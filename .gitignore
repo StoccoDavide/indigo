@@ -33,3 +33,6 @@
 
 # Matlab
 *.asv
+
+# MacOS
+.DS_Store
