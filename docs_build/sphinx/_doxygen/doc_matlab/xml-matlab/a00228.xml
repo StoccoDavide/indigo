@@ -1,0 +1,665 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00228" kind="class" language="C++" prot="public">
+    <compoundname>LobattoIIID4</compoundname>
+    <basecompoundref refid="a00260" prot="public" virt="non-virtual">RKimplicit</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00228_1a83f39fdaed5d328e11c4b6b9e50ccb8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function LobattoIIID4::LobattoIIID4</definition>
+        <argsstring>(in ignoredArg)</argsstring>
+        <name>LobattoIIID4</name>
+        <qualifiedname>LobattoIIID4::LobattoIIID4</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Lobatto IIID fourth-order method (3 stages)</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. math::
+* 
+*    \begin{array}{c|ccc}
+*        0 &amp;  1/6 &amp;    0 &amp; -1/6 \\
+*      1/2 &amp; 1/12 &amp; 5/12 &amp;    0 \\
+*        1 &amp;  1/2 &amp;  1/3 &amp;  1/6 \\
+*      \hline
+*          &amp;  1/6 &amp;  2/3 &amp; 1/6
+*    \end{array}
+* 
+*  </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ImplicitMethods/LobattoIIID4.m" line="28" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a98da65c25d3701d4fb46841ecd936da3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::getA</definition>
+        <argsstring>(in this)</argsstring>
+        <name>getA</name>
+        <qualifiedname>RKimplicit::getA</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the Runge-Kutta matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="98" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a010e1a9fab090216002951a466921c39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::getB</definition>
+        <argsstring>(in this)</argsstring>
+        <name>getB</name>
+        <qualifiedname>RKimplicit::getB</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the Runge-Kutta weights vector (row vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="107" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1ad88f4f71e73766b94908ab307cb2fefe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::getC</definition>
+        <argsstring>(in this)</argsstring>
+        <name>getC</name>
+        <qualifiedname>RKimplicit::getC</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the Runge-Kutta nodes vector (column vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="116" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a3897ed26b7e344062416f044b9fc84d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::setA</definition>
+        <argsstring>(in this, in in)</argsstring>
+        <name>setA</name>
+        <qualifiedname>RKimplicit::setA</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Set the Runge-Kutta matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="125" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::setB</definition>
+        <argsstring>(in this, in in)</argsstring>
+        <name>setB</name>
+        <qualifiedname>RKimplicit::setB</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Set the Runge-Kutta weights vector (row vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="134" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a657a4861612ed913910ddf9b57680b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::setC</definition>
+        <argsstring>(in this, in in)</argsstring>
+        <name>setC</name>
+        <qualifiedname>RKimplicit::setC</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Set the Runge-Kutta nodes vector (column vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="144" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::stepResidual</definition>
+        <argsstring>(in this, in K, in t_k, in x_k, in d_t)</argsstring>
+        <name>stepResidual</name>
+        <qualifiedname>RKimplicit::stepResidual</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+<para>Compute the step residual <formula id="26">$ \mathbf{F}(\mathbf{K}) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="154" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::stepJacobian</definition>
+        <argsstring>(in this, in K, in t_k, in x_k, in d_t)</argsstring>
+        <name>stepJacobian</name>
+        <qualifiedname>RKimplicit::stepJacobian</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the Jacobian of <formula id="26">$ \mathbf{F}(\mathbf{K}) $</formula>:</para>
+<para><formula id="27">\[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \]</formula>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="178" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::solveStep</definition>
+        <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
+        <name>solveStep</name>
+        <qualifiedname>RKimplicit::solveStep</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve the implicit step <formula id="28">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula> by Newton method</para>
+<para><formula id="29">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
+    \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \]</formula>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="210" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a551aed170a5231654042d90d6f7e8773" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>function RKimplicit::step</definition>
+        <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
+        <name>step</name>
+        <qualifiedname>RKimplicit::step</qualifiedname>
+        <reimplements refid="a00248_1aff22b63fa14cf18dae231d0110d23e7b">step</reimplements>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+<para>Perform an implicit step by solving the residual <formula id="28">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="227" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_name</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_name</name>
+        <qualifiedname>ODEsolver::get_name</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the name of the method used to integrate the system of ODEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="39" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_ode</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_ode</name>
+        <qualifiedname>ODEsolver::get_ode</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the system of ODEs to be integrated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="48" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_solver</definition>
+        <argsstring>(in this, in name)</argsstring>
+        <name>set_solver</name>
+        <qualifiedname>ODEsolver::set_solver</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the method used to integrate the system of ODEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="57" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00248_1a7284ba99c96a673ac08925e318adf6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_ode</definition>
+        <argsstring>(in this, in ode)</argsstring>
+        <name>set_ode</name>
+        <qualifiedname>ODEsolver::set_ode</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ode</declname>
+        </param>
+        <briefdescription>
+<para>Set the system of ODEs to be integrated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="66" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00248_1a6bbd6d7a155e7af436e198c8626c9021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::project</definition>
+        <argsstring>(in this, in t, in x_tilde)</argsstring>
+        <name>project</name>
+        <qualifiedname>ODEsolver::project</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_tilde</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve the ODEs system through the problem:</para>
+<para><formula id="0">\[ \left\{\begin{array}{ll}
+ \textrm{minimize}   &amp;  \frac{1}{2}\left(\mathbf{x}-\widetilde{\mathbf{x}}\right)^2 \\[1em]
+ \textrm{subject to} &amp;  \mathbf{h}( t, \mathbf{x} ) = \mathbf{0}
+\end{array}\right. \]</formula></para>
+<para>Given the Lagrangian</para>
+<para><formula id="1">\[
+L( \mathbf{x}, \boldsymbol{\lambda} ) =
+\frac{1}{2}\left(\mathbf{x}-\widetilde{\mathbf{x}}\right)^2+
+\boldsymbol{\lambda} \cdot \mathbf{h}( t, \mathbf{x} )
+\]</formula></para>
+<para>Solve the problem</para>
+<para><formula id="2">\[ \left\{\begin{array}{rcl}
+\mathbf{x}+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}^T
+\boldsymbol{\lambda} &amp;=&amp; \widetilde{\mathbf{x}}\\[1em]
+\mathbf{h}(t,\mathbf{x}) &amp;=&amp; \mathbf{0}
+\end{array}\right. \]</formula></para>
+<para><bold>Solution algorithm</bold></para>
+<para>Using the Taylor expansion</para>
+<para><formula id="3">\[ \mathbf{h}( t, \mathbf{x} ) +
+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}} \delta\mathbf{x}
++ \mathcal{O}\left( ||\delta\mathbf{x}||^2 \right) = \mathbf{0}
+\]</formula></para>
+<para>define the iterative method</para>
+<para><formula id="4">\[ \mathbf{x}_{k+1} = \mathbf{x}_k + \delta\mathbf{x} \]</formula></para>
+<para>where <formula id="5">$ \delta\mathbf{x} $</formula> is the solution of the linear system</para>
+<para><formula id="6">\[
+\left[\begin{array}{cc}
+\mathbf{I} &amp; \dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}^T \\[1em]
+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}  &amp; \mathbf{0}
+\end{array}\right]
+\left[\begin{array}{c}
+\delta\mathbf{x} \\[1em]
+\boldsymbol{\lambda}
+\end{array}\right]
+= 
+\left[\begin{array}{c}
+\widetilde{\mathbf{x}}-\mathbf{x}_k \\[1em]
+-\mathbf{h}(t_k,\mathbf{x}_k)
+\end{array}\right]
+\]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="127" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00248_1a8c11588013b8a6f10b437d3613583710" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::integrate</definition>
+        <argsstring>(in this, in t, in x_i, in varargin)</argsstring>
+        <name>integrate</name>
+        <qualifiedname>ODEsolver::integrate</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_i</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>varargin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Integrate the system of ODEs and calculate the approximate solution:</para>
+<para><itemizedlist>
+<listitem><para><emphasis>t</emphasis> Time vector</para>
+</listitem><listitem><para><emphasis>x_0</emphasis> Initial states value</para>
+</listitem><listitem><para><emphasis>project</emphasis> [optional, default = false] Apply projection to invariants at each step</para>
+</listitem><listitem><para><emphasis>verbose</emphasis> [optional, default = false] Activate vebose mode and print integration messages</para>
+</listitem><listitem><para><emphasis>maxabs</emphasis> [optional, default = 1.0e3] If <formula id="7">$ || \mathbf{x} ||_{\infty} $</formula> is greater than maxabs computation is interrupted</para>
+</listitem></itemizedlist>
+</para>
+<para>Returns a matrix <computeroutput>length(x0) x length(t)</computeroutput> containing the solution</para>
+<para><bold>Usage</bold></para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. code-block:: matlab
+* 
+*     % Advance without the solution projection on invariants and disabled verbose mode
+*     sol = obj.advance( t, x_0 );
+* 
+*     % Advance with the solution projection on invariants and disabled verbose mode
+*     sol = obj.advance( t, x_0, true );
+* 
+*     % Advance without the solution projection on invariants and enabled verbose mode
+*     sol = obj.advance( t, x_0, false, true );
+* 
+*      % Plot the first component of the solution
+*      plot( t, sol(1,:) );
+* 
+*  </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="183" column="15"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property RKimplicit::m_A</definition>
+        <argsstring></argsstring>
+        <name>m_A</name>
+        <qualifiedname>RKimplicit::m_A</qualifiedname>
+        <briefdescription>
+<para>Runge-Kutta matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="60" column="10" bodyfile="ODE/RKimplicit.m" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00260_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property RKimplicit::m_b</definition>
+        <argsstring></argsstring>
+        <name>m_b</name>
+        <qualifiedname>RKimplicit::m_b</qualifiedname>
+        <briefdescription>
+<para>Runge-Kutta weights vector (row vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="65" column="10" bodyfile="ODE/RKimplicit.m" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00260_1a138cfb5bb810ca10269473ec1cadf615" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property RKimplicit::m_c</definition>
+        <argsstring></argsstring>
+        <name>m_c</name>
+        <qualifiedname>RKimplicit::m_c</qualifiedname>
+        <briefdescription>
+<para>Runge-Kutta nodes vector (column vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="70" column="10" bodyfile="ODE/RKimplicit.m" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>ODEsolver::m_name</qualifiedname>
+        <briefdescription>
+<para>Name of the used numerical integration method. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_ode</definition>
+        <argsstring></argsstring>
+        <name>m_ode</name>
+        <qualifiedname>ODEsolver::m_ode</qualifiedname>
+        <briefdescription>
+<para>System of ODEs to be integrated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class container for Lobatto IIID fourth-order method (3 stages) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LobattoIIID4</label>
+        <link refid="a00228"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ODEsolver</label>
+        <link refid="a00248"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>RKimplicit</label>
+        <link refid="a00260"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>handle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LobattoIIID4</label>
+        <link refid="a00228"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ODEsolver</label>
+        <link refid="a00248"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>RKimplicit</label>
+        <link refid="a00260"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>handle</label>
+      </node>
+    </collaborationgraph>
+    <location file="ODE/ImplicitMethods/LobattoIIID4.m" line="4" column="1" bodyfile="ODE/ImplicitMethods/LobattoIIID4.m" bodystart="5" bodyend="39"/>
+    <listofallmembers>
+      <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_name</name></member>
+      <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_ode</name></member>
+      <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>getA</name></member>
+      <member refid="a00260_1a010e1a9fab090216002951a466921c39" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>getB</name></member>
+      <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>getC</name></member>
+      <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>integrate</name></member>
+      <member refid="a00228_1a83f39fdaed5d328e11c4b6b9e50ccb8e" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>LobattoIIID4</name></member>
+      <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_A</name></member>
+      <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_b</name></member>
+      <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_c</name></member>
+      <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_name</name></member>
+      <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_ode</name></member>
+      <member refid="a00248_1a7d3ffc79c180c1ab24447c96d838bd9d" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>ODEsolver</name></member>
+      <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>project</name></member>
+      <member refid="a00260_1aca919de9c27731d72051a84ae9d024a0" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>RKimplicit</name></member>
+      <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_ode</name></member>
+      <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_solver</name></member>
+      <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>setA</name></member>
+      <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>setB</name></member>
+      <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>setC</name></member>
+      <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>solveStep</name></member>
+      <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" prot="public" virt="virtual"><scope>LobattoIIID4</scope><name>step</name></member>
+      <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>stepJacobian</name></member>
+      <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>stepResidual</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

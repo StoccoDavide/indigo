@@ -1,0 +1,805 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MATLAB API &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Base" href="class_a00116.html" />
+    <link rel="prev" title="ODE solve example 2" href="../Manual_ODE_TEST2.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="matlab-api">
+<h1>MATLAB API<a class="headerlink" href="#matlab-api" title="Permalink to this headline">¶</a>
+</h1>
+<div class="section" id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="treeView" id="class-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li>Class <a href="class_a00116.html#exhale-class-a00116">Base</a>
+</li>
+<li>Class <a href="class_a00120.html#exhale-class-a00120">Collatz</a>
+</li>
+<li>Class <a href="class_a00168.html#exhale-class-a00168">CrankNicolson</a>
+</li>
+<li>Class <a href="class_a00124.html#exhale-class-a00124">ExplicitEuler</a>
+</li>
+<li>Class <a href="class_a00128.html#exhale-class-a00128">ExplicitMidpoint</a>
+</li>
+<li>Class <a href="class_a00172.html#exhale-class-a00172">GaussLegendre2</a>
+</li>
+<li>Class <a href="class_a00176.html#exhale-class-a00176">GaussLegendre4</a>
+</li>
+<li>Class <a href="class_a00180.html#exhale-class-a00180">GaussLegendre6</a>
+</li>
+<li>Class <a href="class_a00132.html#exhale-class-a00132">Heun2</a>
+</li>
+<li>Class <a href="class_a00136.html#exhale-class-a00136">Heun3</a>
+</li>
+<li>Class <a href="class_a00184.html#exhale-class-a00184">ImplicitEuler</a>
+</li>
+<li>Class <a href="class_a00188.html#exhale-class-a00188">ImplicitMidpoint</a>
+</li>
+<li>Class <a href="class_a00192.html#exhale-class-a00192">LobattoIIIA2</a>
+</li>
+<li>Class <a href="class_a00196.html#exhale-class-a00196">LobattoIIIA4</a>
+</li>
+<li>Class <a href="class_a00200.html#exhale-class-a00200">LobattoIIIB2</a>
+</li>
+<li>Class <a href="class_a00204.html#exhale-class-a00204">LobattoIIIB4</a>
+</li>
+<li>Class <a href="class_a00208.html#exhale-class-a00208">LobattoIIIC2</a>
+</li>
+<li>Class <a href="class_a00212.html#exhale-class-a00212">LobattoIIIC4</a>
+</li>
+<li>Class <a href="class_a00216.html#exhale-class-a00216">LobattoIIICS2</a>
+</li>
+<li>Class <a href="class_a00220.html#exhale-class-a00220">LobattoIIICS4</a>
+</li>
+<li>Class <a href="class_a00224.html#exhale-class-a00224">LobattoIIID2</a>
+</li>
+<li>Class <a href="class_a00228.html#exhale-class-a00228">LobattoIIID4</a>
+</li>
+<li>Class <a href="class_a00248.html#exhale-class-a00248">ODEsolver</a>
+</li>
+<li>Class <a href="class_a00252.html#exhale-class-a00252">ODEsystem</a>
+</li>
+<li>Class <a href="class_a00232.html#exhale-class-a00232">RadauIA3</a>
+</li>
+<li>Class <a href="class_a00236.html#exhale-class-a00236">RadauIA5</a>
+</li>
+<li>Class <a href="class_a00240.html#exhale-class-a00240">RadauIIA3</a>
+</li>
+<li>Class <a href="class_a00244.html#exhale-class-a00244">RadauIIA5</a>
+</li>
+<li>Class <a href="class_a00140.html#exhale-class-a00140">Ralston2</a>
+</li>
+<li>Class <a href="class_a00144.html#exhale-class-a00144">Ralston3</a>
+</li>
+<li>Class <a href="class_a00148.html#exhale-class-a00148">Ralston4</a>
+</li>
+<li>Class <a href="class_a00152.html#exhale-class-a00152">RK3</a>
+</li>
+<li>Class <a href="class_a00156.html#exhale-class-a00156">RK38</a>
+</li>
+<li>Class <a href="class_a00160.html#exhale-class-a00160">RK4</a>
+</li>
+<li>Class <a href="class_a00256.html#exhale-class-a00256">RKexplicit</a>
+</li>
+<li>Class <a href="class_a00260.html#exhale-class-a00260">RKimplicit</a>
+</li>
+<li class="lastChild">Class <a href="class_a00164.html#exhale-class-a00164">SSPRK3</a>
+</li>
+    </ul>
+  </li>
+<!-- only tree view element -->
+</ul>
+<!-- /treeView class-treeView -->
+</div>
+<div class="section" id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="treeView" id="file-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li>Directory <a href="dir_ODE.html#dir-ODE">ODE</a><ul>
+<li>Directory <a href="dir_ODE_ExplicitMethods.html#dir-ODE-ExplicitMethods">ExplicitMethods</a><ul>
+<li>File <a href="file_ODE_ExplicitMethods_Collatz.m.html#file-ODE-ExplicitMethods-Collatz.m">Collatz.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_ExplicitEuler.m.html#file-ODE-ExplicitMethods-ExplicitEuler.m">ExplicitEuler.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_ExplicitMidpoint.m.html#file-ODE-ExplicitMethods-ExplicitMidpoint.m">ExplicitMidpoint.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_Heun2.m.html#file-ODE-ExplicitMethods-Heun2.m">Heun2.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_Heun3.m.html#file-ODE-ExplicitMethods-Heun3.m">Heun3.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_Ralston2.m.html#file-ODE-ExplicitMethods-Ralston2.m">Ralston2.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_Ralston3.m.html#file-ODE-ExplicitMethods-Ralston3.m">Ralston3.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_Ralston4.m.html#file-ODE-ExplicitMethods-Ralston4.m">Ralston4.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_RK3.m.html#file-ODE-ExplicitMethods-RK3.m">RK3.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_RK38.m.html#file-ODE-ExplicitMethods-RK38.m">RK38.m</a>
+</li>
+<li>File <a href="file_ODE_ExplicitMethods_RK4.m.html#file-ODE-ExplicitMethods-RK4.m">RK4.m</a>
+</li>
+<li class="lastChild">File <a href="file_ODE_ExplicitMethods_SSPRK3.m.html#file-ODE-ExplicitMethods-SSPRK3.m">SSPRK3.m</a>
+</li>
+</ul>
+</li>
+<li>Directory <a href="dir_ODE_ImplicitMethods.html#dir-ODE-ImplicitMethods">ImplicitMethods</a><ul>
+<li>File <a href="file_ODE_ImplicitMethods_CrankNicolson.m.html#file-ODE-ImplicitMethods-CrankNicolson.m">CrankNicolson.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_GaussLegendre2.m.html#file-ODE-ImplicitMethods-GaussLegendre2.m">GaussLegendre2.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_GaussLegendre4.m.html#file-ODE-ImplicitMethods-GaussLegendre4.m">GaussLegendre4.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_GaussLegendre6.m.html#file-ODE-ImplicitMethods-GaussLegendre6.m">GaussLegendre6.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_ImplicitEuler.m.html#file-ODE-ImplicitMethods-ImplicitEuler.m">ImplicitEuler.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_ImplicitMidpoint.m.html#file-ODE-ImplicitMethods-ImplicitMidpoint.m">ImplicitMidpoint.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIIA2.m.html#file-ODE-ImplicitMethods-LobattoIIIA2.m">LobattoIIIA2.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIIA4.m.html#file-ODE-ImplicitMethods-LobattoIIIA4.m">LobattoIIIA4.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIIB2.m.html#file-ODE-ImplicitMethods-LobattoIIIB2.m">LobattoIIIB2.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIIB4.m.html#file-ODE-ImplicitMethods-LobattoIIIB4.m">LobattoIIIB4.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIIC2.m.html#file-ODE-ImplicitMethods-LobattoIIIC2.m">LobattoIIIC2.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIIC4.m.html#file-ODE-ImplicitMethods-LobattoIIIC4.m">LobattoIIIC4.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIICS2.m.html#file-ODE-ImplicitMethods-LobattoIIICS2.m">LobattoIIICS2.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIICS4.m.html#file-ODE-ImplicitMethods-LobattoIIICS4.m">LobattoIIICS4.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIID2.m.html#file-ODE-ImplicitMethods-LobattoIIID2.m">LobattoIIID2.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_LobattoIIID4.m.html#file-ODE-ImplicitMethods-LobattoIIID4.m">LobattoIIID4.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_RadauIA3.m.html#file-ODE-ImplicitMethods-RadauIA3.m">RadauIA3.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_RadauIA5.m.html#file-ODE-ImplicitMethods-RadauIA5.m">RadauIA5.m</a>
+</li>
+<li>File <a href="file_ODE_ImplicitMethods_RadauIIA3.m.html#file-ODE-ImplicitMethods-RadauIIA3.m">RadauIIA3.m</a>
+</li>
+<li class="lastChild">File <a href="file_ODE_ImplicitMethods_RadauIIA5.m.html#file-ODE-ImplicitMethods-RadauIIA5.m">RadauIIA5.m</a>
+</li>
+</ul>
+</li>
+<li>File <a href="file_ODE_ODEsolver.m.html#file-ODE-ODEsolver.m">ODEsolver.m</a>
+</li>
+<li>File <a href="file_ODE_ODEsystem.m.html#file-ODE-ODEsystem.m">ODEsystem.m</a>
+</li>
+<li>File <a href="file_ODE_RKexplicit.m.html#file-ODE-RKexplicit.m">RKexplicit.m</a>
+</li>
+<li class="lastChild">File <a href="file_ODE_RKimplicit.m.html#file-ODE-RKimplicit.m">RKimplicit.m</a>
+</li>
+</ul>
+</li>
+<li class="lastChild">File <a href="file_Base.m.html#file-Base.m">Base.m</a>
+</li>
+    </ul>
+  </li>
+<!-- only tree view element -->
+</ul>
+<!-- /treeView file-treeView -->
+</div>
+<div class="section" id="full-api">
+<h2>Full API<a class="headerlink" href="#full-api" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline">¶</a>
+</h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00116.html">Class Base</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00116.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00116.html#base-type">Base Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_a00116.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00116.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00120.html">Class Collatz</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00120.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00120.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00120.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00168.html">Class CrankNicolson</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00168.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00168.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00168.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00124.html">Class ExplicitEuler</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00124.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00124.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00124.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00128.html">Class ExplicitMidpoint</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00128.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00128.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00128.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00172.html">Class GaussLegendre2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00172.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00172.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00172.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00176.html">Class GaussLegendre4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00176.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00176.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00176.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00180.html">Class GaussLegendre6</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00180.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00180.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00180.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00132.html">Class Heun2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00132.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00132.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00132.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00136.html">Class Heun3</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00136.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00136.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00136.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00184.html">Class ImplicitEuler</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00184.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00184.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00184.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00188.html">Class ImplicitMidpoint</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00188.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00188.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00188.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00192.html">Class LobattoIIIA2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00192.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00192.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00192.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00196.html">Class LobattoIIIA4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00196.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00196.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00196.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00200.html">Class LobattoIIIB2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00200.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00200.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00200.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00204.html">Class LobattoIIIB4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00204.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00204.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00204.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00208.html">Class LobattoIIIC2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00208.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00208.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00208.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00212.html">Class LobattoIIIC4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00212.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00212.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00212.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00216.html">Class LobattoIIICS2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00216.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00216.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00216.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00220.html">Class LobattoIIICS4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00220.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00220.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00220.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00224.html">Class LobattoIIID2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00224.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00224.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00224.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00228.html">Class LobattoIIID4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00228.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00228.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00228.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00248.html">Class ODEsolver</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00248.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00248.html#base-type">Base Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_a00248.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00248.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00252.html">Class ODEsystem</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00252.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00252.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00252.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00232.html">Class RadauIA3</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00232.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00232.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00232.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00236.html">Class RadauIA5</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00236.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00236.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00236.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00240.html">Class RadauIIA3</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00240.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00240.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00240.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00244.html">Class RadauIIA5</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00244.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00244.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00244.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00140.html">Class Ralston2</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00140.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00140.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00140.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00144.html">Class Ralston3</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00144.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00144.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00144.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00148.html">Class Ralston4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00148.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00148.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00148.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00152.html">Class RK3</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00152.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00152.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00152.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00156.html">Class RK38</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00156.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00156.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00156.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00160.html">Class RK4</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00160.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00160.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00160.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00256.html">Class RKexplicit</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00256.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00256.html#base-type">Base Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_a00256.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00256.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00260.html">Class RKimplicit</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00260.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00260.html#base-type">Base Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class_a00260.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00260.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1">
+<a class="reference internal" href="class_a00164.html">Class SSPRK3</a><ul>
+<li class="toctree-l2">
+<a class="reference internal" href="class_a00164.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="class_a00164.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="class_a00164.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.jpeg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Manual_INTRO.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_TOOLBOX.html">DAE-Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MATLAB API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Davide Stocco and Sebastiano Taddei.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

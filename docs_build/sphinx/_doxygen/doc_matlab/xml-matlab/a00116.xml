@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00116" kind="class" language="C++" prot="public">
+    <compoundname>Base</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
+    <derivedcompoundref refid="a00252" prot="public" virt="non-virtual">ODEsystem</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Base::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>Base::m_name</qualifiedname>
+        <briefdescription>
+<para>Name of the system of ODEs/DAEs (used in warning/error messages). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="14" column="10" bodyfile="Base.m" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Base::m_num_eqns</definition>
+        <argsstring></argsstring>
+        <name>m_num_eqns</name>
+        <qualifiedname>Base::m_num_eqns</qualifiedname>
+        <briefdescription>
+<para>Number of equations of the system of ODEs/DAEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="19" column="10" bodyfile="Base.m" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Base::m_num_invs</definition>
+        <argsstring></argsstring>
+        <name>m_num_invs</name>
+        <qualifiedname>Base::m_num_invs</qualifiedname>
+        <briefdescription>
+<para>Number of invariants/contraints of the system of ODEs/DAEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="24" column="10" bodyfile="Base.m" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::Base</definition>
+        <argsstring>(in name, in num_eqns, in num_invs)</argsstring>
+        <name>Base</name>
+        <qualifiedname>Base::Base</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>num_eqns</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>num_invs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Class constructor that initializes the following properties:</para>
+<para><itemizedlist>
+<listitem><para><emphasis>name</emphasis> Name of the system of ODEs/DAEs;</para>
+</listitem><listitem><para><emphasis>neqn</emphasis> Number of equations of the system of ODEs/DAEs;</para>
+</listitem><listitem><para><emphasis>ninv</emphasis> Number of invariants/contraints of the system of ODEs/DAEs. </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="38" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::get_num_eqns</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_num_eqns</name>
+        <qualifiedname>Base::get_num_eqns</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the number of equations of the system of ODEs/DAEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="49" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::get_num_invs</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_num_invs</name>
+        <qualifiedname>Base::get_num_invs</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the number of invariants/contraints of the system of ODEs/DAEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="58" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::set_num_eqns</definition>
+        <argsstring>(in this, in num_eqns)</argsstring>
+        <name>set_num_eqns</name>
+        <qualifiedname>Base::set_num_eqns</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>num_eqns</declname>
+        </param>
+        <briefdescription>
+<para>Set the number of equations of the system of ODEs/DAEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="67" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00116_1a6325030dd91b09341a9e719d038225d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::set_num_invs</definition>
+        <argsstring>(in this, in num_invs)</argsstring>
+        <name>set_num_invs</name>
+        <qualifiedname>Base::set_num_invs</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>num_invs</declname>
+        </param>
+        <briefdescription>
+<para>Set the number of invariants/contraints of the system of ODEs/DAEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="76" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Class container for the system of Ordinary Differential Equations (ODEs) or Differential Algebraic Equations (DAEs). </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>Base</label>
+        <link refid="a00116"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ODEsystem</label>
+        <link refid="a00252"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>Base</label>
+        <link refid="a00116"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </collaborationgraph>
+    <location file="Base.m" line="5" column="1" bodyfile="Base.m" bodystart="6" bodyend="84"/>
+    <listofallmembers>
+      <member refid="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10" prot="public" virt="non-virtual"><scope>Base</scope><name>Base</name></member>
+      <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_eqns</name></member>
+      <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_invs</name></member>
+      <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>Base</scope><name>m_name</name></member>
+      <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_eqns</name></member>
+      <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_invs</name></member>
+      <member refid="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_eqns</name></member>
+      <member refid="a00116_1a6325030dd91b09341a9e719d038225d8" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_invs</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00180" kind="class" language="C++" prot="public">
+    <compoundname>GaussLegendre6</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">DIAL_RKimplicit</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00180_1a073bd19bdaffef9db237c4f1f433fd41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function GaussLegendre6::GaussLegendre6</definition>
+        <argsstring>(in ignoredArg)</argsstring>
+        <name>GaussLegendre6</name>
+        <qualifiedname>GaussLegendre6::GaussLegendre6</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Gauss–Legendre sixth-order (3 stages)</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. math::
+* 
+*    \begin{array}{c|ccc}
+*      1/2-t &amp;     w &amp; z-t_2 &amp; w-t_4 \\
+*        1/2 &amp; w+t_3 &amp;     z &amp; w-t_3 \\
+*      1/2+t &amp; w+t_4 &amp; z+t_2 &amp;     w \\
+*      \hline
+*            &amp;  5/18 &amp;   4/9 &amp;  5/18
+*    \end{array}
+*    \quad t   = \displaystyle\frac{\sqrt{15}}{10}
+*    \quad t_2 = \displaystyle\frac{\sqrt{15}}{15}
+*    \quad t_3 = \displaystyle\frac{\sqrt{15}}{24}
+*    \quad t_4 = \displaystyle\frac{\sqrt{15}}{30}
+*    \quad w   = \displaystyle\frac{5}{36}
+*    \quad z   = \displaystyle\frac{2}{9}
+* 
+*  </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ImplicitMethods/GaussLegendre6.m" line="65" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class container for Gauss–Legendre sixth-order (3 stages) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>DIAL_RKimplicit</label>
+      </node>
+      <node id="1">
+        <label>GaussLegendre6</label>
+        <link refid="a00180"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>DIAL_RKimplicit</label>
+      </node>
+      <node id="1">
+        <label>GaussLegendre6</label>
+        <link refid="a00180"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="ODE/ImplicitMethods/GaussLegendre6.m" line="35" column="1" bodyfile="ODE/ImplicitMethods/GaussLegendre6.m" bodystart="36" bodyend="87"/>
+    <listofallmembers>
+      <member refid="a00180_1a073bd19bdaffef9db237c4f1f433fd41" prot="public" virt="non-virtual"><scope>GaussLegendre6</scope><name>GaussLegendre6</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

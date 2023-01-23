@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="dir_1e9b5d8874b248fcdd1ff375ac3037ff" kind="dir">
+    <compoundname>ODE/ExplicitMethods</compoundname>
+    <innerfile refid="a00086">Collatz.m</innerfile>
+    <innerfile refid="a00098">ExplicitEuler.m</innerfile>
+    <innerfile refid="a00077">ExplicitMidpoint.m</innerfile>
+    <innerfile refid="a00092">Heun2.m</innerfile>
+    <innerfile refid="a00104">Heun3.m</innerfile>
+    <innerfile refid="a00089">Ralston2.m</innerfile>
+    <innerfile refid="a00101">Ralston3.m</innerfile>
+    <innerfile refid="a00110">Ralston4.m</innerfile>
+    <innerfile refid="a00107">RK3.m</innerfile>
+    <innerfile refid="a00080">RK38.m</innerfile>
+    <innerfile refid="a00095">RK4.m</innerfile>
+    <innerfile refid="a00083">SSPRK3.m</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="ODE/ExplicitMethods/"/>
+  </compounddef>
+</doxygen>

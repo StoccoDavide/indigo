@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="dir_58e649bdffb3deecdc9c67c98e11bcf9" kind="dir">
+    <compoundname>ODE/ImplicitMethods</compoundname>
+    <innerfile refid="a00038">CrankNicolson.m</innerfile>
+    <innerfile refid="a00065">GaussLegendre2.m</innerfile>
+    <innerfile refid="a00029">GaussLegendre4.m</innerfile>
+    <innerfile refid="a00056">GaussLegendre6.m</innerfile>
+    <innerfile refid="a00026">ImplicitEuler.m</innerfile>
+    <innerfile refid="a00059">ImplicitMidpoint.m</innerfile>
+    <innerfile refid="a00032">LobattoIIIA2.m</innerfile>
+    <innerfile refid="a00062">LobattoIIIA4.m</innerfile>
+    <innerfile refid="a00035">LobattoIIIB2.m</innerfile>
+    <innerfile refid="a00008">LobattoIIIB4.m</innerfile>
+    <innerfile refid="a00050">LobattoIIIC2.m</innerfile>
+    <innerfile refid="a00014">LobattoIIIC4.m</innerfile>
+    <innerfile refid="a00041">LobattoIIICS2.m</innerfile>
+    <innerfile refid="a00011">LobattoIIICS4.m</innerfile>
+    <innerfile refid="a00023">LobattoIIID2.m</innerfile>
+    <innerfile refid="a00053">LobattoIIID4.m</innerfile>
+    <innerfile refid="a00020">RadauIA3.m</innerfile>
+    <innerfile refid="a00044">RadauIA5.m</innerfile>
+    <innerfile refid="a00047">RadauIIA3.m</innerfile>
+    <innerfile refid="a00017">RadauIIA5.m</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="ODE/ImplicitMethods/"/>
+  </compounddef>
+</doxygen>
