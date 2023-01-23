@@ -88,7 +88,7 @@
 <span class="c">%&gt;     \end{array}</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%</span><span class="w"></span>
-<span class="k">classdef</span><span class="w"> </span><span class="n">RKimplicit</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ODEsolver</span><span class="w"></span>
+<span class="k">classdef</span><span class="w"> </span><span class="n">RKimplicit</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">indigo</span><span class="p">.</span><span class="n">ODEsolver</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">properties</span><span class="w"> </span><span class="p">(</span><span class="nb">SetAccess</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">protected</span><span class="p">,</span><span class="w"> </span><span class="nb">Hidden</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -116,9 +116,18 @@
 <span class="w">    </span><span class="c">%&gt; - *c* Runge-Kutta nodes vector (column vector)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">RKimplicit</span><span class="p">(</span> name, A, b, c <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="w"> </span><span class="nb">isrow</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w">    </span><span class="s">'RKimplicit::RKimplicit(...): Found Runge-Kutta weights vector b not as a row vector'</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="w"> </span><span class="nb">iscolumn</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="s">'RKimplicit::RKimplicit(...): Found Runge-Kutta nodes vector c vector not as a column vector'</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">ODEsolver</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKimplicit::RKimplicit(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="nb">isrow</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'Found Runge-Kutta weights vector b not as a row vector'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="nb">iscolumn</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'Found Runge-Kutta nodes vector c vector not as a column vector'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">indigo</span><span class="p">.</span><span class="n">ODEsolver</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">check_tableau</span><span class="p">(</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"></span>
@@ -128,7 +137,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Get the Runge-Kutta matrix</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">getA</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_A</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -136,7 +145,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Get the Runge-Kutta weights vector (row vector)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">getB</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_b</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -144,7 +153,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Get the Runge-Kutta nodes vector (column vector)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">getC</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_c</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -152,7 +161,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the Runge-Kutta matrix</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">setA</span><span class="p">(</span> this, in <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_A</span><span class="p">(</span> this, in <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">in</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -172,6 +181,17 @@
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">setC</span><span class="p">(</span> this, in <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="w"> </span><span class="nb">iscolumn</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="s">'RKimplicit::setC(...): Found Runge-Kutta nodes vector c vector not as a column vector'</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">in</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Check the Butcher tableau</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> this, A, b, c <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKimplicit::check_tableau(...): '</span><span class="p">;</span><span class="w"></span>
+
+
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>

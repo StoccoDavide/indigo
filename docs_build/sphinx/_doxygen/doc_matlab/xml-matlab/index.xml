@@ -33,27 +33,20 @@
   </compound>
   <compound refid="a00168" kind="class"><name>CrankNicolson</name>
     <member refid="a00168_1a98a32ed50e7c8909cd359bbe08204565" kind="function"><name>CrankNicolson</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00124" kind="class"><name>ExplicitEuler</name>
     <member refid="a00124_1a7a82ab266f23f0a741bd8367b8b4086e" kind="function"><name>ExplicitEuler</name></member>
@@ -99,51 +92,37 @@
   </compound>
   <compound refid="a00172" kind="class"><name>GaussLegendre2</name>
     <member refid="a00172_1a8f2c1cd21a1a5c13b4423b6bbbc1b806" kind="function"><name>GaussLegendre2</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00176" kind="class"><name>GaussLegendre4</name>
     <member refid="a00176_1a60d9b8df91b08803996dda4ed1dfcba2" kind="function"><name>GaussLegendre4</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00180" kind="class"><name>GaussLegendre6</name>
     <member refid="a00180_1a073bd19bdaffef9db237c4f1f433fd41" kind="function"><name>GaussLegendre6</name></member>
@@ -192,291 +171,207 @@
   </compound>
   <compound refid="a00184" kind="class"><name>ImplicitEuler</name>
     <member refid="a00184_1a4873bd2beee3e6ff9974b27c98ce7516" kind="function"><name>ImplicitEuler</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00188" kind="class"><name>ImplicitMidpoint</name>
     <member refid="a00188_1acc9bfbea67ed8f501721fd760db33004" kind="function"><name>ImplicitMidpoint</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00192" kind="class"><name>LobattoIIIA2</name>
     <member refid="a00192_1a68fdb2148804afbb2a7828e4df96f96b" kind="function"><name>LobattoIIIA2</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00196" kind="class"><name>LobattoIIIA4</name>
     <member refid="a00196_1a3d7e7d2e74f44fdbd5c1594417b2145e" kind="function"><name>LobattoIIIA4</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00200" kind="class"><name>LobattoIIIB2</name>
     <member refid="a00200_1ac94a16c8d0ee0abe04e193dc6b6d38fa" kind="function"><name>LobattoIIIB2</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00204" kind="class"><name>LobattoIIIB4</name>
     <member refid="a00204_1a6918d2fc22e61e2b6409931cb5275d39" kind="function"><name>LobattoIIIB4</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00208" kind="class"><name>LobattoIIIC2</name>
     <member refid="a00208_1adfceb45d07e9415321fc395a7a2c0eac" kind="function"><name>LobattoIIIC2</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00212" kind="class"><name>LobattoIIIC4</name>
     <member refid="a00212_1a2e35de813cdc2fcc0688801fbab1acef" kind="function"><name>LobattoIIIC4</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00216" kind="class"><name>LobattoIIICS2</name>
     <member refid="a00216_1afcba29e03d2255c9677acfcef8f8b187" kind="function"><name>LobattoIIICS2</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00220" kind="class"><name>LobattoIIICS4</name>
     <member refid="a00220_1a29a24a98548f6bd5d99f9c6db5a01b6b" kind="function"><name>LobattoIIICS4</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00224" kind="class"><name>LobattoIIID2</name>
     <member refid="a00224_1a42f08b4cd97d00ac46e85ab8afa66235" kind="function"><name>LobattoIIID2</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00228" kind="class"><name>LobattoIIID4</name>
     <member refid="a00228_1a83f39fdaed5d328e11c4b6b9e50ccb8e" kind="function"><name>LobattoIIID4</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00248" kind="class"><name>ODEsolver</name>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
@@ -492,113 +387,78 @@
   </compound>
   <compound refid="a00252" kind="class"><name>ODEsystem</name>
     <member refid="a00252_1a93fda3f6114ad92570290a4b35351e3f" kind="function"><name>ODEsystem</name></member>
-    <member refid="a00252_1a593266aa813bda0446667fe93955cb50" kind="function"><name>f</name></member>
-    <member refid="a00252_1a42c2de80bf1580e921989488ea9367d1" kind="function"><name>DfDx</name></member>
-    <member refid="a00252_1abecf7f59b4cf4796303be30235c4a384" kind="function"><name>h</name></member>
-    <member refid="a00252_1abd6bf96684984e28628d67cc86f2cb84" kind="function"><name>DhDx</name></member>
-    <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" kind="function"><name>get_num_eqns</name></member>
-    <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" kind="function"><name>get_num_invs</name></member>
-    <member refid="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" kind="function"><name>set_num_eqns</name></member>
-    <member refid="a00116_1a6325030dd91b09341a9e719d038225d8" kind="function"><name>set_num_invs</name></member>
-    <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" kind="variable"><name>m_name</name></member>
-    <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" kind="variable"><name>m_num_eqns</name></member>
-    <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" kind="variable"><name>m_num_invs</name></member>
+    <member refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" kind="function"><name>F</name></member>
+    <member refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" kind="function"><name>JF</name></member>
+    <member refid="a00252_1ab186493d31a6369185700e502347e7a5" kind="function"><name>H</name></member>
+    <member refid="a00252_1abe619a3b4e36777c702352b9d0c83efe" kind="function"><name>JH</name></member>
   </compound>
   <compound refid="a00232" kind="class"><name>RadauIA3</name>
     <member refid="a00232_1acce493aea95211c76bd3d86dd50b8df5" kind="function"><name>RadauIA3</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00236" kind="class"><name>RadauIA5</name>
     <member refid="a00236_1ad2bdc38a90ffdf2ce5a771f005026004" kind="function"><name>RadauIA5</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00240" kind="class"><name>RadauIIA3</name>
     <member refid="a00240_1a8d8c90eb137e88e58b5b5e33ae193512" kind="function"><name>RadauIIA3</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00244" kind="class"><name>RadauIIA5</name>
     <member refid="a00244_1a427a21c33ce2bd3e78671b36032b5857" kind="function"><name>RadauIIA5</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00140" kind="class"><name>Ralston2</name>
     <member refid="a00140_1aad3f799fe03e1e0dc26fc2b5519ffcb9" kind="function"><name>Ralston2</name></member>
@@ -751,25 +611,18 @@
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
-    <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
-    <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00260_1aca919de9c27731d72051a84ae9d024a0" kind="function"><name>RKimplicit</name></member>
-    <member refid="a00260_1a98da65c25d3701d4fb46841ecd936da3" kind="function"><name>getA</name></member>
-    <member refid="a00260_1a010e1a9fab090216002951a466921c39" kind="function"><name>getB</name></member>
-    <member refid="a00260_1ad88f4f71e73766b94908ab307cb2fefe" kind="function"><name>getC</name></member>
-    <member refid="a00260_1a3897ed26b7e344062416f044b9fc84d1" kind="function"><name>setA</name></member>
+    <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" kind="function"><name>get_A</name></member>
+    <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" kind="function"><name>get_b</name></member>
+    <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" kind="function"><name>get_c</name></member>
+    <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" kind="function"><name>set_A</name></member>
     <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" kind="function"><name>setB</name></member>
     <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" kind="function"><name>setC</name></member>
+    <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" kind="function"><name>check_tableau</name></member>
     <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" kind="function"><name>stepResidual</name></member>
     <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" kind="function"><name>stepJacobian</name></member>
     <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" kind="function"><name>solveStep</name></member>
     <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" kind="function"><name>step</name></member>
-    <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
-    <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
   </compound>
   <compound refid="a00164" kind="class"><name>SSPRK3</name>
     <member refid="a00164_1a43a8d066450a6ffdadd1d90878a7129a" kind="function"><name>SSPRK3</name></member>
@@ -791,6 +644,8 @@
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+  </compound>
+  <compound refid="a00273" kind="namespace"><name>indigo</name>
   </compound>
   <compound refid="a00002" kind="file"><name>Base.m</name>
   </compound>

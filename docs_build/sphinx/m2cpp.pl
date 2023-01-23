@@ -6,7 +6,7 @@ if ($#ARGV != 0)
 }
 else
 {
-  $fname=$ARGV[0];
+  $fname = $ARGV[0];
 }
 
 # If we have a .m file inside a (@)-folder with the same name :
@@ -51,12 +51,11 @@ foreach $my_fic (@listeFic)
 
   $methodAttribute = "";
 
-
   while (<$in>)
   {
     if (/(^\s*)(%>)(.*)/)
     {
-      $output=$output."$1///$3";
+      $output = $output."$1///$3";
     }
     if (($listeProperties == 1) && (/(^\s*\bend\b\s*)/))
     {
@@ -84,18 +83,18 @@ foreach $my_fic (@listeFic)
 
         $properties =~ s/%>/\/\/\//g;
         $properties =~ s/%/\/\//g;
-        $output=$output.$typeProperties."Property ".$properties;
+        $output = $output.$typeProperties."Property ".$properties;
       }
     }
     if (($listeEnumeration == 1) && (/(^\s*\bend\b\s*)/))
     {
       $listeEnumeration = 0;
-      $output=$output."};";
+      $output = $output."};";
     }
     if (($listeEvents == 1) && (/(^\s*\bend\b\s*)/))
     {
       $listeEvents = 0;
-      $output=$output."};";
+      $output = $output."};";
     }
     if (($listeEvents == 1) && (/^\s*([\w\d]*)\s*/))
     {
@@ -105,7 +104,7 @@ foreach $my_fic (@listeFic)
         $event = $name_event.",";
         $event =~ s/%>/\/\/\//g;
         $event =~ s/%/\/\//g;
-        $output=$output.$event;
+        $output = $output.$event;
       }
     }
     if (($listeEnumeration == 1) && (/^\s*([\w\d]*)\s*(\(.*\))?(%>.*)?/))
@@ -119,14 +118,14 @@ foreach $my_fic (@listeFic)
           $enum = "$name_enum=$val_enum,";
           $enum =~ s/%>/\/\/\//g;
           $enum =~ s/%/\/\//g;
-          $output=$output.$enum;
+          $output = $output.$enum;
         }
         else
         {
           $enum = "$name_enum,";
           $enum =~ s/%>/\/\/\//g;
           $enum =~ s/%/\/\//g;
-          $output=$output.$enum;
+          $output = $output.$enum;
         }
       }
     }
@@ -148,8 +147,8 @@ foreach $my_fic (@listeFic)
         {
           $arguments = "";
         }
-        $ligne = "$methodAttribute $functionKeyWord $functionName($arguments);"; 
-        $output=$output.$ligne;
+        $ligne = "$methodAttribute $functionKeyWord $functionName ($arguments);";
+        $output = $output.$ligne;
       }
     }
     # Signature of functions in abstract methods
@@ -165,12 +164,12 @@ foreach $my_fic (@listeFic)
         {
           $arguments = "";
         }
-        $ligne = "$methodAttribute $functionKeyWord $functionName($arguments);";
-        $output=$output.$ligne;
+        $ligne  = "$methodAttribute $functionKeyWord $functionName ($arguments);";
+        $output = $output.$ligne;
       }
     }
     # inheritance for classes
-    if (/(^\s*classdef)\s*(\s*\([\{\}\?\w,=\s]+\s*\))?\s*([\w\d_]+)\s*<?\s*([\s\w\d._&]+)?(.*)/) 
+    if (/(^\s*classdef)\s*(\s*\([\{\}\?\w,=\s]+\s*\))?\s*([\w\d_]+)\s*<?\s*([\s\w\d._&]+)?(.*)/)
     {
       $className = $3;
       $classInheritance = $4;
@@ -184,10 +183,10 @@ foreach $my_fic (@listeFic)
       {
         $classDef = "class ".$className;
       }
-      $output=$output.$classDef;
-      $output=$output."{";
-      $output=$output.$declTypeDef;
-      $output=$output."public:\n";
+      $output  = $output.$classDef;
+      $output  = $output."{";
+      $output  = $output.$declTypeDef;
+      $output  = $output."public:\n";
       $inClass = 1;
     }
     if (/(^\s*properties)\s*(\s*\([\w,=\s]+\s*\))?(.*)/)
@@ -218,12 +217,12 @@ foreach $my_fic (@listeFic)
     if (/(^\s*enumeration)\s*(.*)/)
     {
       $listeEnumeration = 1;
-      $output=$output."public:\nenum ".$className." {";
+      $output = $output."public:\nenum ".$className." {";
     }
     if (/(^\s*events)\s*(.*)/)
     {
       $listeEvents = 1;
-      $output=$output."public:\nenum Events {";
+      $output = $output."public:\nenum Events {";
     }
     if (/(^\s*methods)\s*(\s*\([\w,=\s]+\s*\))?(.*)/)
     {
@@ -251,12 +250,12 @@ foreach $my_fic (@listeFic)
       }
       elsif (lc($methodsAttributes) =~ /(static(\s*=\s*true\s*)?)/)
       {
-        $methodAttribute = $methodAttribute." static";
+        $methodAttribute = $methodAttribute." static ";
       }
     }
-    $output=$output."\n";
+    $output = $output."\n";
   }
   close $in;
 }
-$output=$output."};\n";
+$output = $output."};\n";
 print $output;

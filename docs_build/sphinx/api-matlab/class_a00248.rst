@@ -15,11 +15,10 @@ Base Type
 - ``public handle``
 
 
-Derived Types
-*************
+Derived Type
+************
 
 - ``public RKexplicit`` (:ref:`exhale_class_a00256`)
-- ``public RKimplicit`` (:ref:`exhale_class_a00260`)
 
 
 Class Documentation

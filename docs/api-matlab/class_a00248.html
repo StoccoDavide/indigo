@@ -52,12 +52,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">handle</span></code></p></li>
 </ul>
 </div>
-<div class="section" id="derived-types">
-<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a>
+<div class="section" id="derived-type">
+<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this headline">¶</a>
 </h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKexplicit</span></code> (<a class="reference internal" href="class_a00256.html#exhale-class-a00256"><span class="std std-ref">Class RKexplicit</span></a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKimplicit</span></code> (<a class="reference internal" href="class_a00260.html#exhale-class-a00260"><span class="std std-ref">Class RKimplicit</span></a>)</p></li>
 </ul>
 </div>
 </div>
@@ -70,12 +69,12 @@
 </dt>
 <dd>
 <p>Class container for the system of Ordinary Differential Equations (ODEs) or Differential Algebraic Equations (DAEs) solver. </p>
-<p>Subclassed by <a class="reference internal" href="class_a00256.html#a00256"><span class="std std-ref">RKexplicit</span></a>, <a class="reference internal" href="class_a00260.html#a00260"><span class="std std-ref">RKimplicit</span></a></p>
+<p>Subclassed by <a class="reference internal" href="class_a00256.html#a00256"><span class="std std-ref">RKexplicit</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver9ODEsolverE2in">
-<span id="_CPPv3N9ODEsolver9ODEsolverE2in"></span><span id="_CPPv2N9ODEsolver9ODEsolverE2in"></span><span id="ODEsolver::ODEsolver__in"></span><span class="target" id="a00248_1a7d3ffc79c180c1ab24447c96d838bd9d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ODEsolver</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver9ODEsolverE2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver9ODEsolverE2in"></span><span id="_CPPv2N9ODEsolver9ODEsolverE2in"></span><span id="ODEsolver::ODEsolver__in"></span><span class="target" id="a00248_1a7d3ffc79c180c1ab24447c96d838bd9d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ODEsolver</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver9ODEsolverE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Class constructor. It initializes the name of the numerical method used to integrate the system of ODEs. </p>
@@ -84,7 +83,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver8get_nameE2in">
-<span id="_CPPv3N9ODEsolver8get_nameE2in"></span><span id="_CPPv2N9ODEsolver8get_nameE2in"></span><span id="ODEsolver::get_name__in"></span><span class="target" id="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver8get_nameE2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver8get_nameE2in"></span><span id="_CPPv2N9ODEsolver8get_nameE2in"></span><span id="ODEsolver::get_name__in"></span><span class="target" id="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver8get_nameE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the name of the method used to integrate the system of ODEs. </p>
@@ -93,7 +92,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver7get_odeE2in">
-<span id="_CPPv3N9ODEsolver7get_odeE2in"></span><span id="_CPPv2N9ODEsolver7get_odeE2in"></span><span id="ODEsolver::get_ode__in"></span><span class="target" id="a00248_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver7get_odeE2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver7get_odeE2in"></span><span id="_CPPv2N9ODEsolver7get_odeE2in"></span><span id="ODEsolver::get_ode__in"></span><span class="target" id="a00248_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver7get_odeE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the system of ODEs to be integrated. </p>
@@ -102,7 +101,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver10set_solverE2in2in">
-<span id="_CPPv3N9ODEsolver10set_solverE2in2in"></span><span id="_CPPv2N9ODEsolver10set_solverE2in2in"></span><span id="ODEsolver::set_solver__in.in"></span><span class="target" id="a00248_1adf22eb997cd5cd532fef6edeeb2a1322"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_solver</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver10set_solverE2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver10set_solverE2in2in"></span><span id="_CPPv2N9ODEsolver10set_solverE2in2in"></span><span id="ODEsolver::set_solver__in.in"></span><span class="target" id="a00248_1adf22eb997cd5cd532fef6edeeb2a1322"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_solver</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver10set_solverE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the name of the method used to integrate the system of ODEs. </p>
@@ -111,7 +110,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver7set_odeE2in2in">
-<span id="_CPPv3N9ODEsolver7set_odeE2in2in"></span><span id="_CPPv2N9ODEsolver7set_odeE2in2in"></span><span id="ODEsolver::set_ode__in.in"></span><span class="target" id="a00248_1a7284ba99c96a673ac08925e318adf6d8"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver7set_odeE2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver7set_odeE2in2in"></span><span id="_CPPv2N9ODEsolver7set_odeE2in2in"></span><span id="ODEsolver::set_ode__in.in"></span><span class="target" id="a00248_1a7284ba99c96a673ac08925e318adf6d8"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver7set_odeE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the system of ODEs to be integrated. </p>
@@ -120,7 +119,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver7projectE2in2in2in">
-<span id="_CPPv3N9ODEsolver7projectE2in2in2in"></span><span id="_CPPv2N9ODEsolver7projectE2in2in2in"></span><span id="ODEsolver::project__in.in.in"></span><span class="target" id="a00248_1a6bbd6d7a155e7af436e198c8626c9021"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_tilde</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver7projectE2in2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver7projectE2in2in2in"></span><span id="_CPPv2N9ODEsolver7projectE2in2in2in"></span><span id="ODEsolver::project__in.in.in"></span><span class="target" id="a00248_1a6bbd6d7a155e7af436e198c8626c9021"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_tilde</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver7projectE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Solve the ODEs system through the problem:</p>
@@ -187,7 +186,7 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver9integrateE2in2in2in2in">
-<span id="_CPPv3N9ODEsolver9integrateE2in2in2in2in"></span><span id="_CPPv2N9ODEsolver9integrateE2in2in2in2in"></span><span id="ODEsolver::integrate__in.in.in.in"></span><span class="target" id="a00248_1a8c11588013b8a6f10b437d3613583710"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">integrate</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_i</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver9integrateE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver9integrateE2in2in2in2in"></span><span id="_CPPv2N9ODEsolver9integrateE2in2in2in2in"></span><span id="ODEsolver::integrate__in.in.in.in"></span><span class="target" id="a00248_1a8c11588013b8a6f10b437d3613583710"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">integrate</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver9integrateE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Integrate the system of ODEs and calculate the approximate solution:</p>
@@ -225,7 +224,7 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9ODEsolver4stepE2in2in2in2in">
-<span id="_CPPv3N9ODEsolver4stepE2in2in2in2in"></span><span id="_CPPv2N9ODEsolver4stepE2in2in2in2in"></span><span id="ODEsolver::step__in.in.in.in"></span><span class="target" id="a00248_1aff22b63fa14cf18dae231d0110d23e7b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_k</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">t_k</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver4stepE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N9ODEsolver4stepE2in2in2in2in"></span><span id="_CPPv2N9ODEsolver4stepE2in2in2in2in"></span><span id="ODEsolver::step__in.in.in.in"></span><span class="target" id="a00248_1aff22b63fa14cf18dae231d0110d23e7b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsolver4stepE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Generic advancing step for a generic numerical integration method:</p>

@@ -2,6 +2,15 @@
 Full API
 --------
 
+Namespaces
+**********
+
+
+.. toctree::
+   :maxdepth: 5
+
+   namespace_indigo.rst
+
 Classes and Structs
 *******************
 

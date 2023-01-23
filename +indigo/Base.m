@@ -24,7 +24,6 @@ classdef Base < handle
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Class constructor that initializes the following properties:
-    %>
     %> - *name* Name of the system of ODEs/DAEs;
     %> - *neqn* Number of equations of the system of ODEs/DAEs;
     %> - *ninv* Number of invariants/contraints of the system of ODEs/DAEs.
@@ -61,7 +60,7 @@ classdef Base < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the number of invariants/contraints of the system of ODEs/DAEs.
+    %> Set the number of invariants/hidden constraints of the system of ODEs/DAEs.
     %
     function set_num_invs( this, num_invs )
       this.m_num_invs = num_invs;

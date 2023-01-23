@@ -12,7 +12,7 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public ODEsolver`` (:ref:`exhale_class_a00248`)
+- ``public indigo::ODEsolver``
 
 
 Derived Types

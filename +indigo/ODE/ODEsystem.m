@@ -1,73 +1,92 @@
 %
 %> Class container for a system of Ordinary Differential Equations (ODEs).
 %
-classdef ODEsystem < Base
+classdef ODEsystem < indigo.Base
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Class constructor
+    %> Class constructor for a system of ODEs that requires the following\n
+    %> inputs:
     %>
     %> - *name* Name of the system of ODEs/DAEs;
     %> - *neqn* Number of equations of the system of ODEs/DAEs;
-    %> - *ninv* Number of invariants/contraints of the system of ODEs/DAEs [optional, default = 0].
+    %> - *ninv* Number of invariants/contraints of the system of ODEs/DAEs\n
+    %>   [optional, default = 0].
     %
     function this = ODEsystem( name, neqn, ninv )
-      this@Base( name, neqn, ninv );
+      this@indigo.Base( name, neqn, ninv );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %
   methods (Abstract)
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> (Abstract) Definition of the system of ODEs:
+    %> Definition of the system of ODEs:
     %>
-    %> \f[ \mathbf{x}' = \mathbf{f}( t, \mathbf{x} ) \quad\oplus\quad [\textrm{invariants}] \f]
+    %> \f[
+    %> \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
+    %> \f]
     %>
-    %> invariants are of the form:
+    %> with optional invariants of the form:
     %>
-    %> \f[ \mathbf{h}( t, \mathbf{x} ) = \mathbf{0} \f]
+    %> \f[
+    %> \mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
+    %> \f]
     %>
-    %> The derived function must define the r.h.s. of the ODE
-    %> \f$ \mathbf{f}( t, \mathbf{x} ) \f$ where
-    %> \f$ \mathbf{x} \f$ are the states of the model described by the ODE.
+    %> The derived function must define an implicit system of ODEs of the form
+    %> \f$ \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0} \f$ where
+    %> \f$ \mathbf{x} \f$ are the unknown functions of the independent variable
+    %> \f$ \mathbf{t} \f$.
     %
-    f( this, t, x )
+    F( this, x, x_dot, t )
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> (Abstract) Evaluate the jacobian of the r.h.s. of the system of ODEs:
+    %> Evaluate the Jacobian of the of the system of ODEs:
     %>
-    %> \f[ \partial \mathbf{f}( t, \mathbf{x} ) / \partial \mathbf{x} \f]
+    %> \f[
+    %> \dfrac{
+    %> \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %> }{
+    %> \hat{\mathbf{x}}
+    %> }
+    %> \f]
     %>
-    %> Used only in implicit Runge-Kutta methods
+    %> where \f$ \hat{\mathbf{x}} = \left[ \mathbf{x}, \mathbf{x}' \right]^T \f$
+    %> is the concatenation of the unknown functions and their derivatives.
     %
-    DfDx( this, t, x )
+    JF( this, x, x_dot, t )
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> (Abstract) Evaluate the invariants/hidden constraints of the system of ODEs:
+    %> Evaluate the invariants of the system of ODEs:
     %>
-    %> \f[ \mathbf{h}( t, \mathbf{x} ) = \mathbf{0} \f]
+    %> \f[
+    %> \mathbf{H}( t, \mathbf{x} ) = \mathbf{0}.
+    %> \f]
     %
-    h( this, t, x )
+    H( this, x, t )
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> (Abstract) Evaluate the Jacobian of the hidden constraints of the system of ODEs:
+    %> Evaluate the Jacobian of the invariants of the system of ODEs:
     %>
-    %> \f[ \partial \mathbf{h}( t, \mathbf{x} ) / \partial \mathbf{x} \f]
+    %> \f[
+    %> \partial \mathbf{H}( t, \mathbf{x} ) / \partial \hat{\mathbf{x}}
+    %> \f]
     %>
-    %> Used only in projection method
+    %> where \f$ \hat{\mathbf{x}} = \left[ \mathbf{x}, \mathbf{x}' \right]^T \f$
+    %> is the concatenation of the unknown functions and their derivatives.
     %
-    DhDx( this, t, x )
+    JH( this, x, t )
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

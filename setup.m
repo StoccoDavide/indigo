@@ -8,7 +8,8 @@ set(groot, 'defaultLegendInterpreter',        'latex' );
 set(0,     'defaultAxesFontSize',             18      );
 
 % Library folder
-addpath('./indigo');
+addpath('./+indigo');
+addpath('./+indigo/ODE');
 
 % Tests folder
 addpath('./tests');

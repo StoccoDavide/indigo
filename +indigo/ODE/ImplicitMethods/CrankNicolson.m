@@ -5,7 +5,7 @@ classdef CrankNicolson < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Crank-Nicolson second-order method (2 stages)
     %>
@@ -21,6 +21,7 @@ classdef CrankNicolson < RKimplicit
     %>
     %> \endrst
     %
+    % TODO: remove the ~ argument and check if the tableau is correct (latex and code!)
     function this = CrankNicolson( ~ )
       this@RKimplicit( ...
         'CrankNicolson', ...

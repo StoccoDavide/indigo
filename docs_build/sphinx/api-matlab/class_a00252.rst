@@ -12,7 +12,7 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public Base`` (:ref:`exhale_class_a00116`)
+- ``public indigo::Base``
 
 
 Class Documentation

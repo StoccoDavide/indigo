@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00252" kind="class" language="C++" prot="public">
     <compoundname>ODEsystem</compoundname>
-    <basecompoundref refid="a00116" prot="public" virt="non-virtual">Base</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">indigo::Base</basecompoundref>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="a00252_1a93fda3f6114ad92570290a4b35351e3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -25,265 +25,158 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Class constructor</para>
+<para>Class constructor for a system of ODEs that requires the following<linebreak/>
+inputs:</para>
 <para><itemizedlist>
 <listitem><para><emphasis>name</emphasis> Name of the system of ODEs/DAEs;</para>
 </listitem><listitem><para><emphasis>neqn</emphasis> Number of equations of the system of ODEs/DAEs;</para>
-</listitem><listitem><para><emphasis>ninv</emphasis> Number of invariants/contraints of the system of ODEs/DAEs [optional, default = 0]. </para>
+</listitem><listitem><para><emphasis>ninv</emphasis> Number of invariants/contraints of the system of ODEs/DAEs<linebreak/>
+ [optional, default = 0]. </para>
 </listitem></itemizedlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="19" column="15"/>
+        <location file="ODE/ODEsystem.m" line="21" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00252_1a593266aa813bda0446667fe93955cb50" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00252_1a1c92aac456561832c8d17aab2565c7ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
-        <definition>virtual function ODEsystem::f</definition>
-        <argsstring>(in this, in t, in x)</argsstring>
-        <name>f</name>
-        <qualifiedname>ODEsystem::f</qualifiedname>
+        <definition>virtual function ODEsystem::F</definition>
+        <argsstring>(in this, in x, in x_dot, in t)</argsstring>
+        <name>F</name>
+        <qualifiedname>ODEsystem::F</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t</declname>
         </param>
         <param>
           <type>in</type>
           <declname>x</declname>
         </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>(Abstract) Definition of the system of ODEs:</para>
-<para><formula id="13">\[ \mathbf{x}&apos; = \mathbf{f}( t, \mathbf{x} ) \quad\oplus\quad [\textrm{invariants}] \]</formula></para>
-<para>invariants are of the form:</para>
-<para><formula id="14">\[ \mathbf{h}( t, \mathbf{x} ) = \mathbf{0} \]</formula></para>
-<para>The derived function must define the r.h.s. of the ODE <formula id="15">$ \mathbf{f}( t, \mathbf{x} ) $</formula> where <formula id="16">$ \mathbf{x} $</formula> are the states of the model described by the ODE. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="44" column="24"/>
-      </memberdef>
-      <memberdef kind="function" id="a00252_1a42c2de80bf1580e921989488ea9367d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>function</type>
-        <definition>virtual function ODEsystem::DfDx</definition>
-        <argsstring>(in this, in t, in x)</argsstring>
-        <name>DfDx</name>
-        <qualifiedname>ODEsystem::DfDx</qualifiedname>
         <param>
           <type>in</type>
-          <declname>this</declname>
+          <declname>x_dot</declname>
         </param>
         <param>
           <type>in</type>
           <declname>t</declname>
         </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Definition of the system of ODEs:</para>
+<para><formula id="13">\[
+\mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t ) = \mathbf{0}
+\]</formula></para>
+<para>with optional invariants of the form:</para>
+<para><formula id="14">\[
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
+\]</formula></para>
+<para>The derived function must define an implicit system of ODEs of the form <formula id="15">$ \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t ) = \mathbf{0} $</formula> where <formula id="16">$ \mathbf{x} $</formula> are the unknown functions of the independent variable <formula id="17">$ \mathbf{t} $</formula>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsystem.m" line="51" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function ODEsystem::JF</definition>
+        <argsstring>(in this, in x, in x_dot, in t)</argsstring>
+        <name>JF</name>
+        <qualifiedname>ODEsystem::JF</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
         <param>
           <type>in</type>
           <declname>x</declname>
         </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>(Abstract) Evaluate the jacobian of the r.h.s. of the system of ODEs:</para>
-<para><formula id="17">\[ \partial \mathbf{f}( t, \mathbf{x} ) / \partial \mathbf{x} \]</formula></para>
-<para>Used only in implicit Runge-Kutta methods </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="55" column="24"/>
-      </memberdef>
-      <memberdef kind="function" id="a00252_1abecf7f59b4cf4796303be30235c4a384" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>function</type>
-        <definition>virtual function ODEsystem::h</definition>
-        <argsstring>(in this, in t, in x)</argsstring>
-        <name>h</name>
-        <qualifiedname>ODEsystem::h</qualifiedname>
         <param>
           <type>in</type>
-          <declname>this</declname>
+          <declname>x_dot</declname>
         </param>
         <param>
           <type>in</type>
           <declname>t</declname>
         </param>
-        <param>
-          <type>in</type>
-          <declname>x</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>(Abstract) Evaluate the invariants/hidden constraints of the system of ODEs:</para>
-<para><formula id="14">\[ \mathbf{h}( t, \mathbf{x} ) = \mathbf{0} \]</formula> </para>
+<para>Evaluate the Jacobian of the of the system of ODEs:</para>
+<para><formula id="18">\[
+\dfrac{
+\partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t )
+}{
+\hat{\mathbf{x}}
+}
+\]</formula></para>
+<para>where <formula id="19">$ \hat{\mathbf{x}} = \left[ \mathbf{x}, \mathbf{x}&apos; \right]^T $</formula> is the concatenation of the unknown functions and their derivatives. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="64" column="24"/>
+        <location file="ODE/ODEsystem.m" line="69" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="a00252_1abd6bf96684984e28628d67cc86f2cb84" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00252_1ab186493d31a6369185700e502347e7a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
-        <definition>virtual function ODEsystem::DhDx</definition>
-        <argsstring>(in this, in t, in x)</argsstring>
-        <name>DhDx</name>
-        <qualifiedname>ODEsystem::DhDx</qualifiedname>
+        <definition>virtual function ODEsystem::H</definition>
+        <argsstring>(in this, in x, in t)</argsstring>
+        <name>H</name>
+        <qualifiedname>ODEsystem::H</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
         </param>
         <param>
           <type>in</type>
           <declname>t</declname>
         </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate the invariants of the system of ODEs:</para>
+<para><formula id="20">\[
+\mathbf{H}( t, \mathbf{x} ) = \mathbf{0}.
+\]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsystem.m" line="80" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="a00252_1abe619a3b4e36777c702352b9d0c83efe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function ODEsystem::JH</definition>
+        <argsstring>(in this, in x, in t)</argsstring>
+        <name>JH</name>
+        <qualifiedname>ODEsystem::JH</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
         <param>
           <type>in</type>
           <declname>x</declname>
         </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>(Abstract) Evaluate the Jacobian of the hidden constraints of the system of ODEs:</para>
-<para><formula id="18">\[ \partial \mathbf{h}( t, \mathbf{x} ) / \partial \mathbf{x} \]</formula></para>
-<para>Used only in projection method </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="75" column="24"/>
-      </memberdef>
-      <memberdef kind="function" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function Base::get_num_eqns</definition>
-        <argsstring>(in this)</argsstring>
-        <name>get_num_eqns</name>
-        <qualifiedname>Base::get_num_eqns</qualifiedname>
         <param>
           <type>in</type>
-          <declname>this</declname>
+          <declname>t</declname>
         </param>
         <briefdescription>
-<para>Get the number of equations of the system of ODEs/DAEs. </para>
         </briefdescription>
         <detaileddescription>
+<para>Evaluate the Jacobian of the invariants of the system of ODEs:</para>
+<para><formula id="21">\[
+\partial \mathbf{H}( t, \mathbf{x} ) / \partial \hat{\mathbf{x}}
+\]</formula></para>
+<para>where <formula id="19">$ \hat{\mathbf{x}} = \left[ \mathbf{x}, \mathbf{x}&apos; \right]^T $</formula> is the concatenation of the unknown functions and their derivatives. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="49" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function Base::get_num_invs</definition>
-        <argsstring>(in this)</argsstring>
-        <name>get_num_invs</name>
-        <qualifiedname>Base::get_num_invs</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <briefdescription>
-<para>Get the number of invariants/contraints of the system of ODEs/DAEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="58" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function Base::set_num_eqns</definition>
-        <argsstring>(in this, in num_eqns)</argsstring>
-        <name>set_num_eqns</name>
-        <qualifiedname>Base::set_num_eqns</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>num_eqns</declname>
-        </param>
-        <briefdescription>
-<para>Set the number of equations of the system of ODEs/DAEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="67" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00116_1a6325030dd91b09341a9e719d038225d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function Base::set_num_invs</definition>
-        <argsstring>(in this, in num_invs)</argsstring>
-        <name>set_num_invs</name>
-        <qualifiedname>Base::set_num_invs</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>num_invs</declname>
-        </param>
-        <briefdescription>
-<para>Set the number of invariants/contraints of the system of ODEs/DAEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="76" column="15"/>
-      </memberdef>
-      </sectiondef>
-      <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property Base::m_name</definition>
-        <argsstring></argsstring>
-        <name>m_name</name>
-        <qualifiedname>Base::m_name</qualifiedname>
-        <briefdescription>
-<para>Name of the system of ODEs/DAEs (used in warning/error messages). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="14" column="10" bodyfile="Base.m" bodystart="14" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property Base::m_num_eqns</definition>
-        <argsstring></argsstring>
-        <name>m_num_eqns</name>
-        <qualifiedname>Base::m_num_eqns</qualifiedname>
-        <briefdescription>
-<para>Number of equations of the system of ODEs/DAEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="19" column="10" bodyfile="Base.m" bodystart="19" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property Base::m_num_invs</definition>
-        <argsstring></argsstring>
-        <name>m_num_invs</name>
-        <qualifiedname>Base::m_num_invs</qualifiedname>
-        <briefdescription>
-<para>Number of invariants/contraints of the system of ODEs/DAEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="24" column="10" bodyfile="Base.m" bodystart="24" bodyend="-1"/>
+        <location file="ODE/ODEsystem.m" line="94" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -292,54 +185,34 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="2">
-        <label>Base</label>
-        <link refid="a00116"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="1">
         <label>ODEsystem</label>
         <link refid="a00252"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
-        <label>handle</label>
+      <node id="2">
+        <label>indigo::Base</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="2">
-        <label>Base</label>
-        <link refid="a00116"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="1">
         <label>ODEsystem</label>
         <link refid="a00252"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
-        <label>handle</label>
+      <node id="2">
+        <label>indigo::Base</label>
       </node>
     </collaborationgraph>
-    <location file="ODE/ODEsystem.m" line="4" column="1" bodyfile="ODE/ODEsystem.m" bodystart="5" bodyend="82"/>
+    <location file="ODE/ODEsystem.m" line="4" column="1" bodyfile="ODE/ODEsystem.m" bodystart="5" bodyend="101"/>
     <listofallmembers>
-      <member refid="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>Base</name></member>
-      <member refid="a00252_1a42c2de80bf1580e921989488ea9367d1" prot="public" virt="virtual"><scope>ODEsystem</scope><name>DfDx</name></member>
-      <member refid="a00252_1abd6bf96684984e28628d67cc86f2cb84" prot="public" virt="virtual"><scope>ODEsystem</scope><name>DhDx</name></member>
-      <member refid="a00252_1a593266aa813bda0446667fe93955cb50" prot="public" virt="virtual"><scope>ODEsystem</scope><name>f</name></member>
-      <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>get_num_eqns</name></member>
-      <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>get_num_invs</name></member>
-      <member refid="a00252_1abecf7f59b4cf4796303be30235c4a384" prot="public" virt="virtual"><scope>ODEsystem</scope><name>h</name></member>
-      <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>ODEsystem</scope><name>m_name</name></member>
-      <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" virt="non-virtual"><scope>ODEsystem</scope><name>m_num_eqns</name></member>
-      <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" virt="non-virtual"><scope>ODEsystem</scope><name>m_num_invs</name></member>
+      <member refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" prot="public" virt="virtual"><scope>ODEsystem</scope><name>F</name></member>
+      <member refid="a00252_1ab186493d31a6369185700e502347e7a5" prot="public" virt="virtual"><scope>ODEsystem</scope><name>H</name></member>
+      <member refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" prot="public" virt="virtual"><scope>ODEsystem</scope><name>JF</name></member>
+      <member refid="a00252_1abe619a3b4e36777c702352b9d0c83efe" prot="public" virt="virtual"><scope>ODEsystem</scope><name>JH</name></member>
       <member refid="a00252_1a93fda3f6114ad92570290a4b35351e3f" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>ODEsystem</name></member>
-      <member refid="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>set_num_eqns</name></member>
-      <member refid="a00116_1a6325030dd91b09341a9e719d038225d8" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>set_num_invs</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

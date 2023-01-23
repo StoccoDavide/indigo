@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Class Collatz" href="class_a00120.html" />
-    <link rel="prev" title="MATLAB API" href="root.html" />
+    <link rel="prev" title="Namespace indigo" href="namespace_indigo.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -51,13 +51,6 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">handle</span></code></p></li>
 </ul>
 </div>
-<div class="section" id="derived-type">
-<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this headline">¶</a>
-</h3>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">ODEsystem</span></code> (<a class="reference internal" href="class_a00252.html#exhale-class-a00252"><span class="std std-ref">Class ODEsystem</span></a>)</p></li>
-</ul>
-</div>
 </div>
 <div class="section" id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
@@ -68,16 +61,14 @@
 </dt>
 <dd>
 <p>Class container for the system of Ordinary Differential Equations (ODEs) or Differential Algebraic Equations (DAEs). </p>
-<p>Subclassed by <a class="reference internal" href="class_a00252.html#a00252"><span class="std std-ref">ODEsystem</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4Base4BaseE2in2in2in">
-<span id="_CPPv3N4Base4BaseE2in2in2in"></span><span id="_CPPv2N4Base4BaseE2in2in2in"></span><span id="Base::Base__in.in.in"></span><span class="target" id="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Base</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_eqns</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base4BaseE2in2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N4Base4BaseE2in2in2in"></span><span id="_CPPv2N4Base4BaseE2in2in2in"></span><span id="Base::Base__in.in.in"></span><span class="target" id="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Base</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">name</span></span>, </span><span class="n sig-param"><span class="pre">num_eqns</span></span>, </span><span class="n sig-param"><span class="pre">num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base4BaseE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Class constructor that initializes the following properties:</p>
-<p></p>
 <ul class="simple">
 <li><p><em>name</em> Name of the system of ODEs/DAEs;</p></li>
 <li><p><em>neqn</em> Number of equations of the system of ODEs/DAEs;</p></li>
@@ -89,7 +80,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4Base12get_num_eqnsE2in">
-<span id="_CPPv3N4Base12get_num_eqnsE2in"></span><span id="_CPPv2N4Base12get_num_eqnsE2in"></span><span id="Base::get_num_eqns__in"></span><span class="target" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_eqns</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12get_num_eqnsE2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N4Base12get_num_eqnsE2in"></span><span id="_CPPv2N4Base12get_num_eqnsE2in"></span><span id="Base::get_num_eqns__in"></span><span class="target" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_eqns</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12get_num_eqnsE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the number of equations of the system of ODEs/DAEs. </p>
@@ -98,7 +89,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4Base12get_num_invsE2in">
-<span id="_CPPv3N4Base12get_num_invsE2in"></span><span id="_CPPv2N4Base12get_num_invsE2in"></span><span id="Base::get_num_invs__in"></span><span class="target" id="a00116_1a547ccdd8280c668961998fc8e561492e"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_invs</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12get_num_invsE2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N4Base12get_num_invsE2in"></span><span id="_CPPv2N4Base12get_num_invsE2in"></span><span id="Base::get_num_invs__in"></span><span class="target" id="a00116_1a547ccdd8280c668961998fc8e561492e"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_invs</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">this</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12get_num_invsE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the number of invariants/contraints of the system of ODEs/DAEs. </p>
@@ -107,7 +98,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4Base12set_num_eqnsE2in2in">
-<span id="_CPPv3N4Base12set_num_eqnsE2in2in"></span><span id="_CPPv2N4Base12set_num_eqnsE2in2in"></span><span id="Base::set_num_eqns__in.in"></span><span class="target" id="a00116_1a4901f10f24d72fde7844ea7d6191cc3c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_eqns</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_eqns</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12set_num_eqnsE2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N4Base12set_num_eqnsE2in2in"></span><span id="_CPPv2N4Base12set_num_eqnsE2in2in"></span><span id="Base::set_num_eqns__in.in"></span><span class="target" id="a00116_1a4901f10f24d72fde7844ea7d6191cc3c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_eqns</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">num_eqns</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12set_num_eqnsE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the number of equations of the system of ODEs/DAEs. </p>
@@ -116,10 +107,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4Base12set_num_invsE2in2in">
-<span id="_CPPv3N4Base12set_num_invsE2in2in"></span><span id="_CPPv2N4Base12set_num_invsE2in2in"></span><span id="Base::set_num_invs__in.in"></span><span class="target" id="a00116_1a6325030dd91b09341a9e719d038225d8"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_invs</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">this</span></span>, <span class="n"></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12set_num_invsE2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N4Base12set_num_invsE2in2in"></span><span id="_CPPv2N4Base12set_num_invsE2in2in"></span><span id="Base::set_num_invs__in.in"></span><span class="target" id="a00116_1a6325030dd91b09341a9e719d038225d8"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_invs</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Base12set_num_invsE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the number of invariants/contraints of the system of ODEs/DAEs. </p>
+<p>Set the number of invariants/hidden constraints of the system of ODEs/DAEs. </p>
 </dd>
 </dl>
 

@@ -60,7 +60,7 @@ Program Listing for File RKimplicit.m
    %>     \end{array}
    %> \f]
    %
-   classdef RKimplicit < ODEsolver
+   classdef RKimplicit < indigo.ODEsolver
      %
      properties (SetAccess = protected, Hidden = true)
        %
@@ -88,9 +88,18 @@ Program Listing for File RKimplicit.m
        %> - *c* Runge-Kutta nodes vector (column vector)
        %
        function this = RKimplicit( name, A, b, c )
-         assert( isrow(b),    'RKimplicit::RKimplicit(...): Found Runge-Kutta weights vector b not as a row vector' );
-         assert( iscolumn(c), 'RKimplicit::RKimplicit(...): Found Runge-Kutta nodes vector c vector not as a column vector' );
-         this@ODEsolver( name );
+   
+         CMD = 'indigo::RKimplicit::RKimplicit(...): ';
+   
+         assert(isrow(b), ...
+           [CMD, 'Found Runge-Kutta weights vector b not as a row vector']);
+         assert(iscolumn(c), ...
+           [CMD, 'Found Runge-Kutta nodes vector c vector not as a column vector']);
+   
+         this@indigo.ODEsolver( name );
+   
+         this.check_tableau( A, b, c );
+   
          this.m_A = A;
          this.m_b = b;
          this.m_c = c;
@@ -100,7 +109,7 @@ Program Listing for File RKimplicit.m
        %
        %> Get the Runge-Kutta matrix
        %
-       function out = getA( this )
+       function out = get_A( this )
          out = this.m_A;
        end
        %
@@ -108,7 +117,7 @@ Program Listing for File RKimplicit.m
        %
        %> Get the Runge-Kutta weights vector (row vector)
        %
-       function out = getB( this )
+       function out = get_b( this )
          out = this.m_b;
        end
        %
@@ -116,7 +125,7 @@ Program Listing for File RKimplicit.m
        %
        %> Get the Runge-Kutta nodes vector (column vector)
        %
-       function out = getC( this )
+       function out = get_c( this )
          out = this.m_c;
        end
        %
@@ -124,7 +133,7 @@ Program Listing for File RKimplicit.m
        %
        %> Set the Runge-Kutta matrix
        %
-       function setA( this, in )
+       function set_A( this, in )
          this.m_A = in;
        end
        %
@@ -144,6 +153,17 @@ Program Listing for File RKimplicit.m
        function setC( this, in )
          assert( iscolumn(c), 'RKimplicit::setC(...): Found Runge-Kutta nodes vector c vector not as a column vector' );
          this.m_c = in;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Check the Butcher tableau
+       %
+       function out = check_tableau( this, A, b, c )
+   
+         CMD = 'indigo::RKimplicit::check_tableau(...): ';
+   
+   
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
