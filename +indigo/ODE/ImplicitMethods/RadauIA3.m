@@ -7,7 +7,7 @@ classdef RadauIA3 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> RadauIA third-order method (2 stages)
+    %> Radau IA third-order method (2 stages)
     %>
     %> \rst
     %> .. math::
@@ -21,7 +21,7 @@ classdef RadauIA3 < RKimplicit
     %>
     %> \endrst
     %
-    function this = RadauIA3( ~ )
+    function this = RadauIA3()
       this@RKimplicit( ...
         'RadauIA3', ...
         [1/4, -1/4; 1/4, 5/12], ...

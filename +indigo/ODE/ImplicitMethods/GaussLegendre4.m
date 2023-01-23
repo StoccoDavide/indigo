@@ -7,7 +7,7 @@ classdef GaussLegendre4 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss–Legendre fouth-order (2 stages)
+    %> Gauss–Legendre fourth-order (2 stages)
     %>
     %> \rst
     %> .. math::
@@ -22,7 +22,7 @@ classdef GaussLegendre4 < RKimplicit
     %>
     %> \endrst
     %
-    function this = GaussLegendre4( ~ )
+    function this = GaussLegendre4()
       t = sqrt(3)/6;
       this@RKimplicit( ...
         'GaussLegendre4', ...

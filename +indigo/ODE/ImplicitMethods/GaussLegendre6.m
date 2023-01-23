@@ -59,7 +59,7 @@ classdef GaussLegendre6 < DIAL_RKimplicit
     %>
     %> \endrst
     %
-    function this = GaussLegendre6( ~ )
+    function this = GaussLegendre6()
       t  = sqrt(15)/10;
       t2 = sqrt(15)/15;
       t3 = sqrt(15)/24;
