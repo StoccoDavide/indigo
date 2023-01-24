@@ -107,7 +107,7 @@ classdef ODEsolver < handle
     %> \delta\mathbf{x} \\[1em]
     %> \boldsymbol{\lambda}
     %> \end{array}\right]
-    %> = 
+    %> =
     %> \left[\begin{array}{c}
     %> \widetilde{\mathbf{x}}-\mathbf{x}_k \\[1em]
     %> -\mathbf{h}(t_k,\mathbf{x}_k)
@@ -194,6 +194,12 @@ classdef ODEsolver < handle
         maxabs = 1.0e3;
       end
 
+      if nargin > 6
+        dx_k = varargin{4};
+      else
+        dx_k = zeros(1, length(x_i));
+      end
+
       out      = zeros( neqn, length(t) );
       out(:,1) = x_i(:);
       perc     = 0.0;
@@ -208,7 +214,7 @@ classdef ODEsolver < handle
         end
 
         % Integrate system of ODEs
-        xnew = this.step( t(k), out(:,k), t(k+1)-t(k) );
+        [xnew, dx_k] = this.step( out(:, k), dx_k, t(k), t(k+1)-t(k) );
 
         % Project solution to the invariants
         if project

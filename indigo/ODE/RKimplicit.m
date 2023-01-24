@@ -48,7 +48,7 @@
 %>     \end{array}
 %> \f]
 %
-classdef RKimplicit < indigo.ODEsolver
+classdef RKimplicit < ODEsolver
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -182,7 +182,7 @@ classdef RKimplicit < indigo.ODEsolver
       R   = zeros(nc*nx, 1);
       idx = 1:nx;
       for i = 1:nc
-        R(idx) = this.m_ode.f( ...
+        R(idx) = this.m_ode.F( ...
             x_k + this.m_A(i,:) * x_dot_k, x_dot_k, t_k + this.m_c(i) * d_t ...
           );
         idx    = idx + nx;
@@ -201,7 +201,7 @@ classdef RKimplicit < indigo.ODEsolver
       JR  = eye(nc*nx, 2*nx + 1);
       idx = 1:nx;
       for i = 1:nc
-        JR(idx,:) = this.m_ode.DfDx( ...
+        JR(idx,:) = this.m_ode.JF( ...
             x_k + this.m_A(i,:) * x_dot_k, x_dot_k, t_k + this.m_c(i) * d_t ...
           );
         idx       = idx + nx;
@@ -229,7 +229,7 @@ classdef RKimplicit < indigo.ODEsolver
     %
     %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$
     %
-    function out = step( this, x_k, x_dot_k, t_k, d_t )
+    function [out, K] = step( this, x_k, x_dot_k, t_k, d_t )
       K   = this.solveStep( x_k, x_dot_k, t_k, d_t );
       out = x_k + d_t * this.m_b(:) * K;
     end

@@ -1,7 +1,7 @@
 %
 %> Class container for a system of Ordinary Differential Equations (ODEs).
 %
-classdef ODEsystem < indigo.Base
+classdef ODEsystem < Base
   %
   methods
     %
@@ -16,7 +16,7 @@ classdef ODEsystem < indigo.Base
     %>   [optional, default = 0].
     %
     function this = ODEsystem( name, neqn, ninv )
-      this@indigo.Base( name, neqn, ninv );
+      this@Base( name, neqn, ninv );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

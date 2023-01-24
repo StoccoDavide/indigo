@@ -10,7 +10,7 @@
 %>
 %> \endrst
 %
-classdef LinearPendulumODE_Implicit < indigo.ODEsystem
+classdef LinearPendulumODE_Implicit < ODEsystem
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -34,7 +34,7 @@ classdef LinearPendulumODE_Implicit < indigo.ODEsystem
     function this = LinearPendulumODE_Implicit( m, l, g )
       neq  = 2;
       ninv = 0;
-      this@indigo.ODEsystem( 'LinearPendulumODE_Implicit', neq, ninv );
+      this@ODEsystem( 'LinearPendulumODE_Implicit', neq, ninv );
       this.m_m = m;
       this.m_l = l;
       this.m_g = g;
@@ -42,7 +42,7 @@ classdef LinearPendulumODE_Implicit < indigo.ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = f( this, x, x_dot, t )
+    function out = F( this, x, x_dot, t )
       out    = zeros(2,1);
       out(1) = x_dot(1) - x(2);
       out(2) = x_dot(2) + this.m_g / this.m_l * x(1);
@@ -50,7 +50,7 @@ classdef LinearPendulumODE_Implicit < indigo.ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = DfDx( this, x, x_dot, t )
+    function out = JF( this, x, x_dot, t )
       out      = zeros(2,5);
       out(1,2) = -1.0;
       out(1,3) = 1.0;
@@ -60,12 +60,12 @@ classdef LinearPendulumODE_Implicit < indigo.ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function h( ~, ~, ~ )
+    function H( ~, ~, ~ )
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function DhDx( ~, ~, ~ )
+    function JH( ~, ~, ~ )
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
