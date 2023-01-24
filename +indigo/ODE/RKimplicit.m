@@ -125,6 +125,11 @@ classdef RKimplicit < indigo.ODEsolver
     %> Set the Runge-Kutta matrix
     %
     function setA( this, in )
+      CMD = 'RKimplicit::set_A(...): ';
+      assert( ismatrix(in), ...
+        [CMD, 'Found Runge-Kutta matrix A not as a matrix.'] );
+      assert( ~nnz(isnan(in)), ...
+        [CMD, 'Found NaN in Runge-Kutta matrix A.'] );
       this.m_A = in;
     end
     %
@@ -158,78 +163,63 @@ classdef RKimplicit < indigo.ODEsolver
     %
     %> Check the Butcher tableau
     %
-    function out = check_tableau( this, A, b, c )
-
+    function check_tableau( this, A, b, c )
       CMD = 'indigo::RKimplicit::check_tableau(...): ';
-
-
+      assert( size(A, 1) == size(c, 1), ...
+        [CMD, 'Found Runge-Kutta matrix A rows != rows of nodes vector c.'] );
+      assert( size(A, 2) == size(b, 2), ...
+        [CMD, 'Found Runge-Kutta matrix A columns ', ...
+         '!= columns of weights vector b.'] );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute the step residual \f$ \mathbf{F}(\mathbf{K}) \f$
+    %> Compute the step residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \f$
     %
-    function R = stepResidual( this, K, t_k, x_k, d_t )
+    function R = stepResidual( this, x_k, x_dot_k, t_k, d_t )
       nc  = length(this.m_c);
       nx  = length(x_k);
       R   = zeros(nc*nx, 1);
       idx = 1:nx;
       for i = 1:nc
-        tmp = x_k;
-        jdx = 1:nx;
-        for j = 1:nc
-          tmp = tmp + this.m_A(i,j) * K(jdx);
-          jdx = jdx + nx;
-        end
-        R(idx) = K(idx) - d_t * this.m_ode.f( t_k + this.m_c(i) * d_t, tmp );
+        R(idx) = this.m_ode.f( ...
+            x_k + this.m_A(i,:) * x_dot_k, x_dot_k, t_k + this.m_c(i) * d_t ...
+          );
         idx    = idx + nx;
       end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute the Jacobian of \f$ \mathbf{F}(\mathbf{K}) \f$:
+    %> Compute the Jacobian of \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \f$:
     %>
-    %> \f[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \f].
+    %> \f[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \f].
     %
-    function JR = stepJacobian( this, K, t_k, x_k, d_t )
-      A   = this.m_A;
-      c   = this.m_c;
+    function JR = stepJacobian( this, x_k, x_dot_k, t_k, d_t )
       nc  = length(this.m_c);
       nx  = length(x_k);
-      JR  = eye(nc*nx);
+      JR  = eye(nc*nx, 2*nx + 1);
       idx = 1:nx;
       for i = 1:nc
-        tmp = x_k;
-        jdx = 1:nx;
-        for j = 1:nc
-          tmp = tmp + A(i,j) * K(jdx);
-          jdx = jdx + nx;
-        end
-        ti  = t_k + c(i) * d_t;
-        jdx = 1:nx;
-        for j = 1:nc
-          JR(idx,jdx) = JR(idx,jdx) - d_t * A(i,j)*this.m_ode.DfDx( ti, tmp );
-          jdx = jdx + nx;
-        end
-        idx = idx + nx;
+        JR(idx,:) = this.m_ode.DfDx( ...
+            x_k + this.m_A(i,:) * x_dot_k, x_dot_k, t_k + this.m_c(i) * d_t ...
+          );
+        idx       = idx + nx;
       end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the implicit step \f$ \mathbf{F}(\mathbf{K})=\mathbf{0} \f$ by Newton method
+    %> Solve the implicit step \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$ by Newton method
     %>
     %> \f[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
     %>     \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \f].
     %
-    function K = solveStep( this, t_k, x_k, d_t )
-      ns  = length( this.m_c );
-      K_0 = d_t * this.m_ode.f( t_k, x_k );
-      K   = repmat( K_0(:), ns, 1);
-      fun = @(K) this.stepResidual( K, t_k, x_k, d_t );
-      jac = @(K) this.stepJacobian( K, t_k, x_k, d_t );
-      [K, ierr] = NewtonSolver( fun, jac, K );
+    function K = solveStep( this, x_k, x_dot_k, t_k, d_t )
+      fun = @(x_dot_k) this.stepResidual( x_k, x_dot_k, t_k, d_t );
+      jac = @(x_dot_k) this.stepJacobian( x_k, x_dot_k, t_k, d_t );
+      K0  = x_dot_k;
+      [K, ierr] = NewtonSolver( fun, jac, K0 );
       if ierr ~= 0
         fprintf( 1, 'RKimplicit::solveStep(...): Not converged flag = %d!\n', ierr );
       end
@@ -237,11 +227,11 @@ classdef RKimplicit < indigo.ODEsolver
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{K})=\mathbf{0} \f$
+    %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$
     %
-    function out = step( this, t_k, x_k, d_t )
-      K   = this.solveStep( t_k, x_k, d_t );
-      out = x_k + reshape( K, length(x_k), length(this.m_c) ) * this.m_b(:);
+    function out = step( this, x_k, x_dot_k, t_k, d_t )
+      K   = this.solveStep( x_k, x_dot_k, t_k, d_t );
+      out = x_k + d_t * this.m_b(:) * K;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

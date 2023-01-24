@@ -10,7 +10,7 @@
 %>
 %> \endrst
 %
-classdef LinearPendulumODE_Implicit < BVP_ODEsystem
+classdef LinearPendulumODE_Implicit < indigo.ODEsystem
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -34,7 +34,7 @@ classdef LinearPendulumODE_Implicit < BVP_ODEsystem
     function this = LinearPendulumODE_Implicit( m, l, g )
       neq  = 2;
       ninv = 0;
-      this@BVP_ODEsystem( 'LinearPendulumODE', neq, ninv );
+      this@indigo.ODEsystem( 'LinearPendulumODE_Implicit', neq, ninv );
       this.m_m = m;
       this.m_l = l;
       this.m_g = g;
@@ -42,18 +42,20 @@ classdef LinearPendulumODE_Implicit < BVP_ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = f( this, ~, X, Xdot )
+    function out = f( this, x, x_dot, t )
       out    = zeros(2,1);
-      out(1) = Xdot(1) - X(2);
-      out(2) = Xdot(2) + this.m_g / this.m_l * X(1);
+      out(1) = x_dot(1) - x(2);
+      out(2) = x_dot(2) + this.m_g / this.m_l * x(1);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = DfDx( this, ~, ~ )
-      out      = zeros(2,2);
-      out(1,2) = 1.0;
-      out(2,1) = -this.m_g / this.m_l;
+    function out = DfDx( this, x, x_dot, t )
+      out      = zeros(2,5);
+      out(1,2) = -1.0;
+      out(1,3) = 1.0;
+      out(2,1) = this.m_g / this.m_l;
+      out(2,4) = 1.0;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -68,9 +70,9 @@ classdef LinearPendulumODE_Implicit < BVP_ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function plot( this, ~, X )
-      x  =  this.m_l*sin(X(1));
-      y  = -this.m_l*cos(X(1));
+    function plot( this, ~, x )
+      x  =  this.m_l*sin(x(1));
+      y  = -this.m_l*cos(x(1));
       x0 = 0;
       y0 = 0;
       tt = 0:pi/100:2*pi;
