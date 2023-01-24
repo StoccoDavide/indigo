@@ -4,7 +4,6 @@
     <compoundname>ODEsolver</compoundname>
     <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
     <derivedcompoundref refid="a00256" prot="public" virt="non-virtual">RKexplicit</derivedcompoundref>
-    <derivedcompoundref refid="a00260" prot="public" virt="non-virtual">RKimplicit</derivedcompoundref>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
         <type>Property</type>
@@ -272,7 +271,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
         <name>step</name>
         <qualifiedname>ODEsolver::step</qualifiedname>
         <reimplementedby refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d">step</reimplementedby>
-        <reimplementedby refid="a00260_1a551aed170a5231654042d90d6f7e8773">step</reimplementedby>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -318,12 +316,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
-        <label>CrankNicolson</label>
-        <link refid="a00168"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="5">
         <label>ExplicitEuler</label>
         <link refid="a00124"/>
@@ -336,18 +328,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
-        <label>GaussLegendre2</label>
-        <link refid="a00172"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>GaussLegendre4</label>
-        <link refid="a00176"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="7">
         <label>Heun2</label>
         <link refid="a00132"/>
@@ -358,78 +338,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
         <label>Heun3</label>
         <link refid="a00136"/>
         <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="20">
-        <label>ImplicitEuler</label>
-        <link refid="a00184"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>ImplicitMidpoint</label>
-        <link refid="a00188"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>LobattoIIIA2</label>
-        <link refid="a00192"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>LobattoIIIA4</label>
-        <link refid="a00196"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>LobattoIIIB2</label>
-        <link refid="a00200"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>LobattoIIIB4</label>
-        <link refid="a00204"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="26">
-        <label>LobattoIIIC2</label>
-        <link refid="a00208"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>LobattoIIIC4</label>
-        <link refid="a00212"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>LobattoIIICS2</label>
-        <link refid="a00216"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>LobattoIIICS4</label>
-        <link refid="a00220"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>LobattoIIID2</label>
-        <link refid="a00224"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>LobattoIIID4</label>
-        <link refid="a00228"/>
-        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -460,36 +368,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
         <label>RKexplicit</label>
         <link refid="a00256"/>
         <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>RKimplicit</label>
-        <link refid="a00260"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="32">
-        <label>RadauIA3</label>
-        <link refid="a00232"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="33">
-        <label>RadauIA5</label>
-        <link refid="a00236"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="34">
-        <label>RadauIIA3</label>
-        <link refid="a00240"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>RadauIIA5</label>
-        <link refid="a00244"/>
-        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="12">

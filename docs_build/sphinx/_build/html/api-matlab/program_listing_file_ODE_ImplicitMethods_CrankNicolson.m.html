@@ -45,7 +45,7 @@
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">methods</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Crank-Nicolson second-order method (2 stages)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
@@ -61,6 +61,7 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \endrst</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% TODO: remove the ~ argument and check if the tableau is correct (latex and code!)</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">CrankNicolson</span><span class="p">(</span> ~ <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">RKimplicit</span><span class="p">(</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">        </span><span class="s">'CrankNicolson'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>

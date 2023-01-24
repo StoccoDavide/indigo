@@ -17,7 +17,7 @@ Program Listing for File CrankNicolson.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Crank-Nicolson second-order method (2 stages)
        %>
@@ -33,6 +33,7 @@ Program Listing for File CrankNicolson.m
        %>
        %> \endrst
        %
+       % TODO: remove the ~ argument and check if the tableau is correct (latex and code!)
        function this = CrankNicolson( ~ )
          this@RKimplicit( ...
            'CrankNicolson', ...

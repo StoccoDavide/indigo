@@ -125,7 +125,8 @@ html_theme_options = {
   "link_hover"       : "#4B0082",
   "anchor_hover_fg"  : "#4B0082",
   "gray_1"           : "#black",
-  "code_font_family" : "Menlo"
+  "code_font_family" : "Menlo",
+  "code_highlight"   : "#4B0082",
 }
 
 # If true, SmartyPants will be used to convert quotes and dashes to

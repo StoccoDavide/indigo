@@ -19,5 +19,5 @@ ODE/DAE Toolbox
 License
 -------
 
-.. literalinclude:: ../License.txt
+.. literalinclude:: ../LICENSE.txt
   :language: none

@@ -187,7 +187,7 @@
         </briefdescription>
         <detaileddescription>
 <para>Compute an integration step using the <bold>explicit</bold> Runge-Kutta method:</para>
-<para><formula id="19">\[
+<para><formula id="22">\[
     \begin{array}{rcl}
        x_{k+1} &amp;=&amp; x_k + \displaystyle\sum_{j=1}^s b_j K_j \\
        K_i     &amp;=&amp; h f \left(

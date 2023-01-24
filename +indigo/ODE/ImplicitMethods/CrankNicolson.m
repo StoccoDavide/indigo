@@ -5,7 +5,7 @@ classdef CrankNicolson < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Crank-Nicolson second-order method (2 stages)
     %>

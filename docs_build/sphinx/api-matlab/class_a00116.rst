@@ -15,12 +15,6 @@ Base Type
 - ``public handle``
 
 
-Derived Type
-************
-
-- ``public ODEsystem`` (:ref:`exhale_class_a00252`)
-
-
 Class Documentation
 -------------------
 
