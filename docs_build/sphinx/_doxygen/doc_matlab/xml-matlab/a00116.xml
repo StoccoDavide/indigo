@@ -3,6 +3,7 @@
   <compounddef id="a00116" kind="class" language="C++" prot="public">
     <compoundname>Base</compoundname>
     <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
+    <derivedcompoundref refid="a00252" prot="public" virt="non-virtual">ODEsystem</derivedcompoundref>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" static="no" mutable="no">
         <type>Property</type>
@@ -41,7 +42,7 @@
         <name>m_num_invs</name>
         <qualifiedname>Base::m_num_invs</qualifiedname>
         <briefdescription>
-<para>Number of invariants/contraints of the system of ODEs/DAEs. </para>
+<para>Number of invariants/hidden contraints of the system of ODEs/DAEs. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -51,37 +52,58 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00116_1a606023c352e27bb5cc5a56f6850c27da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::Base</definition>
-        <argsstring>(in name, in num_eqns, in num_invs)</argsstring>
+        <argsstring>(in t_name, in t_num_eqns, in t_num_invs)</argsstring>
         <name>Base</name>
         <qualifiedname>Base::Base</qualifiedname>
         <param>
           <type>in</type>
-          <declname>name</declname>
+          <declname>t_name</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>num_eqns</declname>
+          <declname>t_num_eqns</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>num_invs</declname>
+          <declname>t_num_invs</declname>
         </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Class constructor that initializes the following properties:<itemizedlist>
-<listitem><para><emphasis>name</emphasis> Name of the system of ODEs/DAEs;</para>
-</listitem><listitem><para><emphasis>neqn</emphasis> Number of equations of the system of ODEs/DAEs;</para>
-</listitem><listitem><para><emphasis>ninv</emphasis> Number of invariants/contraints of the system of ODEs/DAEs. </para>
-</listitem></itemizedlist>
+<para>Class constructor for a system of ODEs/DAEs that requires the following inputs:</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the system of ODEs/DAEs; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>neqn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of equations of the system of ODEs/DAEs; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ninv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of invariants/hidden contraints of the system of ODEs/DAEs. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="37" column="15"/>
+        <location file="Base.m" line="40" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -94,13 +116,49 @@
           <declname>this</declname>
         </param>
         <briefdescription>
-<para>Get the number of equations of the system of ODEs/DAEs. </para>
         </briefdescription>
         <detaileddescription>
+<para>Get the number of equations of the system of ODEs/DAEs.</para>
+<para><simplesect kind="return"><para>The number of equations of the system of ODEs/DAEs. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="48" column="15"/>
+        <location file="Base.m" line="53" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00116_1a8acdc198f9503ad4df0938412359d4fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::set_num_eqns</definition>
+        <argsstring>(in this, in t_num_eqns)</argsstring>
+        <name>set_num_eqns</name>
+        <qualifiedname>Base::set_num_eqns</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_num_eqns</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the number of equations of the system of ODEs/DAEs.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num_eqns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of equations of the system of ODEs/DAEs. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="64" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -113,41 +171,21 @@
           <declname>this</declname>
         </param>
         <briefdescription>
-<para>Get the number of invariants/contraints of the system of ODEs/DAEs. </para>
         </briefdescription>
         <detaileddescription>
+<para>Get the number of invariants/hidden contraints of the system of ODEs/DAEs.</para>
+<para><simplesect kind="return"><para>The number of invariants/hidden contraints of the system of ODEs/DAEs. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="57" column="15"/>
+        <location file="Base.m" line="76" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function Base::set_num_eqns</definition>
-        <argsstring>(in this, in num_eqns)</argsstring>
-        <name>set_num_eqns</name>
-        <qualifiedname>Base::set_num_eqns</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>num_eqns</declname>
-        </param>
-        <briefdescription>
-<para>Set the number of equations of the system of ODEs/DAEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Base.m" line="66" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00116_1a6325030dd91b09341a9e719d038225d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00116_1afbed901db1ac25ff5a3bd9607f129549" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::set_num_invs</definition>
-        <argsstring>(in this, in num_invs)</argsstring>
+        <argsstring>(in this, in t_num_invs)</argsstring>
         <name>set_num_invs</name>
         <qualifiedname>Base::set_num_invs</qualifiedname>
         <param>
@@ -156,16 +194,26 @@
         </param>
         <param>
           <type>in</type>
-          <declname>num_invs</declname>
+          <declname>t_num_invs</declname>
         </param>
         <briefdescription>
-<para>Set the number of invariants/hidden constraints of the system of ODEs/DAEs. </para>
         </briefdescription>
         <detaileddescription>
+<para>Set the number of invariants/hidden constraints of the system of ODEs/DAEs.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num_invs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of invariants/hidden constraints of the system of ODEs/DAEs. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="75" column="15"/>
+        <location file="Base.m" line="88" column="15"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -178,6 +226,12 @@
         <label>Base</label>
         <link refid="a00116"/>
         <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ODEsystem</label>
+        <link refid="a00252"/>
+        <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -195,16 +249,16 @@
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="Base.m" line="5" column="1" bodyfile="Base.m" bodystart="6" bodyend="83"/>
+    <location file="Base.m" line="5" column="1" bodyfile="Base.m" bodystart="6" bodyend="96"/>
     <listofallmembers>
-      <member refid="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10" prot="public" virt="non-virtual"><scope>Base</scope><name>Base</name></member>
+      <member refid="a00116_1a606023c352e27bb5cc5a56f6850c27da" prot="public" virt="non-virtual"><scope>Base</scope><name>Base</name></member>
       <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_eqns</name></member>
       <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_invs</name></member>
       <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>Base</scope><name>m_name</name></member>
       <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_eqns</name></member>
       <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_invs</name></member>
-      <member refid="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_eqns</name></member>
-      <member refid="a00116_1a6325030dd91b09341a9e719d038225d8" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_invs</name></member>
+      <member refid="a00116_1a8acdc198f9503ad4df0938412359d4fd" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_eqns</name></member>
+      <member refid="a00116_1afbed901db1ac25ff5a3bd9607f129549" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_invs</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

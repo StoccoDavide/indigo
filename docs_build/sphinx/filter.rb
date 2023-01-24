@@ -17,6 +17,7 @@ Dir.glob("./_build/html/api-matlab/*.html").each do |f|
       line.gsub!(/<span class="n"><span class="pre">in<\/span><\/span><span class="w"> */,'');
       line.gsub!(/<em><span class="pre">(this|ignoredArg)<\/span><\/em>,? */,'');
       line.gsub!(/<span class="pre">(this|ignoredArg)\)<\/span>/,'<span class="sig-paren">)</span>');
+      line.gsub!(/<\/span><span class="n sig-param"><span class="pre">(this|ignoredArg)<\/span><\/span>/,'');
       line.gsub!(
         /<span class="pre">(in<\/span> *)/,
         '<span class="sig-paren">()</span>'

@@ -4,11 +4,11 @@
     <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" kind="variable"><name>m_name</name></member>
     <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" kind="variable"><name>m_num_eqns</name></member>
     <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" kind="variable"><name>m_num_invs</name></member>
-    <member refid="a00116_1ac7fc44802e8ec6a3900735a1b63e3d10" kind="function"><name>Base</name></member>
+    <member refid="a00116_1a606023c352e27bb5cc5a56f6850c27da" kind="function"><name>Base</name></member>
     <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" kind="function"><name>get_num_eqns</name></member>
+    <member refid="a00116_1a8acdc198f9503ad4df0938412359d4fd" kind="function"><name>set_num_eqns</name></member>
     <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" kind="function"><name>get_num_invs</name></member>
-    <member refid="a00116_1a4901f10f24d72fde7844ea7d6191cc3c" kind="function"><name>set_num_eqns</name></member>
-    <member refid="a00116_1a6325030dd91b09341a9e719d038225d8" kind="function"><name>set_num_invs</name></member>
+    <member refid="a00116_1afbed901db1ac25ff5a3bd9607f129549" kind="function"><name>set_num_invs</name></member>
   </compound>
   <compound refid="a00120" kind="class"><name>Collatz</name>
     <member refid="a00120_1a319db761b80045d9209400f0b3cacb5e" kind="function"><name>Collatz</name></member>
@@ -19,17 +19,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00168" kind="class"><name>CrankNicolson</name>
     <member refid="a00168_1a98a32ed50e7c8909cd359bbe08204565" kind="function"><name>CrankNicolson</name></member>
@@ -57,17 +61,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00128" kind="class"><name>ExplicitMidpoint</name>
     <member refid="a00128_1a2d400bb0f2d975122bb46b830d84f71c" kind="function"><name>ExplicitMidpoint</name></member>
@@ -78,17 +86,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00172" kind="class"><name>GaussLegendre2</name>
     <member refid="a00172_1a8f2c1cd21a1a5c13b4423b6bbbc1b806" kind="function"><name>GaussLegendre2</name></member>
@@ -136,17 +148,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00136" kind="class"><name>Heun3</name>
     <member refid="a00136_1a052faa0929100c5f4d01b8bf4ae6b5c7" kind="function"><name>Heun3</name></member>
@@ -157,17 +173,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00184" kind="class"><name>ImplicitEuler</name>
     <member refid="a00184_1a4873bd2beee3e6ff9974b27c98ce7516" kind="function"><name>ImplicitEuler</name></member>
@@ -376,21 +396,31 @@
   <compound refid="a00248" kind="class"><name>ODEsolver</name>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
-    <member refid="a00248_1a7d3ffc79c180c1ab24447c96d838bd9d" kind="function"><name>ODEsolver</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
+    <member refid="a00248_1a4cab2953507bc503d780ecbed14713ca" kind="function"><name>ODEsolver</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
-    <member refid="a00248_1aff22b63fa14cf18dae231d0110d23e7b" kind="function"><name>step</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
   </compound>
   <compound refid="a00252" kind="class"><name>ODEsystem</name>
     <member refid="a00252_1a93fda3f6114ad92570290a4b35351e3f" kind="function"><name>ODEsystem</name></member>
     <member refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" kind="function"><name>F</name></member>
     <member refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" kind="function"><name>JF</name></member>
-    <member refid="a00252_1ab186493d31a6369185700e502347e7a5" kind="function"><name>H</name></member>
-    <member refid="a00252_1abe619a3b4e36777c702352b9d0c83efe" kind="function"><name>JH</name></member>
+    <member refid="a00252_1aa4aeb9e2668be5258e2ca30f39cb0889" kind="function"><name>H</name></member>
+    <member refid="a00252_1a429842d9815af9a468f8659ab64ebb94" kind="function"><name>JH</name></member>
+    <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" kind="function"><name>get_num_eqns</name></member>
+    <member refid="a00116_1a8acdc198f9503ad4df0938412359d4fd" kind="function"><name>set_num_eqns</name></member>
+    <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" kind="function"><name>get_num_invs</name></member>
+    <member refid="a00116_1afbed901db1ac25ff5a3bd9607f129549" kind="function"><name>set_num_invs</name></member>
+    <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" kind="variable"><name>m_name</name></member>
+    <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" kind="variable"><name>m_num_eqns</name></member>
+    <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" kind="variable"><name>m_num_invs</name></member>
   </compound>
   <compound refid="a00232" kind="class"><name>RadauIA3</name>
     <member refid="a00232_1acce493aea95211c76bd3d86dd50b8df5" kind="function"><name>RadauIA3</name></member>
@@ -469,17 +499,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00144" kind="class"><name>Ralston3</name>
     <member refid="a00144_1a88e59c0dba74905b37bc8438685baa9e" kind="function"><name>Ralston3</name></member>
@@ -490,17 +524,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00148" kind="class"><name>Ralston4</name>
     <member refid="a00148_1a8bb9bfd280f5ef02b6e211b10f94ba9d" kind="function"><name>Ralston4</name></member>
@@ -511,17 +549,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00152" kind="class"><name>RK3</name>
     <member refid="a00152_1a457607e592b7a98617ff6997bf39a231" kind="function"><name>RK3</name></member>
@@ -532,17 +574,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00156" kind="class"><name>RK38</name>
     <member refid="a00156_1a1a5c90a0408a781b882f21371340fe03" kind="function"><name>RK38</name></member>
@@ -553,17 +599,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00160" kind="class"><name>RK4</name>
     <member refid="a00160_1a825ec831c70980037463834ef1657293" kind="function"><name>RK4</name></member>
@@ -574,17 +624,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00256" kind="class"><name>RKexplicit</name>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
@@ -592,6 +646,7 @@
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
     <member refid="a00256_1af77a8bb27f7250531cc013e4c0f888ae" kind="function"><name>RKexplicit</name></member>
     <member refid="a00256_1ab9999241cfd0871f748d1f305bf8f504" kind="function"><name>get_A</name></member>
     <member refid="a00256_1a24e40fa536c7312e5ddcc444755fc468" kind="function"><name>get_b</name></member>
@@ -601,11 +656,14 @@
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
   </compound>
   <compound refid="a00260" kind="class"><name>RKimplicit</name>
     <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
@@ -633,17 +691,21 @@
     <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" kind="function"><name>set_b</name></member>
     <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" kind="function"><name>set_c</name></member>
     <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" kind="function"><name>step</name></member>
+    <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
+    <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
-    <member refid="a00248_1adf22eb997cd5cd532fef6edeeb2a1322" kind="function"><name>set_solver</name></member>
-    <member refid="a00248_1a7284ba99c96a673ac08925e318adf6d8" kind="function"><name>set_ode</name></member>
-    <member refid="a00248_1a6bbd6d7a155e7af436e198c8626c9021" kind="function"><name>project</name></member>
-    <member refid="a00248_1a8c11588013b8a6f10b437d3613583710" kind="function"><name>integrate</name></member>
+    <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
+    <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
+    <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
+    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
     <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" kind="variable"><name>m_c</name></member>
     <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
+    <member refid="a00248_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
   </compound>
   <compound refid="a00273" kind="namespace"><name>indigo</name>
   </compound>

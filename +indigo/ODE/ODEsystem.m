@@ -1,22 +1,20 @@
 %
 %> Class container for a system of Ordinary Differential Equations (ODEs).
 %
-classdef ODEsystem < indigo.Base
+classdef ODEsystem < Base
   %
   methods
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Class constructor for a system of ODEs that requires the following\n
-    %> inputs:
+    %> Class constructor for a system of ODEs.
     %>
-    %> - *name* Name of the system of ODEs/DAEs;
-    %> - *neqn* Number of equations of the system of ODEs/DAEs;
-    %> - *ninv* Number of invariants/contraints of the system of ODEs/DAEs\n
-    %>   [optional, default = 0].
+    %> \param name Name of the system of ODEs.
+    %> \param neqn Number of equations of the system of ODEs.
+    %> \param ninv Number of invariants/hidden contraints of the system of ODEs.
     %
     function this = ODEsystem( name, neqn, ninv )
-      this@indigo.Base( name, neqn, ninv );
+      this@Base( name, neqn, ninv );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -27,22 +25,25 @@ classdef ODEsystem < indigo.Base
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Definition of the system of ODEs:
+    %> Definition of an implicit system of ODEs of the form:
     %>
     %> \f[
     %> \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
     %> \f]
     %>
-    %> with optional invariants of the form:
+    %> with *optional* invariants/hidden constraints of the form:
     %>
     %> \f[
-    %> \mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
+    %> \mathbf{H}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
     %> \f]
     %>
-    %> The derived function must define an implicit system of ODEs of the form
-    %> \f$ \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0} \f$ where
-    %> \f$ \mathbf{x} \f$ are the unknown functions of the independent variable
-    %> \f$ \mathbf{t} \f$.
+    %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
+    %> independent variable \f$ t \f$.
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %> \return      Value of the system of ODEs function \f$ \mathbf{F} \f$.
     %
     F( this, x, x_dot, t )
     %
@@ -51,40 +52,72 @@ classdef ODEsystem < indigo.Base
     %> Evaluate the Jacobian of the of the system of ODEs:
     %>
     %> \f[
+    %> \mathbf{JF}( \mathbf{x}, \mathbf{x}', t ) =
+    %> \left[
     %> \dfrac{
     %> \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
     %> }{
-    %> \hat{\mathbf{x}}
+    %> \partial \mathbf{x}
+    %> },
+    %> \dfrac{
+    %> \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %> }{
+    %> \partial \mathbf{x}'
     %> }
+    %> \right].
     %> \f]
     %>
-    %> where \f$ \hat{\mathbf{x}} = \left[ \mathbf{x}, \mathbf{x}' \right]^T \f$
-    %> is the concatenation of the unknown functions and their derivatives.
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %> \return      Value of the Jacobian of the system of ODEs function
+    %>              \f$ \mathbf{JF} \f$.
     %
     JF( this, x, x_dot, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the invariants of the system of ODEs:
+    %> Evaluate the invariants/hidden contraints of the system of ODEs:
     %>
     %> \f[
-    %> \mathbf{H}( t, \mathbf{x} ) = \mathbf{0}.
+    %> \mathbf{H}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}.
     %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %> \return      Value of the invariants/hidden contraints \f$ \mathbf{H} \f$.
     %
-    H( this, x, t )
+    H( this, x, x_dot, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the invariants of the system of ODEs:
+    %> Evaluate the Jacobian of the invariants/hidden contraints of the system
+    %> of ODEs:
     %>
     %> \f[
-    %> \partial \mathbf{H}( t, \mathbf{x} ) / \partial \hat{\mathbf{x}}
+    %> \mathbf{JH}( \mathbf{x}, \mathbf{x}', t ) =
+    %> \left[
+    %> \dfrac{
+    %> \partial \mathbf{H}( \mathbf{x}, \mathbf{x}', t )
+    %> }{
+    %> \partial \mathbf{x}
+    %> },
+    %> \dfrac{
+    %> \partial \mathbf{H}( \mathbf{x}, \mathbf{x}', t )
+    %> }{
+    %> \partial \mathbf{x}'
+    %> }
+    %> \right].
     %> \f]
     %>
-    %> where \f$ \hat{\mathbf{x}} = \left[ \mathbf{x}, \mathbf{x}' \right]^T \f$
-    %> is the concatenation of the unknown functions and their derivatives.
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %> \return      Value of the Jacobian of the invariants/hidden contraints
+    %>              \f$ \mathbf{JH} \f$.
     %
-    JH( this, x, t )
+    JH( this, x, x_dot, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
