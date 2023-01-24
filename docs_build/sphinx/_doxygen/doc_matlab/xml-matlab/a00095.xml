@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00095" kind="file" language="C++">
     <compoundname>RK4.m</compoundname>
-    <innerclass refid="a00160" prot="public">RK4</innerclass>
+    <innerclass refid="a00163" prot="public">RK4</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -11,7 +11,7 @@
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
 <codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Runge-Kutta<sp/>fourth-order<sp/>method<sp/>(4<sp/>stages)</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4" refid="a00160" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00160" kindref="compound">RK4</ref><sp/>&lt;<sp/><ref refid="a00256" kindref="compound">RKexplicit</ref></highlight></codeline>
+<codeline lineno="4" refid="a00163" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00163" kindref="compound">RK4</ref><sp/>&lt;<sp/><ref refid="a00259" kindref="compound">RKexplicit</ref></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -35,8 +35,8 @@
 <codeline lineno="25"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="26"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>this<sp/>=<sp/>RK4(<sp/>~<sp/>)</highlight></codeline>
 <codeline lineno="27"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this@RKexplicit(<sp/>...</highlight></codeline>
-<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal"><ref refid="a00160" kindref="compound">RK4</ref></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="29" refid="a00160_1a825ec831c70980037463834ef1657293" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[<sp/><sp/>0,<sp/><sp/><sp/>0,<sp/>0,<sp/>0;<sp/>...</highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal"><ref refid="a00163" kindref="compound">RK4</ref></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="29" refid="a00163_1a825ec831c70980037463834ef1657293" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[<sp/><sp/>0,<sp/><sp/><sp/>0,<sp/>0,<sp/>0;<sp/>...</highlight></codeline>
 <codeline lineno="30"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/2,<sp/><sp/><sp/>0,<sp/>0,<sp/>0;<sp/>...</highlight></codeline>
 <codeline lineno="31"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,<sp/>1/2,<sp/>0,<sp/>0;<sp/>...</highlight></codeline>
 <codeline lineno="32"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,<sp/><sp/><sp/>0,<sp/>1,<sp/>0<sp/>],<sp/>...</highlight></codeline>

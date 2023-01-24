@@ -19,7 +19,7 @@ Program Listing for File RadauIA5.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> RadauIA fifth-order method (3 stages)
+       %> Radau IA fifth-order method (3 stages)
        %>
        %> \rst
        %> .. math::
@@ -34,7 +34,7 @@ Program Listing for File RadauIA5.m
        %>
        %> \endrst
        %
-       function this = RadauIA5( ~ )
+       function this = RadauIA5()
          this@RKimplicit( ...
            'RadauIA5',...
            [1/9, (-1-sqrt(6))/18,      (-1+sqrt(6))/18; ...

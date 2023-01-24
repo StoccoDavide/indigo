@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00056" kind="file" language="C++">
     <compoundname>GaussLegendre6.m</compoundname>
-    <innerclass refid="a00180" prot="public">GaussLegendre6</innerclass>
+    <innerclass refid="a00183" prot="public">GaussLegendre6</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -42,7 +42,7 @@
 <codeline lineno="32"><highlight class="normal">%</highlight></codeline>
 <codeline lineno="33"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Gauss–Legendre<sp/>sixth-order<sp/>(3<sp/>stages)</highlight></codeline>
 <codeline lineno="34"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="35" refid="a00180" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00180" kindref="compound">GaussLegendre6</ref><sp/>&lt;<sp/>DIAL_RKimplicit</highlight></codeline>
+<codeline lineno="35" refid="a00183" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00183" kindref="compound">GaussLegendre6</ref><sp/>&lt;<sp/>DIAL_RKimplicit</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -69,15 +69,15 @@
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00180" kindref="compound">GaussLegendre6</ref>(<sp/>~<sp/>)</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00183" kindref="compound">GaussLegendre6</ref>()</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t<sp/><sp/>=<sp/>sqrt(15)/10;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t2<sp/>=<sp/>sqrt(15)/15;</highlight></codeline>
-<codeline lineno="65" refid="a00180_1a073bd19bdaffef9db237c4f1f433fd41" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t3<sp/>=<sp/>sqrt(15)/24;</highlight></codeline>
+<codeline lineno="65" refid="a00183_1a56f9706fbcc438edc31824f672ffad3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t3<sp/>=<sp/>sqrt(15)/24;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t4<sp/>=<sp/>sqrt(15)/30;</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>w<sp/><sp/>=<sp/>5/36;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>z<sp/><sp/>=<sp/>2/9;</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@DIAL_RKimplicit(<sp/>...</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00180" kindref="compound">GaussLegendre6</ref>&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00183" kindref="compound">GaussLegendre6</ref>&apos;,<sp/>...</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[w,<sp/><sp/><sp/><sp/>z-t2,<sp/>w-t4;<sp/>...</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>w+t3,<sp/>z,<sp/><sp/><sp/><sp/>w-t3;<sp/>...</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>w+t4,<sp/>z+t2,<sp/>w<sp/>],<sp/>...</highlight></codeline>

@@ -140,6 +140,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_NewtonSolver.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ODEsolver.m.rst
 
 .. toctree::

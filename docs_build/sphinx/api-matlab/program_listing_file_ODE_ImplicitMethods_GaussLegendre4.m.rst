@@ -19,7 +19,7 @@ Program Listing for File GaussLegendre4.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Gauss–Legendre fouth-order (2 stages)
+       %> Gauss–Legendre fourth-order (2 stages)
        %>
        %> \rst
        %> .. math::
@@ -34,7 +34,7 @@ Program Listing for File GaussLegendre4.m
        %>
        %> \endrst
        %
-       function this = GaussLegendre4( ~ )
+       function this = GaussLegendre4()
          t = sqrt(3)/6;
          this@RKimplicit( ...
            'GaussLegendre4', ...

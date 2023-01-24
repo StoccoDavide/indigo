@@ -19,7 +19,7 @@ Program Listing for File RadauIIA3.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> RadauIIA third-order method (2 stages)
+       %> Radau IIA third-order method (2 stages)
        %>
        %> \rst
        %> .. math::
@@ -33,7 +33,7 @@ Program Listing for File RadauIIA3.m
        %>
        %> \endrst
        %
-       function this = RadauIIA3( ~ )
+       function this = RadauIIA3()
          this@RKimplicit( ...
            'RadauIIA3', ...
            [5/12, -1/12; 3/4, 1/4], ...

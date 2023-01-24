@@ -1,0 +1,568 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00251" kind="class" language="C++" prot="public">
+    <compoundname>ODEsolver</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
+<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00248.xml
+    <derivedcompoundref refid="a00256" prot="public" virt="non-virtual">RKexplicit</derivedcompoundref>
+=======
+    <derivedcompoundref refid="a00259" prot="public" virt="non-virtual">RKexplicit</derivedcompoundref>
+    <derivedcompoundref refid="a00263" prot="public" virt="non-virtual">RKimplicit</derivedcompoundref>
+>>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00251.xml
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>ODEsolver::m_name</qualifiedname>
+        <briefdescription>
+<para>Name of the used numerical integration method. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_ode</definition>
+        <argsstring></argsstring>
+        <name>m_ode</name>
+        <qualifiedname>ODEsolver::m_ode</qualifiedname>
+        <briefdescription>
+<para>System of ODEs to be integrated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00251_1a7d3ffc79c180c1ab24447c96d838bd9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::ODEsolver</definition>
+        <argsstring>(in name)</argsstring>
+        <name>ODEsolver</name>
+        <qualifiedname>ODEsolver::ODEsolver</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Class constructor. It initializes the name of the numerical method used to integrate the system of ODEs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="30" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_name</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_name</name>
+        <qualifiedname>ODEsolver::get_name</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the name of the method used to integrate the system of ODEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="39" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_ode</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_ode</name>
+        <qualifiedname>ODEsolver::get_ode</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the system of ODEs to be integrated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="48" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1adf22eb997cd5cd532fef6edeeb2a1322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_solver</definition>
+        <argsstring>(in this, in name)</argsstring>
+        <name>set_solver</name>
+        <qualifiedname>ODEsolver::set_solver</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the method used to integrate the system of ODEs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="57" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1a7284ba99c96a673ac08925e318adf6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_ode</definition>
+        <argsstring>(in this, in ode)</argsstring>
+        <name>set_ode</name>
+        <qualifiedname>ODEsolver::set_ode</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ode</declname>
+        </param>
+        <briefdescription>
+<para>Set the system of ODEs to be integrated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="66" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1a6bbd6d7a155e7af436e198c8626c9021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::project</definition>
+        <argsstring>(in this, in t, in x_tilde)</argsstring>
+        <name>project</name>
+        <qualifiedname>ODEsolver::project</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_tilde</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve the ODEs system through the problem:</para>
+<para><formula id="0">\[ \left\{\begin{array}{ll}
+ \textrm{minimize}   &amp;  \frac{1}{2}\left(\mathbf{x}-\widetilde{\mathbf{x}}\right)^2 \\[1em]
+ \textrm{subject to} &amp;  \mathbf{h}( t, \mathbf{x} ) = \mathbf{0}
+\end{array}\right. \]</formula></para>
+<para>Given the Lagrangian</para>
+<para><formula id="1">\[
+L( \mathbf{x}, \boldsymbol{\lambda} ) =
+\frac{1}{2}\left(\mathbf{x}-\widetilde{\mathbf{x}}\right)^2+
+\boldsymbol{\lambda} \cdot \mathbf{h}( t, \mathbf{x} )
+\]</formula></para>
+<para>Solve the problem</para>
+<para><formula id="2">\[ \left\{\begin{array}{rcl}
+\mathbf{x}+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}^T
+\boldsymbol{\lambda} &amp;=&amp; \widetilde{\mathbf{x}}\\[1em]
+\mathbf{h}(t,\mathbf{x}) &amp;=&amp; \mathbf{0}
+\end{array}\right. \]</formula></para>
+<para><bold>Solution algorithm</bold></para>
+<para>Using the Taylor expansion</para>
+<para><formula id="3">\[ \mathbf{h}( t, \mathbf{x} ) +
+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}} \delta\mathbf{x}
++ \mathcal{O}\left( ||\delta\mathbf{x}||^2 \right) = \mathbf{0}
+\]</formula></para>
+<para>define the iterative method</para>
+<para><formula id="4">\[ \mathbf{x}_{k+1} = \mathbf{x}_k + \delta\mathbf{x} \]</formula></para>
+<para>where <formula id="5">$ \delta\mathbf{x} $</formula> is the solution of the linear system</para>
+<para><formula id="6">\[
+\left[\begin{array}{cc}
+\mathbf{I} &amp; \dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}^T \\[1em]
+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}  &amp; \mathbf{0}
+\end{array}\right]
+\left[\begin{array}{c}
+\delta\mathbf{x} \\[1em]
+\boldsymbol{\lambda}
+\end{array}\right]
+= 
+\left[\begin{array}{c}
+\widetilde{\mathbf{x}}-\mathbf{x}_k \\[1em]
+-\mathbf{h}(t_k,\mathbf{x}_k)
+\end{array}\right]
+\]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="127" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1a8c11588013b8a6f10b437d3613583710" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::integrate</definition>
+        <argsstring>(in this, in t, in x_i, in varargin)</argsstring>
+        <name>integrate</name>
+        <qualifiedname>ODEsolver::integrate</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_i</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>varargin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Integrate the system of ODEs and calculate the approximate solution:</para>
+<para><itemizedlist>
+<listitem><para><emphasis>t</emphasis> Time vector</para>
+</listitem><listitem><para><emphasis>x_0</emphasis> Initial states value</para>
+</listitem><listitem><para><emphasis>project</emphasis> [optional, default = false] Apply projection to invariants at each step</para>
+</listitem><listitem><para><emphasis>verbose</emphasis> [optional, default = false] Activate vebose mode and print integration messages</para>
+</listitem><listitem><para><emphasis>maxabs</emphasis> [optional, default = 1.0e3] If <formula id="7">$ || \mathbf{x} ||_{\infty} $</formula> is greater than maxabs computation is interrupted</para>
+</listitem></itemizedlist>
+</para>
+<para>Returns a matrix <computeroutput>length(x0) x length(t)</computeroutput> containing the solution</para>
+<para><bold>Usage</bold></para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. code-block:: matlab
+* 
+*     % Advance without the solution projection on invariants and disabled verbose mode
+*     sol = obj.advance( t, x_0 );
+* 
+*     % Advance with the solution projection on invariants and disabled verbose mode
+*     sol = obj.advance( t, x_0, true );
+* 
+*     % Advance without the solution projection on invariants and enabled verbose mode
+*     sol = obj.advance( t, x_0, false, true );
+* 
+*      % Plot the first component of the solution
+*      plot( t, sol(1,:) );
+* 
+*  </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="183" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00251_1aff22b63fa14cf18dae231d0110d23e7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function ODEsolver::step</definition>
+        <argsstring>(in this, in x_k, in t_k, in d_t)</argsstring>
+        <name>step</name>
+        <qualifiedname>ODEsolver::step</qualifiedname>
+<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00248.xml
+        <reimplementedby refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d">step</reimplementedby>
+=======
+        <reimplementedby refid="a00259_1a7d7a59c02ec394c13eaf8f2950e51e9d">step</reimplementedby>
+        <reimplementedby refid="a00263_1a551aed170a5231654042d90d6f7e8773">step</reimplementedby>
+>>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00251.xml
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Generic advancing step for a generic numerical integration method:</para>
+<para><itemizedlist>
+<listitem><para><emphasis>x_k</emphasis> States value at <formula id="8">$ k $</formula>-th time step <formula id="9">$ \mathbf{x}(t_k) $</formula></para>
+</listitem><listitem><para><emphasis>t_k</emphasis> Time step <formula id="10">$ t_k $</formula></para>
+</listitem><listitem><para><emphasis>d_t</emphasis> Advancing time step <formula id="11">$ \Delta t$</formula></para>
+</listitem></itemizedlist>
+</para>
+<para>Returns the approximation of <formula id="12">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="258" column="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Class container for the system of Ordinary Differential Equations (ODEs) or Differential Algebraic Equations (DAEs) solver. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Collatz</label>
+        <link refid="a00123"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00248.xml
+=======
+      <node id="17">
+        <label>CrankNicolson</label>
+        <link refid="a00171"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+>>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00251.xml
+      <node id="5">
+        <label>ExplicitEuler</label>
+        <link refid="a00127"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>ExplicitMidpoint</label>
+        <link refid="a00131"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00248.xml
+=======
+      <node id="18">
+        <label>GaussLegendre2</label>
+        <link refid="a00175"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>GaussLegendre4</label>
+        <link refid="a00179"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+>>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00251.xml
+      <node id="7">
+        <label>Heun2</label>
+        <link refid="a00135"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Heun3</label>
+        <link refid="a00139"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00248.xml
+=======
+      <node id="20">
+        <label>ImplicitEuler</label>
+        <link refid="a00187"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>ImplicitMidpoint</label>
+        <link refid="a00191"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>LobattoIIIA2</label>
+        <link refid="a00195"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>LobattoIIIA4</label>
+        <link refid="a00199"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>LobattoIIIB2</label>
+        <link refid="a00203"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>LobattoIIIB4</label>
+        <link refid="a00207"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>LobattoIIIC2</label>
+        <link refid="a00211"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>LobattoIIIC4</label>
+        <link refid="a00215"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>LobattoIIICS2</label>
+        <link refid="a00219"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>LobattoIIICS4</label>
+        <link refid="a00223"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>LobattoIIID2</label>
+        <link refid="a00227"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>LobattoIIID4</label>
+        <link refid="a00231"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+>>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00251.xml
+      <node id="1">
+        <label>ODEsolver</label>
+        <link refid="a00251"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>RK3</label>
+        <link refid="a00155"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>RK38</label>
+        <link refid="a00159"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>RK4</label>
+        <link refid="a00163"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>RKexplicit</label>
+        <link refid="a00259"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00248.xml
+=======
+      <node id="16">
+        <label>RKimplicit</label>
+        <link refid="a00263"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>RadauIA3</label>
+        <link refid="a00235"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>RadauIA5</label>
+        <link refid="a00239"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>RadauIIA3</label>
+        <link refid="a00243"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>RadauIIA5</label>
+        <link refid="a00247"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+>>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00251.xml
+      <node id="12">
+        <label>Ralston2</label>
+        <link refid="a00143"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>Ralston3</label>
+        <link refid="a00147"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Ralston4</label>
+        <link refid="a00151"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SSPRK3</label>
+        <link refid="a00167"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ODEsolver</label>
+        <link refid="a00251"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </collaborationgraph>
+    <location file="ODE/ODEsolver.m" line="5" column="1" bodyfile="ODE/ODEsolver.m" bodystart="6" bodyend="264"/>
+    <listofallmembers>
+      <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_name</name></member>
+      <member refid="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_ode</name></member>
+      <member refid="a00251_1a8c11588013b8a6f10b437d3613583710" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>integrate</name></member>
+      <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_name</name></member>
+      <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_ode</name></member>
+      <member refid="a00251_1a7d3ffc79c180c1ab24447c96d838bd9d" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>ODEsolver</name></member>
+      <member refid="a00251_1a6bbd6d7a155e7af436e198c8626c9021" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>project</name></member>
+      <member refid="a00251_1a7284ba99c96a673ac08925e318adf6d8" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_ode</name></member>
+      <member refid="a00251_1adf22eb997cd5cd532fef6edeeb2a1322" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_solver</name></member>
+      <member refid="a00251_1aff22b63fa14cf18dae231d0110d23e7b" prot="public" virt="virtual"><scope>ODEsolver</scope><name>step</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

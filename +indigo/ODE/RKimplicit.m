@@ -1,5 +1,5 @@
 %
-%> Class implementing the abstract function `step` for the 
+%> Class implementing the abstract function `step` for the
 %> advancing using **implicit** Runge-Kutta methods.
 %> The user must simply define the Tableau of the Runge-Kutta method:
 %>
@@ -24,7 +24,7 @@
 %>     \end{array}
 %> \f]
 %>
-%> where the coefficients \f$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T \f$ are the solution of 
+%> where the coefficients \f$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T \f$ are the solution of
 %> \f$ \mathbf{F}(\mathbf{K}) = \mathbf{0} \f$ the nonlinear system
 %>
 %> \f[
@@ -67,7 +67,7 @@ classdef RKimplicit < indigo.ODEsolver
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Initialize the class with the method name and the Butcher tableau
     %>
@@ -76,24 +76,27 @@ classdef RKimplicit < indigo.ODEsolver
     %> - *c* Runge-Kutta nodes vector (column vector)
     %
     function this = RKimplicit( name, A, b, c )
+      CMD = 'RKimplicit::RKimplicit(...): ';
+      assert( ismatrix(A), ...
+        [CMD, 'Found Runge-Kutta matrix A not as a matrix.'] );
+      assert( ~nnz(isnan(A)), ...
+        [CMD, 'Found NaN in Runge-Kutta matrix A.'] );
+      assert( isrow(b), ...
+        [CMD, 'Found Runge-Kutta weights vector b not as a row vector.'] );
+      assert( ~nnz(isnan(b)), ...
+        [CMD, 'Found NaN in Runge-Kutta weights vector b.'] );
+      assert( iscolumn(c), ...
+        [CMD, 'Found Runge-Kutta nodes vector c not as a column vector.'] );
+      assert( ~nnz(isnan(c)), ...
+        [CMD, 'Found NaN in Runge-Kutta nodes vector c.'] );
 
-      CMD = 'indigo::RKimplicit::RKimplicit(...): ';
-
-      assert(isrow(b), ...
-        [CMD, 'Found Runge-Kutta weights vector b not as a row vector']);
-      assert(iscolumn(c), ...
-        [CMD, 'Found Runge-Kutta nodes vector c vector not as a column vector']);
-
-      this@indigo.ODEsolver( name );
-
-      this.check_tableau( A, b, c );
-
+      this@ODEsolver( name );
       this.m_A = A;
       this.m_b = b;
       this.m_c = c;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the Runge-Kutta matrix
     %
@@ -101,7 +104,7 @@ classdef RKimplicit < indigo.ODEsolver
       out = this.m_A;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the Runge-Kutta weights vector (row vector)
     %
@@ -109,7 +112,7 @@ classdef RKimplicit < indigo.ODEsolver
       out = this.m_b;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the Runge-Kutta nodes vector (column vector)
     %
@@ -117,29 +120,37 @@ classdef RKimplicit < indigo.ODEsolver
       out = this.m_c;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the Runge-Kutta matrix
     %
-    function set_A( this, in )
+    function setA( this, in )
       this.m_A = in;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the Runge-Kutta weights vector (row vector)
     %
-    function setB( this, in )
-      assert( isrow(in), 'RKimplicit::setB(...): Found Runge-Kutta weights vector b not as a row vector' );
+    function set_b( this, in )
+      CMD = 'RKimplicit::set_b(...): ';
+      assert( isrow(in), ...
+        [CMD, 'Found Runge-Kutta weights vector b not as a row vector.'] );
+      assert( ~nnz(isnan(in)), ...
+        [CMD, 'Found NaN in Runge-Kutta weights vector b.'] );
       this.m_b = in;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the Runge-Kutta nodes vector (column vector)
     %
-    function setC( this, in )
-      assert( iscolumn(c), 'RKimplicit::setC(...): Found Runge-Kutta nodes vector c vector not as a column vector' );
+    function set_c( this, in )
+      CMD = 'RKimplicit::set_c(...): ';
+      assert( iscolumn(in), ...
+        [CMD, 'Found Runge-Kutta nodes vector c not as a column vector.'] );
+      assert( ~nnz(isnan(in)), ...
+        [CMD, 'Found NaN in Runge-Kutta nodes vector c.'] );
       this.m_c = in;
     end
     %
@@ -154,7 +165,7 @@ classdef RKimplicit < indigo.ODEsolver
 
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Compute the step residual \f$ \mathbf{F}(\mathbf{K}) \f$
     %
@@ -175,7 +186,7 @@ classdef RKimplicit < indigo.ODEsolver
       end
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Compute the Jacobian of \f$ \mathbf{F}(\mathbf{K}) \f$:
     %>
@@ -205,7 +216,7 @@ classdef RKimplicit < indigo.ODEsolver
       end
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Solve the implicit step \f$ \mathbf{F}(\mathbf{K})=\mathbf{0} \f$ by Newton method
     %>
@@ -214,7 +225,7 @@ classdef RKimplicit < indigo.ODEsolver
     %
     function K = solveStep( this, t_k, x_k, d_t )
       ns  = length( this.m_c );
-      K_0  = d_t * this.m_ode.f( t_k, x_k );
+      K_0 = d_t * this.m_ode.f( t_k, x_k );
       K   = repmat( K_0(:), ns, 1);
       fun = @(K) this.stepResidual( K, t_k, x_k, d_t );
       jac = @(K) this.stepJacobian( K, t_k, x_k, d_t );
@@ -224,7 +235,7 @@ classdef RKimplicit < indigo.ODEsolver
       end
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{K})=\mathbf{0} \f$
     %
@@ -233,7 +244,7 @@ classdef RKimplicit < indigo.ODEsolver
       out = x_k + reshape( K, length(x_k), length(this.m_c) ) * this.m_b(:);
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

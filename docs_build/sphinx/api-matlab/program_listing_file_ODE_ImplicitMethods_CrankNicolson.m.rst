@@ -33,8 +33,12 @@ Program Listing for File CrankNicolson.m
        %>
        %> \endrst
        %
+<<<<<<< Updated upstream
        % TODO: remove the ~ argument and check if the tableau is correct (latex and code!)
        function this = CrankNicolson( ~ )
+=======
+       function this = CrankNicolson()
+>>>>>>> Stashed changes
          this@RKimplicit( ...
            'CrankNicolson', ...
            [0, 0; 1/2, 1/2], ...
