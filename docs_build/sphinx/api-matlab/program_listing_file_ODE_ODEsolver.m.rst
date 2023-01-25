@@ -117,33 +117,26 @@ Program Listing for File ODEsolver.m
        %>
        %> \f[
        %> \textrm{minimize} \quad
-       %> \dfrac{1}{2}\left(
-       %>   \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} -
-       %>   \begin{bmatrix} \tilde{\mathbf{x}} \\ \tilde{\mathbf{x}}' \end{bmatrix}
-       %> \right)^2 \quad
-       %> \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0}
+       %> \dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
+       %> \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
        %> \f]
        %>
-       %> given the Lagrangian of the form:
+       %> given the Lagrangian \f$ \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \f$
+       %> of the form:
        %>
        %> \f[
-       %> \mathcal{L}(\mathbf{x}, \mathbf{x}', \boldsymbol{\lambda}) =
-       %> \frac{1}{2}\left(
-       %>   \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} -
-       %>   \begin{bmatrix} \widetilde{\mathbf{x}} \\ \widetilde{\mathbf{x}}' \end{bmatrix}
-       %> \right)^2 +
-       %> \boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, \mathbf{x}', t).
+       %> \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
+       %> \frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
+       %> \boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).
        %> \f]
        %>
        %> The solution of the problem is obtained by solving the following:
        %>
        %> \f[
        %> \left\{\begin{array}{l}
-       %> \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} + \mathbf{JH}_\mathbf{x}^T
-       %> \boldsymbol{\lambda} = \begin{bmatrix}
-       %>   \widetilde{\mathbf{x}} \\ \widetilde{\mathbf{x}}'
-       %> \end{bmatrix} \\[1em]
-       %> \mathbf{H}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0}
+       %> \mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =
+       %> \widetilde{\mathbf{x}} \\[0.5em]
+       %> \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
        %> \end{array}\right.
        %> \f]
        %>
@@ -152,45 +145,43 @@ Program Listing for File ODEsolver.m
        %> Using the Taylor expansion of the Lagrangian:
        %>
        %> \f[
-       %> \mathbf{H}(\mathbf{x}, \mathbf{x}', t) +
-       %> \mathbf{JH}_\mathbf{x}
-       %> \begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix} +
-       %> \mathcal{O}\left(\left\|
-       %> \begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix}
-       %> \right\|^2\right) = \mathbf{0}
+       %> \mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +
+       %> \mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
        %> \f]
        %>
        %> define the iterative method as:
        %>
        %> \f[
-       %> \begin{bmatrix} \mathbf{x}_{k+1} \\ \mathbf{x}_{k+1}' \end{bmatrix} =
-       %> \begin{bmatrix} \mathbf{x}_{k} \\ \mathbf{x}_{k}' \end{bmatrix} +
-       %> \begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix}.
+       %> \mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
        %> \f]
        %>
-       %> Notice that \f$ \left[\delta\mathbf{x}, \delta\mathbf{x}'\right]^T \f$ is the
-       %> solution of the linear system:
+       %> Notice that \f$ \delta\mathbf{x} \f$ is the solution of the linear system:
        %>
        %> \f[
-       %> \left[\begin{array}{c|c} \\[-0.75em]
-       %> \mathbf{I}             & \mathbf{JH}_\mathbf{x}^T \\[0.5em] \hline
+       %> \begin{bmatrix}
+       %> \mathbf{I}             & \mathbf{JH}_\mathbf{x}^T \\[0.5em]
        %> \mathbf{JH}_\mathbf{x} & \mathbf{0}
-       %> \end{array}\right]
-       %> \left[\begin{array}{c}
-       %> \delta\mathbf{x} \\ \delta\mathbf{x}' \\ \hline \boldsymbol{\lambda}
-       %> \end{array}\right]
+       %> \end{bmatrix}
+       %> \begin{bmatrix}
+       %> \delta\mathbf{x} \\[0.5em]
+       %> \boldsymbol{\lambda}
+       %> \end{bmatrix}
        %> =
-       %> \left[\begin{array}{c}
-       %> \widetilde{\mathbf{x}}  - \mathbf{x}_k \\
-       %> \widetilde{\mathbf{x}}' - \mathbf{x}'_k \\ \hline
-       %> -\mathbf{H}(\mathbf{x}_k, \mathbf{x}_k', t_k)
-       %> \end{array}\right]
+       %> \begin{bmatrix}
+       %> \widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
+       %> -\mathbf{H}(\mathbf{x}, t)
+       %> \end{bmatrix}
        %> \f]
        %>
        %> where \f$ \mathbf{JH}_\mathbf{x} \f$ is the Jacobian of the invariants/
        %> hidden constraints with respect to the states \f$ \mathbf{x} \f$.
+       %>
+       %> \param x_tilde The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
+       %> \param t The time \f$ t \f$ at which the states are evaluated.
+       %>
+       %> \return The solution of the projection problem \f$ \mathbf{x} \f$.
        %
-       function [x, x_dot] = project( this, x_tilde, x_dot_tilde, t )
+       function x = project( this, x_tilde, t )
    
          CMD = 'indigo::ODEsolver::project(...): ';
    
@@ -198,12 +189,9 @@ Program Listing for File ODEsolver.m
          num_eqns = this.m_ode.get_num_eqns();
          num_invs = this.m_ode.get_num_invs();
          x        = x_tilde;
-         x_dot    = x_dot_tilde;
    
          assert(length(x_tilde) == num_eqns, ...
            [CMD, 'the number of states does not match the number of equations.']);
-         assert(length(x_dot_tilde) == num_eqns, ...
-           [CMD, 'the number of states derivatives does not match the number of equations.']);
    
          % Check if there are any constraints
          if num_invs > 0
@@ -213,26 +201,25 @@ Program Listing for File ODEsolver.m
    
            % Iterate until the projected solution is found
            for k = 1:this.m_max_iter
-             %     [A]           {x}      =                   {b}
-             % / I  JH^T \ / dx, dx_dot \   / x_tilde - x_k, x_dot_tilde - x_dot \
-             % |         | |            | = |                                    |
-             % \ JH   0  / \   lambda   /   \                 -H                 /
+   
+             %     [A]         {x}    =        {b}
+             % / I  JH^T \ /   dx   \   / x_tilde - x_k \
+             % |         | |        | = |               |
+             % \ JH   0  / \ lambda /   \      -H       /
    
              % Evaluate the invariants/hidden constraints vector and its Jacobian
-             J  = this.m_ode.H(x, x_dot, t);
-             JH = this.m_ode.JH(x, x_dot, t);
+             J  = this.m_ode.H(x, t);
+             JH = this.m_ode.JH(x, t);
    
              % Compute the solution of the linear system
              A   = [eye(num_eqns), JH.'; ...
                     JH, zeros(num_invs, num_invs)];
-             b   = [x_tilde-x; x_dot_tilde-x_dot; -H];
+             b   = [x_tilde - x; -H];
              sol = A\b;
    
              % Update the solution
-             dx     = sol(1:num_eqns);
-             dx_dot = sol(num_eqns+1:2*num_eqns+1);
-             x      = x     + dx;
-             x_dot  = x_dot + dx_dot;
+             dx = sol(1:num_eqns);
+             x  = x + dx;
    
              % Check if the solution is found
              if (max(abs(dx)) < tolerance && max(abs(H)) < tolerance)
@@ -259,9 +246,9 @@ Program Listing for File ODEsolver.m
        %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
        %>                the computation is interrupted.
        %>
-       %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) + \mathrm{size}
-       %>         (\mathbf{x}')) \times \mathrm{size}(t)\right] \f$ containing the
-       %>         approximated solution \f$ \mathbf{x}(t) \f$ of the system of ODEs.
+       %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+       %>         (t)\right] \f$ containing the approximated solution \f$ \mathbf{x}
+       %>         (t) \f$ of the system of ODEs.
        %>
        %> **Usage:**
        %>
@@ -382,6 +369,13 @@ Program Listing for File ODEsolver.m
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Generic advancing step for a generic solver.
+       %>
+       %> \f[
+       %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
+       %> \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)
+       %> \f]
+       %>
+       %> where \f$ \mathcal{S} \f$ is the advancing step of the solver.
        %>
        %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
        %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'(t_k) \f$.

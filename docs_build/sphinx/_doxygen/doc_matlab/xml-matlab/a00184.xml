@@ -217,7 +217,7 @@
           <declname>d_t</declname>
         </param>
         <briefdescription>
-<para>Compute the step residual <formula id="40">$ \mathbf{F}(\mathbf{K}) $</formula>. </para>
+<para>Compute the step residual <formula id="45">$ \mathbf{F}(\mathbf{K}) $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -254,8 +254,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the Jacobian of <formula id="40">$ \mathbf{F}(\mathbf{K}) $</formula>:</para>
-<para><formula id="41">\[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \]</formula>. </para>
+<para>Compute the Jacobian of <formula id="45">$ \mathbf{F}(\mathbf{K}) $</formula>:</para>
+<para><formula id="46">\[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \]</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -286,8 +286,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Solve the implicit step <formula id="42">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula> by Newton method</para>
-<para><formula id="43">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
+<para>Solve the implicit step <formula id="47">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula> by Newton method</para>
+<para><formula id="48">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
     \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \]</formula>. </para>
         </detaileddescription>
         <inbodydescription>
@@ -317,7 +317,7 @@
           <declname>d_t</declname>
         </param>
         <briefdescription>
-<para>Perform an implicit step by solving the residual <formula id="42">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
+<para>Perform an implicit step by solving the residual <formula id="47">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

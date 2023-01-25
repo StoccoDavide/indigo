@@ -100,7 +100,7 @@
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{H}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
 \]</div>
 
 <p>where <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> are the unknown functions (states) of the independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p>
@@ -110,7 +110,7 @@
 <ul class="simple">
 <li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
 <li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
-<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -126,23 +126,23 @@
 <span id="_CPPv3N9ODEsystem2JFE2in2in2in2in"></span><span id="_CPPv2N9ODEsystem2JFE2in2in2in2in"></span><span id="ODEsystem::JF__in.in.in.in"></span><span class="target" id="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem2JFE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Evaluate the Jacobian of the of the system of ODEs:</p>
+<p>Evaluate the Jacobians with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and the states defivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span> of the system of ODEs:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{JF}( \mathbf{x}, \mathbf{x}', t ) =
-\left[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
 \dfrac{
-\partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
 }{
-\partial \mathbf{x}
+  \partial \mathbf{x}
 },
+\qquad
+\mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', t ) =
 \dfrac{
-\partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
 }{
-\partial \mathbf{x}'
-}
-\right].
+  \partial \mathbf{x}'
+}.
 \]</div>
 
 <dl class="field-list simple">
@@ -151,12 +151,13 @@
 <ul class="simple">
 <li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
 <li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
-<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
-<p>Value of the Jacobian of the system of ODEs function <span class="math notranslate nohighlight">\( \mathbf{JF} \)</span>. </p>
+<p>The Jacobians <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}} \)</span> and <span class="math notranslate nohighlight">\(
+             \mathbf{JF}_{\mathbf{x}'} \)</span> of the ODEs system with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and the states derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p>
 </dd>
 </dl>
 </dd>
@@ -171,7 +172,7 @@
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{H}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}.
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}.
 \]</div>
 
 <dl class="field-list simple">
@@ -179,8 +180,7 @@
 <dd class="field-odd">
 <ul class="simple">
 <li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
-<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
-<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -192,27 +192,20 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem2JHE2in2in2in2in">
-<span id="_CPPv3N9ODEsystem2JHE2in2in2in2in"></span><span id="_CPPv2N9ODEsystem2JHE2in2in2in2in"></span><span id="ODEsystem::JH__in.in.in.in"></span><span class="target" id="a00252_1a429842d9815af9a468f8659ab64ebb94"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JH</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem2JHE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem2JHE2in2in2in">
+<span id="_CPPv3N9ODEsystem2JHE2in2in2in"></span><span id="_CPPv2N9ODEsystem2JHE2in2in2in"></span><span id="ODEsystem::JH__in.in.in"></span><span class="target" id="a00252_1abe619a3b4e36777c702352b9d0c83efe"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JH</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem2JHE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Evaluate the Jacobian of the invariants/hidden contraints of the system of ODEs:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{JH}( \mathbf{x}, \mathbf{x}', t ) =
-\left[
+\mathbf{JH}_{\mathbf{x}}( \mathbf{x}, t ) =
 \dfrac{
-\partial \mathbf{H}( \mathbf{x}, \mathbf{x}', t )
+  \partial \mathbf{H}( \mathbf{x}, t )
 }{
-\partial \mathbf{x}
-},
-\dfrac{
-\partial \mathbf{H}( \mathbf{x}, \mathbf{x}', t )
-}{
-\partial \mathbf{x}'
-}
-\right].
+  \partial \mathbf{x}
+}.
 \]</div>
 
 <dl class="field-list simple">
@@ -220,13 +213,12 @@
 <dd class="field-odd">
 <ul class="simple">
 <li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
-<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
-<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
-<p>Value of the Jacobian of the invariants/hidden contraints <span class="math notranslate nohighlight">\( \mathbf{JH} \)</span>. </p>
+<p>Value of the Jacobian of the invariants/hidden contraints <span class="math notranslate nohighlight">\( \mathbf{JH}_{\mathbf{x}} \)</span>. </p>
 </dd>
 </dl>
 </dd>

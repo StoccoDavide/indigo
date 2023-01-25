@@ -34,7 +34,7 @@ classdef ODEsystem < Base
     %> with *optional* invariants/hidden constraints of the form:
     %>
     %> \f[
-    %> \mathbf{H}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
+    %> \mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
     %> \f]
     %>
     %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
@@ -43,35 +43,40 @@ classdef ODEsystem < Base
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
     %> \param t     Independent variable \f$ t \f$.
+    %>
     %> \return      Value of the system of ODEs function \f$ \mathbf{F} \f$.
     %
     F( this, x, x_dot, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the of the system of ODEs:
+    %> Evaluate the Jacobians with respect to the states \f$ \mathbf{x} \f$ and
+    %> the states defivatives \f$ \mathbf{x}' \f$ of the system of ODEs:
     %>
     %> \f[
-    %> \mathbf{JF}( \mathbf{x}, \mathbf{x}', t ) =
-    %> \left[
+    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
     %> \dfrac{
-    %> \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
     %> }{
-    %> \partial \mathbf{x}
+    %>   \partial \mathbf{x}
     %> },
+    %> \qquad
+    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', t ) =
     %> \dfrac{
-    %> \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
     %> }{
-    %> \partial \mathbf{x}'
-    %> }
-    %> \right].
+    %>   \partial \mathbf{x}'
+    %> }.
     %> \f]
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
     %> \param t     Independent variable \f$ t \f$.
-    %> \return      Value of the Jacobian of the system of ODEs function
-    %>              \f$ \mathbf{JF} \f$.
+    %>
+    %> \return      The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
+    %>              \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect
+    %>              to the states \f$ \mathbf{x} \f$ and the states derivatives
+    %>              \f$ \mathbf{x}' \f$.
     %
     JF( this, x, x_dot, t )
     %
@@ -80,13 +85,13 @@ classdef ODEsystem < Base
     %> Evaluate the invariants/hidden contraints of the system of ODEs:
     %>
     %> \f[
-    %> \mathbf{H}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}.
+    %> \mathbf{H}( \mathbf{x}, t ) = \mathbf{0}.
     %> \f]
     %>
-    %> \param x     States \f$ \mathbf{x} \f$.
-    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param t     Independent variable \f$ t \f$.
-    %> \return      Value of the invariants/hidden contraints \f$ \mathbf{H} \f$.
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return  Value of the invariants/hidden contraints \f$ \mathbf{H} \f$.
     %
     H( this, x, x_dot, t )
     %
@@ -96,28 +101,21 @@ classdef ODEsystem < Base
     %> of ODEs:
     %>
     %> \f[
-    %> \mathbf{JH}( \mathbf{x}, \mathbf{x}', t ) =
-    %> \left[
+    %> \mathbf{JH}_{\mathbf{x}}( \mathbf{x}, t ) =
     %> \dfrac{
-    %> \partial \mathbf{H}( \mathbf{x}, \mathbf{x}', t )
+    %>   \partial \mathbf{H}( \mathbf{x}, t )
     %> }{
-    %> \partial \mathbf{x}
-    %> },
-    %> \dfrac{
-    %> \partial \mathbf{H}( \mathbf{x}, \mathbf{x}', t )
-    %> }{
-    %> \partial \mathbf{x}'
-    %> }
-    %> \right].
+    %>   \partial \mathbf{x}
+    %> }.
     %> \f]
     %>
-    %> \param x     States \f$ \mathbf{x} \f$.
-    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param t     Independent variable \f$ t \f$.
-    %> \return      Value of the Jacobian of the invariants/hidden contraints
-    %>              \f$ \mathbf{JH} \f$.
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return  Value of the Jacobian of the invariants/hidden contraints
+    %>          \f$ \mathbf{JH}_{\mathbf{x}} \f$.
     %
-    JH( this, x, x_dot, t )
+    JH( this, x, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

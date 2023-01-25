@@ -83,20 +83,20 @@
         </briefdescription>
         <detaileddescription>
 <para>Definition of an implicit system of ODEs of the form:</para>
-<para><formula id="22">\[
+<para><formula id="27">\[
 \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t ) = \mathbf{0}
 \]</formula></para>
 <para>with <emphasis>optional</emphasis> invariants/hidden constraints of the form:</para>
-<para><formula id="23">\[
-\mathbf{H}( \mathbf{x}, \mathbf{x}&apos;, t ) = \mathbf{0}
+<para><formula id="28">\[
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
 \]</formula></para>
-<para>where <formula id="8">$ \mathbf{x} $</formula> are the unknown functions (states) of the independent variable <formula id="24">$ t $</formula>.</para>
+<para>where <formula id="9">$ \mathbf{x} $</formula> are the unknown functions (states) of the independent variable <formula id="11">$ t $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States <formula id="8">$ \mathbf{x} $</formula>. </para>
+<para>States <formula id="9">$ \mathbf{x} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -104,7 +104,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="25">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="29">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -112,17 +112,17 @@
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Independent variable <formula id="24">$ t $</formula>. </para>
+<para>Independent variable <formula id="11">$ t $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Value of the system of ODEs function <formula id="26">$ \mathbf{F} $</formula>. </para>
+<simplesect kind="return"><para>Value of the system of ODEs function <formula id="30">$ \mathbf{F} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="52" column="24"/>
+        <location file="ODE/ODEsystem.m" line="53" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -149,28 +149,28 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the of the system of ODEs:</para>
-<para><formula id="27">\[
-\mathbf{JF}( \mathbf{x}, \mathbf{x}&apos;, t ) =
-\left[
+<para>Evaluate the Jacobians with respect to the states <formula id="9">$ \mathbf{x} $</formula> and the states defivatives <formula id="29">$ \mathbf{x}&apos; $</formula> of the system of ODEs:</para>
+<para><formula id="31">\[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}&apos;, t ) =
 \dfrac{
-\partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t )
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t )
 }{
-\partial \mathbf{x}
+  \partial \mathbf{x}
 },
+\qquad
+\mathbf{JF}_{\mathbf{x}&apos;}( \mathbf{x}, \mathbf{x}&apos;, t ) =
 \dfrac{
-\partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t )
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t )
 }{
-\partial \mathbf{x}&apos;
-}
-\right].
+  \partial \mathbf{x}&apos;
+}.
 \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States <formula id="8">$ \mathbf{x} $</formula>. </para>
+<para>States <formula id="9">$ \mathbf{x} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -178,7 +178,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="25">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="29">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -186,17 +186,18 @@
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Independent variable <formula id="24">$ t $</formula>. </para>
+<para>Independent variable <formula id="11">$ t $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Value of the Jacobian of the system of ODEs function <formula id="28">$ \mathbf{JF} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobians <formula id="32">$ \mathbf{JF}_{\mathbf{x}} $</formula> and <formula id="33">$
+             \mathbf{JF}_{\mathbf{x}&apos;} $</formula> of the ODEs system with respect to the states <formula id="9">$ \mathbf{x} $</formula> and the states derivatives <formula id="29">$ \mathbf{x}&apos; $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="81" column="24"/>
+        <location file="ODE/ODEsystem.m" line="86" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00252_1aa4aeb9e2668be5258e2ca30f39cb0889" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -224,23 +225,15 @@
         </briefdescription>
         <detaileddescription>
 <para>Evaluate the invariants/hidden contraints of the system of ODEs:</para>
-<para><formula id="29">\[
-\mathbf{H}( \mathbf{x}, \mathbf{x}&apos;, t ) = \mathbf{0}.
+<para><formula id="34">\[
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}.
 \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States <formula id="8">$ \mathbf{x} $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>x_dot</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States derivatives <formula id="25">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States <formula id="9">$ \mathbf{x} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -248,22 +241,22 @@
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Independent variable <formula id="24">$ t $</formula>. </para>
+<para>Independent variable <formula id="11">$ t $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Value of the invariants/hidden contraints <formula id="30">$ \mathbf{H} $</formula>. </para>
+<simplesect kind="return"><para>Value of the invariants/hidden contraints <formula id="35">$ \mathbf{H} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="97" column="24"/>
+        <location file="ODE/ODEsystem.m" line="102" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="a00252_1a429842d9815af9a468f8659ab64ebb94" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00252_1abe619a3b4e36777c702352b9d0c83efe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
         <definition>virtual function ODEsystem::JH</definition>
-        <argsstring>(in this, in x, in x_dot, in t)</argsstring>
+        <argsstring>(in this, in x, in t)</argsstring>
         <name>JH</name>
         <qualifiedname>ODEsystem::JH</qualifiedname>
         <param>
@@ -276,45 +269,26 @@
         </param>
         <param>
           <type>in</type>
-          <declname>x_dot</declname>
-        </param>
-        <param>
-          <type>in</type>
           <declname>t</declname>
         </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
 <para>Evaluate the Jacobian of the invariants/hidden contraints of the system of ODEs:</para>
-<para><formula id="31">\[
-\mathbf{JH}( \mathbf{x}, \mathbf{x}&apos;, t ) =
-\left[
+<para><formula id="36">\[
+\mathbf{JH}_{\mathbf{x}}( \mathbf{x}, t ) =
 \dfrac{
-\partial \mathbf{H}( \mathbf{x}, \mathbf{x}&apos;, t )
+  \partial \mathbf{H}( \mathbf{x}, t )
 }{
-\partial \mathbf{x}
-},
-\dfrac{
-\partial \mathbf{H}( \mathbf{x}, \mathbf{x}&apos;, t )
-}{
-\partial \mathbf{x}&apos;
-}
-\right].
+  \partial \mathbf{x}
+}.
 \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States <formula id="8">$ \mathbf{x} $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>x_dot</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States derivatives <formula id="25">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States <formula id="9">$ \mathbf{x} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -322,17 +296,17 @@
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Independent variable <formula id="24">$ t $</formula>. </para>
+<para>Independent variable <formula id="11">$ t $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Value of the Jacobian of the invariants/hidden contraints <formula id="32">$ \mathbf{JH} $</formula>. </para>
+<simplesect kind="return"><para>Value of the Jacobian of the invariants/hidden contraints <formula id="37">$ \mathbf{JH}_{\mathbf{x}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsystem.m" line="127" column="24"/>
+        <location file="ODE/ODEsystem.m" line="125" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -531,7 +505,7 @@
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="ODE/ODEsystem.m" line="4" column="1" bodyfile="ODE/ODEsystem.m" bodystart="5" bodyend="134"/>
+    <location file="ODE/ODEsystem.m" line="4" column="1" bodyfile="ODE/ODEsystem.m" bodystart="5" bodyend="132"/>
     <listofallmembers>
       <member refid="a00116_1a606023c352e27bb5cc5a56f6850c27da" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>Base</name></member>
       <member refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" prot="public" virt="virtual"><scope>ODEsystem</scope><name>F</name></member>
@@ -539,7 +513,7 @@
       <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>ODEsystem</scope><name>get_num_invs</name></member>
       <member refid="a00252_1aa4aeb9e2668be5258e2ca30f39cb0889" prot="public" virt="virtual"><scope>ODEsystem</scope><name>H</name></member>
       <member refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" prot="public" virt="virtual"><scope>ODEsystem</scope><name>JF</name></member>
-      <member refid="a00252_1a429842d9815af9a468f8659ab64ebb94" prot="public" virt="virtual"><scope>ODEsystem</scope><name>JH</name></member>
+      <member refid="a00252_1abe619a3b4e36777c702352b9d0c83efe" prot="public" virt="virtual"><scope>ODEsystem</scope><name>JH</name></member>
       <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>ODEsystem</scope><name>m_name</name></member>
       <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" virt="non-virtual"><scope>ODEsystem</scope><name>m_num_eqns</name></member>
       <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" virt="non-virtual"><scope>ODEsystem</scope><name>m_num_invs</name></member>

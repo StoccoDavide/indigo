@@ -146,33 +146,26 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \textrm{minimize} \quad</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \dfrac{1}{2}\left(</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;   \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;   \begin{bmatrix} \tilde{\mathbf{x}} \\ \tilde{\mathbf{x}}' \end{bmatrix}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \right)^2 \quad</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; given the Lagrangian of the form:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; given the Lagrangian \f$ \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; of the form:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \mathcal{L}(\mathbf{x}, \mathbf{x}', \boldsymbol{\lambda}) =</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \frac{1}{2}\left(</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;   \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;   \begin{bmatrix} \widetilde{\mathbf{x}} \\ \widetilde{\mathbf{x}}' \end{bmatrix}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \right)^2 +</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, \mathbf{x}', t).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; The solution of the problem is obtained by solving the following:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \left\{\begin{array}{l}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} + \mathbf{JH}_\mathbf{x}^T</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \boldsymbol{\lambda} = \begin{bmatrix}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;   \widetilde{\mathbf{x}} \\ \widetilde{\mathbf{x}}'</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \end{bmatrix} \\[1em]</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \mathbf{H}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \widetilde{\mathbf{x}} \\[0.5em]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{H}(\mathbf{x}, t) = \mathbf{0}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \end{array}\right.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
@@ -181,45 +174,43 @@
 <span class="w">    </span><span class="c">%&gt; Using the Taylor expansion of the Lagrangian:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \mathbf{H}(\mathbf{x}, \mathbf{x}', t) +</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \mathbf{JH}_\mathbf{x}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix} +</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \mathcal{O}\left(\left\|</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \right\|^2\right) = \mathbf{0}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; define the iterative method as:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \begin{bmatrix} \mathbf{x}_{k+1} \\ \mathbf{x}_{k+1}' \end{bmatrix} =</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \begin{bmatrix} \mathbf{x}_{k} \\ \mathbf{x}_{k}' \end{bmatrix} +</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix}.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Notice that \f$ \left[\delta\mathbf{x}, \delta\mathbf{x}'\right]^T \f$ is the</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; solution of the linear system:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Notice that \f$ \delta\mathbf{x} \f$ is the solution of the linear system:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \left[\begin{array}{c|c} \\[-0.75em]</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em] \hline</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \begin{bmatrix}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \mathbf{JH}_\mathbf{x} &amp; \mathbf{0}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \end{array}\right]</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \left[\begin{array}{c}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \delta\mathbf{x} \\ \delta\mathbf{x}' \\ \hline \boldsymbol{\lambda}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \end{array}\right]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \end{bmatrix}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \begin{bmatrix}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \delta\mathbf{x} \\[0.5em]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \boldsymbol{\lambda}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \end{bmatrix}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; =</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \left[\begin{array}{c}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \widetilde{\mathbf{x}}  - \mathbf{x}_k \\</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \widetilde{\mathbf{x}}' - \mathbf{x}'_k \\ \hline</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; -\mathbf{H}(\mathbf{x}_k, \mathbf{x}_k', t_k)</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \end{array}\right]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \begin{bmatrix}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; -\mathbf{H}(\mathbf{x}, t)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \end{bmatrix}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; where \f$ \mathbf{JH}_\mathbf{x} \f$ is the Jacobian of the invariants/</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; hidden constraints with respect to the states \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_tilde The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t The time \f$ t \f$ at which the states are evaluated.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The solution of the projection problem \f$ \mathbf{x} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[x, x_dot] = project</span><span class="p">(</span> this, x_tilde, x_dot_tilde, t <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>x<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">project</span><span class="p">(</span> this, x_tilde, t <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::project(...): '</span><span class="p">;</span><span class="w"></span>
 
@@ -227,12 +218,9 @@
 <span class="w">      </span><span class="n">num_eqns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">get_num_eqns</span><span class="p">();</span><span class="w"></span>
 <span class="w">      </span><span class="n">num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">get_num_invs</span><span class="p">();</span><span class="w"></span>
 <span class="w">      </span><span class="n">x</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="n">x_tilde</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">x_dot</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="n">x_dot_tilde</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x_tilde</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'the number of states does not match the number of equations.'</span><span class="p">]);</span><span class="w"></span>
-<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x_dot_tilde</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'the number of states derivatives does not match the number of equations.'</span><span class="p">]);</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Check if there are any constraints</span><span class="w"></span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">num_invs</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
@@ -242,26 +230,25 @@
 
 <span class="w">        </span><span class="c">% Iterate until the projected solution is found</span><span class="w"></span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iter</span><span class="w"></span>
-<span class="w">          </span><span class="c">%     [A]           {x}      =                   {b}</span><span class="w"></span>
-<span class="w">          </span><span class="c">% / I  JH^T \ / dx, dx_dot \   / x_tilde - x_k, x_dot_tilde - x_dot \</span><span class="w"></span>
-<span class="w">          </span><span class="c">% |         | |            | = |                                    |</span><span class="w"></span>
-<span class="w">          </span><span class="c">% \ JH   0  / \   lambda   /   \                 -H                 /</span><span class="w"></span>
+
+<span class="w">          </span><span class="c">%     [A]         {x}    =        {b}</span><span class="w"></span>
+<span class="w">          </span><span class="c">% / I  JH^T \ /   dx   \   / x_tilde - x_k \</span><span class="w"></span>
+<span class="w">          </span><span class="c">% |         | |        | = |               |</span><span class="w"></span>
+<span class="w">          </span><span class="c">% \ JH   0  / \ lambda /   \      -H       /</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">% Evaluate the invariants/hidden constraints vector and its Jacobian</span><span class="w"></span>
-<span class="w">          </span><span class="n">J</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">JH</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">JH</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">J</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">JH</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">JH</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">% Compute the solution of the linear system</span><span class="w"></span>
 <span class="w">          </span><span class="n">A</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">eye</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">),</span><span class="w"> </span><span class="n">JH</span><span class="p">.</span><span class="o">'</span><span class="p">;</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">                 </span><span class="n">JH</span><span class="p">,</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_invs</span><span class="p">,</span><span class="w"> </span><span class="n">num_invs</span><span class="p">)];</span><span class="w"></span>
-<span class="w">          </span><span class="n">b</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">x_tilde</span><span class="o">-</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">x_dot_tilde</span><span class="o">-</span><span class="n">x_dot</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="p">];</span><span class="w"></span>
+<span class="w">          </span><span class="n">b</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">x_tilde</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="p">];</span><span class="w"></span>
 <span class="w">          </span><span class="n">sol</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="o">\</span><span class="n">b</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">% Update the solution</span><span class="w"></span>
-<span class="w">          </span><span class="n">dx</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">sol</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">num_eqns</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">dx_dot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sol</span><span class="p">(</span><span class="n">num_eqns</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">num_eqns</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">x</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w">     </span><span class="o">+</span><span class="w"> </span><span class="n">dx</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="n">x_dot</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">x_dot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dx_dot</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">dx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sol</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">num_eqns</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">x</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dx</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">% Check if the solution is found</span><span class="w"></span>
 <span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tolerance</span><span class="p">)</span><span class="w"></span>
@@ -288,9 +275,9 @@
 <span class="w">    </span><span class="c">%&gt;                \f$ || \mathbf{x} ||_{\infty} &gt; \varepsilon \f$</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;                the computation is interrupted.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) + \mathrm{size}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         (\mathbf{x}')) \times \mathrm{size}(t)\right] \f$ containing the</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         approximated solution \f$ \mathbf{x}(t) \f$ of the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         (t)\right] \f$ containing the approximated solution \f$ \mathbf{x}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         (t) \f$ of the system of ODEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; **Usage:**</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
@@ -411,6 +398,13 @@
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Generic advancing step for a generic solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; where \f$ \mathcal{S} \f$ is the advancing step of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'(t_k) \f$.</span><span class="w"></span>

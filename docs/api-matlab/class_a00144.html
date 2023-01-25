@@ -177,6 +177,14 @@
 </dt>
 <dd>
 <p>Generic advancing step for a generic solver.</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
+\mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)
+\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathcal{S} \)</span> is the advancing step of the solver.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
@@ -286,44 +294,36 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Ralston37projectE2in2in2in2in">
-<span id="_CPPv3N8Ralston37projectE2in2in2in2in"></span><span id="_CPPv2N8Ralston37projectE2in2in2in2in"></span><span id="Ralston3::project__in.in.in.in"></span><span class="target" id="a00248_1aa05e3925fe897af1381b3592d3d18fd6"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Ralston37projectE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Ralston37projectE2in2in2in">
+<span id="_CPPv3N8Ralston37projectE2in2in2in"></span><span id="_CPPv2N8Ralston37projectE2in2in2in"></span><span id="Ralston3::project__in.in.in"></span><span class="target" id="a00248_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Ralston37projectE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Solve the ODEs system through the problem:</p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
+\[
 \textrm{minimize} \quad
-\dfrac{1}{2}\left(
-  \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} -
-  \begin{bmatrix} \tilde{\mathbf{x}} \\ \tilde{\mathbf{x}}' \end{bmatrix}
-\right)^2 \quad
-\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0}
-\end{split}\]</div>
+\dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\]</div>
 
-<p>given the Lagrangian of the form:</p>
+<p>given the Lagrangian <span class="math notranslate nohighlight">\( \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \)</span> of the form:</p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\mathcal{L}(\mathbf{x}, \mathbf{x}', \boldsymbol{\lambda}) =
-\frac{1}{2}\left(
-  \begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} -
-  \begin{bmatrix} \widetilde{\mathbf{x}} \\ \widetilde{\mathbf{x}}' \end{bmatrix}
-\right)^2 +
-\boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, \mathbf{x}', t).
-\end{split}\]</div>
+\[
+\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
+\frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
+\boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).
+\]</div>
 
 <p>The solution of the problem is obtained by solving the following:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \left\{\begin{array}{l}
-\begin{bmatrix} \mathbf{x} \\ \mathbf{x}' \end{bmatrix} + \mathbf{JH}_\mathbf{x}^T
-\boldsymbol{\lambda} = \begin{bmatrix}
-  \widetilde{\mathbf{x}} \\ \widetilde{\mathbf{x}}'
-\end{bmatrix} \\[1em]
-\mathbf{H}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0}
+\mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =
+\widetilde{\mathbf{x}} \\[0.5em]
+\mathbf{H}(\mathbf{x}, t) = \mathbf{0}
 \end{array}\right.
 \end{split}\]</div>
 
@@ -331,44 +331,51 @@
 <p>Using the Taylor expansion of the Lagrangian:</p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\mathbf{H}(\mathbf{x}, \mathbf{x}', t) +
-\mathbf{JH}_\mathbf{x}
-\begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix} +
-\mathcal{O}\left(\left\|
-\begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix}
-\right\|^2\right) = \mathbf{0}
-\end{split}\]</div>
+\[
+\mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +
+\mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
+\]</div>
 
 <p>define the iterative method as:</p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{bmatrix} \mathbf{x}_{k+1} \\ \mathbf{x}_{k+1}' \end{bmatrix} =
-\begin{bmatrix} \mathbf{x}_{k} \\ \mathbf{x}_{k}' \end{bmatrix} +
-\begin{bmatrix} \delta\mathbf{x} \\ \delta\mathbf{x}' \end{bmatrix}.
-\end{split}\]</div>
+\[
+\mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
+\]</div>
 
-<p>Notice that <span class="math notranslate nohighlight">\( \left[\delta\mathbf{x}, \delta\mathbf{x}'\right]^T \)</span> is the solution of the linear system:</p>
+<p>Notice that <span class="math notranslate nohighlight">\( \delta\mathbf{x} \)</span> is the solution of the linear system:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\left[\begin{array}{c|c} \\[-0.75em]
-\mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em] \hline
+\begin{bmatrix}
+\mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em]
 \mathbf{JH}_\mathbf{x} &amp; \mathbf{0}
-\end{array}\right]
-\left[\begin{array}{c}
-\delta\mathbf{x} \\ \delta\mathbf{x}' \\ \hline \boldsymbol{\lambda}
-\end{array}\right]
+\end{bmatrix}
+\begin{bmatrix}
+\delta\mathbf{x} \\[0.5em]
+\boldsymbol{\lambda}
+\end{bmatrix}
 =
-\left[\begin{array}{c}
-\widetilde{\mathbf{x}}  - \mathbf{x}_k \\
-\widetilde{\mathbf{x}}' - \mathbf{x}'_k \\ \hline
--\mathbf{H}(\mathbf{x}_k, \mathbf{x}_k', t_k)
-\end{array}\right]
+\begin{bmatrix}
+\widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
+-\mathbf{H}(\mathbf{x}, t)
+\end{bmatrix}
 \end{split}\]</div>
 
-<p>where <span class="math notranslate nohighlight">\( \mathbf{JH}_\mathbf{x} \)</span> is the Jacobian of the invariants/ hidden constraints with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p>
+<p>where <span class="math notranslate nohighlight">\( \mathbf{JH}_\mathbf{x} \)</span> is the Jacobian of the invariants/ hidden constraints with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_tilde</strong> – The initial guess for the states <span class="math notranslate nohighlight">\( \widetilde{\mathbf{x}} \)</span>. </p></li>
+<li><p><strong>t</strong> – The time <span class="math notranslate nohighlight">\( t \)</span> at which the states are evaluated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The solution of the projection problem <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p>
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -422,8 +429,9 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
-<p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) + \mathrm{size}
-           (\mathbf{x}')) \times \mathrm{size}(t)\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs.</p>
+<p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+           (t)\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}
+           (t) \)</span> of the system of ODEs.</p>
 </dd>
 </dl>
 </dd>

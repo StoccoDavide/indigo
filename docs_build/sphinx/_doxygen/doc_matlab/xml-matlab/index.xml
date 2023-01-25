@@ -26,7 +26,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -68,7 +68,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -93,7 +93,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -155,7 +155,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -180,7 +180,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -404,7 +404,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
   </compound>
@@ -413,7 +413,7 @@
     <member refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" kind="function"><name>F</name></member>
     <member refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" kind="function"><name>JF</name></member>
     <member refid="a00252_1aa4aeb9e2668be5258e2ca30f39cb0889" kind="function"><name>H</name></member>
-    <member refid="a00252_1a429842d9815af9a468f8659ab64ebb94" kind="function"><name>JH</name></member>
+    <member refid="a00252_1abe619a3b4e36777c702352b9d0c83efe" kind="function"><name>JH</name></member>
     <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" kind="function"><name>get_num_eqns</name></member>
     <member refid="a00116_1a8acdc198f9503ad4df0938412359d4fd" kind="function"><name>set_num_eqns</name></member>
     <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" kind="function"><name>get_num_invs</name></member>
@@ -506,7 +506,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -531,7 +531,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -556,7 +556,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -581,7 +581,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -606,7 +606,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -631,7 +631,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
@@ -661,7 +661,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
   </compound>
@@ -698,7 +698,7 @@
     <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" kind="function"><name>set_ode</name></member>
     <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" kind="function"><name>get_max_iter</name></member>
     <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
-    <member refid="a00248_1aa05e3925fe897af1381b3592d3d18fd6" kind="function"><name>project</name></member>
+    <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
     <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
     <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" kind="variable"><name>m_b</name></member>
