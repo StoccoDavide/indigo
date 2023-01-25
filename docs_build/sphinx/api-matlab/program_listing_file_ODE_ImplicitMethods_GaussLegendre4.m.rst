@@ -11,7 +11,7 @@ Program Listing for File GaussLegendre4.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Gauss–Legendre fouth-order (2 stages)
+   %> Class container for Gauss-Legendre fouth-order (2 stages)
    %
    classdef GaussLegendre4 < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File GaussLegendre4.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Gauss–Legendre fourth-order (2 stages)
+       %> Gauss-Legendre fourth-order (2 stages)
        %>
        %> \rst
        %> .. math::

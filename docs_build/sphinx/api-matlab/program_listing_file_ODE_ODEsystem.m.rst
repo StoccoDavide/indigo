@@ -21,12 +21,12 @@ Program Listing for File ODEsystem.m
        %
        %> Class constructor for a system of ODEs.
        %>
-       %> \param name Name of the system of ODEs.
-       %> \param neqn Number of equations of the system of ODEs.
-       %> \param ninv Number of invariants/hidden contraints of the system of ODEs.
+       %> \param t_name Name of the system of ODEs.
+       %> \param t_neqn Number of equations of the system of ODEs.
+       %> \param t_ninv Number of invariants/hidden contraints of the system of ODEs.
        %
-       function this = ODEsystem( name, neqn, ninv )
-         this@Base( name, neqn, ninv );
+       function this = ODEsystem( t_name, t_neqn, t_ninv )
+         this@Base( t_name, t_neqn, t_ninv );
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -56,7 +56,7 @@ Program Listing for File ODEsystem.m
        %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
        %> \param t     Independent variable \f$ t \f$.
        %>
-       %> \return      Value of the system of ODEs function \f$ \mathbf{F} \f$.
+       %> \return The value of the system of ODEs function \f$ \mathbf{F} \f$.
        %
        F( this, x, x_dot, t )
        %
@@ -85,10 +85,10 @@ Program Listing for File ODEsystem.m
        %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
        %> \param t     Independent variable \f$ t \f$.
        %>
-       %> \return      The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
-       %>              \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect
-       %>              to the states \f$ \mathbf{x} \f$ and the states derivatives
-       %>              \f$ \mathbf{x}' \f$.
+       %> \return The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
+       %>         \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect to
+       %>         the states \f$ \mathbf{x} \f$ and the states derivatives
+       %>         \f$ \mathbf{x}' \f$.
        %
        JF( this, x, x_dot, t )
        %
@@ -103,9 +103,9 @@ Program Listing for File ODEsystem.m
        %> \param x States \f$ \mathbf{x} \f$.
        %> \param t Independent variable \f$ t \f$.
        %>
-       %> \return  Value of the invariants/hidden contraints \f$ \mathbf{H} \f$.
+       %> \return The value of the invariants/hidden contraints \f$ \mathbf{H} \f$.
        %
-       H( this, x, x_dot, t )
+       H( this, x, t )
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
@@ -124,8 +124,8 @@ Program Listing for File ODEsystem.m
        %> \param x States \f$ \mathbf{x} \f$.
        %> \param t Independent variable \f$ t \f$.
        %>
-       %> \return  Value of the Jacobian of the invariants/hidden contraints
-       %>          \f$ \mathbf{JH}_{\mathbf{x}} \f$.
+       %> \return The value of the Jacobian of the invariants/hidden contraints
+       %>         \f$ \mathbf{JH}_{\mathbf{x}} \f$.
        %
        JH( this, x, t )
        %

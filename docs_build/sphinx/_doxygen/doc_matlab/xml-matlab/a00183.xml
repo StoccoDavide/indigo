@@ -13,7 +13,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Gauss–Legendre sixth-order (3 stages)</para>
+<para>Gauss-Legendre sixth-order (3 stages)</para>
 <para><verbatim>embed:rst:leading-asterisk
 *  .. math::
 * 
@@ -39,7 +39,7 @@
       </memberdef>
       </sectiondef>
     <briefdescription>
-<para>Class container for Gauss–Legendre sixth-order (3 stages) </para>
+<para>Class container for Gauss-Legendre sixth-order (3 stages) </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>

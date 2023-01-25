@@ -68,7 +68,7 @@
 <span class="w">    </span><span class="c">%&gt; Class constructor for ODEsolver, which requires the name of the solver</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; used to integrate the system of ODEs as input.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param name The name of the solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_name The name of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ODEsolver</span><span class="p">(</span> t_name <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
@@ -80,17 +80,17 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The name of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_name<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the name of the method used to integrate the system of ODEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param name The name of the solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_name The name of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">set_name</span><span class="p">(</span> this, t_name <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_name</span><span class="p">(</span> this, t_name <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -100,15 +100,15 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The system of ODEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_ode</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_ode<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_ode</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_ode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the system of ODEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param ode The system of ODEs to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_ode The system of ODEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_ode</span><span class="p">(</span> this, t_ode <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_ode</span><span class="p">;</span><span class="w"></span>
@@ -120,15 +120,15 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The maximum number of iterations in the projection process.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_iter</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_max_iter<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_iter</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_max_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iter</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the maximum number of iterations in the projection process.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param max_iter The maximum number of iterations in the projection process.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_max_iter The maximum number of projection iterations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_iter</span><span class="p">(</span> this, t_max_iter <span class="p">)</span><span class="w"></span>
 
@@ -142,16 +142,19 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Solve the ODEs system through the problem:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Project the ODEs system solution \f$ \mathbf{x} \f$ on the invariants/hidden</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; constraints \f$ \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \f$. The constrained</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; minimization problem to be solved is:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \textrm{minimize} \quad</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; given the Lagrangian \f$ \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \f$</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; of the form:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; **Solution Algorithm**</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Given the Lagrangian of the minimization problem of the form:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =</span><span class="w"></span>
@@ -168,8 +171,6 @@
 <span class="w">    </span><span class="c">%&gt; \mathbf{H}(\mathbf{x}, t) = \mathbf{0}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \end{array}\right.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; **Solution algorithm**</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Using the Taylor expansion of the Lagrangian:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
@@ -265,7 +266,8 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Solve the system of ODEs and calculate the approximate solution.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t       Time vector \f$ \left[ t_0, t_1, \ldots, t_n \right]^T \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;                \right]^T \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_0     Initial states value \f$ \mathbf{x}(t_0) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param project [optional, default = false] Apply projection to invariants</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;                 at each step.</span><span class="w"></span>
@@ -276,10 +278,10 @@
 <span class="w">    </span><span class="c">%&gt;                the computation is interrupted.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         (t)\right] \f$ containing the approximated solution \f$ \mathbf{x}</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         (t) \f$ of the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         (\mathbf{t})\right] \f$ containing the approximated solution</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}(t) \f$ of the system of ODEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; **Usage:**</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; **Usage**</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Solve without the solution projection on invariants/hidden constraints and</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; disabled verbose mode.</span><span class="w"></span>
@@ -406,17 +408,20 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Generic advancing step for a generic solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Compute a step using a generic integration method for a system of ODEs of</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; step is based on the following formula:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; where \f$ \mathcal{S} \f$ is the advancing step of the solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'(t_k) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;                (t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k     Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t     Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>

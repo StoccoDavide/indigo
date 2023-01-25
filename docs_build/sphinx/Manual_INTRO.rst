@@ -6,18 +6,17 @@ Library for the course *Mechatronics System Simulation*
 Installation
 ------------
 
-Download the toolbox from
-`here <https://github.com/ebertolazzi/course-ModellingAndSimulationOfMechatronicsSystem/releases>`__
+Download the toolbox from `here <https://github.com/StoccoDavide/indigo/releases>`__
 and follows the instruction.
 
 Library structure
 -----------------
 
-- **DIAL_ODEsystem**
+- **ODEsystem**
   base class to define the system of Ordinary Differential Equations (ODEs) to be integrated.
-- **DIAL_ODEsolver**
+- **ODEsolver**
   base class to define the solver for the system of ODEs.
-- **DIAL_RKexplicit**
+- **RKexplicit**
   base class to define the explicit Runge-Kutta solver.
 
   .. list-table:: Available explicit solvers

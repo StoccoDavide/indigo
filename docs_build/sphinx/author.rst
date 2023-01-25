@@ -1,8 +1,12 @@
-Author
-~~~~~~
+Authors
+~~~~~~~
 
-| Enrico Bertolazzi
-| Dipartimento di Ingegneria Industriale
-| Università degli Studi di Trento
-| email: enrico.bertolazzi@unitn.it
-| homepage: https://e.bertolazzi.dii.unitn.it
+| *Davide Stocco*
+| Department of Industrial Engineering
+| University of Trento
+| email: davide.stocco@unitn.it
+
+| *Sebastiano Taddei*
+| Department of Industrial Engineering
+| University of Trento
+| email: sebastiano.taddei@unitn.it

@@ -50,12 +50,12 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Class constructor for a system of ODEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param name Name of the system of ODEs.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param neqn Number of equations of the system of ODEs.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param ninv Number of invariants/hidden contraints of the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_name Name of the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_neqn Number of equations of the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_ninv Number of invariants/hidden contraints of the system of ODEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ODEsystem</span><span class="p">(</span> name, neqn, ninv <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">Base</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">neqn</span><span class="p">,</span><span class="w"> </span><span class="n">ninv</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ODEsystem</span><span class="p">(</span> t_name, t_neqn, t_ninv <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">Base</span><span class="p">(</span><span class="w"> </span><span class="n">t_name</span><span class="p">,</span><span class="w"> </span><span class="n">t_neqn</span><span class="p">,</span><span class="w"> </span><span class="n">t_ninv</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -85,7 +85,7 @@
 <span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return      Value of the system of ODEs function \f$ \mathbf{F} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The value of the system of ODEs function \f$ \mathbf{F} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">F</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -114,10 +114,10 @@
 <span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return      The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;              \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;              to the states \f$ \mathbf{x} \f$ and the states derivatives</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;              \f$ \mathbf{x}' \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect to</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         the states \f$ \mathbf{x} \f$ and the states derivatives</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}' \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">JF</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -132,9 +132,9 @@
 <span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return  Value of the invariants/hidden contraints \f$ \mathbf{H} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The value of the invariants/hidden contraints \f$ \mathbf{H} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="n">H</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">H</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -153,8 +153,8 @@
 <span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return  Value of the Jacobian of the invariants/hidden contraints</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;          \f$ \mathbf{JH}_{\mathbf{x}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The value of the Jacobian of the invariants/hidden contraints</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{JH}_{\mathbf{x}} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">JH</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>

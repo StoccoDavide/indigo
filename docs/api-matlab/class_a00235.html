@@ -217,7 +217,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>name</strong> – The name of the solver. </p>
+<p><strong>t_name</strong> – The name of the solver. </p>
 </dd>
 </dl>
 </dd>
@@ -247,7 +247,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>ode</strong> – The system of ODEs to be solved. </p>
+<p><strong>t_ode</strong> – The system of ODEs to be solved. </p>
 </dd>
 </dl>
 </dd>
@@ -277,7 +277,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>max_iter</strong> – The maximum number of iterations in the projection process. </p>
+<p><strong>t_max_iter</strong> – The maximum number of projection iterations. </p>
 </dd>
 </dl>
 </dd>
@@ -288,16 +288,17 @@
 <span id="_CPPv3N8RadauIA37projectE2in2in2in"></span><span id="_CPPv2N8RadauIA37projectE2in2in2in"></span><span id="RadauIA3::project__in.in.in"></span><span class="target" id="a00251_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8RadauIA37projectE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Solve the ODEs system through the problem:</p>
+<p>Project the ODEs system solution <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> on the invariants/hidden constraints <span class="math notranslate nohighlight">\( \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \)</span>. The constrained minimization problem to be solved is:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
 \textrm{minimize} \quad
-\dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
-\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.
 \]</div>
 
-<p>given the Lagrangian <span class="math notranslate nohighlight">\( \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \)</span> of the form:</p>
+<p><strong>Solution Algorithm</strong></p>
+<p>Given the Lagrangian of the minimization problem of the form:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
@@ -317,7 +318,6 @@
 \end{array}\right.
 \end{split}\]</div>
 
-<p><strong>Solution algorithm</strong></p>
 <p>Using the Taylor expansion of the Lagrangian:</p>
 <p></p>
 <div class="math notranslate nohighlight">
@@ -375,7 +375,7 @@
 </dt>
 <dd>
 <p>Solve the system of ODEs and calculate the approximate solution.</p>
-<p><strong>Usage:</strong></p>
+<p><strong>Usage</strong></p>
 <p>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
 <p></p>
 <div class="highlight-none notranslate">
@@ -410,7 +410,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
 <ul class="simple">
-<li><p><strong>t</strong> – Time vector <span class="math notranslate nohighlight">\( \left[ t_0, t_1, \ldots, t_n \right]^T \)</span>. </p></li>
+<li><p><strong>t</strong> – Time vector <span class="math notranslate nohighlight">\( \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+                  \right]^T \)</span>. </p></li>
 <li><p><strong>x_0</strong> – Initial states value <span class="math notranslate nohighlight">\( \mathbf{x}(t_0) \)</span>. </p></li>
 <li><p><strong>project</strong> – [optional, default = false] Apply projection to invariants at each step. </p></li>
 <li><p><strong>verbose</strong> – [optional, default = <span class="math notranslate nohighlight">\( \mathrm{false} \)</span>] Activate vebose mode. </p></li>
@@ -420,8 +421,7 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
 <p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-           (t)\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}
-           (t) \)</span> of the system of ODEs.</p>
+           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs.</p>
 </dd>
 </dl>
 </dd>

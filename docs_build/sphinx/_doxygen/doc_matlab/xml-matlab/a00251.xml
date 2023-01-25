@@ -69,7 +69,7 @@
 <para>Class constructor for <ref refid="a00251" kindref="compound">ODEsolver</ref>, which requires the name of the solver used to integrate the system of ODEs as input.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>name</parametername>
+<parametername>t_name</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The name of the solver. </para>
@@ -124,7 +124,7 @@
 <para>Set the name of the method used to integrate the system of ODEs.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>name</parametername>
+<parametername>t_name</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The name of the solver. </para>
@@ -179,7 +179,7 @@
 <para>Set the system of ODEs to be solved.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>ode</parametername>
+<parametername>t_ode</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The system of ODEs to be solved. </para>
@@ -234,10 +234,10 @@
 <para>Set the maximum number of iterations in the projection process.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>max_iter</parametername>
+<parametername>t_max_iter</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The maximum number of iterations in the projection process. </para>
+<para>The maximum number of projection iterations. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -268,38 +268,38 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Solve the ODEs system through the problem:</para>
-<para><formula id="0">\[
+<para>Project the ODEs system solution <formula id="12">$ \mathbf{x} $</formula> on the invariants/hidden constraints <formula id="16">$ \mathbf{H} (\mathbf{x}, t) = \mathbf{0} $</formula>. The constrained minimization problem to be solved is:</para>
+<para><formula id="17">\[
 \textrm{minimize} \quad
-\dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
-\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.
 \]</formula></para>
-<para>given the Lagrangian <formula id="1">$ \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) $</formula> of the form:</para>
-<para><formula id="2">\[
+<para><bold>Solution Algorithm</bold></para>
+<para>Given the Lagrangian of the minimization problem of the form:</para>
+<para><formula id="18">\[
 \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
 \frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
 \boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).
 \]</formula></para>
 <para>The solution of the problem is obtained by solving the following:</para>
-<para><formula id="3">\[
+<para><formula id="19">\[
 \left\{\begin{array}{l}
 \mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =
 \widetilde{\mathbf{x}} \\[0.5em]
 \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
 \end{array}\right.
 \]</formula></para>
-<para><bold>Solution algorithm</bold></para>
 <para>Using the Taylor expansion of the Lagrangian:</para>
-<para><formula id="4">\[
+<para><formula id="20">\[
 \mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +
 \mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
 \]</formula></para>
 <para>define the iterative method as:</para>
-<para><formula id="5">\[
+<para><formula id="21">\[
 \mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
 \]</formula></para>
-<para>Notice that <formula id="6">$ \delta\mathbf{x} $</formula> is the solution of the linear system:</para>
-<para><formula id="7">\[
+<para>Notice that <formula id="22">$ \delta\mathbf{x} $</formula> is the solution of the linear system:</para>
+<para><formula id="23">\[
 \begin{bmatrix}
 \mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em]
 \mathbf{JH}_\mathbf{x} &amp; \mathbf{0}
@@ -314,13 +314,13 @@
 -\mathbf{H}(\mathbf{x}, t)
 \end{bmatrix}
 \]</formula></para>
-<para>where <formula id="8">$ \mathbf{JH}_\mathbf{x} $</formula> is the Jacobian of the invariants/ hidden constraints with respect to the states <formula id="9">$ \mathbf{x} $</formula>.</para>
+<para>where <formula id="24">$ \mathbf{JH}_\mathbf{x} $</formula> is the Jacobian of the invariants/ hidden constraints with respect to the states <formula id="12">$ \mathbf{x} $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_tilde</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The initial guess for the states <formula id="10">$ \widetilde{\mathbf{x}} $</formula>. </para>
+<para>The initial guess for the states <formula id="25">$ \widetilde{\mathbf{x}} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -328,17 +328,17 @@
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The time <formula id="11">$ t $</formula> at which the states are evaluated.</para>
+<para>The time <formula id="26">$ t $</formula> at which the states are evaluated.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The solution of the projection problem <formula id="9">$ \mathbf{x} $</formula>. </para>
+<simplesect kind="return"><para>The solution of the projection problem <formula id="12">$ \mathbf{x} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="185" column="15"/>
+        <location file="ODE/ODEsolver.m" line="186" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00251_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -371,7 +371,8 @@
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time vector <formula id="12">$ \left[ t_0, t_1, \ldots, t_n \right]^T $</formula>. </para>
+<para>Time vector <formula id="27">$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+                  \right]^T $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -379,7 +380,7 @@
 <parametername>x_0</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Initial states value <formula id="13">$ \mathbf{x}(t_0) $</formula>. </para>
+<para>Initial states value <formula id="28">$ \mathbf{x}(t_0) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -395,7 +396,7 @@
 <parametername>verbose</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>[optional, default = <formula id="14">$ \mathrm{false} $</formula>] Activate vebose mode. </para>
+<para>[optional, default = <formula id="8">$ \mathrm{false} $</formula>] Activate vebose mode. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -403,15 +404,14 @@
 <parametername>epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>[optional, default = <formula id="15">$ 1.0\mathrm{e}3 $</formula>] If <formula id="16">$ || \mathbf{x} ||_{\infty} &gt; \varepsilon $</formula> the computation is interrupted.</para>
+<para>[optional, default = <formula id="29">$ 1.0\mathrm{e}3 $</formula>] If <formula id="30">$ || \mathbf{x} ||_{\infty} &gt; \varepsilon $</formula> the computation is interrupted.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A matrix <formula id="17">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-           (t)\right] $</formula> containing the approximated solution <formula id="18">$ \mathbf{x}
-           (t) $</formula> of the system of ODEs.</para>
+<simplesect kind="return"><para>A matrix <formula id="31">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+           (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="32">$ \mathbf{x}(t) $</formula> of the system of ODEs.</para>
 </simplesect>
-<bold>Usage:</bold></para>
+<bold>Usage</bold></para>
 <para>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</para>
 <para><verbatim>embed:rst:leading-asterisk
 *  .. code-block:: none
@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="296" column="15"/>
+        <location file="ODE/ODEsolver.m" line="298" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00251_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -451,6 +451,7 @@
         <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
         <name>step</name>
         <qualifiedname>ODEsolver::step</qualifiedname>
+        <reimplementedby refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a">step</reimplementedby>
         <reimplementedby refid="a00263_1a0193256fd309fadc298287dd71c8874e">step</reimplementedby>
         <param>
           <type>in</type>
@@ -475,18 +476,18 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Generic advancing step for a generic solver.</para>
-<para><formula id="19">\[
+<para>Compute a step using a generic integration method for a system of ODEs of the form <formula id="33">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula>. The step is based on the following formula:</para>
+<para><formula id="34">\[
 \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
 \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}&apos;_k(t_k), t_k, \Delta t)
 \]</formula></para>
-<para>where <formula id="20">$ \mathcal{S} $</formula> is the advancing step of the solver.</para>
+<para>where <formula id="35">$ \mathcal{S} $</formula> is the generic advancing step of the solver.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States value at <formula id="21">$ k $</formula>-th time step <formula id="22">$ \mathbf{x}(t_k) $</formula>. </para>
+<para>States value at <formula id="36">$ k $</formula>-th time step <formula id="37">$ \mathbf{x}(t_k) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -494,7 +495,8 @@
 <parametername>x_dot_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivative at <formula id="21">$ k $</formula>-th time step <formula id="23">$ \mathbf{x}&apos;(t_k) $</formula>. </para>
+<para>States derivative at <formula id="36">$ k $</formula>-th time step <formula id="38">$ \mathbf{x}&apos;
+               (t_k) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -502,7 +504,7 @@
 <parametername>t_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time step <formula id="24">$ t_k $</formula>. </para>
+<para>Time step <formula id="39">$ t_k $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -510,17 +512,17 @@
 <parametername>d_t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Advancing time step <formula id="25">$ \Delta t$</formula>.</para>
+<para>Advancing time step <formula id="40">$ \Delta t$</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The approximation of <formula id="26">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="27">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
+<simplesect kind="return"><para>The approximation of <formula id="41">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="42">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="400" column="24"/>
+        <location file="ODE/ODEsolver.m" line="405" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -748,7 +750,7 @@
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="ODE/ODEsolver.m" line="5" column="1" bodyfile="ODE/ODEsolver.m" bodystart="6" bodyend="406"/>
+    <location file="ODE/ODEsolver.m" line="5" column="1" bodyfile="ODE/ODEsolver.m" bodystart="6" bodyend="411"/>
     <listofallmembers>
       <member refid="a00251_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_max_iter</name></member>
       <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_name</name></member>

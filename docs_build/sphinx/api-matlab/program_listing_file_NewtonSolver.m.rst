@@ -10,56 +10,53 @@ Program Listing for File NewtonSolver.m
 
 .. code-block:: MATLAB
 
-   % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-   %                                                                     %
-   % The DIAL project - Course of MECHATRONICS SYSTEM SIMULATION         %
-   %                                                                     %
-   % Copyright (c) 2020, Davide Stocco and Enrico Bertolazzi, Francesco  %
-   % Biral                                                               %
-   %                                                                     %
-   % The DIAL project and its components are supplied under the terms of %
-   % the open source BSD 2-Clause License. The contents of the DIAL      %
-   % project and its components may not be copied or disclosed except in %
-   % accordance with the terms of the BSD 2-Clause License.              %
-   %                                                                     %
-   % URL: https://opensource.org/licenses/BSD-2-Clause                   %
-   %                                                                     %
-   %    Davide Stocco                                                    %
-   %    Department of Industrial Engineering                             %
-   %    University of Trento                                             %
-   %    e-mail: davide.stocco@unitn.it                                   %
-   %                                                                     %
-   %    Enrico Bertolazzi                                                %
-   %    Department of Industrial Engineering                             %
-   %    University of Trento                                             %
-   %    e-mail: enrico.bertolazzi@unitn.it                               %
-   %                                                                     %
-   %    Francesco Biral                                                  %
-   %    Department of Industrial Engineering                             %
-   %    University of Trento                                             %
-   %    e-mail: francesco.biral@unitn.it                                 %
-   %                                                                     %
-   % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
    %
-   %> Function implementing the Dumped Newton Solver.
-   %> Solve \rst ..math:`J(x_k) h = -F(x_k)` \endrst and update \rst ..math:`x_{k+1} = x_k + \alpha_k h` \endrst where \rst ..math:`\alpha_k` \endrst satisfies \rst ..math:`\norm{J(x_k)^{-1} F(x_{k+1})} \leq (1 - \frac{\alpha_k}{2}) \norm{J(x_k)^{-1} F(x_k)} = (1 - \frac{\alpha_k}{2}) \norm{h}` \endrst.
-   %> This is called Affine invariant Newton step (see
-   %> https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html).
+   %> Function implementing a dumped Newton's method with affine invariant step.
    %>
-   %> Output flags:
-   %>  - flag = 0 -> solution found;
-   %>  - flag = 1 -> failed because of bad initial point;
-   %>  - flag = 2 -> failed because of step too short, filed linesearch.
+   %> **Solution Algorithm:**
    %>
-   %> Inputs:
-   %>  - fun       -> function F(x) = feval( fun, x );
-   %>  - jac       -> Jacobian matrix of the function J(x) = feval( jac, x );
-   %>  - x_0       -> initial guess;
-   %>  - VERBOSE   -> [optional, defalut = false] enable verbose mode;
-   %>  - TOLERANCE -> [optional, defalut = 1.0e-08] tolerance;
-   %>  - ITER_NWTN -> [optional, defalut = 50] maximum number of Newton iterations;
-   %>  - ITER_DUMP -> [optional, defalut = 50] maximum number of Dumping iterations;
-   %>  - ALPHA     -> [optional, defalut = 0.5] dumping coefficient
+   %> Given a zeros of a vectorial function problem of the form \f$ \mathbf{F}
+   %> (\mathbf{x}) = \mathbf{0} \f$, where \f$ \mathbf{F}: \mathbb{R}^n \rightarrow
+   %> \mathbb{R}^n \f$, then the Newton's method is defined as:
+   %>
+   %> \f[
+   %> \mathbf{JF}(\mathbf{x}_k)\mathbf{h} = -\mathbf{F}(\mathbf{x}_k).
+   %> \f]
+   %>
+   %> The dumped step is defined as:
+   %>
+   %> \f[
+   %> \mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{h}
+   %> \f]
+   %>
+   %> where \f$ \alpha_k \f$ is a dumping coefficient that satisfies:
+   %>
+   %> \f[
+   %> \left\| \mathbf{JF}(\mathbf{x}_k)^{-1} \mathbf{F}(\mathbf{x}_{k+1}) \right\|
+   %> \leq \left(1 - \dfrac{\alpha_k}{2}\right) \left\| \mathbf{JF}(\mathbf{x}_k)^{-1}
+   %> \mathbf{F}(\mathbf{x}_k) \right\| = \left(1 - \dfrac{\alpha_k}{2} \right)
+   %> \left\| \mathbf{h}  \right\|.
+   %> \f]
+   %>
+   %> **Note:**
+   %>
+   %> For more details on the Newton's method with affine invariant step refer to:
+   %> https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.
+   %>
+   %>  \param F         Function handle of the vectorial function
+   %>                   \f$ \mathbf{F}(\mathbf{x}) \f$.
+   %>  \param JF        Function handle of Jacobian matrix
+   %>                   \f$ \mathbf{JF}(\mathbf{x}) \f$.
+   %>  \param x_0       Initial guess of the solution.
+   %>  \param VERBOSE   [optional, default = \f$ \mathrm{false} \f$] enable verbose mode.
+   %>  \param TOLERANCE [optional, default = \f$ 1.0e^{-8} \f$] Convergence tolerance.
+   %>  \param ITER_NWTN [optional, default = \f$ 50 \f$] Maximum number of Newton iterations.
+   %>  \param ITER_DUMP [optional, default = \f$ 50 \f$] Maximum number of Dumping iterations.
+   %>  \param ALPHA     [optional, default = \f$ 0.5 \f$] Dumping coefficient.
+   %>
+   %> \return The solution \f$ \mathbf{x} \f$ and the output flag: \f$ 0 \f$ =
+   %>         success, \f$ 1 \f$ = failed because of bad initial point, \f$ 2 \f$ =
+   %>         failed because of bad dumping (step got too short).
    %
    function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
      flag = 0;
@@ -113,7 +110,7 @@ Program Listing for File NewtonSolver.m
        if norm(F,inf) < TOLERANCE
          return;
        end
-       
+   
        % Evaluate search direction
        h  = -JF\F;
        nh = norm(h,2);
@@ -131,7 +128,7 @@ Program Listing for File NewtonSolver.m
            end
          end
        end
-       
+   
        if ~dumped
          if VERBOSE
            fprintf(1, 'NewtonSolver(...): alpha = %g, Failed dumping iteration!\n', ALPHA );
@@ -139,12 +136,12 @@ Program Listing for File NewtonSolver.m
          flag = 2;
          break;
        end
-       
+   
        x = xd;
        if VERBOSE
          fprintf(1, 'iter [%d]: ||F||_inf = %14g, alpha = %g\n', i, norm(F,inf), ALPHA );
        end
-       if norm(h,inf) < TOLERANCE
+       if (norm(h, inf) < TOLERANCE)
          return;
        end
      end

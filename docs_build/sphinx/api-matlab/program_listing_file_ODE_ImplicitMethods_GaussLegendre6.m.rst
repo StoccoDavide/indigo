@@ -42,7 +42,7 @@ Program Listing for File GaussLegendre6.m
    % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
    
    %
-   %> Class container for Gauss–Legendre sixth-order (3 stages)
+   %> Class container for Gauss-Legendre sixth-order (3 stages)
    %
    classdef GaussLegendre6 < DIAL_RKimplicit
      %
@@ -50,7 +50,7 @@ Program Listing for File GaussLegendre6.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Gauss–Legendre sixth-order (3 stages)
+       %> Gauss-Legendre sixth-order (3 stages)
        %>
        %> \rst
        %> .. math::
