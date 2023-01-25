@@ -112,12 +112,14 @@ primary_domain = 'cpp'
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = 'cpp'
 
-html_theme = 'alabaster'
+html_theme = 'alabaster'#'sphinx_rtd_theme'#
 html_logo  = '../logo.jpeg'
 
 email_automode       = True
 autodoc_member_order = 'bysource'
 
+html_css_files = ["custom.css"]
+html_show_sphinx = False
 html_theme_options = {
   "page_width"       : "65em",
   "body_text"        : "black",

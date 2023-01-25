@@ -15,6 +15,12 @@ Base Type
 - ``public RKexplicit`` (:ref:`exhale_class_a00259`)
 
 
+Derived Type
+************
+
+- ``public ODEsystem`` (:ref:`exhale_class_a00252`)
+
+
 Class Documentation
 -------------------
 

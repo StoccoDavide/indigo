@@ -1,4 +1,4 @@
-.. _exhale_class_a00255:
+.. _exhale_class_a00252:
 
 Class ODEsystem
 ===============
@@ -12,11 +12,7 @@ Inheritance Relationships
 Base Type
 *********
 
-<<<<<<< Updated upstream:docs_build/sphinx/api-matlab/class_a00252.rst
-- ``public indigo::Base``
-=======
-- ``public Base`` (:ref:`exhale_class_a00119`)
->>>>>>> Stashed changes:docs_build/sphinx/api-matlab/class_a00255.rst
+- ``public Base`` (:ref:`exhale_class_a00116`)
 
 
 Class Documentation
@@ -24,7 +20,6 @@ Class Documentation
 
 
 .. doxygenclass:: ODEsystem
-   :project: doc_matlab
    :project: doc_matlab
    :members:
    :protected-members:

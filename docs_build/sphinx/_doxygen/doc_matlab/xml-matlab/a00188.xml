@@ -1,0 +1,435 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00188" kind="class" language="C++" prot="public">
+    <compoundname>ImplicitMidpoint</compoundname>
+    <basecompoundref refid="a00260" prot="public" virt="non-virtual">RKimplicit</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00188_1acc9bfbea67ed8f501721fd760db33004" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ImplicitMidpoint::ImplicitMidpoint</definition>
+        <argsstring>(in ignoredArg)</argsstring>
+        <name>ImplicitMidpoint</name>
+        <qualifiedname>ImplicitMidpoint::ImplicitMidpoint</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Implicit midpoint second-order method (1 stage)</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. math::
+* 
+*    \begin{array}{c|c}
+*      1/2 &amp; 1/2 \\
+*      \hline
+*          &amp;   1
+*    \end{array}
+* 
+*  </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ImplicitMethods/ImplicitMidpoint.m" line="26" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1aa0906abffeb4bad00155109fae1064c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::get_A</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_A</name>
+        <qualifiedname>RKimplicit::get_A</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the Runge-Kutta matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="107" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1aaa48759e248d6b186368ea103c9a102a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::get_b</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_b</name>
+        <qualifiedname>RKimplicit::get_b</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the Runge-Kutta weights vector (row vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="116" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::get_c</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_c</name>
+        <qualifiedname>RKimplicit::get_c</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+<para>Get the Runge-Kutta nodes vector (column vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="125" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1ada3ec1087753706c770cf78d129f101a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::set_A</definition>
+        <argsstring>(in this, in in)</argsstring>
+        <name>set_A</name>
+        <qualifiedname>RKimplicit::set_A</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Set the Runge-Kutta matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="134" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::setB</definition>
+        <argsstring>(in this, in in)</argsstring>
+        <name>setB</name>
+        <qualifiedname>RKimplicit::setB</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Set the Runge-Kutta weights vector (row vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="143" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a657a4861612ed913910ddf9b57680b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::setC</definition>
+        <argsstring>(in this, in in)</argsstring>
+        <name>setC</name>
+        <qualifiedname>RKimplicit::setC</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+<para>Set the Runge-Kutta nodes vector (column vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="153" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::check_tableau</definition>
+        <argsstring>(in this, in A, in b, in c)</argsstring>
+        <name>check_tableau</name>
+        <qualifiedname>RKimplicit::check_tableau</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>Check the Butcher tableau. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="163" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::stepResidual</definition>
+        <argsstring>(in this, in K, in t_k, in x_k, in d_t)</argsstring>
+        <name>stepResidual</name>
+        <qualifiedname>RKimplicit::stepResidual</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+<para>Compute the step residual <formula id="45">$ \mathbf{F}(\mathbf{K}) $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="175" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::stepJacobian</definition>
+        <argsstring>(in this, in K, in t_k, in x_k, in d_t)</argsstring>
+        <name>stepJacobian</name>
+        <qualifiedname>RKimplicit::stepJacobian</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the Jacobian of <formula id="45">$ \mathbf{F}(\mathbf{K}) $</formula>:</para>
+<para><formula id="46">\[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \]</formula>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="199" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::solveStep</definition>
+        <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
+        <name>solveStep</name>
+        <qualifiedname>RKimplicit::solveStep</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve the implicit step <formula id="47">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula> by Newton method</para>
+<para><formula id="48">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
+    \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \]</formula>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="231" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00260_1a551aed170a5231654042d90d6f7e8773" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKimplicit::step</definition>
+        <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
+        <name>step</name>
+        <qualifiedname>RKimplicit::step</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+<para>Perform an implicit step by solving the residual <formula id="47">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="248" column="15"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property RKimplicit::m_A</definition>
+        <argsstring></argsstring>
+        <name>m_A</name>
+        <qualifiedname>RKimplicit::m_A</qualifiedname>
+        <briefdescription>
+<para>Runge-Kutta matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="60" column="10" bodyfile="ODE/RKimplicit.m" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00260_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property RKimplicit::m_b</definition>
+        <argsstring></argsstring>
+        <name>m_b</name>
+        <qualifiedname>RKimplicit::m_b</qualifiedname>
+        <briefdescription>
+<para>Runge-Kutta weights vector (row vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="65" column="10" bodyfile="ODE/RKimplicit.m" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00260_1a138cfb5bb810ca10269473ec1cadf615" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property RKimplicit::m_c</definition>
+        <argsstring></argsstring>
+        <name>m_c</name>
+        <qualifiedname>RKimplicit::m_c</qualifiedname>
+        <briefdescription>
+<para>Runge-Kutta nodes vector (column vector) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKimplicit.m" line="70" column="10" bodyfile="ODE/RKimplicit.m" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class container for Implicit midpoint second-order method (1 stage) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ImplicitMidpoint</label>
+        <link refid="a00188"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>RKimplicit</label>
+        <link refid="a00260"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>indigo::ODEsolver</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ImplicitMidpoint</label>
+        <link refid="a00188"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>RKimplicit</label>
+        <link refid="a00260"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>indigo::ODEsolver</label>
+      </node>
+    </collaborationgraph>
+    <location file="ODE/ImplicitMethods/ImplicitMidpoint.m" line="4" column="1" bodyfile="ODE/ImplicitMethods/ImplicitMidpoint.m" bodystart="5" bodyend="40"/>
+    <listofallmembers>
+      <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>check_tableau</name></member>
+      <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>get_A</name></member>
+      <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>get_b</name></member>
+      <member refid="a00260_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>get_c</name></member>
+      <member refid="a00188_1acc9bfbea67ed8f501721fd760db33004" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>ImplicitMidpoint</name></member>
+      <member refid="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>m_A</name></member>
+      <member refid="a00260_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>m_b</name></member>
+      <member refid="a00260_1a138cfb5bb810ca10269473ec1cadf615" prot="private" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>m_c</name></member>
+      <member refid="a00260_1aca919de9c27731d72051a84ae9d024a0" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>RKimplicit</name></member>
+      <member refid="a00260_1ada3ec1087753706c770cf78d129f101a" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>set_A</name></member>
+      <member refid="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>setB</name></member>
+      <member refid="a00260_1a657a4861612ed913910ddf9b57680b9e" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>setC</name></member>
+      <member refid="a00260_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>solveStep</name></member>
+      <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>step</name></member>
+      <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>stepJacobian</name></member>
+      <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" virt="non-virtual"><scope>ImplicitMidpoint</scope><name>stepResidual</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

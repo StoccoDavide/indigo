@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00005" kind="file" language="C++">
     <compoundname>ODEsystem.m</compoundname>
-    <innerclass refid="a00255" prot="public">ODEsystem</innerclass>
+    <innerclass refid="a00252" prot="public">ODEsystem</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -11,162 +11,127 @@
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
 <codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a<sp/>system<sp/>of<sp/>Ordinary<sp/>Differential<sp/>Equations<sp/>(ODEs).</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<<<<<<< Updated upstream
-<codeline lineno="4" refid="a00252" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00252" kindref="compound">ODEsystem</ref><sp/>&lt;<sp/>indigo.Base</highlight></codeline>
-=======
-<codeline lineno="4" refid="a00255" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00255" kindref="compound">ODEsystem</ref><sp/>&lt;<sp/><ref refid="a00119" kindref="compound">Base</ref></highlight></codeline>
->>>>>>> Stashed changes
+<codeline lineno="4" refid="a00252" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00252" kindref="compound">ODEsystem</ref><sp/>&lt;<sp/><ref refid="a00116" kindref="compound">Base</ref></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<<<<<<< Updated upstream
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a<sp/>system<sp/>of<sp/>ODEs<sp/>that<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>the<sp/>following\n</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>inputs:</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>-<sp/>*name*<sp/>Name<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>-<sp/>*neqn*<sp/>Number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>-<sp/>*ninv*<sp/>Number<sp/>of<sp/>invariants/contraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs\n</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>[optional,<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal"><sp/>=<sp/>0].</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00252" kindref="compound">ODEsystem</ref>(<sp/>name,<sp/>neqn,<sp/>ninv<sp/>)</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">@indigo.Base(<sp/>name,<sp/>neqn,<sp/>ninv<sp/>);</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="21" refid="a00252_1a93fda3f6114ad92570290a4b35351e3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
-=======
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>-<sp/>*name*<sp/>Name<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>-<sp/>*neqn*<sp/>Number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>-<sp/>*ninv*<sp/>Number<sp/>of<sp/>invariants/contraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>[optional,<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal"><sp/>=<sp/>0].</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>name<sp/>Name<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>neqn<sp/>Number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>ninv<sp/>Number<sp/>of<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00255" kindref="compound">ODEsystem</ref>(<sp/>name,<sp/>neqn,<sp/>ninv<sp/>)</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">@<ref refid="a00119" kindref="compound">Base</ref>(<sp/>name,<sp/>neqn,<sp/>ninv<sp/>);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00252" kindref="compound">ODEsystem</ref>(<sp/>name,<sp/>neqn,<sp/>ninv<sp/>)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">@<ref refid="a00116" kindref="compound">Base</ref>(<sp/>name,<sp/>neqn,<sp/>ninv<sp/>);</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="19" refid="a00255_1a93fda3f6114ad92570290a4b35351e3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="19" refid="a00252_1a93fda3f6114ad92570290a4b35351e3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
->>>>>>> Stashed changes
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Definition<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
-<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Definition<sp/>of<sp/>an<sp/>implicit<sp/>system<sp/>of<sp/>ODEs<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>with<sp/>*optional*<sp/>invariants/hidden<sp/>constraints<sp/>of<sp/>the<sp/>form:</highlight></codeline>
 <codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<<<<<<< Updated upstream
-<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>with<sp/>optional<sp/>invariants<sp/>of<sp/>the<sp/>form:</highlight></codeline>
-<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{H}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
-<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>The<sp/>derived<sp/>function<sp/>must<sp/>define<sp/>an<sp/>implicit<sp/>system<sp/>of<sp/>ODEs<sp/>of<sp/>the<sp/>form</highlight></codeline>
-<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}<sp/>\f$<sp/>where</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>are<sp/>the<sp/>unknown<sp/>functions<sp/>of<sp/>the<sp/>independent<sp/>variable</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{t}<sp/>\f$.</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>F(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{H}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>are<sp/>the<sp/>unknown<sp/>functions<sp/>(states)<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Value<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$.</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>F(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>t<sp/>)</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="51" refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
-<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\hat{\mathbf{x}}</highlight></codeline>
-<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}</highlight></codeline>
-<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\hat{\mathbf{x}}<sp/>=<sp/>\left[<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\right]^T<sp/>\f$</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>is<sp/>the<sp/>concatenation<sp/>of<sp/>the<sp/>unknown<sp/>functions<sp/>and<sp/>their<sp/>derivatives.</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>JF(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>invariants<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="69" refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{H}(<sp/>t,<sp/>\mathbf{x}<sp/>)<sp/>=<sp/>\mathbf{0}.</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>H(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>invariants<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="80" refid="a00252_1ab186493d31a6369185700e502347e7a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\partial<sp/>\mathbf{H}(<sp/>t,<sp/>\mathbf{x}<sp/>)<sp/>/<sp/>\partial<sp/>\hat{\mathbf{x}}</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\hat{\mathbf{x}}<sp/>=<sp/>\left[<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>\right]^T<sp/>\f$</highlight></codeline>
-<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>is<sp/>the<sp/>concatenation<sp/>of<sp/>the<sp/>unknown<sp/>functions<sp/>and<sp/>their<sp/>derivatives.</highlight></codeline>
-<codeline lineno="86"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>JH(<sp/>this,<sp/>x,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="90"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="92"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="93"><highlight class="stringliteral">end</highlight></codeline>
-=======
-<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>The<sp/>derived<sp/>function<sp/>must<sp/>define<sp/>the<sp/>r.h.s.<sp/>of<sp/>the<sp/>ODE</highlight></codeline>
-<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{f}(<sp/>t,<sp/>\mathbf{x}<sp/>)<sp/>\f$<sp/>where</highlight></codeline>
-<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>are<sp/>the<sp/>states<sp/>of<sp/>the<sp/>model<sp/>described<sp/>by<sp/>the<sp/>ODE.</highlight></codeline>
-<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>f(<sp/>this,<sp/>t,<sp/>x<sp/>)</highlight></codeline>
-<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="44" refid="a00255_1a593266aa813bda0446667fe93955cb50" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>(Abstract)<sp/>Evaluate<sp/>the<sp/>jacobian<sp/>of<sp/>the<sp/>r.h.s.<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="45"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[<sp/>\partial<sp/>\mathbf{f}(<sp/>t,<sp/>\mathbf{x}<sp/>)<sp/>/<sp/>\partial<sp/>\mathbf{x}<sp/>\f]</highlight></codeline>
-<codeline lineno="47"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Used<sp/>only<sp/>in<sp/>implicit<sp/>Runge-Kutta<sp/>methods</highlight></codeline>
-<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>DfDx(<sp/>this,<sp/>t,<sp/>x<sp/>)</highlight></codeline>
-<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="52"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="54"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>(Abstract)<sp/>Evaluate<sp/>the<sp/>invariants/hidden<sp/>constraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="55" refid="a00255_1a42c2de80bf1580e921989488ea9367d1" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[<sp/>\mathbf{h}(<sp/>t,<sp/>\mathbf{x}<sp/>)<sp/>=<sp/>\mathbf{0}<sp/>\f]</highlight></codeline>
-<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>h(<sp/>this,<sp/>t,<sp/>x<sp/>)</highlight></codeline>
-<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>(Abstract)<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>hidden<sp/>constraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
-<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="64" refid="a00255_1abecf7f59b4cf4796303be30235c4a384" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[<sp/>\partial<sp/>\mathbf{h}(<sp/>t,<sp/>\mathbf{x}<sp/>)<sp/>/<sp/>\partial<sp/>\mathbf{x}<sp/>\f]</highlight></codeline>
-<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Used<sp/>only<sp/>in<sp/>projection<sp/>method</highlight></codeline>
-<codeline lineno="67"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>DhDx(<sp/>this,<sp/>t,<sp/>x<sp/>)</highlight></codeline>
-<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="74"><highlight class="stringliteral">end</highlight></codeline>
->>>>>>> Stashed changes
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="53" refid="a00252_1a1c92aac456561832c8d17aab2565c7ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobians<sp/>with<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>states<sp/>defivatives<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>\f$<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>},</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\qquad</highlight></codeline>
+<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}&apos;</highlight><highlight class="normal">}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>Jacobians<sp/>\f$<sp/>\mathbf{JF}_{\mathbf{x}}<sp/>\f$<sp/>and<sp/>\f$</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{JF}_{\mathbf{x}</highlight><highlight class="stringliteral">&apos;}<sp/>\f$<sp/>of<sp/>the<sp/>ODEs<sp/>system<sp/>with<sp/>respect</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>the<sp/>states<sp/>derivatives</highlight></codeline>
+<codeline lineno="79"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>JF(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs:</highlight></codeline>
+<codeline lineno="86" refid="a00252_1ad027fbdfe15c9a31ba4e793ffa9ede8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{H}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}.</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><sp/>Value<sp/>of<sp/>the<sp/>invariants/hidden<sp/>contraints<sp/>\f$<sp/>\mathbf{H}<sp/>\f$.</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>H(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>of<sp/>ODEs:</highlight></codeline>
+<codeline lineno="102" refid="a00252_1aa4aeb9e2668be5258e2ca30f39cb0889" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JH}_{\mathbf{x}}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{H}(<sp/>\mathbf{x},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><sp/>Value<sp/>of<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>invariants/hidden<sp/>contraints</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{JH}_{\mathbf{x}}<sp/>\f$.</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>JH(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">end</highlight></codeline>
     </programlisting>
     <location file="ODE/ODEsystem.m"/>
   </compounddef>

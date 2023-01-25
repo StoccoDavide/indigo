@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
-  <compounddef id="a00263" kind="class" language="C++" prot="public">
+  <compounddef id="a00260" kind="class" language="C++" prot="public">
     <compoundname>RKimplicit</compoundname>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
     <basecompoundref prot="public" virt="non-virtual">indigo::ODEsolver</basecompoundref>
     <derivedcompoundref refid="a00168" prot="public" virt="non-virtual">CrankNicolson</derivedcompoundref>
     <derivedcompoundref refid="a00172" prot="public" virt="non-virtual">GaussLegendre2</derivedcompoundref>
@@ -23,30 +22,8 @@
     <derivedcompoundref refid="a00236" prot="public" virt="non-virtual">RadauIA5</derivedcompoundref>
     <derivedcompoundref refid="a00240" prot="public" virt="non-virtual">RadauIIA3</derivedcompoundref>
     <derivedcompoundref refid="a00244" prot="public" virt="non-virtual">RadauIIA5</derivedcompoundref>
-=======
-    <basecompoundref refid="a00251" prot="public" virt="non-virtual">ODEsolver</basecompoundref>
-    <derivedcompoundref refid="a00171" prot="public" virt="non-virtual">CrankNicolson</derivedcompoundref>
-    <derivedcompoundref refid="a00175" prot="public" virt="non-virtual">GaussLegendre2</derivedcompoundref>
-    <derivedcompoundref refid="a00179" prot="public" virt="non-virtual">GaussLegendre4</derivedcompoundref>
-    <derivedcompoundref refid="a00187" prot="public" virt="non-virtual">ImplicitEuler</derivedcompoundref>
-    <derivedcompoundref refid="a00191" prot="public" virt="non-virtual">ImplicitMidpoint</derivedcompoundref>
-    <derivedcompoundref refid="a00195" prot="public" virt="non-virtual">LobattoIIIA2</derivedcompoundref>
-    <derivedcompoundref refid="a00199" prot="public" virt="non-virtual">LobattoIIIA4</derivedcompoundref>
-    <derivedcompoundref refid="a00203" prot="public" virt="non-virtual">LobattoIIIB2</derivedcompoundref>
-    <derivedcompoundref refid="a00207" prot="public" virt="non-virtual">LobattoIIIB4</derivedcompoundref>
-    <derivedcompoundref refid="a00211" prot="public" virt="non-virtual">LobattoIIIC2</derivedcompoundref>
-    <derivedcompoundref refid="a00215" prot="public" virt="non-virtual">LobattoIIIC4</derivedcompoundref>
-    <derivedcompoundref refid="a00219" prot="public" virt="non-virtual">LobattoIIICS2</derivedcompoundref>
-    <derivedcompoundref refid="a00223" prot="public" virt="non-virtual">LobattoIIICS4</derivedcompoundref>
-    <derivedcompoundref refid="a00227" prot="public" virt="non-virtual">LobattoIIID2</derivedcompoundref>
-    <derivedcompoundref refid="a00231" prot="public" virt="non-virtual">LobattoIIID4</derivedcompoundref>
-    <derivedcompoundref refid="a00235" prot="public" virt="non-virtual">RadauIA3</derivedcompoundref>
-    <derivedcompoundref refid="a00239" prot="public" virt="non-virtual">RadauIA5</derivedcompoundref>
-    <derivedcompoundref refid="a00243" prot="public" virt="non-virtual">RadauIIA3</derivedcompoundref>
-    <derivedcompoundref refid="a00247" prot="public" virt="non-virtual">RadauIIA5</derivedcompoundref>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00263_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00260_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKimplicit::m_A</definition>
         <argsstring></argsstring>
@@ -61,7 +38,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="60" column="10" bodyfile="ODE/RKimplicit.m" bodystart="60" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00263_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00260_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKimplicit::m_b</definition>
         <argsstring></argsstring>
@@ -76,7 +53,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="65" column="10" bodyfile="ODE/RKimplicit.m" bodystart="65" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00263_1a138cfb5bb810ca10269473ec1cadf615" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00260_1a138cfb5bb810ca10269473ec1cadf615" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKimplicit::m_c</definition>
         <argsstring></argsstring>
@@ -91,42 +68,9 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="70" column="10" bodyfile="ODE/RKimplicit.m" bodystart="70" bodyend="-1"/>
       </memberdef>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
-=======
-      <memberdef kind="variable" id="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property ODEsolver::m_name</definition>
-        <argsstring></argsstring>
-        <name>m_name</name>
-        <qualifiedname>ODEsolver::m_name</qualifiedname>
-        <briefdescription>
-<para>Name of the used numerical integration method. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property ODEsolver::m_ode</definition>
-        <argsstring></argsstring>
-        <name>m_ode</name>
-        <qualifiedname>ODEsolver::m_ode</qualifiedname>
-        <briefdescription>
-<para>System of ODEs to be integrated. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
-      </memberdef>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00263_1aca919de9c27731d72051a84ae9d024a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00260_1aca919de9c27731d72051a84ae9d024a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::RKimplicit</definition>
         <argsstring>(in name, in A, in b, in c)</argsstring>
@@ -163,11 +107,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="84" column="15"/>
       </memberdef>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
       <memberdef kind="function" id="a00260_1aa0906abffeb4bad00155109fae1064c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-=======
-      <memberdef kind="function" id="a00263_1a98da65c25d3701d4fb46841ecd936da3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         <type>function</type>
         <definition>function RKimplicit::get_A</definition>
         <argsstring>(in this)</argsstring>
@@ -186,11 +126,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="107" column="15"/>
       </memberdef>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
       <memberdef kind="function" id="a00260_1aaa48759e248d6b186368ea103c9a102a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-=======
-      <memberdef kind="function" id="a00263_1a010e1a9fab090216002951a466921c39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         <type>function</type>
         <definition>function RKimplicit::get_b</definition>
         <argsstring>(in this)</argsstring>
@@ -209,11 +145,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="116" column="15"/>
       </memberdef>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
       <memberdef kind="function" id="a00260_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-=======
-      <memberdef kind="function" id="a00263_1ad88f4f71e73766b94908ab307cb2fefe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         <type>function</type>
         <definition>function RKimplicit::get_c</definition>
         <argsstring>(in this)</argsstring>
@@ -232,11 +164,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="125" column="15"/>
       </memberdef>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
       <memberdef kind="function" id="a00260_1ada3ec1087753706c770cf78d129f101a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-=======
-      <memberdef kind="function" id="a00263_1a3897ed26b7e344062416f044b9fc84d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         <type>function</type>
         <definition>function RKimplicit::set_A</definition>
         <argsstring>(in this, in in)</argsstring>
@@ -259,7 +187,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="134" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00263_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00260_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::setB</definition>
         <argsstring>(in this, in in)</argsstring>
@@ -282,7 +210,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="143" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00263_1a657a4861612ed913910ddf9b57680b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00260_1a657a4861612ed913910ddf9b57680b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::setC</definition>
         <argsstring>(in this, in in)</argsstring>
@@ -336,7 +264,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="163" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00263_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::stepResidual</definition>
         <argsstring>(in this, in K, in t_k, in x_k, in d_t)</argsstring>
@@ -363,7 +291,7 @@
           <declname>d_t</declname>
         </param>
         <briefdescription>
-<para>Compute the step residual <formula id="29">$ \mathbf{F}(\mathbf{K}) $</formula>. </para>
+<para>Compute the step residual <formula id="45">$ \mathbf{F}(\mathbf{K}) $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -371,7 +299,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="175" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00263_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00260_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::stepJacobian</definition>
         <argsstring>(in this, in K, in t_k, in x_k, in d_t)</argsstring>
@@ -400,14 +328,14 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the Jacobian of <formula id="29">$ \mathbf{F}(\mathbf{K}) $</formula>:</para>
-<para><formula id="30">\[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \]</formula>. </para>
+<para>Compute the Jacobian of <formula id="45">$ \mathbf{F}(\mathbf{K}) $</formula>:</para>
+<para><formula id="46">\[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \]</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="199" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00263_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00260_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::solveStep</definition>
         <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
@@ -432,28 +360,20 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Solve the implicit step <formula id="31">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula> by Newton method</para>
-<para><formula id="32">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
+<para>Solve the implicit step <formula id="47">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula> by Newton method</para>
+<para><formula id="48">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
     \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \]</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="231" column="15"/>
       </memberdef>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
       <memberdef kind="function" id="a00260_1a551aed170a5231654042d90d6f7e8773" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-=======
-      <memberdef kind="function" id="a00263_1a551aed170a5231654042d90d6f7e8773" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         <type>function</type>
         <definition>function RKimplicit::step</definition>
         <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
         <name>step</name>
         <qualifiedname>RKimplicit::step</qualifiedname>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
-=======
-        <reimplements refid="a00251_1aff22b63fa14cf18dae231d0110d23e7b">step</reimplements>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -471,223 +391,9 @@
           <declname>d_t</declname>
         </param>
         <briefdescription>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
-<para>Perform an implicit step by solving the residual <formula id="31">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
+<para>Perform an implicit step by solving the residual <formula id="47">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
         </briefdescription>
         <detaileddescription>
-=======
-<para>Perform an implicit step by solving the residual <formula id="28">$ \mathbf{F}(\mathbf{K})=\mathbf{0} $</formula>. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/RKimplicit.m" line="227" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ODEsolver::get_name</definition>
-        <argsstring>(in this)</argsstring>
-        <name>get_name</name>
-        <qualifiedname>ODEsolver::get_name</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <briefdescription>
-<para>Get the name of the method used to integrate the system of ODEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="39" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ODEsolver::get_ode</definition>
-        <argsstring>(in this)</argsstring>
-        <name>get_ode</name>
-        <qualifiedname>ODEsolver::get_ode</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <briefdescription>
-<para>Get the system of ODEs to be integrated. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="48" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00251_1adf22eb997cd5cd532fef6edeeb2a1322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ODEsolver::set_solver</definition>
-        <argsstring>(in this, in name)</argsstring>
-        <name>set_solver</name>
-        <qualifiedname>ODEsolver::set_solver</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>name</declname>
-        </param>
-        <briefdescription>
-<para>Set the name of the method used to integrate the system of ODEs. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="57" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00251_1a7284ba99c96a673ac08925e318adf6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ODEsolver::set_ode</definition>
-        <argsstring>(in this, in ode)</argsstring>
-        <name>set_ode</name>
-        <qualifiedname>ODEsolver::set_ode</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>ode</declname>
-        </param>
-        <briefdescription>
-<para>Set the system of ODEs to be integrated. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="66" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00251_1a6bbd6d7a155e7af436e198c8626c9021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ODEsolver::project</definition>
-        <argsstring>(in this, in t, in x_tilde)</argsstring>
-        <name>project</name>
-        <qualifiedname>ODEsolver::project</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_tilde</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Solve the ODEs system through the problem:</para>
-<para><formula id="0">\[ \left\{\begin{array}{ll}
- \textrm{minimize}   &amp;  \frac{1}{2}\left(\mathbf{x}-\widetilde{\mathbf{x}}\right)^2 \\[1em]
- \textrm{subject to} &amp;  \mathbf{h}( t, \mathbf{x} ) = \mathbf{0}
-\end{array}\right. \]</formula></para>
-<para>Given the Lagrangian</para>
-<para><formula id="1">\[
-L( \mathbf{x}, \boldsymbol{\lambda} ) =
-\frac{1}{2}\left(\mathbf{x}-\widetilde{\mathbf{x}}\right)^2+
-\boldsymbol{\lambda} \cdot \mathbf{h}( t, \mathbf{x} )
-\]</formula></para>
-<para>Solve the problem</para>
-<para><formula id="2">\[ \left\{\begin{array}{rcl}
-\mathbf{x}+\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}^T
-\boldsymbol{\lambda} &amp;=&amp; \widetilde{\mathbf{x}}\\[1em]
-\mathbf{h}(t,\mathbf{x}) &amp;=&amp; \mathbf{0}
-\end{array}\right. \]</formula></para>
-<para><bold>Solution algorithm</bold></para>
-<para>Using the Taylor expansion</para>
-<para><formula id="3">\[ \mathbf{h}( t, \mathbf{x} ) +
-\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}} \delta\mathbf{x}
-+ \mathcal{O}\left( ||\delta\mathbf{x}||^2 \right) = \mathbf{0}
-\]</formula></para>
-<para>define the iterative method</para>
-<para><formula id="4">\[ \mathbf{x}_{k+1} = \mathbf{x}_k + \delta\mathbf{x} \]</formula></para>
-<para>where <formula id="5">$ \delta\mathbf{x} $</formula> is the solution of the linear system</para>
-<para><formula id="6">\[
-\left[\begin{array}{cc}
-\mathbf{I} &amp; \dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}^T \\[1em]
-\dfrac{\partial \mathbf{h}(t,\mathbf{x})}{\partial\mathbf{x}}  &amp; \mathbf{0}
-\end{array}\right]
-\left[\begin{array}{c}
-\delta\mathbf{x} \\[1em]
-\boldsymbol{\lambda}
-\end{array}\right]
-= 
-\left[\begin{array}{c}
-\widetilde{\mathbf{x}}-\mathbf{x}_k \\[1em]
--\mathbf{h}(t_k,\mathbf{x}_k)
-\end{array}\right]
-\]</formula> </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="127" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00251_1a8c11588013b8a6f10b437d3613583710" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ODEsolver::integrate</definition>
-        <argsstring>(in this, in t, in x_i, in varargin)</argsstring>
-        <name>integrate</name>
-        <qualifiedname>ODEsolver::integrate</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_i</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>varargin</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Integrate the system of ODEs and calculate the approximate solution:</para>
-<para><itemizedlist>
-<listitem><para><emphasis>t</emphasis> Time vector</para>
-</listitem><listitem><para><emphasis>x_0</emphasis> Initial states value</para>
-</listitem><listitem><para><emphasis>project</emphasis> [optional, default = false] Apply projection to invariants at each step</para>
-</listitem><listitem><para><emphasis>verbose</emphasis> [optional, default = false] Activate vebose mode and print integration messages</para>
-</listitem><listitem><para><emphasis>maxabs</emphasis> [optional, default = 1.0e3] If <formula id="7">$ || \mathbf{x} ||_{\infty} $</formula> is greater than maxabs computation is interrupted</para>
-</listitem></itemizedlist>
-</para>
-<para>Returns a matrix <computeroutput>length(x0) x length(t)</computeroutput> containing the solution</para>
-<para><bold>Usage</bold></para>
-<para><verbatim>embed:rst:leading-asterisk
-*  .. code-block:: matlab
-* 
-*     % Advance without the solution projection on invariants and disabled verbose mode
-*     sol = obj.advance( t, x_0 );
-* 
-*     % Advance with the solution projection on invariants and disabled verbose mode
-*     sol = obj.advance( t, x_0, true );
-* 
-*     % Advance without the solution projection on invariants and enabled verbose mode
-*     sol = obj.advance( t, x_0, false, true );
-* 
-*      % Plot the first component of the solution
-*      plot( t, sol(1,:) );
-* 
-*  </verbatim> </para>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -708,16 +414,16 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
 *     \end{array}
 * 
 *  </verbatim></para>
-<para>The advancing for the ODE <formula id="23">$ x&apos;=f(t,x) $</formula> is done as follows:</para>
-<para><formula id="24">\[
+<para>The advancing for the ODE <formula id="39">$ x&apos;=f(t,x) $</formula> is done as follows:</para>
+<para><formula id="40">\[
        \begin{array}{rcl}
           x_{k+1} &amp;=&amp; x_k + \displaystyle\sum_{j=1}^s b_j K_j \\
           K_i     &amp;=&amp; h f\left( t_k + c_i \Delta t, x_k + \displaystyle\sum_{j=1}^s A_{ij} K_j \right),
           \qquad i=1,2,\ldots,s
        \end{array}
    \]</formula></para>
-<para>where the coefficients <formula id="25">$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T $</formula> are the solution of <formula id="26">$ \mathbf{F}(\mathbf{K}) = \mathbf{0} $</formula> the nonlinear system</para>
-<para><formula id="27">\[
+<para>where the coefficients <formula id="41">$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T $</formula> are the solution of <formula id="42">$ \mathbf{F}(\mathbf{K}) = \mathbf{0} $</formula> the nonlinear system</para>
+<para><formula id="43">\[
        \mathbf{F}(\mathbf{K}) =
        \left\{\begin{array}{rcl}
           F_1(K_1,K_2,\ldots,K_s) &amp;=&amp; 0, \\
@@ -727,7 +433,7 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
        \end{array}\right.
    \]</formula></para>
 <para>where</para>
-<para><formula id="28">\[
+<para><formula id="44">\[
        \begin{array}{rcl}
           F_1(K_1,K_2,\ldots,K_s) &amp;=&amp; K_1-h f\left( t_k + c_1 \Delta t, x_k + \displaystyle\sum_{j=1}^s A_{1j} K_j \right), \\
           F_2(K_1,K_2,\ldots,K_s) &amp;=&amp; K_2-h f\left( t_k + c_1 \Delta t, x_k + \displaystyle\sum_{j=1}^s A_{2j} K_j \right), \\
@@ -739,130 +445,121 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
     <inheritancegraph>
       <node id="3">
         <label>CrankNicolson</label>
-        <link refid="a00171"/>
+        <link refid="a00168"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
         <label>GaussLegendre2</label>
-        <link refid="a00175"/>
+        <link refid="a00172"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
         <label>GaussLegendre4</label>
-        <link refid="a00179"/>
+        <link refid="a00176"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
         <label>ImplicitEuler</label>
-        <link refid="a00187"/>
+        <link refid="a00184"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
         <label>ImplicitMidpoint</label>
-        <link refid="a00191"/>
+        <link refid="a00188"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="8">
         <label>LobattoIIIA2</label>
-        <link refid="a00195"/>
+        <link refid="a00192"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
         <label>LobattoIIIA4</label>
-        <link refid="a00199"/>
+        <link refid="a00196"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
         <label>LobattoIIIB2</label>
-        <link refid="a00203"/>
+        <link refid="a00200"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
         <label>LobattoIIIB4</label>
-        <link refid="a00207"/>
+        <link refid="a00204"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="12">
         <label>LobattoIIIC2</label>
-        <link refid="a00211"/>
+        <link refid="a00208"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="13">
         <label>LobattoIIIC4</label>
-        <link refid="a00215"/>
+        <link refid="a00212"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="14">
         <label>LobattoIIICS2</label>
-        <link refid="a00219"/>
+        <link refid="a00216"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
         <label>LobattoIIICS4</label>
-        <link refid="a00223"/>
+        <link refid="a00220"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="16">
         <label>LobattoIIID2</label>
-        <link refid="a00227"/>
+        <link refid="a00224"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="17">
         <label>LobattoIIID4</label>
-        <link refid="a00231"/>
+        <link refid="a00228"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
-=======
-      <node id="2">
-        <label>ODEsolver</label>
-        <link refid="a00251"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
       <node id="1">
         <label>RKimplicit</label>
-        <link refid="a00263"/>
+        <link refid="a00260"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="18">
         <label>RadauIA3</label>
-        <link refid="a00235"/>
+        <link refid="a00232"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="19">
         <label>RadauIA5</label>
-        <link refid="a00239"/>
+        <link refid="a00236"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="20">
         <label>RadauIIA3</label>
-        <link refid="a00243"/>
+        <link refid="a00240"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="21">
         <label>RadauIIA5</label>
-        <link refid="a00247"/>
+        <link refid="a00244"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
@@ -871,18 +568,9 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
       </node>
     </inheritancegraph>
     <collaborationgraph>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
-=======
-      <node id="2">
-        <label>ODEsolver</label>
-        <link refid="a00251"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
       <node id="1">
         <label>RKimplicit</label>
-        <link refid="a00263"/>
+        <link refid="a00260"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -892,7 +580,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
     </collaborationgraph>
     <location file="ODE/RKimplicit.m" line="51" column="1" bodyfile="ODE/RKimplicit.m" bodystart="52" bodyend="258"/>
     <listofallmembers>
-<<<<<<< Updated upstream:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00260.xml
       <member refid="a00260_1adfa0b8f90fd3302c10d42084a677c4ff" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>check_tableau</name></member>
       <member refid="a00260_1aa0906abffeb4bad00155109fae1064c7" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>get_A</name></member>
       <member refid="a00260_1aaa48759e248d6b186368ea103c9a102a" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>get_b</name></member>
@@ -908,31 +595,6 @@ L( \mathbf{x}, \boldsymbol{\lambda} ) =
       <member refid="a00260_1a551aed170a5231654042d90d6f7e8773" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>step</name></member>
       <member refid="a00260_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>stepJacobian</name></member>
       <member refid="a00260_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>stepResidual</name></member>
-=======
-      <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>get_name</name></member>
-      <member refid="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>get_ode</name></member>
-      <member refid="a00263_1a98da65c25d3701d4fb46841ecd936da3" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>getA</name></member>
-      <member refid="a00263_1a010e1a9fab090216002951a466921c39" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>getB</name></member>
-      <member refid="a00263_1ad88f4f71e73766b94908ab307cb2fefe" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>getC</name></member>
-      <member refid="a00251_1a8c11588013b8a6f10b437d3613583710" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>integrate</name></member>
-      <member refid="a00263_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" virt="non-virtual"><scope>RKimplicit</scope><name>m_A</name></member>
-      <member refid="a00263_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" virt="non-virtual"><scope>RKimplicit</scope><name>m_b</name></member>
-      <member refid="a00263_1a138cfb5bb810ca10269473ec1cadf615" prot="private" virt="non-virtual"><scope>RKimplicit</scope><name>m_c</name></member>
-      <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>RKimplicit</scope><name>m_name</name></member>
-      <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>RKimplicit</scope><name>m_ode</name></member>
-      <member refid="a00251_1a7d3ffc79c180c1ab24447c96d838bd9d" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>ODEsolver</name></member>
-      <member refid="a00251_1a6bbd6d7a155e7af436e198c8626c9021" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>project</name></member>
-      <member refid="a00263_1aca919de9c27731d72051a84ae9d024a0" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>RKimplicit</name></member>
-      <member refid="a00251_1a7284ba99c96a673ac08925e318adf6d8" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>set_ode</name></member>
-      <member refid="a00251_1adf22eb997cd5cd532fef6edeeb2a1322" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>set_solver</name></member>
-      <member refid="a00263_1a3897ed26b7e344062416f044b9fc84d1" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>setA</name></member>
-      <member refid="a00263_1a3b75dc769cf76418a31dcb36b0ce0b9e" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>setB</name></member>
-      <member refid="a00263_1a657a4861612ed913910ddf9b57680b9e" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>setC</name></member>
-      <member refid="a00263_1ad6f47719d39790f59cbb1408a3beebb9" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>solveStep</name></member>
-      <member refid="a00263_1a551aed170a5231654042d90d6f7e8773" prot="public" virt="virtual"><scope>RKimplicit</scope><name>step</name></member>
-      <member refid="a00263_1a009a73fe8891fe1bebabfe96e4916d57" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>stepJacobian</name></member>
-      <member refid="a00263_1afe0b763bf0f18fe34c859a15c3b9babd" prot="public" virt="non-virtual"><scope>RKimplicit</scope><name>stepResidual</name></member>
->>>>>>> Stashed changes:docs_build/sphinx/_doxygen/doc_matlab/xml-matlab/a00263.xml
     </listofallmembers>
   </compounddef>
 </doxygen>
