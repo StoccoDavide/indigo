@@ -51,7 +51,7 @@ classdef LinearPendulumODE_Implicit < ODEsystem
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function out = JF( this, x, x_dot, t )
-      out      = zeros(2,5);
+      out      = zeros(2,4);
       out(1,2) = -1.0;
       out(1,3) = 1.0;
       out(2,1) = this.m_g / this.m_l;

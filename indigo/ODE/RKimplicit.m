@@ -176,15 +176,19 @@ classdef RKimplicit < ODEsolver
     %
     %> Compute the step residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \f$
     %
-    function R = stepResidual( this, x_k, x_dot_k, t_k, d_t )
+    function R = stepResidual( this, x_k, K, t_k, d_t )
       nc  = length(this.m_c);
       nx  = length(x_k);
       R   = zeros(nc*nx, 1);
       idx = 1:nx;
       for i = 1:nc
-        R(idx) = this.m_ode.F( ...
-            x_k + this.m_A(i,:) * x_dot_k, x_dot_k, t_k + this.m_c(i) * d_t ...
-          );
+        tmp = x_k;
+        jdx = 1:nx;
+        for j = 1:nc
+          tmp = tmp + this.m_A(i,j) * K(jdx);
+          jdx = jdx + nx;
+        end
+        R(idx) = this.m_ode.F(tmp, K(idx), t_k + this.m_c(i) * d_t);
         idx    = idx + nx;
       end
     end
@@ -195,16 +199,27 @@ classdef RKimplicit < ODEsolver
     %>
     %> \f[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \f].
     %
-    function JR = stepJacobian( this, x_k, x_dot_k, t_k, d_t )
+    function JR = stepJacobian( this, x_k, K, t_k, d_t )
+      A   = this.m_A;
+      c   = this.m_c;
       nc  = length(this.m_c);
       nx  = length(x_k);
-      JR  = eye(nc*nx, 2*nx + 1);
+      JR  = eye(nc*nx);
       idx = 1:nx;
       for i = 1:nc
-        JR(idx,:) = this.m_ode.JF( ...
-            x_k + this.m_A(i,:) * x_dot_k, x_dot_k, t_k + this.m_c(i) * d_t ...
-          );
-        idx       = idx + nx;
+        tmp = x_k;
+        jdx = 1:nx;
+        for j = 1:nc
+          tmp = tmp + A(i,j) * K(jdx);
+          jdx = jdx + nx;
+        end
+        jdx = 1:nx;
+        for j = 1:nc
+          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + c(i) * d_t);
+          JR(idx,jdx)      = JF_x * d_t * A(i,j) + JF_x_dot;
+          jdx = jdx + nx;
+        end
+        idx = idx + nx;
       end
     end
     %
