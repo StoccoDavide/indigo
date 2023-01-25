@@ -40,6 +40,7 @@ solver_name = {
 %   'RK38', ...
 %   'SSPRK3', ...
   ... % Implict methods
+  'Exact', ...
   'CrankNicolson', ...
   'GaussLegendre2', ...
   'GaussLegendre4', ...
@@ -64,7 +65,7 @@ solver_name = {
 
 for i = 2:length(solver_name)
   eval(strcat([ 'solver', solver_name{i}, '=', solver_name{i}, '();' ]));
-  eval(strcat([ 'solver', solver_name{i}, '.setODE( ODE );' ]));
+  eval(strcat([ 'solver', solver_name{i}, '.set_ode( ODE );' ]));
 end
 
 %% Integrate the system of ODE
@@ -77,10 +78,9 @@ tt = T_ini:d_t:T_end;
 theta_0 = 5*pi/180;
 omega_0 = 0.0;
 X_ini   = [theta_0, omega_0];
-DX_ini  = zeros(1, 2);
 
-for i = 1:length(solver_name)
-  eval(strcat([ 'Z', solver_name{i}, ' = solver', solver_name{i}, '.integrate( tt, X_ini, false, false, 20.0e+03, DX_ini );' ]));
+for i = 2:length(solver_name)
+  eval(strcat([ 'Z', solver_name{i}, ' = solver', solver_name{i}, '.solve( tt, X_ini, false, false, 20.0e+03 );' ]));
 end
 
 %% Calculate exact solution of the ODE

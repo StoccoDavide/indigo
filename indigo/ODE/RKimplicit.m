@@ -185,10 +185,10 @@ classdef RKimplicit < ODEsolver
         tmp = x_k;
         jdx = 1:nx;
         for j = 1:nc
-          tmp = tmp + this.m_A(i,j) * K(jdx);
+          tmp = tmp + d_t * this.m_A(i,j) * K(jdx);
           jdx = jdx + nx;
         end
-        R(idx) = this.m_ode.F(tmp, K(idx), t_k + this.m_c(i) * d_t);
+        R(idx) = this.m_ode.F( tmp, K(idx), t_k + this.m_c(i) * d_t );
         idx    = idx + nx;
       end
     end
@@ -210,13 +210,18 @@ classdef RKimplicit < ODEsolver
         tmp = x_k;
         jdx = 1:nx;
         for j = 1:nc
-          tmp = tmp + A(i,j) * K(jdx);
+          tmp = tmp + d_t * A(i,j) * K(jdx);
           jdx = jdx + nx;
         end
         jdx = 1:nx;
         for j = 1:nc
-          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + c(i) * d_t);
-          JR(idx,jdx)      = JF_x * d_t * A(i,j) + JF_x_dot;
+          if i == j
+            fix = 1;
+          else
+            fix = 0;
+          end
+          [JF_x, JF_x_dot] = this.m_ode.JF( tmp, K(idx), t_k + c(i) * d_t );
+          JR(idx,jdx)      = JF_x * d_t * A(i,j) + JF_x_dot*fix;
           jdx = jdx + nx;
         end
         idx = idx + nx;
@@ -230,10 +235,9 @@ classdef RKimplicit < ODEsolver
     %> \f[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
     %>     \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \f].
     %
-    function K = solveStep( this, x_k, x_dot_k, t_k, d_t )
-      fun = @(x_dot_k) this.stepResidual( x_k, x_dot_k, t_k, d_t );
-      jac = @(x_dot_k) this.stepJacobian( x_k, x_dot_k, t_k, d_t );
-      K0  = x_dot_k;
+    function K = solveStep( this, x_k, K0, t_k, d_t )
+      fun = @(K) this.stepResidual( x_k, K, t_k, d_t );
+      jac = @(K) this.stepJacobian( x_k, K, t_k, d_t );
       [K, ierr] = NewtonSolver( fun, jac, K0 );
       if ierr ~= 0
         fprintf( 1, 'RKimplicit::solveStep(...): Not converged flag = %d!\n', ierr );
@@ -244,9 +248,13 @@ classdef RKimplicit < ODEsolver
     %
     %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$
     %
-    function [out, K] = step( this, x_k, x_dot_k, t_k, d_t )
-      K   = this.solveStep( x_k, x_dot_k, t_k, d_t );
-      out = x_k + d_t * this.m_b(:) * K;
+    function [out, out_dot] = step( this, x_k, x_dot_k, t_k, d_t )
+      nc      = length(this.m_c);
+      nx      = length(x_k);
+      K0      = repmat(x_dot_k, nc, 1);
+      K       = this.solveStep( x_k, K0, t_k, d_t );
+      out     = x_k + d_t * reshape(K, nx, nc) * this.m_b';
+      out_dot = K(end + 1 - nx:end);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
