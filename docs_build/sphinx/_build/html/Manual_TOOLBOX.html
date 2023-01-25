@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DAE-Toolbox &#8212; indigo v</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
@@ -38,12 +37,12 @@
 
           <div class="body" role="main">
             
-  <section id="dae-toolbox">
+  <div class="section" id="dae-toolbox">
 <h1>DAE-Toolbox<a class="headerlink" href="#dae-toolbox" title="Permalink to this headline">¶</a>
 </h1>
 <p>The <em>DAE-toolbox</em> is a small collection of <em>MAPLE</em> scripts
 which shuold simplify the develop of DAE integrator.</p>
-<section id="load-toolbox-script">
+<div class="section" id="load-toolbox-script">
 <h2>Load toolbox script<a class="headerlink" href="#load-toolbox-script" title="Permalink to this headline">¶</a>
 </h2>
 <p>In the <em>MAPLE</em> worksheet load the scripts</p>
@@ -55,36 +54,36 @@ which shuold simplify the develop of DAE integrator.</p>
 the script <code class="docutils literal notranslate"><span class="pre">DAE-toolbox.maplet</span></code> is located.</p>
 <p>At this point you can use a series of scripts which
 hopefully simplify DAE manipulation.</p>
-<section id="diff">
+<div class="section" id="diff">
 <h3>DIFF<a class="headerlink" href="#diff" title="Permalink to this headline">¶</a>
 </h3>
 <p>Extends diff to works with function as derivation argument.
 In practice if you try to differentiate</p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">fun</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">,</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">fun</span> <span class="o">:=</span> <span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
+<span class="o">&gt;</span> <span class="nf">diff</span><span class="p">(</span><span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">,</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
 </pre></div>
 </div>
 <p>you get an error because <em>MAPLE</em> expect a symbol
 not a function as second argument.
 However <code class="docutils literal notranslate"><span class="pre">DIFF</span></code> work</p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">fun</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nf">DIFF</span><span class="p">(</span><span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">,</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">fun</span> <span class="o">:=</span> <span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
+<span class="o">&gt;</span> <span class="nf">DIFF</span><span class="p">(</span><span class="nf">sin</span><span class="p">(</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">,</span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">;</span>
 
-<span class="w">  </span><span class="nf">cos</span><span class="p">(</span><span class="w"> </span><span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span>
+  <span class="nf">cos</span><span class="p">(</span> <span class="nf">x</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>returning the correct answer.</p>
-</section>
-<section id="jacobian">
+</div>
+<div class="section" id="jacobian">
 <h3>JACOBIAN<a class="headerlink" href="#jacobian" title="Permalink to this headline">¶</a>
 </h3>
 <p>Do the same job as for <code class="docutils literal notranslate"><span class="pre">DIFF</span></code> but for map
 or multivariate functions.
 The syntax is</p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nf">JACOBIAN</span><span class="p">(</span><span class="nv">FUN</span><span class="o">,</span><span class="nv">PARS</span><span class="p">)</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">JACOBIAN</span><span class="p">(</span><span class="nv">FUN</span><span class="o">,</span><span class="nv">PARS</span><span class="p">)</span><span class="o">;</span>
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">FUN</span></code> is a list of expressions, a single expression
@@ -93,18 +92,18 @@ The map <code class="docutils literal notranslate"><span class="pre">FUN</span><
 a list of parameters.
 The parameters can be also functions.</p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">FUN</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;</span><span class="nv">x</span><span class="o">^</span><span class="m">2</span><span class="o">+</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span><span class="o">,</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="nv">x</span><span class="o">*</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">&gt;:</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nv">PARS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="nv">x</span><span class="o">,</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)]</span><span class="o">:</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nf">JACOBIAN</span><span class="p">(</span><span class="nv">FUN</span><span class="o">,</span><span class="nv">PARS</span><span class="p">)</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">FUN</span>  <span class="o">:=</span> <span class="o">&lt;</span><span class="nv">x</span><span class="o">^</span><span class="m">2</span><span class="o">+</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span><span class="o">,</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="nv">x</span><span class="o">*</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="o">&gt;:</span>
+<span class="o">&gt;</span> <span class="nv">PARS</span> <span class="o">:=</span> <span class="p">[</span><span class="nv">x</span><span class="o">,</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)]</span><span class="o">:</span>
+<span class="o">&gt;</span> <span class="nf">JACOBIAN</span><span class="p">(</span><span class="nv">FUN</span><span class="o">,</span><span class="nv">PARS</span><span class="p">)</span><span class="o">;</span>
 
-<span class="w">         </span><span class="p">[</span><span class="w">       </span><span class="m">2</span><span class="w"> </span><span class="nv">x</span><span class="w">                         </span><span class="m">1</span><span class="w">                </span><span class="p">]</span>
-<span class="w">         </span><span class="p">[</span><span class="w">                                                    </span><span class="p">]</span>
-<span class="w">         </span><span class="p">[</span><span class="w">     </span><span class="m">2</span><span class="w">                                              </span><span class="p">]</span>
-<span class="w">         </span><span class="p">[</span><span class="o">-</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span><span class="w">  </span><span class="nf">sin</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="w">  </span><span class="nf">cos</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))]</span>
+         <span class="p">[</span>       <span class="m">2</span> <span class="nv">x</span>                         <span class="m">1</span>                <span class="p">]</span>
+         <span class="p">[</span>                                                    <span class="p">]</span>
+         <span class="p">[</span>     <span class="m">2</span>                                              <span class="p">]</span>
+         <span class="p">[</span><span class="o">-</span><span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>  <span class="nf">sin</span><span class="p">(</span><span class="nv">x</span> <span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span>  <span class="nf">cos</span><span class="p">(</span><span class="nv">x</span> <span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))</span> <span class="o">-</span> <span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span> <span class="nv">x</span> <span class="nf">sin</span><span class="p">(</span><span class="nv">x</span> <span class="nf">y</span><span class="p">(</span><span class="nv">t</span><span class="p">))]</span>
 </pre></div>
 </div>
-</section>
-<section id="kernel-build">
+</div>
+<div class="section" id="kernel-build">
 <h3>Kernel_build<a class="headerlink" href="#kernel-build" title="Permalink to this headline">¶</a>
 </h3>
 <p>Give a (possibly rectangular) matrix <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>
@@ -121,14 +120,14 @@ such that</p>
 <p>The routine return also the rank of the matrix  <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>.
 Usage exaple:</p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">K</span><span class="o">,</span><span class="w"> </span><span class="nv">L</span><span class="o">,</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Kernel_build</span><span class="p">(</span><span class="w"> </span><span class="no">E</span><span class="w"> </span><span class="p">)</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">K</span><span class="o">,</span> <span class="nv">L</span><span class="o">,</span> <span class="nv">r</span> <span class="o">:=</span> <span class="nf">Kernel_build</span><span class="p">(</span> <span class="no">E</span> <span class="p">)</span><span class="o">;</span>
 </pre></div>
 </div>
 <p>The algorithm use Gaussian elimination
 so that <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> can contains symbolic
 expressions.</p>
-</section>
-<section id="dae-separate-algebraic">
+</div>
+<div class="section" id="dae-separate-algebraic">
 <h3>DAE_separate_algebraic<a class="headerlink" href="#dae-separate-algebraic" title="Permalink to this headline">¶</a>
 </h3>
 <p>Given a DAE in the form</p>
@@ -143,7 +142,7 @@ expressions.</p>
 <p>separating the algebraic part into <span class="math notranslate nohighlight">\(\mathbf{g}_2(\mathbf{x},t)\)</span>.</p>
 <p><em>Usage:</em></p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">E1</span><span class="o">,</span><span class="w"> </span><span class="nv">G1</span><span class="o">,</span><span class="w"> </span><span class="nv">G2</span><span class="o">,</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DAE_separate_algebraic</span><span class="p">(</span><span class="w"> </span><span class="no">E</span><span class="o">,</span><span class="w"> </span><span class="nv">G</span><span class="w"> </span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nv">#</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">rank</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="no">E</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">E1</span><span class="o">,</span> <span class="nv">G1</span><span class="o">,</span> <span class="nv">G2</span><span class="o">,</span> <span class="nv">r</span> <span class="o">:=</span> <span class="nf">DAE_separate_algebraic</span><span class="p">(</span> <span class="no">E</span><span class="o">,</span> <span class="nv">G</span> <span class="p">)</span><span class="o">:</span> <span class="nv">#</span> <span class="nv">r</span> <span class="o">=</span> <span class="nv">rank</span> <span class="ow">or</span> <span class="no">E</span>
 </pre></div>
 </div>
 <p>Notice that the routine return also the rank
@@ -155,11 +154,11 @@ In this case you must also pass the list of
 differential variables to transform (internally)
 to the form <span class="math notranslate nohighlight">\(\mathbf{E}(\mathbf{x},t) \mathbf{x}' = \mathbf{g}(\mathbf{x},t)\)</span></p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">E1</span><span class="o">,</span><span class="w"> </span><span class="nv">G1</span><span class="o">,</span><span class="w"> </span><span class="nv">G2</span><span class="o">,</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DAE_separate_algebraic_bis</span><span class="p">(</span><span class="w"> </span><span class="nv">EQNS</span><span class="o">,</span><span class="w"> </span><span class="nv">DVARS</span><span class="w"> </span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nv">#</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">rank</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="no">E</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">E1</span><span class="o">,</span> <span class="nv">G1</span><span class="o">,</span> <span class="nv">G2</span><span class="o">,</span> <span class="nv">r</span> <span class="o">:=</span> <span class="nf">DAE_separate_algebraic_bis</span><span class="p">(</span> <span class="nv">EQNS</span><span class="o">,</span> <span class="nv">DVARS</span> <span class="p">)</span><span class="o">:</span> <span class="nv">#</span> <span class="nv">r</span> <span class="o">=</span> <span class="nv">rank</span> <span class="ow">or</span> <span class="no">E</span>
 </pre></div>
 </div>
-</section>
-<section id="dae-make-semi-explicit">
+</div>
+<div class="section" id="dae-make-semi-explicit">
 <h3>DAE_make_semi_explicit<a class="headerlink" href="#dae-make-semi-explicit" title="Permalink to this headline">¶</a>
 </h3>
 <p>Given DAE passed as a list of differential equations
@@ -170,7 +169,7 @@ The user musty pass</p>
 <li><p>A list with the variables (functions) of the DAE</p></li>
 </ul>
 <div class="highlight-cpp notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">ODE</span><span class="p">,</span><span class="w"> </span><span class="n">DVARS</span><span class="p">,</span><span class="w"> </span><span class="n">AVARS</span><span class="p">,</span><span class="w"> </span><span class="n">ALG</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">DAE_make_semi_explicit</span><span class="p">(</span><span class="w"> </span><span class="n">DAE</span><span class="p">,</span><span class="w"> </span><span class="n">vars</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">ODE</span><span class="p">,</span> <span class="n">DVARS</span><span class="p">,</span> <span class="n">AVARS</span><span class="p">,</span> <span class="nl">ALG</span> <span class="p">:</span><span class="o">=</span> <span class="n">DAE_make_semi_explicit</span><span class="p">(</span> <span class="n">DAE</span><span class="p">,</span> <span class="n">vars</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>After the reduction you have</p>
@@ -222,8 +221,8 @@ x^2+y^2-1 = 0
 \[[ \dot{u}(t), \dot{v}(t), \lambda(t) ]\]</div>
 <p>For a non trivial usare of <code class="docutils literal notranslate"><span class="pre">DAE_make_semi_explicit</span></code>
 lokk at <code class="file docutils literal notranslate"><span class="pre">DAE-toolbox-usare-2.mw</span></code></p>
-</section>
-<section id="dae-reduce-index-by-1">
+</div>
+<div class="section" id="dae-reduce-index-by-1">
 <h3>DAE_reduce_index_by_1<a class="headerlink" href="#dae-reduce-index-by-1" title="Permalink to this headline">¶</a>
 </h3>
 <p>Given a DAE in the form (you che put in this form using <code class="docutils literal notranslate"><span class="pre">DAE_separate_algebraic</span></code>)</p>
@@ -241,7 +240,7 @@ lokk at <code class="file docutils literal notranslate"><span class="pre">DAE-to
 <p>That has index reduced by one.
 The command usage is the following</p>
 <div class="highlight-maple notranslate">
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="nv">E2</span><span class="o">,</span><span class="w"> </span><span class="nv">G2</span><span class="o">,</span><span class="w"> </span><span class="nv">A2</span><span class="o">,</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DAE_reduce_index_by_1</span><span class="p">(</span><span class="w"> </span><span class="nv">E1</span><span class="o">,</span><span class="w"> </span><span class="nv">G1</span><span class="o">,</span><span class="w"> </span><span class="nv">A1</span><span class="o">,</span><span class="w"> </span><span class="nv">Dvars</span><span class="w"> </span><span class="p">)</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nv">E2</span><span class="o">,</span> <span class="nv">G2</span><span class="o">,</span> <span class="nv">A2</span><span class="o">,</span> <span class="nv">r</span> <span class="o">:=</span> <span class="nf">DAE_reduce_index_by_1</span><span class="p">(</span> <span class="nv">E1</span><span class="o">,</span> <span class="nv">G1</span><span class="o">,</span> <span class="nv">A1</span><span class="o">,</span> <span class="nv">Dvars</span> <span class="p">)</span><span class="o">;</span>
 </pre></div>
 </div>
 <p>where</p>
@@ -277,8 +276,8 @@ done internally.</p></li>
 Do not need to put in the form <cite>E x’ = G</cite>
 is done internally.</p></li>
 </ul>
-</section>
-<section id="dae3-get-ode-and-invariants">
+</div>
+<div class="section" id="dae3-get-ode-and-invariants">
 <h3>DAE3_get_ODE_and_invariants<a class="headerlink" href="#dae3-get-ode-and-invariants" title="Permalink to this headline">¶</a>
 </h3>
 <p>Given an index-3 DAE of the form</p>
@@ -324,7 +323,7 @@ is done internally.</p></li>
 \[\mathbf{g}(\mathbf{q},\mathbf{v},t) = -\dfrac{\mathrm{d}}{\mathrm{d}t}\mathbf{a}(\mathbf{q},\mathbf{v},t)|_{\mathbf{v}=\mathrm{fixed}}\]</div>
 <p><em>USAGE:</em></p>
 <div class="highlight-cpp notranslate">
-<div class="highlight"><pre><span></span><span class="nl">res</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DAE3_get_ODE_and_invariants</span><span class="p">(</span><span class="w"> </span><span class="n">Mass</span><span class="p">,</span><span class="w"> </span><span class="n">Phi</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">qvars</span><span class="p">,</span><span class="w"> </span><span class="n">vvars</span><span class="p">,</span><span class="w"> </span><span class="n">lvars</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nl">res</span> <span class="p">:</span><span class="o">=</span> <span class="n">DAE3_get_ODE_and_invariants</span><span class="p">(</span> <span class="n">Mass</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">qvars</span><span class="p">,</span> <span class="n">vvars</span><span class="p">,</span> <span class="n">lvars</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>where</p>
@@ -435,13 +434,13 @@ is done internally.</p></li>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="dae3-get-ode-and-invariants-full">
+</div>
+<div class="section" id="dae3-get-ode-and-invariants-full">
 <h3>DAE3_get_ODE_and_invariants_full<a class="headerlink" href="#dae3-get-ode-and-invariants-full" title="Permalink to this headline">¶</a>
 </h3>
 <p>The extended version of the call <code class="docutils literal notranslate"><span class="pre">DAE3_get_ODE_and_invariants</span></code></p>
 <div class="highlight-cpp notranslate">
-<div class="highlight"><pre><span></span><span class="nl">res</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DAE3_get_ODE_and_invariants_full</span><span class="p">(</span><span class="w"> </span><span class="n">Mass</span><span class="p">,</span><span class="w"> </span><span class="n">Phi</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">qvars</span><span class="p">,</span><span class="w"> </span><span class="n">vvars</span><span class="p">,</span><span class="w"> </span><span class="n">lvars</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nl">res</span> <span class="p">:</span><span class="o">=</span> <span class="n">DAE3_get_ODE_and_invariants_full</span><span class="p">(</span> <span class="n">Mass</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">qvars</span><span class="p">,</span> <span class="n">vvars</span><span class="p">,</span> <span class="n">lvars</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>return the same table of <code class="docutils literal notranslate"><span class="pre">DAE3_get_ODE_and_invariants</span></code>
@@ -470,13 +469,13 @@ with in addition</p>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="dae3-get-ode-and-invariants-stab">
+</div>
+<div class="section" id="dae3-get-ode-and-invariants-stab">
 <h3>DAE3_get_ODE_and_invariants_stab<a class="headerlink" href="#dae3-get-ode-and-invariants-stab" title="Permalink to this headline">¶</a>
 </h3>
 <p>The extended version of the call <code class="docutils literal notranslate"><span class="pre">DAE3_get_ODE_and_invariants_full</span></code></p>
 <div class="highlight-cpp notranslate">
-<div class="highlight"><pre><span></span><span class="nl">res</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">DAE3_get_ODE_and_invariants_full</span><span class="p">(</span><span class="w"> </span><span class="n">Mass</span><span class="p">,</span><span class="w"> </span><span class="n">Phi</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">qvars</span><span class="p">,</span><span class="w"> </span><span class="n">vvars</span><span class="p">,</span><span class="w"> </span><span class="n">lvars</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nl">res</span> <span class="p">:</span><span class="o">=</span> <span class="n">DAE3_get_ODE_and_invariants_full</span><span class="p">(</span> <span class="n">Mass</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">qvars</span><span class="p">,</span> <span class="n">vvars</span><span class="p">,</span> <span class="n">lvars</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>return the same table of <code class="docutils literal notranslate"><span class="pre">DAE3_get_ODE_and_invariants_full</span></code>
@@ -504,17 +503,17 @@ with in addition the stabilized constraints with Baumgarte technique.</p>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="f-to-matlab">
+</div>
+<div class="section" id="f-to-matlab">
 <h3>F_TO_MATLAB<a class="headerlink" href="#f-to-matlab" title="Permalink to this headline">¶</a>
 </h3>
-</section>
-<section id="jf-to-matlab">
+</div>
+<div class="section" id="jf-to-matlab">
 <h3>JF_TO_MATLAB<a class="headerlink" href="#jf-to-matlab" title="Permalink to this headline">¶</a>
 </h3>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
 
@@ -556,8 +555,8 @@ with in addition the stabilized constraints with Baumgarte technique.</p>
       &copy;2023, Davide Stocco and Sebastiano Taddei.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

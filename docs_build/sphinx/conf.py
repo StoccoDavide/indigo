@@ -20,7 +20,7 @@ breathe_projects = {
 
 breathe_default_project = "doc_matlab"
 
-dir_path_matlab = os.path.dirname(os.path.realpath(__file__))+"../../../+indigo"
+dir_path_matlab = os.path.dirname(os.path.realpath(__file__))+"../../../indigo"
 dir_path_matlab = Path(dir_path_matlab).resolve()
 
 doxygen_common_stdin = """
@@ -57,7 +57,7 @@ doc_matlab = {
     "exhaleExecutesDoxygen": True,
     "doxygenStripFromPath":  str(dir_path_matlab),
     "exhaleDoxygenStdin":   '''
-        INPUT               = ../../+indigo
+        INPUT               = ../../indigo
         PREDEFINED         += protected=private
         XML_OUTPUT          = xml-matlab
         EXTENSION_MAPPING   = .m=C++

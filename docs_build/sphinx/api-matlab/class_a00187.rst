@@ -21,7 +21,6 @@ Class Documentation
 
 .. doxygenclass:: ImplicitEuler
    :project: doc_matlab
-   :project: doc_matlab
    :members:
    :protected-members:
    :undoc-members:

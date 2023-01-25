@@ -4,18 +4,19 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Class ODEsystem &#8212; indigo v</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Class RadauIA3" href="class_a00235.html" />
@@ -36,28 +37,259 @@
 
           <div class="body" role="main">
             
-  <section id="class-odesystem">
+  <div class="section" id="class-odesystem">
 <span id="exhale-class-a00255"></span><h1>Class ODEsystem<a class="headerlink" href="#class-odesystem" title="Permalink to this headline">¶</a>
 </h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file_ODE_ODEsystem.m.html#file-ode-odesystem-m"><span class="std std-ref">File ODEsystem.m</span></a></p></li>
 </ul>
-<section id="inheritance-relationships">
+<div class="section" id="inheritance-relationships">
 <h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
 </h2>
-<section id="base-type">
+<div class="section" id="base-type">
 <h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
 </h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Base</span></code> (<a class="reference internal" href="class_a00119.html#exhale-class-a00119"><span class="std std-ref">Class Base</span></a>)</p></li>
 </ul>
-</section>
-</section>
-<section id="class-documentation">
+</div>
+</div>
+<div class="section" id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
 </h2>
-</section>
-</section>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv49ODEsystem">
+<span id="_CPPv39ODEsystem"></span><span id="_CPPv29ODEsystem"></span><span id="ODEsystem"></span><span class="target" id="a00255"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ODEsystem</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00119.html#_CPPv44Base" title="Base"><span class="n"><span class="pre">Base</span></span></a><a class="headerlink" href="#_CPPv49ODEsystem" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class container for a system of Ordinary Differential Equations (ODEs). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem9ODEsystemE2in2in2in">
+<span id="_CPPv3N9ODEsystem9ODEsystemE2in2in2in"></span><span id="_CPPv2N9ODEsystem9ODEsystemE2in2in2in"></span><span id="ODEsystem::ODEsystem__in.in.in"></span><span class="target" id="a00255_1a93fda3f6114ad92570290a4b35351e3f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ODEsystem</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">name</span></span>, </span><span class="n sig-param"><span class="pre">neqn</span></span>, </span><span class="n sig-param"><span class="pre">ninv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem9ODEsystemE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class constructor for a system of ODEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>name</strong> – Name of the system of ODEs. </p></li>
+<li><p><strong>neqn</strong> – Number of equations of the system of ODEs. </p></li>
+<li><p><strong>ninv</strong> – Number of invariants/hidden contraints of the system of ODEs. </p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem1FE2in2in2in2in">
+<span id="_CPPv3N9ODEsystem1FE2in2in2in2in"></span><span id="_CPPv2N9ODEsystem1FE2in2in2in2in"></span><span id="ODEsystem::F__in.in.in.in"></span><span class="target" id="a00255_1a1c92aac456561832c8d17aab2565c7ec"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem1FE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Definition of an implicit system of ODEs of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
+\]</div>
+
+<p>with <em>optional</em> invariants/hidden constraints of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
+\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> are the unknown functions (states) of the independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>Value of the system of ODEs function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem2JFE2in2in2in2in">
+<span id="_CPPv3N9ODEsystem2JFE2in2in2in2in"></span><span id="_CPPv2N9ODEsystem2JFE2in2in2in2in"></span><span id="ODEsystem::JF__in.in.in.in"></span><span class="target" id="a00255_1ad027fbdfe15c9a31ba4e793ffa9ede8c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem2JFE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobians with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and the states defivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span> of the system of ODEs:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+}{
+  \partial \mathbf{x}
+},
+\qquad
+\mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+}{
+  \partial \mathbf{x}'
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobians <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}} \)</span> and <span class="math notranslate nohighlight">\(
+             \mathbf{JF}_{\mathbf{x}'} \)</span> of the ODEs system with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and the states derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem1HE2in2in2in2in">
+<span id="_CPPv3N9ODEsystem1HE2in2in2in2in"></span><span id="_CPPv2N9ODEsystem1HE2in2in2in2in"></span><span id="ODEsystem::H__in.in.in.in"></span><span class="target" id="a00255_1aa4aeb9e2668be5258e2ca30f39cb0889"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">H</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem1HE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the invariants/hidden contraints of the system of ODEs:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{H}( \mathbf{x}, t ) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>Value of the invariants/hidden contraints <span class="math notranslate nohighlight">\( \mathbf{H} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem2JHE2in2in2in">
+<span id="_CPPv3N9ODEsystem2JHE2in2in2in"></span><span id="_CPPv2N9ODEsystem2JHE2in2in2in"></span><span id="ODEsystem::JH__in.in.in"></span><span class="target" id="a00255_1abe619a3b4e36777c702352b9d0c83efe"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JH</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem2JHE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the invariants/hidden contraints of the system of ODEs:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JH}_{\mathbf{x}}( \mathbf{x}, t ) =
+\dfrac{
+  \partial \mathbf{H}( \mathbf{x}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>Value of the Jacobian of the invariants/hidden contraints <span class="math notranslate nohighlight">\( \mathbf{JH}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem12get_num_eqnsE2in">
+<span id="_CPPv3N9ODEsystem12get_num_eqnsE2in"></span><span id="_CPPv2N9ODEsystem12get_num_eqnsE2in"></span><span id="ODEsystem::get_num_eqns__in"></span><span class="target" id="a00119_1a67d9d0b3788a49baa9c6b6d82bf1d0a2"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_eqns</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem12get_num_eqnsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the number of equations of the system of ODEs/DAEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The number of equations of the system of ODEs/DAEs. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem12set_num_eqnsE2in2in">
+<span id="_CPPv3N9ODEsystem12set_num_eqnsE2in2in"></span><span id="_CPPv2N9ODEsystem12set_num_eqnsE2in2in"></span><span id="ODEsystem::set_num_eqns__in.in"></span><span class="target" id="a00119_1a8acdc198f9503ad4df0938412359d4fd"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_eqns</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_num_eqns</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem12set_num_eqnsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the number of equations of the system of ODEs/DAEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>num_eqns</strong> – The number of equations of the system of ODEs/DAEs. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem12get_num_invsE2in">
+<span id="_CPPv3N9ODEsystem12get_num_invsE2in"></span><span id="_CPPv2N9ODEsystem12get_num_invsE2in"></span><span id="ODEsystem::get_num_invs__in"></span><span class="target" id="a00119_1a547ccdd8280c668961998fc8e561492e"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_invs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem12get_num_invsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the number of invariants/hidden contraints of the system of ODEs/DAEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The number of invariants/hidden contraints of the system of ODEs/DAEs. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9ODEsystem12set_num_invsE2in2in">
+<span id="_CPPv3N9ODEsystem12set_num_invsE2in2in"></span><span id="_CPPv2N9ODEsystem12set_num_invsE2in2in"></span><span id="ODEsystem::set_num_invs__in.in"></span><span class="target" id="a00119_1afbed901db1ac25ff5a3bd9607f129549"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_invs</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9ODEsystem12set_num_invsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the number of invariants/hidden constraints of the system of ODEs/DAEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>num_invs</strong> – The number of invariants/hidden constraints of the system of ODEs/DAEs. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</dd>
+</dl>
+
+</div>
+</div>
 
 
 
@@ -81,16 +313,11 @@
 </div>
 <script>$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table of Contents</a></h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_INTRO.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_TOOLBOX.html">DAE-Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="root.html">MATLAB API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="root.html#class-hierarchy">Class Hierarchy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="root.html#file-hierarchy">File Hierarchy</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="root.html#full-api">Full API</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
 </ul>
 
         </div>
@@ -101,8 +328,8 @@
       &copy;2023, Davide Stocco and Sebastiano Taddei.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

@@ -1,4 +1,4 @@
-.. _exhale_class_a00252:
+.. _exhale_class_a00255:
 
 Class ODEsystem
 ===============
@@ -12,7 +12,7 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public Base`` (:ref:`exhale_class_a00116`)
+- ``public Base`` (:ref:`exhale_class_a00119`)
 
 
 Class Documentation

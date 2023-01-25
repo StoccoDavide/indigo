@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
-  <compounddef id="a00248" kind="class" language="C++" prot="public">
+  <compounddef id="a00251" kind="class" language="C++" prot="public">
     <compoundname>ODEsolver</compoundname>
     <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
-    <derivedcompoundref refid="a00256" prot="public" virt="non-virtual">RKexplicit</derivedcompoundref>
+    <derivedcompoundref refid="a00259" prot="public" virt="non-virtual">RKexplicit</derivedcompoundref>
+    <derivedcompoundref refid="a00263" prot="public" virt="non-virtual">RKimplicit</derivedcompoundref>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_name</definition>
         <argsstring></argsstring>
@@ -20,7 +21,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_ode</definition>
         <argsstring></argsstring>
@@ -35,7 +36,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00248_1aa248ad5dd350504c12475009b9401467" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00251_1aa248ad5dd350504c12475009b9401467" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_max_iter</definition>
         <argsstring></argsstring>
@@ -52,7 +53,7 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00248_1a4cab2953507bc503d780ecbed14713ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a4cab2953507bc503d780ecbed14713ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::ODEsolver</definition>
         <argsstring>(in t_name)</argsstring>
@@ -65,7 +66,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Class constructor for <ref refid="a00248" kindref="compound">ODEsolver</ref>, which requires the name of the solver used to integrate the system of ODEs as input.</para>
+<para>Class constructor for <ref refid="a00251" kindref="compound">ODEsolver</ref>, which requires the name of the solver used to integrate the system of ODEs as input.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>name</parametername>
@@ -81,7 +82,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="38" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_name</definition>
         <argsstring>(in this)</argsstring>
@@ -103,7 +104,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="49" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_name</definition>
         <argsstring>(in this, in t_name)</argsstring>
@@ -136,7 +137,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="60" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_ode</definition>
         <argsstring>(in this)</argsstring>
@@ -158,7 +159,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="71" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_ode</definition>
         <argsstring>(in this, in t_ode)</argsstring>
@@ -191,7 +192,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="82" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a8411082da0c9e096a21be71ed3217245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a8411082da0c9e096a21be71ed3217245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_max_iter</definition>
         <argsstring>(in this)</argsstring>
@@ -213,7 +214,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="93" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_max_iter</definition>
         <argsstring>(in this, in t_max_iter)</argsstring>
@@ -246,7 +247,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="104" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::project</definition>
         <argsstring>(in this, in x_tilde, in t)</argsstring>
@@ -339,7 +340,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="185" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::solve</definition>
         <argsstring>(in this, in t, in x_0, in varargin)</argsstring>
@@ -444,12 +445,13 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="296" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00251_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
         <definition>virtual function ODEsolver::step</definition>
         <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
         <name>step</name>
         <qualifiedname>ODEsolver::step</qualifiedname>
+        <reimplementedby refid="a00263_1a0193256fd309fadc298287dd71c8874e">step</reimplementedby>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -512,13 +514,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The approximation of <formula id="26">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula>. </para>
+<simplesect kind="return"><para>The approximation of <formula id="26">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="27">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="390" column="24"/>
+        <location file="ODE/ODEsolver.m" line="400" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -529,85 +531,205 @@
     <inheritancegraph>
       <node id="4">
         <label>Collatz</label>
-        <link refid="a00120"/>
+        <link refid="a00123"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>CrankNicolson</label>
+        <link refid="a00171"/>
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
         <label>ExplicitEuler</label>
-        <link refid="a00124"/>
+        <link refid="a00127"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
         <label>ExplicitMidpoint</label>
-        <link refid="a00128"/>
+        <link refid="a00131"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>GaussLegendre2</label>
+        <link refid="a00175"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>GaussLegendre4</label>
+        <link refid="a00179"/>
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
         <label>Heun2</label>
-        <link refid="a00132"/>
+        <link refid="a00135"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="8">
         <label>Heun3</label>
-        <link refid="a00136"/>
+        <link refid="a00139"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>ImplicitEuler</label>
+        <link refid="a00187"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>ImplicitMidpoint</label>
+        <link refid="a00191"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>LobattoIIIA2</label>
+        <link refid="a00195"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>LobattoIIIA4</label>
+        <link refid="a00199"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>LobattoIIIB2</label>
+        <link refid="a00203"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>LobattoIIIB4</label>
+        <link refid="a00207"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>LobattoIIIC2</label>
+        <link refid="a00211"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>LobattoIIIC4</label>
+        <link refid="a00215"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>LobattoIIICS2</label>
+        <link refid="a00219"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>LobattoIIICS4</label>
+        <link refid="a00223"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>LobattoIIID2</label>
+        <link refid="a00227"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>LobattoIIID4</label>
+        <link refid="a00231"/>
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
         <label>ODEsolver</label>
-        <link refid="a00248"/>
+        <link refid="a00251"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
         <label>RK3</label>
-        <link refid="a00152"/>
+        <link refid="a00155"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
         <label>RK38</label>
-        <link refid="a00156"/>
+        <link refid="a00159"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
         <label>RK4</label>
-        <link refid="a00160"/>
+        <link refid="a00163"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>RKexplicit</label>
-        <link refid="a00256"/>
+        <link refid="a00259"/>
         <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>RKimplicit</label>
+        <link refid="a00263"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>RadauIA3</label>
+        <link refid="a00235"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>RadauIA5</label>
+        <link refid="a00239"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>RadauIIA3</label>
+        <link refid="a00243"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>RadauIIA5</label>
+        <link refid="a00247"/>
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="12">
         <label>Ralston2</label>
-        <link refid="a00140"/>
+        <link refid="a00143"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="13">
         <label>Ralston3</label>
-        <link refid="a00144"/>
+        <link refid="a00147"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="14">
         <label>Ralston4</label>
-        <link refid="a00148"/>
+        <link refid="a00151"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
         <label>SSPRK3</label>
-        <link refid="a00164"/>
+        <link refid="a00167"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -618,7 +740,7 @@
     <collaborationgraph>
       <node id="1">
         <label>ODEsolver</label>
-        <link refid="a00248"/>
+        <link refid="a00251"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -626,21 +748,21 @@
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="ODE/ODEsolver.m" line="5" column="1" bodyfile="ODE/ODEsolver.m" bodystart="6" bodyend="396"/>
+    <location file="ODE/ODEsolver.m" line="5" column="1" bodyfile="ODE/ODEsolver.m" bodystart="6" bodyend="406"/>
     <listofallmembers>
-      <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_max_iter</name></member>
-      <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_name</name></member>
-      <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_ode</name></member>
-      <member refid="a00248_1aa248ad5dd350504c12475009b9401467" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_max_iter</name></member>
-      <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_name</name></member>
-      <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_ode</name></member>
-      <member refid="a00248_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>ODEsolver</name></member>
-      <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>project</name></member>
-      <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_max_iter</name></member>
-      <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_name</name></member>
-      <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_ode</name></member>
-      <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>solve</name></member>
-      <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" virt="virtual"><scope>ODEsolver</scope><name>step</name></member>
+      <member refid="a00251_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_max_iter</name></member>
+      <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_name</name></member>
+      <member refid="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_ode</name></member>
+      <member refid="a00251_1aa248ad5dd350504c12475009b9401467" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_max_iter</name></member>
+      <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_name</name></member>
+      <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_ode</name></member>
+      <member refid="a00251_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>ODEsolver</name></member>
+      <member refid="a00251_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>project</name></member>
+      <member refid="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_max_iter</name></member>
+      <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_name</name></member>
+      <member refid="a00251_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_ode</name></member>
+      <member refid="a00251_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>solve</name></member>
+      <member refid="a00251_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" virt="virtual"><scope>ODEsolver</scope><name>step</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

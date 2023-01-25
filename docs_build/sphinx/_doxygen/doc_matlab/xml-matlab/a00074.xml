@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00074" kind="file" language="C++">
     <compoundname>ODEsolver.m</compoundname>
-    <innerclass refid="a00248" prot="public">ODEsolver</innerclass>
+    <innerclass refid="a00251" prot="public">ODEsolver</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -12,7 +12,7 @@
 <codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>solver<sp/>of<sp/><sp/>the<sp/>system<sp/>of<sp/>Ordinary<sp/>Differential<sp/>Equations</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%&gt;<sp/>(ODEs)<sp/>or<sp/>Differential<sp/>Algebraic<sp/>Equations<sp/>(DAEs).</highlight></codeline>
 <codeline lineno="4"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="5" refid="a00248" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00248" kindref="compound">ODEsolver</ref><sp/>&lt;<sp/>handle</highlight></codeline>
+<codeline lineno="5" refid="a00251" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00251" kindref="compound">ODEsolver</ref><sp/>&lt;<sp/>handle</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/>properties<sp/>(SetAccess<sp/>=<sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">,<sp/>Hidden<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -21,31 +21,31 @@
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>m_name;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>System<sp/>of<sp/>ODEs/DAEs<sp/>to<sp/>be<sp/>solved.</highlight></codeline>
-<codeline lineno="14" refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="14" refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>m_ode;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Maximum<sp/>number<sp/>of<sp/>iterations<sp/>in<sp/>the<sp/>projection<sp/>process.</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="19" refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_max_iter;</highlight></codeline>
+<codeline lineno="19" refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_max_iter;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="24" refid="a00248_1aa248ad5dd350504c12475009b9401467" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="24" refid="a00251_1aa248ad5dd350504c12475009b9401467" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/><ref refid="a00248" kindref="compound">ODEsolver</ref>,<sp/>which<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>the<sp/>name<sp/>of<sp/>the<sp/>solver</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/><ref refid="a00251" kindref="compound">ODEsolver</ref>,<sp/>which<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>the<sp/>name<sp/>of<sp/>the<sp/>solver</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>used<sp/>to<sp/>integrate<sp/>the<sp/>system<sp/>of<sp/>ODEs<sp/>as<sp/>input.</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>name<sp/>The<sp/>name<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00248" kindref="compound">ODEsolver</ref>(<sp/>t_name<sp/>)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00251" kindref="compound">ODEsolver</ref>(<sp/>t_name<sp/>)</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name<sp/>=<sp/>t_name;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="38" refid="a00248_1a4cab2953507bc503d780ecbed14713ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>name<sp/>of<sp/>the<sp/>method<sp/>used<sp/>to<sp/>integrate<sp/>the<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
+<codeline lineno="38" refid="a00251_1a4cab2953507bc503d780ecbed14713ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>name<sp/>of<sp/>the<sp/>method<sp/>used<sp/>to<sp/>integrate<sp/>the<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>name<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -56,7 +56,7 @@
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>the<sp/>name<sp/>of<sp/>the<sp/>method<sp/>used<sp/>to<sp/>integrate<sp/>the<sp/>system<sp/>of<sp/>ODEs.</highlight></codeline>
-<codeline lineno="49" refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="49" refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>name<sp/>The<sp/>name<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>set_name(<sp/>this,<sp/>t_name<sp/>)</highlight></codeline>
@@ -67,7 +67,7 @@
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>system<sp/>of<sp/>ODEs<sp/>to<sp/>be<sp/>solved.</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="60" refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>system<sp/>of<sp/>ODEs<sp/>to<sp/>be<sp/>solved.</highlight></codeline>
+<codeline lineno="60" refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>system<sp/>of<sp/>ODEs<sp/>to<sp/>be<sp/>solved.</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>get_ode(<sp/>this<sp/>)</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_ode;</highlight></codeline>
@@ -78,7 +78,7 @@
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>the<sp/>system<sp/>of<sp/>ODEs<sp/>to<sp/>be<sp/>solved.</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>ode<sp/>The<sp/>system<sp/>of<sp/>ODEs<sp/>to<sp/>be<sp/>solved.</highlight></codeline>
-<codeline lineno="71" refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="71" refid="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_ode(<sp/>this,<sp/>t_ode<sp/>)</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_ode<sp/>=<sp/>t_ode;</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
@@ -89,7 +89,7 @@
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>maximum<sp/>number<sp/>of<sp/>iterations<sp/>in<sp/>the<sp/>projection<sp/>process.</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="82" refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>get_max_iter(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="82" refid="a00251_1a25f67f3d4e229ebc0f5514e71887663c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>get_max_iter(<sp/>this<sp/>)</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_max_iter;</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -100,8 +100,8 @@
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>max_iter<sp/>The<sp/>maximum<sp/>number<sp/>of<sp/>iterations<sp/>in<sp/>the<sp/>projection<sp/>process.</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_max_iter(<sp/>this,<sp/>t_max_iter<sp/>)</highlight></codeline>
-<codeline lineno="93" refid="a00248_1a8411082da0c9e096a21be71ed3217245" refkind="member"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;indigo::<ref refid="a00248" kindref="compound">ODEsolver</ref>::set_max_iter(...)&apos;</highlight></codeline>
+<codeline lineno="93" refid="a00251_1a8411082da0c9e096a21be71ed3217245" refkind="member"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;indigo::<ref refid="a00251" kindref="compound">ODEsolver</ref>::set_max_iter(...)&apos;</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(t_max_iter<sp/>&gt;<sp/>0,<sp/>...</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;invalid<sp/>maximum<sp/>number<sp/>of<sp/>iterations.&apos;]);</highlight></codeline>
@@ -111,7 +111,7 @@
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="104" refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>the<sp/>ODEs<sp/>system<sp/>through<sp/>the<sp/>problem:</highlight></codeline>
+<codeline lineno="104" refid="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>the<sp/>ODEs<sp/>system<sp/>through<sp/>the<sp/>problem:</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\textrm{minimize}<sp/>\quad</highlight></codeline>
@@ -192,7 +192,7 @@
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/></highlight><highlight class="stringliteral">&apos;the<sp/>number<sp/>of<sp/>states<sp/>does<sp/>not<sp/>match<sp/>the<sp/>number<sp/>of<sp/>equations.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"></highlight></codeline>
 <codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>there<sp/>are<sp/>any<sp/>constraints</highlight></codeline>
-<codeline lineno="185" refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>num_invs<sp/>&gt;<sp/>0</highlight></codeline>
+<codeline lineno="185" refid="a00251_1a1d979299edb12a7d042a7dfb8c64550f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(num_invs<sp/>&gt;<sp/>0)</highlight></codeline>
 <codeline lineno="186"><highlight class="normal"></highlight></codeline>
 <codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Calculate<sp/>and<sp/>scale<sp/>the<sp/>tolerance</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tolerance<sp/>=<sp/>max(1,<sp/>norm(x_tilde,<sp/>inf))<sp/>*<sp/>sqrt(eps);</highlight></codeline>
@@ -295,99 +295,109 @@
 <codeline lineno="285"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="286"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
 <codeline lineno="287"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_ode.get_num_eqns();</highlight></codeline>
-<codeline lineno="288"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>num_eqns<sp/>~=<sp/>length(x_0)</highlight></codeline>
+<codeline lineno="288"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(num_eqns<sp/>~=<sp/>length(x_0))</highlight></codeline>
 <codeline lineno="289"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
 <codeline lineno="290"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_0),<sp/>num_eqns);</highlight></codeline>
 <codeline lineno="291"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="292"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="293"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Collect<sp/>optional<sp/>projection<sp/>flag</highlight></codeline>
-<codeline lineno="294"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>nargin<sp/>&gt;<sp/>3</highlight></codeline>
+<codeline lineno="294"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>3)</highlight></codeline>
 <codeline lineno="295"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>project<sp/>=<sp/>varargin{1};</highlight></codeline>
-<codeline lineno="296" refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="296" refid="a00251_1ae3194efaa3521a1ddc38488ff2a86118" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
 <codeline lineno="297"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>project<sp/>=<sp/>false;</highlight></codeline>
 <codeline lineno="298"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="299"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="300"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Collect<sp/>optional<sp/>verbose<sp/>flag</highlight></codeline>
-<codeline lineno="301"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>nargin<sp/>&gt;<sp/>4</highlight></codeline>
+<codeline lineno="301"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>4)</highlight></codeline>
 <codeline lineno="302"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>verbose<sp/>=<sp/>varargin{2};</highlight></codeline>
 <codeline lineno="303"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
 <codeline lineno="304"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>verbose<sp/>=<sp/>false;</highlight></codeline>
 <codeline lineno="305"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="306"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="307"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Collect<sp/>optional<sp/>epsilon<sp/>value</highlight></codeline>
-<codeline lineno="308"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>nargin<sp/>&gt;<sp/>5</highlight></codeline>
+<codeline lineno="308"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>5)</highlight></codeline>
 <codeline lineno="309"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epsilon<sp/>=<sp/>varargin{3};</highlight></codeline>
 <codeline lineno="310"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
 <codeline lineno="311"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epsilon<sp/>=<sp/>1.0e3;</highlight></codeline>
 <codeline lineno="312"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="313"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="314"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>number<sp/>of<sp/>input<sp/>arguments</highlight></codeline>
-<codeline lineno="315"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>nargin<sp/>&gt;<sp/>6</highlight></codeline>
+<codeline lineno="315"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>6)</highlight></codeline>
 <codeline lineno="316"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>too<sp/>many<sp/>input<sp/>arguments.</highlight><highlight class="stringliteral">&apos;],<sp/>this.m_name);</highlight></codeline>
 <codeline lineno="317"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="318"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="319"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
-<codeline lineno="320"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out(:,1)<sp/>=<sp/>x_0(:);</highlight></codeline>
-<codeline lineno="321"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>perc<sp/><sp/><sp/><sp/><sp/>=<sp/>0.0;</highlight></codeline>
-<codeline lineno="322"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>nt<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>length(t)-1;</highlight></codeline>
-<codeline lineno="323"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>k<sp/>=<sp/>1:nt</highlight></codeline>
-<codeline lineno="324"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>verbose</highlight></codeline>
-<codeline lineno="325"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newpp<sp/>=<sp/>ceil(100*k/nt);</highlight></codeline>
-<codeline lineno="326"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>newpp<sp/>&gt;<sp/>perc+4</highlight></codeline>
-<codeline lineno="327"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perc<sp/>=<sp/>newpp;</highlight></codeline>
-<codeline lineno="328"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">%3d%%\n</highlight><highlight class="stringliteral">&apos;,<sp/>perc);</highlight></codeline>
-<codeline lineno="329"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="330"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="331"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="332"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs</highlight></codeline>
-<codeline lineno="333"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/>=<sp/>this.step(t(k),<sp/>out(:,k),<sp/>t(k+1)-t(k));</highlight></codeline>
-<codeline lineno="334"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="335"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Project<sp/>solution<sp/>on<sp/>the<sp/>invariants/hidden<sp/>constraints</highlight></codeline>
-<codeline lineno="336"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>project</highlight></codeline>
-<codeline lineno="337"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/>=<sp/>this.project(t(k+1),<sp/>x_new);</highlight></codeline>
-<codeline lineno="338"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="339"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="340"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>the<sp/>infinity<sp/>norm<sp/>of<sp/>the<sp/>projected<sp/>solution</highlight></codeline>
-<codeline lineno="341"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>norm_x_new<sp/>=<sp/>norm(x_new,<sp/>inf);</highlight></codeline>
-<codeline lineno="342"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>norm_x_new<sp/>&gt;<sp/>epsilon</highlight></codeline>
-<codeline lineno="343"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t(%d)<sp/>=<sp/>%g,<sp/>||x||_inf<sp/>=<sp/>%g,<sp/>computation<sp/>interrupted.\n</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="344"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>k,<sp/>t(k),<sp/>norm_xnew);</highlight></codeline>
-<codeline lineno="345"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
-<codeline lineno="346"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="347"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out(:,k+1)<sp/>=<sp/>x_new;</highlight></codeline>
-<codeline lineno="348"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="349"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="350"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="351"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="352"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="353"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="354"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="355"><highlight class="stringliteral"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
-<codeline lineno="356"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="357"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="358"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="359"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Generic<sp/>advancing<sp/>step<sp/>for<sp/>a<sp/>generic<sp/>solver.</highlight></codeline>
-<codeline lineno="360"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="361"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="362"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{x}_{k+1}(t_{k}+\Delta<sp/>t)<sp/>=<sp/>\mathbf{x}_k(t_{k})<sp/>+</highlight></codeline>
-<codeline lineno="363"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathcal{S}(\mathbf{x}_k(t_k),<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">_k(t_k),<sp/>t_k,<sp/>\Delta<sp/>t)</highlight></codeline>
-<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathcal{S}<sp/>\f$<sp/>is<sp/>the<sp/>advancing<sp/>step<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
-<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_k<sp/><sp/><sp/><sp/><sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
-<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot_k<sp/>States<sp/>derivative<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;(t_k)<sp/>\f$.</highlight></codeline>
-<codeline lineno="370"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_k<sp/><sp/><sp/><sp/><sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
-<codeline lineno="371"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/><sp/><sp/><sp/><sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
-<codeline lineno="372"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="373"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>approximation<sp/>of<sp/>\f$<sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$.</highlight></codeline>
-<codeline lineno="374"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="375"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>step(<sp/>this,<sp/>x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
-<codeline lineno="376"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="377"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="378"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="379"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="380"><highlight class="stringliteral">end</highlight></codeline>
+<codeline lineno="319"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>output</highlight></codeline>
+<codeline lineno="320"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
+<codeline lineno="321"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out_dot<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
+<codeline lineno="322"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out(:,1)<sp/><sp/><sp/><sp/><sp/>=<sp/>x_0(:);</highlight></codeline>
+<codeline lineno="323"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out_dot(:,1)<sp/>=<sp/>zeros(num_eqns,<sp/>1);</highlight></codeline>
+<codeline lineno="324"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="325"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>temporary<sp/>variables</highlight></codeline>
+<codeline lineno="326"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>perc<sp/><sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="327"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>steps<sp/>=<sp/>length(t)<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="328"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="329"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>k<sp/>=<sp/>1:steps</highlight></codeline>
+<codeline lineno="330"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(verbose<sp/>==<sp/>true)</highlight></codeline>
+<codeline lineno="331"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newpp<sp/>=<sp/>ceil(100*k/nt);</highlight></codeline>
+<codeline lineno="332"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(newpp<sp/>&gt;<sp/>perc<sp/>+<sp/>4)</highlight></codeline>
+<codeline lineno="333"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perc<sp/>=<sp/>newpp;</highlight></codeline>
+<codeline lineno="334"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">%3d%%\n</highlight><highlight class="stringliteral">&apos;,<sp/>perc);</highlight></codeline>
+<codeline lineno="335"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="336"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="337"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="338"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs</highlight></codeline>
+<codeline lineno="339"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_new,<sp/>x_dot_new]<sp/>=<sp/>this.step(out(:,k),<sp/>out_dot(:,k),<sp/>t(k),<sp/>t(k+1)-t(k));</highlight></codeline>
+<codeline lineno="340"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="341"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Project<sp/>solution<sp/>on<sp/>the<sp/>invariants/hidden<sp/>constraints</highlight></codeline>
+<codeline lineno="342"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(project<sp/>==<sp/>true)</highlight></codeline>
+<codeline lineno="343"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/>=<sp/>this.project(t(k+1),<sp/>x_new);</highlight></codeline>
+<codeline lineno="344"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="345"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="346"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>the<sp/>infinity<sp/>norm<sp/>of<sp/>the<sp/>projected<sp/>solution</highlight></codeline>
+<codeline lineno="347"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>norm_x_new<sp/>=<sp/>norm(x_new,<sp/>inf);</highlight></codeline>
+<codeline lineno="348"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(norm_x_new<sp/>&gt;<sp/>epsilon)</highlight></codeline>
+<codeline lineno="349"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t(%d)<sp/>=<sp/>%g,<sp/>||x||_inf<sp/>=<sp/>%g,<sp/>computation<sp/>interrupted.\n</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="350"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>k,<sp/>t(k),<sp/>norm_xnew);</highlight></codeline>
+<codeline lineno="351"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
+<codeline lineno="352"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="353"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="354"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>solutions</highlight></codeline>
+<codeline lineno="355"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out(:,k+1)<sp/><sp/><sp/><sp/><sp/>=<sp/>x_new;</highlight></codeline>
+<codeline lineno="356"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out_dot(:,k+1)<sp/>=<sp/>x_dot_new;</highlight></codeline>
+<codeline lineno="357"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="358"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="359"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="360"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="361"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="362"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="363"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="364"><highlight class="stringliteral"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
+<codeline lineno="365"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="366"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="367"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="368"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Generic<sp/>advancing<sp/>step<sp/>for<sp/>a<sp/>generic<sp/>solver.</highlight></codeline>
+<codeline lineno="369"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="370"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="371"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{x}_{k+1}(t_{k}+\Delta<sp/>t)<sp/>=<sp/>\mathbf{x}_k(t_{k})<sp/>+</highlight></codeline>
+<codeline lineno="372"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathcal{S}(\mathbf{x}_k(t_k),<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">_k(t_k),<sp/>t_k,<sp/>\Delta<sp/>t)</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathcal{S}<sp/>\f$<sp/>is<sp/>the<sp/>advancing<sp/>step<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_k<sp/><sp/><sp/><sp/><sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot_k<sp/>States<sp/>derivative<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="379"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_k<sp/><sp/><sp/><sp/><sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
+<codeline lineno="380"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/><sp/><sp/><sp/><sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="381"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="382"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>approximation<sp/>of<sp/>\f$<sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>and</highlight></codeline>
+<codeline lineno="383"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">_{k+1}(t_{k}+\Delta<sp/>t)<sp/>\f$.</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>step(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="390"><highlight class="normal">end</highlight></codeline>
     </programlisting>
     <location file="ODE/ODEsolver.m"/>
   </compounddef>

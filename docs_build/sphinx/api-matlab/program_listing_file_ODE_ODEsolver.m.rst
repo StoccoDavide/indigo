@@ -194,7 +194,7 @@ Program Listing for File ODEsolver.m
            [CMD, 'the number of states does not match the number of equations.']);
    
          % Check if there are any constraints
-         if num_invs > 0
+         if (num_invs > 0)
    
            % Calculate and scale the tolerance
            tolerance = max(1, norm(x_tilde, inf)) * sqrt(eps);
@@ -297,66 +297,75 @@ Program Listing for File ODEsolver.m
    
          % Check initial conditions
          num_eqns = this.m_ode.get_num_eqns();
-         if num_eqns ~= length(x_0)
+         if (num_eqns ~= length(x_0))
            error([CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
              this.m_name, length(x_0), num_eqns);
          end
    
          % Collect optional projection flag
-         if nargin > 3
+         if (nargin > 3)
            project = varargin{1};
          else
            project = false;
          end
    
          % Collect optional verbose flag
-         if nargin > 4
+         if (nargin > 4)
            verbose = varargin{2};
          else
            verbose = false;
          end
    
          % Collect optional epsilon value
-         if nargin > 5
+         if (nargin > 5)
            epsilon = varargin{3};
          else
            epsilon = 1.0e3;
          end
    
          % Check number of input arguments
-         if nargin > 6
+         if (nargin > 6)
            error([CMD, 'in %s solver, too many input arguments.'], this.m_name);
          end
    
-         out      = zeros(num_eqns, length(t));
-         out(:,1) = x_0(:);
-         perc     = 0.0;
-         nt       = length(t)-1;
-         for k = 1:nt
-           if verbose
+         % Instantiate output
+         out          = zeros(num_eqns, length(t));
+         out_dot      = zeros(num_eqns, length(t));
+         out(:,1)     = x_0(:);
+         out_dot(:,1) = zeros(num_eqns, 1);
+   
+         % Instantiate temporary variables
+         perc  = 0.0;
+         steps = length(t) - 1;
+   
+         for k = 1:steps
+           if (verbose == true)
              newpp = ceil(100*k/nt);
-             if newpp > perc+4
+             if (newpp > perc + 4)
                perc = newpp;
                fprintf('%3d%%\n', perc);
              end
            end
    
            % Integrate system of ODEs
-           x_new = this.step(t(k), out(:,k), t(k+1)-t(k));
+           [x_new, x_dot_new] = this.step(out(:,k), out_dot(:,k), t(k), t(k+1)-t(k));
    
            % Project solution on the invariants/hidden constraints
-           if project
+           if (project == true)
              x_new = this.project(t(k+1), x_new);
            end
    
            % Check the infinity norm of the projected solution
            norm_x_new = norm(x_new, inf);
-           if norm_x_new > epsilon
+           if (norm_x_new > epsilon)
              fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, computation interrupted.\n'], ...
                this.m_name, k, t(k), norm_xnew);
              break;
            end
-           out(:,k+1) = x_new;
+   
+           % Store solutions
+           out(:,k+1)     = x_new;
+           out_dot(:,k+1) = x_dot_new;
          end
        end
        %
@@ -382,7 +391,8 @@ Program Listing for File ODEsolver.m
        %> \param t_k     Time step \f$ t_k \f$.
        %> \param d_t     Advancing time step \f$ \Delta t\f$.
        %>
-       %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$.
+       %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
+       %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
        %
        step( this, x_k, x_dot_k, t_k, d_t )
        %

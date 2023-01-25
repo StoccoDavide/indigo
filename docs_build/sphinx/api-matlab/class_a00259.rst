@@ -38,7 +38,6 @@ Class Documentation
 
 .. doxygenclass:: RKexplicit
    :project: doc_matlab
-   :project: doc_matlab
    :members:
    :protected-members:
    :undoc-members:

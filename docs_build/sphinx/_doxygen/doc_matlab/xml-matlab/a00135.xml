@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
-  <compounddef id="a00132" kind="class" language="C++" prot="public">
+  <compounddef id="a00135" kind="class" language="C++" prot="public">
     <compoundname>Heun2</compoundname>
-    <basecompoundref refid="a00256" prot="public" virt="non-virtual">RKexplicit</basecompoundref>
+    <basecompoundref refid="a00259" prot="public" virt="non-virtual">RKexplicit</basecompoundref>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00132_1a1738fef9b2e5c82d696439bde46dbd8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00135_1a1738fef9b2e5c82d696439bde46dbd8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Heun2::Heun2</definition>
         <argsstring>(in ignoredArg)</argsstring>
@@ -34,7 +34,7 @@
         </inbodydescription>
         <location file="ODE/ExplicitMethods/Heun2.m" line="27" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1ab9999241cfd0871f748d1f305bf8f504" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1ab9999241cfd0871f748d1f305bf8f504" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::get_A</definition>
         <argsstring>(in this)</argsstring>
@@ -53,7 +53,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="83" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1a24e40fa536c7312e5ddcc444755fc468" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1a24e40fa536c7312e5ddcc444755fc468" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::get_b</definition>
         <argsstring>(in this)</argsstring>
@@ -72,7 +72,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="92" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1aa152d02f1d648022af25c8f5c67f3030" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1aa152d02f1d648022af25c8f5c67f3030" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::get_c</definition>
         <argsstring>(in this)</argsstring>
@@ -91,7 +91,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="101" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1a2e5173a007bbf6df93c034171e316415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1a2e5173a007bbf6df93c034171e316415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::set_A</definition>
         <argsstring>(in this, in in)</argsstring>
@@ -114,7 +114,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="110" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1a17aaf4d6bcde8fa7290c18ef7800ad05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::set_b</definition>
         <argsstring>(in this, in in)</argsstring>
@@ -137,7 +137,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="119" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1a5ecac0a56f3ed4d52e8667ae5e720f67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::set_c</definition>
         <argsstring>(in this, in in)</argsstring>
@@ -160,7 +160,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="128" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1a7d7a59c02ec394c13eaf8f2950e51e9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKexplicit::step</definition>
         <argsstring>(in this, in t_k, in x_k, in d_t)</argsstring>
@@ -186,7 +186,7 @@
         </briefdescription>
         <detaileddescription>
 <para>Compute an integration step using the <bold>explicit</bold> Runge-Kutta method:</para>
-<para><formula id="38">\[
+<para><formula id="39">\[
     \begin{array}{rcl}
        x_{k+1} &amp;=&amp; x_k + \displaystyle\sum_{j=1}^s b_j K_j \\
        K_i     &amp;=&amp; h f \left(
@@ -209,12 +209,13 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="156" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00251_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
         <definition>virtual function ODEsolver::step</definition>
         <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
         <name>step</name>
         <qualifiedname>ODEsolver::step</qualifiedname>
+        <reimplementedby refid="a00263_1a0193256fd309fadc298287dd71c8874e">step</reimplementedby>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -277,15 +278,15 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The approximation of <formula id="26">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula>. </para>
+<simplesect kind="return"><para>The approximation of <formula id="26">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="27">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="390" column="24"/>
+        <location file="ODE/ODEsolver.m" line="400" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_name</definition>
         <argsstring>(in this)</argsstring>
@@ -307,7 +308,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="49" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_name</definition>
         <argsstring>(in this, in t_name)</argsstring>
@@ -340,7 +341,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="60" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_ode</definition>
         <argsstring>(in this)</argsstring>
@@ -362,7 +363,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="71" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_ode</definition>
         <argsstring>(in this, in t_ode)</argsstring>
@@ -395,7 +396,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="82" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a8411082da0c9e096a21be71ed3217245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a8411082da0c9e096a21be71ed3217245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_max_iter</definition>
         <argsstring>(in this)</argsstring>
@@ -417,7 +418,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="93" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_max_iter</definition>
         <argsstring>(in this, in t_max_iter)</argsstring>
@@ -450,7 +451,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="104" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::project</definition>
         <argsstring>(in this, in x_tilde, in t)</argsstring>
@@ -543,7 +544,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="185" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00248_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00251_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::solve</definition>
         <argsstring>(in this, in t, in x_0, in varargin)</argsstring>
@@ -650,7 +651,7 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00256_1a9b32e85744bfa4b59dc46728a843f753" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00259_1a9b32e85744bfa4b59dc46728a843f753" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKexplicit::m_A</definition>
         <argsstring></argsstring>
@@ -665,7 +666,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="26" column="10" bodyfile="ODE/RKexplicit.m" bodystart="26" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00256_1a9d185e705f423c885e4b91c69227c670" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00259_1a9d185e705f423c885e4b91c69227c670" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKexplicit::m_b</definition>
         <argsstring></argsstring>
@@ -680,7 +681,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="31" column="10" bodyfile="ODE/RKexplicit.m" bodystart="31" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00256_1ad1b36906b6a5842e94224234ec0f36a0" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00259_1ad1b36906b6a5842e94224234ec0f36a0" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKexplicit::m_c</definition>
         <argsstring></argsstring>
@@ -695,7 +696,7 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="36" column="10" bodyfile="ODE/RKexplicit.m" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_name</definition>
         <argsstring></argsstring>
@@ -710,7 +711,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_ode</definition>
         <argsstring></argsstring>
@@ -725,7 +726,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00248_1aa248ad5dd350504c12475009b9401467" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00251_1aa248ad5dd350504c12475009b9401467" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_max_iter</definition>
         <argsstring></argsstring>
@@ -749,19 +750,19 @@
     <inheritancegraph>
       <node id="1">
         <label>Heun2</label>
-        <link refid="a00132"/>
+        <link refid="a00135"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>ODEsolver</label>
-        <link refid="a00248"/>
+        <link refid="a00251"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
         <label>RKexplicit</label>
-        <link refid="a00256"/>
+        <link refid="a00259"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -772,19 +773,19 @@
     <collaborationgraph>
       <node id="1">
         <label>Heun2</label>
-        <link refid="a00132"/>
+        <link refid="a00135"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>ODEsolver</label>
-        <link refid="a00248"/>
+        <link refid="a00251"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
         <label>RKexplicit</label>
-        <link refid="a00256"/>
+        <link refid="a00259"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -794,31 +795,31 @@
     </collaborationgraph>
     <location file="ODE/ExplicitMethods/Heun2.m" line="4" column="1" bodyfile="ODE/ExplicitMethods/Heun2.m" bodystart="5" bodyend="41"/>
     <listofallmembers>
-      <member refid="a00256_1ab9999241cfd0871f748d1f305bf8f504" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_A</name></member>
-      <member refid="a00256_1a24e40fa536c7312e5ddcc444755fc468" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_b</name></member>
-      <member refid="a00256_1aa152d02f1d648022af25c8f5c67f3030" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_c</name></member>
-      <member refid="a00248_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_max_iter</name></member>
-      <member refid="a00248_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_name</name></member>
-      <member refid="a00248_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_ode</name></member>
-      <member refid="a00132_1a1738fef9b2e5c82d696439bde46dbd8e" prot="public" virt="non-virtual"><scope>Heun2</scope><name>Heun2</name></member>
-      <member refid="a00256_1a9b32e85744bfa4b59dc46728a843f753" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_A</name></member>
-      <member refid="a00256_1a9d185e705f423c885e4b91c69227c670" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_b</name></member>
-      <member refid="a00256_1ad1b36906b6a5842e94224234ec0f36a0" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_c</name></member>
-      <member refid="a00248_1aa248ad5dd350504c12475009b9401467" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_max_iter</name></member>
-      <member refid="a00248_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_name</name></member>
-      <member refid="a00248_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_ode</name></member>
-      <member refid="a00248_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>Heun2</scope><name>ODEsolver</name></member>
-      <member refid="a00248_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>Heun2</scope><name>project</name></member>
-      <member refid="a00256_1af77a8bb27f7250531cc013e4c0f888ae" prot="public" virt="non-virtual"><scope>Heun2</scope><name>RKexplicit</name></member>
-      <member refid="a00256_1a2e5173a007bbf6df93c034171e316415" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_A</name></member>
-      <member refid="a00256_1a17aaf4d6bcde8fa7290c18ef7800ad05" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_b</name></member>
-      <member refid="a00256_1a5ecac0a56f3ed4d52e8667ae5e720f67" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_c</name></member>
-      <member refid="a00248_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_max_iter</name></member>
-      <member refid="a00248_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_name</name></member>
-      <member refid="a00248_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_ode</name></member>
-      <member refid="a00248_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>Heun2</scope><name>solve</name></member>
-      <member refid="a00256_1a7d7a59c02ec394c13eaf8f2950e51e9d" prot="public" virt="non-virtual"><scope>Heun2</scope><name>step</name></member>
-      <member refid="a00248_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" virt="virtual" ambiguityscope="ODEsolver::"><scope>Heun2</scope><name>step</name></member>
+      <member refid="a00259_1ab9999241cfd0871f748d1f305bf8f504" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_A</name></member>
+      <member refid="a00259_1a24e40fa536c7312e5ddcc444755fc468" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_b</name></member>
+      <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_c</name></member>
+      <member refid="a00251_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_max_iter</name></member>
+      <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_name</name></member>
+      <member refid="a00251_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>Heun2</scope><name>get_ode</name></member>
+      <member refid="a00135_1a1738fef9b2e5c82d696439bde46dbd8e" prot="public" virt="non-virtual"><scope>Heun2</scope><name>Heun2</name></member>
+      <member refid="a00259_1a9b32e85744bfa4b59dc46728a843f753" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_A</name></member>
+      <member refid="a00259_1a9d185e705f423c885e4b91c69227c670" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_b</name></member>
+      <member refid="a00259_1ad1b36906b6a5842e94224234ec0f36a0" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_c</name></member>
+      <member refid="a00251_1aa248ad5dd350504c12475009b9401467" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_max_iter</name></member>
+      <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_name</name></member>
+      <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>Heun2</scope><name>m_ode</name></member>
+      <member refid="a00251_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>Heun2</scope><name>ODEsolver</name></member>
+      <member refid="a00251_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>Heun2</scope><name>project</name></member>
+      <member refid="a00259_1af77a8bb27f7250531cc013e4c0f888ae" prot="public" virt="non-virtual"><scope>Heun2</scope><name>RKexplicit</name></member>
+      <member refid="a00259_1a2e5173a007bbf6df93c034171e316415" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_A</name></member>
+      <member refid="a00259_1a17aaf4d6bcde8fa7290c18ef7800ad05" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_b</name></member>
+      <member refid="a00259_1a5ecac0a56f3ed4d52e8667ae5e720f67" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_c</name></member>
+      <member refid="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_max_iter</name></member>
+      <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_name</name></member>
+      <member refid="a00251_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>Heun2</scope><name>set_ode</name></member>
+      <member refid="a00251_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>Heun2</scope><name>solve</name></member>
+      <member refid="a00259_1a7d7a59c02ec394c13eaf8f2950e51e9d" prot="public" virt="non-virtual"><scope>Heun2</scope><name>step</name></member>
+      <member refid="a00251_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" virt="virtual" ambiguityscope="ODEsolver::"><scope>Heun2</scope><name>step</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

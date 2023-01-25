@@ -11,7 +11,7 @@ Program Listing for File RKimplicit.m
 .. code-block:: MATLAB
 
    %
-   %> Class implementing the abstract function `step` for the 
+   %> Class implementing the abstract function `step` for the
    %> advancing using **implicit** Runge-Kutta methods.
    %> The user must simply define the Tableau of the Runge-Kutta method:
    %>
@@ -36,7 +36,7 @@ Program Listing for File RKimplicit.m
    %>     \end{array}
    %> \f]
    %>
-   %> where the coefficients \f$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T \f$ are the solution of 
+   %> where the coefficients \f$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T \f$ are the solution of
    %> \f$ \mathbf{F}(\mathbf{K}) = \mathbf{0} \f$ the nonlinear system
    %>
    %> \f[
@@ -60,7 +60,7 @@ Program Listing for File RKimplicit.m
    %>     \end{array}
    %> \f]
    %
-   classdef RKimplicit < indigo.ODEsolver
+   classdef RKimplicit < ODEsolver
      %
      properties (SetAccess = protected, Hidden = true)
        %
@@ -79,7 +79,7 @@ Program Listing for File RKimplicit.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Initialize the class with the method name and the Butcher tableau
        %>
@@ -88,24 +88,27 @@ Program Listing for File RKimplicit.m
        %> - *c* Runge-Kutta nodes vector (column vector)
        %
        function this = RKimplicit( name, A, b, c )
+         CMD = 'RKimplicit::RKimplicit(...): ';
+         assert( ismatrix(A), ...
+           [CMD, 'Found Runge-Kutta matrix A not as a matrix.'] );
+         assert( ~nnz(isnan(A)), ...
+           [CMD, 'Found NaN in Runge-Kutta matrix A.'] );
+         assert( isrow(b), ...
+           [CMD, 'Found Runge-Kutta weights vector b not as a row vector.'] );
+         assert( ~nnz(isnan(b)), ...
+           [CMD, 'Found NaN in Runge-Kutta weights vector b.'] );
+         assert( iscolumn(c), ...
+           [CMD, 'Found Runge-Kutta nodes vector c not as a column vector.'] );
+         assert( ~nnz(isnan(c)), ...
+           [CMD, 'Found NaN in Runge-Kutta nodes vector c.'] );
    
-         CMD = 'indigo::RKimplicit::RKimplicit(...): ';
-   
-         assert(isrow(b), ...
-           [CMD, 'Found Runge-Kutta weights vector b not as a row vector']);
-         assert(iscolumn(c), ...
-           [CMD, 'Found Runge-Kutta nodes vector c vector not as a column vector']);
-   
-         this@indigo.ODEsolver( name );
-   
-         this.check_tableau( A, b, c );
-   
+         this@ODEsolver( name );
          this.m_A = A;
          this.m_b = b;
          this.m_c = c;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Get the Runge-Kutta matrix
        %
@@ -113,7 +116,7 @@ Program Listing for File RKimplicit.m
          out = this.m_A;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Get the Runge-Kutta weights vector (row vector)
        %
@@ -121,7 +124,7 @@ Program Listing for File RKimplicit.m
          out = this.m_b;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Get the Runge-Kutta nodes vector (column vector)
        %
@@ -129,29 +132,42 @@ Program Listing for File RKimplicit.m
          out = this.m_c;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Set the Runge-Kutta matrix
        %
-       function set_A( this, in )
+       function setA( this, in )
+         CMD = 'RKimplicit::set_A(...): ';
+         assert( ismatrix(in), ...
+           [CMD, 'Found Runge-Kutta matrix A not as a matrix.'] );
+         assert( ~nnz(isnan(in)), ...
+           [CMD, 'Found NaN in Runge-Kutta matrix A.'] );
          this.m_A = in;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Set the Runge-Kutta weights vector (row vector)
        %
-       function setB( this, in )
-         assert( isrow(in), 'RKimplicit::setB(...): Found Runge-Kutta weights vector b not as a row vector' );
+       function set_b( this, in )
+         CMD = 'RKimplicit::set_b(...): ';
+         assert( isrow(in), ...
+           [CMD, 'Found Runge-Kutta weights vector b not as a row vector.'] );
+         assert( ~nnz(isnan(in)), ...
+           [CMD, 'Found NaN in Runge-Kutta weights vector b.'] );
          this.m_b = in;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Set the Runge-Kutta nodes vector (column vector)
        %
-       function setC( this, in )
-         assert( iscolumn(c), 'RKimplicit::setC(...): Found Runge-Kutta nodes vector c vector not as a column vector' );
+       function set_c( this, in )
+         CMD = 'RKimplicit::set_c(...): ';
+         assert( iscolumn(in), ...
+           [CMD, 'Found Runge-Kutta nodes vector c not as a column vector.'] );
+         assert( ~nnz(isnan(in)), ...
+           [CMD, 'Found NaN in Runge-Kutta nodes vector c.'] );
          this.m_c = in;
        end
        %
@@ -159,18 +175,20 @@ Program Listing for File RKimplicit.m
        %
        %> Check the Butcher tableau
        %
-       function out = check_tableau( this, A, b, c )
-   
+       function check_tableau( this, A, b, c )
          CMD = 'indigo::RKimplicit::check_tableau(...): ';
-   
-   
+         assert( size(A, 1) == size(c, 1), ...
+           [CMD, 'Found Runge-Kutta matrix A rows != rows of nodes vector c.'] );
+         assert( size(A, 2) == size(b, 2), ...
+           [CMD, 'Found Runge-Kutta matrix A columns ', ...
+            '!= columns of weights vector b.'] );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Compute the step residual \f$ \mathbf{F}(\mathbf{K}) \f$
+       %> Compute the step residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \f$
        %
-       function R = stepResidual( this, K, t_k, x_k, d_t )
+       function R = stepResidual( this, x_k, K, t_k, d_t )
          nc  = length(this.m_c);
          nx  = length(x_k);
          R   = zeros(nc*nx, 1);
@@ -182,18 +200,18 @@ Program Listing for File RKimplicit.m
              tmp = tmp + this.m_A(i,j) * K(jdx);
              jdx = jdx + nx;
            end
-           R(idx) = K(idx) - d_t * this.m_ode.f( t_k + this.m_c(i) * d_t, tmp );
+           R(idx) = this.m_ode.F(tmp, K(idx), t_k + this.m_c(i) * d_t);
            idx    = idx + nx;
          end
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Compute the Jacobian of \f$ \mathbf{F}(\mathbf{K}) \f$:
+       %> Compute the Jacobian of \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \f$:
        %>
-       %> \f[ \frac{\partial\mathbf{F}(\mathbf{K})}{\partial \mathbf{K}} \f].
+       %> \f[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \f].
        %
-       function JR = stepJacobian( this, K, t_k, x_k, d_t )
+       function JR = stepJacobian( this, x_k, K, t_k, d_t )
          A   = this.m_A;
          c   = this.m_c;
          nc  = length(this.m_c);
@@ -207,45 +225,43 @@ Program Listing for File RKimplicit.m
              tmp = tmp + A(i,j) * K(jdx);
              jdx = jdx + nx;
            end
-           ti  = t_k + c(i) * d_t;
            jdx = 1:nx;
            for j = 1:nc
-             JR(idx,jdx) = JR(idx,jdx) - d_t * A(i,j)*this.m_ode.DfDx( ti, tmp );
+             [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + c(i) * d_t);
+             JR(idx,jdx)      = JF_x * d_t * A(i,j) + JF_x_dot;
              jdx = jdx + nx;
            end
            idx = idx + nx;
          end
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Solve the implicit step \f$ \mathbf{F}(\mathbf{K})=\mathbf{0} \f$ by Newton method
+       %> Solve the implicit step \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$ by Newton method
        %>
        %> \f[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
        %>     \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \f].
        %
-       function K = solveStep( this, t_k, x_k, d_t )
-         ns  = length( this.m_c );
-         K_0  = d_t * this.m_ode.f( t_k, x_k );
-         K   = repmat( K_0(:), ns, 1);
-         fun = @(K) this.stepResidual( K, t_k, x_k, d_t );
-         jac = @(K) this.stepJacobian( K, t_k, x_k, d_t );
-         [K, ierr] = NewtonSolver( fun, jac, K );
+       function K = solveStep( this, x_k, x_dot_k, t_k, d_t )
+         fun = @(x_dot_k) this.stepResidual( x_k, x_dot_k, t_k, d_t );
+         jac = @(x_dot_k) this.stepJacobian( x_k, x_dot_k, t_k, d_t );
+         K0  = x_dot_k;
+         [K, ierr] = NewtonSolver( fun, jac, K0 );
          if ierr ~= 0
            fprintf( 1, 'RKimplicit::solveStep(...): Not converged flag = %d!\n', ierr );
          end
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{K})=\mathbf{0} \f$
+       %> Perform an implicit step by solving the residual \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$
        %
-       function out = step( this, t_k, x_k, d_t )
-         K   = this.solveStep( t_k, x_k, d_t );
-         out = x_k + reshape( K, length(x_k), length(this.m_c) ) * this.m_b(:);
+       function [out, K] = step( this, x_k, x_dot_k, t_k, d_t )
+         K   = this.solveStep( x_k, x_dot_k, t_k, d_t );
+         out = x_k + d_t * this.m_b(:) * K;
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

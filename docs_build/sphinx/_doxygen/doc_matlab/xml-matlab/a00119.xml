@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
-  <compounddef id="a00116" kind="class" language="C++" prot="public">
+  <compounddef id="a00119" kind="class" language="C++" prot="public">
     <compoundname>Base</compoundname>
     <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
-    <derivedcompoundref refid="a00252" prot="public" virt="non-virtual">ODEsystem</derivedcompoundref>
+    <derivedcompoundref refid="a00255" prot="public" virt="non-virtual">ODEsystem</derivedcompoundref>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00119_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property Base::m_name</definition>
         <argsstring></argsstring>
@@ -20,7 +20,7 @@
         </inbodydescription>
         <location file="Base.m" line="14" column="10" bodyfile="Base.m" bodystart="14" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00119_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property Base::m_num_eqns</definition>
         <argsstring></argsstring>
@@ -35,7 +35,7 @@
         </inbodydescription>
         <location file="Base.m" line="19" column="10" bodyfile="Base.m" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00119_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property Base::m_num_invs</definition>
         <argsstring></argsstring>
@@ -52,7 +52,7 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00116_1a606023c352e27bb5cc5a56f6850c27da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00119_1a606023c352e27bb5cc5a56f6850c27da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::Base</definition>
         <argsstring>(in t_name, in t_num_eqns, in t_num_invs)</argsstring>
@@ -105,7 +105,7 @@
         </inbodydescription>
         <location file="Base.m" line="40" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00119_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::get_num_eqns</definition>
         <argsstring>(in this)</argsstring>
@@ -127,7 +127,7 @@
         </inbodydescription>
         <location file="Base.m" line="53" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00116_1a8acdc198f9503ad4df0938412359d4fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00119_1a8acdc198f9503ad4df0938412359d4fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::set_num_eqns</definition>
         <argsstring>(in this, in t_num_eqns)</argsstring>
@@ -160,7 +160,7 @@
         </inbodydescription>
         <location file="Base.m" line="64" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00119_1a547ccdd8280c668961998fc8e561492e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::get_num_invs</definition>
         <argsstring>(in this)</argsstring>
@@ -182,7 +182,7 @@
         </inbodydescription>
         <location file="Base.m" line="76" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00116_1afbed901db1ac25ff5a3bd9607f129549" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00119_1afbed901db1ac25ff5a3bd9607f129549" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Base::set_num_invs</definition>
         <argsstring>(in this, in t_num_invs)</argsstring>
@@ -224,13 +224,13 @@
     <inheritancegraph>
       <node id="1">
         <label>Base</label>
-        <link refid="a00116"/>
+        <link refid="a00119"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>ODEsystem</label>
-        <link refid="a00252"/>
+        <link refid="a00255"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
@@ -241,7 +241,7 @@
     <collaborationgraph>
       <node id="1">
         <label>Base</label>
-        <link refid="a00116"/>
+        <link refid="a00119"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -251,14 +251,14 @@
     </collaborationgraph>
     <location file="Base.m" line="5" column="1" bodyfile="Base.m" bodystart="6" bodyend="96"/>
     <listofallmembers>
-      <member refid="a00116_1a606023c352e27bb5cc5a56f6850c27da" prot="public" virt="non-virtual"><scope>Base</scope><name>Base</name></member>
-      <member refid="a00116_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_eqns</name></member>
-      <member refid="a00116_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_invs</name></member>
-      <member refid="a00116_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>Base</scope><name>m_name</name></member>
-      <member refid="a00116_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_eqns</name></member>
-      <member refid="a00116_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_invs</name></member>
-      <member refid="a00116_1a8acdc198f9503ad4df0938412359d4fd" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_eqns</name></member>
-      <member refid="a00116_1afbed901db1ac25ff5a3bd9607f129549" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_invs</name></member>
+      <member refid="a00119_1a606023c352e27bb5cc5a56f6850c27da" prot="public" virt="non-virtual"><scope>Base</scope><name>Base</name></member>
+      <member refid="a00119_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_eqns</name></member>
+      <member refid="a00119_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_invs</name></member>
+      <member refid="a00119_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>Base</scope><name>m_name</name></member>
+      <member refid="a00119_1a2afc6f457a733d1e90971b2e3d6a5ef0" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_eqns</name></member>
+      <member refid="a00119_1abea400bb1e63fabb6364e85aa3c384a1" prot="private" virt="non-virtual"><scope>Base</scope><name>m_num_invs</name></member>
+      <member refid="a00119_1a8acdc198f9503ad4df0938412359d4fd" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_eqns</name></member>
+      <member refid="a00119_1afbed901db1ac25ff5a3bd9607f129549" prot="public" virt="non-virtual"><scope>Base</scope><name>set_num_invs</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

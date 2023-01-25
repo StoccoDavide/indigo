@@ -21,7 +21,6 @@ Class Documentation
 
 .. doxygenclass:: RadauIIA5
    :project: doc_matlab
-   :project: doc_matlab
    :members:
    :protected-members:
    :undoc-members:

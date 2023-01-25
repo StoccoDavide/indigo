@@ -21,7 +21,6 @@ Class Documentation
 
 .. doxygenclass:: GaussLegendre6
    :project: doc_matlab
-   :project: doc_matlab
    :members:
    :protected-members:
    :undoc-members:

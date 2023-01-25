@@ -4,18 +4,19 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Class LobattoIIICS4 &#8212; indigo v</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
     <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Class LobattoIIID2" href="class_a00227.html" />
@@ -36,28 +37,403 @@
 
           <div class="body" role="main">
             
-  <section id="class-lobattoiiics4">
+  <div class="section" id="class-lobattoiiics4">
 <span id="exhale-class-a00223"></span><h1>Class LobattoIIICS4<a class="headerlink" href="#class-lobattoiiics4" title="Permalink to this headline">¶</a>
 </h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file_ODE_ImplicitMethods_LobattoIIICS4.m.html#file-ode-implicitmethods-lobattoiiics4-m"><span class="std std-ref">File LobattoIIICS4.m</span></a></p></li>
 </ul>
-<section id="inheritance-relationships">
+<div class="section" id="inheritance-relationships">
 <h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
 </h2>
-<section id="base-type">
+<div class="section" id="base-type">
 <h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
 </h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKimplicit</span></code> (<a class="reference internal" href="class_a00263.html#exhale-class-a00263"><span class="std std-ref">Class RKimplicit</span></a>)</p></li>
 </ul>
-</section>
-</section>
-<section id="class-documentation">
+</div>
+</div>
+<div class="section" id="class-documentation">
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
 </h2>
-</section>
-</section>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv413LobattoIIICS4">
+<span id="_CPPv313LobattoIIICS4"></span><span id="_CPPv213LobattoIIICS4"></span><span id="LobattoIIICS4"></span><span class="target" id="a00223"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LobattoIIICS4</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00263.html#_CPPv410RKimplicit" title="RKimplicit"><span class="n"><span class="pre">RKimplicit</span></span></a><a class="headerlink" href="#_CPPv413LobattoIIICS4" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class container for Lobatto IIIC$^\star$ fourth-order method (3 stages) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS413LobattoIIICS4Ev">
+<span id="_CPPv3N13LobattoIIICS413LobattoIIICS4Ev"></span><span id="_CPPv2N13LobattoIIICS413LobattoIIICS4Ev"></span><span id="LobattoIIICS4::LobattoIIICS4"></span><span class="target" id="a00223_1ab357ac3b2f2f7d5f16d3abba50900f67"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LobattoIIICS4</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS413LobattoIIICS4Ev" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Lobatto IIIC$^\star$ fourth-order method (3 stages)</p>
+<p></p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{c|ccc}
+    0 &amp;   0 &amp;   0 &amp;   0 \\
+  1/2 &amp; 1/4 &amp; 1/4 &amp;   0 \\
+    1 &amp;   0 &amp;   1 &amp;   0 \\
+  \hline
+      &amp; 1/6 &amp; 2/3 &amp; 1/6
+\end{array}\end{split}\]</div>
+
+ 
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS45get_AE2in">
+<span id="_CPPv3N13LobattoIIICS45get_AE2in"></span><span id="_CPPv2N13LobattoIIICS45get_AE2in"></span><span id="LobattoIIICS4::get_A__in"></span><span class="target" id="a00263_1aa0906abffeb4bad00155109fae1064c7"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS45get_AE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the Runge-Kutta matrix. </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS45get_bE2in">
+<span id="_CPPv3N13LobattoIIICS45get_bE2in"></span><span id="_CPPv2N13LobattoIIICS45get_bE2in"></span><span id="LobattoIIICS4::get_b__in"></span><span class="target" id="a00263_1aaa48759e248d6b186368ea103c9a102a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS45get_bE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the Runge-Kutta weights vector (row vector) </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS45get_cE2in">
+<span id="_CPPv3N13LobattoIIICS45get_cE2in"></span><span id="_CPPv2N13LobattoIIICS45get_cE2in"></span><span id="LobattoIIICS4::get_c__in"></span><span class="target" id="a00263_1a9e7f48b77103ad2aa3d521530f91e076"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS45get_cE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the Runge-Kutta nodes vector (column vector) </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS44setAE2in2in">
+<span id="_CPPv3N13LobattoIIICS44setAE2in2in"></span><span id="_CPPv2N13LobattoIIICS44setAE2in2in"></span><span id="LobattoIIICS4::setA__in.in"></span><span class="target" id="a00263_1a3897ed26b7e344062416f044b9fc84d1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setA</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N13LobattoIIICS44setAE2in2in" title="LobattoIIICS4::setA::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> , <a class="reference internal" href="#_CPPv4N13LobattoIIICS44setAE2in2in" title="LobattoIIICS4::setA::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> </span><span class="n sig-param"><span class="sig-paren">()</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS44setAE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the Runge-Kutta matrix. </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS45set_bE2in2in">
+<span id="_CPPv3N13LobattoIIICS45set_bE2in2in"></span><span id="_CPPv2N13LobattoIIICS45set_bE2in2in"></span><span id="LobattoIIICS4::set_b__in.in"></span><span class="target" id="a00263_1ae1d11b9f36628e4140b77dba1476734a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N13LobattoIIICS45set_bE2in2in" title="LobattoIIICS4::set_b::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> , <a class="reference internal" href="#_CPPv4N13LobattoIIICS45set_bE2in2in" title="LobattoIIICS4::set_b::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> </span><span class="n sig-param"><span class="sig-paren">()</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS45set_bE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the Runge-Kutta weights vector (row vector) </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS45set_cE2in2in">
+<span id="_CPPv3N13LobattoIIICS45set_cE2in2in"></span><span id="_CPPv2N13LobattoIIICS45set_cE2in2in"></span><span id="LobattoIIICS4::set_c__in.in"></span><span class="target" id="a00263_1a33ce647c286131462ec9bc429b43cd08"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N13LobattoIIICS45set_cE2in2in" title="LobattoIIICS4::set_c::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> , <a class="reference internal" href="#_CPPv4N13LobattoIIICS45set_cE2in2in" title="LobattoIIICS4::set_c::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> </span><span class="n sig-param"><span class="sig-paren">()</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS45set_cE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the Runge-Kutta nodes vector (column vector) </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS413check_tableauE2in2in2in2in">
+<span id="_CPPv3N13LobattoIIICS413check_tableauE2in2in2in2in"></span><span id="_CPPv2N13LobattoIIICS413check_tableauE2in2in2in2in"></span><span id="LobattoIIICS4::check_tableau__in.in.in.in"></span><span class="target" id="a00263_1adfa0b8f90fd3302c10d42084a677c4ff"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS413check_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check the Butcher tableau. </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS412stepResidualE2in2in2in2in2in">
+<span id="_CPPv3N13LobattoIIICS412stepResidualE2in2in2in2in2in"></span><span id="_CPPv2N13LobattoIIICS412stepResidualE2in2in2in2in2in"></span><span id="LobattoIIICS4::stepResidual__in.in.in.in.in"></span><span class="target" id="a00263_1a66160728f47f89bf6efb6499365a1d34"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stepResidual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS412stepResidualE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the step residual <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \)</span>. </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS412stepJacobianE2in2in2in2in2in">
+<span id="_CPPv3N13LobattoIIICS412stepJacobianE2in2in2in2in2in"></span><span id="_CPPv2N13LobattoIIICS412stepJacobianE2in2in2in2in2in"></span><span id="LobattoIIICS4::stepJacobian__in.in.in.in.in"></span><span class="target" id="a00263_1a3073640d83dfea96e94e283a98a6b46b"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stepJacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS412stepJacobianE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the Jacobian of <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \]</div>
+. 
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS49solveStepE2in2in2in2in2in">
+<span id="_CPPv3N13LobattoIIICS49solveStepE2in2in2in2in2in"></span><span id="_CPPv2N13LobattoIIICS49solveStepE2in2in2in2in2in"></span><span id="LobattoIIICS4::solveStep__in.in.in.in.in"></span><span class="target" id="a00263_1a83da1836c9a708eba916a9f50562282a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solveStep</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS49solveStepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the implicit step <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \)</span> by Newton method</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
+    \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \]</div>
+. 
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS44stepE2in2in2in2in2in">
+<span id="_CPPv3N13LobattoIIICS44stepE2in2in2in2in2in"></span><span id="_CPPv2N13LobattoIIICS44stepE2in2in2in2in2in"></span><span id="LobattoIIICS4::step__in.in.in.in.in"></span><span class="target" id="a00263_1a0193256fd309fadc298287dd71c8874e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS44stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Perform an implicit step by solving the residual <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \)</span>. </p>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS48get_nameE2in">
+<span id="_CPPv3N13LobattoIIICS48get_nameE2in"></span><span id="_CPPv2N13LobattoIIICS48get_nameE2in"></span><span id="LobattoIIICS4::get_name__in"></span><span class="target" id="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS48get_nameE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the name of the method used to integrate the system of ODEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The name of the solver. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS48set_nameE2in2in">
+<span id="_CPPv3N13LobattoIIICS48set_nameE2in2in"></span><span id="_CPPv2N13LobattoIIICS48set_nameE2in2in"></span><span id="LobattoIIICS4::set_name__in.in"></span><span class="target" id="a00251_1a40bb03ebfe42e7377881f48ba450e339"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS48set_nameE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the name of the method used to integrate the system of ODEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>name</strong> – The name of the solver. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS47get_odeE2in">
+<span id="_CPPv3N13LobattoIIICS47get_odeE2in"></span><span id="_CPPv2N13LobattoIIICS47get_odeE2in"></span><span id="LobattoIIICS4::get_ode__in"></span><span class="target" id="a00251_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS47get_odeE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the system of ODEs to be solved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The system of ODEs to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS47set_odeE2in2in">
+<span id="_CPPv3N13LobattoIIICS47set_odeE2in2in"></span><span id="_CPPv2N13LobattoIIICS47set_odeE2in2in"></span><span id="LobattoIIICS4::set_ode__in.in"></span><span class="target" id="a00251_1a25f67f3d4e229ebc0f5514e71887663c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS47set_odeE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the system of ODEs to be solved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>ode</strong> – The system of ODEs to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS412get_max_iterE2in">
+<span id="_CPPv3N13LobattoIIICS412get_max_iterE2in"></span><span id="_CPPv2N13LobattoIIICS412get_max_iterE2in"></span><span id="LobattoIIICS4::get_max_iter__in"></span><span class="target" id="a00251_1a8411082da0c9e096a21be71ed3217245"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_iter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS412get_max_iterE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the maximum number of iterations in the projection process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The maximum number of iterations in the projection process. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS412set_max_iterE2in2in">
+<span id="_CPPv3N13LobattoIIICS412set_max_iterE2in2in"></span><span id="_CPPv2N13LobattoIIICS412set_max_iterE2in2in"></span><span id="LobattoIIICS4::set_max_iter__in.in"></span><span class="target" id="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_iter</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_iter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS412set_max_iterE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the maximum number of iterations in the projection process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>max_iter</strong> – The maximum number of iterations in the projection process. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS47projectE2in2in2in">
+<span id="_CPPv3N13LobattoIIICS47projectE2in2in2in"></span><span id="_CPPv2N13LobattoIIICS47projectE2in2in2in"></span><span id="LobattoIIICS4::project__in.in.in"></span><span class="target" id="a00251_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS47projectE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the ODEs system through the problem:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{minimize} \quad
+\dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\]</div>
+
+<p>given the Lagrangian <span class="math notranslate nohighlight">\( \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \)</span> of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
+\frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
+\boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).
+\]</div>
+
+<p>The solution of the problem is obtained by solving the following:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{\begin{array}{l}
+\mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =
+\widetilde{\mathbf{x}} \\[0.5em]
+\mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\end{array}\right.
+\end{split}\]</div>
+
+<p><strong>Solution algorithm</strong></p>
+<p>Using the Taylor expansion of the Lagrangian:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +
+\mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
+\]</div>
+
+<p>define the iterative method as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
+\]</div>
+
+<p>Notice that <span class="math notranslate nohighlight">\( \delta\mathbf{x} \)</span> is the solution of the linear system:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em]
+\mathbf{JH}_\mathbf{x} &amp; \mathbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+\delta\mathbf{x} \\[0.5em]
+\boldsymbol{\lambda}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
+-\mathbf{H}(\mathbf{x}, t)
+\end{bmatrix}
+\end{split}\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathbf{JH}_\mathbf{x} \)</span> is the Jacobian of the invariants/ hidden constraints with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_tilde</strong> – The initial guess for the states <span class="math notranslate nohighlight">\( \widetilde{\mathbf{x}} \)</span>. </p></li>
+<li><p><strong>t</strong> – The time <span class="math notranslate nohighlight">\( t \)</span> at which the states are evaluated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The solution of the projection problem <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13LobattoIIICS45solveE2in2in2in2in">
+<span id="_CPPv3N13LobattoIIICS45solveE2in2in2in2in"></span><span id="_CPPv2N13LobattoIIICS45solveE2in2in2in2in"></span><span id="LobattoIIICS4::solve__in.in.in.in"></span><span class="target" id="a00251_1ae3194efaa3521a1ddc38488ff2a86118"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13LobattoIIICS45solveE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the system of ODEs and calculate the approximate solution.</p>
+<p><strong>Usage:</strong></p>
+<p>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>sol = obj.solve(t, x_0);
+</pre></div>
+</div>
+
+<p>Solve with the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>sol = obj.solve(t, x_0, true);
+</pre></div>
+</div>
+
+<p>Solve without the solution projection on invariants/hidden constraints and enabled verbose mode.</p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>sol = obj.solve(t, x_0, false, true);
+</pre></div>
+</div>
+
+<p>Plot the first component of the solution.</p>
+<p></p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>plot(t, sol(1,:));
+</pre></div>
+</div>
+
+ 
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>t</strong> – Time vector <span class="math notranslate nohighlight">\( \left[ t_0, t_1, \ldots, t_n \right]^T \)</span>. </p></li>
+<li><p><strong>x_0</strong> – Initial states value <span class="math notranslate nohighlight">\( \mathbf{x}(t_0) \)</span>. </p></li>
+<li><p><strong>project</strong> – [optional, default = false] Apply projection to invariants at each step. </p></li>
+<li><p><strong>verbose</strong> – [optional, default = <span class="math notranslate nohighlight">\( \mathrm{false} \)</span>] Activate vebose mode. </p></li>
+<li><p><strong>epsilon</strong> – [optional, default = <span class="math notranslate nohighlight">\( 1.0\mathrm{e}3 \)</span>] If <span class="math notranslate nohighlight">\( || \mathbf{x} ||_{\infty} &gt; \varepsilon \)</span> the computation is interrupted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+           (t)\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}
+           (t) \)</span> of the system of ODEs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</dd>
+</dl>
+
+</div>
+</div>
 
 
 
@@ -81,16 +457,11 @@
 </div>
 <script>$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table of Contents</a></h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_INTRO.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_TOOLBOX.html">DAE-Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="root.html">MATLAB API</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="root.html#class-hierarchy">Class Hierarchy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="root.html#file-hierarchy">File Hierarchy</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="root.html#full-api">Full API</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
 </ul>
 
         </div>
@@ -101,8 +472,8 @@
       &copy;2023, Davide Stocco and Sebastiano Taddei.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

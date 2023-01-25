@@ -12,4 +12,3 @@ Function Documentation
 
 .. doxygenfunction:: NewtonSolver(in, in, in, in)
    :project: doc_matlab
-   :project: doc_matlab

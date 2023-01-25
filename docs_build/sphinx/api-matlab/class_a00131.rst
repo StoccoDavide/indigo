@@ -21,7 +21,6 @@ Class Documentation
 
 .. doxygenclass:: ExplicitMidpoint
    :project: doc_matlab
-   :project: doc_matlab
    :members:
    :protected-members:
    :undoc-members:
