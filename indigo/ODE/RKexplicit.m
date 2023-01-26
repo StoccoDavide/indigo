@@ -322,7 +322,7 @@ classdef RKexplicit < ODEsolver
         out = false;
       end
       if (size(A, 1) == length(c))
-        warning([CMD, 'vector b is not consistent with the size of matrix A.']);
+        warning([CMD, 'vector c is not consistent with the size of matrix A.']);
         out = false;
       end
     end
