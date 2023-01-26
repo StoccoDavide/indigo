@@ -1,5 +1,5 @@
 %
-%> Class container for Runge-Kutta 3/8-rule third-order method (4 stages)
+%> Class container for Runge-Kutta 3/8-rule third-order method.
 %
 classdef RK38 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef RK38 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Runge-Kutta 3/8-rule fourth-order method (4 stages)
+    %> Runge-Kutta 3/8-rule fourth-order method.
     %>
     %> \rst
     %> .. math::
@@ -23,7 +23,7 @@ classdef RK38 < RKexplicit
     %>
     %> \endrst
     %
-    function this = RK38( ~ )
+    function this = RK38()
       this@RKexplicit( ...
         'RK38',...
         [   0,  0, 0, 0; ...

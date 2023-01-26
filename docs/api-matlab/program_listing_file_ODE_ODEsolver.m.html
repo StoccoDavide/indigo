@@ -40,7 +40,7 @@
 <p>↰ <a class="reference internal" href="file_ODE_ODEsolver.m.html#file-ode-odesolver-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">ODE/ODEsolver.m</span></code>)</p>
 <div class="highlight-MATLAB notranslate">
 <div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
-<span class="c">%&gt; Class container for solver of  the system of Ordinary Differential Equations</span><span class="w"></span>
+<span class="c">%&gt; Class container for solvers of the system of Ordinary Differential Equations</span><span class="w"></span>
 <span class="c">%&gt; (ODEs) or Differential Algebraic Equations (DAEs).</span><span class="w"></span>
 <span class="c">%</span><span class="w"></span>
 <span class="k">classdef</span><span class="w"> </span><span class="n">ODEsolver</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">handle</span><span class="w"></span>
@@ -132,7 +132,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_iter</span><span class="p">(</span> this, t_max_iter <span class="p">)</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::set_max_iter(...)'</span><span class="w"></span>
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::set_max_iter(...)'</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">t_max_iter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid maximum number of iterations.'</span><span class="p">]);</span><span class="w"></span>
@@ -220,7 +220,7 @@
 <span class="w">      </span><span class="n">num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">get_num_invs</span><span class="p">();</span><span class="w"></span>
 <span class="w">      </span><span class="n">x</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="n">x_tilde</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x_tilde</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x_tilde</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'the number of states does not match the number of equations.'</span><span class="p">]);</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Check if there are any constraints</span><span class="w"></span>
@@ -238,7 +238,7 @@
 <span class="w">          </span><span class="c">% \ JH   0  / \ lambda /   \      -H       /</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">% Evaluate the invariants/hidden constraints vector and its Jacobian</span><span class="w"></span>
-<span class="w">          </span><span class="n">J</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">H</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
 <span class="w">          </span><span class="n">JH</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">JH</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">% Compute the solution of the linear system</span><span class="w"></span>
@@ -254,9 +254,8 @@
 <span class="w">          </span><span class="c">% Check if the solution is found</span><span class="w"></span>
 <span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tolerance</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tolerance</span><span class="p">)</span><span class="w"></span>
 <span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">          </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MAX_ITER</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="k">elseif</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MAX_ITER</span><span class="p">)</span><span class="w"></span>
 <span class="w">            </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'maximum number of iterations reached.'</span><span class="p">]);</span><span class="w"></span>
-<span class="w">          </span><span class="k">end</span><span class="w"></span>
 <span class="w">          </span><span class="k">end</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
@@ -390,7 +389,7 @@
 <span class="w">        </span><span class="n">norm_x_new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">norm_x_new</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span><span class="w"></span>
 <span class="w">          </span><span class="nb">fprintf</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'in %s solver, at t(%d) = %g, ||x||_inf = %g, '</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
-<span class="w">          </span><span class="s">'computation interrupted.\n'</span><span class="p">],</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">norm_xnew</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="s">'computation interrupted.\n'</span><span class="p">],</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">norm_x_new</span><span class="p">);</span><span class="w"></span>
 <span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 
@@ -461,10 +460,12 @@
 <script>$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_INTRO.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_TOOLBOX.html">DAE-Toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
         </div>
@@ -472,7 +473,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Davide Stocco and Sebastiano Taddei.
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>

@@ -11,7 +11,7 @@ Program Listing for File Ralston3.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Ralston's third-order method (3 stages)
+   %> Class container for Ralston's third-order method.
    %
    classdef Ralston3 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Ralston3.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Ralston's third-order method (3 stages)
+       %> Ralston's third-order method.
        %>
        %> \rst
        %> .. math::
@@ -34,7 +34,7 @@ Program Listing for File Ralston3.m
        %>
        %> \endrst
        %
-       function this = Ralston3( ~ )
+       function this = Ralston3()
          this@RKexplicit( ...
            'Ralston3', ...
            [0, 0, 0; 1/2, 0, 0; 0, 3/4, 0], ...

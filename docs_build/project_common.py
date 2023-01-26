@@ -61,8 +61,8 @@ def exhale_environment_ready(app):
 exhale.environment_ready = exhale_environment_ready
 
 project   = 'indigo'
-copyright = '2023, Davide Stocco and Sebastiano Taddei'
-author    = ':email:`Davide Stocco <davide.stocco@unitn.it>`'
+copyright = '2023, D. Stocco, S. Taddei and E. Bertolazzi'
+author    = ':email: `Davide Stocco <davide.stocco@unitn.it>`'
 version   = os.popen('git describe --tags').read()
 
 # The master toctree document.
@@ -127,8 +127,7 @@ html_theme_options = {
 html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-##html_sidebars = {'**': ['searchbox.html', 'globaltoc.html']}
-html_sidebars = { '**': ['searchbox.html', 'globaltoc.html'] }
+html_sidebars = {'**': ['searchbox.html', 'globaltoc.html']}
 
 # relbar_links = [("genindex2","MATLAB index")]
 

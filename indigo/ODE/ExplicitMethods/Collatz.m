@@ -1,5 +1,5 @@
 %
-%> Class container for Collatz's second-order method (2 stages)
+%> Class container for Collatz's second-order method.
 %
 classdef Collatz < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Collatz < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Collatz's second-order method (2 stages)
+    %> Collatz's second-order method.
     %>
     %> \rst
     %> .. math::
@@ -21,7 +21,7 @@ classdef Collatz < RKexplicit
     %>
     %> \endrst
     %
-    function this = Collatz( ~ )
+    function this = Collatz()
         this@RKexplicit( ...
         'Collatz', ...
         [0, 0; 1/2, 0], ...

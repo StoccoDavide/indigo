@@ -1,0 +1,794 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00272" kind="class" language="C++" prot="public">
+    <compoundname>ODEsolver</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
+    <derivedcompoundref refid="a00280" prot="public" virt="non-virtual">RKexplicit</derivedcompoundref>
+    <derivedcompoundref refid="a00284" prot="public" virt="non-virtual">RKimplicit</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00272_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>ODEsolver::m_name</qualifiedname>
+        <briefdescription>
+<para>Name of the solver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00272_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_ode</definition>
+        <argsstring></argsstring>
+        <name>m_ode</name>
+        <qualifiedname>ODEsolver::m_ode</qualifiedname>
+        <briefdescription>
+<para>System of ODEs/DAEs to be solved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00272_1aa248ad5dd350504c12475009b9401467" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_max_iter</definition>
+        <argsstring></argsstring>
+        <name>m_max_iter</name>
+        <qualifiedname>ODEsolver::m_max_iter</qualifiedname>
+        <briefdescription>
+<para>Maximum number of iterations in the projection process. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="24" column="10" bodyfile="ODE/ODEsolver.m" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00272_1a4cab2953507bc503d780ecbed14713ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::ODEsolver</definition>
+        <argsstring>(in t_name)</argsstring>
+        <name>ODEsolver</name>
+        <qualifiedname>ODEsolver::ODEsolver</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>t_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Class constructor for <ref refid="a00272" kindref="compound">ODEsolver</ref>, which requires the name of the solver used to integrate the system of ODEs as input.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the solver. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="38" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_name</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_name</name>
+        <qualifiedname>ODEsolver::get_name</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the name of the method used to integrate the system of ODEs.</para>
+<para><simplesect kind="return"><para>The name of the solver. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="49" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_name</definition>
+        <argsstring>(in this, in t_name)</argsstring>
+        <name>set_name</name>
+        <qualifiedname>ODEsolver::set_name</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the name of the method used to integrate the system of ODEs.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the solver. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="60" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_ode</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_ode</name>
+        <qualifiedname>ODEsolver::get_ode</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the system of ODEs to be solved.</para>
+<para><simplesect kind="return"><para>The system of ODEs to be solved. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="71" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_ode</definition>
+        <argsstring>(in this, in t_ode)</argsstring>
+        <name>set_ode</name>
+        <qualifiedname>ODEsolver::set_ode</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_ode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the system of ODEs to be solved.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_ode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The system of ODEs to be solved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="82" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1a8411082da0c9e096a21be71ed3217245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_max_iter</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_max_iter</name>
+        <qualifiedname>ODEsolver::get_max_iter</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the maximum number of iterations in the projection process.</para>
+<para><simplesect kind="return"><para>The maximum number of iterations in the projection process. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="93" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_max_iter</definition>
+        <argsstring>(in this, in t_max_iter)</argsstring>
+        <name>set_max_iter</name>
+        <qualifiedname>ODEsolver::set_max_iter</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_max_iter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the maximum number of iterations in the projection process.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_max_iter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of projection iterations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="104" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::project</definition>
+        <argsstring>(in this, in x_tilde, in t)</argsstring>
+        <name>project</name>
+        <qualifiedname>ODEsolver::project</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_tilde</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Project the ODEs system solution <formula id="12">$ \mathbf{x} $</formula> on the invariants/hidden constraints <formula id="17">$ \mathbf{H} (\mathbf{x}, t) = \mathbf{0} $</formula>. The constrained minimization problem to be solved is:</para>
+<para><formula id="18">\[
+\textrm{minimize} \quad
+\dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.
+\]</formula></para>
+<para><bold>Solution Algorithm</bold></para>
+<para>Given the Lagrangian of the minimization problem of the form:</para>
+<para><formula id="19">\[
+\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
+\frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
+\boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).
+\]</formula></para>
+<para>The solution of the problem is obtained by solving the following:</para>
+<para><formula id="20">\[
+\left\{\begin{array}{l}
+\mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =
+\widetilde{\mathbf{x}} \\[0.5em]
+\mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\end{array}\right.
+\]</formula></para>
+<para>Using the Taylor expansion of the Lagrangian:</para>
+<para><formula id="21">\[
+\mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +
+\mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
+\]</formula></para>
+<para>define the iterative method as:</para>
+<para><formula id="22">\[
+\mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
+\]</formula></para>
+<para>Notice that <formula id="23">$ \delta\mathbf{x} $</formula> is the solution of the linear system:</para>
+<para><formula id="24">\[
+\begin{bmatrix}
+\mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em]
+\mathbf{JH}_\mathbf{x} &amp; \mathbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+\delta\mathbf{x} \\[0.5em]
+\boldsymbol{\lambda}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
+-\mathbf{H}(\mathbf{x}, t)
+\end{bmatrix}
+\]</formula></para>
+<para>where <formula id="25">$ \mathbf{JH}_\mathbf{x} $</formula> is the Jacobian of the invariants/ hidden constraints with respect to the states <formula id="12">$ \mathbf{x} $</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x_tilde</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial guess for the states <formula id="26">$ \widetilde{\mathbf{x}} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time <formula id="27">$ t $</formula> at which the states are evaluated.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The solution of the projection problem <formula id="12">$ \mathbf{x} $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="186" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::solve</definition>
+        <argsstring>(in this, in t, in x_0, in varargin)</argsstring>
+        <name>solve</name>
+        <qualifiedname>ODEsolver::solve</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_0</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>varargin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve the system of ODEs and calculate the approximate solution.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time vector <formula id="28">$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+                  \right]^T $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial states value <formula id="29">$ \mathbf{x}(t_0) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>project</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[optional, default = false] Apply projection to invariants at each step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>verbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[optional, default = <formula id="8">$ \mathrm{false} $</formula>] Activate vebose mode. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>epsilon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[optional, default = <formula id="30">$ 1.0\mathrm{e}3 $</formula>] If <formula id="31">$ || \mathbf{x} ||_{\infty} &gt; \varepsilon $</formula> the computation is interrupted.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A matrix <formula id="32">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+           (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="33">$ \mathbf{x}(t) $</formula> of the system of ODEs.</para>
+</simplesect>
+<bold>Usage</bold></para>
+<para>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. code-block:: none
+* 
+*    sol = obj.solve(t, x_0);
+* 
+*  </verbatim></para>
+<para>Solve with the solution projection on invariants/hidden constraints and disabled verbose mode.</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. code-block:: none
+* 
+*    sol = obj.solve(t, x_0, true);
+* 
+*  </verbatim></para>
+<para>Solve without the solution projection on invariants/hidden constraints and enabled verbose mode.</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. code-block:: none
+* 
+*    sol = obj.solve(t, x_0, false, true);
+* 
+*  </verbatim></para>
+<para>Plot the first component of the solution.</para>
+<para><verbatim>embed:rst:leading-asterisk
+*  .. code-block:: none
+* 
+*    plot(t, sol(1,:));
+* 
+*  </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="297" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00272_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function ODEsolver::step</definition>
+        <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
+        <name>step</name>
+        <qualifiedname>ODEsolver::step</qualifiedname>
+        <reimplementedby refid="a00280_1a8c5537fac6a33b1e323ffa4c6ddb3c3e">step</reimplementedby>
+        <reimplementedby refid="a00284_1a0193256fd309fadc298287dd71c8874e">step</reimplementedby>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_dot_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute a step using a generic integration method for a system of ODEs of the form <formula id="34">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula>. The step is based on the following formula:</para>
+<para><formula id="35">\[
+\mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
+\mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}&apos;_k(t_k), t_k, \Delta t)
+\]</formula></para>
+<para>where <formula id="36">$ \mathcal{S} $</formula> is the generic advancing step of the solver.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States value at <formula id="37">$ k $</formula>-th time step <formula id="38">$ \mathbf{x}(t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_dot_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States derivative at <formula id="37">$ k $</formula>-th time step <formula id="39">$ \mathbf{x}&apos;
+               (t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step <formula id="40">$ t_k $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Advancing time step <formula id="41">$ \Delta t$</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The approximation of <formula id="42">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="43">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="404" column="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Class container for solvers of the system of Ordinary Differential Equations (ODEs) or Differential Algebraic Equations (DAEs). </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Collatz</label>
+        <link refid="a00132"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>CrankNicolson</label>
+        <link refid="a00192"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ExplicitEuler</label>
+        <link refid="a00136"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>ExplicitMidpoint</label>
+        <link refid="a00140"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>GaussLegendre2</label>
+        <link refid="a00196"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>GaussLegendre4</label>
+        <link refid="a00200"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>GaussLegendre6</label>
+        <link refid="a00204"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Generic2</label>
+        <link refid="a00144"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Generic3</label>
+        <link refid="a00148"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Heun2</label>
+        <link refid="a00152"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Heun3</label>
+        <link refid="a00156"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>ImplicitEuler</label>
+        <link refid="a00208"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>ImplicitMidpoint</label>
+        <link refid="a00212"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>LobattoIIIA2</label>
+        <link refid="a00216"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>LobattoIIIA4</label>
+        <link refid="a00220"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>LobattoIIIB2</label>
+        <link refid="a00224"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>LobattoIIIB4</label>
+        <link refid="a00228"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>LobattoIIIC2</label>
+        <link refid="a00232"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>LobattoIIIC4</label>
+        <link refid="a00236"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>LobattoIIICS2</label>
+        <link refid="a00240"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>LobattoIIICS4</label>
+        <link refid="a00244"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>LobattoIIID2</label>
+        <link refid="a00248"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>LobattoIIID4</label>
+        <link refid="a00252"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ODEsolver</label>
+        <link refid="a00272"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>RK3</label>
+        <link refid="a00172"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>RK38</label>
+        <link refid="a00176"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>RK4</label>
+        <link refid="a00180"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>RKexplicit</label>
+        <link refid="a00280"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>RKimplicit</label>
+        <link refid="a00284"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>RadauIA3</label>
+        <link refid="a00256"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>RadauIA5</label>
+        <link refid="a00260"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>RadauIIA3</label>
+        <link refid="a00264"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>RadauIIA5</label>
+        <link refid="a00268"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Ralston2</label>
+        <link refid="a00160"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Ralston3</label>
+        <link refid="a00164"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>Ralston4</label>
+        <link refid="a00168"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SSPRK3</label>
+        <link refid="a00184"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Wray3</label>
+        <link refid="a00188"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ODEsolver</label>
+        <link refid="a00272"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </collaborationgraph>
+    <location file="ODE/ODEsolver.m" line="5" column="1" bodyfile="ODE/ODEsolver.m" bodystart="6" bodyend="410"/>
+    <listofallmembers>
+      <member refid="a00272_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_max_iter</name></member>
+      <member refid="a00272_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_name</name></member>
+      <member refid="a00272_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>get_ode</name></member>
+      <member refid="a00272_1aa248ad5dd350504c12475009b9401467" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_max_iter</name></member>
+      <member refid="a00272_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_name</name></member>
+      <member refid="a00272_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>ODEsolver</scope><name>m_ode</name></member>
+      <member refid="a00272_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>ODEsolver</name></member>
+      <member refid="a00272_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>project</name></member>
+      <member refid="a00272_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_max_iter</name></member>
+      <member refid="a00272_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_name</name></member>
+      <member refid="a00272_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>set_ode</name></member>
+      <member refid="a00272_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>ODEsolver</scope><name>solve</name></member>
+      <member refid="a00272_1a0824da2f381de5d8e4a4e49f1d1a8eb3" prot="public" virt="virtual"><scope>ODEsolver</scope><name>step</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

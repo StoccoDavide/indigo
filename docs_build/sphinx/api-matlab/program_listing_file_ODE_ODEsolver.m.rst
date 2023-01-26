@@ -11,7 +11,7 @@ Program Listing for File ODEsolver.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for solver of  the system of Ordinary Differential Equations
+   %> Class container for solvers of the system of Ordinary Differential Equations
    %> (ODEs) or Differential Algebraic Equations (DAEs).
    %
    classdef ODEsolver < handle
@@ -103,7 +103,7 @@ Program Listing for File ODEsolver.m
        %
        function set_max_iter( this, t_max_iter )
    
-         CMD = 'indigo::ODEsolver::set_max_iter(...)'
+         CMD = 'indigo::ODEsolver::set_max_iter(...)';
    
          assert(t_max_iter > 0, ...
            [CMD, 'invalid maximum number of iterations.']);
@@ -191,7 +191,7 @@ Program Listing for File ODEsolver.m
          num_invs = this.m_ode.get_num_invs();
          x        = x_tilde;
    
-         assert(length(x_tilde) == num_eqns, ...
+         assert(length(x_tilde) ~= num_eqns, ...
            [CMD, 'the number of states does not match the number of equations.']);
    
          % Check if there are any constraints
@@ -209,7 +209,7 @@ Program Listing for File ODEsolver.m
              % \ JH   0  / \ lambda /   \      -H       /
    
              % Evaluate the invariants/hidden constraints vector and its Jacobian
-             J  = this.m_ode.H(x, t);
+             H  = this.m_ode.H(x, t);
              JH = this.m_ode.JH(x, t);
    
              % Compute the solution of the linear system
@@ -225,9 +225,8 @@ Program Listing for File ODEsolver.m
              % Check if the solution is found
              if (max(abs(dx)) < tolerance && max(abs(H)) < tolerance)
                break;
-             else if (k == MAX_ITER)
+             elseif (k == MAX_ITER)
                warning([CMD, 'maximum number of iterations reached.']);
-             end
              end
            end
          end
@@ -361,7 +360,7 @@ Program Listing for File ODEsolver.m
            norm_x_new = norm(x_new, inf);
            if (norm_x_new > epsilon)
              fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, ', ...
-             'computation interrupted.\n'], this.m_name, k, t(k), norm_xnew);
+             'computation interrupted.\n'], this.m_name, k, t(k), norm_x_new);
              break;
            end
    

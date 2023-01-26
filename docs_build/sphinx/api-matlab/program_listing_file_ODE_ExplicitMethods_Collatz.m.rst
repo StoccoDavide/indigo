@@ -11,7 +11,7 @@ Program Listing for File Collatz.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Collatz's second-order method (2 stages)
+   %> Class container for Collatz's second-order method.
    %
    classdef Collatz < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Collatz.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Collatz's second-order method (2 stages)
+       %> Collatz's second-order method.
        %>
        %> \rst
        %> .. math::
@@ -33,7 +33,7 @@ Program Listing for File Collatz.m
        %>
        %> \endrst
        %
-       function this = Collatz( ~ )
+       function this = Collatz()
            this@RKexplicit( ...
            'Collatz', ...
            [0, 0; 1/2, 0], ...

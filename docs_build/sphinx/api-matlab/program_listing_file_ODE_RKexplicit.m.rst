@@ -202,20 +202,17 @@ Program Listing for File RKexplicit.m
        %> \f]
        %>
        %> \param i   Index of the step to be computed.
-       %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+       %> \param x_i \f$ i \f$-th node.
        %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
        %> \param t_k Time step \f$ t_k \f$.
        %> \param d_t Advancing time step \f$ \Delta t\f$.
        %>
        %> \return The residual of the ODEs system to be solved.
        %
-       function out = step_residual( this, i, x_k, K, t_k, d_t )
-   
-         % Compute node
-         x_i = this.step_node(i, x_k, K, d_t);
+       function out = step_residual( this, i, x_i, K, t_k, d_t )
    
          % Compute the residuals
-         out = this.m_ode.F(x_i, K(:,i), t_k + this.m_c(i) * d_t);
+         out = this.m_ode.F(x_i, K, t_k + this.m_c(i) * d_t);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -234,24 +231,21 @@ Program Listing for File RKexplicit.m
        %> \dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
        %>   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
        %>   \, \mathbf{K}_i, \, t_k + c_i \Delta t
-       %> \right).
+       %> \right)
        %> \f]
        %>
        %> \param i   Index of the step to be computed.
-       %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+       %> \param x_i \f$ i \f$-th node.
        %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
        %> \param t_k Time step \f$ t_k \f$.
        %> \param d_t Advancing time step \f$ \Delta t\f$.
        %>
        %> \return The Jacobian of the ODEs system of equations to be solved.
        %
-       function out = step_jacobian( this, i, x_k, K, t_k, d_t )
+       function out = step_jacobian( this, i, x_i, K, t_k, d_t )
    
-         % Compute node
-         x_i = this.step_node(i, x_k, K, d_t);
-   
-         % Compute the residuals
-         out = this.m_ode.JF(x_i, K(:,i), t_k + this.m_c(i) * d_t);
+         % Compute the Jacobians
+         [~, out] = this.m_ode.JF(x_i, K, t_k + this.m_c(i) * d_t);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -267,7 +261,6 @@ Program Listing for File RKexplicit.m
        %>
        %> by Newton method.
        %>
-       %> \param i   Index of the step to be computed.
        %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
        %> \param K   Initial guess for the \f$ \mathbf{K} \f$ variable to be found.
        %> \param t_k Time step \f$ t_k \f$.
@@ -275,27 +268,30 @@ Program Listing for File RKexplicit.m
        %>
        %> \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved.
        %
-       function out = solve_step( this, i, x_k, K_0, t_k, d_t )
+       function out = solve_step( this, x_k, K_0, t_k, d_t )
    
-         CMD = 'indigo::RKexplicit::solve_step(...): '
+         CMD = 'indigo::RKexplicit::solve_step(...): ';
    
          % Extract lengths
          nc = length(this.m_c);
-         nx = length(x_k);
    
-         K = repmat(K_0, nx, nc);
+         K = repmat(K_0, 1, nc);
          for i = 1:nc
    
+           % Compute node
+           x_i = this.step_node(i, x_k, K, d_t);
+   
            % Define the function handles
-           fun = @(K) this.step_residual(i, x_k, K, t_k, d_t);
-           jac = @(K) this.step_jacobian(i, x_k, K, t_k, d_t);
+           fun = @(K_i) this.step_residual(i, x_i, K_i, t_k, d_t);
+           jac = @(K_i) this.step_jacobian(i, x_i, K_i, t_k, d_t);
    
            % Solve using Newton
            [K(:,i), ierr] = NewtonSolver(fun, jac, K(:,i));
            if (ierr ~= 0)
-             fprintf(1, [CMD, 'not converged flag = %d.\n', ierr]);
+             fprintf(1, [CMD, 'not converged flag = %d.\n'], ierr);
            end
          end
+         out = K;
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -388,11 +384,7 @@ Program Listing for File RKexplicit.m
        %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
        %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
        %>
-       function [out, out_dot] = step( this, t_k, x_k, x_dot_k, d_t )
-   
-         % Extract lengths
-         nc = length(this.m_c);
-         nx = length(x_k);
+       function [out, out_dot] = step( this, x_k, x_dot_k, t_k, d_t )
    
          % Solve the system to obtain K
          K = this.solve_step( x_k, x_dot_k, t_k, d_t );
@@ -401,7 +393,7 @@ Program Listing for File RKexplicit.m
          out = x_k + d_t * K * this.m_b';
    
          % Extract x_dot_k+1 from K (i.e., its last value)
-         out_dot = K(:,nc);
+         out_dot = K(:,end);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -420,7 +412,7 @@ Program Listing for File RKexplicit.m
        %>
        %> \return True if the Butcher tableau is consistent, false otherwise.
        %
-       function check_tableau( A, b, c )
+       function out = check_tableau( A, b, c )
    
          CMD = 'indigo::RKexplicit::check_tableau(...): ';
    

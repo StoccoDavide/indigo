@@ -1,5 +1,5 @@
 %
-%> Class container for Ralston's second-order method (2 stages)
+%> Class container for Ralston's second-order method.
 %
 classdef Ralston2 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Ralston2 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Ralston's second-order method (2 stages)
+    %> Ralston's second-order method.
     %>
     %> \rst
     %> .. math::
@@ -21,7 +21,7 @@ classdef Ralston2 < RKexplicit
     %>
     %> \endrst
     %
-    function this = Ralston2( ~ )
+    function this = Ralston2()
       this@RKexplicit( ...
         'Ralston2', ...
         [0, 0; 2/3, 0], ...

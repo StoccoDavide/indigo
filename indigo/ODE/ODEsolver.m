@@ -1,5 +1,5 @@
 %
-%> Class container for solver of  the system of Ordinary Differential Equations
+%> Class container for solvers of the system of Ordinary Differential Equations
 %> (ODEs) or Differential Algebraic Equations (DAEs).
 %
 classdef ODEsolver < handle

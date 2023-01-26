@@ -11,7 +11,7 @@ Program Listing for File Ralston2.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Ralston's second-order method (2 stages)
+   %> Class container for Ralston's second-order method.
    %
    classdef Ralston2 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Ralston2.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Ralston's second-order method (2 stages)
+       %> Ralston's second-order method.
        %>
        %> \rst
        %> .. math::
@@ -33,7 +33,7 @@ Program Listing for File Ralston2.m
        %>
        %> \endrst
        %
-       function this = Ralston2( ~ )
+       function this = Ralston2()
          this@RKexplicit( ...
            'Ralston2', ...
            [0, 0; 2/3, 0], ...

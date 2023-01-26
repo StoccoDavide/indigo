@@ -44,7 +44,7 @@ Program Listing for File GaussLegendre6.m
    %
    %> Class container for Gauss-Legendre sixth-order (3 stages)
    %
-   classdef GaussLegendre6 < DIAL_RKimplicit
+   classdef GaussLegendre6 < RKimplicit
      %
      methods
        %
@@ -78,7 +78,7 @@ Program Listing for File GaussLegendre6.m
          t4 = sqrt(15)/30;
          w  = 5/36;
          z  = 2/9;
-         this@DIAL_RKimplicit( ...
+         this@RKimplicit( ...
            'GaussLegendre6', ...
            [w,    z-t2, w-t4; ...
             w+t3, z,    w-t3; ...

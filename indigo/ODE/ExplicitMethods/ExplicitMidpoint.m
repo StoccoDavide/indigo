@@ -1,5 +1,5 @@
 %
-%> Class container for Explicit midpoint second-order method (2 stages)
+%> Class container for Explicit midpoint second-order method.
 %
 classdef ExplicitMidpoint < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef ExplicitMidpoint < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Explicit midpoint second-order method (2 stages)
+    %> Explicit midpoint second-order method.
     %>
     %> \rst
     %> .. math::
@@ -21,7 +21,7 @@ classdef ExplicitMidpoint < RKexplicit
     %>
     %> \endrst
     %
-    function this = ExplicitMidpoint( ~ )
+    function this = ExplicitMidpoint()
       this@RKexplicit( ...
         'ExplicitMidpoint', ...
         [0, 0; 1/2, 0], ...

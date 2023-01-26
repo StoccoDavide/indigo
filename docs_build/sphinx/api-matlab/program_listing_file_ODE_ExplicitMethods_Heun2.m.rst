@@ -11,7 +11,7 @@ Program Listing for File Heun2.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Heun's second-order method (2 stages)
+   %> Class container for Heun's second-order method.
    %
    classdef Heun2 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Heun2.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Heun's second-order method (2 stages)
+       %> Heun's second-order method.
        %>
        %> \rst
        %> .. math::
@@ -33,7 +33,7 @@ Program Listing for File Heun2.m
        %>
        %> \endrst
        %
-       function this = Heun2( ~ )
+       function this = Heun2()
          this@RKexplicit( ...
            'Heun2', ...
            [0, 0; 1, 0], ...

@@ -13,11 +13,19 @@ classdef RadauIA5 < RKimplicit
     %> .. math::
     %>
     %>  \begin{array}{c|ccc}
-    %>    0 & \frac{1}{9} & \frac{-1 - \sqrt{6}}{18} & \frac{-1 + \sqrt{6}}{18} \\
-    %>    \frac{3}{5} - \frac{\sqrt{6}}{10} & \frac{1}{9} & \frac{11}{45} + \frac{7\sqrt{6}}{360} & \frac{11}{45} - \frac{43\sqrt{6}}{360} \\
-    %>    \frac{3}{5} + \frac{\sqrt{6}}{10} & \frac{1}{9} & \frac{11}{45} + \frac{43\sqrt{6}}{360} & \frac{11}{45} - \frac{7\sqrt{6}}{360} \\
+    %>    0 & \frac{1}{9} &
+    %>    \frac{-1 - \sqrt{6}}{18} &
+    %>    \frac{-1 + \sqrt{6}}{18} \\
+    %>    \frac{3}{5} - \frac{\sqrt{6}}{10} & \frac{1}{9} &
+    %>    \frac{11}{45} + \frac{7\sqrt{6}}{360} &
+    %>    \frac{11}{45} - \frac{43\sqrt{6}}{360} \\
+    %>    \frac{3}{5} + \frac{\sqrt{6}}{10} & \frac{1}{9} &
+    %>    \frac{11}{45} + \frac{43\sqrt{6}}{360} &
+    %>    \frac{11}{45} - \frac{7\sqrt{6}}{360} \\
     %>    \hline
-    %>      & \frac{1}{9} & \frac{4}{9} + \frac{\sqrt{6}}{36} & \frac{4}{9} - \frac{\sqrt{6}}{36} \\
+    %>      & \frac{1}{9} &
+    %>        \frac{4}{9} + \frac{\sqrt{6}}{36} &
+    %>        \frac{4}{9} - \frac{\sqrt{6}}{36} \\
     %>  \end{array}
     %>
     %> \endrst

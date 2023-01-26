@@ -70,6 +70,16 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_ExplicitMethods_Generic2.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_ExplicitMethods_Generic3.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ExplicitMethods_Heun2.m.rst
 
 .. toctree::
@@ -216,3 +226,8 @@ Files
    :maxdepth: 5
 
    file_ODE_ExplicitMethods_SSPRK3.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_ExplicitMethods_Wray3.m.rst

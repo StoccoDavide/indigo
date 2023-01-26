@@ -18,6 +18,8 @@ Files
 - :ref:`file_ODE_ExplicitMethods_Collatz.m`
 - :ref:`file_ODE_ExplicitMethods_ExplicitEuler.m`
 - :ref:`file_ODE_ExplicitMethods_ExplicitMidpoint.m`
+- :ref:`file_ODE_ExplicitMethods_Generic2.m`
+- :ref:`file_ODE_ExplicitMethods_Generic3.m`
 - :ref:`file_ODE_ExplicitMethods_Heun2.m`
 - :ref:`file_ODE_ExplicitMethods_Heun3.m`
 - :ref:`file_ODE_ExplicitMethods_Ralston2.m`
@@ -27,5 +29,6 @@ Files
 - :ref:`file_ODE_ExplicitMethods_RK38.m`
 - :ref:`file_ODE_ExplicitMethods_RK4.m`
 - :ref:`file_ODE_ExplicitMethods_SSPRK3.m`
+- :ref:`file_ODE_ExplicitMethods_Wray3.m`
 
 

@@ -1,5 +1,5 @@
 %
-%> Calss container for Heun's third-order method (3 stages)
+%> Calss container for Heun's third-order method.
 %
 classdef Heun3 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Heun3 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Heun's third-order method (3 stages)
+    %> Heun's third-order method.
     %>
     %> \rst
     %> .. math::
@@ -22,7 +22,7 @@ classdef Heun3 < RKexplicit
     %>
     %> \endrst
     %
-    function this = Heun3( ~ )
+    function this = Heun3()
       this@RKexplicit( ...
         'Heun3', ...
         [0, 0, 0; 1/3, 0, 0; 0, 2/3, 0], ...

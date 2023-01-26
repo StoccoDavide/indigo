@@ -1,5 +1,5 @@
 %
-%> Class container for Runge-Kutta fourth-order method (4 stages)
+%> Class container for Runge-Kutta fourth-order method.
 %
 classdef RK4 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef RK4 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Classic fourth-order Runge-Kutta's method (4 stages)
+    %> Classic fourth-order Runge-Kutta's method.
     %>
     %> \rst
     %> .. math::
@@ -23,7 +23,7 @@ classdef RK4 < RKexplicit
     %>
     %> \endrst
     %
-    function this = RK4( ~ )
+    function this = RK4()
       this@RKexplicit( ...
         'RK4', ...
         [  0,   0, 0, 0; ...

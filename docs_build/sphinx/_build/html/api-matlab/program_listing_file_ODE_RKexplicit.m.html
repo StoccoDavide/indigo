@@ -231,20 +231,17 @@
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param i   Index of the step to be computed.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_i \f$ i \f$-th node.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The residual of the ODEs system to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">step_residual</span><span class="p">(</span> this, i, x_k, K, t_k, d_t <span class="p">)</span><span class="w"></span>
-
-<span class="w">      </span><span class="c">% Compute node</span><span class="w"></span>
-<span class="w">      </span><span class="n">x_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_node</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">step_residual</span><span class="p">(</span> this, i, x_i, K, t_k, d_t <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Compute the residuals</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">F</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="n">t_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">F</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -263,24 +260,21 @@
 <span class="w">    </span><span class="c">%&gt; \dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;   \, \mathbf{K}_i, \, t_k + c_i \Delta t</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \right).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \right)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param i   Index of the step to be computed.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_i \f$ i \f$-th node.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The Jacobian of the ODEs system of equations to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">step_jacobian</span><span class="p">(</span> this, i, x_k, K, t_k, d_t <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">step_jacobian</span><span class="p">(</span> this, i, x_i, K, t_k, d_t <span class="p">)</span><span class="w"></span>
 
-<span class="w">      </span><span class="c">% Compute node</span><span class="w"></span>
-<span class="w">      </span><span class="n">x_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_node</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c">% Compute the residuals</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">JF</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="n">t_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="c">% Compute the Jacobians</span><span class="w"></span>
+<span class="w">      </span><span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">.</span><span class="n">JF</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -296,7 +290,6 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; by Newton method.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param i   Index of the step to be computed.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param K   Initial guess for the \f$ \mathbf{K} \f$ variable to be found.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
@@ -304,27 +297,30 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">solve_step</span><span class="p">(</span> this, i, x_k, K_0, t_k, d_t <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">solve_step</span><span class="p">(</span> this, x_k, K_0, t_k, d_t <span class="p">)</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::solve_step(...): '</span><span class="w"></span>
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::solve_step(...): '</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Extract lengths</span><span class="w"></span>
 <span class="w">      </span><span class="n">nc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">nx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x_k</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">K</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="n">K_0</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="n">nc</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">K</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="n">K_0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nc</span><span class="p">);</span><span class="w"></span>
 <span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">nc</span><span class="w"></span>
 
+<span class="w">        </span><span class="c">% Compute node</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_node</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+
 <span class="w">        </span><span class="c">% Define the function handles</span><span class="w"></span>
-<span class="w">        </span><span class="n">fun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_residual</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">jac</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_jacobian</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">fun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K_i</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_residual</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">jac</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K_i</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_jacobian</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">        </span><span class="c">% Solve using Newton</span><span class="w"></span>
 <span class="w">        </span><span class="p">[</span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NewtonSolver</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'not converged flag = %d.\n'</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]);</span><span class="w"></span>
+<span class="w">          </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'not converged flag = %d.\n'</span><span class="p">],</span><span class="w"> </span><span class="n">ierr</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -417,11 +413,7 @@
 <span class="w">    </span><span class="c">%&gt; \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, out_dot] = step</span><span class="p">(</span> this, t_k, x_k, x_dot_k, d_t <span class="p">)</span><span class="w"></span>
-
-<span class="w">      </span><span class="c">% Extract lengths</span><span class="w"></span>
-<span class="w">      </span><span class="n">nc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">nx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x_k</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, out_dot] = step</span><span class="p">(</span> this, x_k, x_dot_k, t_k, d_t <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Solve the system to obtain K</span><span class="w"></span>
 <span class="w">      </span><span class="n">K</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">solve_step</span><span class="p">(</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
@@ -430,7 +422,7 @@
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Extract x_dot_k+1 from K (i.e., its last value)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out_dot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="n">nc</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">out_dot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -449,7 +441,7 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return True if the Butcher tableau is consistent, false otherwise.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> A, b, c <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> A, b, c <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::check_tableau(...): '</span><span class="p">;</span><span class="w"></span>
 
@@ -541,10 +533,12 @@
 <script>$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_INTRO.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_TOOLBOX.html">DAE-Toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
         </div>
@@ -552,7 +546,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Davide Stocco and Sebastiano Taddei.
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>

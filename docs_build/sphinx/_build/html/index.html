@@ -18,7 +18,7 @@
     <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="Manual_INTRO.html" />
+    <link rel="next" title="MATLAB Toolbox" href="Manual_MATLAB.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -42,41 +42,56 @@
 <a class="reference external image-reference" href="https://github.com/StoccoDavide/indigo"><img alt="https://img.shields.io/badge/Version-0.0.0-7E2F8E.svg" src="https://img.shields.io/badge/Version-0.0.0-7E2F8E.svg"></a>
 <a class="reference external image-reference" href="https://github.com/StoccoDavide/indigo"><img alt="https://img.shields.io/badge/Release-2023.10.01-7E2F8E.svg" src="https://img.shields.io/badge/Release-2023.10.01-7E2F8E.svg"></a>
 <a class="reference external image-reference" href="https://opensource.org/licenses/BSD-3-Clause"><img alt="https://img.shields.io/badge/License-BSD3-7E2F8E.svg" src="https://img.shields.io/badge/License-BSD3-7E2F8E.svg"></a>
-<div class="line-block">
-<div class="line">This MATLAB toolbox is a collection of integrators for ordinary differential</div>
-<div class="line">and differential-algebraic equations (ODEs/DAEs), which has been originally</div>
-<div class="line">developed for the course of <em>Mechatronics System Simulation</em> at the University</div>
-<div class="line">of Trento (Italy) held by Prof. <em>Francesco Biral</em> and Prof. <em>Enrico Bertolazzi</em>.</div>
-</div>
+<p>This MATLAB toolbox is a collection of integrators for ordinary differential
+and differential-algebraic equations (ODEs/DAEs), which has been originally
+developed for the course of <em>Mechatronics System Simulation</em> at the University
+of Trento (Italy) held by Prof. <em>Francesco Biral</em> and Prof. <em>Enrico Bertolazzi</em>.</p>
+<div class="section" id="what-s-inside">
+<h2>What’s inside?<a class="headerlink" href="#what-s-inside" title="Permalink to this headline">¶</a>
+</h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1">
-<a class="reference internal" href="Manual_INTRO.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Manual_INTRO.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Manual_INTRO.html#library-structure">Library structure</a></li>
+<a class="reference internal" href="Manual_MATLAB.html">MATLAB Toolbox</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MATLAB.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MATLAB.html#structure">Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MATLAB.html#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1">
-<a class="reference internal" href="Manual_TOOLBOX.html">DAE-Toolbox</a><ul>
+<a class="reference internal" href="api-matlab/root.html">MATLAB API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-matlab/root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-matlab/root.html#file-hierarchy">File Hierarchy</a></li>
 <li class="toctree-l2">
-<a class="reference internal" href="Manual_TOOLBOX.html#load-toolbox-script">Load toolbox script</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#diff">DIFF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#jacobian">JACOBIAN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#kernel-build">Kernel_build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#dae-separate-algebraic">DAE_separate_algebraic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#dae-make-semi-explicit">DAE_make_semi_explicit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#dae-reduce-index-by-1">DAE_reduce_index_by_1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#dae3-get-ode-and-invariants">DAE3_get_ODE_and_invariants</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#dae3-get-ode-and-invariants-full">DAE3_get_ODE_and_invariants_full</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#dae3-get-ode-and-invariants-stab">DAE3_get_ODE_and_invariants_stab</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#f-to-matlab">F_TO_MATLAB</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Manual_TOOLBOX.html#jf-to-matlab">JF_TO_MATLAB</a></li>
+<a class="reference internal" href="api-matlab/root.html#full-api">Full API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api-matlab/root.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-matlab/root.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1">
-<a class="reference internal" href="Manual_EXAMPLES.html">ODE/DAE library examples</a><ul>
+<a class="reference internal" href="Manual_MAPLE.html">MAPLE Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Manual_MAPLE_API.html">MAPLE API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#diff">Diff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#jacobian">Jacobian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#kernelbuild">KernelBuild</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#dae-separate-algebraic">DAE_separate_algebraic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#dae-make-semi-explicit">DAE_make_semi_explicit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#dae-reduce-index-by-1">DAE_reduce_index_by_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#dae3-get-ode-and-invariants">DAE3_get_ODE_and_invariants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#dae3-get-ode-and-invariants-full">DAE3_get_ODE_and_invariants_full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#dae3-get-ode-and-invariants-stab">DAE3_get_ODE_and_invariants_stab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#f-to-matlab">F_TO_MATLAB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_MAPLE_API.html#jf-to-matlab">JF_TO_MATLAB</a></li>
+</ul>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Manual_EXAMPLES.html">Examples</a><ul>
 <li class="toctree-l2">
 <a class="reference internal" href="Manual_ODE_TEST1.html">ODE solve example 1</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="Manual_ODE_TEST1.html#load-ode">Load ODE</a></li>
@@ -97,25 +112,14 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1">
-<a class="reference internal" href="api-matlab/root.html">MATLAB API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api-matlab/root.html#class-hierarchy">Class Hierarchy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api-matlab/root.html#file-hierarchy">File Hierarchy</a></li>
-<li class="toctree-l2">
-<a class="reference internal" href="api-matlab/root.html#full-api">Full API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api-matlab/root.html#classes-and-structs">Classes and Structs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api-matlab/root.html#functions">Functions</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 </div>
 <div class="section" id="authors">
-<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a>
-</h2>
+<h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a>
+</h3>
 <div class="line-block">
-<div class="line"><em>Davide Stocco</em></div>
+<div class="line"><strong>Davide Stocco</strong></div>
 <div class="line">Department of Industrial Engineering</div>
 <div class="line">University of Trento</div>
 <div class="line">email: <script type="text/javascript">document.write(
@@ -130,7 +134,7 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><em>Sebastiano Taddei</em></div>
+<div class="line"><strong>Sebastiano Taddei</strong></div>
 <div class="line">Department of Industrial Engineering</div>
 <div class="line">University of Trento</div>
 <div class="line">email: <script type="text/javascript">document.write(
@@ -144,56 +148,26 @@
 );</script>
 </div>
 </div>
-<div class="section" id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a>
-</h3>
-<ol class="arabic">
-<li>
 <div class="line-block">
-<div class="line">
-<em>Claus Bendtsen</em>, <em>Per Grove Thomsen</em>,</div>
-<div class="line">
-<strong>Numerical Solution of Differential Algebraic Equations</strong>,</div>
-<div class="line">Technical report IMM-REP-1999-8 (1999).</div>
-<div class="line">
-<a class="reference external" href="http://www.imm.dtu.dk/documents/ftp/tr99/tr08_99.pdf">http://www.imm.dtu.dk/documents/ftp/tr99/tr08_99.pdf</a>.</div>
+<div class="line"><strong>Enrico Bertolazzi</strong></div>
+<div class="line">Department of Industrial Engineering</div>
+<div class="line">University of Trento</div>
+<div class="line">email: <script type="text/javascript">document.write(
+    "<n pynff=\"ersrerapr rkgreany\" uers=\"znvygb:raevpb\056oregbynmmv%40havga\056vg\">raevpb<fcna>\056<\057fcna>oregbynmmv<fcna>\100<\057fcna>havga<fcna>\056<\057fcna>vg<\057n>".replace(/[a-zA-Z]/g,
+        function(c){
+            return String.fromCharCode(
+                (c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26
+            );
+        }
+    )
+);</script>
 </div>
-</li>
-<li>
-<div class="line-block">
-<div class="line">
-<em>John C.Butcher</em>,</div>
-<div class="line"><strong>The Numerical Analysis of Ordinary Differential Equations</strong></div>
-<div class="line">Wiley, Chichester (2016).</div>
-<div class="line">
-<a class="reference external" href="https://doi.org/10.1002/9781119121534">https://doi.org/10.1002/9781119121534</a>.</div>
 </div>
-</li>
-<li>
-<div class="line-block">
-<div class="line">
-<em>Ernst Hairer</em>, <em>Gerhard Wanner</em>, <em>Syvert P. Nørsett</em>,</div>
-<div class="line">
-<strong>Solving Ordinary Differential Equations I: Nonstiff Problems</strong>,</div>
-<div class="line">Springer, Berlin (1993).</div>
-<div class="line"><a class="reference external" href="https://doi.org/10.1007/978-3-540-78862-1">https://doi.org/10.1007/978-3-540-78862-1</a></div>
 </div>
-</li>
-<li>
-<div class="line-block">
-<div class="line">
-<em>Ernst Hairer</em>, <em>Gerhard Wanner</em>,</div>
-<div class="line">
-<strong>Solving Ordinary Differential Equations II: Stiff and Differential-Algebraic Problems</strong>,</div>
-<div class="line">Springer, Berlin (1996).</div>
-<div class="line"><a class="reference external" href="https://doi.org/10.1007/978-3-642-05221-7">https://doi.org/10.1007/978-3-642-05221-7</a></div>
-</div>
-</li>
-</ol>
 </div>
 <div class="section" id="license">
-<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a>
-</h3>
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a>
+</h2>
 <div class="highlight-none notranslate">
 <div class="highlight"><pre><span></span>BSD 3-Clause License
 
@@ -227,7 +201,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </div>
 </div>
 </div>
-</div>
 
 
 
@@ -252,10 +225,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <script>$('#searchbox').show(0);</script>
 <h3><a href="#">Table of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Manual_INTRO.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Manual_TOOLBOX.html">DAE-Toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MATLAB.html">MATLAB Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api-matlab/root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
         </div>
@@ -263,7 +238,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Davide Stocco and Sebastiano Taddei.
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
