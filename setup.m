@@ -8,8 +8,10 @@ set(groot, 'defaultLegendInterpreter',        'latex' );
 set(0,     'defaultAxesFontSize',             18      );
 
 % Library folder
-addpath('./+indigo');
-addpath('./+indigo/ODE');
+addpath('./indigo');
+addpath('./indigo/ODE');
+addpath('./indigo/ODE/ExplicitMethods/');
+addpath('./indigo/ODE/ImplicitMethods/');
 
 % Tests folder
 addpath('./tests');

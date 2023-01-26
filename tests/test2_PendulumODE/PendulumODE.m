@@ -2,7 +2,7 @@
 %>
 %> \rst
 %> .. math::
-%> 
+%>
 %>   \begin{cases}
 %>      \theta' = \omega & \\
 %>      \omega' = -\displaystyle\frac{g}{\ell}\sin(\theta) &
@@ -10,7 +10,7 @@
 %>
 %> \endrst
 %
-classdef PendulumODE < BVP_ODEsystem
+classdef PendulumODE < ODEsystem
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -34,7 +34,7 @@ classdef PendulumODE < BVP_ODEsystem
     function this = PendulumODE( m, l, g )
       neq  = 2;
       ninv = 0;
-      this@BVP_ODEsystem( 'NonLinearPendulum2Eqns', neq, ninv );
+      this@ODEsystem( 'NonLinearPendulum2Eqns', neq, ninv );
       this.m_m = m;
       this.m_l = l;
       this.m_g = g;
@@ -42,35 +42,35 @@ classdef PendulumODE < BVP_ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = f( this, ~, X )
+    function out = F( this, ~, x )
       out    = zeros(2,1);
-      out(1) = X(2);
-      out(2) = -(this.m_g/this.m_l)*sin(X(1));
+      out(1) = x(2);
+      out(2) = -(this.m_g/this.m_l)*sin(x(1));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = DfDx( this, ~, X )
+    function out = JF( this, ~, x )
       out      = zeros(2,2);
       out(1,2) = 1;
-      out(2,1) = -(this.m_g/this.m_l)*cos(X(1));
+      out(2,1) = -(this.m_g/this.m_l)*cos(x(1));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function h( ~, ~, ~ )
+    function H( ~, ~, ~ )
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function DhDx( ~, ~, ~ )
+    function JH( ~, ~, ~ )
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function plot( this, ~, X )
-      x  =  this.m_l*sin(X(1));
-      y  = -this.m_l*cos(X(1));
+    function plot( this, ~, x )
+      x  =  this.m_l*sin(x(1));
+      y  = -this.m_l*cos(x(1));
       x0 = 0;
       y0 = 0;
       tt = 0:pi/100:2*pi;

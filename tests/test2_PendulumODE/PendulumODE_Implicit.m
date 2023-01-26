@@ -1,16 +1,16 @@
-%> Implementation of the Linear Pendulum (2 Equations)
+%> Implementation of the Non Linear Pendulum (2 Equations)
 %>
 %> \rst
 %> .. math::
 %>
 %>   \begin{cases}
 %>      \theta' = \omega & \\
-%>      \omega' = -\displaystyle\frac{g}{\ell}\theta &
+%>      \omega' = -\displaystyle\frac{g}{\ell}\sin(\theta) &
 %>   \end{cases}
 %>
 %> \endrst
 %
-classdef LinearPendulumODE_Implicit < ODEsystem
+classdef PendulumODE_Implicit < ODEsystem
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -31,10 +31,10 @@ classdef LinearPendulumODE_Implicit < ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function this = LinearPendulumODE_Implicit( m, l, g )
+    function this = PendulumODE_Implicit( m, l, g )
       neq  = 2;
       ninv = 0;
-      this@ODEsystem( 'LinearPendulumODE_Implicit', neq, ninv );
+      this@ODEsystem( 'NonLinearPendulum2Eqns', neq, ninv );
       this.m_m = m;
       this.m_l = l;
       this.m_g = g;
@@ -45,7 +45,7 @@ classdef LinearPendulumODE_Implicit < ODEsystem
     function out = F( this, x, x_dot, t )
       out    = zeros(2,1);
       out(1) = x_dot(1) - x(2);
-      out(2) = x_dot(2) + this.m_g / this.m_l * x(1);
+      out(2) = x_dot(2) + (this.m_g/this.m_l)*sin(x(1));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -53,8 +53,8 @@ classdef LinearPendulumODE_Implicit < ODEsystem
     function [JF_x, JF_x_dot] = JF( this, x, x_dot, t )
       JF_x      = zeros(2,2);
       JF_x_dot  = eye(2);
-      JF_x(1,2) = -1.0;
-      JF_x(2,1) = this.m_g / this.m_l;
+      JF_x(1,2) = -1;
+      JF_x(2,1) = (this.m_g/this.m_l)*cos(x(1));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -91,16 +91,6 @@ classdef LinearPendulumODE_Implicit < ODEsystem
       ylim([-l, l]);
       axis equal;
     end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out = exact( this, x_i, t )
-      sqrt_g_l = sqrt(this.m_g / this.m_l);
-      out      = zeros(2,length(t));
-      out(1,:) = -sqrt_g_l .* x_i(2) .* sin(sqrt_g_l .* t) + x_i(1) * cos(sqrt_g_l .* t);
-      out(2,:) = sqrt_g_l .* (sqrt_g_l .* x_i(2) .* cos(sqrt_g_l .* t) - x_i(1) * sin(sqrt_g_l .* t));
-    end
-    %
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
