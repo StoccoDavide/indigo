@@ -91,7 +91,7 @@ classdef ODEsolver < handle
     %
     function set_max_iter( this, t_max_iter )
 
-      CMD = 'indigo::ODEsolver::set_max_iter(...)'
+      CMD = 'indigo::ODEsolver::set_max_iter(...)';
 
       assert(t_max_iter > 0, ...
         [CMD, 'invalid maximum number of iterations.']);

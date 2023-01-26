@@ -50,7 +50,7 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
 
   CMD = 'indigo::NewtonSolver(...) ';
 
-  assert(any(isnan(x_0)), ...
+  assert(~any(isnan(x_0)), ...
     [CMD, 'invalid initial guess of the solution.']);
 
   flag      = 0;

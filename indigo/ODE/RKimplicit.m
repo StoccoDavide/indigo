@@ -140,10 +140,10 @@ classdef RKimplicit < ODEsolver
     %
     function set_tableau( this, A, b, c )
 
-      CMD = 'RKexplicit::set_tableau(...): ';
+      CMD = 'RKimplicit::set_tableau(...): ';
 
       % Check the Butcher tableau
-      assert(RKexplicit.check_butcher_tableau(A, b, c), ...
+      assert(this.check_tableau(A, b, c), ...
         [CMD, 'invalid Butcher tableau detected.']);
 
       % Set the Butcher tableau
@@ -370,7 +370,7 @@ classdef RKimplicit < ODEsolver
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    function out = check_tableau( this, A, b, c )
+    function out = check_tableau( A, b, c )
 
       CMD = 'indigo::RKimplicit::check_tableau(...): ';
 
@@ -381,11 +381,11 @@ classdef RKimplicit < ODEsolver
         warning([CMD, 'A must be a numeric matrix.']);
         out = false;
       end
-      if (size(A, 1) == size(A, 2))
+      if (size(A, 1) ~= size(A, 2))
         warning([CMD, 'matrix A is not a square matrix.']);
         out = false;
       end
-      if (nnz(isnan(A)))
+      if (any(isnan(A)))
         warning([CMD, 'matrix A found with NaN values.']);
         out = false;
       end
@@ -395,15 +395,15 @@ classdef RKimplicit < ODEsolver
         warning([CMD, 'b must be a numeric vector.']);
         out = false;
       end
-      if (isrow(b))
+      if (~isrow(b))
         warning([CMD, 'vector b is not a row vector.']);
         out = false;
       end
-      if (size(A, 2) == length(b))
+      if (size(A, 2) ~= size(b, 2))
         warning([CMD, 'vector b is not consistent with the size of matrix A.']);
         out = false;
       end
-      if (nnz(isnan(b)))
+      if (any(isnan(b)))
         warning([CMD, 'vector b found with NaN values.']);
         out = false;
       end
@@ -413,15 +413,15 @@ classdef RKimplicit < ODEsolver
         warning([CMD, 'c must be a numeric vector.']);
         out = false;
       end
-      if (iscolumn(c))
+      if (~iscolumn(c))
         warning([CMD, 'vector c is not a column vector.']);
         out = false;
       end
-      if (size(A, 1) == length(c))
+      if (size(A, 1) ~= size(c, 1))
         warning([CMD, 'vector c is not consistent with the size of matrix A.']);
         out = false;
       end
-      if (nnz(isnan(c)))
+      if (any(isnan(c)))
         warning([CMD, 'vector c found with NaN values.']);
         out = false;
       end
