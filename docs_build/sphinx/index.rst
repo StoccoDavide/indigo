@@ -1,16 +1,16 @@
 An Integrator for Differential & Differential-Algebraic Equations
 =================================================================
 
-.. image:: https://img.shields.io/badge/Github-indigo-4B0082.svg
+.. image:: https://img.shields.io/badge/Github-indigo-7E2F8E.svg
   :target: https://github.com/StoccoDavide/indigo
 
-.. image:: https://img.shields.io/badge/Version-0.0.0-4B0082.svg
+.. image:: https://img.shields.io/badge/Version-0.0.0-7E2F8E.svg
   :target: https://github.com/StoccoDavide/indigo
 
-.. image:: https://img.shields.io/badge/Release-2023.10.01-4B0082.svg
+.. image:: https://img.shields.io/badge/Release-2023.10.01-7E2F8E.svg
   :target: https://github.com/StoccoDavide/indigo
 
-.. image:: https://img.shields.io/badge/License-BSD3-4B0082.svg
+.. image:: https://img.shields.io/badge/License-BSD3-7E2F8E.svg
   :target: https://opensource.org/licenses/BSD-3-Clause
 
 | This MATLAB toolbox is a collection of integrators for ordinary differential

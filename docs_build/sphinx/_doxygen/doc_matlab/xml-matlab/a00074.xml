@@ -340,7 +340,7 @@
 <codeline lineno="330"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="331"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>k<sp/>=<sp/>1:steps</highlight></codeline>
 <codeline lineno="332"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(verbose<sp/>==<sp/>true)</highlight></codeline>
-<codeline lineno="333"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newpp<sp/>=<sp/>ceil(100*k/nt);</highlight></codeline>
+<codeline lineno="333"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newpp<sp/>=<sp/>ceil(100*k/steps);</highlight></codeline>
 <codeline lineno="334"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(newpp<sp/>&gt;<sp/>perc<sp/>+<sp/>4)</highlight></codeline>
 <codeline lineno="335"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perc<sp/>=<sp/>newpp;</highlight></codeline>
 <codeline lineno="336"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">%3d%%\n</highlight><highlight class="stringliteral">&apos;,<sp/>perc);</highlight></codeline>
@@ -358,8 +358,8 @@
 <codeline lineno="348"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>the<sp/>infinity<sp/>norm<sp/>of<sp/>the<sp/>projected<sp/>solution</highlight></codeline>
 <codeline lineno="349"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>norm_x_new<sp/>=<sp/>norm(x_new,<sp/>inf);</highlight></codeline>
 <codeline lineno="350"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(norm_x_new<sp/>&gt;<sp/>epsilon)</highlight></codeline>
-<codeline lineno="351"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t(%d)<sp/>=<sp/>%g,<sp/>||x||_inf<sp/>=<sp/>%g,<sp/>computation<sp/>interrupted.\n</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="352"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>k,<sp/>t(k),<sp/>norm_xnew);</highlight></codeline>
+<codeline lineno="351"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t(%d)<sp/>=<sp/>%g,<sp/>||x||_inf<sp/>=<sp/>%g,<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="352"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">computation<sp/>interrupted.\n</highlight><highlight class="stringliteral">&apos;],<sp/>this.m_name,<sp/>k,<sp/>t(k),<sp/>norm_xnew);</highlight></codeline>
 <codeline lineno="353"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
 <codeline lineno="354"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="355"><highlight class="stringliteral"></highlight></codeline>

@@ -258,6 +258,353 @@
         </inbodydescription>
         <location file="ODE/RKexplicit.m" line="155" column="15"/>
       </memberdef>
+      <memberdef kind="function" id="a00259_1a0bdd67de086e92e16a122dc63ed41289" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKexplicit::step_node</definition>
+        <argsstring>(in this, in i, in x_k, in K, in d_t)</argsstring>
+        <name>step_node</name>
+        <qualifiedname>RKexplicit::step_node</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the node as:</para>
+<para><formula id="61">\[
+\mathbf{x}_i = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the node to be computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States value at <formula id="36">$ k $</formula>-th time step <formula id="37">$ \mathbf{x}(t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>K</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Variable <formula id="62">$ \mathbf{K} $</formula> of the system to be solved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Advancing time step <formula id="40">$ \Delta t$</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The residual of the ODEs system to be solved. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKexplicit.m" line="186" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKexplicit::step_residual</definition>
+        <argsstring>(in this, in i, in x_k, in K, in t_k, in d_t)</argsstring>
+        <name>step_residual</name>
+        <qualifiedname>RKexplicit::step_residual</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the left hand side of the ODEs system to be solved:</para>
+<para><formula id="63">\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the step to be computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States value at <formula id="36">$ k $</formula>-th time step <formula id="37">$ \mathbf{x}(t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>K</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Variable <formula id="62">$ \mathbf{K} $</formula> of the system to be solved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step <formula id="39">$ t_k $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Advancing time step <formula id="40">$ \Delta t$</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The residual of the ODEs system to be solved. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKexplicit.m" line="215" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00259_1a5673be710b0feec4cba580d3a955508e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKexplicit::step_jacobian</definition>
+        <argsstring>(in this, in i, in x_k, in K, in t_k, in d_t)</argsstring>
+        <name>step_jacobian</name>
+        <qualifiedname>RKexplicit::step_jacobian</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the Jacobian of the ODEs system of equations:</para>
+<para><formula id="64">\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</formula></para>
+<para>to be solved in the <formula id="62">$ \mathbf{K} $</formula> variable:</para>
+<para><formula id="65">\[
+\dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
+  \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right).
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the step to be computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States value at <formula id="36">$ k $</formula>-th time step <formula id="37">$ \mathbf{x}(t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>K</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Variable <formula id="62">$ \mathbf{K} $</formula> of the system to be solved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step <formula id="39">$ t_k $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Advancing time step <formula id="40">$ \Delta t$</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian of the ODEs system of equations to be solved. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKexplicit.m" line="252" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00259_1ada9d54d434f221a94e8e13abbd1ab285" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function RKexplicit::solve_step</definition>
+        <argsstring>(in this, in i, in x_k, in K_0, in t_k, in d_t)</argsstring>
+        <name>solve_step</name>
+        <qualifiedname>RKexplicit::solve_step</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>K_0</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve the <formula id="66">$ i $</formula>-th explicit step of the ODEs system to find the <formula id="67">$ \mathbf{K}_i $</formula> variable:</para>
+<para><formula id="64">\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</formula></para>
+<para>by Newton method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the step to be computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States value at <formula id="36">$ k $</formula>-th time step <formula id="37">$ \mathbf{x}(t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>K</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial guess for the <formula id="62">$ \mathbf{K} $</formula> variable to be found. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step <formula id="39">$ t_k $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Advancing time step <formula id="40">$ \Delta t$</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The <formula id="62">$ \mathbf{K} $</formula> variables of the ODEs system to be solved. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/RKexplicit.m" line="283" column="15"/>
+      </memberdef>
       <memberdef kind="function" id="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
         <definition>function RKexplicit::step</definition>
@@ -288,29 +635,29 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <formula id="61">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) =
+<para>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <formula id="68">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) =
 \mathbf{0} $</formula>.</para>
 <para><bold>Solution Algorithm</bold></para>
-<para>Consider a Runge-Kutta method, written for a system of ODEs of the form <formula id="62">$ \mathbf{x}&apos; = \mathbf{f}(\mathbf{x}, t) $</formula>:</para>
-<para><formula id="63">\[
+<para>Consider a Runge-Kutta method, written for a system of ODEs of the form <formula id="69">$ \mathbf{x}&apos; = \mathbf{f}(\mathbf{x}, t) $</formula>:</para>
+<para><formula id="70">\[
  \begin{array}{l}
  \mathbf{K}_i = \mathbf{f} \left(
-   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
-   t_k + c_i \Delta t
+   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
+   \, t_k + c_i \Delta t
    \right), \qquad i = 1, 2, \ldots, s \\
  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
  \mathbf{K}_j \, ,
  \end{array}
  \]</formula></para>
-<para>Beacuse of the nature of the matrix <formula id="55">$ \mathbf{A} $</formula> (lower triangular) the <formula id="64">$ s$</formula> stages for a generic explicit Runge-Kutta method take the form:</para>
-<para><formula id="65">\[
+<para>Beacuse of the nature of the matrix <formula id="55">$ \mathbf{A} $</formula> (lower triangular) the <formula id="71">$ s$</formula> stages for a generic explicit Runge-Kutta method take the form:</para>
+<para><formula id="72">\[
 \mathbf{K}_i = \mathbf{f} \left(
   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
   \mathbf{K}_j, \, t_k + c_i \Delta t
   \right), \qquad i = 1, 2, \ldots, s.
 \]</formula></para>
-<para>Then the explicit Runge-Kutta method for an implicit system of ODEs of the form <formula id="66">$\mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula> can be written as:</para>
-<para><formula id="67">\[
+<para>Then the explicit Runge-Kutta method for an implicit system of ODEs of the form <formula id="73">$\mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula> can be written as:</para>
+<para><formula id="74">\[
 \begin{array}{l}
 \mathbf{F}_i \left(
   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
@@ -319,12 +666,12 @@
 \mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.
 \end{array}
 \]</formula></para>
-<para>It is important to notice that the system of <formula id="68">$ s $</formula> equations <formula id="69">$ \mathbf{F}_i $</formula> is a triangular system (which may be non-linear in the <formula id="70">$ \mathbf{K}_i $</formula> variables), so it can be solved using forward substitution and the solution of the system is the vector <formula id="71">$ \mathbf{K}
+<para>It is important to notice that the system of <formula id="75">$ s $</formula> equations <formula id="76">$ \mathbf{F}_i $</formula> is a triangular system (which may be non-linear in the <formula id="67">$ \mathbf{K}_i $</formula> variables), so it can be solved using forward substitution and the solution of the system is the vector <formula id="77">$ \mathbf{K}
 $</formula>. Thus, the final system to be solved is the following:</para>
-<para><formula id="72">\[
+<para><formula id="78">\[
 \left\{\begin{array}{l}
 \mathbf{F}_1 \left(
-  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k
+  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t
 \right) = \mathbf{0} \\
 \mathbf{F}_2 \left(
   \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
@@ -337,7 +684,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 \right) = \mathbf{0}
 \end{array}\right.
 \]</formula></para>
-<para>The <formula id="70">$ \mathbf{K}_i $</formula> variable are computed using the Newton&apos;s method.</para>
+<para>The <formula id="67">$ \mathbf{K}_i $</formula> variable are computed using the Newton&apos;s method.</para>
 <para><bold>Note</bold></para>
 <para>Another approach is to directly solve the whole system of equations by Newton&apos;smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <computeroutput><ref refid="a00263" kindref="compound">RKimplicit</ref></computeroutput> class.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -380,7 +727,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/RKexplicit.m" line="260" column="15"/>
+        <location file="ODE/RKexplicit.m" line="397" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -839,16 +1186,12 @@ $</formula>. Thus, the final system to be solved is the following:</para>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00259_1ab8774991272d53402d89d1c400d7274f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>static function RKexplicit::check_tableau</definition>
-        <argsstring>(in this, in A, in b, in c)</argsstring>
+        <argsstring>(in A, in b, in c)</argsstring>
         <name>check_tableau</name>
         <qualifiedname>RKexplicit::check_tableau</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
         <param>
           <type>in</type>
           <declname>A</declname>
@@ -896,7 +1239,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/RKexplicit.m" line="296" column="23"/>
+        <location file="ODE/RKexplicit.m" line="430" column="23"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -952,7 +1295,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
     </collaborationgraph>
     <location file="ODE/ExplicitMethods/RK38.m" line="4" column="1" bodyfile="ODE/ExplicitMethods/RK38.m" bodystart="5" bodyend="43"/>
     <listofallmembers>
-      <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" prot="public" virt="non-virtual"><scope>RK38</scope><name>check_tableau</name></member>
+      <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" prot="public" virt="non-virtual"><scope>RK38</scope><name>check_tableau</name></member>
       <member refid="a00259_1ab9999241cfd0871f748d1f305bf8f504" prot="public" virt="non-virtual"><scope>RK38</scope><name>get_A</name></member>
       <member refid="a00259_1a24e40fa536c7312e5ddcc444755fc468" prot="public" virt="non-virtual"><scope>RK38</scope><name>get_b</name></member>
       <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" prot="public" virt="non-virtual"><scope>RK38</scope><name>get_c</name></member>
@@ -977,7 +1320,11 @@ $</formula>. Thus, the final system to be solved is the following:</para>
       <member refid="a00251_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>RK38</scope><name>set_ode</name></member>
       <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" prot="public" virt="non-virtual"><scope>RK38</scope><name>set_tableau</name></member>
       <member refid="a00251_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>RK38</scope><name>solve</name></member>
+      <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" prot="public" virt="non-virtual"><scope>RK38</scope><name>solve_step</name></member>
       <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" prot="public" virt="virtual"><scope>RK38</scope><name>step</name></member>
+      <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" prot="public" virt="non-virtual"><scope>RK38</scope><name>step_jacobian</name></member>
+      <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" prot="public" virt="non-virtual"><scope>RK38</scope><name>step_node</name></member>
+      <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" prot="public" virt="non-virtual"><scope>RK38</scope><name>step_residual</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

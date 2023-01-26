@@ -72,13 +72,13 @@
 <span class="c">%&gt; For more details on the Newton's method with affine invariant step refer to:</span><span class="w"></span>
 <span class="c">%&gt; https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
-<span class="c">%&gt;  \param F         Function handle of the vectorial function</span><span class="w"></span>
+<span class="c">%&gt;  \param fun       Function handle of the vectorial function</span><span class="w"></span>
 <span class="c">%&gt;                   \f$ \mathbf{F}(\mathbf{x}) \f$.</span><span class="w"></span>
-<span class="c">%&gt;  \param JF        Function handle of Jacobian matrix</span><span class="w"></span>
+<span class="c">%&gt;  \param jac       Function handle of Jacobian matrix</span><span class="w"></span>
 <span class="c">%&gt;                   \f$ \mathbf{JF}(\mathbf{x}) \f$.</span><span class="w"></span>
 <span class="c">%&gt;  \param x_0       Initial guess of the solution.</span><span class="w"></span>
-<span class="c">%&gt;  \param VERBOSE   [optional, default = \f$ \mathrm{false} \f$] enable verbose mode.</span><span class="w"></span>
-<span class="c">%&gt;  \param TOLERANCE [optional, default = \f$ 1.0e^{-8} \f$] Convergence tolerance.</span><span class="w"></span>
+<span class="c">%&gt;  \param verbose   [optional, default = \f$ \mathrm{false} \f$] enable verbose mode.</span><span class="w"></span>
+<span class="c">%&gt;  \param tolerance [optional, default = \f$ 1.0e^{-8} \f$] Convergence tolerance.</span><span class="w"></span>
 <span class="c">%&gt;  \param ITER_NWTN [optional, default = \f$ 50 \f$] Maximum number of Newton iterations.</span><span class="w"></span>
 <span class="c">%&gt;  \param ITER_DUMP [optional, default = \f$ 50 \f$] Maximum number of Dumping iterations.</span><span class="w"></span>
 <span class="c">%&gt;  \param ALPHA     [optional, default = \f$ 0.5 \f$] Dumping coefficient.</span><span class="w"></span>
@@ -88,89 +88,97 @@
 <span class="c">%&gt;         failed because of bad dumping (step got too short).</span><span class="w"></span>
 <span class="c">%</span><span class="w"></span>
 <span class="k">function</span><span class="w"> </span><span class="nf">[x, flag] = NewtonSolver</span><span class="p">(</span> fun, jac, x_0, varargin <span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">x</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="n">x_0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">x_0</span><span class="p">))</span><span class="w"></span>
-<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">'NewtonSolver: Bad initial point!\n'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::NewtonSolver(...): '</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">VERBOSE</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">TOLERANCE</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0e-08</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nb">assert</span><span class="p">(</span><span class="o">~</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">x_0</span><span class="p">)),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">    </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid initial guess of the solution.'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">  </span><span class="nb">flag</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">verbose</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">tolerance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0e-08</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="n">ITER_NWTN</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="n">ITER_DUMP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">ALPHA</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nb">alpha</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
-<span class="w">    </span><span class="n">VERBOSE</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="c">% Collect verbose flag</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">verbose</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
-<span class="w">    </span><span class="n">TOLERANCE</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="c">% Collect tolerance</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">tolerance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<span class="w">  </span><span class="c">% Collect Newton's maximum number of iterations</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="n">ITER_NWTN</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">6</span><span class="w"></span>
+<span class="w">  </span><span class="c">% Collect dumping maximum number of iterations</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="n">ITER_DUMP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">7</span><span class="w"></span>
-<span class="w">    </span><span class="n">ALPHA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="c">% Collect dumping coefficient</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nb">alpha</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">VERBOSE</span><span class="w"></span>
-<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">'NEWTON SOLVER\n'</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c">% Check for too many input arguments</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nb">error</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'too many input arguments.'</span><span class="p">]);</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">  </span><span class="c">% Perform Newton iteration</span><span class="w"></span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_0</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">ITER_NWTN</span><span class="w"></span>
 
-<span class="w">    </span><span class="c">% Direction search</span><span class="w"></span>
-<span class="w">    </span><span class="n">F</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">JF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-
+<span class="w">    </span><span class="c">% Evaluate function and Jacobian</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="c">% Check if converged</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TOLERANCE</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tolerance</span><span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">    </span><span class="c">% Evaluate search direction</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Evaluate advancing direction</span><span class="w"></span>
 <span class="w">    </span><span class="n">h</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="n">JF</span><span class="o">\</span><span class="n">F</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">nh</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="c">% Perform Dumping iteration</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Perform dumping iteration</span><span class="w"></span>
 <span class="w">    </span><span class="n">dumped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="n">ITER_DUMP</span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
-<span class="w">      </span><span class="n">xd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ALPHA</span>^<span class="nb">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">xd</span><span class="p">))</span><span class="w"></span>
+<span class="w">      </span><span class="n">xd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">alpha</span>^<span class="nb">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">xd</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
 <span class="w">        </span><span class="n">Fd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">xd</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="n">hd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="n">JF</span><span class="o">\</span><span class="n">Fd</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">hd</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ALPHA</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">nh</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">norm</span><span class="p">(</span><span class="n">hd</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
 <span class="w">          </span><span class="n">dumped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
 <span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="n">dumped</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">VERBOSE</span><span class="w"></span>
-<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">'NewtonSolver(...): alpha = %g, Failed dumping iteration!\n'</span><span class="p">,</span><span class="w"> </span><span class="n">ALPHA</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Check if dumping failed</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dumped</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">verbose</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'alpha = %g, failed dumping iteration.\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">alpha</span><span class="p">]);</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 
+<span class="w">    </span><span class="c">% Update solution</span><span class="w"></span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">xd</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">VERBOSE</span><span class="w"></span>
-<span class="w">      </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">'iter [%d]: ||F||_inf = %14g, alpha = %g\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">inf</span><span class="p">),</span><span class="w"> </span><span class="n">ALPHA</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">verbose</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'iter %d: ||F||_inf = %14g, alpha = %g.\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">),</span><span class="w"> </span><span class="n">aplha</span><span class="p">]);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">norm</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TOLERANCE</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="c">% Check if converged</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">norm</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tolerance</span><span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>

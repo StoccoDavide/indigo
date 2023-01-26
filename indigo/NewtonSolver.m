@@ -36,8 +36,8 @@
 %>  \param jac       Function handle of Jacobian matrix
 %>                   \f$ \mathbf{JF}(\mathbf{x}) \f$.
 %>  \param x_0       Initial guess of the solution.
-%>  \param VERBOSE   [optional, default = \f$ \mathrm{false} \f$] enable verbose mode.
-%>  \param TOLERANCE [optional, default = \f$ 1.0e^{-8} \f$] Convergence tolerance.
+%>  \param verbose   [optional, default = \f$ \mathrm{false} \f$] enable verbose mode.
+%>  \param tolerance [optional, default = \f$ 1.0e^{-8} \f$] Convergence tolerance.
 %>  \param ITER_NWTN [optional, default = \f$ 50 \f$] Maximum number of Newton iterations.
 %>  \param ITER_DUMP [optional, default = \f$ 50 \f$] Maximum number of Dumping iterations.
 %>  \param ALPHA     [optional, default = \f$ 0.5 \f$] Dumping coefficient.
@@ -48,26 +48,26 @@
 %
 function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
 
-  CMD = 'indigo::NewtonSolver(...) ';
+  CMD = 'indigo::NewtonSolver(...): ';
 
-  assert(any(isnan(x_0)), ...
+  assert(~any(isnan(x_0)), ...
     [CMD, 'invalid initial guess of the solution.']);
 
   flag      = 0;
-  VERBOSE   = false;
-  TOLERANCE = 1.0e-08;
+  verbose   = false;
+  tolerance = 1.0e-08;
   ITER_NWTN = 50;
   ITER_DUMP = 50;
-  ALPHA     = 0.5;
+  alpha     = 0.5;
 
   % Collect verbose flag
   if (nargin > 3)
-    VERBOSE = varargin{1};
+    verbose = varargin{1};
   end
 
   % Collect tolerance
   if (nargin > 4)
-    TOLERANCE = varargin{2};
+    tolerance = varargin{2};
   end
 
   % Collect Newton's maximum number of iterations
@@ -82,16 +82,12 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
 
   % Collect dumping coefficient
   if (nargin > 7)
-    ALPHA = varargin{5};
+    alpha = varargin{5};
   end
 
   % Check for too many input arguments
   if (nargin > 8)
-    error([CMD, 'too many input arguments!']);
-  end
-
-  if (VERBOSE == true)
-    fprintf(1, 'NEWTON SOLVER\n' );
+    error([CMD, 'too many input arguments.']);
   end
 
   % Perform Newton iteration
@@ -103,41 +99,45 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
     JF = feval(jac, x);
 
     % Check if converged
-    if (norm(F, inf) < TOLERANCE)
+    if (norm(F, inf) < tolerance)
       return;
     end
 
-    % Evaluate search direction and its norm
+    % Evaluate advancing direction
     h  = -JF\F;
-    nh = norm(h, 2);
 
     % Perform dumping iteration
     dumped = false;
     for j = 0:ITER_DUMP-1
-      xd = x + ALPHA^j * h;
-      if all(isfinite(xd))
+      xd = x + alpha^j * h;
+      if (all(isfinite(xd)) == true)
         Fd = feval( fun, xd );
         hd = -JF\Fd;
-        if norm(hd, 2) < sqrt(1 - ALPHA/2)*nh
+        if (norm(hd, 2) < sqrt(1 - alpha/2) * norm(h, 2))
           dumped = true;
           break;
         end
       end
     end
 
+    % Check if dumping failed
     if (dumped == false)
-      if (VERBOSE == true)
-        fprintf(1, 'NewtonSolver(...): alpha = %g, Failed dumping iteration!\n', ALPHA );
+      if (verbose == true)
+        fprintf(1, [CMD, 'alpha = %g, failed dumping iteration.\n', alpha]);
       end
       flag = 2;
       break;
     end
 
+    % Update solution
     x = xd;
-    if (VERBOSE == true)
-      fprintf(1, 'iter [%d]: ||F||_inf = %14g, alpha = %g\n', i, norm(F, inf), ALPHA );
+    if (verbose == true)
+      fprintf(1, ...
+        [CMD, 'iter %d: ||F||_inf = %14g, alpha = %g.\n', i, norm(F, inf), aplha]);
     end
-    if (norm(h, inf) < TOLERANCE)
+
+    % Check if converged
+    if (norm(h, inf) < tolerance)
       return;
     end
   end

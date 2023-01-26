@@ -20,6 +20,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -35,7 +39,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00171" kind="class"><name>CrankNicolson</name>
     <member refid="a00171_1a091a8351cfc51a097c96bab586b51217" kind="function"><name>CrankNicolson</name></member>
@@ -74,6 +78,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -89,7 +97,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00131" kind="class"><name>ExplicitMidpoint</name>
     <member refid="a00131_1a2d400bb0f2d975122bb46b830d84f71c" kind="function"><name>ExplicitMidpoint</name></member>
@@ -100,6 +108,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -115,7 +127,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00175" kind="class"><name>GaussLegendre2</name>
     <member refid="a00175_1a92ade4685b863663f1e56df4ac924505" kind="function"><name>GaussLegendre2</name></member>
@@ -185,6 +197,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -200,7 +216,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00139" kind="class"><name>Heun3</name>
     <member refid="a00139_1a052faa0929100c5f4d01b8bf4ae6b5c7" kind="function"><name>Heun3</name></member>
@@ -211,6 +227,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -226,7 +246,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00187" kind="class"><name>ImplicitEuler</name>
     <member refid="a00187_1a19928925da4c5632c375f2474a67f208" kind="function"><name>ImplicitEuler</name></member>
@@ -715,6 +735,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -730,7 +754,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00147" kind="class"><name>Ralston3</name>
     <member refid="a00147_1a88e59c0dba74905b37bc8438685baa9e" kind="function"><name>Ralston3</name></member>
@@ -741,6 +765,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -756,7 +784,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00151" kind="class"><name>Ralston4</name>
     <member refid="a00151_1a8bb9bfd280f5ef02b6e211b10f94ba9d" kind="function"><name>Ralston4</name></member>
@@ -767,6 +795,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -782,7 +814,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00155" kind="class"><name>RK3</name>
     <member refid="a00155_1a457607e592b7a98617ff6997bf39a231" kind="function"><name>RK3</name></member>
@@ -793,6 +825,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -808,7 +844,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00159" kind="class"><name>RK38</name>
     <member refid="a00159_1a1a5c90a0408a781b882f21371340fe03" kind="function"><name>RK38</name></member>
@@ -819,6 +855,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -834,7 +874,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00163" kind="class"><name>RK4</name>
     <member refid="a00163_1a825ec831c70980037463834ef1657293" kind="function"><name>RK4</name></member>
@@ -845,6 +885,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -860,7 +904,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00259" kind="class"><name>RKexplicit</name>
     <member refid="a00259_1a9b32e85744bfa4b59dc46728a843f753" kind="variable"><name>m_A</name></member>
@@ -877,6 +921,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -886,7 +934,7 @@
     <member refid="a00251_1ae92cc5a5de7c746d4c22efefe9afeee3" kind="function"><name>set_max_iter</name></member>
     <member refid="a00251_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00251_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00263" kind="class"><name>RKimplicit</name>
     <member refid="a00263_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
@@ -925,6 +973,10 @@
     <member refid="a00259_1aa152d02f1d648022af25c8f5c67f3030" kind="function"><name>get_c</name></member>
     <member refid="a00259_1aafe813d51d48506e02c0c986e89bb22a" kind="function"><name>set_c</name></member>
     <member refid="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe" kind="function"><name>set_tableau</name></member>
+    <member refid="a00259_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
+    <member refid="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb" kind="function"><name>step_residual</name></member>
+    <member refid="a00259_1a5673be710b0feec4cba580d3a955508e" kind="function"><name>step_jacobian</name></member>
+    <member refid="a00259_1ada9d54d434f221a94e8e13abbd1ab285" kind="function"><name>solve_step</name></member>
     <member refid="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a" kind="function"><name>step</name></member>
     <member refid="a00251_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00251_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
@@ -940,7 +992,7 @@
     <member refid="a00251_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00251_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
     <member refid="a00251_1aa248ad5dd350504c12475009b9401467" kind="variable"><name>m_max_iter</name></member>
-    <member refid="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58" kind="function"><name>check_tableau</name></member>
+    <member refid="a00259_1ab8774991272d53402d89d1c400d7274f" kind="function"><name>check_tableau</name></member>
   </compound>
   <compound refid="a00002" kind="file"><name>Base.m</name>
   </compound>

@@ -342,7 +342,7 @@ Program Listing for File ODEsolver.m
    
          for k = 1:steps
            if (verbose == true)
-             newpp = ceil(100*k/nt);
+             newpp = ceil(100*k/steps);
              if (newpp > perc + 4)
                perc = newpp;
                fprintf('%3d%%\n', perc);
@@ -360,8 +360,8 @@ Program Listing for File ODEsolver.m
            % Check the infinity norm of the projected solution
            norm_x_new = norm(x_new, inf);
            if (norm_x_new > epsilon)
-             fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, computation interrupted.\n'], ...
-               this.m_name, k, t(k), norm_xnew);
+             fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, ', ...
+             'computation interrupted.\n'], this.m_name, k, t(k), norm_xnew);
              break;
            end
    

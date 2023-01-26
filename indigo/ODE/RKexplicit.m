@@ -141,16 +141,149 @@ classdef RKexplicit < ODEsolver
     %
     function set_tableau( this, A, b, c )
 
-      CMD = 'RKexplicit::set_tableau(...): ';
+      CMD = 'indigo::RKexplicit::set_tableau(...): ';
 
       % Check the Butcher tableau
-      assert(RKexplicit.check_butcher_tableau(A, b, c), ...
-        [CMD, 'invalid Butcher tableau detected.']);
+      assert(RKexplicit.check_tableau(A, b, c), ...
+        [CMD, 'invalid tableau detected.']);
 
       % Set the Butcher tableau
       this.m_A = A;
       this.m_b = b;
       this.m_c = c;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Compute the node as:
+    %>
+    %> \f[
+    %> \mathbf{x}_i = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+    %>   a_{ij} \mathbf{K}_j.
+    %> \f]
+    %>
+    %> \param i   Index of the node to be computed.
+    %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
+    %> \param d_t Advancing time step \f$ \Delta t\f$.
+    %>
+    %> \return The residual of the ODEs system to be solved.
+    %
+    function out = step_node( this, i, x_k, K, d_t )
+
+      % Compute node
+      out = zeros(length(x_k), 1);
+      for j = 1:i-1
+        out = out + this.m_A(i,j) * K(:,j);
+      end
+      out = x_k + out * d_t;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Compute the left hand side of the ODEs system to be solved:
+    %>
+    %> \f[
+    %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+    %>   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+    %> \right) = \mathbf{0}.
+    %> \f]
+    %>
+    %> \param i   Index of the step to be computed.
+    %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
+    %> \param t_k Time step \f$ t_k \f$.
+    %> \param d_t Advancing time step \f$ \Delta t\f$.
+    %>
+    %> \return The residual of the ODEs system to be solved.
+    %
+    function out = step_residual( this, i, x_k, K, t_k, d_t )
+
+      % Compute node
+      x_i = this.step_node(i, x_k, K, d_t);
+
+      % Compute the residuals
+      out = this.m_ode.F(x_i, K(:,i), t_k + this.m_c(i) * d_t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Compute the Jacobian of the ODEs system of equations:
+    %>
+    %> \f[
+    %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+    %>   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+    %> \right) = \mathbf{0}
+    %> \f]
+    %>
+    %> to be solved in the \f$ \mathbf{K} \f$ variable:
+    %>
+    %> \f[
+    %> \dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
+    %>   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
+    %>   \, \mathbf{K}_i, \, t_k + c_i \Delta t
+    %> \right).
+    %> \f]
+    %>
+    %> \param i   Index of the step to be computed.
+    %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
+    %> \param t_k Time step \f$ t_k \f$.
+    %> \param d_t Advancing time step \f$ \Delta t\f$.
+    %>
+    %> \return The Jacobian of the ODEs system of equations to be solved.
+    %
+    function out = step_jacobian( this, i, x_k, K, t_k, d_t )
+
+      % Compute node
+      x_i = this.step_node(i, x_k, K, d_t);
+
+      % Compute the residuals
+      out = this.m_ode.JF(x_i, K(:,i), t_k + this.m_c(i) * d_t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Solve the \f$ i \f$-th explicit step of the ODEs system to find the
+    %> \f$ \mathbf{K}_i \f$ variable:
+    %>
+    %> \f[
+    %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+    %>   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+    %> \right) = \mathbf{0}
+    %> \f]
+    %>
+    %> by Newton method.
+    %>
+    %> \param i   Index of the step to be computed.
+    %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param K   Initial guess for the \f$ \mathbf{K} \f$ variable to be found.
+    %> \param t_k Time step \f$ t_k \f$.
+    %> \param d_t Advancing time step \f$ \Delta t\f$.
+    %>
+    %> \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved.
+    %
+    function out = solve_step( this, i, x_k, K_0, t_k, d_t )
+
+      CMD = 'indigo::RKexplicit::solve_step(...): '
+
+      % Extract lengths
+      nc = length(this.m_c);
+      nx = length(x_k);
+
+      K = repmat(K_0, nx, nc);
+      for i = 1:nc
+
+        % Define the function handles
+        fun = @(K) this.step_residual(i, x_k, K, t_k, d_t);
+        jac = @(K) this.step_jacobian(i, x_k, K, t_k, d_t);
+
+        % Solve using Newton
+        [K(:,i), ierr] = NewtonSolver(fun, jac, K(:,i));
+        if (ierr ~= 0)
+          fprintf(1, [CMD, 'not converged flag = %d.\n', ierr]);
+        end
+      end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -167,8 +300,8 @@ classdef RKexplicit < ODEsolver
     %>  \f[
     %>  \begin{array}{l}
     %>  \mathbf{K}_i = \mathbf{f} \left(
-    %>    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
-    %>    t_k + c_i \Delta t
+    %>    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
+    %>    \, t_k + c_i \Delta t
     %>    \right), \qquad i = 1, 2, \ldots, s \\
     %>  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
     %>  \mathbf{K}_j \, ,
@@ -209,7 +342,7 @@ classdef RKexplicit < ODEsolver
     %> \f[
     %> \left\{\begin{array}{l}
     %> \mathbf{F}_1 \left(
-    %>   \mathbf{x}_k, \, \mathbf{K}_1, \, t_k
+    %>   \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t
     %> \right) = \mathbf{0} \\
     %> \mathbf{F}_2 \left(
     %>   \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
@@ -243,23 +376,20 @@ classdef RKexplicit < ODEsolver
     %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
     %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
     %>
-    function out = step( this, t_k, x_k, x_dot_k, d_t )
-      nx     = length( x_k );
-      nc     = length( this.m_c );
-      tt     = t_k + d_t * this.m_c;
-      k      = zeros( nx, nc );
-      k(:,1) = d_t * this.m_ode.f( tt(1), x_k );
-      for i = 2:nc
-        tmp = x_k;
-        for j = 1:i-1
-          tmp = tmp + this.m_A(i,j) * k(:,j);
-        end
-        k(:,i) = d_t * this.m_ode.f( tt(i), tmp );
-      end
-      out = x_k;
-      for i = 1:nc
-        out = out + this.m_b(i) * k(:,i);
-      end
+    function [out, out_dot] = step( this, t_k, x_k, x_dot_k, d_t )
+
+      % Extract lengths
+      nc = length(this.m_c);
+      nx = length(x_k);
+
+      % Solve the system to obtain K
+      K = this.solve_step( x_k, x_dot_k, t_k, d_t );
+
+      % Perform the step and obtain x_k+1
+      out = x_k + d_t * K * this.m_b';
+
+      % Extract x_dot_k+1 from K (i.e., its last value)
+      out_dot = K(:,nc);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -278,7 +408,7 @@ classdef RKexplicit < ODEsolver
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    function check_tableau( this, A, b, c )
+    function check_tableau( A, b, c )
 
       CMD = 'indigo::RKexplicit::check_tableau(...): ';
 
@@ -286,43 +416,55 @@ classdef RKexplicit < ODEsolver
 
       % Check matrix A
       if (~isnumeric(A))
-        warning([CMD, 'A must be a numeric matrix.']);
+        warning([CMD, 'matrix A must be numeric.']);
         out = false;
       end
-      if (istril(A))
+      if (~istril(A))
         warning([CMD, 'matrix A is not a lower triangular matrix.']);
         out = false;
       end
-      if (size(A, 1) == size(A, 2))
+      if (size(A, 1) ~= size(A, 2))
         warning([CMD, 'matrix A is not a square matrix.']);
+        out = false;
+      end
+      if (any(isnan(A)))
+        warning([CMD, 'matrix A found with NaN values.']);
         out = false;
       end
 
       % Check vector b
       if (~isnumeric(b))
-        warning([CMD, 'b must be a numeric vector.']);
+        warning([CMD, 'vector b must be numeric.']);
         out = false;
       end
-      if (isrow(b))
+      if (~isrow(b))
         warning([CMD, 'vector b is not a row vector.']);
         out = false;
       end
-      if (size(A, 2) == length(b))
+      if (size(A, 2) ~= length(b))
         warning([CMD, 'vector b is not consistent with the size of matrix A.']);
+        out = false;
+      end
+      if (any(isnan(b)))
+        warning([CMD, 'vector b found with NaN values.']);
         out = false;
       end
 
       % Check vector c
       if (~isnumeric(c))
-        warning([CMD, 'c must be a numeric vector.']);
+        warning([CMD, 'vector c must be numeric.']);
         out = false;
       end
-      if (iscolumn(c))
+      if (~iscolumn(c))
         warning([CMD, 'vector c is not a column vector.']);
         out = false;
       end
-      if (size(A, 1) == length(c))
-        warning([CMD, 'vector b is not consistent with the size of matrix A.']);
+      if (size(A, 1) ~= length(c))
+        warning([CMD, 'vector c is not consistent with the size of matrix A.']);
+        out = false;
+      end
+      if (any(isnan(c)))
+        warning([CMD, 'vector c found with NaN values.']);
         out = false;
       end
     end

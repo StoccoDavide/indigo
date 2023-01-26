@@ -114,12 +114,12 @@ html_show_sphinx = False
 html_theme_options = {
   "page_width"       : "65em",
   "body_text"        : "#000000",
-  "link_hover"       : "#4B0082",
+  "link_hover"       : "#7E2F8E",
   "link"             : "#000000",
-  "anchor_hover_fg"  : "#4B0082",
+  "anchor_hover_fg"  : "#7E2F8E",
   "gray_1"           : "#000000",
   "code_font_family" : "Menlo",
-  "code_highlight"   : "#4B0082",
+  "code_highlight"   : "#7E2F8E",
 }
 
 # If true, SmartyPants will be used to convert quotes and dashes to

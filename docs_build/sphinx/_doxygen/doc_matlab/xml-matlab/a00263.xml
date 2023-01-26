@@ -336,7 +336,7 @@
           <declname>d_t</declname>
         </param>
         <briefdescription>
-<para>Compute the step residual <formula id="79">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) $</formula>. </para>
+<para>Compute the step residual <formula id="85">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -373,8 +373,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the Jacobian of <formula id="79">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) $</formula>:</para>
-<para><formula id="80">\[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \]</formula>. </para>
+<para>Compute the Jacobian of <formula id="85">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) $</formula>:</para>
+<para><formula id="86">\[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \]</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -409,8 +409,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Solve the implicit step <formula id="81">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} $</formula> by Newton method</para>
-<para><formula id="82">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
+<para>Solve the implicit step <formula id="87">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} $</formula> by Newton method</para>
+<para><formula id="88">\[ \mathbf{K}^{\ell+1} = \mathbf{K}^{\ell} -
     \left(\frac{\partial\mathbf{F}(\mathbf{K}^{\ell})}{\partial \mathbf{K}}\right)^{-1}\mathbf{F}(\mathbf{K}^{\ell}) \]</formula>. </para>
         </detaileddescription>
         <inbodydescription>
@@ -445,7 +445,7 @@
           <declname>d_t</declname>
         </param>
         <briefdescription>
-<para>Perform an implicit step by solving the residual <formula id="81">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} $</formula>. </para>
+<para>Perform an implicit step by solving the residual <formula id="87">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -831,16 +831,16 @@
 *     \end{array}
 * 
 *  </verbatim></para>
-<para>The advancing for the ODE <formula id="73">$ x&apos;=f(t,x) $</formula> is done as follows:</para>
-<para><formula id="74">\[
+<para>The advancing for the ODE <formula id="79">$ x&apos;=f(t,x) $</formula> is done as follows:</para>
+<para><formula id="80">\[
        \begin{array}{rcl}
           x_{k+1} &amp;=&amp; x_k + \displaystyle\sum_{j=1}^s b_j K_j \\
           K_i     &amp;=&amp; h f\left( t_k + c_i \Delta t, x_k + \displaystyle\sum_{j=1}^s A_{ij} K_j \right),
           \qquad i=1,2,\ldots,s
        \end{array}
    \]</formula></para>
-<para>where the coefficients <formula id="75">$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T $</formula> are the solution of <formula id="76">$ \mathbf{F}(\mathbf{K}) = \mathbf{0} $</formula> the nonlinear system</para>
-<para><formula id="77">\[
+<para>where the coefficients <formula id="81">$ \mathbf{K} = (K_1,K_2,\ldots,K_s)^T $</formula> are the solution of <formula id="82">$ \mathbf{F}(\mathbf{K}) = \mathbf{0} $</formula> the nonlinear system</para>
+<para><formula id="83">\[
        \mathbf{F}(\mathbf{K}) =
        \left\{\begin{array}{rcl}
           F_1(K_1,K_2,\ldots,K_s) &amp;=&amp; 0, \\
@@ -850,7 +850,7 @@
        \end{array}\right.
    \]</formula></para>
 <para>where</para>
-<para><formula id="78">\[
+<para><formula id="84">\[
        \begin{array}{rcl}
           F_1(K_1,K_2,\ldots,K_s) &amp;=&amp; K_1-h f\left( t_k + c_1 \Delta t, x_k + \displaystyle\sum_{j=1}^s A_{1j} K_j \right), \\
           F_2(K_1,K_2,\ldots,K_s) &amp;=&amp; K_2-h f\left( t_k + c_1 \Delta t, x_k + \displaystyle\sum_{j=1}^s A_{2j} K_j \right), \\

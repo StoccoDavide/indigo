@@ -197,6 +197,147 @@
 </dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RK49step_nodeE2in2in2in2in2in">
+<span id="_CPPv3N3RK49step_nodeE2in2in2in2in2in"></span><span id="_CPPv2N3RK49step_nodeE2in2in2in2in2in"></span><span id="RK4::step_node__in.in.in.in.in"></span><span class="target" id="a00259_1a0bdd67de086e92e16a122dc63ed41289"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_node</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK49step_nodeE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the node as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_i = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the node to be computed. </p></li>
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The residual of the ODEs system to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RK413step_residualE2in2in2in2in2in2in">
+<span id="_CPPv3N3RK413step_residualE2in2in2in2in2in2in"></span><span id="_CPPv2N3RK413step_residualE2in2in2in2in2in2in"></span><span id="RK4::step_residual__in.in.in.in.in.in"></span><span class="target" id="a00259_1a7f8e94e9fd8b0c22ddc1a57fffca47bb"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_residual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK413step_residualE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the left hand side of the ODEs system to be solved:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The residual of the ODEs system to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RK413step_jacobianE2in2in2in2in2in2in">
+<span id="_CPPv3N3RK413step_jacobianE2in2in2in2in2in2in"></span><span id="_CPPv2N3RK413step_jacobianE2in2in2in2in2in2in"></span><span id="RK4::step_jacobian__in.in.in.in.in.in"></span><span class="target" id="a00259_1a5673be710b0feec4cba580d3a955508e"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_jacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK413step_jacobianE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the Jacobian of the ODEs system of equations:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</div>
+
+<p>to be solved in the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
+  \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right).
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian of the ODEs system of equations to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3RK410solve_stepE2in2in2in2in2in2in">
+<span id="_CPPv3N3RK410solve_stepE2in2in2in2in2in2in"></span><span id="_CPPv2N3RK410solve_stepE2in2in2in2in2in2in"></span><span id="RK4::solve_step__in.in.in.in.in.in"></span><span class="target" id="a00259_1ada9d54d434f221a94e8e13abbd1ab285"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K_0</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK410solve_stepE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the <span class="math notranslate nohighlight">\( i \)</span>-th explicit step of the ODEs system to find the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</div>
+
+<p>by Newton method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Initial guess for the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable to be found. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variables of the ODEs system to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N3RK44stepE2in2in2in2in2in">
 <span id="_CPPv3N3RK44stepE2in2in2in2in2in"></span><span id="_CPPv2N3RK44stepE2in2in2in2in2in"></span><span id="RK4::step__in.in.in.in.in"></span><span class="target" id="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK44stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
@@ -210,8 +351,8 @@
 \[\begin{split}
  \begin{array}{l}
  \mathbf{K}_i = \mathbf{f} \left(
-   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
-   t_k + c_i \Delta t
+   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
+   \, t_k + c_i \Delta t
    \right), \qquad i = 1, 2, \ldots, s \\
  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
  \mathbf{K}_j \, ,
@@ -248,7 +389,7 @@
 \[\begin{split}
 \left\{\begin{array}{l}
 \mathbf{F}_1 \left(
-  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k
+  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t
 \right) = \mathbf{0} \\
 \mathbf{F}_2 \left(
   \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
@@ -522,8 +663,8 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N3RK413check_tableauE2in2in2in2in">
-<span id="_CPPv3N3RK413check_tableauE2in2in2in2in"></span><span id="_CPPv2N3RK413check_tableauE2in2in2in2in"></span><span id="RK4::check_tableau__in.in.in.in"></span><span class="target" id="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK413check_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N3RK413check_tableauE2in2in2in">
+<span id="_CPPv3N3RK413check_tableauE2in2in2in"></span><span id="_CPPv2N3RK413check_tableauE2in2in2in"></span><span id="RK4::check_tableau__in.in.in"></span><span class="target" id="a00259_1ab8774991272d53402d89d1c400d7274f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3RK413check_tableauE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Check Butcher tableau consistency for an explicit Runge-Kutta method.</p>
