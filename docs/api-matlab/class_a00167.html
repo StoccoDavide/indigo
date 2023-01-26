@@ -91,7 +91,28 @@
 <span id="_CPPv3N6SSPRK35get_AE2in"></span><span id="_CPPv2N6SSPRK35get_AE2in"></span><span id="SSPRK3::get_A__in"></span><span class="target" id="a00259_1ab9999241cfd0871f748d1f305bf8f504"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35get_AE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the Runge-Kutta matrix <em>A</em> (lower triangular matrix). </p>
+<p>Get the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK35set_AE2in2in">
+<span id="_CPPv3N6SSPRK35set_AE2in2in"></span><span id="_CPPv2N6SSPRK35set_AE2in2in"></span><span id="SSPRK3::set_A__in.in"></span><span class="target" id="a00259_1a2ae4cb305691b585b55e40e725caf038"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35set_AE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_A</strong> – The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p>
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -100,7 +121,28 @@
 <span id="_CPPv3N6SSPRK35get_bE2in"></span><span id="_CPPv2N6SSPRK35get_bE2in"></span><span id="SSPRK3::get_b__in"></span><span class="target" id="a00259_1a24e40fa536c7312e5ddcc444755fc468"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35get_bE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the Runge-Kutta weights vector <em>b</em> (row vector). </p>
+<p>Get the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK35set_bE2in2in">
+<span id="_CPPv3N6SSPRK35set_bE2in2in"></span><span id="_CPPv2N6SSPRK35set_bE2in2in"></span><span id="SSPRK3::set_b__in.in"></span><span class="target" id="a00259_1ada8fa59ad233cb3508118d51c2fcf969"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35set_bE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_b</strong> – The weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector). </p>
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -109,88 +151,126 @@
 <span id="_CPPv3N6SSPRK35get_cE2in"></span><span id="_CPPv2N6SSPRK35get_cE2in"></span><span id="SSPRK3::get_c__in"></span><span class="target" id="a00259_1aa152d02f1d648022af25c8f5c67f3030"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35get_cE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the Runge-Kutta nodes vector <em>c</em> (column vector). </p>
+<p>Get the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p>
 </dd>
 </dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK35set_AE2in2in">
-<span id="_CPPv3N6SSPRK35set_AE2in2in"></span><span id="_CPPv2N6SSPRK35set_AE2in2in"></span><span id="SSPRK3::set_A__in.in"></span><span class="target" id="a00259_1a2e5173a007bbf6df93c034171e316415"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6SSPRK35set_AE2in2in" title="SSPRK3::set_A::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> , <a class="reference internal" href="#_CPPv4N6SSPRK35set_AE2in2in" title="SSPRK3::set_A::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> </span><span class="n sig-param"><span class="sig-paren">()</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35set_AE2in2in" title="Permalink to this definition">¶</a><br>
-</dt>
-<dd>
-<p>Set the Runge-Kutta matrix <em>A</em> (lower triangular matrix). </p>
-</dd>
-</dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK35set_bE2in2in">
-<span id="_CPPv3N6SSPRK35set_bE2in2in"></span><span id="_CPPv2N6SSPRK35set_bE2in2in"></span><span id="SSPRK3::set_b__in.in"></span><span class="target" id="a00259_1a17aaf4d6bcde8fa7290c18ef7800ad05"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6SSPRK35set_bE2in2in" title="SSPRK3::set_b::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> , <a class="reference internal" href="#_CPPv4N6SSPRK35set_bE2in2in" title="SSPRK3::set_b::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> </span><span class="n sig-param"><span class="sig-paren">()</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35set_bE2in2in" title="Permalink to this definition">¶</a><br>
-</dt>
-<dd>
-<p>Set the Runge-Kutta weights vector <em>b</em> (row vector). </p>
 </dd>
 </dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6SSPRK35set_cE2in2in">
-<span id="_CPPv3N6SSPRK35set_cE2in2in"></span><span id="_CPPv2N6SSPRK35set_cE2in2in"></span><span id="SSPRK3::set_c__in.in"></span><span class="target" id="a00259_1a5ecac0a56f3ed4d52e8667ae5e720f67"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6SSPRK35set_cE2in2in" title="SSPRK3::set_c::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> , <a class="reference internal" href="#_CPPv4N6SSPRK35set_cE2in2in" title="SSPRK3::set_c::in"><span class="n"><span class="sig-paren">()</span></span></a><span class="w"> </span><span class="n sig-param"><span class="sig-paren">()</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35set_cE2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N6SSPRK35set_cE2in2in"></span><span id="_CPPv2N6SSPRK35set_cE2in2in"></span><span id="SSPRK3::set_c__in.in"></span><span class="target" id="a00259_1aafe813d51d48506e02c0c986e89bb22a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK35set_cE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the Runge-Kutta nodes vector <em>c</em> (column vector). </p>
+<p>Set the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_c</strong> – The nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p>
+</dd>
+</dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK34stepE2in2in2in2in">
-<span id="_CPPv3N6SSPRK34stepE2in2in2in2in"></span><span id="_CPPv2N6SSPRK34stepE2in2in2in2in"></span><span id="SSPRK3::step__in.in.in.in"></span><span class="target" id="a00259_1a7d7a59c02ec394c13eaf8f2950e51e9d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK34stepE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK311set_tableauE2in2in2in2in">
+<span id="_CPPv3N6SSPRK311set_tableauE2in2in2in2in"></span><span id="_CPPv2N6SSPRK311set_tableauE2in2in2in2in"></span><span id="SSPRK3::set_tableau__in.in.in.in"></span><span class="target" id="a00259_1aaaaa5e21cd287fad5cac9654c7411fbe"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK311set_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Compute an integration step using the <strong>explicit</strong> Runge-Kutta method:</p>
-<p></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \begin{array}{rcl}
-       x_{k+1} &amp;=&amp; x_k + \displaystyle\sum_{j=1}^s b_j K_j \\
-       K_i     &amp;=&amp; h f \left(
-                         t_k + c_i \Delta t,
-                         x_k + \displaystyle\sum_{j=1}^{i-1} A_{ij} K_j
-                       \right),
-       \qquad i = 1, 2, \ldots, s.
-    \end{array}
- \end{split}\]</div>
-
-<p>The method requires the following inputs:</p>
-<p></p>
+<p>Set the Butcher tableau.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
 <ul class="simple">
-<li><p><em>x_k</em> States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>;</p></li>
-<li><p><em>t_k</em> Time step <span class="math notranslate nohighlight">\( t_k \)</span>;</p></li>
-<li><p><em>d_t</em> Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+<li><p><strong>A</strong> – Matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p></li>
+<li><p><strong>b</strong> – Weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector). </p></li>
+<li><p><strong>c</strong> – Nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p></li>
 </ul>
-
-<p>The return value is the approximation of <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span>. </p>
+</dd>
+</dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6SSPRK34stepE2in2in2in2in2in">
-<span id="_CPPv3N6SSPRK34stepE2in2in2in2in2in"></span><span id="_CPPv2N6SSPRK34stepE2in2in2in2in2in"></span><span id="SSPRK3::step__in.in.in.in.in"></span><span class="target" id="a00251_1a0824da2f381de5d8e4a4e49f1d1a8eb3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK34stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<span id="_CPPv3N6SSPRK34stepE2in2in2in2in2in"></span><span id="_CPPv2N6SSPRK34stepE2in2in2in2in2in"></span><span id="SSPRK3::step__in.in.in.in.in"></span><span class="target" id="a00259_1a76b8e09e4fd5a0790f5d3668abf1d79a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK34stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Generic advancing step for a generic solver.</p>
+<p>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
+\mathbf{0} \)</span>.</p>
+<p><strong>Solution Algorithm</strong></p>
+<p>Consider a Runge-Kutta method, written for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{x}' = \mathbf{f}(\mathbf{x}, t) \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{array}{l}
+ \mathbf{K}_i = \mathbf{f} \left(
+   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
+   t_k + c_i \Delta t
+   \right), \qquad i = 1, 2, \ldots, s \\
+ \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
+ \mathbf{K}_j \, ,
+ \end{array}
+ \end{split}\]</div>
+
+<p>Beacuse of the nature of the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular) the <span class="math notranslate nohighlight">\( s\)</span> stages for a generic explicit Runge-Kutta method take the form:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
-\mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)
+\mathbf{K}_i = \mathbf{f} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
+  \mathbf{K}_j, \, t_k + c_i \Delta t
+  \right), \qquad i = 1, 2, \ldots, s.
 \]</div>
 
-<p>where <span class="math notranslate nohighlight">\( \mathcal{S} \)</span> is the advancing step of the solver.</p>
+<p>Then the explicit Runge-Kutta method for an implicit system of ODEs of the form <span class="math notranslate nohighlight">\(\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \)</span> can be written as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{l}
+\mathbf{F}_i \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
+    \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\
+\mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.
+\end{array}
+\end{split}\]</div>
+
+<p>It is important to notice that the system of <span class="math notranslate nohighlight">\( s \)</span> equations <span class="math notranslate nohighlight">\( \mathbf{F}_i \)</span> is a triangular system (which may be non-linear in the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variables), so it can be solved using forward substitution and the solution of the system is the vector <span class="math notranslate nohighlight">\( \mathbf{K}
+\)</span>. Thus, the final system to be solved is the following:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{\begin{array}{l}
+\mathbf{F}_1 \left(
+  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k
+\right) = \mathbf{0} \\
+\mathbf{F}_2 \left(
+  \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
+  \mathbf{K}_2, \, t_k + c_2 \Delta t
+\right) = \mathbf{0} \\
+~~ \vdots \\
+\mathbf{F}_s \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s-1} a_{sj}
+  \mathbf{K}_j, \, \mathbf{K}_s, \, t_k + c_s \Delta t
+\right) = \mathbf{0}
+\end{array}\right.
+\end{split}\]</div>
+
+<p>The <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable are computed using the Newton’s method.</p>
+<p><strong>Note</strong></p>
+<p>Another approach is to directly solve the whole system of equations by Newton’smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <code class="docutils literal notranslate"><a class="reference internal" href="class_a00263.html#a00263"><span class="std std-ref"><span class="pre">RKimplicit</span></span></a></code> class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
 <ul class="simple">
 <li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
-<li><p><strong>x_dot_k</strong> – States derivative at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}'(t_k) \)</span>. </p></li>
+<li><p><strong>x_dot_k</strong> – States derivative at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}'
+               (t_k) \)</span>. </p></li>
 <li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
 <li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
 </ul>
@@ -227,7 +307,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>name</strong> – The name of the solver. </p>
+<p><strong>t_name</strong> – The name of the solver. </p>
 </dd>
 </dl>
 </dd>
@@ -257,7 +337,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>ode</strong> – The system of ODEs to be solved. </p>
+<p><strong>t_ode</strong> – The system of ODEs to be solved. </p>
 </dd>
 </dl>
 </dd>
@@ -287,7 +367,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>max_iter</strong> – The maximum number of iterations in the projection process. </p>
+<p><strong>t_max_iter</strong> – The maximum number of projection iterations. </p>
 </dd>
 </dl>
 </dd>
@@ -298,16 +378,17 @@
 <span id="_CPPv3N6SSPRK37projectE2in2in2in"></span><span id="_CPPv2N6SSPRK37projectE2in2in2in"></span><span id="SSPRK3::project__in.in.in"></span><span class="target" id="a00251_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK37projectE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Solve the ODEs system through the problem:</p>
+<p>Project the ODEs system solution <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> on the invariants/hidden constraints <span class="math notranslate nohighlight">\( \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \)</span>. The constrained minimization problem to be solved is:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
 \textrm{minimize} \quad
-\dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
-\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.
 \]</div>
 
-<p>given the Lagrangian <span class="math notranslate nohighlight">\( \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \)</span> of the form:</p>
+<p><strong>Solution Algorithm</strong></p>
+<p>Given the Lagrangian of the minimization problem of the form:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
@@ -327,7 +408,6 @@
 \end{array}\right.
 \end{split}\]</div>
 
-<p><strong>Solution algorithm</strong></p>
 <p>Using the Taylor expansion of the Lagrangian:</p>
 <p></p>
 <div class="math notranslate nohighlight">
@@ -385,7 +465,7 @@
 </dt>
 <dd>
 <p>Solve the system of ODEs and calculate the approximate solution.</p>
-<p><strong>Usage:</strong></p>
+<p><strong>Usage</strong></p>
 <p>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
 <p></p>
 <div class="highlight-none notranslate">
@@ -420,7 +500,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
 <ul class="simple">
-<li><p><strong>t</strong> – Time vector <span class="math notranslate nohighlight">\( \left[ t_0, t_1, \ldots, t_n \right]^T \)</span>. </p></li>
+<li><p><strong>t</strong> – Time vector <span class="math notranslate nohighlight">\( \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+                  \right]^T \)</span>. </p></li>
 <li><p><strong>x_0</strong> – Initial states value <span class="math notranslate nohighlight">\( \mathbf{x}(t_0) \)</span>. </p></li>
 <li><p><strong>project</strong> – [optional, default = false] Apply projection to invariants at each step. </p></li>
 <li><p><strong>verbose</strong> – [optional, default = <span class="math notranslate nohighlight">\( \mathrm{false} \)</span>] Activate vebose mode. </p></li>
@@ -430,8 +511,33 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
 <p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-           (t)\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}
-           (t) \)</span> of the system of ODEs.</p>
+           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6SSPRK313check_tableauE2in2in2in2in">
+<span id="_CPPv3N6SSPRK313check_tableauE2in2in2in2in"></span><span id="_CPPv2N6SSPRK313check_tableauE2in2in2in2in"></span><span id="SSPRK3::check_tableau__in.in.in.in"></span><span class="target" id="a00259_1a6dd5629b4d8b92d84abff1cfcdb68e58"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SSPRK313check_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check Butcher tableau consistency for an explicit Runge-Kutta method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>A</strong> – Matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span>. </p></li>
+<li><p><strong>b</strong> – Weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span>. </p></li>
+<li><p><strong>c</strong> – Nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>True if the Butcher tableau is consistent, false otherwise. </p>
 </dd>
 </dl>
 </dd>

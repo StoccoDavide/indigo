@@ -26,10 +26,10 @@ classdef Base < handle
     %> Class constructor for a system of ODEs/DAEs that requires the following
     %> inputs:
     %>
-    %> \param name The name of the system of ODEs/DAEs;
-    %> \param neqn The number of equations of the system of ODEs/DAEs;
-    %> \param ninv The number of invariants/hidden contraints of the system of
-    %>             ODEs/DAEs.
+    %> \param t_num_ame The name of the system of ODEs/DAEs.
+    %> \param t_num_eqn The number of equations of the system of ODEs/DAEs.
+    %> \param t_num_inv The number of invariants/hidden contraints of the system
+    %>                  of ODEs/DAEs.
     %
     function this = Base( t_name, t_num_eqns, t_num_invs )
       this.m_name     = t_name;
@@ -39,19 +39,29 @@ classdef Base < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    %> Get the system of ODEs/DAEs name.
+    %>
+    %> \return The system of ODEs/DAEs name.
+    %
+    function out = get_name( this )
+      out = this.m_name;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     %> Get the number of equations of the system of ODEs/DAEs.
     %>
     %> \return The number of equations of the system of ODEs/DAEs.
     %
-    function out = get_num_eqns( this )
-      out = this.m_num_eqns;
+    function t_num_eqns = get_num_eqns( this )
+      t_num_eqns = this.m_num_eqns;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the number of equations of the system of ODEs/DAEs.
     %>
-    %> \param num_eqns The number of equations of the system of ODEs/DAEs.
+    %> \param t_num_eqns The number of equations of the system of ODEs/DAEs.
     %
     function set_num_eqns( this, t_num_eqns )
       this.m_num_eqns = t_num_eqns;
@@ -64,16 +74,16 @@ classdef Base < handle
     %> \return The number of invariants/hidden contraints of the system of
     %>         ODEs/DAEs.
     %
-    function out = get_num_invs( this )
-      out = this.m_num_invs;
+    function t_num_invs = get_num_invs( this )
+      t_num_invs = this.m_num_invs;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the number of invariants/hidden constraints of the system of ODEs/DAEs.
     %>
-    %> \param num_invs The number of invariants/hidden constraints of the system
-    %>                 of ODEs/DAEs.
+    %> \param t_num_invs The number of invariants/hidden constraints of the system
+    %>                   of ODEs/DAEs.
     %
     function set_num_invs( this, t_num_invs )
       this.m_num_invs = t_num_invs;

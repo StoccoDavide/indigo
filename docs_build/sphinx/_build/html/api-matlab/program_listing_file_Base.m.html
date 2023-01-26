@@ -67,10 +67,10 @@
 <span class="w">    </span><span class="c">%&gt; Class constructor for a system of ODEs/DAEs that requires the following</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; inputs:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param name The name of the system of ODEs/DAEs;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param neqn The number of equations of the system of ODEs/DAEs;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param ninv The number of invariants/hidden contraints of the system of</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;             ODEs/DAEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_ame The name of the system of ODEs/DAEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_eqn The number of equations of the system of ODEs/DAEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_inv The number of invariants/hidden contraints of the system</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;                  of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">Base</span><span class="p">(</span> t_name, t_num_eqns, t_num_invs <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
@@ -80,19 +80,29 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the system of ODEs/DAEs name.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The system of ODEs/DAEs name.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Get the number of equations of the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The number of equations of the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_eqns</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_num_eqns<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_eqns</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_num_eqns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the number of equations of the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param num_eqns The number of equations of the system of ODEs/DAEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_eqns The number of equations of the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_num_eqns</span><span class="p">(</span> this, t_num_eqns <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_eqns</span><span class="p">;</span><span class="w"></span>
@@ -105,16 +115,16 @@
 <span class="w">    </span><span class="c">%&gt; \return The number of invariants/hidden contraints of the system of</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;         ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_invs</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_invs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_num_invs<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_invs</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_invs</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the number of invariants/hidden constraints of the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param num_invs The number of invariants/hidden constraints of the system</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;                 of ODEs/DAEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_invs The number of invariants/hidden constraints of the system</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;                   of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_num_invs</span><span class="p">(</span> this, t_num_invs <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_invs</span><span class="p">;</span><span class="w"></span>

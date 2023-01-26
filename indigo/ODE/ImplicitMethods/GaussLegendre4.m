@@ -1,5 +1,5 @@
 %
-%> Class container for Gauss–Legendre fouth-order (2 stages)
+%> Class container for Gauss-Legendre fouth-order (2 stages)
 %
 classdef GaussLegendre4 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef GaussLegendre4 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss–Legendre fourth-order (2 stages)
+    %> Gauss-Legendre fourth-order (2 stages)
     %>
     %> \rst
     %> .. math::

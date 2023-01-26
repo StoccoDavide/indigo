@@ -11,7 +11,7 @@ Program Listing for File GaussLegendre2.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Gauss–Legendre second-order method (1 stage)
+   %> Class container for Gauss-Legendre second-order method (1 stage)
    %
    classdef GaussLegendre2 < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File GaussLegendre2.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Gauss–Legendre second-order method (1 stage)
+       %> Gauss-Legendre second-order method (1 stage)
        %>
        %> \rst
        %> .. math::

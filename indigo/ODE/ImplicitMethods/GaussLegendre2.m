@@ -1,5 +1,5 @@
 %
-%> Class container for Gauss–Legendre second-order method (1 stage)
+%> Class container for Gauss-Legendre second-order method (1 stage)
 %
 classdef GaussLegendre2 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef GaussLegendre2 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss–Legendre second-order method (1 stage)
+    %> Gauss-Legendre second-order method (1 stage)
     %>
     %> \rst
     %> .. math::

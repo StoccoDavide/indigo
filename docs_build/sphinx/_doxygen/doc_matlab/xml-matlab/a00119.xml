@@ -76,23 +76,23 @@
 <para>Class constructor for a system of ODEs/DAEs that requires the following inputs:</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>name</parametername>
+<parametername>t_num_ame</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The name of the system of ODEs/DAEs; </para>
+<para>The name of the system of ODEs/DAEs. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>neqn</parametername>
+<parametername>t_num_eqn</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The number of equations of the system of ODEs/DAEs; </para>
+<para>The number of equations of the system of ODEs/DAEs. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>ninv</parametername>
+<parametername>t_num_inv</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The number of invariants/hidden contraints of the system of ODEs/DAEs. </para>
@@ -104,6 +104,28 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Base.m" line="40" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00119_1ad8e1b22487ddb483ff606042a03b46da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Base::get_name</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_name</name>
+        <qualifiedname>Base::get_name</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the system of ODEs/DAEs name.</para>
+<para><simplesect kind="return"><para>The system of ODEs/DAEs name. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Base.m" line="53" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00119_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -125,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="53" column="15"/>
+        <location file="Base.m" line="64" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00119_1a8acdc198f9503ad4df0938412359d4fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -147,7 +169,7 @@
 <para>Set the number of equations of the system of ODEs/DAEs.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>num_eqns</parametername>
+<parametername>t_num_eqns</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The number of equations of the system of ODEs/DAEs. </para>
@@ -158,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="64" column="15"/>
+        <location file="Base.m" line="75" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00119_1a547ccdd8280c668961998fc8e561492e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -180,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="76" column="15"/>
+        <location file="Base.m" line="87" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00119_1afbed901db1ac25ff5a3bd9607f129549" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -202,7 +224,7 @@
 <para>Set the number of invariants/hidden constraints of the system of ODEs/DAEs.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>num_invs</parametername>
+<parametername>t_num_invs</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The number of invariants/hidden constraints of the system of ODEs/DAEs. </para>
@@ -213,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Base.m" line="88" column="15"/>
+        <location file="Base.m" line="99" column="15"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -249,9 +271,10 @@
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="Base.m" line="5" column="1" bodyfile="Base.m" bodystart="6" bodyend="96"/>
+    <location file="Base.m" line="5" column="1" bodyfile="Base.m" bodystart="6" bodyend="107"/>
     <listofallmembers>
       <member refid="a00119_1a606023c352e27bb5cc5a56f6850c27da" prot="public" virt="non-virtual"><scope>Base</scope><name>Base</name></member>
+      <member refid="a00119_1ad8e1b22487ddb483ff606042a03b46da" prot="public" virt="non-virtual"><scope>Base</scope><name>get_name</name></member>
       <member refid="a00119_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_eqns</name></member>
       <member refid="a00119_1a547ccdd8280c668961998fc8e561492e" prot="public" virt="non-virtual"><scope>Base</scope><name>get_num_invs</name></member>
       <member refid="a00119_1aeceb7d6443dc5d20f4d04600dab356d7" prot="private" virt="non-virtual"><scope>Base</scope><name>m_name</name></member>

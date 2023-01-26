@@ -39,56 +39,53 @@
 </h1>
 <p>↰ <a class="reference internal" href="file_NewtonSolver.m.html#file-newtonsolver-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">NewtonSolver.m</span></code>)</p>
 <div class="highlight-MATLAB notranslate">
-<div class="highlight"><pre><span></span><span class="c">% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">% The DIAL project - Course of MECHATRONICS SYSTEM SIMULATION         %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">% Copyright (c) 2020, Davide Stocco and Enrico Bertolazzi, Francesco  %</span><span class="w"></span>
-<span class="c">% Biral                                                               %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">% The DIAL project and its components are supplied under the terms of %</span><span class="w"></span>
-<span class="c">% the open source BSD 2-Clause License. The contents of the DIAL      %</span><span class="w"></span>
-<span class="c">% project and its components may not be copied or disclosed except in %</span><span class="w"></span>
-<span class="c">% accordance with the terms of the BSD 2-Clause License.              %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">% URL: https://opensource.org/licenses/BSD-2-Clause                   %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">%    Davide Stocco                                                    %</span><span class="w"></span>
-<span class="c">%    Department of Industrial Engineering                             %</span><span class="w"></span>
-<span class="c">%    University of Trento                                             %</span><span class="w"></span>
-<span class="c">%    e-mail: davide.stocco@unitn.it                                   %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">%    Enrico Bertolazzi                                                %</span><span class="w"></span>
-<span class="c">%    Department of Industrial Engineering                             %</span><span class="w"></span>
-<span class="c">%    University of Trento                                             %</span><span class="w"></span>
-<span class="c">%    e-mail: enrico.bertolazzi@unitn.it                               %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">%    Francesco Biral                                                  %</span><span class="w"></span>
-<span class="c">%    Department of Industrial Engineering                             %</span><span class="w"></span>
-<span class="c">%    University of Trento                                             %</span><span class="w"></span>
-<span class="c">%    e-mail: francesco.biral@unitn.it                                 %</span><span class="w"></span>
-<span class="c">%                                                                     %</span><span class="w"></span>
-<span class="c">% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %</span><span class="w"></span>
-<span class="c">%</span><span class="w"></span>
-<span class="c">%&gt; Function implementing the Dumped Newton Solver.</span><span class="w"></span>
-<span class="c">%&gt; Solve \rst ..math:`J(x_k) h = -F(x_k)` \endrst and update \rst ..math:`x_{k+1} = x_k + \alpha_k h` \endrst where \rst ..math:`\alpha_k` \endrst satisfies \rst ..math:`\norm{J(x_k)^{-1} F(x_{k+1})} \leq (1 - \frac{\alpha_k}{2}) \norm{J(x_k)^{-1} F(x_k)} = (1 - \frac{\alpha_k}{2}) \norm{h}` \endrst.</span><span class="w"></span>
-<span class="c">%&gt; This is called Affine invariant Newton step (see</span><span class="w"></span>
-<span class="c">%&gt; https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html).</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
+<span class="c">%&gt; Function implementing a dumped Newton's method with affine invariant step.</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
-<span class="c">%&gt; Output flags:</span><span class="w"></span>
-<span class="c">%&gt;  - flag = 0 -&gt; solution found;</span><span class="w"></span>
-<span class="c">%&gt;  - flag = 1 -&gt; failed because of bad initial point;</span><span class="w"></span>
-<span class="c">%&gt;  - flag = 2 -&gt; failed because of step too short, filed linesearch.</span><span class="w"></span>
+<span class="c">%&gt; **Solution Algorithm:**</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
-<span class="c">%&gt; Inputs:</span><span class="w"></span>
-<span class="c">%&gt;  - fun       -&gt; function F(x) = feval( fun, x );</span><span class="w"></span>
-<span class="c">%&gt;  - jac       -&gt; Jacobian matrix of the function J(x) = feval( jac, x );</span><span class="w"></span>
-<span class="c">%&gt;  - x_0       -&gt; initial guess;</span><span class="w"></span>
-<span class="c">%&gt;  - VERBOSE   -&gt; [optional, defalut = false] enable verbose mode;</span><span class="w"></span>
-<span class="c">%&gt;  - TOLERANCE -&gt; [optional, defalut = 1.0e-08] tolerance;</span><span class="w"></span>
-<span class="c">%&gt;  - ITER_NWTN -&gt; [optional, defalut = 50] maximum number of Newton iterations;</span><span class="w"></span>
-<span class="c">%&gt;  - ITER_DUMP -&gt; [optional, defalut = 50] maximum number of Dumping iterations;</span><span class="w"></span>
-<span class="c">%&gt;  - ALPHA     -&gt; [optional, defalut = 0.5] dumping coefficient</span><span class="w"></span>
+<span class="c">%&gt; Given a zeros of a vectorial function problem of the form \f$ \mathbf{F}</span><span class="w"></span>
+<span class="c">%&gt; (\mathbf{x}) = \mathbf{0} \f$, where \f$ \mathbf{F}: \mathbb{R}^n \rightarrow</span><span class="w"></span>
+<span class="c">%&gt; \mathbb{R}^n \f$, then the Newton's method is defined as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{JF}(\mathbf{x}_k)\mathbf{h} = -\mathbf{F}(\mathbf{x}_k).</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; The dumped step is defined as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{h}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; where \f$ \alpha_k \f$ is a dumping coefficient that satisfies:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \left\| \mathbf{JF}(\mathbf{x}_k)^{-1} \mathbf{F}(\mathbf{x}_{k+1}) \right\|</span><span class="w"></span>
+<span class="c">%&gt; \leq \left(1 - \dfrac{\alpha_k}{2}\right) \left\| \mathbf{JF}(\mathbf{x}_k)^{-1}</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}(\mathbf{x}_k) \right\| = \left(1 - \dfrac{\alpha_k}{2} \right)</span><span class="w"></span>
+<span class="c">%&gt; \left\| \mathbf{h}  \right\|.</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; **Note:**</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; For more details on the Newton's method with affine invariant step refer to:</span><span class="w"></span>
+<span class="c">%&gt; https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt;  \param F         Function handle of the vectorial function</span><span class="w"></span>
+<span class="c">%&gt;                   \f$ \mathbf{F}(\mathbf{x}) \f$.</span><span class="w"></span>
+<span class="c">%&gt;  \param JF        Function handle of Jacobian matrix</span><span class="w"></span>
+<span class="c">%&gt;                   \f$ \mathbf{JF}(\mathbf{x}) \f$.</span><span class="w"></span>
+<span class="c">%&gt;  \param x_0       Initial guess of the solution.</span><span class="w"></span>
+<span class="c">%&gt;  \param VERBOSE   [optional, default = \f$ \mathrm{false} \f$] enable verbose mode.</span><span class="w"></span>
+<span class="c">%&gt;  \param TOLERANCE [optional, default = \f$ 1.0e^{-8} \f$] Convergence tolerance.</span><span class="w"></span>
+<span class="c">%&gt;  \param ITER_NWTN [optional, default = \f$ 50 \f$] Maximum number of Newton iterations.</span><span class="w"></span>
+<span class="c">%&gt;  \param ITER_DUMP [optional, default = \f$ 50 \f$] Maximum number of Dumping iterations.</span><span class="w"></span>
+<span class="c">%&gt;  \param ALPHA     [optional, default = \f$ 0.5 \f$] Dumping coefficient.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \return The solution \f$ \mathbf{x} \f$ and the output flag: \f$ 0 \f$ =</span><span class="w"></span>
+<span class="c">%&gt;         success, \f$ 1 \f$ = failed because of bad initial point, \f$ 2 \f$ =</span><span class="w"></span>
+<span class="c">%&gt;         failed because of bad dumping (step got too short).</span><span class="w"></span>
 <span class="c">%</span><span class="w"></span>
 <span class="k">function</span><span class="w"> </span><span class="nf">[x, flag] = NewtonSolver</span><span class="p">(</span> fun, jac, x_0, varargin <span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="nb">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
@@ -173,7 +170,7 @@
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">VERBOSE</span><span class="w"></span>
 <span class="w">      </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">'iter [%d]: ||F||_inf = %14g, alpha = %g\n'</span><span class="p">,</span><span class="w"> </span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">inf</span><span class="p">),</span><span class="w"> </span><span class="n">ALPHA</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TOLERANCE</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">norm</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TOLERANCE</span><span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>

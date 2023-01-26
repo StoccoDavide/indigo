@@ -30,7 +30,7 @@
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 %
-%> Class container for Gauss–Legendre sixth-order (3 stages)
+%> Class container for Gauss-Legendre sixth-order (3 stages)
 %
 classdef GaussLegendre6 < RKimplicit
   %
@@ -38,7 +38,7 @@ classdef GaussLegendre6 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss–Legendre sixth-order (3 stages)
+    %> Gauss-Legendre sixth-order (3 stages)
     %>
     %> \rst
     %> .. math::

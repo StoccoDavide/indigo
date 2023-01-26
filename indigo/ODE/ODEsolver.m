@@ -27,7 +27,7 @@ classdef ODEsolver < handle
     %> Class constructor for ODEsolver, which requires the name of the solver
     %> used to integrate the system of ODEs as input.
     %>
-    %> \param name The name of the solver.
+    %> \param t_name The name of the solver.
     %
     function this = ODEsolver( t_name )
       this.m_name = t_name;
@@ -39,17 +39,17 @@ classdef ODEsolver < handle
     %>
     %> \return The name of the solver.
     %
-    function out = get_name( this )
-      out = this.m_name;
+    function t_name = get_name( this )
+      t_name = this.m_name;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the name of the method used to integrate the system of ODEs.
     %>
-    %> \param name The name of the solver.
+    %> \param t_name The name of the solver.
     %
-    function out = set_name( this, t_name )
+    function set_name( this, t_name )
       this.m_name = t_name;
     end
     %
@@ -59,15 +59,15 @@ classdef ODEsolver < handle
     %>
     %> \return The system of ODEs to be solved.
     %
-    function out = get_ode( this )
-      out = this.m_ode;
+    function t_ode = get_ode( this )
+      t_ode = this.m_ode;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the system of ODEs to be solved.
     %>
-    %> \param ode The system of ODEs to be solved.
+    %> \param t_ode The system of ODEs to be solved.
     %
     function set_ode( this, t_ode )
       this.m_ode = t_ode;
@@ -79,15 +79,15 @@ classdef ODEsolver < handle
     %>
     %> \return The maximum number of iterations in the projection process.
     %
-    function out = get_max_iter( this )
-      out = this.m_max_iter;
+    function t_max_iter = get_max_iter( this )
+      t_max_iter = this.m_max_iter;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the maximum number of iterations in the projection process.
     %>
-    %> \param max_iter The maximum number of iterations in the projection process.
+    %> \param t_max_iter The maximum number of projection iterations.
     %
     function set_max_iter( this, t_max_iter )
 
@@ -101,16 +101,19 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the ODEs system through the problem:
+    %> Project the ODEs system solution \f$ \mathbf{x} \f$ on the invariants/hidden
+    %> constraints \f$ \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \f$. The constrained
+    %> minimization problem to be solved is:
     %>
     %> \f[
     %> \textrm{minimize} \quad
-    %> \dfrac{1}{2}\left(\mathbf{x} - \tilde{\mathbf{x}}\right)^2 \quad
-    %> \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+    %> \dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
+    %> \textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.
     %> \f]
     %>
-    %> given the Lagrangian \f$ \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) \f$
-    %> of the form:
+    %> **Solution Algorithm**
+    %>
+    %> Given the Lagrangian of the minimization problem of the form:
     %>
     %> \f[
     %> \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
@@ -127,8 +130,6 @@ classdef ODEsolver < handle
     %> \mathbf{H}(\mathbf{x}, t) = \mathbf{0}
     %> \end{array}\right.
     %> \f]
-    %>
-    %> **Solution algorithm**
     %>
     %> Using the Taylor expansion of the Lagrangian:
     %>
@@ -224,7 +225,8 @@ classdef ODEsolver < handle
     %
     %> Solve the system of ODEs and calculate the approximate solution.
     %>
-    %> \param t       Time vector \f$ \left[ t_0, t_1, \ldots, t_n \right]^T \f$.
+    %> \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+    %>                \right]^T \f$.
     %> \param x_0     Initial states value \f$ \mathbf{x}(t_0) \f$.
     %> \param project [optional, default = false] Apply projection to invariants
     %>                 at each step.
@@ -235,10 +237,10 @@ classdef ODEsolver < handle
     %>                the computation is interrupted.
     %>
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-    %>         (t)\right] \f$ containing the approximated solution \f$ \mathbf{x}
-    %>         (t) \f$ of the system of ODEs.
+    %>         (\mathbf{t})\right] \f$ containing the approximated solution
+    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs.
     %>
-    %> **Usage:**
+    %> **Usage**
     %>
     %> Solve without the solution projection on invariants/hidden constraints and
     %> disabled verbose mode.
@@ -328,7 +330,7 @@ classdef ODEsolver < handle
 
       for k = 1:steps
         if (verbose == true)
-          newpp = ceil(100*k/nt);
+          newpp = ceil(100*k/steps);
           if (newpp > perc + 4)
             perc = newpp;
             fprintf('%3d%%\n', perc);
@@ -346,8 +348,8 @@ classdef ODEsolver < handle
         % Check the infinity norm of the projected solution
         norm_x_new = norm(x_new, inf);
         if (norm_x_new > epsilon)
-          fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, computation interrupted.\n'], ...
-            this.m_name, k, t(k), norm_xnew);
+          fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, ', ...
+          'computation interrupted.\n'], this.m_name, k, t(k), norm_xnew);
           break;
         end
 
@@ -365,17 +367,20 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Generic advancing step for a generic solver.
+    %> Compute a step using a generic integration method for a system of ODEs of
+    %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The
+    %> step is based on the following formula:
     %>
     %> \f[
     %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
     %> \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)
     %> \f]
     %>
-    %> where \f$ \mathcal{S} \f$ is the advancing step of the solver.
+    %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
     %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
-    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'(t_k) \f$.
+    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
+    %>                (t_k) \f$.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>

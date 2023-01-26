@@ -92,16 +92,7 @@ extensions = [
   #'sphinx.ext.inheritance_diagram',
 
   # 3rd party extensions
-  #'sphinxcontrib.fulltoc',
   'sphinxcontrib.email',
-
-  # cloud's extensions
-  #'cloud_sptheme',
-  #'cloud_sptheme.ext.autodoc_sections',
-  #'cloud_sptheme.ext.relbar_links',
-  #'cloud_sptheme.ext.escaped_samp_literals',
-  #'cloud_sptheme.ext.issue_tracker',
-  #'cloud_sptheme.ext.table_styling',
 ]
 
 source_suffix = ['.rst', '.md']
@@ -122,11 +113,11 @@ html_css_files = ["custom.css"]
 html_show_sphinx = False
 html_theme_options = {
   "page_width"       : "65em",
-  "body_text"        : "black",
-  "link"             : "black",
+  "body_text"        : "#000000",
   "link_hover"       : "#4B0082",
+  "link"             : "#000000",
   "anchor_hover_fg"  : "#4B0082",
-  "gray_1"           : "#black",
+  "gray_1"           : "#000000",
   "code_font_family" : "Menlo",
   "code_highlight"   : "#4B0082",
 }
