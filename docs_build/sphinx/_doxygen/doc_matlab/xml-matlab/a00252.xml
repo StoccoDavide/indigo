@@ -1,37 +1,37 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00252" kind="class" language="C++" prot="public">
-    <compoundname>LobattoIIID4</compoundname>
-    <basecompoundref refid="a00284" prot="public" virt="non-virtual">RKimplicit</basecompoundref>
+    <compoundname>GaussLegendre4</compoundname>
+    <basecompoundref refid="a00340" prot="public" virt="non-virtual">RKimplicit</basecompoundref>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00252_1a8022a9a7c75eedc9012dcd68902edefd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00252_1acab220411fb065ff76c97de1b326fee8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function LobattoIIID4::LobattoIIID4</definition>
+        <definition>function GaussLegendre4::GaussLegendre4</definition>
         <argsstring>()</argsstring>
-        <name>LobattoIIID4</name>
-        <qualifiedname>LobattoIIID4::LobattoIIID4</qualifiedname>
+        <name>GaussLegendre4</name>
+        <qualifiedname>GaussLegendre4::GaussLegendre4</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Lobatto IIID fourth-order method (3 stages)</para>
+<para>Gauss-Legendre fourth-order (2 stages)</para>
 <para><verbatim>embed:rst:leading-asterisk
 *  .. math::
 * 
-*    \begin{array}{c|ccc}
-*        0 &amp;  1/6 &amp;    0 &amp; -1/6 \\
-*      1/2 &amp; 1/12 &amp; 5/12 &amp;    0 \\
-*        1 &amp;  1/2 &amp;  1/3 &amp;  1/6 \\
+*    \begin{array}{c|cc}
+*      1/2-t &amp;   1/4 &amp; 1/4-t \\
+*      1/2+t &amp; 1/4+t &amp;   1/4 \\
 *      \hline
-*          &amp;  1/6 &amp;  2/3 &amp; 1/6
+*            &amp;   1/2 &amp;   1/2
 *    \end{array}
+*    \qquad t = \dfrac{\sqrt{3}}{6}
 * 
 *  </verbatim> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ImplicitMethods/LobattoIIID4.m" line="28" column="15"/>
+        <location file="ODE/ImplicitMethods/GaussLegendre4.m" line="28" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1aa0906abffeb4bad00155109fae1064c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1aa0906abffeb4bad00155109fae1064c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::get_A</definition>
         <argsstring>(in this)</argsstring>
@@ -53,7 +53,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="86" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1acfce3ba3641ed47597a0c73baaeac545" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1acfce3ba3641ed47597a0c73baaeac545" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::set_A</definition>
         <argsstring>(in this, in t_A)</argsstring>
@@ -86,7 +86,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="97" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1aaa48759e248d6b186368ea103c9a102a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1aaa48759e248d6b186368ea103c9a102a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::get_b</definition>
         <argsstring>(in this)</argsstring>
@@ -108,7 +108,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="108" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1affdd4def48efd5267c6b142c4ed12e71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1affdd4def48efd5267c6b142c4ed12e71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::set_b</definition>
         <argsstring>(in this, in t_b)</argsstring>
@@ -141,7 +141,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="119" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::get_c</definition>
         <argsstring>(in this)</argsstring>
@@ -154,8 +154,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the nodes vector <formula id="60">$ \mathbf{c} $</formula> (column vector).</para>
-<para><simplesect kind="return"><para>The nodes vector <formula id="60">$ \mathbf{c} $</formula> (column vector). </para>
+<para>Get the nodes vector <formula id="66">$ \mathbf{c} $</formula> (column vector).</para>
+<para><simplesect kind="return"><para>The nodes vector <formula id="66">$ \mathbf{c} $</formula> (column vector). </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -163,7 +163,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="130" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1a04851b34c4f9287f4d70d5a565556eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1a04851b34c4f9287f4d70d5a565556eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::set_c</definition>
         <argsstring>(in this, in t_c)</argsstring>
@@ -180,13 +180,13 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the nodes vector <formula id="60">$ \mathbf{c} $</formula> (column vector).</para>
+<para>Set the nodes vector <formula id="66">$ \mathbf{c} $</formula> (column vector).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_c</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The nodes vector <formula id="60">$ \mathbf{c} $</formula> (column vector). </para>
+<para>The nodes vector <formula id="66">$ \mathbf{c} $</formula> (column vector). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -196,7 +196,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="141" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1afd0336eac47bb91dd193f916cf5e37cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1afd0336eac47bb91dd193f916cf5e37cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::set_tableau</definition>
         <argsstring>(in this, in A, in b, in c)</argsstring>
@@ -243,7 +243,7 @@
 <parametername>c</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Nodes vector <formula id="60">$ \mathbf{c} $</formula> (column vector). </para>
+<para>Nodes vector <formula id="66">$ \mathbf{c} $</formula> (column vector). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -253,7 +253,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="154" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1aa9b97c05aa0ec5e8858c9dd93f0a3210" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1aa9b97c05aa0ec5e8858c9dd93f0a3210" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::step_residual</definition>
         <argsstring>(in this, in x_k, in K, in t_k, in d_t)</argsstring>
@@ -282,7 +282,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the LHS of the system of equations to be solved <formula id="80">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = \mathbf{0} $</formula></para>
+<para>Compute the LHS of the system of equations to be solved <formula id="102">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = \mathbf{0} $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_k</parametername>
@@ -296,7 +296,7 @@
 <parametername>K</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="63">$ \mathbf{K} $</formula> variable of the system to be solved. </para>
+<para><formula id="97">$ \mathbf{K} $</formula> variable of the system to be solved. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -322,7 +322,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="179" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1aa2949eea840d0646a44f4d6d0ded8f61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1aa2949eea840d0646a44f4d6d0ded8f61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::step_jacobian</definition>
         <argsstring>(in this, in x_k, in K, in t_k, in d_t)</argsstring>
@@ -351,8 +351,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the Jacobian of the LHS of the system of equations to be solved <formula id="81">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = 0 $</formula> in the <formula id="63">$ \mathbf{K} $</formula> variable:</para>
-<para><formula id="82">\[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \]</formula>.</para>
+<para>Compute the Jacobian of the LHS of the system of equations to be solved <formula id="103">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = 0 $</formula> in the <formula id="97">$ \mathbf{K} $</formula> variable:</para>
+<para><formula id="104">\[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \]</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_k</parametername>
@@ -366,7 +366,7 @@
 <parametername>K</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="63">$ \mathbf{K} $</formula> variable of the system to be solved. </para>
+<para><formula id="97">$ \mathbf{K} $</formula> variable of the system to be solved. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -392,7 +392,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="222" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1a4c39091c8432f587aae4bc8e73e861a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1a4c39091c8432f587aae4bc8e73e861a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function RKimplicit::solve_step</definition>
         <argsstring>(in this, in x_k, in K0, in t_k, in d_t)</argsstring>
@@ -421,7 +421,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Solve the implicit step <formula id="83">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} $</formula> by Newton method.</para>
+<para>Solve the implicit step <formula id="105">$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} $</formula> by Newton method.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_k</parametername>
@@ -435,7 +435,7 @@
 <parametername>K</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Initial guess for the <formula id="63">$ \mathbf{K} $</formula> variable of the system to be solved. </para>
+<para>Initial guess for the <formula id="97">$ \mathbf{K} $</formula> variable of the system to be solved. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -461,13 +461,13 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="276" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00284_1a0193256fd309fadc298287dd71c8874e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00340_1a0193256fd309fadc298287dd71c8874e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
         <definition>function RKimplicit::step</definition>
         <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
         <name>step</name>
         <qualifiedname>RKimplicit::step</qualifiedname>
-        <reimplements refid="a00272_1a0824da2f381de5d8e4a4e49f1d1a8eb3">step</reimplements>
+        <reimplements refid="a00324_1a0824da2f381de5d8e4a4e49f1d1a8eb3">step</reimplements>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -491,11 +491,11 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute an integration step using the implicit Runge-Kutta method for a system of ODEs of the form <formula id="69">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) =
+<para>Compute an integration step using the implicit Runge-Kutta method for a system of ODEs of the form <formula id="68">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) =
 \mathbf{0} $</formula>.</para>
 <para><bold>Solution Algorithm</bold></para>
-<para>Consider a Runge-Kutta method, written for a system of ODEs of the form <formula id="70">$ \mathbf{x}&apos; = \mathbf{f}(\mathbf{x}, t) $</formula>:</para>
-<para><formula id="84">\[
+<para>Consider a Runge-Kutta method, written for a system of ODEs of the form <formula id="69">$ \mathbf{x}&apos; = \mathbf{f}(\mathbf{x}, t) $</formula>:</para>
+<para><formula id="106">\[
  \begin{array}{l}
  \mathbf{K}_i = \mathbf{f} \left(
    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
@@ -505,8 +505,8 @@
  \mathbf{K}_j \, ,
  \end{array}
  \]</formula></para>
-<para>Then the implicit Runge-Kutta method for an implicit system of ODEs of the form <formula id="74">$\mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula> can be written as:</para>
-<para><formula id="85">\[
+<para>Then the implicit Runge-Kutta method for an implicit system of ODEs of the form <formula id="73">$\mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula> can be written as:</para>
+<para><formula id="107">\[
 \begin{array}{l}
 \mathbf{F}_i \left(
   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
@@ -515,7 +515,7 @@
 \end{array}
 \]</formula></para>
 <para>Thus, the final system to be solved is the following:</para>
-<para><formula id="86">\[
+<para><formula id="108">\[
 \left\{\begin{array}{l}
 \mathbf{F}_1 \left(
   \mathbf{x}_k, \, \mathbf{K}_1, \, t_k
@@ -531,7 +531,9 @@
 \right) = \mathbf{0}
 \end{array}\right.
 \]</formula></para>
-<para>The <formula id="68">$ \mathbf{K}_i $</formula> variable are computed using the Newton&apos;s method.</para>
+<para>The <formula id="77">$ \mathbf{K}_i $</formula> variable are computed using the Newton&apos;s method.</para>
+<para><bold>Note</bold></para>
+<para>The suggested time step for the next advancing step <formula id="80">$ \Delta t_{k+1} $</formula>, is the same as the input time step <formula id="81">$ \Delta t $</formula> since in the implicit Runge-Kutta method the time step is not modified through any error control method.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_k</parametername>
@@ -566,15 +568,17 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The approximation of <formula id="42">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="43">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
+<simplesect kind="return"><para>The approximation of the states at <formula id="82">$ k+1 $</formula>-th time step <formula id="83">$
+        \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula>, the approximation of the states derivatives at <formula id="82">$ k+1 $</formula>-th time step <formula id="84">$ \mathbf{x}&apos;_{k+1}
+        (t_{k}+\Delta t) $</formula>, and the suggested time step for the next advancing step <formula id="80">$ \Delta t_{k+1} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/RKimplicit.m" line="355" column="15"/>
+        <location file="ODE/RKimplicit.m" line="365" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_name</definition>
         <argsstring>(in this)</argsstring>
@@ -587,16 +591,16 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the name of the method used to integrate the system of ODEs.</para>
+<para>Get the name of the method used to integrate the system of ODEs/DAEs.</para>
 <para><simplesect kind="return"><para>The name of the solver. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="49" column="15"/>
+        <location file="ODE/ODEsolver.m" line="56" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1a40bb03ebfe42e7377881f48ba450e339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_name</definition>
         <argsstring>(in this, in t_name)</argsstring>
@@ -613,7 +617,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the name of the method used to integrate the system of ODEs.</para>
+<para>Set the name of the method used to integrate the system of ODEs/DAEs.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_name</parametername>
@@ -627,9 +631,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="60" column="15"/>
+        <location file="ODE/ODEsolver.m" line="67" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::get_ode</definition>
         <argsstring>(in this)</argsstring>
@@ -642,16 +646,16 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the system of ODEs to be solved.</para>
-<para><simplesect kind="return"><para>The system of ODEs to be solved. </para>
+<para>Get the system of ODEs/DAEs to be solved.</para>
+<para><simplesect kind="return"><para>The system of ODEs/DAEs to be solved. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="71" column="15"/>
+        <location file="ODE/ODEsolver.m" line="78" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::set_ode</definition>
         <argsstring>(in this, in t_ode)</argsstring>
@@ -668,13 +672,13 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the system of ODEs to be solved.</para>
+<para>Set the system of ODEs/DAEs to be solved.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_ode</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The system of ODEs to be solved. </para>
+<para>The system of ODEs/DAEs to be solved. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -682,14 +686,69 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="82" column="15"/>
+        <location file="ODE/ODEsolver.m" line="89" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1a8411082da0c9e096a21be71ed3217245" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1a2fa05285670633217d21f4d94a57d3bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function ODEsolver::get_max_iter</definition>
+        <definition>function ODEsolver::get_max_substeps</definition>
         <argsstring>(in this)</argsstring>
-        <name>get_max_iter</name>
-        <qualifiedname>ODEsolver::get_max_iter</qualifiedname>
+        <name>get_max_substeps</name>
+        <qualifiedname>ODEsolver::get_max_substeps</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the maximum number of substeps.</para>
+<para><simplesect kind="return"><para>The maximum number of substeps. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="100" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00324_1af47610c9fb9bafedcc73eba941545e80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::set_max_substeps</definition>
+        <argsstring>(in this, in t_max_substeps)</argsstring>
+        <name>set_max_substeps</name>
+        <qualifiedname>ODEsolver::set_max_substeps</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_max_substeps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the maximum number of substeps.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_max_substeps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of substeps. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="111" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00324_1a42a81bc73fd3a98879234d62ae517bff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function ODEsolver::get_max_projection_iter</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_max_projection_iter</name>
+        <qualifiedname>ODEsolver::get_max_projection_iter</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -704,21 +763,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="93" column="15"/>
+        <location file="ODE/ODEsolver.m" line="128" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1a6448d0034867dc16f01f7e46702ef91a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function ODEsolver::set_max_iter</definition>
-        <argsstring>(in this, in t_max_iter)</argsstring>
-        <name>set_max_iter</name>
-        <qualifiedname>ODEsolver::set_max_iter</qualifiedname>
+        <definition>function ODEsolver::set_max_projection_iter</definition>
+        <argsstring>(in this, in t_max_projection_iter)</argsstring>
+        <name>set_max_projection_iter</name>
+        <qualifiedname>ODEsolver::set_max_projection_iter</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>t_max_iter</declname>
+          <declname>t_max_projection_iter</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -726,7 +785,7 @@
 <para>Set the maximum number of iterations in the projection process.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>t_max_iter</parametername>
+<parametername>t_max_projection_iter</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The maximum number of projection iterations. </para>
@@ -737,9 +796,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="104" column="15"/>
+        <location file="ODE/ODEsolver.m" line="139" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::project</definition>
         <argsstring>(in this, in x_tilde, in t)</argsstring>
@@ -830,9 +889,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="186" column="15"/>
+        <location file="ODE/ODEsolver.m" line="221" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00272_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00324_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function ODEsolver::solve</definition>
         <argsstring>(in this, in t, in x_0, in varargin)</argsstring>
@@ -857,7 +916,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Solve the system of ODEs and calculate the approximate solution.</para>
+<para>Solve the system of ODEs/DAEs and calculate the approximate solution.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t</parametername>
@@ -901,7 +960,7 @@
 </parameteritem>
 </parameterlist>
 <simplesect kind="return"><para>A matrix <formula id="32">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-           (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="33">$ \mathbf{x}(t) $</formula> of the system of ODEs.</para>
+           (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="33">$ \mathbf{x}(t) $</formula> of the system of ODEs/DAEs.</para>
 </simplesect>
 <bold>Usage</bold></para>
 <para>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</para>
@@ -935,11 +994,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/ODEsolver.m" line="297" column="15"/>
+        <location file="ODE/ODEsolver.m" line="332" column="15"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00284_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00340_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKimplicit::m_A</definition>
         <argsstring></argsstring>
@@ -954,7 +1013,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="45" column="10" bodyfile="ODE/RKimplicit.m" bodystart="45" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00284_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00340_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKimplicit::m_b</definition>
         <argsstring></argsstring>
@@ -969,14 +1028,14 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="50" column="10" bodyfile="ODE/RKimplicit.m" bodystart="50" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00284_1a138cfb5bb810ca10269473ec1cadf615" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00340_1a138cfb5bb810ca10269473ec1cadf615" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property RKimplicit::m_c</definition>
         <argsstring></argsstring>
         <name>m_c</name>
         <qualifiedname>RKimplicit::m_c</qualifiedname>
         <briefdescription>
-<para>Nodes vector <formula id="60">$ \mathbf{c} $</formula> (column vector). </para>
+<para>Nodes vector <formula id="66">$ \mathbf{c} $</formula> (column vector). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -984,7 +1043,7 @@
         </inbodydescription>
         <location file="ODE/RKimplicit.m" line="55" column="10" bodyfile="ODE/RKimplicit.m" bodystart="55" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00272_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00324_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_name</definition>
         <argsstring></argsstring>
@@ -999,7 +1058,7 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="14" column="10" bodyfile="ODE/ODEsolver.m" bodystart="14" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00272_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00324_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" static="no" mutable="no">
         <type>Property</type>
         <definition>Property ODEsolver::m_ode</definition>
         <argsstring></argsstring>
@@ -1014,14 +1073,14 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="19" column="10" bodyfile="ODE/ODEsolver.m" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="a00272_1aa248ad5dd350504c12475009b9401467" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="a00324_1a311a2e4dc5d3850880d43a826630ad10" prot="private" static="no" mutable="no">
         <type>Property</type>
-        <definition>Property ODEsolver::m_max_iter</definition>
+        <definition>Property ODEsolver::m_max_substeps</definition>
         <argsstring></argsstring>
-        <name>m_max_iter</name>
-        <qualifiedname>ODEsolver::m_max_iter</qualifiedname>
+        <name>m_max_substeps</name>
+        <qualifiedname>ODEsolver::m_max_substeps</qualifiedname>
         <briefdescription>
-<para>Maximum number of iterations in the projection process. </para>
+<para>Maximum number of substeps. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1029,9 +1088,24 @@
         </inbodydescription>
         <location file="ODE/ODEsolver.m" line="24" column="10" bodyfile="ODE/ODEsolver.m" bodystart="24" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="a00324_1a23b3198080fcdcf98b143a2369123159" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property ODEsolver::m_max_projection_iter</definition>
+        <argsstring></argsstring>
+        <name>m_max_projection_iter</name>
+        <qualifiedname>ODEsolver::m_max_projection_iter</qualifiedname>
+        <briefdescription>
+<para>Maximum number of iterations in the projection process. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ODE/ODEsolver.m" line="29" column="10" bodyfile="ODE/ODEsolver.m" bodystart="29" bodyend="-1"/>
+      </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="a00284_1a07307f6bae261fa470d588ad5c39696b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00340_1a07307f6bae261fa470d588ad5c39696b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>static function RKimplicit::check_tableau</definition>
         <argsstring>(in A, in b, in c)</argsstring>
@@ -1074,7 +1148,7 @@
 <parametername>c</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Nodes vector <formula id="60">$ \mathbf{c} $</formula>.</para>
+<para>Nodes vector <formula id="66">$ \mathbf{c} $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1084,30 +1158,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="ODE/RKimplicit.m" line="391" column="23"/>
+        <location file="ODE/RKimplicit.m" line="401" column="23"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
-<para>Class container for Lobatto IIID fourth-order method (3 stages) </para>
+<para>Class container for Gauss-Legendre fouth-order (2 stages) </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>LobattoIIID4</label>
+        <label>GaussLegendre4</label>
         <link refid="a00252"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>ODEsolver</label>
-        <link refid="a00272"/>
+        <link refid="a00324"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
         <label>RKimplicit</label>
-        <link refid="a00284"/>
+        <link refid="a00340"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -1117,20 +1191,20 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>LobattoIIID4</label>
+        <label>GaussLegendre4</label>
         <link refid="a00252"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
         <label>ODEsolver</label>
-        <link refid="a00272"/>
+        <link refid="a00324"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
         <label>RKimplicit</label>
-        <link refid="a00284"/>
+        <link refid="a00340"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -1138,37 +1212,40 @@
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="ODE/ImplicitMethods/LobattoIIID4.m" line="4" column="1" bodyfile="ODE/ImplicitMethods/LobattoIIID4.m" bodystart="5" bodyend="39"/>
+    <location file="ODE/ImplicitMethods/GaussLegendre4.m" line="4" column="1" bodyfile="ODE/ImplicitMethods/GaussLegendre4.m" bodystart="5" bodyend="43"/>
     <listofallmembers>
-      <member refid="a00284_1a07307f6bae261fa470d588ad5c39696b" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>check_tableau</name></member>
-      <member refid="a00284_1aa0906abffeb4bad00155109fae1064c7" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_A</name></member>
-      <member refid="a00284_1aaa48759e248d6b186368ea103c9a102a" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_b</name></member>
-      <member refid="a00284_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_c</name></member>
-      <member refid="a00272_1a8411082da0c9e096a21be71ed3217245" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_max_iter</name></member>
-      <member refid="a00272_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_name</name></member>
-      <member refid="a00272_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>get_ode</name></member>
-      <member refid="a00252_1a8022a9a7c75eedc9012dcd68902edefd" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>LobattoIIID4</name></member>
-      <member refid="a00284_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_A</name></member>
-      <member refid="a00284_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_b</name></member>
-      <member refid="a00284_1a138cfb5bb810ca10269473ec1cadf615" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_c</name></member>
-      <member refid="a00272_1aa248ad5dd350504c12475009b9401467" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_max_iter</name></member>
-      <member refid="a00272_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_name</name></member>
-      <member refid="a00272_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>LobattoIIID4</scope><name>m_ode</name></member>
-      <member refid="a00272_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>ODEsolver</name></member>
-      <member refid="a00272_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>project</name></member>
-      <member refid="a00284_1aca919de9c27731d72051a84ae9d024a0" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>RKimplicit</name></member>
-      <member refid="a00284_1acfce3ba3641ed47597a0c73baaeac545" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_A</name></member>
-      <member refid="a00284_1affdd4def48efd5267c6b142c4ed12e71" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_b</name></member>
-      <member refid="a00284_1a04851b34c4f9287f4d70d5a565556eac" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_c</name></member>
-      <member refid="a00272_1ae92cc5a5de7c746d4c22efefe9afeee3" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_max_iter</name></member>
-      <member refid="a00272_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_name</name></member>
-      <member refid="a00272_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_ode</name></member>
-      <member refid="a00284_1afd0336eac47bb91dd193f916cf5e37cf" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>set_tableau</name></member>
-      <member refid="a00272_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>solve</name></member>
-      <member refid="a00284_1a4c39091c8432f587aae4bc8e73e861a4" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>solve_step</name></member>
-      <member refid="a00284_1a0193256fd309fadc298287dd71c8874e" prot="public" virt="virtual"><scope>LobattoIIID4</scope><name>step</name></member>
-      <member refid="a00284_1aa2949eea840d0646a44f4d6d0ded8f61" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>step_jacobian</name></member>
-      <member refid="a00284_1aa9b97c05aa0ec5e8858c9dd93f0a3210" prot="public" virt="non-virtual"><scope>LobattoIIID4</scope><name>step_residual</name></member>
+      <member refid="a00340_1a07307f6bae261fa470d588ad5c39696b" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>check_tableau</name></member>
+      <member refid="a00252_1acab220411fb065ff76c97de1b326fee8" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>GaussLegendre4</name></member>
+      <member refid="a00340_1aa0906abffeb4bad00155109fae1064c7" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_A</name></member>
+      <member refid="a00340_1aaa48759e248d6b186368ea103c9a102a" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_b</name></member>
+      <member refid="a00340_1a9e7f48b77103ad2aa3d521530f91e076" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_c</name></member>
+      <member refid="a00324_1a42a81bc73fd3a98879234d62ae517bff" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_max_projection_iter</name></member>
+      <member refid="a00324_1a2fa05285670633217d21f4d94a57d3bd" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_max_substeps</name></member>
+      <member refid="a00324_1aa7fe2ee7be8223c0b64b4aadb62be540" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_name</name></member>
+      <member refid="a00324_1a6465ec6fcd75f090d4f77663cf265ae1" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>get_ode</name></member>
+      <member refid="a00340_1aec930de1c87bde18d0ac9ada289f4f7c" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_A</name></member>
+      <member refid="a00340_1a55f8a29e4110d64bb738b9a484e82c75" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_b</name></member>
+      <member refid="a00340_1a138cfb5bb810ca10269473ec1cadf615" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_c</name></member>
+      <member refid="a00324_1a23b3198080fcdcf98b143a2369123159" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_max_projection_iter</name></member>
+      <member refid="a00324_1a311a2e4dc5d3850880d43a826630ad10" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_max_substeps</name></member>
+      <member refid="a00324_1a713ea06a6a04674b6a0525df8d5b67c0" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_name</name></member>
+      <member refid="a00324_1ac29751a4b6199fdcddbebf25aaaf5de3" prot="private" virt="non-virtual"><scope>GaussLegendre4</scope><name>m_ode</name></member>
+      <member refid="a00324_1a4cab2953507bc503d780ecbed14713ca" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>ODEsolver</name></member>
+      <member refid="a00324_1a1d979299edb12a7d042a7dfb8c64550f" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>project</name></member>
+      <member refid="a00340_1aca919de9c27731d72051a84ae9d024a0" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>RKimplicit</name></member>
+      <member refid="a00340_1acfce3ba3641ed47597a0c73baaeac545" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_A</name></member>
+      <member refid="a00340_1affdd4def48efd5267c6b142c4ed12e71" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_b</name></member>
+      <member refid="a00340_1a04851b34c4f9287f4d70d5a565556eac" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_c</name></member>
+      <member refid="a00324_1a6448d0034867dc16f01f7e46702ef91a" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_max_projection_iter</name></member>
+      <member refid="a00324_1af47610c9fb9bafedcc73eba941545e80" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_max_substeps</name></member>
+      <member refid="a00324_1a40bb03ebfe42e7377881f48ba450e339" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_name</name></member>
+      <member refid="a00324_1a25f67f3d4e229ebc0f5514e71887663c" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_ode</name></member>
+      <member refid="a00340_1afd0336eac47bb91dd193f916cf5e37cf" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>set_tableau</name></member>
+      <member refid="a00324_1ae3194efaa3521a1ddc38488ff2a86118" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>solve</name></member>
+      <member refid="a00340_1a4c39091c8432f587aae4bc8e73e861a4" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>solve_step</name></member>
+      <member refid="a00340_1a0193256fd309fadc298287dd71c8874e" prot="public" virt="virtual"><scope>GaussLegendre4</scope><name>step</name></member>
+      <member refid="a00340_1aa2949eea840d0646a44f4d6d0ded8f61" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>step_jacobian</name></member>
+      <member refid="a00340_1aa9b97c05aa0ec5e8858c9dd93f0a3210" prot="public" virt="non-virtual"><scope>GaussLegendre4</scope><name>step_residual</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

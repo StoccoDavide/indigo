@@ -5,8 +5,8 @@
 %>
 %> \f[
 %> \begin{array}{c|c}
-%>   c & A \\ \hline
-%>     & b
+%>   \mathbf{c} & \mathbf{A} \\ \hline
+%>              & \mathbf{b}
 %> \end{array}
 %> \f]
 %>
@@ -254,11 +254,10 @@ classdef RKexplicit < ODEsolver
     %> \param t_k Time step \f$ t_k \f$.
     %> \param d_t Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved.
+    %> \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved
+    %>         and the error control flag.
     %
-    function out = solve_step( this, x_k, K_0, t_k, d_t )
-
-      CMD = 'indigo::RKexplicit::solve_step(...): ';
+    function [out, ierr] = solve_step( this, x_k, K_0, t_k, d_t )
 
       % Extract lengths
       nc = length(this.m_c);
@@ -275,8 +274,9 @@ classdef RKexplicit < ODEsolver
 
         % Solve using Newton
         [K(:,i), ierr] = NewtonSolver(fun, jac, K(:,i));
-        if (ierr ~= 0)
-          fprintf(1, [CMD, 'not converged flag = %d.\n'], ierr);
+
+        if (ierr > 0)
+          return;
         end
       end
       out = K;
@@ -363,25 +363,43 @@ classdef RKexplicit < ODEsolver
     %> Runge-Kutta method. For this reason, a Butcher tableau relative to an
     %> explicit Runge-Kutta method can also be used in the `RKimplicit` class.
     %>
+    %> The suggested time step for the next advancing step \f$ \Delta t_{k+1} \f$,
+    %> is the same as the input time step \f$ \Delta t \f$ since in the explicit
+    %> Runge-Kutta method the time step is not modified through any error control
+    %> method.
+    %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
     %>                (t_k) \f$.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
-    %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
-    %>
-    function [out, out_dot] = step( this, x_k, x_dot_k, t_k, d_t )
+    %> \return The approximation of the states at \f$ k+1 \f$-th time step \f$
+    %>         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the
+    %>         states derivatives at \f$ k+1 \f$-th time step \f$ \mathbf{x}'_{k+1}
+    %>         (t_{k}+\Delta t) \f$, the suggested time step for the next
+    %>         advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.
+    %
+    function [x_out, x_dot_out, d_t_star, ierr] = step( this, x_k, x_dot_k, t_k, d_t )
 
       % Solve the system to obtain K
-      K = this.solve_step( x_k, x_dot_k, t_k, d_t );
+      [K, ierr] = this.solve_step(x_k, x_dot_k, t_k, d_t);
+
+      % Suggested time step for the next advancing step
+      d_t_star = d_t;
+
+      % Error code check
+      if (ierr > 0)
+        x_out     = NaN * x_k;
+        x_dot_out = NaN * x_dot_k;
+        return;
+      end
 
       % Perform the step and obtain x_k+1
-      out = x_k + d_t * K * this.m_b';
+      x_out = x_k + d_t * K * this.m_b';
 
       % Extract x_dot_k+1 from K (i.e., its last value)
-      out_dot = K(:,end);
+      x_dot_out = K(:,end);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

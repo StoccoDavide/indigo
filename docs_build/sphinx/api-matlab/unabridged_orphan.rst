@@ -16,6 +16,11 @@ Directories
 .. toctree::
    :maxdepth: 5
 
+   dir_ODE_EmbeddedMethods.rst
+
+.. toctree::
+   :maxdepth: 5
+
    dir_ODE_ExplicitMethods.rst
 
 .. toctree::
@@ -90,6 +95,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_HeunEuler.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_ImplicitEuler.m.rst
 
 .. toctree::
@@ -146,6 +156,11 @@ Files
    :maxdepth: 5
 
    file_ODE_ImplicitMethods_LobattoIIID4.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Merson45.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -215,7 +230,32 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_RKembedded.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_RKexplicit.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_RKF12.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_RKF45I.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_RKF45II.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_RKF78.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -231,3 +271,8 @@ Files
    :maxdepth: 5
 
    file_ODE_ExplicitMethods_Wray3.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Zonnenveld45.m.rst

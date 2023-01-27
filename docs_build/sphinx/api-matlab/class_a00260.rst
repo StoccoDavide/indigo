@@ -1,9 +1,9 @@
 .. _exhale_class_a00260:
 
-Class RadauIA5
-==============
+Class ImplicitEuler
+===================
 
-- Defined in :ref:`file_ODE_ImplicitMethods_RadauIA5.m`
+- Defined in :ref:`file_ODE_ImplicitMethods_ImplicitEuler.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKimplicit`` (:ref:`exhale_class_a00340`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: RadauIA5
+.. doxygenclass:: ImplicitEuler
    :project: doc_matlab
    :members:
    :protected-members:

@@ -59,12 +59,14 @@ classdef LinearPendulumODE_Implicit < ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function H( ~, ~, ~ )
+    function out = H( x, ~, ~ )
+      out = zeros(length(x), 1);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function JH( ~, ~, ~ )
+    function out = JH( x, ~, ~ )
+      out = eye(length(x));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -1,9 +1,9 @@
 .. _exhale_class_a00176:
 
-Class RK38
-==========
+Class RKF78
+===========
 
-- Defined in :ref:`file_ODE_ExplicitMethods_RK38.m`
+- Defined in :ref:`file_ODE_EmbeddedMethods_RKF78.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKembedded`` (:ref:`exhale_class_a00332`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: RK38
+.. doxygenclass:: RKF78
    :project: doc_matlab
    :members:
    :protected-members:

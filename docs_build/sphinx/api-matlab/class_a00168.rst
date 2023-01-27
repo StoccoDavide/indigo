@@ -1,9 +1,9 @@
 .. _exhale_class_a00168:
 
-Class Ralston4
-==============
+Class RKF45I
+============
 
-- Defined in :ref:`file_ODE_ExplicitMethods_Ralston4.m`
+- Defined in :ref:`file_ODE_EmbeddedMethods_RKF45I.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKembedded`` (:ref:`exhale_class_a00332`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: Ralston4
+.. doxygenclass:: RKF45I
    :project: doc_matlab
    :members:
    :protected-members:

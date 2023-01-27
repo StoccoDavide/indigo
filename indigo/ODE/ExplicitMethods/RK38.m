@@ -5,7 +5,7 @@ classdef RK38 < RKexplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Runge-Kutta 3/8-rule fourth-order method.
     %>

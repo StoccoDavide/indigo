@@ -1,9 +1,9 @@
 .. _exhale_class_a00184:
 
-Class SSPRK3
-============
+Class Collatz
+=============
 
-- Defined in :ref:`file_ODE_ExplicitMethods_SSPRK3.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_Collatz.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: SSPRK3
+.. doxygenclass:: Collatz
    :project: doc_matlab
    :members:
    :protected-members:

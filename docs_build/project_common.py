@@ -40,7 +40,6 @@ def exhale_environment_ready(app):
 
     project_exhale_args    = exhale_projects_args.get(project, {})
     app.config.exhale_args = dict(project_exhale_args)
-    #app.config.exhale_args["containmentFolder"] = os.path.realpath(app.config.exhale_args["containmentFolder"])
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     print("="*75)
     print(project)
@@ -51,7 +50,6 @@ def exhale_environment_ready(app):
     saved_exhale_environment_ready( app )
 
     dir = app.config.exhale_args["containmentFolder"];
-    ##os.system("ruby ../filter_exhale_breathe.rb %s %s" % (dir, project));
     do_filter(project,dir)
 
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")

@@ -1,277 +1,51 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00122" kind="file" language="C++">
-    <compoundname>NewtonSolver.m</compoundname>
-      <sectiondef kind="func">
-      <memberdef kind="function" id="a00122_1a86bf5da3ed616857524e95fb134ed389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function NewtonSolver</definition>
-        <argsstring>(in fun, in jac, in x_0, in varargin)</argsstring>
-        <name>NewtonSolver</name>
-        <param>
-          <type>in</type>
-          <declname>fun</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>jac</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_0</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>varargin</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Function implementing a dumped Newton&apos;s method with affine invariant step.</para>
-<para><bold>Solution Algorithm:</bold></para>
-<para>Given a zeros of a vectorial function problem of the form <formula id="0">$ \mathbf{F}
-(\mathbf{x}) = \mathbf{0} $</formula>, where <formula id="1">$ \mathbf{F}: \mathbb{R}^n \rightarrow
-\mathbb{R}^n $</formula>, then the Newton&apos;s method is defined as:</para>
-<para><formula id="2">\[
-\mathbf{JF}(\mathbf{x}_k)\mathbf{h} = -\mathbf{F}(\mathbf{x}_k).
-\]</formula></para>
-<para>The dumped step is defined as:</para>
-<para><formula id="3">\[
-\mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{h}
-\]</formula></para>
-<para>where <formula id="4">$ \alpha_k $</formula> is a dumping coefficient that satisfies:</para>
-<para><formula id="5">\[
-\left\| \mathbf{JF}(\mathbf{x}_k)^{-1} \mathbf{F}(\mathbf{x}_{k+1}) \right\|
-\leq \left(1 - \dfrac{\alpha_k}{2}\right) \left\| \mathbf{JF}(\mathbf{x}_k)^{-1}
-\mathbf{F}(\mathbf{x}_k) \right\| = \left(1 - \dfrac{\alpha_k}{2} \right)
-\left\| \mathbf{h}  \right\|.
-\]</formula></para>
-<para><bold>Note:</bold></para>
-<para>For more details on the Newton&apos;s method with affine invariant step refer to: <ulink url="https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html">https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html</ulink>.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>fun</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Function handle of the vectorial function <formula id="6">$ \mathbf{F}(\mathbf{x}) $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>jac</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Function handle of Jacobian matrix <formula id="7">$ \mathbf{JF}(\mathbf{x}) $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>x_0</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Initial guess of the solution. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>verbose</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>[optional, default = <formula id="8">$ \mathrm{false} $</formula>] enable verbose mode. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>tolerance</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>[optional, default = <formula id="9">$ 1.0e^{-8} $</formula>] Convergence tolerance. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>ITER_NWTN</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>[optional, default = <formula id="10">$ 50 $</formula>] Maximum number of Newton iterations. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>ITER_DUMP</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>[optional, default = <formula id="10">$ 50 $</formula>] Maximum number of Dumping iterations. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>ALPHA</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>[optional, default = <formula id="11">$ 0.5 $</formula>] Dumping coefficient.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The solution <formula id="12">$ \mathbf{x} $</formula> and the output flag: <formula id="13">$ 0 $</formula> = success, <formula id="14">$ 1 $</formula> = failed because of bad initial point, <formula id="15">$ 2 $</formula> = failed because of bad dumping (step got too short). </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="NewtonSolver.m" line="49" column="11" declfile="NewtonSolver.m" declline="49" declcolumn="11"/>
-      </memberdef>
-      </sectiondef>
+    <compoundname>Heun2.m</compoundname>
+    <innerclass refid="a00204" prot="public">Heun2</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Function<sp/>implementing<sp/>a<sp/>dumped<sp/>Newton</highlight><highlight class="stringliteral">&apos;s<sp/>method<sp/>with<sp/>affine<sp/>invariant<sp/>step.</highlight></codeline>
-<codeline lineno="3"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="4"><highlight class="stringliteral">%&gt;<sp/>**Solution<sp/>Algorithm:**</highlight></codeline>
-<codeline lineno="5"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="6"><highlight class="stringliteral">%&gt;<sp/>Given<sp/>a<sp/>zeros<sp/>of<sp/>a<sp/>vectorial<sp/>function<sp/>problem<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}</highlight></codeline>
-<codeline lineno="7"><highlight class="stringliteral">%&gt;<sp/>(\mathbf{x})<sp/>=<sp/>\mathbf{0}<sp/>\f$,<sp/>where<sp/>\f$<sp/>\mathbf{F}:<sp/>\mathbb{R}^n<sp/>\rightarrow</highlight></codeline>
-<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>\mathbb{R}^n<sp/>\f$,<sp/>then<sp/>the<sp/>Newton&apos;</highlight><highlight class="normal">s<sp/>method<sp/>is<sp/>defined<sp/>as:</highlight></codeline>
-<codeline lineno="9"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="11"><highlight class="normal">%&gt;<sp/>\mathbf{JF}(\mathbf{x}_k)\mathbf{h}<sp/>=<sp/>-\mathbf{F}(\mathbf{x}_k).</highlight></codeline>
-<codeline lineno="12"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="13"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal">%&gt;<sp/>The<sp/>dumped<sp/>step<sp/>is<sp/>defined<sp/>as:</highlight></codeline>
-<codeline lineno="15"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="17"><highlight class="normal">%&gt;<sp/>\mathbf{x}_{k+1}<sp/>=<sp/>\mathbf{x}_k<sp/>+<sp/>\alpha_k<sp/>\mathbf{h}</highlight></codeline>
-<codeline lineno="18"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="19"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="20"><highlight class="normal">%&gt;<sp/>where<sp/>\f$<sp/>\alpha_k<sp/>\f$<sp/>is<sp/>a<sp/>dumping<sp/>coefficient<sp/>that<sp/>satisfies:</highlight></codeline>
-<codeline lineno="21"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="22"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="23"><highlight class="normal">%&gt;<sp/>\left\|<sp/>\mathbf{JF}(\mathbf{x}_k)^{-1}<sp/>\mathbf{F}(\mathbf{x}_{k+1})<sp/>\right\|</highlight></codeline>
-<codeline lineno="24"><highlight class="normal">%&gt;<sp/>\leq<sp/>\left(1<sp/>-<sp/>\dfrac{\alpha_k}{2}\right)<sp/>\left\|<sp/>\mathbf{JF}(\mathbf{x}_k)^{-1}</highlight></codeline>
-<codeline lineno="25"><highlight class="normal">%&gt;<sp/>\mathbf{F}(\mathbf{x}_k)<sp/>\right\|<sp/>=<sp/>\left(1<sp/>-<sp/>\dfrac{\alpha_k}{2}<sp/>\right)</highlight></codeline>
-<codeline lineno="26"><highlight class="normal">%&gt;<sp/>\left\|<sp/>\mathbf{h}<sp/><sp/>\right\|.</highlight></codeline>
-<codeline lineno="27"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="28"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="29"><highlight class="normal">%&gt;<sp/>**Note:**</highlight></codeline>
-<codeline lineno="30"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal">%&gt;<sp/>For<sp/>more<sp/>details<sp/>on<sp/>the<sp/>Newton</highlight><highlight class="stringliteral">&apos;s<sp/>method<sp/>with<sp/>affine<sp/>invariant<sp/>step<sp/>refer<sp/>to:</highlight></codeline>
-<codeline lineno="32"><highlight class="stringliteral">%&gt;<sp/>https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.</highlight></codeline>
-<codeline lineno="33"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="34"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>fun<sp/><sp/><sp/><sp/><sp/><sp/><sp/>Function<sp/>handle<sp/>of<sp/>the<sp/>vectorial<sp/>function</highlight></codeline>
-<codeline lineno="35"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{F}(\mathbf{x})<sp/>\f$.</highlight></codeline>
-<codeline lineno="36"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>jac<sp/><sp/><sp/><sp/><sp/><sp/><sp/>Function<sp/>handle<sp/>of<sp/>Jacobian<sp/>matrix</highlight></codeline>
-<codeline lineno="37"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{JF}(\mathbf{x})<sp/>\f$.</highlight></codeline>
-<codeline lineno="38"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>x_0<sp/><sp/><sp/><sp/><sp/><sp/><sp/>Initial<sp/>guess<sp/>of<sp/>the<sp/>solution.</highlight></codeline>
-<codeline lineno="39"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>verbose<sp/><sp/><sp/>[optional,<sp/>default<sp/>=<sp/>\f$<sp/>\mathrm{false}<sp/>\f$]<sp/>enable<sp/>verbose<sp/>mode.</highlight></codeline>
-<codeline lineno="40"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>tolerance<sp/>[optional,<sp/>default<sp/>=<sp/>\f$<sp/>1.0e^{-8}<sp/>\f$]<sp/>Convergence<sp/>tolerance.</highlight></codeline>
-<codeline lineno="41"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>ITER_NWTN<sp/>[optional,<sp/>default<sp/>=<sp/>\f$<sp/>50<sp/>\f$]<sp/>Maximum<sp/>number<sp/>of<sp/>Newton<sp/>iterations.</highlight></codeline>
-<codeline lineno="42"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>ITER_DUMP<sp/>[optional,<sp/>default<sp/>=<sp/>\f$<sp/>50<sp/>\f$]<sp/>Maximum<sp/>number<sp/>of<sp/>Dumping<sp/>iterations.</highlight></codeline>
-<codeline lineno="43"><highlight class="stringliteral">%&gt;<sp/><sp/>\param<sp/>ALPHA<sp/><sp/><sp/><sp/><sp/>[optional,<sp/>default<sp/>=<sp/>\f$<sp/>0.5<sp/>\f$]<sp/>Dumping<sp/>coefficient.</highlight></codeline>
-<codeline lineno="44"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="45"><highlight class="stringliteral">%&gt;<sp/>\return<sp/>The<sp/>solution<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>the<sp/>output<sp/>flag:<sp/>\f$<sp/>0<sp/>\f$<sp/>=</highlight></codeline>
-<codeline lineno="46"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success,<sp/>\f$<sp/>1<sp/>\f$<sp/>=<sp/>failed<sp/>because<sp/>of<sp/>bad<sp/>initial<sp/>point,<sp/>\f$<sp/>2<sp/>\f$<sp/>=</highlight></codeline>
-<codeline lineno="47"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>failed<sp/>because<sp/>of<sp/>bad<sp/>dumping<sp/>(step<sp/>got<sp/>too<sp/>short).</highlight></codeline>
-<codeline lineno="48"><highlight class="stringliteral">%</highlight></codeline>
-<codeline lineno="49" refid="a00122_1a86bf5da3ed616857524e95fb134ed389" refkind="member"><highlight class="stringliteral">function<sp/>[x,<sp/>flag]<sp/>=<sp/>NewtonSolver(<sp/>fun,<sp/>jac,<sp/>x_0,<sp/>varargin<sp/>)</highlight></codeline>
-<codeline lineno="50"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">indigo::NewtonSolver(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
-<codeline lineno="52"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/>assert(~any(isnan(x_0)),<sp/>...</highlight></codeline>
-<codeline lineno="54"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>initial<sp/>guess<sp/>of<sp/>the<sp/>solution.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
-<codeline lineno="55"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/>flag<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/>verbose<sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/>tolerance<sp/>=<sp/>1.0e-08;</highlight></codeline>
-<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/>ITER_NWTN<sp/>=<sp/>50;</highlight></codeline>
-<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/>ITER_DUMP<sp/>=<sp/>50;</highlight></codeline>
-<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/>alpha<sp/><sp/><sp/><sp/><sp/>=<sp/>0.5;</highlight></codeline>
-<codeline lineno="62"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/>%<sp/>Collect<sp/>verbose<sp/>flag</highlight></codeline>
-<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>3)</highlight></codeline>
-<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>verbose<sp/>=<sp/>varargin{1};</highlight></codeline>
-<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="67"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/>%<sp/>Collect<sp/>tolerance</highlight></codeline>
-<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>4)</highlight></codeline>
-<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>tolerance<sp/>=<sp/>varargin{2};</highlight></codeline>
-<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="72"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/>%<sp/>Collect<sp/>Newton&apos;</highlight><highlight class="normal">s<sp/>maximum<sp/>number<sp/>of<sp/>iterations</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/>if<sp/>(nargin<sp/>&gt;<sp/>5)</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>ITER_NWTN<sp/>=<sp/>varargin{3};</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/>%<sp/>Collect<sp/>dumping<sp/>maximum<sp/>number<sp/>of<sp/>iterations</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nargin<sp/>&gt;<sp/>6)</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>ITER_DUMP<sp/>=<sp/>varargin{4};</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/>%<sp/>Collect<sp/>dumping<sp/>coefficient</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nargin<sp/>&gt;<sp/>7)</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>alpha<sp/>=<sp/>varargin{5};</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/>%<sp/>Check<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>too<sp/>many<sp/>input<sp/>arguments</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nargin<sp/>&gt;<sp/>8)</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>error([CMD,<sp/></highlight><highlight class="stringliteral">&apos;too<sp/>many<sp/>input<sp/>arguments.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/>%<sp/>Perform<sp/>Newton<sp/>iteration</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/>x<sp/>=<sp/>x_0;</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>1:ITER_NWTN</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>function<sp/>and<sp/>Jacobian</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>F<sp/><sp/>=<sp/>feval(fun,<sp/>x);</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>JF<sp/>=<sp/>feval(jac,<sp/>x);</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Check<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>converged</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(norm(F,<sp/>inf)<sp/>&lt;<sp/>tolerance)</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>advancing<sp/>direction</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>h<sp/><sp/>=<sp/>-JF\F;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Perform<sp/>dumping<sp/>iteration</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>dumped<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0:ITER_DUMP-1</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>xd<sp/>=<sp/>x<sp/>+<sp/>alpha^j<sp/>*<sp/>h;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(all(isfinite(xd))<sp/>==<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Fd<sp/>=<sp/>feval(<sp/>fun,<sp/>xd<sp/>);</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hd<sp/>=<sp/>-JF\Fd;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(norm(hd,<sp/>2)<sp/>&lt;<sp/>sqrt(1<sp/>-<sp/>alpha/2)<sp/>*<sp/>norm(h,<sp/>2))</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dumped<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Check<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>dumping<sp/>failed</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dumped<sp/>==<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(verbose<sp/>==<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(1,<sp/>[CMD,<sp/></highlight><highlight class="stringliteral">&apos;alpha<sp/>=<sp/>%g,<sp/>failed<sp/>dumping<sp/>iteration.\n&apos;</highlight><highlight class="normal">,<sp/>alpha]);</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>flag<sp/>=<sp/>2;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>solution</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>x<sp/>=<sp/>xd;</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(verbose<sp/>==<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(1,<sp/>...</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/></highlight><highlight class="stringliteral">&apos;iter<sp/>%d:<sp/>||F||_inf<sp/>=<sp/>%14g,<sp/>alpha<sp/>=<sp/>%g.\n&apos;</highlight><highlight class="normal">,<sp/>i,<sp/>norm(F,<sp/>inf),<sp/>aplha]);</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Check<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>converged</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(norm(h,<sp/>inf)<sp/>&lt;<sp/>tolerance)</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="144"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Heun</highlight><highlight class="stringliteral">&apos;s<sp/>second-order<sp/>method.</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="4" refid="a00204" refkind="compound"><highlight class="stringliteral">classdef<sp/>Heun2<sp/>&lt;<sp/>RKexplicit</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Heun&apos;</highlight><highlight class="normal">s<sp/>second-order<sp/>method.</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\rst</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>..<sp/>math::</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\begin{array}{c|cc}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>\hline</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/2<sp/>&amp;<sp/>1/2</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\end{array}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00204" kindref="compound">Heun2</ref>()</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00336" kindref="compound">RKexplicit</ref>(<sp/>...</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00204" kindref="compound">Heun2</ref>&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="27" refid="a00204_1a52a019ab60379f741eb458cd89df5a7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/>0;<sp/>1,<sp/>0],<sp/>...</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/2,<sp/>1/2],<sp/>...</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/>1]&apos;<sp/>...</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="NewtonSolver.m"/>
+    <location file="ODE/ExplicitMethods/Heun2.m"/>
   </compounddef>
 </doxygen>

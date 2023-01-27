@@ -48,7 +48,7 @@ Program Listing for File GaussLegendre6.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Gauss-Legendre sixth-order (3 stages)
        %>
@@ -88,7 +88,7 @@ Program Listing for File GaussLegendre6.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

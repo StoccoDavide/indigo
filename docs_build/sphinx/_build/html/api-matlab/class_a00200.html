@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Class GaussLegendre4 &#8212; indigo v</title>
+    <title>Class Generic3 &#8212; indigo v</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
@@ -19,8 +19,8 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class GaussLegendre6" href="class_a00204.html" />
-    <link rel="prev" title="Class GaussLegendre2" href="class_a00196.html" />
+    <link rel="next" title="Class Heun2" href="class_a00204.html" />
+    <link rel="prev" title="Class Generic2" href="class_a00196.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -37,11 +37,11 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="class-gausslegendre4">
-<span id="exhale-class-a00200"></span><h1>Class GaussLegendre4<a class="headerlink" href="#class-gausslegendre4" title="Permalink to this headline">¶</a>
+  <div class="section" id="class-generic3">
+<span id="exhale-class-a00200"></span><h1>Class Generic3<a class="headerlink" href="#class-generic3" title="Permalink to this headline">¶</a>
 </h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_ODE_ImplicitMethods_GaussLegendre4.m.html#file-ode-implicitmethods-gausslegendre4-m"><span class="std std-ref">File GaussLegendre4.m</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_ODE_ExplicitMethods_Generic3.m.html#file-ode-explicitmethods-generic3-m"><span class="std std-ref">File Generic3.m</span></a></p></li>
 </ul>
 <div class="section" id="inheritance-relationships">
 <h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
@@ -50,7 +50,7 @@
 <h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
 </h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKimplicit</span></code> (<a class="reference internal" href="class_a00284.html#exhale-class-a00284"><span class="std std-ref">Class RKimplicit</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKexplicit</span></code> (<a class="reference internal" href="class_a00336.html#exhale-class-a00336"><span class="std std-ref">Class RKexplicit</span></a>)</p></li>
 </ul>
 </div>
 </div>
@@ -58,67 +58,71 @@
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
 </h2>
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv414GaussLegendre4">
-<span id="_CPPv314GaussLegendre4"></span><span id="_CPPv214GaussLegendre4"></span><span id="GaussLegendre4"></span><span class="target" id="a00200"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GaussLegendre4</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00284.html#_CPPv410RKimplicit" title="RKimplicit"><span class="n"><span class="pre">RKimplicit</span></span></a><a class="headerlink" href="#_CPPv414GaussLegendre4" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv48Generic3">
+<span id="_CPPv38Generic3"></span><span id="_CPPv28Generic3"></span><span id="Generic3"></span><span class="target" id="a00200"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Generic3</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00336.html#_CPPv410RKexplicit" title="RKexplicit"><span class="n"><span class="pre">RKexplicit</span></span></a><a class="headerlink" href="#_CPPv48Generic3" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Class container for Gauss-Legendre fouth-order (2 stages) </p>
+<p>Class container for Generic third-order method. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre414GaussLegendre4Ev">
-<span id="_CPPv3N14GaussLegendre414GaussLegendre4Ev"></span><span id="_CPPv2N14GaussLegendre414GaussLegendre4Ev"></span><span id="GaussLegendre4::GaussLegendre4"></span><span class="target" id="a00200_1acab220411fb065ff76c97de1b326fee8"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GaussLegendre4</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre414GaussLegendre4Ev" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic38Generic3Ev">
+<span id="_CPPv3N8Generic38Generic3Ev"></span><span id="_CPPv2N8Generic38Generic3Ev"></span><span id="Generic3::Generic3"></span><span class="target" id="a00200_1a53571baac2d4a6e047155d9d8715e62d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Generic3</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic38Generic3Ev" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Gauss-Legendre fourth-order (2 stages)</p>
+<p>Van der Generic third-order method ( <span class="math notranslate nohighlight">\( \alpha \neq 0, 2/3, 1 \)</span>).</p>
 <p></p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{c|cc}
-  1/2-t &amp;   1/4 &amp; 1/4-t \\
-  1/2+t &amp; 1/4+t &amp;   1/4 \\
+\[\begin{split}\begin{array}{c|ccc}
+  0      &amp; 0      &amp; 0  &amp; 0 \\
+  \alpha &amp; \alpha &amp; 0  &amp; 0 \\
+  1      &amp; 1+\frac{1-\alpha}{\alpha(3\alpha-2)}
+                  &amp; -\frac{1-\alpha}{\alpha(3\alpha-2)}
+                       &amp; 0 \\
   \hline
-        &amp;   1/2 &amp;   1/2
-\end{array}
-\qquad t = \dfrac{\sqrt{3}}{6}\end{split}\]</div>
+   &amp; \frac{1}{2}-\frac{1}{6\alpha}
+   &amp; \frac{1}{6\alpha(1-\alpha)}
+   &amp; \frac{2-3\alpha}{6(1-\alpha)} \\
+\end{array}\end{split}\]</div>
 
  
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45get_AE2in">
-<span id="_CPPv3N14GaussLegendre45get_AE2in"></span><span id="_CPPv2N14GaussLegendre45get_AE2in"></span><span id="GaussLegendre4::get_A__in"></span><span class="target" id="a00284_1aa0906abffeb4bad00155109fae1064c7"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45get_AE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35get_AE2in">
+<span id="_CPPv3N8Generic35get_AE2in"></span><span id="_CPPv2N8Generic35get_AE2in"></span><span id="Generic3::get_A__in"></span><span class="target" id="a00336_1ab9999241cfd0871f748d1f305bf8f504"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35get_AE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span>.</p>
+<p>Get the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd">
-<p>The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span>. </p>
+<p>The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45set_AE2in2in">
-<span id="_CPPv3N14GaussLegendre45set_AE2in2in"></span><span id="_CPPv2N14GaussLegendre45set_AE2in2in"></span><span id="GaussLegendre4::set_A__in.in"></span><span class="target" id="a00284_1acfce3ba3641ed47597a0c73baaeac545"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45set_AE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35set_AE2in2in">
+<span id="_CPPv3N8Generic35set_AE2in2in"></span><span id="_CPPv2N8Generic35set_AE2in2in"></span><span id="Generic3::set_A__in.in"></span><span class="target" id="a00336_1a2ae4cb305691b585b55e40e725caf038"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35set_AE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span>.</p>
+<p>Set the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>t_A</strong> – The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span>. </p>
+<p><strong>t_A</strong> – The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45get_bE2in">
-<span id="_CPPv3N14GaussLegendre45get_bE2in"></span><span id="_CPPv2N14GaussLegendre45get_bE2in"></span><span id="GaussLegendre4::get_b__in"></span><span class="target" id="a00284_1aaa48759e248d6b186368ea103c9a102a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45get_bE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35get_bE2in">
+<span id="_CPPv3N8Generic35get_bE2in"></span><span id="_CPPv2N8Generic35get_bE2in"></span><span id="Generic3::get_b__in"></span><span class="target" id="a00336_1a24e40fa536c7312e5ddcc444755fc468"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35get_bE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
@@ -132,8 +136,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45set_bE2in2in">
-<span id="_CPPv3N14GaussLegendre45set_bE2in2in"></span><span id="_CPPv2N14GaussLegendre45set_bE2in2in"></span><span id="GaussLegendre4::set_b__in.in"></span><span class="target" id="a00284_1affdd4def48efd5267c6b142c4ed12e71"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45set_bE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35set_bE2in2in">
+<span id="_CPPv3N8Generic35set_bE2in2in"></span><span id="_CPPv2N8Generic35set_bE2in2in"></span><span id="Generic3::set_b__in.in"></span><span class="target" id="a00336_1ada8fa59ad233cb3508118d51c2fcf969"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35set_bE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
@@ -147,8 +151,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45get_cE2in">
-<span id="_CPPv3N14GaussLegendre45get_cE2in"></span><span id="_CPPv2N14GaussLegendre45get_cE2in"></span><span id="GaussLegendre4::get_c__in"></span><span class="target" id="a00284_1a9e7f48b77103ad2aa3d521530f91e076"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45get_cE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35get_cE2in">
+<span id="_CPPv3N8Generic35get_cE2in"></span><span id="_CPPv2N8Generic35get_cE2in"></span><span id="Generic3::get_c__in"></span><span class="target" id="a00336_1aa152d02f1d648022af25c8f5c67f3030"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35get_cE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
@@ -162,8 +166,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45set_cE2in2in">
-<span id="_CPPv3N14GaussLegendre45set_cE2in2in"></span><span id="_CPPv2N14GaussLegendre45set_cE2in2in"></span><span id="GaussLegendre4::set_c__in.in"></span><span class="target" id="a00284_1a04851b34c4f9287f4d70d5a565556eac"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45set_cE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35set_cE2in2in">
+<span id="_CPPv3N8Generic35set_cE2in2in"></span><span id="_CPPv2N8Generic35set_cE2in2in"></span><span id="Generic3::set_c__in.in"></span><span class="target" id="a00336_1aafe813d51d48506e02c0c986e89bb22a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35set_cE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
@@ -177,8 +181,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre411set_tableauE2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre411set_tableauE2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre411set_tableauE2in2in2in2in"></span><span id="GaussLegendre4::set_tableau__in.in.in.in"></span><span class="target" id="a00284_1afd0336eac47bb91dd193f916cf5e37cf"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre411set_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic311set_tableauE2in2in2in2in">
+<span id="_CPPv3N8Generic311set_tableauE2in2in2in2in"></span><span id="_CPPv2N8Generic311set_tableauE2in2in2in2in"></span><span id="Generic3::set_tableau__in.in.in.in"></span><span class="target" id="a00336_1aaaaa5e21cd287fad5cac9654c7411fbe"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic311set_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the Butcher tableau.</p>
@@ -196,75 +200,151 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre413step_residualE2in2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre413step_residualE2in2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre413step_residualE2in2in2in2in2in"></span><span id="GaussLegendre4::step_residual__in.in.in.in.in"></span><span class="target" id="a00284_1aa9b97c05aa0ec5e8858c9dd93f0a3210"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_residual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre413step_residualE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic39step_nodeE2in2in2in2in2in">
+<span id="_CPPv3N8Generic39step_nodeE2in2in2in2in2in"></span><span id="_CPPv2N8Generic39step_nodeE2in2in2in2in2in"></span><span id="Generic3::step_node__in.in.in.in.in"></span><span class="target" id="a00336_1a0bdd67de086e92e16a122dc63ed41289"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_node</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic39step_nodeE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Compute the LHS of the system of equations to be solved <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = \mathbf{0} \)</span></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd">
-<ul class="simple">
-<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
-<li><p><strong>K</strong> – <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable of the system to be solved. </p></li>
-<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
-<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>. </p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre413step_jacobianE2in2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre413step_jacobianE2in2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre413step_jacobianE2in2in2in2in2in"></span><span id="GaussLegendre4::step_jacobian__in.in.in.in.in"></span><span class="target" id="a00284_1aa2949eea840d0646a44f4d6d0ded8f61"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_jacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre413step_jacobianE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
-</dt>
-<dd>
-<p>Compute the Jacobian of the LHS of the system of equations to be solved <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = 0 \)</span> in the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable:</p>
+<p>Compute the node as:</p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \]</div>
-.
+\[
+\mathbf{x}_i = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j.
+\]</div>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
 <ul class="simple">
+<li><p><strong>i</strong> – Index of the node to be computed. </p></li>
 <li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
-<li><p><strong>K</strong> – <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable of the system to be solved. </p></li>
-<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
-<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The residual of the ODEs system to be solved. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre410solve_stepE2in2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre410solve_stepE2in2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre410solve_stepE2in2in2in2in2in"></span><span id="GaussLegendre4::solve_step__in.in.in.in.in"></span><span class="target" id="a00284_1a4c39091c8432f587aae4bc8e73e861a4"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K0</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre410solve_stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic313step_residualE2in2in2in2in2in2in">
+<span id="_CPPv3N8Generic313step_residualE2in2in2in2in2in2in"></span><span id="_CPPv2N8Generic313step_residualE2in2in2in2in2in2in"></span><span id="Generic3::step_residual__in.in.in.in.in.in"></span><span class="target" id="a00336_1ac8d8755ed737b7b06ddb8c289480b3c5"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_residual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic313step_residualE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Solve the implicit step <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \)</span> by Newton method.</p>
+<p>Compute the left hand side of the ODEs system to be solved:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}.
+\]</div>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
 <ul class="simple">
-<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
-<li><p><strong>K</strong> – Initial guess for the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable of the system to be solved. </p></li>
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_i</strong> – <span class="math notranslate nohighlight">\( i \)</span>-th node. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
 <li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
-<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The residual of the ODEs system to be solved. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre44stepE2in2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre44stepE2in2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre44stepE2in2in2in2in2in"></span><span id="GaussLegendre4::step__in.in.in.in.in"></span><span class="target" id="a00284_1a0193256fd309fadc298287dd71c8874e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre44stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic313step_jacobianE2in2in2in2in2in2in">
+<span id="_CPPv3N8Generic313step_jacobianE2in2in2in2in2in2in"></span><span id="_CPPv2N8Generic313step_jacobianE2in2in2in2in2in2in"></span><span id="Generic3::step_jacobian__in.in.in.in.in.in"></span><span class="target" id="a00336_1a93cf367d9537094dc307a3433b4083aa"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_jacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic313step_jacobianE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Compute an integration step using the implicit Runge-Kutta method for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
+<p>Compute the Jacobian of the ODEs system of equations:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</div>
+
+<p>to be solved in the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
+  \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right)
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_i</strong> – <span class="math notranslate nohighlight">\( i \)</span>-th node. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian of the ODEs system of equations to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic310solve_stepE2in2in2in2in2in">
+<span id="_CPPv3N8Generic310solve_stepE2in2in2in2in2in"></span><span id="_CPPv2N8Generic310solve_stepE2in2in2in2in2in"></span><span id="Generic3::solve_step__in.in.in.in.in"></span><span class="target" id="a00336_1ab91c1cca160fb6c5bd9177cefc522f1d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K_0</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic310solve_stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the <span class="math notranslate nohighlight">\( i \)</span>-th explicit step of the ODEs system to find the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</div>
+
+<p>by Newton method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Initial guess for the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable to be found. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variables of the ODEs system to be solved and the error control flag. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic34stepE2in2in2in2in2in">
+<span id="_CPPv3N8Generic34stepE2in2in2in2in2in"></span><span id="_CPPv2N8Generic34stepE2in2in2in2in2in"></span><span id="Generic3::step__in.in.in.in.in"></span><span class="target" id="a00336_1a8c5537fac6a33b1e323ffa4c6ddb3c3e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic34stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
 \mathbf{0} \)</span>.</p>
 <p><strong>Solution Algorithm</strong></p>
 <p>Consider a Runge-Kutta method, written for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{x}' = \mathbf{f}(\mathbf{x}, t) \)</span>:</p>
@@ -273,33 +353,45 @@
 \[\begin{split}
  \begin{array}{l}
  \mathbf{K}_i = \mathbf{f} \left(
-   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
-   t_k + c_i \Delta t
+   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
+   \, t_k + c_i \Delta t
    \right), \qquad i = 1, 2, \ldots, s \\
  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
  \mathbf{K}_j \, ,
  \end{array}
  \end{split}\]</div>
 
-<p>Then the implicit Runge-Kutta method for an implicit system of ODEs of the form <span class="math notranslate nohighlight">\(\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \)</span> can be written as:</p>
+<p>Beacuse of the nature of the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular) the <span class="math notranslate nohighlight">\( s\)</span> stages for a generic explicit Runge-Kutta method take the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{K}_i = \mathbf{f} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
+  \mathbf{K}_j, \, t_k + c_i \Delta t
+  \right), \qquad i = 1, 2, \ldots, s.
+\]</div>
+
+<p>Then the explicit Runge-Kutta method for an implicit system of ODEs of the form <span class="math notranslate nohighlight">\(\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \)</span> can be written as:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{array}{l}
 \mathbf{F}_i \left(
-  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
+    \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
 \right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\
 \mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.
 \end{array}
 \end{split}\]</div>
 
-<p>Thus, the final system to be solved is the following:</p>
+<p>It is important to notice that the system of <span class="math notranslate nohighlight">\( s \)</span> equations <span class="math notranslate nohighlight">\( \mathbf{F}_i \)</span> is a triangular system (which may be non-linear in the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variables), so it can be solved using forward substitution and the solution of the system is the vector <span class="math notranslate nohighlight">\( \mathbf{K}
+\)</span>. Thus, the final system to be solved is the following:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \left\{\begin{array}{l}
 \mathbf{F}_1 \left(
-  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k
+  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t
 \right) = \mathbf{0} \\
 \mathbf{F}_2 \left(
   \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
@@ -314,6 +406,9 @@
 \end{split}\]</div>
 
 <p>The <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable are computed using the Newton’s method.</p>
+<p><strong>Note</strong></p>
+<p>Another approach is to directly solve the whole system of equations by Newton’smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <code class="docutils literal notranslate"><a class="reference internal" href="class_a00340.html#a00340"><span class="std std-ref"><span class="pre">RKimplicit</span></span></a></code> class.</p>
+<p>The suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, is the same as the input time step <span class="math notranslate nohighlight">\( \Delta t \)</span> since in the explicit Runge-Kutta method the time step is not modified through any error control method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
@@ -327,18 +422,20 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
-<p>The approximation of <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> and <span class="math notranslate nohighlight">\( \mathbf{x}'_{k+1}(t_{k}+\Delta t) \)</span>. </p>
+<p>The approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\(
+        \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span>, the approximation of the states derivatives at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}'_{k+1}
+        (t_{k}+\Delta t) \)</span>, the suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, and the error control flag. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre48get_nameE2in">
-<span id="_CPPv3N14GaussLegendre48get_nameE2in"></span><span id="_CPPv2N14GaussLegendre48get_nameE2in"></span><span id="GaussLegendre4::get_name__in"></span><span class="target" id="a00272_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre48get_nameE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic38get_nameE2in">
+<span id="_CPPv3N8Generic38get_nameE2in"></span><span id="_CPPv2N8Generic38get_nameE2in"></span><span id="Generic3::get_name__in"></span><span class="target" id="a00324_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic38get_nameE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the name of the method used to integrate the system of ODEs.</p>
+<p>Get the name of the method used to integrate the system of ODEs/DAEs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd">
@@ -349,11 +446,11 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre48set_nameE2in2in">
-<span id="_CPPv3N14GaussLegendre48set_nameE2in2in"></span><span id="_CPPv2N14GaussLegendre48set_nameE2in2in"></span><span id="GaussLegendre4::set_name__in.in"></span><span class="target" id="a00272_1a40bb03ebfe42e7377881f48ba450e339"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre48set_nameE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic38set_nameE2in2in">
+<span id="_CPPv3N8Generic38set_nameE2in2in"></span><span id="_CPPv2N8Generic38set_nameE2in2in"></span><span id="Generic3::set_name__in.in"></span><span class="target" id="a00324_1a40bb03ebfe42e7377881f48ba450e339"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic38set_nameE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the name of the method used to integrate the system of ODEs.</p>
+<p>Set the name of the method used to integrate the system of ODEs/DAEs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
@@ -364,38 +461,68 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre47get_odeE2in">
-<span id="_CPPv3N14GaussLegendre47get_odeE2in"></span><span id="_CPPv2N14GaussLegendre47get_odeE2in"></span><span id="GaussLegendre4::get_ode__in"></span><span class="target" id="a00272_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre47get_odeE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic37get_odeE2in">
+<span id="_CPPv3N8Generic37get_odeE2in"></span><span id="_CPPv2N8Generic37get_odeE2in"></span><span id="Generic3::get_ode__in"></span><span class="target" id="a00324_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic37get_odeE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the system of ODEs to be solved.</p>
+<p>Get the system of ODEs/DAEs to be solved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd">
-<p>The system of ODEs to be solved. </p>
+<p>The system of ODEs/DAEs to be solved. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre47set_odeE2in2in">
-<span id="_CPPv3N14GaussLegendre47set_odeE2in2in"></span><span id="_CPPv2N14GaussLegendre47set_odeE2in2in"></span><span id="GaussLegendre4::set_ode__in.in"></span><span class="target" id="a00272_1a25f67f3d4e229ebc0f5514e71887663c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre47set_odeE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic37set_odeE2in2in">
+<span id="_CPPv3N8Generic37set_odeE2in2in"></span><span id="_CPPv2N8Generic37set_odeE2in2in"></span><span id="Generic3::set_ode__in.in"></span><span class="target" id="a00324_1a25f67f3d4e229ebc0f5514e71887663c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic37set_odeE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the system of ODEs to be solved.</p>
+<p>Set the system of ODEs/DAEs to be solved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>t_ode</strong> – The system of ODEs to be solved. </p>
+<p><strong>t_ode</strong> – The system of ODEs/DAEs to be solved. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre412get_max_iterE2in">
-<span id="_CPPv3N14GaussLegendre412get_max_iterE2in"></span><span id="_CPPv2N14GaussLegendre412get_max_iterE2in"></span><span id="GaussLegendre4::get_max_iter__in"></span><span class="target" id="a00272_1a8411082da0c9e096a21be71ed3217245"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_iter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre412get_max_iterE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic316get_max_substepsE2in">
+<span id="_CPPv3N8Generic316get_max_substepsE2in"></span><span id="_CPPv2N8Generic316get_max_substepsE2in"></span><span id="Generic3::get_max_substeps__in"></span><span class="target" id="a00324_1a2fa05285670633217d21f4d94a57d3bd"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_substeps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic316get_max_substepsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the maximum number of substeps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The maximum number of substeps. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic316set_max_substepsE2in2in">
+<span id="_CPPv3N8Generic316set_max_substepsE2in2in"></span><span id="_CPPv2N8Generic316set_max_substepsE2in2in"></span><span id="Generic3::set_max_substeps__in.in"></span><span class="target" id="a00324_1af47610c9fb9bafedcc73eba941545e80"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_substeps</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_substeps</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic316set_max_substepsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the maximum number of substeps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_max_substeps</strong> – The maximum number of substeps. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic323get_max_projection_iterE2in">
+<span id="_CPPv3N8Generic323get_max_projection_iterE2in"></span><span id="_CPPv2N8Generic323get_max_projection_iterE2in"></span><span id="Generic3::get_max_projection_iter__in"></span><span class="target" id="a00324_1a42a81bc73fd3a98879234d62ae517bff"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_projection_iter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic323get_max_projection_iterE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the maximum number of iterations in the projection process.</p>
@@ -409,23 +536,23 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre412set_max_iterE2in2in">
-<span id="_CPPv3N14GaussLegendre412set_max_iterE2in2in"></span><span id="_CPPv2N14GaussLegendre412set_max_iterE2in2in"></span><span id="GaussLegendre4::set_max_iter__in.in"></span><span class="target" id="a00272_1ae92cc5a5de7c746d4c22efefe9afeee3"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_iter</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_iter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre412set_max_iterE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic323set_max_projection_iterE2in2in">
+<span id="_CPPv3N8Generic323set_max_projection_iterE2in2in"></span><span id="_CPPv2N8Generic323set_max_projection_iterE2in2in"></span><span id="Generic3::set_max_projection_iter__in.in"></span><span class="target" id="a00324_1a6448d0034867dc16f01f7e46702ef91a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_projection_iter</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_projection_iter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic323set_max_projection_iterE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the maximum number of iterations in the projection process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>t_max_iter</strong> – The maximum number of projection iterations. </p>
+<p><strong>t_max_projection_iter</strong> – The maximum number of projection iterations. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre47projectE2in2in2in">
-<span id="_CPPv3N14GaussLegendre47projectE2in2in2in"></span><span id="_CPPv2N14GaussLegendre47projectE2in2in2in"></span><span id="GaussLegendre4::project__in.in.in"></span><span class="target" id="a00272_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre47projectE2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic37projectE2in2in2in">
+<span id="_CPPv3N8Generic37projectE2in2in2in"></span><span id="_CPPv2N8Generic37projectE2in2in2in"></span><span id="Generic3::project__in.in.in"></span><span class="target" id="a00324_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic37projectE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Project the ODEs system solution <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> on the invariants/hidden constraints <span class="math notranslate nohighlight">\( \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \)</span>. The constrained minimization problem to be solved is:</p>
@@ -510,11 +637,11 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre45solveE2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre45solveE2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre45solveE2in2in2in2in"></span><span id="GaussLegendre4::solve__in.in.in.in"></span><span class="target" id="a00272_1ae3194efaa3521a1ddc38488ff2a86118"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre45solveE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic35solveE2in2in2in2in">
+<span id="_CPPv3N8Generic35solveE2in2in2in2in"></span><span id="_CPPv2N8Generic35solveE2in2in2in2in"></span><span id="Generic3::solve__in.in.in.in"></span><span class="target" id="a00324_1ae3194efaa3521a1ddc38488ff2a86118"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic35solveE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Solve the system of ODEs and calculate the approximate solution.</p>
+<p>Solve the system of ODEs/DAEs and calculate the approximate solution.</p>
 <p><strong>Usage</strong></p>
 <p>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
 <p></p>
@@ -561,7 +688,7 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
 <p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs.</p>
+           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs/DAEs.</p>
 </dd>
 </dl>
 </dd>
@@ -571,11 +698,11 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre413check_tableauE2in2in2in">
-<span id="_CPPv3N14GaussLegendre413check_tableauE2in2in2in"></span><span id="_CPPv2N14GaussLegendre413check_tableauE2in2in2in"></span><span id="GaussLegendre4::check_tableau__in.in.in"></span><span class="target" id="a00284_1a07307f6bae261fa470d588ad5c39696b"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre413check_tableauE2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N8Generic313check_tableauE2in2in2in">
+<span id="_CPPv3N8Generic313check_tableauE2in2in2in"></span><span id="_CPPv2N8Generic313check_tableauE2in2in2in"></span><span id="Generic3::check_tableau__in.in.in"></span><span class="target" id="a00336_1ab8774991272d53402d89d1c400d7274f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Generic313check_tableauE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Check Butcher tableau consistency for an implict Runge-Kutta method.</p>
+<p>Check Butcher tableau consistency for an explicit Runge-Kutta method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">

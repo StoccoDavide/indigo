@@ -40,8 +40,8 @@
 <p>↰ <a class="reference internal" href="file_ODE_ODEsolver.m.html#file-ode-odesolver-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">ODE/ODEsolver.m</span></code>)</p>
 <div class="highlight-MATLAB notranslate">
 <div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
-<span class="c">%&gt; Class container for solvers of the system of Ordinary Differential Equations</span><span class="w"></span>
-<span class="c">%&gt; (ODEs) or Differential Algebraic Equations (DAEs).</span><span class="w"></span>
+<span class="c">%&gt; Class container for Rnge-Kutta solvers of the system of Ordinary Differential</span><span class="w"></span>
+<span class="c">%&gt; Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs).</span><span class="w"></span>
 <span class="c">%</span><span class="w"></span>
 <span class="k">classdef</span><span class="w"> </span><span class="n">ODEsolver</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">handle</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
@@ -55,9 +55,13 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">m_ode</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Maximum number of substeps.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_max_substeps</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Maximum number of iterations in the projection process.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="n">m_max_iter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_max_projection_iter</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
@@ -66,17 +70,19 @@
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Class constructor for ODEsolver, which requires the name of the solver</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; used to integrate the system of ODEs as input.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; used to integrate the system of ODEs/DAEs as input.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_name The name of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ODEsolver</span><span class="p">(</span> t_name <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w">                </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_substeps</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_projection_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Get the name of the method used to integrate the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the name of the method used to integrate the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The name of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -86,7 +92,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set the name of the method used to integrate the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the name of the method used to integrate the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_name The name of the solver.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -96,9 +102,9 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Get the system of ODEs to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the system of ODEs/DAEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The system of ODEs to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The system of ODEs/DAEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>t_ode<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_ode</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">t_ode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="p">;</span><span class="w"></span>
@@ -106,12 +112,38 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set the system of ODEs to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the system of ODEs/DAEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_ode The system of ODEs to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_ode The system of ODEs/DAEs to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_ode</span><span class="p">(</span> this, t_ode <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_ode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_ode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the maximum number of substeps.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The maximum number of substeps.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_max_substeps<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_substeps</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_max_substeps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_substeps</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the maximum number of substeps.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_max_substeps The maximum number of substeps.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_substeps</span><span class="p">(</span> this, t_max_substeps <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::set_max_substeps(...)'</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">t_max_substeps</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid maximum number of substeps.'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_substeps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_max_substeps</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -120,24 +152,24 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The maximum number of iterations in the projection process.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_max_iter<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_iter</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">t_max_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_max_iter<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_projection_iter</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_max_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_projection_iter</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the maximum number of iterations in the projection process.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_max_iter The maximum number of projection iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_max_projection_iter The maximum number of projection iterations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_iter</span><span class="p">(</span> this, t_max_iter <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_projection_iter</span><span class="p">(</span> this, t_max_projection_iter <span class="p">)</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::set_max_iter(...)'</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::set_max_projection_iter(...)'</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">t_max_iter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">t_max_projection_iter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid maximum number of iterations.'</span><span class="p">]);</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_max_iter</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_projection_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_max_projection_iter</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -230,7 +262,7 @@
 <span class="w">        </span><span class="n">tolerance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">x_tilde</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="nb">eps</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">        </span><span class="c">% Iterate until the projected solution is found</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iter</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">this</span><span class="p">.</span><span class="n">m_max_projection_iter</span><span class="w"></span>
 
 <span class="w">          </span><span class="c">%     [A]         {x}    =        {b}</span><span class="w"></span>
 <span class="w">          </span><span class="c">% / I  JH^T \ /   dx   \   / x_tilde - x_k \</span><span class="w"></span>
@@ -261,9 +293,9 @@
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Solve the system of ODEs and calculate the approximate solution.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Solve the system of ODEs/DAEs and calculate the approximate solution.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;                \right]^T \f$.</span><span class="w"></span>
@@ -278,7 +310,7 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;         (\mathbf{t})\right] \f$ containing the approximated solution</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}(t) \f$ of the system of ODEs.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; **Usage**</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
@@ -321,7 +353,7 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \endrst</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span> this, t, x_0, varargin <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[x_out, t_out] = solve</span><span class="p">(</span> this, t, x_0, varargin <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::ODEsolver::solve(...): '</span><span class="p">;</span><span class="w"></span>
 
@@ -359,44 +391,108 @@
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Instantiate output</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">out_dot</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">x_0</span><span class="p">(:);</span><span class="w"></span>
-<span class="w">      </span><span class="n">out_dot</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">safety_length</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_out</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">safety_length</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="n">safety_length</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out_dot</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="n">safety_length</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Initialize first step</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_out</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">x_0</span><span class="p">(:);</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out_dot</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">num_eqns</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Instantiate temporary variables</span><span class="w"></span>
-<span class="w">      </span><span class="n">perc</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">max_k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_substeps</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_substeps</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c">% Number of substepping</span><span class="w"></span>
+<span class="w">      </span><span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c">% Current step</span><span class="w"></span>
+<span class="w">      </span><span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c">% Current percentage</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">steps</span><span class="w"></span>
+<span class="w">      </span><span class="c">% Compute the initial step size</span><span class="w"></span>
+<span class="w">      </span><span class="n">d_t_ini</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">d_t</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">d_t_ini</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">t_out</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="k">end</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% TODO: The while loop does not guarantee that the final time step</span><span class="w"></span>
+<span class="w">        </span><span class="c">%       end in t(end)</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Print percentage of completion</span><span class="w"></span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">verbose</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="n">newpp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ceil</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">k</span><span class="o">/</span><span class="n">steps</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newpp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">perc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="n">perc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newpp</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">'%3d%%\n'</span><span class="p">,</span><span class="w"> </span><span class="n">perc</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">p_new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ceil</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">s</span><span class="o">/</span><span class="n">steps</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p_new</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">p_new</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">'%3d%%\n'</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w"></span>
 <span class="w">          </span><span class="k">end</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">        </span><span class="c">% Integrate system of ODEs</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="n">x_new</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_new</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">out</span><span class="p">(:,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">out_dot</span><span class="p">(:,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="c">% Integrate system of ODEs/DAEs</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">x_new</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_new</span><span class="p">,</span><span class="w"> </span><span class="n">d_t_star</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">          </span><span class="n">this</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">x_out</span><span class="p">(:,</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">x_out_dot</span><span class="p">(:,</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">t_out</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Calculate the next time step with substepping logic</span><span class="w"></span>
+<span class="w">        </span><span class="c">% TODO: Maybe it doesn't work because it does not take the drift into</span><span class="w"></span>
+<span class="w">        </span><span class="c">% consideration</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">          </span><span class="c">% Accept the step</span><span class="w"></span>
+<span class="w">          </span><span class="n">d_t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t_star</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">          </span><span class="c">% If substepping is enabled,</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">max_k</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="c">% If the substepping index is even, double the step size</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">rem</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="n">d_t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">end</span><span class="w"></span>
+<span class="w">          </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+
+<span class="w">          </span><span class="c">% If the substepping index is too high, abort</span><span class="w"></span>
+<span class="w">          </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_k</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="nb">error</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'in %s solver, at t(%d) = %g, integration failed'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">              </span><span class="s">'(error code %d) with d_t = %g, aborting.'</span><span class="p">],</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">              </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">          </span><span class="c">% Otherwise, try again with a smaller step</span><span class="w"></span>
+<span class="w">          </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'in %s solver, at t(%d) = %g, integration failed'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">          </span><span class="s">'(error code %d), perfom substepping.'</span><span class="p">],</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">          </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">d_t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Store time solution</span><span class="w"></span>
+<span class="w">        </span><span class="n">t_out</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_out</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">        </span><span class="c">% Project solution on the invariants/hidden constraints</span><span class="w"></span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">project</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="n">x_new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">project</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">x_new</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">x_new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">project</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">x_new</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">        </span><span class="c">% Check the infinity norm of the projected solution</span><span class="w"></span>
+<span class="w">        </span><span class="c">% Check the infinity norm of the solution</span><span class="w"></span>
 <span class="w">        </span><span class="n">norm_x_new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">norm_x_new</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">epsilon</span><span class="p">)</span><span class="w"></span>
 <span class="w">          </span><span class="nb">fprintf</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'in %s solver, at t(%d) = %g, ||x||_inf = %g, '</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
-<span class="w">          </span><span class="s">'computation interrupted.\n'</span><span class="p">],</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">norm_x_new</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="s">'computation interrupted.\n'</span><span class="p">],</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="n">norm_x_new</span><span class="p">);</span><span class="w"></span>
 <span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 
-<span class="w">        </span><span class="c">% Store solutions</span><span class="w"></span>
-<span class="w">        </span><span class="n">out</span><span class="p">(:,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">x_new</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">out_dot</span><span class="p">(:,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_dot_new</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c">% Store states solutions</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_out</span><span class="p">(:,</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">x_new</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_out_dot</span><span class="p">(:,</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_dot_new</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Update steps counter</span><span class="w"></span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Resize the output</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_out</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">t_out</span><span class="p">(:,</span><span class="mi">1</span><span class="p">:</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">x_out</span><span class="p">(:,</span><span class="mi">1</span><span class="p">:</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="c">%x_out_dot = x_out_dot(:,1:s-1);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -407,7 +503,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Compute a step using a generic integration method for a system of ODEs of</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Compute a step using a generic integration method for a system of ODEs/DAEs of</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; step is based on the following formula:</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>

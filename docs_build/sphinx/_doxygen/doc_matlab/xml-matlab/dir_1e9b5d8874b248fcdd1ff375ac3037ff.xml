@@ -2,21 +2,21 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="dir_1e9b5d8874b248fcdd1ff375ac3037ff" kind="dir">
     <compoundname>ODE/ExplicitMethods</compoundname>
-    <innerfile refid="a00092">Collatz.m</innerfile>
-    <innerfile refid="a00104">ExplicitEuler.m</innerfile>
-    <innerfile refid="a00077">ExplicitMidpoint.m</innerfile>
-    <innerfile refid="a00113">Generic2.m</innerfile>
-    <innerfile refid="a00083">Generic3.m</innerfile>
-    <innerfile refid="a00098">Heun2.m</innerfile>
-    <innerfile refid="a00110">Heun3.m</innerfile>
-    <innerfile refid="a00095">Ralston2.m</innerfile>
-    <innerfile refid="a00107">Ralston3.m</innerfile>
-    <innerfile refid="a00119">Ralston4.m</innerfile>
-    <innerfile refid="a00116">RK3.m</innerfile>
-    <innerfile refid="a00080">RK38.m</innerfile>
-    <innerfile refid="a00101">RK4.m</innerfile>
-    <innerfile refid="a00086">SSPRK3.m</innerfile>
-    <innerfile refid="a00089">Wray3.m</innerfile>
+    <innerfile refid="a00116">Collatz.m</innerfile>
+    <innerfile refid="a00128">ExplicitEuler.m</innerfile>
+    <innerfile refid="a00101">ExplicitMidpoint.m</innerfile>
+    <innerfile refid="a00137">Generic2.m</innerfile>
+    <innerfile refid="a00107">Generic3.m</innerfile>
+    <innerfile refid="a00122">Heun2.m</innerfile>
+    <innerfile refid="a00134">Heun3.m</innerfile>
+    <innerfile refid="a00119">Ralston2.m</innerfile>
+    <innerfile refid="a00131">Ralston3.m</innerfile>
+    <innerfile refid="a00143">Ralston4.m</innerfile>
+    <innerfile refid="a00140">RK3.m</innerfile>
+    <innerfile refid="a00104">RK38.m</innerfile>
+    <innerfile refid="a00125">RK4.m</innerfile>
+    <innerfile refid="a00110">SSPRK3.m</innerfile>
+    <innerfile refid="a00113">Wray3.m</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

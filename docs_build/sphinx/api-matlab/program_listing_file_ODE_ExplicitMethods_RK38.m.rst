@@ -17,7 +17,7 @@ Program Listing for File RK38.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Runge-Kutta 3/8-rule fourth-order method.
        %>

@@ -1,9 +1,9 @@
 .. _exhale_class_a00232:
 
-Class LobattoIIIC2
-==================
+Class RK4
+=========
 
-- Defined in :ref:`file_ODE_ImplicitMethods_LobattoIIIC2.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_RK4.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: LobattoIIIC2
+.. doxygenclass:: RK4
    :project: doc_matlab
    :members:
    :protected-members:

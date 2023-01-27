@@ -46,8 +46,8 @@
 <span class="c">%&gt;</span><span class="w"></span>
 <span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="c">%&gt; \begin{array}{c|c}</span><span class="w"></span>
-<span class="c">%&gt;   c &amp; A \\ \hline</span><span class="w"></span>
-<span class="c">%&gt;     &amp; b</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{c} &amp; \mathbf{A} \\ \hline</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \mathbf{b}</span><span class="w"></span>
 <span class="c">%&gt; \end{array}</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
@@ -295,11 +295,10 @@
 <span class="w">    </span><span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         and the error control flag.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">solve_step</span><span class="p">(</span> this, x_k, K_0, t_k, d_t <span class="p">)</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::solve_step(...): '</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, ierr] = solve_step</span><span class="p">(</span> this, x_k, K_0, t_k, d_t <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Extract lengths</span><span class="w"></span>
 <span class="w">      </span><span class="n">nc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">);</span><span class="w"></span>
@@ -316,8 +315,9 @@
 
 <span class="w">        </span><span class="c">% Solve using Newton</span><span class="w"></span>
 <span class="w">        </span><span class="p">[</span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NewtonSolver</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'not converged flag = %d.\n'</span><span class="p">],</span><span class="w"> </span><span class="n">ierr</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"></span>
@@ -404,25 +404,43 @@
 <span class="w">    </span><span class="c">%&gt; Runge-Kutta method. For this reason, a Butcher tableau relative to an</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; explicit Runge-Kutta method can also be used in the `RKimplicit` class.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; The suggested time step for the next advancing step \f$ \Delta t_{k+1} \f$,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; is the same as the input time step \f$ \Delta t \f$ since in the explicit</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Runge-Kutta method the time step is not modified through any error control</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;                (t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k     Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t     Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, out_dot] = step</span><span class="p">(</span> this, x_k, x_dot_k, t_k, d_t <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         states derivatives at \f$ k+1 \f$-th time step \f$ \mathbf{x}'_{k+1}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         (t_{k}+\Delta t) \f$, the suggested time step for the next</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[x_out, x_dot_out, d_t_star, ierr] = step</span><span class="p">(</span> this, x_k, x_dot_k, t_k, d_t <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Solve the system to obtain K</span><span class="w"></span>
-<span class="w">      </span><span class="n">K</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">solve_step</span><span class="p">(</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">[</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">solve_step</span><span class="p">(</span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Suggested time step for the next advancing step</span><span class="w"></span>
+<span class="w">      </span><span class="n">d_t_star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Error code check</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_out</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="nb">NaN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x_k</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_dot_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">NaN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Perform the step and obtain x_k+1</span><span class="w"></span>
-<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Extract x_dot_k+1 from K (i.e., its last value)</span><span class="w"></span>
-<span class="w">      </span><span class="n">out_dot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_dot_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>

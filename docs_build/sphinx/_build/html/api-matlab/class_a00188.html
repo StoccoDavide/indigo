@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Class Wray3 &#8212; indigo v</title>
+    <title>Class ExplicitEuler &#8212; indigo v</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
@@ -19,8 +19,8 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function NewtonSolver" href="function_a00122_1a86bf5da3ed616857524e95fb134ed389.html" />
-    <link rel="prev" title="Class SSPRK3" href="class_a00184.html" />
+    <link rel="next" title="Class ExplicitMidpoint" href="class_a00192.html" />
+    <link rel="prev" title="Class CrankNicolson" href="class_a00244.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -37,11 +37,11 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="class-wray3">
-<span id="exhale-class-a00188"></span><h1>Class Wray3<a class="headerlink" href="#class-wray3" title="Permalink to this headline">¶</a>
+  <div class="section" id="class-expliciteuler">
+<span id="exhale-class-a00188"></span><h1>Class ExplicitEuler<a class="headerlink" href="#class-expliciteuler" title="Permalink to this headline">¶</a>
 </h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file_ODE_ExplicitMethods_Wray3.m.html#file-ode-explicitmethods-wray3-m"><span class="std std-ref">File Wray3.m</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file_ODE_ExplicitMethods_ExplicitEuler.m.html#file-ode-explicitmethods-expliciteuler-m"><span class="std std-ref">File ExplicitEuler.m</span></a></p></li>
 </ul>
 <div class="section" id="inheritance-relationships">
 <h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
@@ -50,7 +50,7 @@
 <h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
 </h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKexplicit</span></code> (<a class="reference internal" href="class_a00280.html#exhale-class-a00280"><span class="std std-ref">Class RKexplicit</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKexplicit</span></code> (<a class="reference internal" href="class_a00336.html#exhale-class-a00336"><span class="std std-ref">Class RKexplicit</span></a>)</p></li>
 </ul>
 </div>
 </div>
@@ -58,28 +58,26 @@
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
 </h2>
 <dl class="cpp class">
-<dt class="sig sig-object cpp" id="_CPPv45Wray3">
-<span id="_CPPv35Wray3"></span><span id="_CPPv25Wray3"></span><span id="Wray3"></span><span class="target" id="a00188"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Wray3</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00280.html#_CPPv410RKexplicit" title="RKexplicit"><span class="n"><span class="pre">RKexplicit</span></span></a><a class="headerlink" href="#_CPPv45Wray3" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv413ExplicitEuler">
+<span id="_CPPv313ExplicitEuler"></span><span id="_CPPv213ExplicitEuler"></span><span id="ExplicitEuler"></span><span class="target" id="a00188"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExplicitEuler</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00336.html#_CPPv410RKexplicit" title="RKexplicit"><span class="n"><span class="pre">RKexplicit</span></span></a><a class="headerlink" href="#_CPPv413ExplicitEuler" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Class container for Houwen’s/Wray third-order method. </p>
+<p>Class container for Explicit Euler first-order method (1 stage) </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35Wray3Ev">
-<span id="_CPPv3N5Wray35Wray3Ev"></span><span id="_CPPv2N5Wray35Wray3Ev"></span><span id="Wray3::Wray3"></span><span class="target" id="a00188_1a9f116574fa1f27ddb08e31e2a320fb68"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Wray3</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35Wray3Ev" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler13ExplicitEulerEv">
+<span id="_CPPv3N13ExplicitEuler13ExplicitEulerEv"></span><span id="_CPPv2N13ExplicitEuler13ExplicitEulerEv"></span><span id="ExplicitEuler::ExplicitEuler"></span><span class="target" id="a00188_1a5ef236a040788f27945d9385e7815586"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExplicitEuler</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler13ExplicitEulerEv" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Van der Houwen’s/Wray third-order method.</p>
+<p>Explicit Euler first-order method (1 stage)</p>
 <p></p>
 <p></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{c|ccc}
-     0 &amp;    0 &amp;    0 &amp;   0 \\
-  8/15 &amp; 8/15 &amp;    0 &amp;   0 \\
-   2/3 &amp;  1/4 &amp; 5/12 &amp;   0 \\
+\[\begin{split}\begin{array}{c|c}
+  0 &amp; 0 \\
   \hline
-       &amp;  1/4 &amp;    0 &amp; 3/4
+    &amp; 1
 \end{array}\end{split}\]</div>
 
  
@@ -87,8 +85,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35get_AE2in">
-<span id="_CPPv3N5Wray35get_AE2in"></span><span id="_CPPv2N5Wray35get_AE2in"></span><span id="Wray3::get_A__in"></span><span class="target" id="a00280_1ab9999241cfd0871f748d1f305bf8f504"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35get_AE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5get_AE2in">
+<span id="_CPPv3N13ExplicitEuler5get_AE2in"></span><span id="_CPPv2N13ExplicitEuler5get_AE2in"></span><span id="ExplicitEuler::get_A__in"></span><span class="target" id="a00336_1ab9999241cfd0871f748d1f305bf8f504"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5get_AE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
@@ -102,8 +100,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35set_AE2in2in">
-<span id="_CPPv3N5Wray35set_AE2in2in"></span><span id="_CPPv2N5Wray35set_AE2in2in"></span><span id="Wray3::set_A__in.in"></span><span class="target" id="a00280_1a2ae4cb305691b585b55e40e725caf038"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35set_AE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5set_AE2in2in">
+<span id="_CPPv3N13ExplicitEuler5set_AE2in2in"></span><span id="_CPPv2N13ExplicitEuler5set_AE2in2in"></span><span id="ExplicitEuler::set_A__in.in"></span><span class="target" id="a00336_1a2ae4cb305691b585b55e40e725caf038"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5set_AE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
@@ -117,8 +115,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35get_bE2in">
-<span id="_CPPv3N5Wray35get_bE2in"></span><span id="_CPPv2N5Wray35get_bE2in"></span><span id="Wray3::get_b__in"></span><span class="target" id="a00280_1a24e40fa536c7312e5ddcc444755fc468"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35get_bE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5get_bE2in">
+<span id="_CPPv3N13ExplicitEuler5get_bE2in"></span><span id="_CPPv2N13ExplicitEuler5get_bE2in"></span><span id="ExplicitEuler::get_b__in"></span><span class="target" id="a00336_1a24e40fa536c7312e5ddcc444755fc468"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5get_bE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
@@ -132,8 +130,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35set_bE2in2in">
-<span id="_CPPv3N5Wray35set_bE2in2in"></span><span id="_CPPv2N5Wray35set_bE2in2in"></span><span id="Wray3::set_b__in.in"></span><span class="target" id="a00280_1ada8fa59ad233cb3508118d51c2fcf969"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35set_bE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5set_bE2in2in">
+<span id="_CPPv3N13ExplicitEuler5set_bE2in2in"></span><span id="_CPPv2N13ExplicitEuler5set_bE2in2in"></span><span id="ExplicitEuler::set_b__in.in"></span><span class="target" id="a00336_1ada8fa59ad233cb3508118d51c2fcf969"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5set_bE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
@@ -147,8 +145,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35get_cE2in">
-<span id="_CPPv3N5Wray35get_cE2in"></span><span id="_CPPv2N5Wray35get_cE2in"></span><span id="Wray3::get_c__in"></span><span class="target" id="a00280_1aa152d02f1d648022af25c8f5c67f3030"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35get_cE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5get_cE2in">
+<span id="_CPPv3N13ExplicitEuler5get_cE2in"></span><span id="_CPPv2N13ExplicitEuler5get_cE2in"></span><span id="ExplicitEuler::get_c__in"></span><span class="target" id="a00336_1aa152d02f1d648022af25c8f5c67f3030"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5get_cE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
@@ -162,8 +160,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35set_cE2in2in">
-<span id="_CPPv3N5Wray35set_cE2in2in"></span><span id="_CPPv2N5Wray35set_cE2in2in"></span><span id="Wray3::set_c__in.in"></span><span class="target" id="a00280_1aafe813d51d48506e02c0c986e89bb22a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35set_cE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5set_cE2in2in">
+<span id="_CPPv3N13ExplicitEuler5set_cE2in2in"></span><span id="_CPPv2N13ExplicitEuler5set_cE2in2in"></span><span id="ExplicitEuler::set_c__in.in"></span><span class="target" id="a00336_1aafe813d51d48506e02c0c986e89bb22a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5set_cE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
@@ -177,8 +175,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray311set_tableauE2in2in2in2in">
-<span id="_CPPv3N5Wray311set_tableauE2in2in2in2in"></span><span id="_CPPv2N5Wray311set_tableauE2in2in2in2in"></span><span id="Wray3::set_tableau__in.in.in.in"></span><span class="target" id="a00280_1aaaaa5e21cd287fad5cac9654c7411fbe"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray311set_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler11set_tableauE2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler11set_tableauE2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler11set_tableauE2in2in2in2in"></span><span id="ExplicitEuler::set_tableau__in.in.in.in"></span><span class="target" id="a00336_1aaaaa5e21cd287fad5cac9654c7411fbe"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler11set_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the Butcher tableau.</p>
@@ -196,8 +194,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray39step_nodeE2in2in2in2in2in">
-<span id="_CPPv3N5Wray39step_nodeE2in2in2in2in2in"></span><span id="_CPPv2N5Wray39step_nodeE2in2in2in2in2in"></span><span id="Wray3::step_node__in.in.in.in.in"></span><span class="target" id="a00280_1a0bdd67de086e92e16a122dc63ed41289"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_node</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray39step_nodeE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler9step_nodeE2in2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler9step_nodeE2in2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler9step_nodeE2in2in2in2in2in"></span><span id="ExplicitEuler::step_node__in.in.in.in.in"></span><span class="target" id="a00336_1a0bdd67de086e92e16a122dc63ed41289"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_node</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler9step_nodeE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Compute the node as:</p>
@@ -227,8 +225,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray313step_residualE2in2in2in2in2in2in">
-<span id="_CPPv3N5Wray313step_residualE2in2in2in2in2in2in"></span><span id="_CPPv2N5Wray313step_residualE2in2in2in2in2in2in"></span><span id="Wray3::step_residual__in.in.in.in.in.in"></span><span class="target" id="a00280_1ac8d8755ed737b7b06ddb8c289480b3c5"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_residual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray313step_residualE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler13step_residualE2in2in2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler13step_residualE2in2in2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler13step_residualE2in2in2in2in2in2in"></span><span id="ExplicitEuler::step_residual__in.in.in.in.in.in"></span><span class="target" id="a00336_1ac8d8755ed737b7b06ddb8c289480b3c5"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_residual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler13step_residualE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Compute the left hand side of the ODEs system to be solved:</p>
@@ -260,8 +258,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray313step_jacobianE2in2in2in2in2in2in">
-<span id="_CPPv3N5Wray313step_jacobianE2in2in2in2in2in2in"></span><span id="_CPPv2N5Wray313step_jacobianE2in2in2in2in2in2in"></span><span id="Wray3::step_jacobian__in.in.in.in.in.in"></span><span class="target" id="a00280_1a93cf367d9537094dc307a3433b4083aa"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_jacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray313step_jacobianE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler13step_jacobianE2in2in2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler13step_jacobianE2in2in2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler13step_jacobianE2in2in2in2in2in2in"></span><span id="ExplicitEuler::step_jacobian__in.in.in.in.in.in"></span><span class="target" id="a00336_1a93cf367d9537094dc307a3433b4083aa"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_jacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler13step_jacobianE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Compute the Jacobian of the ODEs system of equations:</p>
@@ -303,8 +301,8 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray310solve_stepE2in2in2in2in2in">
-<span id="_CPPv3N5Wray310solve_stepE2in2in2in2in2in"></span><span id="_CPPv2N5Wray310solve_stepE2in2in2in2in2in"></span><span id="Wray3::solve_step__in.in.in.in.in"></span><span class="target" id="a00280_1ab91c1cca160fb6c5bd9177cefc522f1d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K_0</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray310solve_stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler10solve_stepE2in2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler10solve_stepE2in2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler10solve_stepE2in2in2in2in2in"></span><span id="ExplicitEuler::solve_step__in.in.in.in.in"></span><span class="target" id="a00336_1ab91c1cca160fb6c5bd9177cefc522f1d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K_0</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler10solve_stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Solve the <span class="math notranslate nohighlight">\( i \)</span>-th explicit step of the ODEs system to find the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable:</p>
@@ -329,15 +327,15 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
-<p>The <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variables of the ODEs system to be solved. </p>
+<p>The <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variables of the ODEs system to be solved and the error control flag. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray34stepE2in2in2in2in2in">
-<span id="_CPPv3N5Wray34stepE2in2in2in2in2in"></span><span id="_CPPv2N5Wray34stepE2in2in2in2in2in"></span><span id="Wray3::step__in.in.in.in.in"></span><span class="target" id="a00280_1a8c5537fac6a33b1e323ffa4c6ddb3c3e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray34stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler4stepE2in2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler4stepE2in2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler4stepE2in2in2in2in2in"></span><span id="ExplicitEuler::step__in.in.in.in.in"></span><span class="target" id="a00336_1a8c5537fac6a33b1e323ffa4c6ddb3c3e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler4stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
@@ -403,7 +401,8 @@
 
 <p>The <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable are computed using the Newton’s method.</p>
 <p><strong>Note</strong></p>
-<p>Another approach is to directly solve the whole system of equations by Newton’smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <code class="docutils literal notranslate"><a class="reference internal" href="class_a00284.html#a00284"><span class="std std-ref"><span class="pre">RKimplicit</span></span></a></code> class.</p>
+<p>Another approach is to directly solve the whole system of equations by Newton’smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <code class="docutils literal notranslate"><a class="reference internal" href="class_a00340.html#a00340"><span class="std std-ref"><span class="pre">RKimplicit</span></span></a></code> class.</p>
+<p>The suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, is the same as the input time step <span class="math notranslate nohighlight">\( \Delta t \)</span> since in the explicit Runge-Kutta method the time step is not modified through any error control method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
@@ -417,18 +416,20 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
-<p>The approximation of <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> and <span class="math notranslate nohighlight">\( \mathbf{x}'_{k+1}(t_{k}+\Delta t) \)</span>. </p>
+<p>The approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\(
+        \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span>, the approximation of the states derivatives at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}'_{k+1}
+        (t_{k}+\Delta t) \)</span>, the suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, and the error control flag. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray38get_nameE2in">
-<span id="_CPPv3N5Wray38get_nameE2in"></span><span id="_CPPv2N5Wray38get_nameE2in"></span><span id="Wray3::get_name__in"></span><span class="target" id="a00272_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray38get_nameE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler8get_nameE2in">
+<span id="_CPPv3N13ExplicitEuler8get_nameE2in"></span><span id="_CPPv2N13ExplicitEuler8get_nameE2in"></span><span id="ExplicitEuler::get_name__in"></span><span class="target" id="a00324_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler8get_nameE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the name of the method used to integrate the system of ODEs.</p>
+<p>Get the name of the method used to integrate the system of ODEs/DAEs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd">
@@ -439,11 +440,11 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray38set_nameE2in2in">
-<span id="_CPPv3N5Wray38set_nameE2in2in"></span><span id="_CPPv2N5Wray38set_nameE2in2in"></span><span id="Wray3::set_name__in.in"></span><span class="target" id="a00272_1a40bb03ebfe42e7377881f48ba450e339"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray38set_nameE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler8set_nameE2in2in">
+<span id="_CPPv3N13ExplicitEuler8set_nameE2in2in"></span><span id="_CPPv2N13ExplicitEuler8set_nameE2in2in"></span><span id="ExplicitEuler::set_name__in.in"></span><span class="target" id="a00324_1a40bb03ebfe42e7377881f48ba450e339"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler8set_nameE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the name of the method used to integrate the system of ODEs.</p>
+<p>Set the name of the method used to integrate the system of ODEs/DAEs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
@@ -454,38 +455,68 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray37get_odeE2in">
-<span id="_CPPv3N5Wray37get_odeE2in"></span><span id="_CPPv2N5Wray37get_odeE2in"></span><span id="Wray3::get_ode__in"></span><span class="target" id="a00272_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray37get_odeE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler7get_odeE2in">
+<span id="_CPPv3N13ExplicitEuler7get_odeE2in"></span><span id="_CPPv2N13ExplicitEuler7get_odeE2in"></span><span id="ExplicitEuler::get_ode__in"></span><span class="target" id="a00324_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler7get_odeE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Get the system of ODEs to be solved.</p>
+<p>Get the system of ODEs/DAEs to be solved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd">
-<p>The system of ODEs to be solved. </p>
+<p>The system of ODEs/DAEs to be solved. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray37set_odeE2in2in">
-<span id="_CPPv3N5Wray37set_odeE2in2in"></span><span id="_CPPv2N5Wray37set_odeE2in2in"></span><span id="Wray3::set_ode__in.in"></span><span class="target" id="a00272_1a25f67f3d4e229ebc0f5514e71887663c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray37set_odeE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler7set_odeE2in2in">
+<span id="_CPPv3N13ExplicitEuler7set_odeE2in2in"></span><span id="_CPPv2N13ExplicitEuler7set_odeE2in2in"></span><span id="ExplicitEuler::set_ode__in.in"></span><span class="target" id="a00324_1a25f67f3d4e229ebc0f5514e71887663c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler7set_odeE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Set the system of ODEs to be solved.</p>
+<p>Set the system of ODEs/DAEs to be solved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>t_ode</strong> – The system of ODEs to be solved. </p>
+<p><strong>t_ode</strong> – The system of ODEs/DAEs to be solved. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray312get_max_iterE2in">
-<span id="_CPPv3N5Wray312get_max_iterE2in"></span><span id="_CPPv2N5Wray312get_max_iterE2in"></span><span id="Wray3::get_max_iter__in"></span><span class="target" id="a00272_1a8411082da0c9e096a21be71ed3217245"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_iter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray312get_max_iterE2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler16get_max_substepsE2in">
+<span id="_CPPv3N13ExplicitEuler16get_max_substepsE2in"></span><span id="_CPPv2N13ExplicitEuler16get_max_substepsE2in"></span><span id="ExplicitEuler::get_max_substeps__in"></span><span class="target" id="a00324_1a2fa05285670633217d21f4d94a57d3bd"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_substeps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler16get_max_substepsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the maximum number of substeps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The maximum number of substeps. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler16set_max_substepsE2in2in">
+<span id="_CPPv3N13ExplicitEuler16set_max_substepsE2in2in"></span><span id="_CPPv2N13ExplicitEuler16set_max_substepsE2in2in"></span><span id="ExplicitEuler::set_max_substeps__in.in"></span><span class="target" id="a00324_1af47610c9fb9bafedcc73eba941545e80"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_substeps</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_substeps</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler16set_max_substepsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the maximum number of substeps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_max_substeps</strong> – The maximum number of substeps. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler23get_max_projection_iterE2in">
+<span id="_CPPv3N13ExplicitEuler23get_max_projection_iterE2in"></span><span id="_CPPv2N13ExplicitEuler23get_max_projection_iterE2in"></span><span id="ExplicitEuler::get_max_projection_iter__in"></span><span class="target" id="a00324_1a42a81bc73fd3a98879234d62ae517bff"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_projection_iter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler23get_max_projection_iterE2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Get the maximum number of iterations in the projection process.</p>
@@ -499,23 +530,23 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray312set_max_iterE2in2in">
-<span id="_CPPv3N5Wray312set_max_iterE2in2in"></span><span id="_CPPv2N5Wray312set_max_iterE2in2in"></span><span id="Wray3::set_max_iter__in.in"></span><span class="target" id="a00272_1ae92cc5a5de7c746d4c22efefe9afeee3"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_iter</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_iter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray312set_max_iterE2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler23set_max_projection_iterE2in2in">
+<span id="_CPPv3N13ExplicitEuler23set_max_projection_iterE2in2in"></span><span id="_CPPv2N13ExplicitEuler23set_max_projection_iterE2in2in"></span><span id="ExplicitEuler::set_max_projection_iter__in.in"></span><span class="target" id="a00324_1a6448d0034867dc16f01f7e46702ef91a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_projection_iter</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_projection_iter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler23set_max_projection_iterE2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Set the maximum number of iterations in the projection process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
-<p><strong>t_max_iter</strong> – The maximum number of projection iterations. </p>
+<p><strong>t_max_projection_iter</strong> – The maximum number of projection iterations. </p>
 </dd>
 </dl>
 </dd>
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray37projectE2in2in2in">
-<span id="_CPPv3N5Wray37projectE2in2in2in"></span><span id="_CPPv2N5Wray37projectE2in2in2in"></span><span id="Wray3::project__in.in.in"></span><span class="target" id="a00272_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray37projectE2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler7projectE2in2in2in">
+<span id="_CPPv3N13ExplicitEuler7projectE2in2in2in"></span><span id="_CPPv2N13ExplicitEuler7projectE2in2in2in"></span><span id="ExplicitEuler::project__in.in.in"></span><span class="target" id="a00324_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler7projectE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Project the ODEs system solution <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> on the invariants/hidden constraints <span class="math notranslate nohighlight">\( \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \)</span>. The constrained minimization problem to be solved is:</p>
@@ -600,11 +631,11 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray35solveE2in2in2in2in">
-<span id="_CPPv3N5Wray35solveE2in2in2in2in"></span><span id="_CPPv2N5Wray35solveE2in2in2in2in"></span><span id="Wray3::solve__in.in.in.in"></span><span class="target" id="a00272_1ae3194efaa3521a1ddc38488ff2a86118"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray35solveE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler5solveE2in2in2in2in">
+<span id="_CPPv3N13ExplicitEuler5solveE2in2in2in2in"></span><span id="_CPPv2N13ExplicitEuler5solveE2in2in2in2in"></span><span id="ExplicitEuler::solve__in.in.in.in"></span><span class="target" id="a00324_1ae3194efaa3521a1ddc38488ff2a86118"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler5solveE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Solve the system of ODEs and calculate the approximate solution.</p>
+<p>Solve the system of ODEs/DAEs and calculate the approximate solution.</p>
 <p><strong>Usage</strong></p>
 <p>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
 <p></p>
@@ -651,7 +682,7 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
 <p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs.</p>
+           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs/DAEs.</p>
 </dd>
 </dl>
 </dd>
@@ -661,8 +692,8 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N5Wray313check_tableauE2in2in2in">
-<span id="_CPPv3N5Wray313check_tableauE2in2in2in"></span><span id="_CPPv2N5Wray313check_tableauE2in2in2in"></span><span id="Wray3::check_tableau__in.in.in"></span><span class="target" id="a00280_1ab8774991272d53402d89d1c400d7274f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5Wray313check_tableauE2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N13ExplicitEuler13check_tableauE2in2in2in">
+<span id="_CPPv3N13ExplicitEuler13check_tableauE2in2in2in"></span><span id="_CPPv2N13ExplicitEuler13check_tableauE2in2in2in"></span><span id="ExplicitEuler::check_tableau__in.in.in"></span><span class="target" id="a00336_1ab8774991272d53402d89d1c400d7274f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N13ExplicitEuler13check_tableauE2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Check Butcher tableau consistency for an explicit Runge-Kutta method.</p>

@@ -5,8 +5,8 @@
 %>
 %> \f[
 %> \begin{array}{c|c}
-%>   c & A \\ \hline
-%>     & b
+%>   \mathbf{c} & \mathbf{A} \\ \hline
+%>              & \mathbf{b}
 %> \end{array}
 %> \f]
 %>
@@ -130,7 +130,7 @@ classdef RKimplicit < ODEsolver
       this.m_c = t_c;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the Butcher tableau.
     %>
@@ -325,17 +325,27 @@ classdef RKimplicit < ODEsolver
     %>
     %> The \f$ \mathbf{K}_i \f$ variable are computed using the Newton's method.
     %>
+    %> **Note**
+    %>
+    %> The suggested time step for the next advancing step \f$ \Delta t_{k+1} \f$,
+    %> is the same as the input time step \f$ \Delta t \f$ since in the implicit
+    %> Runge-Kutta method the time step is not modified through any error control
+    %> method.
+    %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
     %>                (t_k) \f$.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
-    %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
+    %> \return The approximation of the states at \f$ k+1 \f$-th time step \f$
+    %>         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the
+    %>         states derivatives at \f$ k+1 \f$-th time step \f$ \mathbf{x}'_{k+1}
+    %>         (t_{k}+\Delta t) \f$, and the suggested time step for the next
+    %>         advancing step \f$ \Delta t_{k+1} \f$.
     %>
     %
-    function [out, out_dot] = step( this, x_k, x_dot_k, t_k, d_t )
+    function [out, out_dot, d_t] = step( this, x_k, x_dot_k, t_k, d_t )
       % Extract lengths
       nc = length(this.m_c);
       nx = length(x_k);

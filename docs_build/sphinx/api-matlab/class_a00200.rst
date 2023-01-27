@@ -1,9 +1,9 @@
 .. _exhale_class_a00200:
 
-Class GaussLegendre4
-====================
+Class Generic3
+==============
 
-- Defined in :ref:`file_ODE_ImplicitMethods_GaussLegendre4.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_Generic3.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: GaussLegendre4
+.. doxygenclass:: Generic3
    :project: doc_matlab
    :members:
    :protected-members:

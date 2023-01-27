@@ -46,8 +46,8 @@
 <span class="c">%&gt;</span><span class="w"></span>
 <span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="c">%&gt; \begin{array}{c|c}</span><span class="w"></span>
-<span class="c">%&gt;   c &amp; A \\ \hline</span><span class="w"></span>
-<span class="c">%&gt;     &amp; b</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{c} &amp; \mathbf{A} \\ \hline</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \mathbf{b}</span><span class="w"></span>
 <span class="c">%&gt; \end{array}</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
@@ -171,7 +171,7 @@
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_c</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Set the Butcher tableau.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
@@ -366,17 +366,27 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; The \f$ \mathbf{K}_i \f$ variable are computed using the Newton's method.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; **Note**</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; The suggested time step for the next advancing step \f$ \Delta t_{k+1} \f$,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; is the same as the input time step \f$ \Delta t \f$ since in the implicit</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Runge-Kutta method the time step is not modified through any error control</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;                (t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k     Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t     Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         states derivatives at \f$ k+1 \f$-th time step \f$ \mathbf{x}'_{k+1}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         (t_{k}+\Delta t) \f$, and the suggested time step for the next</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         advancing step \f$ \Delta t_{k+1} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, out_dot] = step</span><span class="p">(</span> this, x_k, x_dot_k, t_k, d_t <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, out_dot, d_t] = step</span><span class="p">(</span> this, x_k, x_dot_k, t_k, d_t <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="c">% Extract lengths</span><span class="w"></span>
 <span class="w">      </span><span class="n">nc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">);</span><span class="w"></span>
 <span class="w">      </span><span class="n">nx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x_k</span><span class="p">);</span><span class="w"></span>

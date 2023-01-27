@@ -1,9 +1,9 @@
 .. _exhale_class_a00204:
 
-Class GaussLegendre6
-====================
+Class Heun2
+===========
 
-- Defined in :ref:`file_ODE_ImplicitMethods_GaussLegendre6.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_Heun2.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: GaussLegendre6
+.. doxygenclass:: Heun2
    :project: doc_matlab
    :members:
    :protected-members:

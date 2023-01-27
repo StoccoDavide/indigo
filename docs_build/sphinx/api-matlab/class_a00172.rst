@@ -1,9 +1,9 @@
 .. _exhale_class_a00172:
 
-Class RK3
-=========
+Class RKF45II
+=============
 
-- Defined in :ref:`file_ODE_ExplicitMethods_RK3.m`
+- Defined in :ref:`file_ODE_EmbeddedMethods_RKF45II.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKembedded`` (:ref:`exhale_class_a00332`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: RK3
+.. doxygenclass:: RKF45II
    :project: doc_matlab
    :members:
    :protected-members:

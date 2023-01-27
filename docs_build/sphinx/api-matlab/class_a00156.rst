@@ -1,9 +1,9 @@
 .. _exhale_class_a00156:
 
-Class Heun3
-===========
+Class HeunEuler
+===============
 
-- Defined in :ref:`file_ODE_ExplicitMethods_Heun3.m`
+- Defined in :ref:`file_ODE_EmbeddedMethods_HeunEuler.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKembedded`` (:ref:`exhale_class_a00332`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: Heun3
+.. doxygenclass:: HeunEuler
    :project: doc_matlab
    :members:
    :protected-members:

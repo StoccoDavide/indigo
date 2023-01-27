@@ -1,9 +1,9 @@
 .. _exhale_class_a00208:
 
-Class ImplicitEuler
-===================
+Class Heun3
+===========
 
-- Defined in :ref:`file_ODE_ImplicitMethods_ImplicitEuler.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_Heun3.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: ImplicitEuler
+.. doxygenclass:: Heun3
    :project: doc_matlab
    :members:
    :protected-members:

@@ -1,9 +1,9 @@
 .. _exhale_class_a00192:
 
-Class CrankNicolson
-===================
+Class ExplicitMidpoint
+======================
 
-- Defined in :ref:`file_ODE_ImplicitMethods_CrankNicolson.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_ExplicitMidpoint.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: CrankNicolson
+.. doxygenclass:: ExplicitMidpoint
    :project: doc_matlab
    :members:
    :protected-members:

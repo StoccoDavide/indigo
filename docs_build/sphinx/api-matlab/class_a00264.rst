@@ -1,9 +1,9 @@
 .. _exhale_class_a00264:
 
-Class RadauIIA3
-===============
+Class ImplicitMidpoint
+======================
 
-- Defined in :ref:`file_ODE_ImplicitMethods_RadauIIA3.m`
+- Defined in :ref:`file_ODE_ImplicitMethods_ImplicitMidpoint.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKimplicit`` (:ref:`exhale_class_a00340`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: RadauIIA3
+.. doxygenclass:: ImplicitMidpoint
    :project: doc_matlab
    :members:
    :protected-members:

@@ -1,9 +1,9 @@
 .. _exhale_class_a00236:
 
-Class LobattoIIIC4
-==================
+Class SSPRK3
+============
 
-- Defined in :ref:`file_ODE_ImplicitMethods_LobattoIIIC4.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_SSPRK3.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: LobattoIIIC4
+.. doxygenclass:: SSPRK3
    :project: doc_matlab
    :members:
    :protected-members:

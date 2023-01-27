@@ -17,7 +17,7 @@ Program Listing for File Generic3.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Van der Generic third-order method (\f$ \alpha \neq 0, 2/3, 1 \f$).
        %>
@@ -49,7 +49,7 @@ Program Listing for File Generic3.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

@@ -1,9 +1,9 @@
 .. _exhale_class_a00244:
 
-Class LobattoIIICS4
+Class CrankNicolson
 ===================
 
-- Defined in :ref:`file_ODE_ImplicitMethods_LobattoIIICS4.m`
+- Defined in :ref:`file_ODE_ImplicitMethods_CrankNicolson.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKimplicit`` (:ref:`exhale_class_a00340`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: LobattoIIICS4
+.. doxygenclass:: CrankNicolson
    :project: doc_matlab
    :members:
    :protected-members:

@@ -1,9 +1,9 @@
 .. _exhale_class_a00220:
 
-Class LobattoIIIA4
-==================
+Class Ralston4
+==============
 
-- Defined in :ref:`file_ODE_ImplicitMethods_LobattoIIIA4.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_Ralston4.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: LobattoIIIA4
+.. doxygenclass:: Ralston4
    :project: doc_matlab
    :members:
    :protected-members:

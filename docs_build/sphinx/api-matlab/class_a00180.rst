@@ -1,9 +1,9 @@
 .. _exhale_class_a00180:
 
-Class RK4
-=========
+Class Zonnenveld45
+==================
 
-- Defined in :ref:`file_ODE_ExplicitMethods_RK4.m`
+- Defined in :ref:`file_ODE_EmbeddedMethods_Zonnenveld45.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKembedded`` (:ref:`exhale_class_a00332`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: RK4
+.. doxygenclass:: Zonnenveld45
    :project: doc_matlab
    :members:
    :protected-members:

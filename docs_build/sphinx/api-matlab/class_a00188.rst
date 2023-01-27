@@ -1,9 +1,9 @@
 .. _exhale_class_a00188:
 
-Class Wray3
-===========
+Class ExplicitEuler
+===================
 
-- Defined in :ref:`file_ODE_ExplicitMethods_Wray3.m`
+- Defined in :ref:`file_ODE_ExplicitMethods_ExplicitEuler.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKexplicit`` (:ref:`exhale_class_a00336`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: Wray3
+.. doxygenclass:: ExplicitEuler
    :project: doc_matlab
    :members:
    :protected-members:

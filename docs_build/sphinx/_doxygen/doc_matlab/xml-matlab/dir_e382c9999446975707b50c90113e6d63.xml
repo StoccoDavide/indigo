@@ -2,10 +2,12 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="dir_e382c9999446975707b50c90113e6d63" kind="dir">
     <compoundname>ODE</compoundname>
+    <innerdir refid="dir_cbff95965789468e76a5a9510ca331c0">ODE/EmbeddedMethods</innerdir>
     <innerdir refid="dir_1e9b5d8874b248fcdd1ff375ac3037ff">ODE/ExplicitMethods</innerdir>
     <innerdir refid="dir_58e649bdffb3deecdc9c67c98e11bcf9">ODE/ImplicitMethods</innerdir>
-    <innerfile refid="a00074">ODEsolver.m</innerfile>
+    <innerfile refid="a00095">ODEsolver.m</innerfile>
     <innerfile refid="a00005">ODEsystem.m</innerfile>
+    <innerfile refid="a00098">RKembedded.m</innerfile>
     <innerfile refid="a00068">RKexplicit.m</innerfile>
     <innerfile refid="a00071">RKimplicit.m</innerfile>
     <briefdescription>

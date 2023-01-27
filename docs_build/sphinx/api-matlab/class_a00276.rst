@@ -1,9 +1,9 @@
 .. _exhale_class_a00276:
 
-Class ODEsystem
-===============
+Class LobattoIIIB2
+==================
 
-- Defined in :ref:`file_ODE_ODEsystem.m`
+- Defined in :ref:`file_ODE_ImplicitMethods_LobattoIIIB2.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public Base`` (:ref:`exhale_class_a00128`)
+- ``public RKimplicit`` (:ref:`exhale_class_a00340`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: ODEsystem
+.. doxygenclass:: LobattoIIIB2
    :project: doc_matlab
    :members:
    :protected-members:

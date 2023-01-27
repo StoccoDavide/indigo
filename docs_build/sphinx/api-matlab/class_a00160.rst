@@ -1,9 +1,9 @@
 .. _exhale_class_a00160:
 
-Class Ralston2
+Class Merson45
 ==============
 
-- Defined in :ref:`file_ODE_ExplicitMethods_Ralston2.m`
+- Defined in :ref:`file_ODE_EmbeddedMethods_Merson45.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKexplicit`` (:ref:`exhale_class_a00280`)
+- ``public RKembedded`` (:ref:`exhale_class_a00332`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: Ralston2
+.. doxygenclass:: Merson45
    :project: doc_matlab
    :members:
    :protected-members:

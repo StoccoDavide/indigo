@@ -1,9 +1,9 @@
 .. _exhale_class_a00248:
 
-Class LobattoIIID2
-==================
+Class GaussLegendre2
+====================
 
-- Defined in :ref:`file_ODE_ImplicitMethods_LobattoIIID2.m`
+- Defined in :ref:`file_ODE_ImplicitMethods_GaussLegendre2.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public RKimplicit`` (:ref:`exhale_class_a00284`)
+- ``public RKimplicit`` (:ref:`exhale_class_a00340`)
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: LobattoIIID2
+.. doxygenclass:: GaussLegendre2
    :project: doc_matlab
    :members:
    :protected-members:

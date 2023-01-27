@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Listing for File RKembedded.m &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="program-listing-for-file-rkembedded-m">
+<span id="program-listing-file-ode-rkembedded-m"></span><h1>Program Listing for File RKembedded.m<a class="headerlink" href="#program-listing-for-file-rkembedded-m" title="Permalink to this headline">¶</a>
+</h1>
+<p>↰ <a class="reference internal" href="file_ODE_RKembedded.m.html#file-ode-rkembedded-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">ODE/RKembedded.m</span></code>)</p>
+<div class="highlight-MATLAB notranslate">
+<div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
+<span class="c">%&gt; Class implementing the abstract function step for the embedded Runge-Kutta</span><span class="w"></span>
+<span class="c">%&gt; integration method. The user must simply define the Butcher tableau of the</span><span class="w"></span>
+<span class="c">%&gt; method, which defined as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \begin{array}{c|c}</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{c} &amp; \mathbf{A} \\ \hline</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \mathbf{b}</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \hat{\mathbf{b}}</span><span class="w"></span>
+<span class="c">%&gt; \end{array}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; where \f$ \mathbf{A} \f$ is the Runge-Kutta matrix (lower triangular matrix):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{A} = \begin{bmatrix}</span><span class="w"></span>
+<span class="c">%&gt;   a_{11} &amp; a_{12} &amp; \dots  &amp; a_{1s} \\</span><span class="w"></span>
+<span class="c">%&gt;   a_{21} &amp; a_{22} &amp; \dots  &amp; a_{2s} \\</span><span class="w"></span>
+<span class="c">%&gt;   \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\</span><span class="w"></span>
+<span class="c">%&gt;   a_{s1} &amp; a_{s2} &amp; \dots  &amp; a_{ss}</span><span class="w"></span>
+<span class="c">%&gt; \end{bmatrix},</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector relative to a method of</span><span class="w"></span>
+<span class="c">%&gt; order \f$ p \f$ (row vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt; \f$ \hat{\mathbf{b}} \f$ is the Runge-Kutta weights vector relative to a</span><span class="w"></span>
+<span class="c">%&gt; method of order \f$ \hat{p} \f$ (usually \f$ \hat{p} = p−1 \f$ or \f$ \hat{p}</span><span class="w"></span>
+<span class="c">%&gt; = p+1 \f$) (row vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; and \f$ \mathbf{c} \f$ is the Runge-Kutta nodes vector (column vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%</span><span class="w"></span>
+<span class="k">classdef</span><span class="w"> </span><span class="n">RKembedded</span><span class="w"> </span><span class="c">%&lt; RKexplicit &amp; RKimplicit</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">properties</span><span class="w"> </span><span class="p">(</span><span class="nb">SetAccess</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">protected</span><span class="p">,</span><span class="w"> </span><span class="nb">Hidden</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; High weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_b_h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Low weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_b_l</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Runge-Kutta type (choose between 'explicit' and 'implicit').</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">methods</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Initialize the class with the embedded Runge-Kutta method name and its</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Butcher tableau.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param name Name of the method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param A    Matrix (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_h  Low weights vector (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_l  High weights vector (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param c    Nodes vector (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">RKembedded</span><span class="p">(</span> name, A, b_h, b_l, c <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Call the superclasses constructor</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">RKexplicit</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">RKimplicit</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check the embedded method type</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">istril</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">m_type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'explicit'</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">m_type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'implicit'</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Set the Butcher tableau</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">set_tableau</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b_h</span><span class="p">,</span><span class="w"> </span><span class="n">b_l</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_A<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_A</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_A</span><span class="p">(</span> this, t_A <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the high weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The high weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_b_h<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_b_h</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_b_h</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the high weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b_h The high weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_b_h</span><span class="p">(</span> this, t_b_h <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_h</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_b_h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the low weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The low weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_b_l<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_b_l</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_b_l</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_l</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the low weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b_l The low weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_b_l</span><span class="p">(</span> this, t_b_l <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_l</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_b_l</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_c<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_c</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_c</span><span class="p">(</span> this, t_c <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the Butcher tableau.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_h High weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_l Low weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_tableau</span><span class="p">(</span> this, A, b_h, b_l, c <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKembedded::set_tableau(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check the Butcher tableau</span><span class="w"></span>
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">RKembedded</span><span class="p">.</span><span class="n">check_tableau</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b_h</span><span class="p">,</span><span class="w"> </span><span class="n">b_l</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid tableau detected.'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Set the Butcher tableau</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_h</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">b_h</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_l</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">b_l</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Compute an integration step using the embedded Runge-Kutta method for a</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; system of ODEs of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{0} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; **Solution Algorithm**</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Consider a Runge-Kutta method, written for a system of ODEs of the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; form \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, t) \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \begin{array}{l}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \mathbf{K}_i = \mathbf{f} \left(</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;    \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;    \right), \qquad i = 1, 2, \ldots, s \\</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \mathbf{K}_j \, ,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \end{array}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;  \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Beacuse of the nature of the matrix \f$ \mathbf{A} \f$ (lower triangular)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; the \f$ s\f$ stages for a generic embedded Runge-Kutta method take the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; form:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{K}_i = \mathbf{f} \left(</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{K}_j, \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \right), \qquad i = 1, 2, \ldots, s.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Then the embedded Runge-Kutta method for an implicit system of ODEs of</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; the form \f$\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$ can</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; be written as:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \begin{array}{l}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{F}_i \left(</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;     \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \end{array}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; It is important to notice that the system of \f$ s \f$ equations</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f$ \mathbf{F}_i \f$ is a triangular system (which may be non-linear in</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; the \f$ \mathbf{K}_i \f$ variables), so it can be solved using forward</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; substitution and the solution of the system is the vector \f$ \mathbf{K}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f$. Thus, the final system to be solved is the following:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \left\{\begin{array}{l}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{F}_1 \left(</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \right) = \mathbf{0} \\</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{F}_2 \left(</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{K}_2, \, t_k + c_2 \Delta t</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \right) = \mathbf{0} \\</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; ~~ \vdots \\</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{F}_s \left(</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s-1} a_{sj}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \mathbf{K}_j, \, \mathbf{K}_s, \, t_k + c_s \Delta t</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \right) = \mathbf{0}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \end{array}\right.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; The \f$ \mathbf{K}_i \f$ variable are computed using the Newton's method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; **Note**</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; The suggested time step for the next advancing step \f$ \Delta t_{k+1} \f$,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; is the same as the input time step \f$ \Delta t \f$ since in the implicit</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Runge-Kutta method the time step is not modified through any error control</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;                (t_k) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_k     Time step \f$ t_k \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param d_t     Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         states derivatives at \f$ k+1 \f$-th time step \f$ \mathbf{x}'_{k+1}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         (t_{k}+\Delta t) \f$, the suggested time step for the next</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[x_out, x_dot_out, d_t_star, ierr] = step</span><span class="p">(</span> this, x_k, x_dot_k, t_k, d_t <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Solve the system to obtain K</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">strcmp</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_type</span><span class="p">,</span><span class="w"> </span><span class="s">'explicit'</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">solve_step</span><span class="p">@</span><span class="n">RKexplicit</span><span class="p">(</span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">elseif</span><span class="w"> </span><span class="p">(</span><span class="nb">strcmp</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_type</span><span class="p">,</span><span class="w"> </span><span class="s">'implicit'</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">solve_step</span><span class="p">@</span><span class="n">RKimplicit</span><span class="p">(</span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Perform the step and obtain x_k+1 with higher and lower order method</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_h</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_h</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_l</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_l</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Extract x_k+1</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_h</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Extract x_dot_k+1 from K (i.e., its last value)</span><span class="w"></span>
+<span class="w">      </span><span class="n">x_dot_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Suggestions for the next time step</span><span class="w"></span>
+<span class="w">      </span><span class="n">d_t_star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">compute_adaptive_time_step</span><span class="p">(</span><span class="n">x_h</span><span class="p">,</span><span class="w"> </span><span class="n">x_l</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Compute adaptive time step for the next advancing step according to the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; error control method. The error control method used is the local truncation</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; error (LTE) method, which is based on the following formula:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{x}_{k+1}^{(l)} \right|</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; where \f$ \mathbf{x}_{k+1}^{(h)} \f$ is the approximation of the states at</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; higher order method, \f$ \mathbf{x}_{k+1}^{(l)} \f$ is the approximation</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; of the states at \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; t) \f$ with lower order method, \f$ C \f$ is a constant, and \f$ p \f$ is</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; the order of the method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; To compute the suggested time step for the next advancing step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \Delta t_{k+1} \f$, the following formula is used:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; - \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The suggested time step for the next advancing step \f$ \Delta</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         t_{k+1} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">compute_adaptive_time_step</span><span class="p">(</span> this, x_h, x_l, d_t <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Compute the error</span><span class="w"></span>
+<span class="w">      </span><span class="n">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_h</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_l</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Compute the error norm</span><span class="w"></span>
+<span class="w">      </span><span class="n">err_norm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_norm</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Compute the suggested time step</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_tol</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">err_norm</span><span class="p">)</span>^<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">methods</span><span class="w"> </span><span class="p">(</span><span class="n">Static</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Check Butcher tableau consistency for an embedded Runge-Kutta method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param A   Matrix \f$ \mathbf{A} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_h High weights vector \f$ \mathbf{b} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_l Low weights vector \f$ \hat{\mathbf{b}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param c    Nodes vector \f$ \mathbf{c} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return True if the Butcher tableau is consistent, false otherwise.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> A, b_h, b_l, c <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKembedded::check_tableau(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check matrix A</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isnumeric</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'matrix A must be numeric.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">istril</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'matrix A is not a lower triangular matrix.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'matrix A is not a square matrix.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'matrix A found with NaN values.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check vector b_h</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isnumeric</span><span class="p">(</span><span class="n">b_h</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_h must be numeric.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isrow</span><span class="p">(</span><span class="n">b_h</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_h is not a row vector.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">b_h</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_h is not consistent with the size of matrix A.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">b_h</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_h found with NaN values.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check vector b_l</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isnumeric</span><span class="p">(</span><span class="n">b_l</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_l must be numeric.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isrow</span><span class="p">(</span><span class="n">b_l</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_l is not a row vector.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">b_l</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_l is not consistent with the size of matrix A.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">b_l</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_l found with NaN values.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check vector c</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isnumeric</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector c must be numeric.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">iscolumn</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector c is not a column vector.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector c is not consistent with the size of matrix A.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector c found with NaN values.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.jpeg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
