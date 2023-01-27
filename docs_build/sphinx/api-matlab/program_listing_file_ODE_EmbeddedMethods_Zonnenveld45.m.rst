@@ -13,7 +13,7 @@ Program Listing for File Zonnenveld45.m
    %
    %> Class container for The Zonneveld method of thind- and fourth-order method.
    %
-   classdef Zonnenveld45 < RKembedded
+   classdef Zonnenveld45 < RKexplicit
      %
      methods
        %
@@ -38,7 +38,7 @@ Program Listing for File Zonnenveld45.m
        %> \endrst
        %
        function this = Zonnenveld45()
-           this@RKembedded( ...
+           this@RKexplicit( ...
            'Zonneveld34', ...
            [0,    0,    0,     0,     0; ...
             1/2,  0,    0,     0,     0; ...

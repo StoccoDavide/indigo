@@ -40,8 +40,49 @@
 <p>↰ <a class="reference internal" href="file_ODE_ODEsolver.m.html#file-ode-odesolver-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">ODE/ODEsolver.m</span></code>)</p>
 <div class="highlight-MATLAB notranslate">
 <div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
-<span class="c">%&gt; Class container for Rnge-Kutta solvers of the system of Ordinary Differential</span><span class="w"></span>
-<span class="c">%&gt; Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs).</span><span class="w"></span>
+<span class="c">%&gt; Class container for Runge-Kutta solvers of the system of Ordinary Differential</span><span class="w"></span>
+<span class="c">%&gt; Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs). The user</span><span class="w"></span>
+<span class="c">%&gt; must simply define the Butcher tableau of the method, which defined as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \begin{array}{c|c}</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{c} &amp; \mathbf{A} \\ \hline</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \mathbf{b}</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \hat{\mathbf{b}}</span><span class="w"></span>
+<span class="c">%&gt; \end{array}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; where \f$ \mathbf{A} \f$ is the Runge-Kutta matrix (lower triangular matrix):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{A} = \begin{bmatrix}</span><span class="w"></span>
+<span class="c">%&gt;   a_{11} &amp; a_{12} &amp; \dots  &amp; a_{1s} \\</span><span class="w"></span>
+<span class="c">%&gt;   a_{21} &amp; a_{22} &amp; \dots  &amp; a_{2s} \\</span><span class="w"></span>
+<span class="c">%&gt;   \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\</span><span class="w"></span>
+<span class="c">%&gt;   a_{s1} &amp; a_{s2} &amp; \dots  &amp; a_{ss}</span><span class="w"></span>
+<span class="c">%&gt; \end{bmatrix},</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector relative to a method of</span><span class="w"></span>
+<span class="c">%&gt; order \f$ p \f$ (row vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f$ \hat{\mathbf{b}} \f$ is the (optional) embedded Runge-Kutta weights</span><span class="w"></span>
+<span class="c">%&gt; vector relative to a method of order \f$ \hat{p} \f$ (usually \f$ \hat{p} =</span><span class="w"></span>
+<span class="c">%&gt; p−1 \f$ or \f$ \hat{p} = p+1 \f$) (row vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; and \f$ \mathbf{c} \f$ is the Runge-Kutta nodes vector (column vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%</span><span class="w"></span>
 <span class="k">classdef</span><span class="w"> </span><span class="n">ODEsolver</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">handle</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
@@ -51,17 +92,33 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">m_name</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; System of ODEs/DAEs to be solved.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="n">m_ode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Maximum number of substeps.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_b</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_b_e</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Maximum number of substeps (default = 5).</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">m_max_substeps</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Maximum number of iterations in the projection process.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Maximum number of iterations in the projection process (default = 5).</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">m_max_projection_iter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; System of ODEs/DAEs to be solved (fake pointer).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_ode</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
@@ -73,9 +130,23 @@
 <span class="w">    </span><span class="c">%&gt; used to integrate the system of ODEs/DAEs as input.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_name The name of the solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b_e  The embedded weights vector \f$ \hat{\mathbf{b}} \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;               (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return An instance of the ODEsolver class.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ODEsolver</span><span class="p">(</span> t_name <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w">                </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ODEsolver</span><span class="p">(</span> t_name, t_A, t_b, t_b_e, t_c <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Collect input arguments</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Set the Butcher tableau</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">set_tableau</span><span class="p">(</span><span class="n">t_A</span><span class="p">,</span><span class="w"> </span><span class="n">t_b</span><span class="p">,</span><span class="w"> </span><span class="n">t_b_e</span><span class="p">,</span><span class="w"> </span><span class="n">t_c</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Set default values</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_substeps</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_projection_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
@@ -170,6 +241,128 @@
 <span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid maximum number of iterations.'</span><span class="p">]);</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_projection_iter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_max_projection_iter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_A<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_A</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_A</span><span class="p">(</span> this, t_A <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_b<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_b</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_b</span><span class="p">(</span> this, t_b <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_b</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_b_e<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_b_e</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_b_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b_e The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;        vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_b_e</span><span class="p">(</span> this, t_b_e <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_b_e</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_c<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_c</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_c</span><span class="p">(</span> this, t_c <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the Butcher tableau.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix), the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         weights vector \f$ \mathbf{b} \f$ (row vector), the embedded</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         weights vector \f$ \hat{\mathbf{b}} \f$ (row vector), and nodes</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[A, b, b_e, c] = get_tableau</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">A</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">b</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">b_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">c</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the Butcher tableau.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b   Weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;            (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_tableau</span><span class="p">(</span> this, A, b, b_e, c <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::set_tableau(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check the Butcher tableau</span><span class="w"></span>
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">RKexplicit</span><span class="p">.</span><span class="n">check_tableau</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b_e</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid tableau detected.'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Set the tableau</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">b_e</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -497,6 +690,54 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Compute adaptive time step for the next advancing step according to the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; error control method. The error control method used is the local truncation</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; error (LTE) method, which is based on the following formula:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{x}_{k+1}^{(l)} \right|</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; where \f$ \mathbf{x}_{k+1}^{(h)} \f$ is the approximation of the states at</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; higher order method, \f$ \mathbf{x}_{k+1}^{(l)} \f$ is the approximation</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; of the states at \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; t) \f$ with lower order method, \f$ C \f$ is a constant, and \f$ p \f$ is</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; the order of the method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; To compute the suggested time step for the next advancing step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \Delta t_{k+1} \f$, the following formula is used:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; - \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The suggested time step for the next advancing step \f$ \Delta</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         t_{k+1} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">adapt_step</span><span class="p">(</span> this, x_h, x_l, d_t <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Compute the error</span><span class="w"></span>
+<span class="w">      </span><span class="n">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_h</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_l</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Compute the error norm</span><span class="w"></span>
+<span class="w">      </span><span class="n">err_norm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_norm</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Compute the suggested time step</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_tol</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">err_norm</span><span class="p">)</span>^<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">methods</span><span class="w"> </span><span class="p">(</span><span class="n">Abstract</span><span class="p">)</span><span class="w"></span>
@@ -524,6 +765,20 @@
 <span class="w">    </span><span class="c">%&gt;         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="nb">step</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_k</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Check Butcher tableau consistency for an explicit Runge-Kutta method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param A   Matrix \f$ \mathbf{A} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b   Weights vector \f$ \mathbf{b} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;            (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param c   Nodes vector \f$ \mathbf{c} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return True if the Butcher tableau is consistent, false otherwise.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">check_tableau</span><span class="p">(</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b_e</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>

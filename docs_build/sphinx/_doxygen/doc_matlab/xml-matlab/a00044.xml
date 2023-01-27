@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00044" kind="file" language="C++">
     <compoundname>RadauIA5.m</compoundname>
-    <innerclass refid="a00312" prot="public">RadauIA5</innerclass>
+    <innerclass refid="a00302" prot="public">RadauIA5</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -11,7 +11,7 @@
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
 <codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Radau<sp/>IA<sp/>fifth-order<sp/>method<sp/>(3<sp/>stages)</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4" refid="a00312" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00312" kindref="compound">RadauIA5</ref><sp/>&lt;<sp/><ref refid="a00340" kindref="compound">RKimplicit</ref></highlight></codeline>
+<codeline lineno="4" refid="a00302" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00302" kindref="compound">RadauIA5</ref><sp/>&lt;<sp/><ref refid="a00326" kindref="compound">RKimplicit</ref></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -40,10 +40,10 @@
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00312" kindref="compound">RadauIA5</ref>()</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00340" kindref="compound">RKimplicit</ref>(<sp/>...</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00312" kindref="compound">RadauIA5</ref>&apos;,...</highlight></codeline>
-<codeline lineno="36" refid="a00312_1abbed32e0ce8f3f079274adfb1cc02f8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/9,<sp/>(-1-sqrt(6))/18,<sp/><sp/><sp/><sp/><sp/><sp/>(-1+sqrt(6))/18;<sp/>...</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00302" kindref="compound">RadauIA5</ref>()</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00326" kindref="compound">RKimplicit</ref>(<sp/>...</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00302" kindref="compound">RadauIA5</ref>&apos;,...</highlight></codeline>
+<codeline lineno="36" refid="a00302_1abbed32e0ce8f3f079274adfb1cc02f8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/9,<sp/>(-1-sqrt(6))/18,<sp/><sp/><sp/><sp/><sp/><sp/>(-1+sqrt(6))/18;<sp/>...</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/9,<sp/>11/45+7*sqrt(6)/360,<sp/><sp/>11/45-43*sqrt(6)/360;<sp/>...</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/9,<sp/>11/45+43*sqrt(6)/360,<sp/>11/45-7*sqrt(6)/360<sp/>],<sp/>...</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/9,<sp/>4/9+sqrt(6)/36,<sp/>4/9-sqrt(6)/36],<sp/>...</highlight></codeline>

@@ -1,0 +1,867 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class RK38 &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class RK4" href="class_a00222.html" />
+    <link rel="prev" title="Class RK3" href="class_a00214.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="class-rk38">
+<span id="exhale-class-a00218"></span><h1>Class RK38<a class="headerlink" href="#class-rk38" title="Permalink to this headline">¶</a>
+</h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_ODE_ExplicitMethods_RK38.m.html#file-ode-explicitmethods-rk38-m"><span class="std std-ref">File RK38.m</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
+</h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">RKexplicit</span></code> (<a class="reference internal" href="class_a00322.html#exhale-class-a00322"><span class="std std-ref">Class RKexplicit</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
+</h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv44RK38">
+<span id="_CPPv34RK38"></span><span id="_CPPv24RK38"></span><span id="RK38"></span><span class="target" id="a00218"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RK38</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00322.html#_CPPv410RKexplicit" title="RKexplicit"><span class="n"><span class="pre">RKexplicit</span></span></a><a class="headerlink" href="#_CPPv44RK38" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class container for Runge-Kutta 3/8-rule third-order method. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK384RK38Ev">
+<span id="_CPPv3N4RK384RK38Ev"></span><span id="_CPPv2N4RK384RK38Ev"></span><span id="RK38::RK38"></span><span class="target" id="a00218_1a3a04aa7920810be60d7879b93c3d7f3c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RK38</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK384RK38Ev" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Runge-Kutta 3/8-rule fourth-order method.</p>
+<p></p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{c|ccccc}
+    0 &amp;    0 &amp;   0 &amp;   0 &amp;   0 \\
+  1/3 &amp;  1/3 &amp;   0 &amp;   0 &amp;   0 \\
+  2/3 &amp; -1/3 &amp;   1 &amp;   0 &amp;   0 \\
+    1 &amp;    1 &amp;  -1 &amp;   1 &amp;   0 \\
+  \hline
+      &amp;  1/8 &amp; 3/8 &amp; 3/8 &amp; 1/8
+\end{array}\end{split}\]</div>
+
+ 
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK389step_nodeE2in2in2in2in2in">
+<span id="_CPPv3N4RK389step_nodeE2in2in2in2in2in"></span><span id="_CPPv2N4RK389step_nodeE2in2in2in2in2in"></span><span id="RK38::step_node__in.in.in.in.in"></span><span class="target" id="a00322_1a0bdd67de086e92e16a122dc63ed41289"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_node</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK389step_nodeE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the node as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_i = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the node to be computed. </p></li>
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The residual of the ODEs system to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3813step_residualE2in2in2in2in2in2in">
+<span id="_CPPv3N4RK3813step_residualE2in2in2in2in2in2in"></span><span id="_CPPv2N4RK3813step_residualE2in2in2in2in2in2in"></span><span id="RK38::step_residual__in.in.in.in.in.in"></span><span class="target" id="a00322_1ac8d8755ed737b7b06ddb8c289480b3c5"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_residual</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3813step_residualE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the left hand side of the ODEs system to be solved:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_i</strong> – <span class="math notranslate nohighlight">\( i \)</span>-th node. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The residual of the ODEs system to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3813step_jacobianE2in2in2in2in2in2in">
+<span id="_CPPv3N4RK3813step_jacobianE2in2in2in2in2in2in"></span><span id="_CPPv2N4RK3813step_jacobianE2in2in2in2in2in2in"></span><span id="RK38::step_jacobian__in.in.in.in.in.in"></span><span class="target" id="a00322_1a93cf367d9537094dc307a3433b4083aa"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step_jacobian</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">i</span></span>, </span><span class="n sig-param"><span class="pre">x_i</span></span>, </span><span class="n sig-param"><span class="pre">K</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3813step_jacobianE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute the Jacobian of the ODEs system of equations:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</div>
+
+<p>to be solved in the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
+  \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right)
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>i</strong> – Index of the step to be computed. </p></li>
+<li><p><strong>x_i</strong> – <span class="math notranslate nohighlight">\( i \)</span>-th node. </p></li>
+<li><p><strong>K</strong> – Variable <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> of the system to be solved. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian of the ODEs system of equations to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3810solve_stepE2in2in2in2in2in">
+<span id="_CPPv3N4RK3810solve_stepE2in2in2in2in2in"></span><span id="_CPPv2N4RK3810solve_stepE2in2in2in2in2in"></span><span id="RK38::solve_step__in.in.in.in.in"></span><span class="target" id="a00322_1ab91c1cca160fb6c5bd9177cefc522f1d"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">K_0</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3810solve_stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the <span class="math notranslate nohighlight">\( i \)</span>-th explicit step of the ODEs system to find the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
+  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}
+\]</div>
+
+<p>by Newton method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>K</strong> – Initial guess for the <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variable to be found. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The <span class="math notranslate nohighlight">\( \mathbf{K} \)</span> variables of the ODEs system to be solved and the error control flag. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK384stepE2in2in2in2in2in">
+<span id="_CPPv3N4RK384stepE2in2in2in2in2in"></span><span id="_CPPv2N4RK384stepE2in2in2in2in2in"></span><span id="RK38::step__in.in.in.in.in"></span><span class="target" id="a00322_1a8c5537fac6a33b1e323ffa4c6ddb3c3e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_k</span></span>, </span><span class="n sig-param"><span class="pre">x_dot_k</span></span>, </span><span class="n sig-param"><span class="pre">t_k</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK384stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
+\mathbf{0} \)</span>.</p>
+<p><strong>Solution Algorithm</strong></p>
+<p>Consider a Runge-Kutta method, written for a system of ODEs of the form <span class="math notranslate nohighlight">\( \mathbf{x}' = \mathbf{f}(\mathbf{x}, t) \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{array}{l}
+ \mathbf{K}_i = \mathbf{f} \left(
+   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
+   \, t_k + c_i \Delta t
+   \right), \qquad i = 1, 2, \ldots, s \\
+ \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
+ \mathbf{K}_j \, ,
+ \end{array}
+ \end{split}\]</div>
+
+<p>Beacuse of the nature of the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular) the <span class="math notranslate nohighlight">\( s\)</span> stages for a generic explicit Runge-Kutta method take the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{K}_i = \mathbf{f} \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
+  \mathbf{K}_j, \, t_k + c_i \Delta t
+  \right), \qquad i = 1, 2, \ldots, s.
+\]</div>
+
+<p>Then the explicit Runge-Kutta method for an implicit system of ODEs of the form <span class="math notranslate nohighlight">\(\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \)</span> can be written as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{l}
+\mathbf{F}_i \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
+    \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+\right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\
+\mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.
+\end{array}
+\end{split}\]</div>
+
+<p>It is important to notice that the system of <span class="math notranslate nohighlight">\( s \)</span> equations <span class="math notranslate nohighlight">\( \mathbf{F}_i \)</span> is a triangular system (which may be non-linear in the <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variables), so it can be solved using forward substitution and the solution of the system is the vector <span class="math notranslate nohighlight">\( \mathbf{K}
+\)</span>. Thus, the final system to be solved is the following:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{\begin{array}{l}
+\mathbf{F}_1 \left(
+  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t
+\right) = \mathbf{0} \\
+\mathbf{F}_2 \left(
+  \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
+  \mathbf{K}_2, \, t_k + c_2 \Delta t
+\right) = \mathbf{0} \\
+~~ \vdots \\
+\mathbf{F}_s \left(
+  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s-1} a_{sj}
+  \mathbf{K}_j, \, \mathbf{K}_s, \, t_k + c_s \Delta t
+\right) = \mathbf{0}
+\end{array}\right.
+\end{split}\]</div>
+
+<p>The <span class="math notranslate nohighlight">\( \mathbf{K}_i \)</span> variable are computed using the Newton’s method.</p>
+<p><strong>Note</strong></p>
+<p>Another approach is to directly solve the whole system of equations by Newton’smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <code class="docutils literal notranslate"><a class="reference internal" href="class_a00326.html#a00326"><span class="std std-ref"><span class="pre">RKimplicit</span></span></a></code> class.</p>
+<p>The suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, is the same as the input time step <span class="math notranslate nohighlight">\( \Delta t \)</span> since in the explicit Runge-Kutta method the time step is not modified through any error control method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_k</strong> – States value at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}(t_k) \)</span>. </p></li>
+<li><p><strong>x_dot_k</strong> – States derivative at <span class="math notranslate nohighlight">\( k \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}'
+               (t_k) \)</span>. </p></li>
+<li><p><strong>t_k</strong> – Time step <span class="math notranslate nohighlight">\( t_k \)</span>. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\(
+        \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span>, the approximation of the states derivatives at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x}'_{k+1}
+        (t_{k}+\Delta t) \)</span>, the suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, and the error control flag. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK388get_nameE2in">
+<span id="_CPPv3N4RK388get_nameE2in"></span><span id="_CPPv2N4RK388get_nameE2in"></span><span id="RK38::get_name__in"></span><span class="target" id="a00314_1aa7fe2ee7be8223c0b64b4aadb62be540"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK388get_nameE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the name of the method used to integrate the system of ODEs/DAEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The name of the solver. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK388set_nameE2in2in">
+<span id="_CPPv3N4RK388set_nameE2in2in"></span><span id="_CPPv2N4RK388set_nameE2in2in"></span><span id="RK38::set_name__in.in"></span><span class="target" id="a00314_1a40bb03ebfe42e7377881f48ba450e339"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_name</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK388set_nameE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the name of the method used to integrate the system of ODEs/DAEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_name</strong> – The name of the solver. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK387get_odeE2in">
+<span id="_CPPv3N4RK387get_odeE2in"></span><span id="_CPPv2N4RK387get_odeE2in"></span><span id="RK38::get_ode__in"></span><span class="target" id="a00314_1a6465ec6fcd75f090d4f77663cf265ae1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK387get_odeE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the system of ODEs/DAEs to be solved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The system of ODEs/DAEs to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK387set_odeE2in2in">
+<span id="_CPPv3N4RK387set_odeE2in2in"></span><span id="_CPPv2N4RK387set_odeE2in2in"></span><span id="RK38::set_ode__in.in"></span><span class="target" id="a00314_1a25f67f3d4e229ebc0f5514e71887663c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_ode</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_ode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK387set_odeE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the system of ODEs/DAEs to be solved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_ode</strong> – The system of ODEs/DAEs to be solved. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3816get_max_substepsE2in">
+<span id="_CPPv3N4RK3816get_max_substepsE2in"></span><span id="_CPPv2N4RK3816get_max_substepsE2in"></span><span id="RK38::get_max_substeps__in"></span><span class="target" id="a00314_1a2fa05285670633217d21f4d94a57d3bd"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_substeps</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3816get_max_substepsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the maximum number of substeps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The maximum number of substeps. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3816set_max_substepsE2in2in">
+<span id="_CPPv3N4RK3816set_max_substepsE2in2in"></span><span id="_CPPv2N4RK3816set_max_substepsE2in2in"></span><span id="RK38::set_max_substeps__in.in"></span><span class="target" id="a00314_1af47610c9fb9bafedcc73eba941545e80"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_substeps</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_substeps</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3816set_max_substepsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the maximum number of substeps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_max_substeps</strong> – The maximum number of substeps. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3823get_max_projection_iterE2in">
+<span id="_CPPv3N4RK3823get_max_projection_iterE2in"></span><span id="_CPPv2N4RK3823get_max_projection_iterE2in"></span><span id="RK38::get_max_projection_iter__in"></span><span class="target" id="a00314_1a42a81bc73fd3a98879234d62ae517bff"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_max_projection_iter</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3823get_max_projection_iterE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the maximum number of iterations in the projection process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The maximum number of iterations in the projection process. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3823set_max_projection_iterE2in2in">
+<span id="_CPPv3N4RK3823set_max_projection_iterE2in2in"></span><span id="_CPPv2N4RK3823set_max_projection_iterE2in2in"></span><span id="RK38::set_max_projection_iter__in.in"></span><span class="target" id="a00314_1a6448d0034867dc16f01f7e46702ef91a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_max_projection_iter</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_max_projection_iter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3823set_max_projection_iterE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the maximum number of iterations in the projection process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_max_projection_iter</strong> – The maximum number of projection iterations. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385get_AE2in">
+<span id="_CPPv3N4RK385get_AE2in"></span><span id="_CPPv2N4RK385get_AE2in"></span><span id="RK38::get_A__in"></span><span class="target" id="a00314_1a26f235086ec709bf02c4aeb303c6e2d9"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_A</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385get_AE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385set_AE2in2in">
+<span id="_CPPv3N4RK385set_AE2in2in"></span><span id="_CPPv2N4RK385set_AE2in2in"></span><span id="RK38::set_A__in.in"></span><span class="target" id="a00314_1a948357f30c9e8af3301a4185e1942e04"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_A</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385set_AE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_A</strong> – The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385get_bE2in">
+<span id="_CPPv3N4RK385get_bE2in"></span><span id="_CPPv2N4RK385get_bE2in"></span><span id="RK38::get_b__in"></span><span class="target" id="a00314_1a8a519b6ff2372c54a0a50ae71b24decd"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385get_bE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385set_bE2in2in">
+<span id="_CPPv3N4RK385set_bE2in2in"></span><span id="_CPPv2N4RK385set_bE2in2in"></span><span id="RK38::set_b__in.in"></span><span class="target" id="a00314_1ad729ebb9af600c0f677baef3bc3e287c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385set_bE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_b</strong> – The weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK387get_b_eE2in">
+<span id="_CPPv3N4RK387get_b_eE2in"></span><span id="_CPPv2N4RK387get_b_eE2in"></span><span id="RK38::get_b_e__in"></span><span class="target" id="a00314_1a17b075907c5779494b3b8b3548b47b1c"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_b_e</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK387get_b_eE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span> (row vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span> (row vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK387set_b_eE2in2in">
+<span id="_CPPv3N4RK387set_b_eE2in2in"></span><span id="_CPPv2N4RK387set_b_eE2in2in"></span><span id="RK38::set_b_e__in.in"></span><span class="target" id="a00314_1ad3378ac91dbf2bf1ea64b70297bf7d99"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_b_e</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_b_e</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK387set_b_eE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span> (row vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_b_e</strong> – The embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span> (row vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385get_cE2in">
+<span id="_CPPv3N4RK385get_cE2in"></span><span id="_CPPv2N4RK385get_cE2in"></span><span id="RK38::get_c__in"></span><span class="target" id="a00314_1a3098e8b393b26336473cea06c9f81d1a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_c</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385get_cE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385set_cE2in2in">
+<span id="_CPPv3N4RK385set_cE2in2in"></span><span id="_CPPv2N4RK385set_cE2in2in"></span><span id="RK38::set_c__in.in"></span><span class="target" id="a00314_1a1394747004bbd57b1e373ef43bbaafde"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_c</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385set_cE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_c</strong> – The nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3811get_tableauE2in">
+<span id="_CPPv3N4RK3811get_tableauE2in"></span><span id="_CPPv2N4RK3811get_tableauE2in"></span><span id="RK38::get_tableau__in"></span><span class="target" id="a00314_1aa82d4a55edf029a00c84273e3b39bd20"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_tableau</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3811get_tableauE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the Butcher tableau.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix), the weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector), the embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span> (row vector), and nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3811set_tableauE2in2in2in2in2in">
+<span id="_CPPv3N4RK3811set_tableauE2in2in2in2in2in"></span><span id="_CPPv2N4RK3811set_tableauE2in2in2in2in2in"></span><span id="RK38::set_tableau__in.in.in.in.in"></span><span class="target" id="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_tableau</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">b_e</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3811set_tableauE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the Butcher tableau.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>A</strong> – Matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span> (lower triangular matrix). </p></li>
+<li><p><strong>b</strong> – Weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span> (row vector). </p></li>
+<li><p><strong>b_e</strong> – [optional] Embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span> (row vector). </p></li>
+<li><p><strong>c</strong> – Nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span> (column vector). </p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK387projectE2in2in2in">
+<span id="_CPPv3N4RK387projectE2in2in2in"></span><span id="_CPPv2N4RK387projectE2in2in2in"></span><span id="RK38::project__in.in.in"></span><span class="target" id="a00314_1a1d979299edb12a7d042a7dfb8c64550f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">project</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_tilde</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK387projectE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Project the ODEs system solution <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> on the invariants/hidden constraints <span class="math notranslate nohighlight">\( \mathbf{H} (\mathbf{x}, t) = \mathbf{0} \)</span>. The constrained minimization problem to be solved is:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{minimize} \quad
+\dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
+\textrm{subject to} \quad \mathbf{H}(\mathbf{x}, t) = \mathbf{0}.
+\]</div>
+
+<p><strong>Solution Algorithm</strong></p>
+<p>Given the Lagrangian of the minimization problem of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
+\frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
+\boldsymbol{\lambda} \cdot \mathbf{H}(\mathbf{x}, t).
+\]</div>
+
+<p>The solution of the problem is obtained by solving the following:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{\begin{array}{l}
+\mathbf{x} + \mathbf{JH}_\mathbf{x}^T \boldsymbol{\lambda} =
+\widetilde{\mathbf{x}} \\[0.5em]
+\mathbf{H}(\mathbf{x}, t) = \mathbf{0}
+\end{array}\right.
+\end{split}\]</div>
+
+<p>Using the Taylor expansion of the Lagrangian:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{H}(\mathbf{x}, t) + \mathbf{JH}_\mathbf{x} \delta\mathbf{x} +
+\mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
+\]</div>
+
+<p>define the iterative method as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
+\]</div>
+
+<p>Notice that <span class="math notranslate nohighlight">\( \delta\mathbf{x} \)</span> is the solution of the linear system:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\mathbf{I}             &amp; \mathbf{JH}_\mathbf{x}^T \\[0.5em]
+\mathbf{JH}_\mathbf{x} &amp; \mathbf{0}
+\end{bmatrix}
+\begin{bmatrix}
+\delta\mathbf{x} \\[0.5em]
+\boldsymbol{\lambda}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
+-\mathbf{H}(\mathbf{x}, t)
+\end{bmatrix}
+\end{split}\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathbf{JH}_\mathbf{x} \)</span> is the Jacobian of the invariants/ hidden constraints with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_tilde</strong> – The initial guess for the states <span class="math notranslate nohighlight">\( \widetilde{\mathbf{x}} \)</span>. </p></li>
+<li><p><strong>t</strong> – The time <span class="math notranslate nohighlight">\( t \)</span> at which the states are evaluated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The solution of the projection problem <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK385solveE2in2in2in2in">
+<span id="_CPPv3N4RK385solveE2in2in2in2in"></span><span id="_CPPv2N4RK385solveE2in2in2in2in"></span><span id="RK38::solve__in.in.in.in"></span><span class="target" id="a00314_1ae3194efaa3521a1ddc38488ff2a86118"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">solve</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK385solveE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Solve the system of ODEs/DAEs and calculate the approximate solution.</p>
+<p><strong>Usage</strong></p>
+<p>Solve without the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>sol = obj.solve(t, x_0);
+</pre></div>
+</div>
+
+<p>Solve with the solution projection on invariants/hidden constraints and disabled verbose mode.</p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>sol = obj.solve(t, x_0, true);
+</pre></div>
+</div>
+
+<p>Solve without the solution projection on invariants/hidden constraints and enabled verbose mode.</p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>sol = obj.solve(t, x_0, false, true);
+</pre></div>
+</div>
+
+<p>Plot the first component of the solution.</p>
+<p></p>
+<p></p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>plot(t, sol(1,:));
+</pre></div>
+</div>
+
+ 
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>t</strong> – Time vector <span class="math notranslate nohighlight">\( \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+                  \right]^T \)</span>. </p></li>
+<li><p><strong>x_0</strong> – Initial states value <span class="math notranslate nohighlight">\( \mathbf{x}(t_0) \)</span>. </p></li>
+<li><p><strong>project</strong> – [optional, default = false] Apply projection to invariants at each step. </p></li>
+<li><p><strong>verbose</strong> – [optional, default = <span class="math notranslate nohighlight">\( \mathrm{false} \)</span>] Activate vebose mode. </p></li>
+<li><p><strong>epsilon</strong> – [optional, default = <span class="math notranslate nohighlight">\( 1.0\mathrm{e}3 \)</span>] If <span class="math notranslate nohighlight">\( || \mathbf{x} ||_{\infty} &gt; \varepsilon \)</span> the computation is interrupted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>A matrix <span class="math notranslate nohighlight">\( \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+           (\mathbf{t})\right] \)</span> containing the approximated solution <span class="math notranslate nohighlight">\( \mathbf{x}(t) \)</span> of the system of ODEs/DAEs.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3810adapt_stepE2in2in2in2in">
+<span id="_CPPv3N4RK3810adapt_stepE2in2in2in2in"></span><span id="_CPPv2N4RK3810adapt_stepE2in2in2in2in"></span><span id="RK38::adapt_step__in.in.in.in"></span><span class="target" id="a00314_1a72b312c554ac5683154fcf8f4db39169"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adapt_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_h</span></span>, </span><span class="n sig-param"><span class="pre">x_l</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3810adapt_stepE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute adaptive time step for the next advancing step according to the error control method. The error control method used is the local truncation error (LTE) method, which is based on the following formula:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq
+\dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -
+\mathbf{x}_{k+1}^{(l)} \right|
+\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathbf{x}_{k+1}^{(h)} \)</span> is the approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> with higher order method, <span class="math notranslate nohighlight">\( \mathbf{x}_{k+1}^{(l)} \)</span> is the approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta
+t) \)</span> with lower order method, <span class="math notranslate nohighlight">\( C \)</span> is a constant, and <span class="math notranslate nohighlight">\( p \)</span> is the order of the method.</p>
+<p>To compute the suggested time step for the next advancing step <span class="math notranslate nohighlight">\(
+\Delta t_{k+1} \)</span>, the following formula is used:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}
+- \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x_h</strong> – Approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\(
+           \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> with higher order method. </p></li>
+<li><p><strong>x_l</strong> – Approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\(
+           \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> with lower order method. </p></li>
+<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta
+        t_{k+1} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4RK3813check_tableauE2in2in2in2in">
+<span id="_CPPv3N4RK3813check_tableauE2in2in2in2in"></span><span id="_CPPv2N4RK3813check_tableauE2in2in2in2in"></span><span id="RK38::check_tableau__in.in.in.in"></span><span class="target" id="a00322_1a4821b72ab3678a3779124289be8f3f70"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_tableau</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">A</span></span>, </span><span class="n sig-param"><span class="pre">b</span></span>, </span><span class="n sig-param"><span class="pre">b_e</span></span>, </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4RK3813check_tableauE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check Butcher tableau consistency for an explicit Runge-Kutta method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>A</strong> – Matrix <span class="math notranslate nohighlight">\( \mathbf{A} \)</span>. </p></li>
+<li><p><strong>b</strong> – Weights vector <span class="math notranslate nohighlight">\( \mathbf{b} \)</span>. </p></li>
+<li><p><strong>b_e</strong> – [optional] Embedded weights vector <span class="math notranslate nohighlight">\( \hat{\mathbf{b}} \)</span>. </p></li>
+<li><p><strong>c</strong> – Nodes vector <span class="math notranslate nohighlight">\( \mathbf{c} \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>True if the Butcher tableau is consistent, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</dd>
+</dl>
+
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.jpeg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

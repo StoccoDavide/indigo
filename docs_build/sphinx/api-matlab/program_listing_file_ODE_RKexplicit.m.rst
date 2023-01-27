@@ -19,6 +19,7 @@ Program Listing for File RKexplicit.m
    %> \begin{array}{c|c}
    %>   \mathbf{c} & \mathbf{A} \\ \hline
    %>              & \mathbf{b}
+   %>              & \hat{\mathbf{b}}
    %> \end{array}
    %> \f]
    %>
@@ -33,10 +34,19 @@ Program Listing for File RKexplicit.m
    %> \end{bmatrix},
    %> \f]
    %>
-   %> \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector (row vector):
+   %> \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector relative to a method of
+   %> order \f$ p \f$ (row vector):
    %>
    %> \f[
    %> \mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],
+   %> \f]
+   %>
+   %> \f$ \hat{\mathbf{b}} \f$ is the (optional) embedded Runge-Kutta weights
+   %> vector relative to a method of order \f$ \hat{p} \f$ (usually \f$ \hat{p} =
+   %> p−1 \f$ or \f$ \hat{p} = p+1 \f$) (row vector):
+   %>
+   %> \f[
+   %> \hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],
    %> \f]
    %>
    %> and \f$ \mathbf{c} \f$ is the Runge-Kutta nodes vector (column vector):
@@ -47,21 +57,6 @@ Program Listing for File RKexplicit.m
    %
    classdef RKexplicit < ODEsolver
      %
-     properties (SetAccess = protected, Hidden = true)
-       %
-       %> Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-       %
-       m_A;
-       %
-       %> Weights vector \f$ \mathbf{b} \f$ (row vector).
-       %
-       m_b;
-       %
-       %> Nodes vector \f$ \mathbf{c} \f$ (column vector).
-       %
-       m_c;
-     end
-     %
      methods
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -69,100 +64,19 @@ Program Listing for File RKexplicit.m
        %> Initialize the class with the explicit Runge-Kutta method name and its
        %> Butcher tableau.
        %>
-       %> \param name Name of the method.
-       %> \param A    Matrix (lower triangular matrix).
-       %> \param b    Weights vector (row vector).
-       %> \param c    Nodes vector (column vector).
+       %> \param t_name The name of the solver.
+       %> \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %> \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).
+       %> \param t_b_e  [optional] The embedded weights vector \f$ \hat{\mathbf{b}}
+       %>               \f$ (row vector).
+       %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %>
+       %> \return An instance of the RKexplicit class.
        %
-       function this = RKexplicit( name, A, b, c )
+       function this = RKexplicit( t_name, t_A, t_b, t_b_e, t_c )
    
          % Call the superclass constructor
-         this@ODEsolver(name);
-   
-         % Set the Butcher tableau
-         this.set_tableau(A, b, c);
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Get the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-       %>
-       %> \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-       %
-       function t_A = get_A( this )
-         t_A = this.m_A;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Set the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-       %>
-       %> \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-       %
-       function set_A( this, t_A )
-         this.m_A = t_A;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Get the weights vector \f$ \mathbf{b} \f$ (row vector).
-       %>
-       %> \return The weights vector \f$ \mathbf{b} \f$ (row vector).
-       %
-       function t_b = get_b( this )
-         t_b = this.m_b;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Set the weights vector \f$ \mathbf{b} \f$ (row vector).
-       %>
-       %> \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).
-       %
-       function set_b( this, t_b )
-         this.m_b = t_b;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Get the nodes vector \f$ \mathbf{c} \f$ (column vector).
-       %>
-       %> \return The nodes vector \f$ \mathbf{c} \f$ (column vector).
-       %
-       function t_c = get_c( this )
-         t_c = this.m_c;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Set the nodes vector \f$ \mathbf{c} \f$ (column vector).
-       %>
-       %> \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).
-       %
-       function set_c( this, t_c )
-         this.m_c = t_c;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Set the Butcher tableau.
-       %>
-       %> \param A Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-       %> \param b Weights vector \f$ \mathbf{b} \f$ (row vector).
-       %> \param c Nodes vector \f$ \mathbf{c} \f$ (column vector).
-       %
-       function set_tableau( this, A, b, c )
-   
-         CMD = 'indigo::RKexplicit::set_tableau(...): ';
-   
-         % Check the Butcher tableau
-         assert(RKexplicit.check_tableau(A, b, c), ...
-           [CMD, 'invalid tableau detected.']);
-   
-         % Set the Butcher tableau
-         this.m_A = A;
-         this.m_b = b;
-         this.m_c = c;
+         this@ODEsolver(t_name, t_A, t_b, t_b_e, t_c);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -412,6 +326,12 @@ Program Listing for File RKexplicit.m
    
          % Extract x_dot_k+1 from K (i.e., its last value)
          x_dot_out = K(:,end);
+   
+         % Adapt next time step
+         if (~isempty(this.m_b_e))
+           x_e = x_k + d_t * K * this.m_b_e';
+           d_t_star = this.adapt_step(x_out, x_e, d_t_star);
+         end
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -424,13 +344,14 @@ Program Listing for File RKexplicit.m
        %
        %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
        %>
-       %> \param A Matrix \f$ \mathbf{A} \f$.
-       %> \param b Weights vector \f$ \mathbf{b} \f$.
-       %> \param c Nodes vector \f$ \mathbf{c} \f$.
+       %> \param A   Matrix \f$ \mathbf{A} \f$.
+       %> \param b   Weights vector \f$ \mathbf{b} \f$.
+       %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
+       %> \param c   Nodes vector \f$ \mathbf{c} \f$.
        %>
        %> \return True if the Butcher tableau is consistent, false otherwise.
        %
-       function out = check_tableau( A, b, c )
+       function out = check_tableau( A, b, b_e, c )
    
          CMD = 'indigo::RKexplicit::check_tableau(...): ';
    
@@ -470,6 +391,26 @@ Program Listing for File RKexplicit.m
          if (any(isnan(b)))
            warning([CMD, 'vector b found with NaN values.']);
            out = false;
+         end
+   
+         % Check vector b_e
+         if (~isempty(b_e))
+           if (~isnumeric(b_e))
+             warning([CMD, 'vector b_e must be numeric.']);
+             out = false;
+           end
+           if (~isrow(b_e))
+             warning([CMD, 'vector b_e is not a row vector.']);
+             out = false;
+           end
+           if (size(A, 2) ~= length(b_e))
+             warning([CMD, 'vector b_e is not consistent with the size of matrix A.']);
+             out = false;
+           end
+           if (any(isnan(b_e)))
+             warning([CMD, 'vector b_e found with NaN values.']);
+             out = false;
+           end
          end
    
          % Check vector c

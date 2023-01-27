@@ -13,7 +13,7 @@ Program Listing for File Merson45.m
    %
    %> Class container for The Merson method of fourth- and fifth-order method.
    %
-   classdef Merson45 < RKembedded
+   classdef Merson45 < RKexplicit
      %
      methods
        %
@@ -38,7 +38,7 @@ Program Listing for File Merson45.m
        %> \endrst
        %
        function this = Merson45()
-           this@RKembedded( ...
+           this@RKexplicit( ...
            'Merson45', ...
            [0,   0,   0,    0, 0; ...
             1/3, 0,   0,    0, 0; ...

@@ -7,7 +7,6 @@
     <innerdir refid="dir_58e649bdffb3deecdc9c67c98e11bcf9">ODE/ImplicitMethods</innerdir>
     <innerfile refid="a00095">ODEsolver.m</innerfile>
     <innerfile refid="a00005">ODEsystem.m</innerfile>
-    <innerfile refid="a00098">RKembedded.m</innerfile>
     <innerfile refid="a00068">RKexplicit.m</innerfile>
     <innerfile refid="a00071">RKimplicit.m</innerfile>
     <briefdescription>

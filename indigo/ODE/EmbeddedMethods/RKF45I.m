@@ -2,7 +2,7 @@
 %> Class container for The Runge–Kutta–Fehlberg (Table I) method of fourth- and
 %> fifth-order method.
 %
-classdef RKF45I < RKembedded
+classdef RKF45I < RKexplicit
   %
   methods
     %
@@ -28,7 +28,7 @@ classdef RKF45I < RKembedded
     %> \endrst
     %
     function this = RKF45I()
-        this@RKembedded( ...
+        this@RKexplicit( ...
         'RKF45I', ...
         [0,      0,        0,      0,     0,     0; ...
          2/9,    0,        0,      0,     0,     0; ...

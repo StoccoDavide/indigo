@@ -2,7 +2,7 @@
 %> Class container for The Runge–Kutta–Fehlberg method of seventh- and
 %> eigth-order method.
 %
-classdef RKF78 < RKembedded
+classdef RKF78 < RKexplicit
   %
   methods
     %
@@ -35,7 +35,7 @@ classdef RKF78 < RKembedded
     %> \endrst
     %
     function this = RKF78()
-        this@RKembedded( ...
+        this@RKexplicit( ...
         'RKF48', ...
         [0,          0,    0,       0,        0,      0,      0,         0,      0,      0,     0,    0, 0; ...
          2/27,       0,    0,       0,        0,      0,      0,         0,      0,      0,     0,    0, 0; ...

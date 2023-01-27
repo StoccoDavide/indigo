@@ -20,7 +20,6 @@ Files
 
 - :ref:`file_ODE_ODEsolver.m`
 - :ref:`file_ODE_ODEsystem.m`
-- :ref:`file_ODE_RKembedded.m`
 - :ref:`file_ODE_RKexplicit.m`
 - :ref:`file_ODE_RKimplicit.m`
 

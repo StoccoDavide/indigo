@@ -14,7 +14,7 @@ Program Listing for File RKF12.m
    %> Class container for The Runge–Kutta–Fehlberg method of first- and second-order
    %> method.
    %
-   classdef RKF12 < RKembedded
+   classdef RKF12 < RKexplicit
      %
      methods
        %
@@ -37,7 +37,7 @@ Program Listing for File RKF12.m
        %> \endrst
        %
        function this = RKF12()
-           this@RKembedded( ...
+           this@RKexplicit( ...
            'RKF12', ...
            [0,     0,       0; ...
             1/2,   0,       0; ...

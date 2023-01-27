@@ -1,7 +1,7 @@
 %
 %> Class container for The Heun-Euler method of first- and second-order method.
 %
-classdef HeunEuler < RKembedded
+classdef HeunEuler < RKexplicit
   %
   methods
     %
@@ -23,7 +23,7 @@ classdef HeunEuler < RKembedded
     %> \endrst
     %
     function this = HeunEuler()
-        this@RKembedded( ...
+        this@RKexplicit( ...
         'RKF12', ...
         [0, 0; ...
          1, 1], ...

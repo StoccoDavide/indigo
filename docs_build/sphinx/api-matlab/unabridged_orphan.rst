@@ -40,11 +40,6 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_ODE_ExplicitMethods_Collatz.m.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_ODE_ImplicitMethods_CrankNicolson.m.rst
 
 .. toctree::
@@ -226,11 +221,6 @@ Files
    :maxdepth: 5
 
    file_ODE_ExplicitMethods_RK4.m.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_ODE_RKembedded.m.rst
 
 .. toctree::
    :maxdepth: 5

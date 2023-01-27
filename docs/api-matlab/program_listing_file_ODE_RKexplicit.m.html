@@ -48,6 +48,7 @@
 <span class="c">%&gt; \begin{array}{c|c}</span><span class="w"></span>
 <span class="c">%&gt;   \mathbf{c} &amp; \mathbf{A} \\ \hline</span><span class="w"></span>
 <span class="c">%&gt;              &amp; \mathbf{b}</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \hat{\mathbf{b}}</span><span class="w"></span>
 <span class="c">%&gt; \end{array}</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
@@ -62,10 +63,19 @@
 <span class="c">%&gt; \end{bmatrix},</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
-<span class="c">%&gt; \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector (row vector):</span><span class="w"></span>
+<span class="c">%&gt; \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector relative to a method of</span><span class="w"></span>
+<span class="c">%&gt; order \f$ p \f$ (row vector):</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
 <span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="c">%&gt; \mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f$ \hat{\mathbf{b}} \f$ is the (optional) embedded Runge-Kutta weights</span><span class="w"></span>
+<span class="c">%&gt; vector relative to a method of order \f$ \hat{p} \f$ (usually \f$ \hat{p} =</span><span class="w"></span>
+<span class="c">%&gt; p−1 \f$ or \f$ \hat{p} = p+1 \f$) (row vector):</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="c">%&gt;</span><span class="w"></span>
 <span class="c">%&gt; and \f$ \mathbf{c} \f$ is the Runge-Kutta nodes vector (column vector):</span><span class="w"></span>
@@ -76,21 +86,6 @@
 <span class="c">%</span><span class="w"></span>
 <span class="k">classdef</span><span class="w"> </span><span class="n">RKexplicit</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ODEsolver</span><span class="w"></span>
 <span class="w">  </span><span class="c">%</span><span class="w"></span>
-<span class="w">  </span><span class="k">properties</span><span class="w"> </span><span class="p">(</span><span class="nb">SetAccess</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">protected</span><span class="p">,</span><span class="w"> </span><span class="nb">Hidden</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="n">m_b</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">end</span><span class="w"></span>
-<span class="w">  </span><span class="c">%</span><span class="w"></span>
 <span class="w">  </span><span class="k">methods</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -98,100 +93,19 @@
 <span class="w">    </span><span class="c">%&gt; Initialize the class with the explicit Runge-Kutta method name and its</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Butcher tableau.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param name Name of the method.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param A    Matrix (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param b    Weights vector (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param c    Nodes vector (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_name The name of the solver.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_b_e  [optional] The embedded weights vector \f$ \hat{\mathbf{b}}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;               \f$ (row vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return An instance of the RKexplicit class.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">RKexplicit</span><span class="p">(</span> name, A, b, c <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">RKexplicit</span><span class="p">(</span> t_name, t_A, t_b, t_b_e, t_c <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Call the superclass constructor</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">ODEsolver</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c">% Set the Butcher tableau</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">set_tableau</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Get the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_A<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_A</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">t_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_A</span><span class="p">(</span> this, t_A <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_A</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Get the weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_b<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_b</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">t_b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set the weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_b</span><span class="p">(</span> this, t_b <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_b</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Get the nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_c<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_c</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">t_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set the nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_c</span><span class="p">(</span> this, t_c <span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_c</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set the Butcher tableau.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param A Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param b Weights vector \f$ \mathbf{b} \f$ (row vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param c Nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
-<span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_tableau</span><span class="p">(</span> this, A, b, c <span class="p">)</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::set_tableau(...): '</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">      </span><span class="c">% Check the Butcher tableau</span><span class="w"></span>
-<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="n">RKexplicit</span><span class="p">.</span><span class="n">check_tableau</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid tableau detected.'</span><span class="p">]);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c">% Set the Butcher tableau</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">@</span><span class="n">ODEsolver</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span><span class="w"> </span><span class="n">t_A</span><span class="p">,</span><span class="w"> </span><span class="n">t_b</span><span class="p">,</span><span class="w"> </span><span class="n">t_b_e</span><span class="p">,</span><span class="w"> </span><span class="n">t_c</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -441,6 +355,12 @@
 
 <span class="w">      </span><span class="c">% Extract x_dot_k+1 from K (i.e., its last value)</span><span class="w"></span>
 <span class="w">      </span><span class="n">x_dot_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Adapt next time step</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isempty</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="n">x_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">d_t_star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">adapt_step</span><span class="p">(</span><span class="n">x_out</span><span class="p">,</span><span class="w"> </span><span class="n">x_e</span><span class="p">,</span><span class="w"> </span><span class="n">d_t_star</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
@@ -453,13 +373,14 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; Check Butcher tableau consistency for an explicit Runge-Kutta method.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param A Matrix \f$ \mathbf{A} \f$.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param b Weights vector \f$ \mathbf{b} \f$.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param c Nodes vector \f$ \mathbf{c} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param A   Matrix \f$ \mathbf{A} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b   Weights vector \f$ \mathbf{b} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param c   Nodes vector \f$ \mathbf{c} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return True if the Butcher tableau is consistent, false otherwise.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> A, b, c <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> A, b, b_e, c <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::check_tableau(...): '</span><span class="p">;</span><span class="w"></span>
 
@@ -499,6 +420,26 @@
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span><span class="w"></span>
 <span class="w">        </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b found with NaN values.'</span><span class="p">]);</span><span class="w"></span>
 <span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Check vector b_e</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isempty</span><span class="p">(</span><span class="n">b_e</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isnumeric</span><span class="p">(</span><span class="n">b_e</span><span class="p">))</span><span class="w"></span>
+<span class="w">          </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_e must be numeric.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">          </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="nb">isrow</span><span class="p">(</span><span class="n">b_e</span><span class="p">))</span><span class="w"></span>
+<span class="w">          </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_e is not a row vector.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">          </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">b_e</span><span class="p">))</span><span class="w"></span>
+<span class="w">          </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_e is not consistent with the size of matrix A.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">          </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">b_e</span><span class="p">)))</span><span class="w"></span>
+<span class="w">          </span><span class="nb">warning</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'vector b_e found with NaN values.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">          </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
 <span class="w">      </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">      </span><span class="c">% Check vector c</span><span class="w"></span>

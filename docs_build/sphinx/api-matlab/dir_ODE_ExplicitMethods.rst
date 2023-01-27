@@ -15,7 +15,6 @@ Directory ExplicitMethods
 Files
 -----
 
-- :ref:`file_ODE_ExplicitMethods_Collatz.m`
 - :ref:`file_ODE_ExplicitMethods_ExplicitEuler.m`
 - :ref:`file_ODE_ExplicitMethods_ExplicitMidpoint.m`
 - :ref:`file_ODE_ExplicitMethods_Generic2.m`

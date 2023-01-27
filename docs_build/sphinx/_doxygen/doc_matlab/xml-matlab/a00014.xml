@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00014" kind="file" language="C++">
     <compoundname>LobattoIIIC4.m</compoundname>
-    <innerclass refid="a00288" prot="public">LobattoIIIC4</innerclass>
+    <innerclass refid="a00278" prot="public">LobattoIIIC4</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -11,7 +11,7 @@
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
 <codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Lobatto<sp/>IIIC<sp/>fourth-order<sp/>method<sp/>(3<sp/>stages)</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4" refid="a00288" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00288" kindref="compound">LobattoIIIC4</ref><sp/>&lt;<sp/><ref refid="a00340" kindref="compound">RKimplicit</ref></highlight></codeline>
+<codeline lineno="4" refid="a00278" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00278" kindref="compound">LobattoIIIC4</ref><sp/>&lt;<sp/><ref refid="a00326" kindref="compound">RKimplicit</ref></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -32,10 +32,10 @@
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00288" kindref="compound">LobattoIIIC4</ref>()</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00340" kindref="compound">RKimplicit</ref>(<sp/>...</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00288" kindref="compound">LobattoIIIC4</ref>&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="28" refid="a00288_1aeef1cadc3ab3ac92177a96ad5ab1d07c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/6,<sp/>-1/3,<sp/>1/6;<sp/>1/6,<sp/>5/12,<sp/>-1/12;<sp/>1/6,<sp/>2/3,<sp/>1/6],<sp/>...</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00278" kindref="compound">LobattoIIIC4</ref>()</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00326" kindref="compound">RKimplicit</ref>(<sp/>...</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00278" kindref="compound">LobattoIIIC4</ref>&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="28" refid="a00278_1aeef1cadc3ab3ac92177a96ad5ab1d07c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/6,<sp/>-1/3,<sp/>1/6;<sp/>1/6,<sp/>5/12,<sp/>-1/12;<sp/>1/6,<sp/>2/3,<sp/>1/6],<sp/>...</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/6,<sp/>2/3,<sp/>1/6],<sp/>...</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/>1/2,<sp/>1]&apos;<sp/>...</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>

@@ -11,8 +11,49 @@ Program Listing for File ODEsolver.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Rnge-Kutta solvers of the system of Ordinary Differential
-   %> Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs).
+   %> Class container for Runge-Kutta solvers of the system of Ordinary Differential
+   %> Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs). The user
+   %> must simply define the Butcher tableau of the method, which defined as:
+   %>
+   %> \f[
+   %> \begin{array}{c|c}
+   %>   \mathbf{c} & \mathbf{A} \\ \hline
+   %>              & \mathbf{b}
+   %>              & \hat{\mathbf{b}}
+   %> \end{array}
+   %> \f]
+   %>
+   %> where \f$ \mathbf{A} \f$ is the Runge-Kutta matrix (lower triangular matrix):
+   %>
+   %> \f[
+   %> \mathbf{A} = \begin{bmatrix}
+   %>   a_{11} & a_{12} & \dots  & a_{1s} \\
+   %>   a_{21} & a_{22} & \dots  & a_{2s} \\
+   %>   \vdots & \vdots & \ddots & \vdots \\
+   %>   a_{s1} & a_{s2} & \dots  & a_{ss}
+   %> \end{bmatrix},
+   %> \f]
+   %>
+   %> \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector relative to a method of
+   %> order \f$ p \f$ (row vector):
+   %>
+   %> \f[
+   %> \mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],
+   %> \f]
+   %>
+   %> \f$ \hat{\mathbf{b}} \f$ is the (optional) embedded Runge-Kutta weights
+   %> vector relative to a method of order \f$ \hat{p} \f$ (usually \f$ \hat{p} =
+   %> p−1 \f$ or \f$ \hat{p} = p+1 \f$) (row vector):
+   %>
+   %> \f[
+   %> \hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],
+   %> \f]
+   %>
+   %> and \f$ \mathbf{c} \f$ is the Runge-Kutta nodes vector (column vector):
+   %>
+   %> \f[
+   %> \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
+   %> \f]
    %
    classdef ODEsolver < handle
      %
@@ -22,17 +63,33 @@ Program Listing for File ODEsolver.m
        %
        m_name;
        %
-       %> System of ODEs/DAEs to be solved.
+       %> Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
        %
-       m_ode;
+       m_A;
        %
-       %> Maximum number of substeps.
+       %> Weights vector \f$ \mathbf{b} \f$ (row vector).
+       %
+       m_b;
+       %
+       %> Embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+       %
+       m_b_e;
+       %
+       %> Nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %
+       m_c;
+       %
+       %> Maximum number of substeps (default = 5).
        %
        m_max_substeps;
        %
-       %> Maximum number of iterations in the projection process.
+       %> Maximum number of iterations in the projection process (default = 5).
        %
        m_max_projection_iter;
+       %
+       %> System of ODEs/DAEs to be solved (fake pointer).
+       %
+       m_ode;
        %
      end
      %
@@ -44,9 +101,23 @@ Program Listing for File ODEsolver.m
        %> used to integrate the system of ODEs/DAEs as input.
        %>
        %> \param t_name The name of the solver.
+       %> \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %> \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).
+       %> \param t_b_e  The embedded weights vector \f$ \hat{\mathbf{b}} \f$
+       %>               (row vector).
+       %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %>
+       %> \return An instance of the ODEsolver class.
        %
-       function this = ODEsolver( t_name )
-         this.m_name                = t_name;
+       function this = ODEsolver( t_name, t_A, t_b, t_b_e, t_c )
+   
+         % Collect input arguments
+         this.m_name = t_name;
+   
+         % Set the Butcher tableau
+         this.set_tableau(t_A, t_b, t_b_e, t_c);
+   
+         % Set default values
          this.m_max_substeps        = 5;
          this.m_max_projection_iter = 5;
        end
@@ -141,6 +212,128 @@ Program Listing for File ODEsolver.m
            [CMD, 'invalid maximum number of iterations.']);
    
          this.m_max_projection_iter = t_max_projection_iter;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Get the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %>
+       %> \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %
+       function t_A = get_A( this )
+         t_A = this.m_A;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Set the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %>
+       %> \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %
+       function set_A( this, t_A )
+         this.m_A = t_A;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Get the weights vector \f$ \mathbf{b} \f$ (row vector).
+       %>
+       %> \return The weights vector \f$ \mathbf{b} \f$ (row vector).
+       %
+       function t_b = get_b( this )
+         t_b = this.m_b;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Set the weights vector \f$ \mathbf{b} \f$ (row vector).
+       %>
+       %> \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).
+       %
+       function set_b( this, t_b )
+         this.m_b = t_b;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Get the embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+       %>
+       %> \return The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+       %
+       function t_b_e = get_b_e( this )
+         t_b_e = this.m_b_e;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Set the embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+       %>
+       %> \param t_b_e The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row
+       %>        vector).
+       %
+       function set_b_e( this, t_b_e )
+         this.m_b_e = t_b_e;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Get the nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %>
+       %> \return The nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %
+       function t_c = get_c( this )
+         t_c = this.m_c;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Set the nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %>
+       %> \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %
+       function set_c( this, t_c )
+         this.m_c = t_c;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Get the Butcher tableau.
+       %>
+       %> \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix), the
+       %>         weights vector \f$ \mathbf{b} \f$ (row vector), the embedded
+       %>         weights vector \f$ \hat{\mathbf{b}} \f$ (row vector), and nodes
+       %>         vector \f$ \mathbf{c} \f$ (column vector).
+       %
+       function [A, b, b_e, c] = get_tableau( this )
+         A   = this.m_A;
+         b   = this.m_b;
+         b_e = this.m_b_e;
+         c   = this.m_c;
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Set the Butcher tableau.
+       %>
+       %> \param A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+       %> \param b   Weights vector \f$ \mathbf{b} \f$ (row vector).
+       %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
+       %>            (row vector).
+       %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
+       %
+       function set_tableau( this, A, b, b_e, c )
+   
+         CMD = 'indigo::RKexplicit::set_tableau(...): ';
+   
+         % Check the Butcher tableau
+         assert(RKexplicit.check_tableau(A, b, b_e, c), ...
+           [CMD, 'invalid tableau detected.']);
+   
+         % Set the tableau
+         this.m_A   = A;
+         this.m_b   = b;
+         this.m_b_e = b_e;
+         this.m_c   = c;
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -468,6 +661,54 @@ Program Listing for File ODEsolver.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
+       %> Compute adaptive time step for the next advancing step according to the
+       %> error control method. The error control method used is the local truncation
+       %> error (LTE) method, which is based on the following formula:
+       %>
+       %> \f[
+       %> \left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq
+       %> \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -
+       %> \mathbf{x}_{k+1}^{(l)} \right|
+       %> \f]
+       %>
+       %> where \f$ \mathbf{x}_{k+1}^{(h)} \f$ is the approximation of the states at
+       %> \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with
+       %> higher order method, \f$ \mathbf{x}_{k+1}^{(l)} \f$ is the approximation
+       %> of the states at \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta
+       %> t) \f$ with lower order method, \f$ C \f$ is a constant, and \f$ p \f$ is
+       %> the order of the method.
+       %>
+       %> To compute the suggested time step for the next advancing step \f$
+       %> \Delta t_{k+1} \f$, the following formula is used:
+       %>
+       %> \f[
+       %> \Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}
+       %> - \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}
+       %> \f]
+       %>
+       %> \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$
+       %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.
+       %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
+       %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
+       %> \param d_t Advancing time step \f$ \Delta t\f$.
+       %>
+       %> \return The suggested time step for the next advancing step \f$ \Delta
+       %>         t_{k+1} \f$.
+       %>
+       function out = adapt_step( this, x_h, x_l, d_t )
+   
+         % Compute the error
+         err = x_h - x_l;
+   
+         % Compute the error norm
+         err_norm = norm(err, this.m_norm);
+   
+         % Compute the suggested time step
+         out = d_t * (this.m_tol / err_norm)^(1 / (length(this.m_c) + 1));
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
      end
      %
      methods (Abstract)
@@ -495,6 +736,20 @@ Program Listing for File ODEsolver.m
        %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
        %
        step( this, x_k, x_dot_k, t_k, d_t )
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
+       %>
+       %> \param A   Matrix \f$ \mathbf{A} \f$.
+       %> \param b   Weights vector \f$ \mathbf{b} \f$.
+       %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
+       %>            (row vector).
+       %> \param c   Nodes vector \f$ \mathbf{c} \f$.
+       %>
+       %> \return True if the Butcher tableau is consistent, false otherwise.
+       %
+       check_tableau( A, b, b_e, c )
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %

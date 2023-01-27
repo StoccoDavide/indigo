@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00071" kind="file" language="C++">
     <compoundname>RKimplicit.m</compoundname>
-    <innerclass refid="a00340" prot="public">RKimplicit</innerclass>
+    <innerclass refid="a00326" prot="public">RKimplicit</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -43,7 +43,7 @@
 <codeline lineno="33"><highlight class="normal">%&gt;<sp/>\mathbf{c}<sp/>=<sp/>\left[<sp/>c_1,<sp/>c_2,<sp/>\dots,<sp/>c_s<sp/>\right]^T.</highlight></codeline>
 <codeline lineno="34"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
 <codeline lineno="35"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="36" refid="a00340" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00340" kindref="compound">RKimplicit</ref><sp/>&lt;<sp/><ref refid="a00324" kindref="compound">ODEsolver</ref></highlight></codeline>
+<codeline lineno="36" refid="a00326" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00326" kindref="compound">RKimplicit</ref><sp/>&lt;<sp/><ref refid="a00314" kindref="compound">ODEsolver</ref></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/>properties<sp/>(SetAccess<sp/>=<sp/>protected,<sp/>Hidden<sp/>=<sp/>true)</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -52,17 +52,17 @@
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>m_A;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
-<codeline lineno="45" refid="a00340_1aec930de1c87bde18d0ac9ada289f4f7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="45" refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>m_b;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$<sp/>(column<sp/>vector).</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="50" refid="a00340_1a55f8a29e4110d64bb738b9a484e82c75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_c;</highlight></codeline>
+<codeline lineno="50" refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_c;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="55" refid="a00340_1a138cfb5bb810ca10269473ec1cadf615" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="55" refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Initialize<sp/>the<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">with<sp/>the<sp/>implicit<sp/>Runge-Kutta<sp/>method<sp/>name<sp/>and<sp/>its</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Butcher<sp/>tableau.</highlight></codeline>
@@ -72,13 +72,13 @@
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>b<sp/><sp/><sp/><sp/>Weights<sp/>vector<sp/>(row<sp/>vector).</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>c<sp/><sp/><sp/><sp/>Nodes<sp/>vector<sp/>(column<sp/>vector).</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00340" kindref="compound">RKimplicit</ref>(<sp/>name,<sp/>A,<sp/>b,<sp/>c<sp/>)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00326" kindref="compound">RKimplicit</ref>(<sp/>name,<sp/>A,<sp/>b,<sp/>c<sp/>)</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Call<sp/>the<sp/>superclass<sp/>constructor</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">@<ref refid="a00324" kindref="compound">ODEsolver</ref>(<sp/>name<sp/>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">@<ref refid="a00314" kindref="compound">ODEsolver</ref>(<sp/>name<sp/>);</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Set<sp/>the<sp/>Butcher<sp/>tableau</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.set_tableau(A,<sp/>b,<sp/>c);</highlight></codeline>
-<codeline lineno="71" refid="a00340_1aca919de9c27731d72051a84ae9d024a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="71" refid="a00326_1aca919de9c27731d72051a84ae9d024a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -93,7 +93,7 @@
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>the<sp/>matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$.</highlight></codeline>
-<codeline lineno="86" refid="a00340_1aa0906abffeb4bad00155109fae1064c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="86" refid="a00326_1aa0906abffeb4bad00155109fae1064c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_A<sp/>The<sp/>matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$.</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_A(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>t_A<sp/>)</highlight></codeline>
@@ -104,7 +104,7 @@
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="97" refid="a00340_1acfce3ba3641ed47597a0c73baaeac545" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
+<codeline lineno="97" refid="a00326_1acfce3ba3641ed47597a0c73baaeac545" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>t_b<sp/>=<sp/>get_b(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>)</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t_b<sp/>=<sp/>this.m_b;</highlight></codeline>
@@ -115,7 +115,7 @@
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>the<sp/>weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_b<sp/>The<sp/>weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
-<codeline lineno="108" refid="a00340_1aaa48759e248d6b186368ea103c9a102a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="108" refid="a00326_1aaa48759e248d6b186368ea103c9a102a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_b(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>t_b<sp/>)</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_b<sp/>=<sp/>t_b;</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
@@ -126,7 +126,7 @@
 <codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$<sp/>(column<sp/>vector).</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="119" refid="a00340_1affdd4def48efd5267c6b142c4ed12e71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>t_c<sp/>=<sp/>get_c(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>)</highlight></codeline>
+<codeline lineno="119" refid="a00326_1affdd4def48efd5267c6b142c4ed12e71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>t_c<sp/>=<sp/>get_c(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>)</highlight></codeline>
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t_c<sp/>=<sp/>this.m_c;</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -137,7 +137,7 @@
 <codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_c<sp/>The<sp/>nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$<sp/>(column<sp/>vector).</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_c(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>t_c<sp/>)</highlight></codeline>
-<codeline lineno="130" refid="a00340_1a9e7f48b77103ad2aa3d521530f91e076" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_c<sp/>=<sp/>t_c;</highlight></codeline>
+<codeline lineno="130" refid="a00326_1a9e7f48b77103ad2aa3d521530f91e076" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_c<sp/>=<sp/>t_c;</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
@@ -148,7 +148,7 @@
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>b<sp/>Weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>c<sp/>Nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$<sp/>(column<sp/>vector).</highlight></codeline>
 <codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="141" refid="a00340_1a04851b34c4f9287f4d70d5a565556eac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_tableau(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>A,<sp/>b,<sp/>c<sp/>)</highlight></codeline>
+<codeline lineno="141" refid="a00326_1a04851b34c4f9287f4d70d5a565556eac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_tableau(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>A,<sp/>b,<sp/>c<sp/>)</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"></highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/></highlight><highlight class="stringliteral">&apos;RKimplicit::set_tableau(...):<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
@@ -161,7 +161,7 @@
 <codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_b<sp/>=<sp/>b;</highlight></codeline>
 <codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_c<sp/>=<sp/>c;</highlight></codeline>
 <codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="154" refid="a00340_1afd0336eac47bb91dd193f916cf5e37cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="154" refid="a00326_1afd0336eac47bb91dd193f916cf5e37cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Compute<sp/>the<sp/>LHS<sp/>of<sp/>the<sp/>system<sp/>of<sp/>equations<sp/>to<sp/>be<sp/>solved<sp/>\f$<sp/>\mathbf{F}(\mathbf{x}_k<sp/>+<sp/>dt<sp/>\sum{a_{ij}<sp/>K_j},<sp/>\mathbf{K},<sp/>t_k<sp/>+<sp/>c_i<sp/>dt)<sp/>=<sp/>\mathbf{0}<sp/>\f$</highlight></codeline>
@@ -186,7 +186,7 @@
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Loop<sp/>through<sp/>each<sp/>equation<sp/>of<sp/>the<sp/>system</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>idx<sp/>=<sp/>1:nx;</highlight></codeline>
-<codeline lineno="179" refid="a00340_1aa9b97c05aa0ec5e8858c9dd93f0a3210" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>1:nc</highlight></codeline>
+<codeline lineno="179" refid="a00326_1aa9b97c05aa0ec5e8858c9dd93f0a3210" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>1:nc</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>x_k<sp/>+<sp/>sum(a_ij*Kj,<sp/>j)</highlight></codeline>
 <codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmp<sp/>=<sp/>x_k;</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>jdx<sp/>=<sp/>1:nx;</highlight></codeline>
@@ -229,7 +229,7 @@
 <codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Loop<sp/>through<sp/>each<sp/>equation<sp/>of<sp/>the<sp/>system</highlight></codeline>
 <codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>idx<sp/>=<sp/>1:nx;</highlight></codeline>
 <codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>1:nc</highlight></codeline>
-<codeline lineno="222" refid="a00340_1aa2949eea840d0646a44f4d6d0ded8f61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>x_k<sp/>+<sp/>sum(a_ij*Kj,<sp/>j)</highlight></codeline>
+<codeline lineno="222" refid="a00326_1aa2949eea840d0646a44f4d6d0ded8f61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>x_k<sp/>+<sp/>sum(a_ij*Kj,<sp/>j)</highlight></codeline>
 <codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmp<sp/>=<sp/>x_k;</highlight></codeline>
 <codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>jdx<sp/>=<sp/>1:nx;</highlight></codeline>
 <codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>1:nc</highlight></codeline>
@@ -273,7 +273,7 @@
 <codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>jac<sp/>=<sp/>@(K)<sp/>this.step_jacobian(<sp/>x_k,<sp/>K,<sp/>t_k,<sp/>d_t<sp/>);</highlight></codeline>
 <codeline lineno="264"><highlight class="normal"></highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Solve<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Newton</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>[K,<sp/>ierr]<sp/>=<sp/><ref refid="a00146_1a86bf5da3ed616857524e95fb134ed389" kindref="member">NewtonSolver</ref>(<sp/>fun,<sp/>jac,<sp/>K0<sp/>);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>[K,<sp/>ierr]<sp/>=<sp/><ref refid="a00140_1a86bf5da3ed616857524e95fb134ed389" kindref="member">NewtonSolver</ref>(<sp/>fun,<sp/>jac,<sp/>K0<sp/>);</highlight></codeline>
 <codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>ierr<sp/>~=<sp/>0</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(<sp/>1,<sp/></highlight><highlight class="stringliteral">&apos;RKimplicit::solve_step(...):<sp/>Not<sp/>converged<sp/>flag<sp/>=<sp/>%d!\n&apos;</highlight><highlight class="normal">,<sp/>ierr<sp/>);</highlight></codeline>
 <codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
@@ -283,7 +283,7 @@
 <codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Compute<sp/>an<sp/>integration<sp/>step<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">the<sp/>implicit<sp/>Runge-Kutta<sp/>method<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a</highlight></codeline>
 <codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>system<sp/>of<sp/>ODEs<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t)<sp/>=</highlight></codeline>
-<codeline lineno="276" refid="a00340_1a4c39091c8432f587aae4bc8e73e861a4" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{0}<sp/>\f$.</highlight></codeline>
+<codeline lineno="276" refid="a00326_1a4c39091c8432f587aae4bc8e73e861a4" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{0}<sp/>\f$.</highlight></codeline>
 <codeline lineno="277"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="278"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>**Solution<sp/>Algorithm**</highlight></codeline>
 <codeline lineno="279"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
@@ -372,7 +372,7 @@
 <codeline lineno="362"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Extract<sp/>x_dot_k+1<sp/>from<sp/>K<sp/>(i.e.,<sp/>its<sp/>last<sp/>value)</highlight></codeline>
 <codeline lineno="363"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out_dot<sp/>=<sp/>K(end<sp/>+<sp/>1<sp/>-<sp/>nx:end);</highlight></codeline>
 <codeline lineno="364"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="365" refid="a00340_1a0193256fd309fadc298287dd71c8874e" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="365" refid="a00326_1a0193256fd309fadc298287dd71c8874e" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="366"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="367"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="368"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
@@ -408,7 +408,7 @@
 <codeline lineno="398"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(any(isnan(A)))</highlight></codeline>
 <codeline lineno="399"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">matrix<sp/>A<sp/>found<sp/>with<sp/>NaN<sp/>values.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
 <codeline lineno="400"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="401" refid="a00340_1a07307f6bae261fa470d588ad5c39696b" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="401" refid="a00326_1a07307f6bae261fa470d588ad5c39696b" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="402"><highlight class="stringliteral"></highlight></codeline>
 <codeline lineno="403"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>vector<sp/>b</highlight></codeline>
 <codeline lineno="404"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(~isnumeric(b))</highlight></codeline>
