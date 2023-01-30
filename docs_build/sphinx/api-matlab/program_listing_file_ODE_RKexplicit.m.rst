@@ -73,7 +73,25 @@ Program Listing for File RKexplicit.m
        %>
        %> \return An instance of the RKexplicit class.
        %
-       function this = RKexplicit( t_name, t_A, t_b, t_b_e, t_c )
+       function this = RKexplicit( varargin )
+   
+         CMD = 'indigo::RKexplicit::RKexplicit(...): ';
+   
+         if (nargin == 4)
+           t_name = varargin{1};
+           t_A    = varargin{2};
+           t_b    = varargin{3};
+           t_b_e  = [];
+           t_c    = varargin{4};
+         elseif (nargin == 5)
+           t_name = varargin{1};
+           t_A    = varargin{2};
+           t_b    = varargin{3};
+           t_b_e  = varargin{4};
+           t_c    = varargin{5};
+         else
+           error([CMD, 'Wrong number of input arguments.']);
+         end
    
          % Call the superclass constructor
          this@ODEsolver(t_name, t_A, t_b, t_b_e, t_c);

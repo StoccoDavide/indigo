@@ -361,6 +361,20 @@ classdef RKexplicit < ODEsolver
 
       CMD = 'indigo::RKexplicit::check_tableau(...): ';
 
+      if (nargin == 4)
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = [];
+        t_c    = varargin{4};
+      elseif (nargin == 5)
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = varargin{4};
+        t_c    = varargin{5};
+      else
+        error([CMD, 'Wrong number of input arguments.']);
+      end
+
       out = true;
 
       % Check matrix A

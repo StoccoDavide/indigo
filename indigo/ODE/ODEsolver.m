@@ -97,7 +97,25 @@ classdef ODEsolver < handle
     %>
     %> \return An instance of the ODEsolver class.
     %
-    function this = ODEsolver( t_name, t_A, t_b, t_b_e, t_c )
+    function this = ODEsolver( varargin )
+
+      CMD = 'indigo::ODEsolver::ODEsolver(...): ';
+
+      if (nargin == 4)
+        t_name = varargin{1};
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = [];
+        t_c    = varargin{4};
+      elseif (nargin == 5)
+        t_name = varargin{1};
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = varargin{4};
+        t_c    = varargin{5};
+      else
+        error([CMD, 'Wrong number of input arguments.']);
+      end
 
       % Collect input arguments
       this.m_name = t_name;
@@ -311,10 +329,24 @@ classdef ODEsolver < handle
     %
     function set_tableau( this, A, b, b_e, c )
 
-      CMD = 'indigo::RKexplicit::set_tableau(...): ';
+      CMD = 'indigo::ODEsolver::set_tableau(...): ';
+
+      if (nargin == 4)
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = [];
+        t_c    = varargin{4};
+      elseif (nargin == 5)
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = varargin{4};
+        t_c    = varargin{5};
+      else
+        error([CMD, 'Wrong number of input arguments.']);
+      end
 
       % Check the Butcher tableau
-      assert(RKexplicit.check_tableau(A, b, b_e, c), ...
+      assert(this.check_tableau(A, b, b_e, c), ...
         [CMD, 'invalid tableau detected.']);
 
       % Set the tableau
@@ -651,48 +683,114 @@ classdef ODEsolver < handle
     %
     %> Compute adaptive time step for the next advancing step according to the
     %> error control method. The error control method used is the local truncation
-    %> error (LTE) method, which is based on the following formula:
+    %> error method, which is based on the following formula:
     %>
     %> \f[
-    %> \left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq
-    %> \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -
-    %> \mathbf{x}_{k+1}^{(l)} \right|
+    %> e = \sqrt{\dfrac{1}{n} \displaystyle\sum_{i=1}{n}\left(\dfrac
+    %>   {\mathbf{x} - \hat{\mathbf{x}}}
+    %>   {s c_i}
+    %> \right)^2}
     %> \f]
     %>
-    %> where \f$ \mathbf{x}_{k+1}^{(h)} \f$ is the approximation of the states at
-    %> \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with
-    %> higher order method, \f$ \mathbf{x}_{k+1}^{(l)} \f$ is the approximation
-    %> of the states at \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta
-    %> t) \f$ with lower order method, \f$ C \f$ is a constant, and \f$ p \f$ is
-    %> the order of the method.
-    %>
-    %> To compute the suggested time step for the next advancing step \f$
-    %> \Delta t_{k+1} \f$, the following formula is used:
+    %> where \f$ \mathbf{x} \f$ is the approximation of the states at computed
+    %> with higher order method of \f$ p \f$, and \f$ \hat{\mathbf{x}} \f$ is the
+    %> approximation of the states at computed with lower order method of \f$
+    %> \hat{p} \f$. To compute the suggested time step for the next advancing step
+    %> \f$ \Delta t_{k+1} \f$, The error is compared to \f$ 1 \f$ in order to find
+    %> an optimal step size. From the error behaviour \f$ e \approx Ch^{q+1} \f$
+    %> and from \f$ 1 \approx Ch_{opt}^{q+1} \f$ (where \f$ q = \min(p,\hat{p}) \f$)
+    %> the optimal step size is obtained as:
     %>
     %> \f[
-    %> \Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}
-    %> - \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}
+    %> h_{opt} = h \left( \dfrac{1}{e} \right)^{\frac{1}{q+1}}
     %> \f]
+    %>
+    %> We multiply the previous quation by a safety factor \f$ f \f$, usually
+    %> \f$ f = 0.8 \f$, \f$ 0.9 \f$, \f$ (0.25)^{1/(q+1)} \f$, or \f$ (0.38)^{1/(q+1)} \f$,
+    %> so that the error will be acceptable the next time with high probability.
+    %> Further, \f$ h \f$ is not allowed to increase nor to decrease too fast.
+    %> So we put:
+    %>
+    %> \f[
+    %> h_{new} = h \min \left( f_{max} \max \left( f_{max}, f \left(
+    %>   \dfrac{1}{e} \right)^{\frac{1}{q+1}},
+    %> \right), \right)
+    %> \f]
+    %>
+    %> for the new step size. Then, if \f$ e \leq 1 \f$, the computed step is
+    %> accepted and the solution is advanced to \f$ \mathbf{x} \f$ and a new step
+    %> is tried with \f$ h_{new} \f$ as step size. Else, the step is rejected
+    %> and the computations are repeated with the new step size \f$ h_{new} \f$.
+    %> Typially, \f$ f \f$ is set in the interval \f$ [0.8, 0.9] \f$,
+    %> \f$ f_{max} \f$ is set in the interval \f$ [1.5, 5] \f$, and \f$ f_{min} \f$
+    %> is set in the interval \f$ [0.1, 0.2] \f$.
     %>
     %> \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$
     %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.
     %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
     %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
-    %> \param d_t Advancing time step \f$ \Delta t\f$.
+    %> \param d_t Actual advancing time step \f$ \Delta t\f$.
+    %> \param A_tol   [optional, default = \f$ 1e-6 \f$] Absolute tolerance
+    %>                 \f$ A_{tol} \f$.
+    %> \param R_tol   [optional, default = \f$ 1e-6 \f$] Relative tolerance
+    %>                 \f$ R_{tol} \f$.
+    %> \param fac     [optional, default = \f$ 0.9 \f$] Safety factor \f$ f \f$.
+    %> \param fac_min [optional, default = \f$ 0.2 \f$] Minimum safety factor
+    %>                \f$ f_{min} \f$.
+    %> \param fac_max [optional, default = \f$ 2.0 \f$]Maximum safety factor
+    %>                \f$ f_{max} \f$.
     %>
     %> \return The suggested time step for the next advancing step \f$ \Delta
     %>         t_{k+1} \f$.
     %>
-    function out = adapt_step( this, x_h, x_l, d_t )
+    function out = adapt_step( this, x_h, x_l, d_t, varargin )
+
+      CMD = 'indigo::ODEsolver::adapt_step(...): ';
+
+      % Collect optional inputs
+      A_tol   = 1e-6;
+      R_tol   = 1e-6;
+      fac     = 0.9;
+      fac_min = 0.2;
+      fac_max = 2.0;
+
+      % Absolute tolerance
+      if (nargin > 4)
+        A_tol  = 1e-6;
+      end
+
+      % Relative tolerance
+      if (nargin > 5)
+        R_tol  = 1e-6;
+      end
+
+      % Safety factor
+      if (nargin > 5)
+        fac    = 0.9;
+      end
+
+      % Desent safety factor
+      if (nargin > 5)
+        fac_min = 0.2;
+      end
+
+      % Ascent safety factor
+      if (nargin > 5)
+        fac_max = 2.0;
+      end
+
+      % Check inputs number
+      if (nargin > 8)
+        error([CMD 'wrong number of input arguments.']);
+      end
 
       % Compute the error with 2-norm
-      err = sqrt(sum(((x_h - x_l)/.(length(this.m_c)*this.m_c))^2)/length(x_h));
+      err = sqrt(sum(((x_h - x_l)/.( ...
+        A_tol + R_tol * max(abs(x_h), abs(x_l)) ...
+      ))^2)/length(x_h));
 
       % Compute the suggested time step
-      fac    = 0.9;
-      facmin = 0.25;
-      facmax = 2.0;
-      out = d_t * min(facmax, max(facmin, ...
+      out = d_t * min(fac_max, max(fac_min, ...
         (1 / err_norm)^(1 / (length(this.m_c) + 1))));
     end
     %
