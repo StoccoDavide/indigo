@@ -1,14 +1,11 @@
 %> Implementation of the Linear Pendulum (2 Equations)
 %>
-%> \rst
-%> .. math::
-%>
+%> \f[
 %>   \begin{cases}
 %>      \theta' = \omega & \\
 %>      \omega' = -\displaystyle\frac{g}{\ell}\theta &
 %>   \end{cases}
-%>
-%> \endrst
+%> \f]
 %
 classdef LinearPendulumODE_Implicit < ODEsystem
   %
