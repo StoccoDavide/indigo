@@ -83,11 +83,11 @@
         </briefdescription>
         <detaileddescription>
 <para>Definition of an implicit system of ODEs of the form:</para>
-<para><formula id="67">\[
+<para><formula id="87">\[
 \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t ) = \mathbf{0}
 \]</formula></para>
 <para>with <emphasis>optional</emphasis> invariants/hidden constraints of the form:</para>
-<para><formula id="68">\[
+<para><formula id="88">\[
 \mathbf{H}( \mathbf{x}, t ) = \mathbf{0}
 \]</formula></para>
 <para>where <formula id="12">$ \mathbf{x} $</formula> are the unknown functions (states) of the independent variable <formula id="40">$ t $</formula>.</para>
@@ -104,7 +104,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="69">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="89">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -116,7 +116,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The value of the system of ODEs function <formula id="70">$ \mathbf{F} $</formula>. </para>
+<simplesect kind="return"><para>The value of the system of ODEs function <formula id="90">$ \mathbf{F} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -149,8 +149,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobians with respect to the states <formula id="12">$ \mathbf{x} $</formula> and the states defivatives <formula id="69">$ \mathbf{x}&apos; $</formula> of the system of ODEs:</para>
-<para><formula id="71">\[
+<para>Evaluate the Jacobians with respect to the states <formula id="12">$ \mathbf{x} $</formula> and the states defivatives <formula id="89">$ \mathbf{x}&apos; $</formula> of the system of ODEs:</para>
+<para><formula id="91">\[
 \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}&apos;, t ) =
 \dfrac{
   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, t )
@@ -178,7 +178,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="69">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="89">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -190,8 +190,8 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobians <formula id="72">$ \mathbf{JF}_{\mathbf{x}} $</formula> and <formula id="73">$
-        \mathbf{JF}_{\mathbf{x}&apos;} $</formula> of the ODEs system with respect to the states <formula id="12">$ \mathbf{x} $</formula> and the states derivatives <formula id="69">$ \mathbf{x}&apos; $</formula>. </para>
+<simplesect kind="return"><para>The Jacobians <formula id="92">$ \mathbf{JF}_{\mathbf{x}} $</formula> and <formula id="93">$
+        \mathbf{JF}_{\mathbf{x}&apos;} $</formula> of the ODEs system with respect to the states <formula id="12">$ \mathbf{x} $</formula> and the states derivatives <formula id="89">$ \mathbf{x}&apos; $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -221,7 +221,7 @@
         </briefdescription>
         <detaileddescription>
 <para>Evaluate the invariants/hidden contraints of the system of ODEs:</para>
-<para><formula id="74">\[
+<para><formula id="94">\[
 \mathbf{H}( \mathbf{x}, t ) = \mathbf{0}.
 \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -241,7 +241,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The value of the invariants/hidden contraints <formula id="75">$ \mathbf{H} $</formula>. </para>
+<simplesect kind="return"><para>The value of the invariants/hidden contraints <formula id="95">$ \mathbf{H} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -271,7 +271,7 @@
         </briefdescription>
         <detaileddescription>
 <para>Evaluate the Jacobian of the invariants/hidden contraints of the system of ODEs:</para>
-<para><formula id="76">\[
+<para><formula id="96">\[
 \mathbf{JH}_{\mathbf{x}}( \mathbf{x}, t ) =
 \dfrac{
   \partial \mathbf{H}( \mathbf{x}, t )
@@ -296,7 +296,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The value of the Jacobian of the invariants/hidden contraints <formula id="77">$ \mathbf{JH}_{\mathbf{x}} $</formula>. </para>
+<simplesect kind="return"><para>The value of the Jacobian of the invariants/hidden contraints <formula id="97">$ \mathbf{JH}_{\mathbf{x}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>

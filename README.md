@@ -10,14 +10,12 @@ Available [here](https://stoccodavide.github.io/indigo/)!
 
 ### Tier -1
 
-- [ ] Support for the embedded Runge-Kutta methods.
-- [ ] Complete embedded Runge-Kutta methods.
+- [x] Support for the embedded Runge-Kutta methods.
+- [x] Complete embedded Runge-Kutta methods.
 - [ ] Full-scale debugging of explicit Runge-Kutta methods.
 - [ ] Full-scale debugging of implicit Runge-Kutta methods.
 - [ ] Full-scale debugging of embedded Runge-Kutta methods.
-- [ ] Support for automatically creating embedded Runge-Kutta methods.
-- [ ] Full-scale debugging of embedded Runge-Kutta methods.
-- [ ] Check *all* Butcher tableaus and maybe write the order and stages.
+- [ ] Check *all* Butcher tableaus and maybe write the order and stages as method.
 
 ### Tier -2
 

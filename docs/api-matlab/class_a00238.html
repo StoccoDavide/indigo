@@ -689,30 +689,38 @@
 </dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre210adapt_stepE2in2in2in2in">
-<span id="_CPPv3N14GaussLegendre210adapt_stepE2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre210adapt_stepE2in2in2in2in"></span><span id="GaussLegendre2::adapt_step__in.in.in.in"></span><span class="target" id="a00314_1a72b312c554ac5683154fcf8f4db39169"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adapt_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_h</span></span>, </span><span class="n sig-param"><span class="pre">x_l</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre210adapt_stepE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N14GaussLegendre210adapt_stepE2in2in2in2in2in">
+<span id="_CPPv3N14GaussLegendre210adapt_stepE2in2in2in2in2in"></span><span id="_CPPv2N14GaussLegendre210adapt_stepE2in2in2in2in2in"></span><span id="GaussLegendre2::adapt_step__in.in.in.in.in"></span><span class="target" id="a00314_1a496586b9605feb8be03e575d82622f39"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adapt_step</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x_h</span></span>, </span><span class="n sig-param"><span class="pre">x_l</span></span>, </span><span class="n sig-param"><span class="pre">d_t</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14GaussLegendre210adapt_stepE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
-<p>Compute adaptive time step for the next advancing step according to the error control method. The error control method used is the local truncation error (LTE) method, which is based on the following formula:</p>
+<p>Compute adaptive time step for the next advancing step according to the error control method. The error control method used is the local truncation error method, which is based on the following formula:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq
-\dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -
-\mathbf{x}_{k+1}^{(l)} \right|
+e = \sqrt{\dfrac{1}{n} \displaystyle\sum_{i=1}{n}\left(\dfrac
+  {\mathbf{x} - \hat{\mathbf{x}}}
+  {s c_i}
+\right)^2}
 \]</div>
 
-<p>where <span class="math notranslate nohighlight">\( \mathbf{x}_{k+1}^{(h)} \)</span> is the approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> with higher order method, <span class="math notranslate nohighlight">\( \mathbf{x}_{k+1}^{(l)} \)</span> is the approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\( \mathbf{x_{k+1}}(t_{k}+\Delta
-t) \)</span> with lower order method, <span class="math notranslate nohighlight">\( C \)</span> is a constant, and <span class="math notranslate nohighlight">\( p \)</span> is the order of the method.</p>
-<p>To compute the suggested time step for the next advancing step <span class="math notranslate nohighlight">\(
-\Delta t_{k+1} \)</span>, the following formula is used:</p>
+<p>where <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> is the approximation of the states at computed with higher order method of <span class="math notranslate nohighlight">\( p \)</span>, and <span class="math notranslate nohighlight">\( \hat{\mathbf{x}} \)</span> is the approximation of the states at computed with lower order method of <span class="math notranslate nohighlight">\(
+\hat{p} \)</span>. To compute the suggested time step for the next advancing step <span class="math notranslate nohighlight">\( \Delta t_{k+1} \)</span>, The error is compared to <span class="math notranslate nohighlight">\( 1 \)</span> in order to find an optimal step size. From the error behaviour <span class="math notranslate nohighlight">\( e \approx Ch^{q+1} \)</span> and from <span class="math notranslate nohighlight">\( 1 \approx Ch_{opt}^{q+1} \)</span> (where <span class="math notranslate nohighlight">\( q = \min(p,\hat{p}) \)</span>) the optimal step size is obtained as:</p>
 <p></p>
 <div class="math notranslate nohighlight">
 \[
-\Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}
-- \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}
+h_{opt} = h \left( \dfrac{1}{e} \right)^{\frac{1}{q+1}}
 \]</div>
 
+<p>We multiply the previous quation by a safety factor <span class="math notranslate nohighlight">\( f \)</span>, usually <span class="math notranslate nohighlight">\( f = 0.8 \)</span>, <span class="math notranslate nohighlight">\( 0.9 \)</span>, <span class="math notranslate nohighlight">\( (0.25)^{1/(q+1)} \)</span>, or <span class="math notranslate nohighlight">\( (0.38)^{1/(q+1)} \)</span>, so that the error will be acceptable the next time with high probability. Further, <span class="math notranslate nohighlight">\( h \)</span> is not allowed to increase nor to decrease too fast. So we put:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+h_{new} = h \min \left( f_{max} \max \left( f_{max}, f \left(
+  \dfrac{1}{e} \right)^{\frac{1}{q+1}},
+\right), \right)
+\]</div>
+
+<p>for the new step size. Then, if <span class="math notranslate nohighlight">\( e \leq 1 \)</span>, the computed step is accepted and the solution is advanced to <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and a new step is tried with <span class="math notranslate nohighlight">\( h_{new} \)</span> as step size. Else, the step is rejected and the computations are repeated with the new step size <span class="math notranslate nohighlight">\( h_{new} \)</span>. Typially, <span class="math notranslate nohighlight">\( f \)</span> is set in the interval <span class="math notranslate nohighlight">\( [0.8, 0.9] \)</span>, <span class="math notranslate nohighlight">\( f_{max} \)</span> is set in the interval <span class="math notranslate nohighlight">\( [1.5, 5] \)</span>, and <span class="math notranslate nohighlight">\( f_{min} \)</span> is set in the interval <span class="math notranslate nohighlight">\( [0.1, 0.2] \)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
@@ -721,7 +729,12 @@ t) \)</span> with lower order method, <span class="math notranslate nohighlight"
            \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> with higher order method. </p></li>
 <li><p><strong>x_l</strong> – Approximation of the states at <span class="math notranslate nohighlight">\( k+1 \)</span>-th time step <span class="math notranslate nohighlight">\(
            \mathbf{x_{k+1}}(t_{k}+\Delta t) \)</span> with lower order method. </p></li>
-<li><p><strong>d_t</strong> – Advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>.</p></li>
+<li><p><strong>d_t</strong> – Actual advancing time step <span class="math notranslate nohighlight">\( \Delta t\)</span>. </p></li>
+<li><p><strong>A_tol</strong> – [optional, default = <span class="math notranslate nohighlight">\( 1e-6 \)</span>] Absolute tolerance <span class="math notranslate nohighlight">\( A_{tol} \)</span>. </p></li>
+<li><p><strong>R_tol</strong> – [optional, default = <span class="math notranslate nohighlight">\( 1e-6 \)</span>] Relative tolerance <span class="math notranslate nohighlight">\( R_{tol} \)</span>. </p></li>
+<li><p><strong>fac</strong> – [optional, default = <span class="math notranslate nohighlight">\( 0.9 \)</span>] Safety factor <span class="math notranslate nohighlight">\( f \)</span>. </p></li>
+<li><p><strong>fac_min</strong> – [optional, default = <span class="math notranslate nohighlight">\( 0.2 \)</span>] Minimum safety factor <span class="math notranslate nohighlight">\( f_{min} \)</span>. </p></li>
+<li><p><strong>fac_max</strong> – [optional, default = <span class="math notranslate nohighlight">\( 2.0 \)</span>]Maximum safety factor <span class="math notranslate nohighlight">\( f_{max} \)</span>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

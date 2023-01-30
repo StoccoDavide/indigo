@@ -39,7 +39,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -77,7 +77,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -115,7 +115,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -154,7 +154,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -193,7 +193,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -232,7 +232,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -270,7 +270,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -282,7 +282,7 @@
     <member refid="a00314_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00190" kind="class"><name>Generic3</name>
-    <member refid="a00190_1a53571baac2d4a6e047155d9d8715e62d" kind="function"><name>Generic3</name></member>
+    <member refid="a00190_1a5dbcbc72eb677e956a9989217ac58b7c" kind="function"><name>Generic3</name></member>
     <member refid="a00322_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
     <member refid="a00322_1ac8d8755ed737b7b06ddb8c289480b3c5" kind="function"><name>step_residual</name></member>
     <member refid="a00322_1a93cf367d9537094dc307a3433b4083aa" kind="function"><name>step_jacobian</name></member>
@@ -308,7 +308,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -346,7 +346,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -384,7 +384,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -422,7 +422,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -461,7 +461,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -500,7 +500,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -539,7 +539,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -578,7 +578,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -617,7 +617,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -656,7 +656,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -695,7 +695,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -734,7 +734,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -773,7 +773,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -812,7 +812,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -851,7 +851,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -890,7 +890,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -928,7 +928,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -948,7 +948,7 @@
     <member refid="a00314_1a311a2e4dc5d3850880d43a826630ad10" kind="variable"><name>m_max_substeps</name></member>
     <member refid="a00314_1a23b3198080fcdcf98b143a2369123159" kind="variable"><name>m_max_projection_iter</name></member>
     <member refid="a00314_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
-    <member refid="a00314_1a6b5023a38691b0204118a08602309fab" kind="function"><name>ODEsolver</name></member>
+    <member refid="a00314_1a716f60f07661cda843df9dbbe64aa135" kind="function"><name>ODEsolver</name></member>
     <member refid="a00314_1aa7fe2ee7be8223c0b64b4aadb62be540" kind="function"><name>get_name</name></member>
     <member refid="a00314_1a40bb03ebfe42e7377881f48ba450e339" kind="function"><name>set_name</name></member>
     <member refid="a00314_1a6465ec6fcd75f090d4f77663cf265ae1" kind="function"><name>get_ode</name></member>
@@ -969,7 +969,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00314_1a0824da2f381de5d8e4a4e49f1d1a8eb3" kind="function"><name>step</name></member>
     <member refid="a00314_1afe0b94465aa01e93c05d57c74ce95aa7" kind="function"><name>check_tableau</name></member>
   </compound>
@@ -1016,7 +1016,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -1055,7 +1055,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -1094,7 +1094,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -1133,7 +1133,7 @@
     <member refid="a00314_1aa82d4a55edf029a00c84273e3b39bd20" kind="function"><name>get_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00326_1aec930de1c87bde18d0ac9ada289f4f7c" kind="variable"><name>m_A</name></member>
     <member refid="a00326_1a55f8a29e4110d64bb738b9a484e82c75" kind="variable"><name>m_b</name></member>
     <member refid="a00326_1a138cfb5bb810ca10269473ec1cadf615" kind="variable"><name>m_c</name></member>
@@ -1171,7 +1171,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1209,7 +1209,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1247,7 +1247,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1285,7 +1285,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1323,7 +1323,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1361,7 +1361,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1373,7 +1373,7 @@
     <member refid="a00314_1ac29751a4b6199fdcddbebf25aaaf5de3" kind="variable"><name>m_ode</name></member>
   </compound>
   <compound refid="a00322" kind="class"><name>RKexplicit</name>
-    <member refid="a00322_1add67f74573eb3ee1130a3251f6651645" kind="function"><name>RKexplicit</name></member>
+    <member refid="a00322_1a9198776cefc7601d95004198ea08500b" kind="function"><name>RKexplicit</name></member>
     <member refid="a00322_1a0bdd67de086e92e16a122dc63ed41289" kind="function"><name>step_node</name></member>
     <member refid="a00322_1ac8d8755ed737b7b06ddb8c289480b3c5" kind="function"><name>step_residual</name></member>
     <member refid="a00322_1a93cf367d9537094dc307a3433b4083aa" kind="function"><name>step_jacobian</name></member>
@@ -1399,7 +1399,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1437,7 +1437,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1475,7 +1475,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1513,7 +1513,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1551,7 +1551,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1597,7 +1597,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00314_1afe0b94465aa01e93c05d57c74ce95aa7" kind="function"><name>check_tableau</name></member>
     <member refid="a00326_1a07307f6bae261fa470d588ad5c39696b" kind="function"><name>check_tableau</name></member>
   </compound>
@@ -1628,7 +1628,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1666,7 +1666,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
@@ -1704,7 +1704,7 @@
     <member refid="a00314_1a5512be8674f0b0036a5fc7ab0fa519c3" kind="function"><name>set_tableau</name></member>
     <member refid="a00314_1a1d979299edb12a7d042a7dfb8c64550f" kind="function"><name>project</name></member>
     <member refid="a00314_1ae3194efaa3521a1ddc38488ff2a86118" kind="function"><name>solve</name></member>
-    <member refid="a00314_1a72b312c554ac5683154fcf8f4db39169" kind="function"><name>adapt_step</name></member>
+    <member refid="a00314_1a496586b9605feb8be03e575d82622f39" kind="function"><name>adapt_step</name></member>
     <member refid="a00322_1a4821b72ab3678a3779124289be8f3f70" kind="function"><name>check_tableau</name></member>
     <member refid="a00314_1a713ea06a6a04674b6a0525df8d5b67c0" kind="variable"><name>m_name</name></member>
     <member refid="a00314_1aaa7e492a110fbc3a9eb64c09ad26af1b" kind="variable"><name>m_A</name></member>
