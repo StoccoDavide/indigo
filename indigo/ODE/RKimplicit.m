@@ -338,7 +338,7 @@ classdef RKimplicit < ODEsolver
 
       % Adapt next time step
       if (~isempty(this.m_b_e))
-        x_e = x_k + d_t * K * this.m_b_e';
+        x_e = x_k + d_t * reshape(K, nx, nc) * this.m_b_e';
         d_t_star = this.adapt_step(x_out, x_e, d_t_star);
       end
     end
@@ -361,58 +361,93 @@ classdef RKimplicit < ODEsolver
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    function out = check_tableau( A, b, c )
+    function out = check_tableau( varargin )
 
       CMD = 'indigo::RKimplicit::check_tableau(...): ';
 
       out = true;
 
+      if (nargin == 4)
+        t_A    = varargin{1};
+        t_b    = varargin{2};
+        t_b_e  = [];
+        t_c    = varargin{4};
+      elseif (nargin == 5)
+        t_A    = varargin{1};
+        t_b    = varargin{2};
+        t_b_e  = varargin{3};
+        t_c    = varargin{4};
+      else
+        error([CMD, 'Wrong number of input arguments.']);
+      end
+
       % Check matrix A
-      if (~isnumeric(A))
+      if (~isnumeric(t_A))
         warning([CMD, 'A must be a numeric matrix.']);
         out = false;
       end
-      if (size(A, 1) ~= size(A, 2))
+      if (size(t_A, 1) ~= size(t_A, 2))
         warning([CMD, 'matrix A is not a square matrix.']);
         out = false;
       end
-      if (any(isnan(A)))
+      if (any(isnan(t_A)))
         warning([CMD, 'matrix A found with NaN values.']);
         out = false;
       end
 
       % Check vector b
-      if (~isnumeric(b))
+      if (~isnumeric(t_b))
         warning([CMD, 'b must be a numeric vector.']);
         out = false;
       end
-      if (~isrow(b))
+      if (~isrow(t_b))
         warning([CMD, 'vector b is not a row vector.']);
         out = false;
       end
-      if (size(A, 2) ~= size(b, 2))
+      if (size(t_A, 2) ~= size(t_b, 2))
         warning([CMD, 'vector b is not consistent with the size of matrix A.']);
         out = false;
       end
-      if (any(isnan(b)))
+      if (any(isnan(t_b)))
         warning([CMD, 'vector b found with NaN values.']);
         out = false;
       end
 
+      % Check vector b_e
+      if ~isempty(t_b_e)
+        if (~isnumeric(t_b_e))
+          warning([CMD, 'b_e must be a numeric vector.']);
+          out = false;
+        end
+        if (~isrow(t_b_e))
+          warning([CMD, 'vector b_e is not a row vector.']);
+          out = false;
+        end
+        if (size(t_A, 2) ~= size(t_b_e, 2))
+          warning([CMD, ...
+            'vector b_e is not consistent with the size of matrix A.']);
+          out = false;
+        end
+        if (any(isnan(t_b_e)))
+          warning([CMD, 'vector b_e found with NaN values.']);
+          out = false;
+        end
+      end
+
       % Check vector c
-      if (~isnumeric(c))
+      if (~isnumeric(t_c))
         warning([CMD, 'c must be a numeric vector.']);
         out = false;
       end
-      if (~iscolumn(c))
+      if (~iscolumn(t_c))
         warning([CMD, 'vector c is not a column vector.']);
         out = false;
       end
-      if (size(A, 1) ~= size(c, 1))
+      if (size(t_A, 1) ~= size(t_c, 1))
         warning([CMD, 'vector c is not consistent with the size of matrix A.']);
         out = false;
       end
-      if (any(isnan(c)))
+      if (any(isnan(t_c)))
         warning([CMD, 'vector c found with NaN values.']);
         out = false;
       end

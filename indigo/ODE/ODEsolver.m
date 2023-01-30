@@ -106,7 +106,7 @@ classdef ODEsolver < handle
         t_A    = varargin{2};
         t_b    = varargin{3};
         t_b_e  = [];
-        t_c    = varargin{4};
+        t_c    = varargin{5};
       elseif (nargin == 5)
         t_name = varargin{1};
         t_A    = varargin{2};
@@ -327,33 +327,33 @@ classdef ODEsolver < handle
     %>            (row vector).
     %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
     %
-    function set_tableau( this, A, b, b_e, c )
+    function set_tableau( this, varargin )
 
       CMD = 'indigo::ODEsolver::set_tableau(...): ';
 
       if (nargin == 4)
-        t_A    = varargin{2};
-        t_b    = varargin{3};
+        t_A    = varargin{1};
+        t_b    = varargin{2};
         t_b_e  = [];
         t_c    = varargin{4};
       elseif (nargin == 5)
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = varargin{4};
-        t_c    = varargin{5};
+        t_A    = varargin{1};
+        t_b    = varargin{2};
+        t_b_e  = varargin{3};
+        t_c    = varargin{4};
       else
         error([CMD, 'Wrong number of input arguments.']);
       end
 
       % Check the Butcher tableau
-      assert(this.check_tableau(A, b, b_e, c), ...
+      assert(this.check_tableau(t_A, t_b, t_b_e, t_c), ...
         [CMD, 'invalid tableau detected.']);
 
       % Set the tableau
-      this.m_A   = A;
-      this.m_b   = b;
-      this.m_b_e = b_e;
-      this.m_c   = c;
+      this.m_A   = t_A;
+      this.m_b   = t_b;
+      this.m_b_e = t_b_e;
+      this.m_c   = t_c;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -674,8 +674,8 @@ classdef ODEsolver < handle
       end
 
       % Resize the output
-      t_out     = t_out(:,1:s-1);
-      x_out     = x_out(:,1:s-1);
+      t_out     = t_out(:,1:s);
+      x_out     = x_out(:,1:s);
       %x_out_dot = x_out_dot(:,1:s-1);
     end
     %
@@ -785,9 +785,9 @@ classdef ODEsolver < handle
       end
 
       % Compute the error with 2-norm
-      err = sqrt(sum(((x_h - x_l)/.( ...
+      err_norm = sqrt(sum(((x_h - x_l)./( ...
         A_tol + R_tol * max(abs(x_h), abs(x_l)) ...
-      ))^2)/length(x_h));
+      )).^2)/length(x_h));
 
       % Compute the suggested time step
       out = d_t * min(fac_max, max(fac_min, ...

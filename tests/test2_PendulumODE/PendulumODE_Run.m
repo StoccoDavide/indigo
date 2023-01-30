@@ -78,7 +78,7 @@ y_0 = 0.0;
 X_ini = [x_0, y_0];
 
 for i = 1:length(solver_name)
-  eval(strcat([ 'Z', solver_name{i}, ' = solver', solver_name{i}, '.solve( tt, X_ini, false, false, 20.0e+03 );' ]));
+  eval(strcat([ '[Z', solver_name{i}, ', T', solver_name{i}, '] = solver', solver_name{i}, '.solve( tt, X_ini, false, false, 20.0e+03 );' ]));
 end
 
 %% Plot results

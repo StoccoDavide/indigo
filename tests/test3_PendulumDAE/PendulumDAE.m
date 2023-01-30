@@ -1,35 +1,19 @@
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-%                                                                     %
-% The BVP project - Course of MECHATRONICS SYSTEM SIMULATION         %
-%                                                                     %
-% Copyright (c) 2020, Davide Stocco and Enrico Bertolazzi, Francesco  %
-% Biral                                                               %
-%                                                                     %
-% The BVP project and its components are supplied under the terms of %
-% the open source BSD 2-Clause License. The contents of the BVP      %
-% project and its components may not be copied or disclosed except in %
-% accordance with the terms of the BSD 2-Clause License.              %
-%                                                                     %
-% URL: https://opensource.org/licenses/BSD-2-Clause                   %
-%                                                                     %
-%    Davide Stocco                                                    %
-%    Department of Industrial Engineering                             %
-%    University of Trento                                             %
-%    e-mail: davide.stocco@unitn.it                                   %
-%                                                                     %
-%    Enrico Bertolazzi                                                %
-%    Department of Industrial Engineering                             %
-%    University of Trento                                             %
-%    e-mail: enrico.bertolazzi@unitn.it                               %
-%                                                                     %
-%    Francesco Biral                                                  %
-%    Department of Industrial Engineering                             %
-%    University of Trento                                             %
-%    e-mail: francesco.biral@unitn.it                                 %
-%                                                                     %
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-
-classdef PendulumDAE < BVP_ODEsystem
+%> Implementation of the Non Linear Pendulum (2 Equations)
+%>
+%> \rst
+%> .. math::
+%>
+%>   \begin{cases}
+%>      x' = u & \\
+%>      y' = v & \\
+%>      m u' + \lambda x = 0 & \\
+%>      m v' + \lambda y = -m g & \\
+%>      x^2 + y^2 - l^2 = 0 &
+%>   \end{cases}
+%>
+%> \endrst
+%
+classdef PendulumDAE < ODEsystem
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -53,100 +37,49 @@ classdef PendulumDAE < BVP_ODEsystem
     function this = PendulumDAE( m, l, g )
       neq  = 5;
       ninv = 3;
-      this@BVP_ODEsystem( 'PendulumDAE', neq, ninv );
+      this@ODEsystem( 'PendulumDAE', neq, ninv );
       this.m_m = m;
       this.m_l = l;
       this.m_g = g;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % x = [x, y, u, v, lambda]
+    % x_dot = [x', y', u', v', lambda']
     %
-    function out = f( this, ~, X )
-      m   = this.m_m;
-      g   = this.m_g;
-
-      % Extract states
-      x      = X(1);
-      y      = X(2);
-      u      = X(3);
-      v      = X(4);
-      lambda = X(5);
-
-      % Evaluate function
-      res__1 = u;
-      res__2 = v;
-      t1 = 0.1e1 / m;
-      res__3 = -lambda * t1 * x;
-      res__4 = t1 * (-m * g - y * lambda);
-      t17 = x ^ 2;
-      t18 = y ^ 2;
-      res__5 = 0.1e1 / (t17 + t18) * (-3 * v * g * m - 4 * lambda * u * x - 4 * lambda * v * y);
-
-      % Store output
+    function out = F( this, x, x_dot, t )
       out    = zeros(5,1);
-      out(1) = res__1;
-      out(2) = res__2;
-      out(3) = res__3;
-      out(4) = res__4;
-      out(5) = res__5;
+      out(1) = x_dot(1) - x(3);
+      out(1) = x_dot(2) - x(4);
+      out(1) = this.m_m * x_dot(3) + x(5) * x(1);
+      out(1) = this.m_m * x_dot(4) + x(5) * x(2) + this.m_m * this.m_g;
+      out(1) = x(1).^2 + x(2).^2 - this.m_l;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = DfDx( this, ~, X )
-      m   = this.m_m;
-      g   = this.m_g;
+    function [JF_x, JF_x_dot] = JF( this, x, x_dot, t )
+      JF_x     = zeros(5,5);
+      JF_x_dot = zeros(5,5);
 
-      % Extract states
-      x      = X(1);
-      y      = X(2);
-      u      = X(3);
-      v      = X(4);
-      lambda = X(5);
+      JF_x(1,3) = -1;
+      JF_x(2,4) = -1;
+      JF_x(3,1) = x(5);
+      JF_x(3,5) = x(1);
+      JF_x(4,2) = x(5);
+      JF_x(4,5) = x(2);
+      JF_x(5,1) = 2.*x(1);
+      JF_x(5,2) = 2.*x(2);
 
-      % Evaluate function
-      res__1_3 = 1;
-      res__2_4 = 1;
-      t1 = 0.1e1 / m;
-      res__3_1 = -lambda * t1;
-      res__3_5 = -t1 * x;
-      res__4_2 = res__3_1;
-      res__4_5 = -t1 * y;
-      t5 = v * g;
-      t9 = x ^ 2;
-      t13 = y ^ 2;
-      t17 = v * lambda;
-      t22 = t9 + t13;
-      t23 = t22 ^ 2;
-      t24 = 0.1e1 / t23;
-      res__5_1 = t24 * (-4 * u * t13 * lambda + 4 * u * t9 * lambda + 6 * m * x * t5 + 8 * x * y * t17);
-      res__5_2 = t24 * (8 * lambda * x * y * u + 6 * m * y * t5 + 4 * t13 * t17 - 4 * t9 * t17);
-      t37 = 0.1e1 / t22;
-      res__5_3 = -4 * lambda * t37 * x;
-      res__5_4 = t37 * (-3 * m * g - 4 * y * lambda);
-      res__5_5 = t37 * (-4 * x * u - 4 * y * v);
-      
-      % Store output
-      out      = zeros(5,5);
-      out(1,3) = res__1_3;
-      out(2,4) = res__2_4;
-      out(3,1) = res__3_1;
-      out(3,5) = res__3_5;
-      out(4,2) = res__4_2;
-      out(4,5) = res__4_5;
-      out(5,1) = res__5_1;
-      out(5,2) = res__5_2;
-      out(5,3) = res__5_3;
-      out(5,4) = res__5_4;
-      out(5,5) = res__5_5;
+      JF_x_dot(1,1) = 1;
+      JF_x_dot(2,2) = 1;
+      JF_x_dot(3,3) = this.m_m;
+      JF_x_dot(4,4) = this.m_m;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function res__h = h( this, ~, vars__ )
-      m   = this.m_m;
-      ell = this.m_l;
-      g   = this.m_g;
+    function res__h = H( this, x, x_dot, t )
 
       % extract states
       x = vars__(1);
@@ -174,7 +107,7 @@ classdef PendulumDAE < BVP_ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = DhDx( this, ~, X )
+    function out = JH( this, x, x_dot, t )
       m = this.m_m;
       g = this.m_g;
 
@@ -202,7 +135,7 @@ classdef PendulumDAE < BVP_ODEsystem
       t13 = x ^ 2;
       t14 = y ^ 2;
       res__3_5 = t3 * (2 * t13 + 2 * t14);
-      
+
       % Store output
       out      = zeros(3,5);
       out(1,1) = res__1_1;
