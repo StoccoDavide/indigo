@@ -63,93 +63,27 @@ classdef RKimplicit < ODEsolver
     %> \param c    Nodes vector (column vector).
     %
     function this = RKimplicit( name, A, b, c )
+
+      CMD = 'indigo::RKimplicit::RKimplicit(...): ';
+
+      if (nargin == 4)
+        t_name = varargin{1};
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = [];
+        t_c    = varargin{4};
+      elseif (nargin == 5)
+        t_name = varargin{1};
+        t_A    = varargin{2};
+        t_b    = varargin{3};
+        t_b_e  = varargin{4};
+        t_c    = varargin{5};
+      else
+        error([CMD, 'Wrong number of input arguments.']);
+      end
+
       % Call the superclass constructor
-      this@ODEsolver( name );
-
-      % Set the Butcher tableau
-      this.set_tableau(A, b, c);
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Get the matrix \f$ \mathbf{A} \f$.
-    %>
-    %> \return The matrix \f$ \mathbf{A} \f$.
-    %
-    function t_A = get_A( this )
-      t_A = this.m_A;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Set the matrix \f$ \mathbf{A} \f$.
-    %>
-    %> \param t_A The matrix \f$ \mathbf{A} \f$.
-    %
-    function set_A( this, t_A )
-      this.m_A = t_A;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Get the weights vector \f$ \mathbf{b} \f$ (row vector).
-    %>
-    %> \return The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %
-    function t_b = get_b( this )
-      t_b = this.m_b;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Set the weights vector \f$ \mathbf{b} \f$ (row vector).
-    %>
-    %> \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %
-    function set_b( this, t_b )
-      this.m_b = t_b;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Get the nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %>
-    %> \return The nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %
-    function t_c = get_c( this )
-      t_c = this.m_c;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Set the nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %>
-    %> \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %
-    function set_c( this, t_c )
-      this.m_c = t_c;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Set the Butcher tableau.
-    %>
-    %> \param A Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-    %> \param b Weights vector \f$ \mathbf{b} \f$ (row vector).
-    %> \param c Nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %
-    function set_tableau( this, A, b, c )
-
-      CMD = 'RKimplicit::set_tableau(...): ';
-
-      % Check the Butcher tableau
-      assert(this.check_tableau(A, b, c), ...
-        [CMD, 'invalid Butcher tableau detected.']);
-
-      % Set the Butcher tableau
-      this.m_A = A;
-      this.m_b = b;
-      this.m_c = c;
+      this@ODEsolver(t_name, t_A, t_b, t_b_e, t_c);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -356,11 +290,27 @@ classdef RKimplicit < ODEsolver
       % Solve the system to obtain K
       K = this.solve_step( x_k, K0, t_k, d_t );
 
+      % Suggested time step for the next advancing step
+      d_t_star = d_t;
+
+      % Error code check
+      if (ierr > 0)
+        x_out     = NaN * x_k;
+        x_dot_out = NaN * x_dot_k;
+        return;
+      end
+
       % Perform the step and obtain x_k+1
       out = x_k + d_t * reshape(K, nx, nc) * this.m_b';
 
       % Extract x_dot_k+1 from K (i.e., its last value)
       out_dot = K(end + 1 - nx:end);
+
+      % Adapt next time step
+      if (~isempty(this.m_b_e))
+        x_e = x_k + d_t * K * this.m_b_e';
+        d_t_star = this.adapt_step(x_out, x_e, d_t_star);
+      end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
