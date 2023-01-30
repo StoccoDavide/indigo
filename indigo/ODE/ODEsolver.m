@@ -685,14 +685,15 @@ classdef ODEsolver < handle
     %>
     function out = adapt_step( this, x_h, x_l, d_t )
 
-      % Compute the error
-      err = x_h - x_l;
-
-      % Compute the error norm
-      err_norm = norm(err, this.m_norm);
+      % Compute the error with 2-norm
+      err = sqrt(sum(((x_h - x_l)/.(length(this.m_c)*this.m_c))^2)/length(x_h));
 
       % Compute the suggested time step
-      out = d_t * (this.m_tol / err_norm)^(1 / (length(this.m_c) + 1));
+      fac    = 0.9;
+      facmin = 0.25;
+      facmax = 2.0;
+      out = d_t * min(facmax, max(facmin, ...
+        (1 / err_norm)^(1 / (length(this.m_c) + 1))));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
