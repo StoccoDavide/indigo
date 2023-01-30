@@ -5,7 +5,7 @@ classdef RadauIA3 < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Radau IA third-order method (2 stages)
     %>
@@ -30,7 +30,7 @@ classdef RadauIA3 < RKimplicit
       );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

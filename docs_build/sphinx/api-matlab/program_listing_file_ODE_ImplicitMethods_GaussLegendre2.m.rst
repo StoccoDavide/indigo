@@ -17,7 +17,7 @@ Program Listing for File GaussLegendre2.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Gauss-Legendre second-order method (1 stage)
        %>
@@ -41,7 +41,7 @@ Program Listing for File GaussLegendre2.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

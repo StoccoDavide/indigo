@@ -11,16 +11,16 @@ Program Listing for File SSPRK3.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for third-order strong stability preserving Runge-Kutta 
-   %> method (3 stages)
+   %> Class container for third-order strong stability preserving Runge-Kutta
+   %> method.
    %
    classdef SSPRK3 < RKexplicit
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Third-order strong stability preserving Runge-Kutta method (3 stages)
+       %> Third-order strong stability preserving Runge-Kutta method.
        %>
        %> \rst
        %> .. math::
@@ -35,16 +35,19 @@ Program Listing for File SSPRK3.m
        %>
        %> \endrst
        %
-       function this = SSPRK3( ~ )
+       function this = SSPRK3()
          this@RKexplicit( ...
            'SSPRK3',...
-           [0, 0, 0; 1, 0, 0; 1/4, 1/4, 0], ...
+           [0,   0,   0; ...
+            1,   0,   0; ...
+            1/4, 1/4, 0], ...
            [1/6, 1/6, 2/3], ...
+           [], ...
            [0, 1, 1/2]' ...
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

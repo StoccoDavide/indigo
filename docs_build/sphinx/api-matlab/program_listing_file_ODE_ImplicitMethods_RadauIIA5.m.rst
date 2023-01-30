@@ -17,7 +17,7 @@ Program Listing for File RadauIIA5.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Radau IIA fifth-order method (3 stages)
        %>
@@ -25,11 +25,22 @@ Program Listing for File RadauIIA5.m
        %> .. math::
        %>
        %>  \begin{array}{c|ccc}
-       %>    \frac{2}{5} - \frac{\sqrt{6}}{10} & \frac{11}{45} - \frac{7 \sqrt{6}}{360} & \frac{37}{225} - \frac{169 \sqrt{6}}{1800}  & -\frac{2}{225} + \frac{\sqrt{6}}{75}  \\
-       %>    \frac{2}{5} + \frac{\sqrt{6}}{10} & \frac{37}{225} + \frac{169 \sqrt{6}}{1800} & \frac{11}{45} + \frac{7 \sqrt{6}}{360} & -\frac{2}{225} - \frac{\sqrt{6}}{75} \\
-       %>    1 & \frac{4}{9} - \frac{\sqrt{6}}{36} & \frac{4}{9} + \frac{\sqrt{6}}{36} & \frac{1}{9} \\
+       %>    \frac{2}{5} - \frac{\sqrt{6}}{10} &
+       %>    \frac{11}{45} - \frac{7 \sqrt{6}}{360} &
+       %>    \frac{37}{225} - \frac{169 \sqrt{6}}{1800}  &
+       %>    -\frac{2}{225} + \frac{\sqrt{6}}{75}  \\
+       %>    \frac{2}{5} + \frac{\sqrt{6}}{10} &
+       %>    \frac{37}{225} + \frac{169 \sqrt{6}}{1800} &
+       %>    \frac{11}{45} + \frac{7 \sqrt{6}}{360} &
+       %>    -\frac{2}{225} - \frac{\sqrt{6}}{75} \\
+       %>    1 &
+       %>    \frac{4}{9} - \frac{\sqrt{6}}{36} &
+       %>    \frac{4}{9} + \frac{\sqrt{6}}{36} &
+       %>    \frac{1}{9} \\
        %>    \hline
-       %>      & \frac{4}{9} - \frac{\sqrt{6}}{36} & \frac{4}{9} + \frac{\sqrt{6}}{36} & \frac{1}{9} \\
+       %>      & \frac{4}{9} - \frac{\sqrt{6}}{36} &
+       %>        \frac{4}{9} + \frac{\sqrt{6}}{36} &
+       %>        \frac{1}{9} \\
        %>  \end{array}
        %>
        %> \endrst
@@ -45,7 +56,7 @@ Program Listing for File RadauIIA5.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

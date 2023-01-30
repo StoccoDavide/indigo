@@ -5,12 +5,12 @@
 %>
 %> \f[
 %> \begin{array}{c|c}
-%>   c & A \\ \hline
-%>     & b
+%>   \mathbf{c} & \mathbf{A} \\ \hline
+%>              & \mathbf{b}
 %> \end{array}
 %> \f]
 %>
-%> where \f$ \mathbf{A} \f$ is the Runge-Kutta matrix:
+%> where \f$ \mathbf{A} \f$ is the Runge-Kutta matrix (lower triangular matrix):
 %>
 %> \f[
 %> \mathbf{A} = \begin{bmatrix}
@@ -154,32 +154,21 @@ classdef RKimplicit < ODEsolver
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute the left hand side of the system of equations to be solved:
-    %>
-    %> \f[
-    %> \begin{bmatrix}
-    %> \mathbf{F}_1(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{1j}
-    %> \mathbf{K}_j, \mathbf{K}_1, t_k + c_1 \Delta t)\\
-    %> \mathbf{F}_2(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{2j}
-    %> \mathbf{K}_j, \mathbf{K}_2, t_k + c_2 \Delta t)\\
-    %> \vdots\\
-    %> \mathbf{F}_s(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{sj}
-    %> \mathbf{K}_j, \mathbf{K}_s, t_k + c_s \Delta t)\\
-    %> \end{bmatrix}
-    %> = \mathbf{0}
-    %> \f]
+    %> Compute the LHS of the system of equations to be solved \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = \mathbf{0} \f$
     %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param K       \f$ \mathbf{K} \f$ variable of the system to be solved.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The residual of the ODEs system to be solved.
-    %>
     %
     function R = step_residual( this, x_k, K, t_k, d_t )
+      % Reassign for readability
+      A   = this.m_A;
+      c   = this.m_c;
+
       % Extract lengths
-      nc  = length(this.m_c);
+      nc  = length(c);
       nx  = length(x_k);
 
       % There are as many residuals as equations in the system
@@ -192,12 +181,12 @@ classdef RKimplicit < ODEsolver
         tmp = x_k;
         jdx = 1:nx;
         for j = 1:nc
-          tmp = tmp + d_t * this.m_A(i,j) * K(jdx);
+          tmp = tmp + d_t * A(i,j) * K(jdx);
           jdx = jdx + nx;
         end
 
         % Compute the residuals
-        R(idx) = this.m_ode.F( tmp, K(idx), t_k + this.m_c(i) * d_t );
+        R(idx) = this.m_ode.F( tmp, K(idx), t_k + c(i) * d_t );
 
         idx = idx + nx;
       end
@@ -205,49 +194,27 @@ classdef RKimplicit < ODEsolver
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute the Jacobian of the left hand side of the system of equations to
-    %> be solved:
+    %> Compute the Jacobian of the LHS of the system of equations to be solved \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt) = 0 \f$ in the \f$ \mathbf{K} \f$ variable:
     %>
-    %> \f[
-    %> \begin{bmatrix}
-    %> \mathbf{F}_1(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{1j}
-    %> \mathbf{K}_j, \mathbf{K}_1, t_k + c_1 \Delta t)\\
-    %> \mathbf{F}_2(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{2j}
-    %> \mathbf{K}_j, \mathbf{K}_2, t_k + c_2 \Delta t)\\
-    %> \vdots\\
-    %> \mathbf{F}_s(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{sj}
-    %> \mathbf{K}_j, \mathbf{K}_s, t_k + c_s \Delta t)\\
-    %> \end{bmatrix}
-    %> = \mathbf{0}
-    %> \f]
-    %>
-    %> to be solved in the \f$ \mathbf{K} \f$ variable:
-    %>
-    %> \f[
-    %> \dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
-    %>   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{ij} \mathbf{K}_j,
-    %>   \, \mathbf{K}_i, \, t_k + c_i \Delta t
-    %> \right)
-    %> \f]
+    %> \f[ \frac{\partial\mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)}{\partial \mathbf{K}} \f].
     %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param K       \f$ \mathbf{K} \f$ variable of the system to be solved.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The Jacobian of the ODEs system of equations to be solved.
-    %>
     %
     function JR = step_jacobian( this, x_k, K, t_k, d_t )
+      % Reassign for readability
+      A   = this.m_A;
+      c   = this.m_c;
+
       % Extract lengths
       nc  = length(this.m_c);
       nx  = length(x_k);
 
-      % The Jacobian is a square length(K)*length(K) matrix,
-      % where length(K) = nc*nx.
-      % The Jacobian is composed of nc*nx sub-matrices obtained by a
-      % combination of the Jacobians w.r.t. x and x_dot.
-      JR  = zeros(nc*nx);
+      % The Jacobian is a square nc*nx (i.e., length(K)) matrix
+      JR  = eye(nc*nx);
 
       % Loop through each equation of the system
       idx = 1:nx;
@@ -256,7 +223,7 @@ classdef RKimplicit < ODEsolver
         tmp = x_k;
         jdx = 1:nx;
         for j = 1:nc
-          tmp = tmp + d_t * this.m_A(i,j) * K(jdx);
+          tmp = tmp + d_t * A(i,j) * K(jdx);
           jdx = jdx + nx;
         end
         jdx = 1:nx;
@@ -268,13 +235,11 @@ classdef RKimplicit < ODEsolver
           end
 
           % Compute the Jacobians w.r.t. x and x_dot
-          [JF_x, JF_x_dot] = this.m_ode.JF( ...
-              tmp, K(idx), t_k + this.m_c(i) * d_t ...
-            );
+          [JF_x, JF_x_dot] = this.m_ode.JF( tmp, K(idx), t_k + c(i) * d_t );
 
           % Combine the Jacobians w.r.t. x and x_dot to obtain
           % the Jacobian w.r.t. K
-          JR(idx,jdx) = JF_x * d_t * this.m_A(i,j) + JF_x_dot * mask;
+          JR(idx,jdx) = JF_x * d_t * A(i,j) + JF_x_dot * mask;
 
           jdx = jdx + nx;
         end
@@ -284,21 +249,10 @@ classdef RKimplicit < ODEsolver
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the \f$ i \f$-th implicit step of the ODEs system to find the
-    %> \f$ \mathbf{K}_i \f$ variable:
+    %> Solve the implicit step \f$ \mathbf{F}(\mathbf{x}_k + dt \sum{a_{ij} K_j}, \mathbf{K}, t_k + c_i dt)=\mathbf{0} \f$ by Newton method.
     %>
-    %> \f[
-    %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s
-    %>   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
-    %> \right) = \mathbf{0}
-    %> \f]
-    %>
-    %> by Newton method.
-    %>
-    %> \param x_k     States value at \f$ k \f$-th time step \f$
-    %>                \mathbf{x}(t_k) \f$.
-    %> \param K       Initial guess for the \f$ \mathbf{K} \f$ variables of the
-    %>                system to be solved.
+    %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param K       Initial guess for the \f$ \mathbf{K} \f$ variable of the system to be solved.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
@@ -329,8 +283,8 @@ classdef RKimplicit < ODEsolver
     %>  \f[
     %>  \begin{array}{l}
     %>  \mathbf{K}_i = \mathbf{f} \left(
-    %>    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij}
-    %> \mathbf{K}_j, \, t_k + c_i \Delta t
+    %>    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \,
+    %>    t_k + c_i \Delta t
     %>    \right), \qquad i = 1, 2, \ldots, s \\
     %>  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
     %>  \mathbf{K}_j \, ,
@@ -344,11 +298,9 @@ classdef RKimplicit < ODEsolver
     %> \f[
     %> \begin{array}{l}
     %> \mathbf{F}_i \left(
-    %>   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij}
-    %> \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
+    %>   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
     %> \right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\
-    %> \mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j
-    %> \mathbf{K}_j.
+    %> \mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.
     %> \end{array}
     %> \f]
     %>
@@ -373,18 +325,27 @@ classdef RKimplicit < ODEsolver
     %>
     %> The \f$ \mathbf{K}_i \f$ variable are computed using the Newton's method.
     %>
-    %> \param x_k     States value at \f$ k \f$-th time step \f$
-    %> \mathbf{x}(t_k) \f$.
-    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$
-    %> \mathbf{x}' (t_k) \f$.
+    %> **Note**
+    %>
+    %> The suggested time step for the next advancing step \f$ \Delta t_{k+1} \f$,
+    %> is the same as the input time step \f$ \Delta t \f$ since in the implicit
+    %> Runge-Kutta method the time step is not modified through any error control
+    %> method.
+    %>
+    %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
+    %>                (t_k) \f$.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
-    %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
+    %> \return The approximation of the states at \f$ k+1 \f$-th time step \f$
+    %>         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the
+    %>         states derivatives at \f$ k+1 \f$-th time step \f$ \mathbf{x}'_{k+1}
+    %>         (t_{k}+\Delta t) \f$, and the suggested time step for the next
+    %>         advancing step \f$ \Delta t_{k+1} \f$.
     %>
     %
-    function [out, out_dot] = step( this, x_k, x_dot_k, t_k, d_t )
+    function [out, out_dot, d_t] = step( this, x_k, x_dot_k, t_k, d_t )
       % Extract lengths
       nc = length(this.m_c);
       nx = length(x_k);

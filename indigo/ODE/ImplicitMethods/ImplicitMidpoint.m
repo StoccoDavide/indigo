@@ -5,7 +5,7 @@ classdef ImplicitMidpoint < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Implicit midpoint second-order method (1 stage)
     %>
@@ -29,7 +29,7 @@ classdef ImplicitMidpoint < RKimplicit
       );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

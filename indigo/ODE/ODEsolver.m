@@ -1,6 +1,47 @@
 %
-%> Class container for solver of  the system of Ordinary Differential Equations
-%> (ODEs) or Differential Algebraic Equations (DAEs).
+%> Class container for Runge-Kutta solvers of the system of Ordinary Differential
+%> Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs). The user
+%> must simply define the Butcher tableau of the method, which defined as:
+%>
+%> \f[
+%> \begin{array}{c|c}
+%>   \mathbf{c} & \mathbf{A} \\ \hline
+%>              & \mathbf{b}
+%>              & \hat{\mathbf{b}}
+%> \end{array}
+%> \f]
+%>
+%> where \f$ \mathbf{A} \f$ is the Runge-Kutta matrix (lower triangular matrix):
+%>
+%> \f[
+%> \mathbf{A} = \begin{bmatrix}
+%>   a_{11} & a_{12} & \dots  & a_{1s} \\
+%>   a_{21} & a_{22} & \dots  & a_{2s} \\
+%>   \vdots & \vdots & \ddots & \vdots \\
+%>   a_{s1} & a_{s2} & \dots  & a_{ss}
+%> \end{bmatrix},
+%> \f]
+%>
+%> \f$ \mathbf{b} \f$ is the Runge-Kutta weights vector relative to a method of
+%> order \f$ p \f$ (row vector):
+%>
+%> \f[
+%> \mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],
+%> \f]
+%>
+%> \f$ \hat{\mathbf{b}} \f$ is the (optional) embedded Runge-Kutta weights
+%> vector relative to a method of order \f$ \hat{p} \f$ (usually \f$ \hat{p} =
+%> p−1 \f$ or \f$ \hat{p} = p+1 \f$) (row vector):
+%>
+%> \f[
+%> \hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],
+%> \f]
+%>
+%> and \f$ \mathbf{c} \f$ is the Runge-Kutta nodes vector (column vector):
+%>
+%> \f[
+%> \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
+%> \f]
 %
 classdef ODEsolver < handle
   %
@@ -10,13 +51,33 @@ classdef ODEsolver < handle
     %
     m_name;
     %
-    %> System of ODEs/DAEs to be solved.
+    %> Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %
+    m_A;
+    %
+    %> Weights vector \f$ \mathbf{b} \f$ (row vector).
+    %
+    m_b;
+    %
+    %> Embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %
+    m_b_e;
+    %
+    %> Nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %
+    m_c;
+    %
+    %> Maximum number of substeps (default = 5).
+    %
+    m_max_substeps;
+    %
+    %> Maximum number of iterations in the projection process (default = 5).
+    %
+    m_max_projection_iter;
+    %
+    %> System of ODEs/DAEs to be solved (fake pointer).
     %
     m_ode;
-    %
-    %> Maximum number of iterations in the projection process.
-    %
-    m_max_iter;
     %
   end
   %
@@ -25,17 +86,33 @@ classdef ODEsolver < handle
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Class constructor for ODEsolver, which requires the name of the solver
-    %> used to integrate the system of ODEs as input.
+    %> used to integrate the system of ODEs/DAEs as input.
     %>
     %> \param t_name The name of the solver.
+    %> \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %> \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %> \param t_b_e  The embedded weights vector \f$ \hat{\mathbf{b}} \f$
+    %>               (row vector).
+    %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %>
+    %> \return An instance of the ODEsolver class.
     %
-    function this = ODEsolver( t_name )
+    function this = ODEsolver( t_name, t_A, t_b, t_b_e, t_c )
+
+      % Collect input arguments
       this.m_name = t_name;
+
+      % Set the Butcher tableau
+      this.set_tableau(t_A, t_b, t_b_e, t_c);
+
+      % Set default values
+      this.m_max_substeps        = 5;
+      this.m_max_projection_iter = 5;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the name of the method used to integrate the system of ODEs.
+    %> Get the name of the method used to integrate the system of ODEs/DAEs.
     %>
     %> \return The name of the solver.
     %
@@ -45,7 +122,7 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the name of the method used to integrate the system of ODEs.
+    %> Set the name of the method used to integrate the system of ODEs/DAEs.
     %>
     %> \param t_name The name of the solver.
     %
@@ -55,9 +132,9 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the system of ODEs to be solved.
+    %> Get the system of ODEs/DAEs to be solved.
     %>
-    %> \return The system of ODEs to be solved.
+    %> \return The system of ODEs/DAEs to be solved.
     %
     function t_ode = get_ode( this )
       t_ode = this.m_ode;
@@ -65,12 +142,38 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the system of ODEs to be solved.
+    %> Set the system of ODEs/DAEs to be solved.
     %>
-    %> \param t_ode The system of ODEs to be solved.
+    %> \param t_ode The system of ODEs/DAEs to be solved.
     %
     function set_ode( this, t_ode )
       this.m_ode = t_ode;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the maximum number of substeps.
+    %>
+    %> \return The maximum number of substeps.
+    %
+    function t_max_substeps = get_max_substeps( this )
+      t_max_substeps = this.m_max_substeps;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the maximum number of substeps.
+    %>
+    %> \param t_max_substeps The maximum number of substeps.
+    %
+    function set_max_substeps( this, t_max_substeps )
+
+      CMD = 'indigo::ODEsolver::set_max_substeps(...)';
+
+      assert(t_max_substeps > 0, ...
+        [CMD, 'invalid maximum number of substeps.']);
+
+      this.m_max_substeps = t_max_substeps;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,24 +182,146 @@ classdef ODEsolver < handle
     %>
     %> \return The maximum number of iterations in the projection process.
     %
-    function t_max_iter = get_max_iter( this )
-      t_max_iter = this.m_max_iter;
+    function t_max_iter = get_max_projection_iter( this )
+      t_max_iter = this.m_max_projection_iter;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the maximum number of iterations in the projection process.
     %>
-    %> \param t_max_iter The maximum number of projection iterations.
+    %> \param t_max_projection_iter The maximum number of projection iterations.
     %
-    function set_max_iter( this, t_max_iter )
+    function set_max_projection_iter( this, t_max_projection_iter )
 
-      CMD = 'indigo::ODEsolver::set_max_iter(...)';
+      CMD = 'indigo::ODEsolver::set_max_projection_iter(...)';
 
-      assert(t_max_iter > 0, ...
+      assert(t_max_projection_iter > 0, ...
         [CMD, 'invalid maximum number of iterations.']);
 
-      this.m_max_iter = t_max_iter;
+      this.m_max_projection_iter = t_max_projection_iter;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %>
+    %> \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %
+    function t_A = get_A( this )
+      t_A = this.m_A;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %>
+    %> \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %
+    function set_A( this, t_A )
+      this.m_A = t_A;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the weights vector \f$ \mathbf{b} \f$ (row vector).
+    %>
+    %> \return The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %
+    function t_b = get_b( this )
+      t_b = this.m_b;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the weights vector \f$ \mathbf{b} \f$ (row vector).
+    %>
+    %> \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %
+    function set_b( this, t_b )
+      this.m_b = t_b;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %>
+    %> \return The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %
+    function t_b_e = get_b_e( this )
+      t_b_e = this.m_b_e;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %>
+    %> \param t_b_e The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row
+    %>        vector).
+    %
+    function set_b_e( this, t_b_e )
+      this.m_b_e = t_b_e;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %>
+    %> \return The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %
+    function t_c = get_c( this )
+      t_c = this.m_c;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %>
+    %> \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %
+    function set_c( this, t_c )
+      this.m_c = t_c;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the Butcher tableau.
+    %>
+    %> \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix), the
+    %>         weights vector \f$ \mathbf{b} \f$ (row vector), the embedded
+    %>         weights vector \f$ \hat{\mathbf{b}} \f$ (row vector), and nodes
+    %>         vector \f$ \mathbf{c} \f$ (column vector).
+    %
+    function [A, b, b_e, c] = get_tableau( this )
+      A   = this.m_A;
+      b   = this.m_b;
+      b_e = this.m_b_e;
+      c   = this.m_c;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the Butcher tableau.
+    %>
+    %> \param A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %> \param b   Weights vector \f$ \mathbf{b} \f$ (row vector).
+    %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
+    %>            (row vector).
+    %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %
+    function set_tableau( this, A, b, b_e, c )
+
+      CMD = 'indigo::RKexplicit::set_tableau(...): ';
+
+      % Check the Butcher tableau
+      assert(RKexplicit.check_tableau(A, b, b_e, c), ...
+        [CMD, 'invalid tableau detected.']);
+
+      % Set the tableau
+      this.m_A   = A;
+      this.m_b   = b;
+      this.m_b_e = b_e;
+      this.m_c   = c;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -189,7 +414,7 @@ classdef ODEsolver < handle
         tolerance = max(1, norm(x_tilde, inf)) * sqrt(eps);
 
         % Iterate until the projected solution is found
-        for k = 1:this.m_max_iter
+        for k = 1:this.m_max_projection_iter
 
           %     [A]         {x}    =        {b}
           % / I  JH^T \ /   dx   \   / x_tilde - x_k \
@@ -220,9 +445,9 @@ classdef ODEsolver < handle
       end
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the system of ODEs and calculate the approximate solution.
+    %> Solve the system of ODEs/DAEs and calculate the approximate solution.
     %>
     %> \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
     %>                \right]^T \f$.
@@ -237,7 +462,7 @@ classdef ODEsolver < handle
     %>
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
-    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs.
+    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
     %>
     %> **Usage**
     %>
@@ -280,7 +505,7 @@ classdef ODEsolver < handle
     %>
     %> \endrst
     %
-    function out = solve( this, t, x_0, varargin )
+    function [x_out, t_out] = solve( this, t, x_0, varargin )
 
       CMD = 'indigo::ODEsolver::solve(...): ';
 
@@ -318,44 +543,157 @@ classdef ODEsolver < handle
       end
 
       % Instantiate output
-      out          = zeros(num_eqns, length(t));
-      out_dot      = zeros(num_eqns, length(t));
-      out(:,1)     = x_0(:);
-      out_dot(:,1) = zeros(num_eqns, 1);
+      safety_length  = 2*length(t);
+      t_out          = zeros(1, safety_length);
+      x_out          = zeros(num_eqns, safety_length);
+      x_out_dot      = zeros(num_eqns, safety_length);
+
+      % Initialize first step
+      t_out(:,1)     = t(1);
+      x_out(:,1)     = x_0(:);
+      x_out_dot(:,1) = zeros(num_eqns, 1);
 
       % Instantiate temporary variables
-      perc  = 0.0;
-      steps = length(t) - 1;
+      max_k = this.m_max_substeps * this.m_max_substeps;
+      k = 0; % Number of substepping
+      s = 1; % Current step
+      p = 0; % Current percentage
 
-      for k = 1:steps
+      % Compute the initial step size
+      d_t_ini = t(2) - t(1);
+      d_t     = d_t_ini;
+
+      while (t_out(s) < t(end))
+
+        % TODO: The while loop does not guarantee that the final time step
+        %       end in t(end)
+
+        % Print percentage of completion
         if (verbose == true)
-          newpp = ceil(100*k/steps);
-          if (newpp > perc + 4)
-            perc = newpp;
-            fprintf('%3d%%\n', perc);
+          p_new = ceil(100*s/steps);
+          if (p_new > p + 4)
+            p = p_new;
+            fprintf('%3d%%\n', p);
           end
         end
 
-        % Integrate system of ODEs
-        [x_new, x_dot_new] = this.step(out(:,k), out_dot(:,k), t(k), t(k+1)-t(k));
+        % Integrate system of ODEs/DAEs
+        [x_new, x_dot_new, d_t_star, ierr] = ...
+          this.step(x_out(:,s), x_out_dot(:,s), t_out(s), d_t);
+
+        % Calculate the next time step with substepping logic
+        % TODO: Maybe it doesn't work because it does not take the drift into
+        % consideration
+        if (ierr == 0)
+
+          % Accept the step
+          d_t = d_t_star;
+
+          % If substepping is enabled,
+          if (k > 0 && k < max_k)
+            k = k - 1;
+            % If the substepping index is even, double the step size
+            if (rem(k, 2) == 0)
+              d_t = 2 * d_t;
+            end
+          end
+
+        else
+
+          % If the substepping index is too high, abort
+          k = k + 2;
+          if (k > max_k)
+            error([CMD, 'in %s solver, at t(%d) = %g, integration failed', ...
+              '(error code %d) with d_t = %g, aborting.'], ...
+              this.m_name, s, t(s), ierr, d_t);
+          end
+
+          % Otherwise, try again with a smaller step
+          warning([CMD, 'in %s solver, at t(%d) = %g, integration failed', ...
+          '(error code %d), perfom substepping.'], ...
+          this.m_name, s, t(s), ierr, k);
+          d_t = d_t/2;
+          continue;
+
+        end
+
+        % Store time solution
+        t_out(s+1) = t_out(s) + d_t;
 
         % Project solution on the invariants/hidden constraints
         if (project == true)
-          x_new = this.project(t(k+1), x_new);
+          x_new = this.project(t(s+1), x_new);
         end
 
-        % Check the infinity norm of the projected solution
+        % Check the infinity norm of the solution
         norm_x_new = norm(x_new, inf);
         if (norm_x_new > epsilon)
           fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, ', ...
-          'computation interrupted.\n'], this.m_name, k, t(k), norm_x_new);
+          'computation interrupted.\n'], this.m_name, s, t(s), norm_x_new);
           break;
         end
 
-        % Store solutions
-        out(:,k+1)     = x_new;
-        out_dot(:,k+1) = x_dot_new;
+        % Store states solutions
+        x_out(:,s+1)     = x_new;
+        x_out_dot(:,s+1) = x_dot_new;
+
+        % Update steps counter
+        s = s + 1;
       end
+
+      % Resize the output
+      t_out     = t_out(:,1:s-1);
+      x_out     = x_out(:,1:s-1);
+      %x_out_dot = x_out_dot(:,1:s-1);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Compute adaptive time step for the next advancing step according to the
+    %> error control method. The error control method used is the local truncation
+    %> error (LTE) method, which is based on the following formula:
+    %>
+    %> \f[
+    %> \left| \mathbf{x}_{k+1} - \mathbf{x}_{k+1}^{(h)} \right| \leq
+    %> \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)} -
+    %> \mathbf{x}_{k+1}^{(l)} \right|
+    %> \f]
+    %>
+    %> where \f$ \mathbf{x}_{k+1}^{(h)} \f$ is the approximation of the states at
+    %> \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with
+    %> higher order method, \f$ \mathbf{x}_{k+1}^{(l)} \f$ is the approximation
+    %> of the states at \f$ k+1 \f$-th time step \f$ \mathbf{x_{k+1}}(t_{k}+\Delta
+    %> t) \f$ with lower order method, \f$ C \f$ is a constant, and \f$ p \f$ is
+    %> the order of the method.
+    %>
+    %> To compute the suggested time step for the next advancing step \f$
+    %> \Delta t_{k+1} \f$, the following formula is used:
+    %>
+    %> \f[
+    %> \Delta t_{k+1} = \dfrac{C \Delta t^{p+1}}{p+1} \left| \mathbf{x}_{k+1}^{(h)}
+    %> - \mathbf{x}_{k+1}^{(l)} \right|^{-\frac{1}{p+1}}
+    %> \f]
+    %>
+    %> \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$
+    %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.
+    %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
+    %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
+    %> \param d_t Advancing time step \f$ \Delta t\f$.
+    %>
+    %> \return The suggested time step for the next advancing step \f$ \Delta
+    %>         t_{k+1} \f$.
+    %>
+    function out = adapt_step( this, x_h, x_l, d_t )
+
+      % Compute the error with 2-norm
+      err = sqrt(sum(((x_h - x_l)/.(length(this.m_c)*this.m_c))^2)/length(x_h));
+
+      % Compute the suggested time step
+      fac    = 0.9;
+      facmin = 0.25;
+      facmax = 2.0;
+      out = d_t * min(facmax, max(facmin, ...
+        (1 / err_norm)^(1 / (length(this.m_c) + 1))));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -366,7 +704,7 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute a step using a generic integration method for a system of ODEs of
+    %> Compute a step using a generic integration method for a system of ODEs/DAEs of
     %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The
     %> step is based on the following formula:
     %>
@@ -387,6 +725,20 @@ classdef ODEsolver < handle
     %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
     %
     step( this, x_k, x_dot_k, t_k, d_t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
+    %>
+    %> \param A   Matrix \f$ \mathbf{A} \f$.
+    %> \param b   Weights vector \f$ \mathbf{b} \f$.
+    %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
+    %>            (row vector).
+    %> \param c   Nodes vector \f$ \mathbf{c} \f$.
+    %>
+    %> \return True if the Butcher tableau is consistent, false otherwise.
+    %
+    check_tableau( A, b, b_e, c )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

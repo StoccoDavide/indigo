@@ -5,7 +5,7 @@ classdef ExplicitEuler < RKexplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Explicit Euler first-order method (1 stage)
     %>
@@ -20,7 +20,7 @@ classdef ExplicitEuler < RKexplicit
     %>
     %> \endrst
     %
-    function this = ExplicitEuler( ~ )
+    function this = ExplicitEuler()
       this@RKexplicit( ...
         'ExplicitEuler', ...
         [0], ...
@@ -29,7 +29,7 @@ classdef ExplicitEuler < RKexplicit
       );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

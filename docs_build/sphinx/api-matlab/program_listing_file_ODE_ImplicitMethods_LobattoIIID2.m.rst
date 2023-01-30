@@ -17,7 +17,7 @@ Program Listing for File LobattoIIID2.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Lobatto IIID second-order method (2 stages)
        %>

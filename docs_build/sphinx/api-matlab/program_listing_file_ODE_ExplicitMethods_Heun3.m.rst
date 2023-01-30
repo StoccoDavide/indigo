@@ -11,15 +11,15 @@ Program Listing for File Heun3.m
 .. code-block:: MATLAB
 
    %
-   %> Calss container for Heun's third-order method (3 stages)
+   %> Calss container for Heun's third-order method.
    %
    classdef Heun3 < RKexplicit
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Heun's third-order method (3 stages)
+       %> Heun's third-order method.
        %>
        %> \rst
        %> .. math::
@@ -34,16 +34,19 @@ Program Listing for File Heun3.m
        %>
        %> \endrst
        %
-       function this = Heun3( ~ )
+       function this = Heun3()
          this@RKexplicit( ...
            'Heun3', ...
-           [0, 0, 0; 1/3, 0, 0; 0, 2/3, 0], ...
+           [0,   0,   0; ...
+            1/3, 0,   0; ...
+            0,   2/3, 0], ...
            [1/4, 0, 3/4], ...
+           [], ...
            [0, 1/3, 2/3]' ...
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

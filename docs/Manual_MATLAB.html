@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MATLAB Toolbox &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MATLAB API" href="api-matlab/root.html" />
+    <link rel="prev" title="An Integrator for Differential &amp; Differential-Algebraic Equations" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="matlab-toolbox">
+<h1>MATLAB Toolbox<a class="headerlink" href="#matlab-toolbox" title="Permalink to this headline">¶</a>
+</h1>
+<p>Thr <code class="docutils literal notranslate"><span class="pre">indigo</span></code> MATLAB toolbox collects multiple integrators for ordinary
+differential and differential-algebraic equations (ODEs/DAEs). The toolbox
+provides a unified interface for the integration of ODEs/DAEs, which allows to
+switch between different integration methods without changing the code of the
+system of ODEs/DAEs. The toolbox is written in MATLAB and it is compatible with
+MATLAB R2017b and later.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
+</h2>
+<p>Download the latest toolbox release from the repository
+<a class="reference external" href="https://github.com/StoccoDavide/indigo/releases">releases</a>
+section. Analogously the latest development version can be downloaded from the
+GitHub <a class="reference external" href="https://github.com/StoccoDavide/indigo">repository</a>. In both cases
+the pakage is a compressed file in <cite>.zip</cite> format. Unzip the file and add the
+folder to the MATLAB path. In case you want to install the MATLAB toolbox
+system-wide, you can open the <cite>indigo.mtlbx</cite> file and follow the instructions.
+If you are using MATLAB R2017b or later, you can install the toolbox directly
+from the Add-On Explorer by clicking on the <cite>Get Add-Ons</cite> button in the Add-On
+Explorer tab. Then search for <cite>indigo</cite> and install the toolbox.</p>
+</div>
+<div class="section" id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a>
+</h2>
+<p>The toolbox is structured through the following classes and functions.</p>
+<ul>
+<li><p><strong>Base:</strong> (Abstract) class container for the system of Ordinary Differential
+Equations (ODEs) or Differential Algebraic Equations (DAEs).</p></li>
+<li><p><strong>ODEsystem:</strong> (Abstract) class container for a system of Ordinary Differential
+Equations (ODEs).</p></li>
+<li><p><strong>ODEsolver:</strong> (Abstract) class container for solvers of the system of Ordinary
+Differential Equations (ODEs) or Differential Algebraic Equations (DAEs).</p></li>
+<li>
+<p><strong>RKexplicit:</strong> (Abstract) class implementing the function step for the explicit
+Runge-Kutta integration method.</p>
+<table class="docutils align-default" id="id1" style="width: 80%">
+<caption>
+<span class="caption-text">Available explicit Runge-Kutta solvers</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a>
+</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="row-odd">
+<td><p><em>Collatz</em></p></td>
+<td><p><em>ExplicitEuler</em></p></td>
+<td><p><em>ExplicitMidpoint</em></p></td>
+<td><p><em>Generic2</em></p></td>
+</tr>
+<tr class="row-even">
+<td><p><em>Generic3</em></p></td>
+<td><p><em>Heun2</em></p></td>
+<td><p><em>Heun3</em></p></td>
+<td><p><em>Ralston2</em></p></td>
+</tr>
+<tr class="row-odd">
+<td><p><em>Ralston3</em></p></td>
+<td><p><em>Ralston4</em></p></td>
+<td><p><em>RK3</em></p></td>
+<td><p><em>RK4</em></p></td>
+</tr>
+<tr class="row-even">
+<td><p><em>RK38</em></p></td>
+<td><p><em>SSPRK3</em></p></td>
+<td><p><em>Wray3</em></p></td>
+<td><p><em>-</em></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>RKimplicit:</strong> (Abstract) class implementing the function step for the implicit
+Runge-Kutta integration method.</p>
+<table class="docutils align-default" id="id2" style="width: 80%">
+<caption>
+<span class="caption-text">Available implicit Runge-Kutta solvers</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a>
+</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="row-odd">
+<td><p><em>CrankNicolson</em></p></td>
+<td><p><em>GaussLegendre2</em></p></td>
+<td><p><em>GaussLegendre4</em></p></td>
+<td><p><em>GaussLegendre6</em></p></td>
+</tr>
+<tr class="row-even">
+<td><p><em>ImplicitEuler</em></p></td>
+<td><p><em>ImplicitMidpoint</em></p></td>
+<td><p><em>LobattoIIIA2</em></p></td>
+<td><p><em>LobattoIIIA4</em></p></td>
+</tr>
+<tr class="row-odd">
+<td><p><em>LobattoIIIB2</em></p></td>
+<td><p><em>LobattoIIIB4</em></p></td>
+<td><p><em>LobattoIIIC2</em></p></td>
+<td><p><em>LobattoIIIC4</em></p></td>
+</tr>
+<tr class="row-even">
+<td><p><em>LobattoIIICS2</em></p></td>
+<td><p><em>LobattoIIICS4</em></p></td>
+<td><p><em>LobattoIIID2</em></p></td>
+<td><p><em>LobattoIIID4</em></p></td>
+</tr>
+<tr class="row-odd">
+<td><p><em>RadauIA3</em></p></td>
+<td><p><em>RadauIA5</em></p></td>
+<td><p><em>RadauIIA3</em></p></td>
+<td><p><em>RadauIIA5</em></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p><strong>NewtonSolver:</strong> function implementing a Newton solver with affine invariant
+step for the explicit and implicit Runge-Kutta solvers.</p></li>
+</ul>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a>
+</h2>
+<p>To use the toolbox you just have to follow the following steps.</p>
+<ol class="arabic simple">
+<li><p>Create an instance of the class representing the system of ODEs/DAEs, which
+must be a subclass of the class <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code>;</p></li>
+<li><p>Create an instance of the class representing the solver, by simply
+instantiating one of the available solver classes listed in the tables
+above.</p></li>
+<li><p>Associate the system of ODEs/DAEs to the solver instance by calling the
+method <code class="docutils literal notranslate"><span class="pre">set_ode</span></code> of the solver instance. Finally, call the method <code class="docutils literal notranslate"><span class="pre">solve</span></code>
+of the solver instance can be called to solve the system of ODEs/DAEs. It
+will return the solution of the system of ODEs/DAEs as a matrix, where each
+column is the solution of the system at a different time instant.</p></li>
+<li><p>(Optional) The method <code class="docutils literal notranslate"><span class="pre">plot</span></code> of the solver instance can be called to plot the
+solution of the system of ODEs/DAEs.</p></li>
+<li><p>(Optional) The method <code class="docutils literal notranslate"><span class="pre">animate</span></code> of the solver instance can be called to
+animate the solution of the system of ODEs/DAEs.</p></li>
+</ol>
+<p>For further details, please refer to the documentation of the classes and
+functions. Analogously, the examples provided in the <code class="docutils literal notranslate"><span class="pre">Examples</span></code> section can be
+used as a starting point for the usage of the <code class="docutils literal notranslate"><span class="pre">indigo</span></code> toolbox.</p>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.jpeg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MATLAB Toolbox</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-matlab/root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -17,7 +17,7 @@ Program Listing for File GaussLegendre4.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Gauss-Legendre fourth-order (2 stages)
        %>
@@ -44,7 +44,7 @@ Program Listing for File GaussLegendre4.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

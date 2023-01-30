@@ -17,7 +17,7 @@ Program Listing for File ImplicitMidpoint.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Implicit midpoint second-order method (1 stage)
        %>
@@ -41,7 +41,7 @@ Program Listing for File ImplicitMidpoint.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

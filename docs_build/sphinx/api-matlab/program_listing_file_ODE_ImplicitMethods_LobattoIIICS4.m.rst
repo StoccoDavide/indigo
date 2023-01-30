@@ -17,7 +17,7 @@ Program Listing for File LobattoIIICS4.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Lobatto IIIC$^\star$ fourth-order method (3 stages)
        %>
@@ -43,7 +43,7 @@ Program Listing for File LobattoIIICS4.m
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

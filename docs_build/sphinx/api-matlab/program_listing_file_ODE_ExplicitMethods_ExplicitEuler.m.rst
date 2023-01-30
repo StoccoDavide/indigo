@@ -17,7 +17,7 @@ Program Listing for File ExplicitEuler.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Explicit Euler first-order method (1 stage)
        %>
@@ -32,16 +32,17 @@ Program Listing for File ExplicitEuler.m
        %>
        %> \endrst
        %
-       function this = ExplicitEuler( ~ )
+       function this = ExplicitEuler()
          this@RKexplicit( ...
            'ExplicitEuler', ...
            [0], ...
            [1], ...
+           [], ...
            [0]' ...
          );
        end
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
      end
      %

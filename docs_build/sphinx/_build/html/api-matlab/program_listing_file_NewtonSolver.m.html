@@ -94,12 +94,12 @@
 <span class="w">  </span><span class="nb">assert</span><span class="p">(</span><span class="o">~</span><span class="nb">any</span><span class="p">(</span><span class="nb">isnan</span><span class="p">(</span><span class="n">x_0</span><span class="p">)),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
 <span class="w">    </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid initial guess of the solution.'</span><span class="p">]);</span><span class="w"></span>
 
-<span class="w">  </span><span class="nb">flag</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">verbose</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">tolerance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0e-08</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">ITER_NWTN</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">ITER_DUMP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="nb">alpha</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nb">flag</span><span class="w">             </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">verbose</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">tolerance</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0e-08</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">max_iter_newton</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">max_iter_dumping</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nb">alpha</span><span class="w">            </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="c">% Collect verbose flag</span><span class="w"></span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
@@ -113,12 +113,12 @@
 
 <span class="w">  </span><span class="c">% Collect Newton's maximum number of iterations</span><span class="w"></span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">ITER_NWTN</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">max_iter_newton</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">  </span><span class="c">% Collect dumping maximum number of iterations</span><span class="w"></span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">ITER_DUMP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">max_iter_dumping</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">  </span><span class="c">% Collect dumping coefficient</span><span class="w"></span>
@@ -133,7 +133,7 @@
 
 <span class="w">  </span><span class="c">% Perform Newton iteration</span><span class="w"></span>
 <span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">ITER_NWTN</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">max_iter_newton</span><span class="w"></span>
 
 <span class="w">    </span><span class="c">% Evaluate function and Jacobian</span><span class="w"></span>
 <span class="w">    </span><span class="n">F</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
@@ -149,7 +149,7 @@
 
 <span class="w">    </span><span class="c">% Perform dumping iteration</span><span class="w"></span>
 <span class="w">    </span><span class="n">dumped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="n">ITER_DUMP</span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="n">max_iter_dumping</span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
 <span class="w">      </span><span class="n">xd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">alpha</span>^<span class="nb">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">xd</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
 <span class="w">        </span><span class="n">Fd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">feval</span><span class="p">(</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">xd</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
@@ -210,10 +210,12 @@
 <script>$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_INTRO.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_TOOLBOX.html">DAE-Toolbox</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">ODE/DAE library examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
         </div>
@@ -221,7 +223,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Davide Stocco and Sebastiano Taddei.
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>

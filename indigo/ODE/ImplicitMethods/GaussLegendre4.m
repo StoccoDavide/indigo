@@ -5,7 +5,7 @@ classdef GaussLegendre4 < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Gauss-Legendre fourth-order (2 stages)
     %>
@@ -32,7 +32,7 @@ classdef GaussLegendre4 < RKimplicit
       );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

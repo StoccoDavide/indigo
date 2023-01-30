@@ -53,12 +53,12 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
   assert(~any(isnan(x_0)), ...
     [CMD, 'invalid initial guess of the solution.']);
 
-  flag      = 0;
-  verbose   = false;
-  tolerance = 1.0e-08;
-  ITER_NWTN = 50;
-  ITER_DUMP = 50;
-  alpha     = 0.5;
+  flag             = 0;
+  verbose          = false;
+  tolerance        = 1.0e-08;
+  max_iter_newton  = 10;
+  max_iter_dumping = 10;
+  alpha            = 0.5;
 
   % Collect verbose flag
   if (nargin > 3)
@@ -72,12 +72,12 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
 
   % Collect Newton's maximum number of iterations
   if (nargin > 5)
-    ITER_NWTN = varargin{3};
+    max_iter_newton = varargin{3};
   end
 
   % Collect dumping maximum number of iterations
   if (nargin > 6)
-    ITER_DUMP = varargin{4};
+    max_iter_dumping = varargin{4};
   end
 
   % Collect dumping coefficient
@@ -92,7 +92,7 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
 
   % Perform Newton iteration
   x = x_0;
-  for i = 1:ITER_NWTN
+  for i = 1:max_iter_newton
 
     % Evaluate function and Jacobian
     F  = feval(fun, x);
@@ -108,7 +108,7 @@ function [x, flag] = NewtonSolver( fun, jac, x_0, varargin )
 
     % Perform dumping iteration
     dumped = false;
-    for j = 0:ITER_DUMP-1
+    for j = 0:max_iter_dumping-1
       xd = x + alpha^j * h;
       if (all(isfinite(xd)) == true)
         Fd = feval( fun, xd );

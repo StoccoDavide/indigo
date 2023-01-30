@@ -36,7 +36,7 @@ classdef GaussLegendre6 < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Gauss-Legendre sixth-order (3 stages)
     %>
@@ -76,7 +76,7 @@ classdef GaussLegendre6 < RKimplicit
       );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

@@ -17,7 +17,7 @@ Program Listing for File LobattoIIIC2.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Lobatto IIIC second-order method (2 stages)
        %>

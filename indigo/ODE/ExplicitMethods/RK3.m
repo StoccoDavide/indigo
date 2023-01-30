@@ -1,13 +1,13 @@
 %
-%> Class container for Runge-Kutta third-order method (3 stages)
+%> Class container for Runge-Kutta third-order method.
 %
 classdef RK3 < RKexplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Runge-Kutta third-order method (3 stages)
+    %> Runge-Kutta third-order method.
     %>
     %>
     %> \rst
@@ -23,16 +23,18 @@ classdef RK3 < RKexplicit
     %>
     %> \endrst
     %
-    function this = RK3( ~ )
+    function this = RK3()
       this@RKexplicit( ...
         'RK3', ...
-        [0, 0, 0; 1/2, 0, 0; -1, 2, 0], ...
+        [0,   0, 0;
+         1/2, 0, 0;
+         -1,  2, 0], ...
         [1/6, 2/3, 1/6], ...
         [0, 1/2, 1]' ...
       );
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end
   %

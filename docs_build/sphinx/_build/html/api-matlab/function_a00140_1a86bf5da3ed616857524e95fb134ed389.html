@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function NewtonSolver &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MAPLE Package" href="../Manual_MAPLE.html" />
+    <link rel="prev" title="Class Zonnenveld45" href="class_a00174.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="function-newtonsolver">
+<span id="exhale-function-a00140-1a86bf5da3ed616857524e95fb134ed389"></span><h1>Function NewtonSolver<a class="headerlink" href="#function-newtonsolver" title="Permalink to this headline">¶</a>
+</h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_NewtonSolver.m.html#file-newtonsolver-m"><span class="std std-ref">File NewtonSolver.m</span></a></p></li>
+</ul>
+<div class="section" id="function-documentation">
+<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a>
+</h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412NewtonSolver2in2in2in2in">
+<span id="_CPPv312NewtonSolver2in2in2in2in"></span><span id="_CPPv212NewtonSolver2in2in2in2in"></span><span id="NewtonSolver__in.in.in.in"></span><span class="target" id="a00140_1a86bf5da3ed616857524e95fb134ed389"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NewtonSolver</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">fun</span></span>, </span><span class="n sig-param"><span class="pre">jac</span></span>, </span><span class="n sig-param"><span class="pre">x_0</span></span>, </span><span class="n sig-param"><span class="pre">varargin</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412NewtonSolver2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Function implementing a dumped Newton’s method with affine invariant step.</p>
+<p><strong>Solution Algorithm:</strong></p>
+<p>Given a zeros of a vectorial function problem of the form <span class="math notranslate nohighlight">\( \mathbf{F}
+(\mathbf{x}) = \mathbf{0} \)</span>, where <span class="math notranslate nohighlight">\( \mathbf{F}: \mathbb{R}^n \rightarrow
+\mathbb{R}^n \)</span>, then the Newton’s method is defined as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}(\mathbf{x}_k)\mathbf{h} = -\mathbf{F}(\mathbf{x}_k).
+\]</div>
+
+<p>The dumped step is defined as:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{h}
+\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \alpha_k \)</span> is a dumping coefficient that satisfies:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\left\| \mathbf{JF}(\mathbf{x}_k)^{-1} \mathbf{F}(\mathbf{x}_{k+1}) \right\|
+\leq \left(1 - \dfrac{\alpha_k}{2}\right) \left\| \mathbf{JF}(\mathbf{x}_k)^{-1}
+\mathbf{F}(\mathbf{x}_k) \right\| = \left(1 - \dfrac{\alpha_k}{2} \right)
+\left\| \mathbf{h}  \right\|.
+\]</div>
+
+<p><strong>Note:</strong></p>
+<p>For more details on the Newton’s method with affine invariant step refer to: <a class="reference external" href="https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html">https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>fun</strong> – Function handle of the vectorial function <span class="math notranslate nohighlight">\( \mathbf{F}(\mathbf{x}) \)</span>. </p></li>
+<li><p><strong>jac</strong> – Function handle of Jacobian matrix <span class="math notranslate nohighlight">\( \mathbf{JF}(\mathbf{x}) \)</span>. </p></li>
+<li><p><strong>x_0</strong> – Initial guess of the solution. </p></li>
+<li><p><strong>verbose</strong> – [optional, default = <span class="math notranslate nohighlight">\( \mathrm{false} \)</span>] enable verbose mode. </p></li>
+<li><p><strong>tolerance</strong> – [optional, default = <span class="math notranslate nohighlight">\( 1.0e^{-8} \)</span>] Convergence tolerance. </p></li>
+<li><p><strong>ITER_NWTN</strong> – [optional, default = <span class="math notranslate nohighlight">\( 50 \)</span>] Maximum number of Newton iterations. </p></li>
+<li><p><strong>ITER_DUMP</strong> – [optional, default = <span class="math notranslate nohighlight">\( 50 \)</span>] Maximum number of Dumping iterations. </p></li>
+<li><p><strong>ALPHA</strong> – [optional, default = <span class="math notranslate nohighlight">\( 0.5 \)</span>] Dumping coefficient.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The solution <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and the output flag: <span class="math notranslate nohighlight">\( 0 \)</span> = success, <span class="math notranslate nohighlight">\( 1 \)</span> = failed because of bad initial point, <span class="math notranslate nohighlight">\( 2 \)</span> = failed because of bad dumping (step got too short). </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.jpeg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

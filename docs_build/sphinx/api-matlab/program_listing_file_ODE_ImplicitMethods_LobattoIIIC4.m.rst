@@ -17,7 +17,7 @@ Program Listing for File LobattoIIIC4.m
      %
      methods
        %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
        %> Lobatto IIIC fourth-order method (3 stages)
        %>

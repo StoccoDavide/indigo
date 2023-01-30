@@ -10,6 +10,7 @@ Directory ODE
 Subdirectories
 --------------
 
+- :ref:`dir_ODE_EmbeddedMethods`
 - :ref:`dir_ODE_ExplicitMethods`
 - :ref:`dir_ODE_ImplicitMethods`
 

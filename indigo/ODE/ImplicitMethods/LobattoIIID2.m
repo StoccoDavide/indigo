@@ -5,7 +5,7 @@ classdef LobattoIIID2 < RKimplicit
   %
   methods
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Lobatto IIID second-order method (2 stages)
     %>
