@@ -34,30 +34,32 @@ The toolbox is structured through the following classes and functions.
 - **ODEsolver:** (Abstract) class container for solvers of the system of Ordinary
   Differential Equations (ODEs) or Differential Algebraic Equations (DAEs).
 - **RKexplicit:** (Abstract) class implementing the function step for the explicit
-  Runge-Kutta integration method.
+  (and explicit-embedded) Runge-Kutta integration method.
+- **RKimplicit:** (Abstract) class implementing the function step for the implicit
+  (and implicit-embedded) Runge-Kutta integration method.
+- **NewtonSolver:** function implementing a Newton solver with affine invariant
+  step for the explicit and implicit Runge-Kutta solvers.
+- **SavePNG:** function for saving the current figure as a PNG file.
 
   .. list-table:: Available explicit Runge-Kutta solvers
     :width: 80%
 
-    * - *Collatz*
-      - *ExplicitEuler*
+    * - *ExplicitEuler*
       - *ExplicitMidpoint*
       - *Generic2*
-    * - *Generic3*
-      - *Heun2*
+      - *Generic3*
+    * - *Heun2*
       - *Heun3*
       - *Ralston2*
-    * - *Ralston3*
-      - *Ralston4*
+      - *Ralston3*
+    * - *Ralston4*
       - *RK3*
       - *RK4*
-    * - *RK38*
-      - *SSPRK3*
+      - *RK38*
+    * - *SSPRK3*
       - *Wray3*
       - *-*
-
-- **RKimplicit:** (Abstract) class implementing the function step for the implicit
-  Runge-Kutta integration method.
+      - *-*
 
   .. list-table:: Available implicit Runge-Kutta solvers
     :width: 80%
@@ -83,8 +85,16 @@ The toolbox is structured through the following classes and functions.
       - *RadauIIA3*
       - *RadauIIA5*
 
-- **NewtonSolver:** function implementing a Newton solver with affine invariant
-  step for the explicit and implicit Runge-Kutta solvers.
+  .. list-table:: Available embedded (explicit and implicit) Runge-Kutta solvers
+    :width: 80%
+
+    * - *Fehlberg12*
+      - *Fehlberg45I*
+      - *Fehlberg45II*
+      - *Fehlberg78*
+    * - *HeunEuler*
+      - *Merson45*
+      - *Zonnenveld45*
 
 Usage
 -----

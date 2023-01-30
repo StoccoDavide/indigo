@@ -9,232 +9,232 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   class_a00146.rst
+   class_a00149.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00234.rst
+   class_a00237.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00178.rst
+   class_a00181.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00182.rst
+   class_a00185.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00238.rst
+   class_a00241.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00242.rst
+   class_a00245.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00246.rst
+   class_a00249.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00186.rst
+   class_a00189.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00190.rst
+   class_a00193.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00194.rst
+   class_a00197.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00198.rst
+   class_a00201.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00150.rst
+   class_a00153.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00250.rst
+   class_a00253.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00254.rst
+   class_a00257.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00258.rst
+   class_a00261.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00262.rst
+   class_a00265.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00266.rst
+   class_a00269.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00270.rst
+   class_a00273.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00274.rst
+   class_a00277.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00278.rst
+   class_a00281.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00282.rst
+   class_a00285.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00286.rst
+   class_a00289.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00290.rst
+   class_a00293.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00294.rst
+   class_a00297.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00154.rst
+   class_a00157.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00314.rst
+   class_a00317.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00318.rst
+   class_a00321.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00298.rst
+   class_a00301.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00302.rst
+   class_a00305.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00306.rst
+   class_a00309.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00310.rst
+   class_a00313.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00202.rst
+   class_a00205.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00206.rst
+   class_a00209.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00210.rst
+   class_a00213.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00214.rst
+   class_a00217.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00218.rst
+   class_a00221.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00222.rst
+   class_a00225.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00322.rst
+   class_a00325.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00158.rst
+   class_a00161.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00162.rst
+   class_a00165.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00166.rst
+   class_a00169.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00170.rst
+   class_a00173.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00326.rst
+   class_a00329.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00226.rst
+   class_a00229.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00230.rst
+   class_a00233.rst
 
 .. toctree::
    :maxdepth: 5
 
-   class_a00174.rst
+   class_a00177.rst
 
 Functions
 *********
@@ -243,4 +243,9 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_a00140_1a86bf5da3ed616857524e95fb134ed389.rst
+   function_a00143_1a86bf5da3ed616857524e95fb134ed389.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_a00005_1a72b8972bf13ac08ad86348b3e5adb078.rst

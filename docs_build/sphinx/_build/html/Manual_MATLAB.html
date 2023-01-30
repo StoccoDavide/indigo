@@ -72,7 +72,7 @@ Equations (ODEs).</p></li>
 Differential Equations (ODEs) or Differential Algebraic Equations (DAEs).</p></li>
 <li>
 <p><strong>RKexplicit:</strong> (Abstract) class implementing the function step for the explicit
-Runge-Kutta integration method.</p>
+(and explicit-embedded) Runge-Kutta integration method.</p>
 <table class="docutils align-default" id="id1" style="width: 80%">
 <caption>
 <span class="caption-text">Available explicit Runge-Kutta solvers</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a>
@@ -85,27 +85,27 @@ Runge-Kutta integration method.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd">
-<td><p><em>Collatz</em></p></td>
 <td><p><em>ExplicitEuler</em></p></td>
 <td><p><em>ExplicitMidpoint</em></p></td>
 <td><p><em>Generic2</em></p></td>
+<td><p><em>Generic3</em></p></td>
 </tr>
 <tr class="row-even">
-<td><p><em>Generic3</em></p></td>
 <td><p><em>Heun2</em></p></td>
 <td><p><em>Heun3</em></p></td>
 <td><p><em>Ralston2</em></p></td>
+<td><p><em>Ralston3</em></p></td>
 </tr>
 <tr class="row-odd">
-<td><p><em>Ralston3</em></p></td>
 <td><p><em>Ralston4</em></p></td>
 <td><p><em>RK3</em></p></td>
 <td><p><em>RK4</em></p></td>
+<td><p><em>RK38</em></p></td>
 </tr>
 <tr class="row-even">
-<td><p><em>RK38</em></p></td>
 <td><p><em>SSPRK3</em></p></td>
 <td><p><em>Wray3</em></p></td>
+<td><p><em>-</em></p></td>
 <td><p><em>-</em></p></td>
 </tr>
 </tbody>
@@ -113,7 +113,7 @@ Runge-Kutta integration method.</p>
 </li>
 <li>
 <p><strong>RKimplicit:</strong> (Abstract) class implementing the function step for the implicit
-Runge-Kutta integration method.</p>
+(and implicit-embedded) Runge-Kutta integration method.</p>
 <table class="docutils align-default" id="id2" style="width: 80%">
 <caption>
 <span class="caption-text">Available implicit Runge-Kutta solvers</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a>

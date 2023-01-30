@@ -47,7 +47,7 @@
 <span class="c">%&gt; \f[</span><span class="w"></span>
 <span class="c">%&gt; \begin{array}{c|c}</span><span class="w"></span>
 <span class="c">%&gt;   \mathbf{c} &amp; \mathbf{A} \\ \hline</span><span class="w"></span>
-<span class="c">%&gt;              &amp; \mathbf{b}</span><span class="w"></span>
+<span class="c">%&gt;              &amp; \mathbf{b} \\</span><span class="w"></span>
 <span class="c">%&gt;              &amp; \hat{\mathbf{b}}</span><span class="w"></span>
 <span class="c">%&gt; \end{array}</span><span class="w"></span>
 <span class="c">%&gt; \f]</span><span class="w"></span>
@@ -398,9 +398,23 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return True if the Butcher tableau is consistent, false otherwise.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> A, b, b_e, c <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">check_tableau</span><span class="p">(</span> varargin <span class="p">)</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'indigo::RKexplicit::check_tableau(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">b</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">b_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[];</span><span class="w"></span>
+<span class="w">        </span><span class="n">c</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+<span class="w">      </span><span class="k">elseif</span><span class="w"> </span><span class="p">(</span><span class="nb">nargin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">b</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">b_e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">c</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nb">varargin</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="nb">error</span><span class="p">([</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'Wrong number of input arguments.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
 

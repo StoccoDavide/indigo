@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00002" kind="file" language="C++">
     <compoundname>Base.m</compoundname>
-    <innerclass refid="a00146" prot="public">Base</innerclass>
+    <innerclass refid="a00149" prot="public">Base</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -12,7 +12,7 @@
 <codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>system<sp/>of<sp/>Ordinary<sp/>Differential<sp/>Equations<sp/>(ODEs)</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%&gt;<sp/>or<sp/>Differential<sp/>Algebraic<sp/>Equations<sp/>(DAEs).</highlight></codeline>
 <codeline lineno="4"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="5" refid="a00146" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00146" kindref="compound">Base</ref><sp/>&lt;<sp/>handle</highlight></codeline>
+<codeline lineno="5" refid="a00149" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00149" kindref="compound">Base</ref><sp/>&lt;<sp/>handle</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/>properties<sp/>(SetAccess<sp/>=<sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">,<sp/>Hidden<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
@@ -21,17 +21,17 @@
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>m_name;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
-<codeline lineno="14" refid="a00146_1aeceb7d6443dc5d20f4d04600dab356d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="14" refid="a00149_1aeceb7d6443dc5d20f4d04600dab356d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>m_num_eqns;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Number<sp/>of<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="19" refid="a00146_1a2afc6f457a733d1e90971b2e3d6a5ef0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_num_invs;</highlight></codeline>
+<codeline lineno="19" refid="a00149_1a2afc6f457a733d1e90971b2e3d6a5ef0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>m_num_invs;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="24" refid="a00146_1abea400bb1e63fabb6364e85aa3c384a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="24" refid="a00149_1abea400bb1e63fabb6364e85aa3c384a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>that<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>the<sp/>following</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>inputs:</highlight></codeline>
@@ -41,13 +41,13 @@
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_inv<sp/>The<sp/>number<sp/>of<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00146" kindref="compound">Base</ref>(<sp/>t_name,<sp/>t_num_eqns,<sp/>t_num_invs<sp/>)</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00149" kindref="compound">Base</ref>(<sp/>t_name,<sp/>t_num_eqns,<sp/>t_num_invs<sp/>)</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name<sp/><sp/><sp/><sp/><sp/>=<sp/>t_name;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_num_eqns<sp/>=<sp/>t_num_eqns;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_num_invs<sp/>=<sp/>t_num_invs;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="40" refid="a00146_1a606023c352e27bb5cc5a56f6850c27da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="40" refid="a00149_1a606023c352e27bb5cc5a56f6850c27da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>name.</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
@@ -60,7 +60,7 @@
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
-<codeline lineno="53" refid="a00146_1ad8e1b22487ddb483ff606042a03b46da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="53" refid="a00149_1ad8e1b22487ddb483ff606042a03b46da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>t_num_eqns<sp/>=<sp/>get_num_eqns(<sp/>this<sp/>)</highlight></codeline>
@@ -71,7 +71,7 @@
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>the<sp/>number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="64" refid="a00146_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_eqns<sp/>The<sp/>number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
+<codeline lineno="64" refid="a00149_1a67d9d0b3788a49baa9c6b6d82bf1d0a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_eqns<sp/>The<sp/>number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_num_eqns(<sp/>this,<sp/>t_num_eqns<sp/>)</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_num_eqns<sp/>=<sp/>t_num_eqns;</highlight></codeline>
@@ -82,7 +82,7 @@
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>number<sp/>of<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>number<sp/>of<sp/>invariants/hidden<sp/>contraints<sp/>of<sp/>the<sp/>system<sp/>of</highlight></codeline>
-<codeline lineno="75" refid="a00146_1a8acdc198f9503ad4df0938412359d4fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ODEs/DAEs.</highlight></codeline>
+<codeline lineno="75" refid="a00149_1a8acdc198f9503ad4df0938412359d4fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ODEs/DAEs.</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>t_num_invs<sp/>=<sp/>get_num_invs(<sp/>this<sp/>)</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>t_num_invs<sp/>=<sp/>this.m_num_invs;</highlight></codeline>
@@ -94,7 +94,7 @@
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_invs<sp/>The<sp/>number<sp/>of<sp/>invariants/hidden<sp/>constraints<sp/>of<sp/>the<sp/>system</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
-<codeline lineno="87" refid="a00146_1a547ccdd8280c668961998fc8e561492e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="87" refid="a00149_1a547ccdd8280c668961998fc8e561492e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>set_num_invs(<sp/>this,<sp/>t_num_invs<sp/>)</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_num_invs<sp/>=<sp/>t_num_invs;</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>

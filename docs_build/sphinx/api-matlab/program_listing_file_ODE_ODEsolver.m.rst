@@ -18,7 +18,7 @@ Program Listing for File ODEsolver.m
    %> \f[
    %> \begin{array}{c|c}
    %>   \mathbf{c} & \mathbf{A} \\ \hline
-   %>              & \mathbf{b}
+   %>              & \mathbf{b} \\
    %>              & \hat{\mathbf{b}}
    %> \end{array}
    %> \f]
@@ -200,7 +200,7 @@ Program Listing for File ODEsolver.m
    
          CMD = 'indigo::ODEsolver::set_max_substeps(...)';
    
-         assert(t_max_substeps > 0, ...
+         assert(t_max_substeps >= 0, ...
            [CMD, 'invalid maximum number of substeps.']);
    
          this.m_max_substeps = t_max_substeps;
@@ -339,12 +339,26 @@ Program Listing for File ODEsolver.m
        %>            (row vector).
        %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
        %
-       function set_tableau( this, A, b, b_e, c )
+       function set_tableau( this, varargin )
    
-         CMD = 'indigo::RKexplicit::set_tableau(...): ';
+         CMD = 'indigo::ODEsolver::set_tableau(...): ';
+   
+         if (nargin == 4)
+           A   = varargin{1};
+           b   = varargin{2};
+           b_e = [];
+           c   = varargin{3};
+         elseif (nargin == 5)
+           A   = varargin{1};
+           b   = varargin{2};
+           b_e = varargin{3};
+           c   = varargin{4};
+         else
+           error([CMD, 'Wrong number of input arguments.']);
+         end
    
          % Check the Butcher tableau
-         assert(RKexplicit.check_tableau(A, b, b_e, c), ...
+         assert(this.check_tableau(A, b, b_e, c), ...
            [CMD, 'invalid tableau detected.']);
    
          % Set the tableau
@@ -534,6 +548,27 @@ Program Listing for File ODEsolver.m
        %>   plot(t, sol(1,:));
        %>
        %> \endrst
+       %>
+       %> **Usage**
+       %>
+       %> Notice that the solve method is implemented through a while loop, thus
+       %> the final time step might not be exactly the same as the last element of
+       %> the desired input time vector \f$ \mathbf{t} \f$.
+       %>
+       %> \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+       %>                \right]^T \f$.
+       %> \param x_0     Initial states value \f$ \mathbf{x}(t_0) \f$.
+       %> \param project [optional, default = false] Apply projection to invariants
+       %>                 at each step.
+       %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
+       %>                vebose mode.
+       %> \param epsilon [optional, default = \f$ 1.0\mathrm{e}3 \f$] If
+       %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
+       %>                the computation is interrupted.
+       %>
+       %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+       %>         (\mathbf{t})\right] \f$ containing the approximated solution
+       %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
        %
        function [x_out, t_out] = solve( this, t, x_0, varargin )
    
@@ -593,7 +628,7 @@ Program Listing for File ODEsolver.m
          d_t_ini = t(2) - t(1);
          d_t     = d_t_ini;
    
-         while (t_out(s) < t(end))
+         while (t_out(s) <= t(end))
    
            % TODO: The while loop does not guarantee that the final time step
            %       end in t(end)
@@ -783,13 +818,14 @@ Program Listing for File ODEsolver.m
          end
    
          % Compute the error with 2-norm
-         err = sqrt(sum(((x_h - x_l)/.( ...
+         e = sqrt(sum(((x_h - x_l)./( ...
            A_tol + R_tol * max(abs(x_h), abs(x_l)) ...
          ))^2)/length(x_h));
    
          % Compute the suggested time step
          out = d_t * min(fac_max, max(fac_min, ...
-           (1 / err_norm)^(1 / (length(this.m_c) + 1))));
+           fac * (1/e) ^ (1/(length(this.m_c)+1) ...
+         )));
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -834,7 +870,7 @@ Program Listing for File ODEsolver.m
        %>
        %> \return True if the Butcher tableau is consistent, false otherwise.
        %
-       check_tableau( A, b, b_e, c )
+       check_tableau( varargin )
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %

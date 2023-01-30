@@ -18,7 +18,7 @@ Program Listing for File RKexplicit.m
    %> \f[
    %> \begin{array}{c|c}
    %>   \mathbf{c} & \mathbf{A} \\ \hline
-   %>              & \mathbf{b}
+   %>              & \mathbf{b} \\
    %>              & \hat{\mathbf{b}}
    %> \end{array}
    %> \f]
@@ -369,9 +369,23 @@ Program Listing for File RKexplicit.m
        %>
        %> \return True if the Butcher tableau is consistent, false otherwise.
        %
-       function out = check_tableau( A, b, b_e, c )
+       function out = check_tableau( varargin )
    
          CMD = 'indigo::RKexplicit::check_tableau(...): ';
+   
+         if (nargin == 3)
+           A   = varargin{1};
+           b   = varargin{2};
+           b_e = [];
+           c   = varargin{3};
+         elseif (nargin == 4)
+           A   = varargin{1};
+           b   = varargin{2};
+           b_e = varargin{3};
+           c   = varargin{4};
+         else
+           error([CMD, 'Wrong number of input arguments.']);
+         end
    
          out = true;
    

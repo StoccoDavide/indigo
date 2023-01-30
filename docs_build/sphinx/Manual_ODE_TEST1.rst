@@ -1,5 +1,5 @@
-ODE solve example 1
-===================
+Linear Pendulum (ODE)
+=====================
 
 .. image:: images/simple-pendulum.svg
     :align: center
@@ -13,109 +13,122 @@ Consider the ODE:
 .. math::
 
   \begin{cases}
-     \theta' = \omega & \\
-     \omega' = -\displaystyle\frac{g}{\ell}\sin\theta &
+     \theta' - \omega = 0 & \\
+     \omega' - \displaystyle\frac{g}{\ell}\sin\theta = 0 &
   \end{cases}
 
-Define the class for the ODE to be integrated.
-In this case the class ``LinearPendulumODE`` derived from
-the base class ``LinearPendulumODE``.
-The following is the contents of the file `LinearPendulumODE.m`
+Define the class for the ODE to be integrated. In this case the class
+``LinearPendulumODE`` derived from the base class ``ODEsystem``. The following
+code is the contents of the file `LinearPendulumODE.m` cleared of comments and
+unnecessary lines:
 
 .. code-block:: none
 
-  classdef LinearPendulumODE < DIAL_ODEsystem
+  classdef LinearPendulumODE < ODEsystem
     %
     properties (SetAccess = protected, Hidden = true)
-      %
-      %> Pendulum mass (kg)
-      %
-      m_m;
-      %
-      %> Pendulum length (m)
-      %
-      m_l;
-      %
-      %> Gravity acceleration (m/s^2)
-      %
-      m_g;
+      m_m; % Pendulum mass (kg)
+      m_l; % Pendulum length (m)
+      m_g; % Gravity acceleration (m/s^2)
     end
     %
     methods
       %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
       function this = LinearPendulumODE( m, l, g )
-        neq  = 2;
-        ninv = 0;
-        this@DIAL_ODEsystem( 'LinearPendulumODE', neq, ninv );
+
+        CMD = 'LinearPendulumODE::LinearPendulumODE(...): ';
+
+        % Set the number of equations and the number of invariants
+        num_eqns = 2;
+        num_invs = 0;
+
+        % Call the superclass constructor
+        this@ODEsystem( 'LinearPendulumODE', num_eqns, num_invs );
+
+        % Check the input arguments
+        assert(m > 0, ...
+          [CMD, 'pendulum mass must be positive.']);
+        assert(l > 0, ...
+          [CMD, 'pendulum length must be positive.']);
+        assert(g > 0, ...
+          [CMD, 'gravity acceleration must be positive.']);
+
         this.m_m = m;
         this.m_l = l;
         this.m_g = g;
       end
       %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
-      function out = f( this, ~, X )
+      function out = F( this, x, x_dot, t )
+
+        CMD = 'LinearPendulumODE::F(...): ';
+
+        % Check the input arguments
+        assert(length(x) == this.m_num_eqns, ...
+          [CMD, 'invalid x vector length.']);
+        assert(length(x_dot) == this.m_num_eqns, ...
+          [CMD, 'invalid x_dot vector length.']);
+        assert(isnumeric(t), ...
+          [CMD, 'invalid t vector.']);
+
+        % Evaluate the system of ODEs
         out    = zeros(2,1);
-        out(1) = X(2);
-        out(2) = -this.m_g / this.m_l * X(1);
+        out(1) = x_dot(1) - x(2);
+        out(2) = x_dot(2) + this.m_g / this.m_l * x(1);
       end
       %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
-      function out = DfDx( this, ~, ~ )
-        out      = zeros(2,2);
-        out(1,2) = 1.0;
-        out(2,1) = -this.m_g / this.m_l;
+      function [JF_x, JF_x_dot] = JF( this, x, x_dot, t )
+
+        CMD = 'LinearPendulumODE::JF(...): ';
+
+        % Check the input arguments
+        assert(length(x) == this.m_num_eqns, ...
+          [CMD, 'invalid x vector length.']);
+        assert(length(x_dot) == this.m_num_eqns, ...
+          [CMD, 'invalid x_dot vector length.']);
+        assert(isnumeric(t), ...
+          [CMD, 'invalid t vector.']);
+
+        % Evaluate the system of ODEs Jacobians
+        JF_x      = zeros(2);
+        JF_x_dot  = eye(2);
+        JF_x(1,2) = -1.0;
+        JF_x(2,1) = this.m_g / this.m_l;
       end
       %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
-      function h( ~, ~, ~ )
+      function out = H( ~, ~, ~ )
+        out = [];
       end
       %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
-      function DhDx( ~, ~, ~ )
+      function out = JH( ~, ~, ~ )
+        out = [];
       end
       %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      %
-      function plot( this, ~, X )
-        x  =  this.m_l*sin(X(1));
-        y  = -this.m_l*cos(X(1));
-        x0 = 0;
-        y0 = 0;
-        tt = 0:pi/100:2*pi;
-        xx = this.m_l*cos(tt);
-        yy = this.m_l*sin(tt);
-        hold off;
-        plot(xx, yy, 'LineWidth', 1.0, 'Color', 'red');
-        hold on;
-        grid on; grid minor;
-        xlabel('$x$(m)');
-        ylabel('$y$(m)');
-        l = 1.1*this.m_l;
-        drawLine(x0, y0, x, y, 'LineWidth', 5, 'Color', 'k');
-        drawCOG( 0.1*this.m_l, x0, y0 );
-        fillCircle( 'r', x, y, 0.1*this.m_l );
-        xlim([-l, l]);
-        ylim([-l, l]);
-        axis equal;
-      end
-      %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
       function out = exact( this, x_i, t )
-        sqrt_g_l = sqrt(this.m_g / this.m_l);
+
+        % Calculate temporary variables
+        sqrt_t = sqrt(this.m_g/this.m_l);
+        cos_t  = cos(sqrt_t.*t);
+        sin_t  = sin(sqrt_t.*t);
+
+        % Evaluate the exact solution
         out      = zeros(2,length(t));
-        out(1,:) = -sqrt_g_l .* x_i(2) .* sin(sqrt_g_l .* t) + x_i(1) * cos(sqrt_g_l .* t);
-        out(2,:) = sqrt_g_l .* (sqrt_g_l .* x_i(2) .* cos(sqrt_g_l .* t) - x_i(1) * sin(sqrt_g_l .* t));
+        out(1,:) = -sqrt_t.*x_i(2).*sin_t + x_i(1).*cos_t;
+        out(2,:) = sqrt_t.*(sqrt_t.*x_i(2).*cos_t - x_i(1).*sin_t);
       end
       %
-      %
-      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       %
     end
     %
@@ -124,112 +137,91 @@ The following is the contents of the file `LinearPendulumODE.m`
 Instantiate the ODE
 -------------------
 
-Having `LinearPendulumODE.m` now can instantiate the ODE:
+Having ``LinearPendulumODE.m`` now can instantiate the ``ODEsystem`` instance
+with the desired parameters, *e.g.* mass, length, gravity:
 
-.. code:: matlab
+.. code:: none
 
   % Load the linear pendulum model
   m = 1.0;  % Mass (kg)
   l = 1.0;  % Length (m)
   g = 9.81; % Gravity (m/s^2)
-  ODE = LinearPendulumODE( m, l, g );
+  ODE = LinearPendulumODE(m, l, g);
 
 Choose solver
 -------------
 
-Choose `ExplicitEuler` as solver and attach the instantiated
-ODE to it:
+Choose ``ExplicitEuler`` as solver and attach the instantiated ``ODEsystem``
+instance to it:
 
-.. code:: matlab
+.. code:: none
 
   solver = ExplicitEuler(); % Initialize solver
-  solver.setODE(ODE);       % Attach ODE to the solver
-
+  solver.set_ode(ODE);      % Attach ODE to the solver
 
 Integrate
 ---------
 
-Select the range and the sampling point for the numerical solution:
+Select the range and the desired sampling steps for the numerical solution:
 
-.. code:: matlab
+.. code:: none
 
-    d_t   = 0.05; % (s)
-    T_ini = 0.0;  % (s)
-    T_end = 10.0; % (s)
-    tt = T_ini:d_t:T_end;
+    d_t   = 0.05; % Desired time step (s)
+    t_ini = 0.0;  % Initial time (s)
+    t_end = 10.0; % Final time (s)
+    T_vec = t_ini:d_t:t_end;
 
-Setup initial condition:
+Setup the system of ODEs initial condition:
 
-.. code:: matlab
+.. code:: none
 
-  theta0  = pi/6;
-  omega0  = 0;
-  ini     = [theta0;omega0];
+  theta_0 = pi/6; % Initial angle (rad)
+  omega_0 = 0;    % Initial angular velocity (rad/s)
+  X_ini   = [theta_0; omega_0];
 
 Compute numerical solution:
 
-.. code:: matlab
+.. code:: none
 
-  sol = solver.advance( tt, ini );
+  [X, T] = solver.solve(T_vec, X_ini);
 
-now the matrix ``sol`` contain the solution.
-The first column contain \(\theta\) the second column
-contains  \(\omega\).
+Now the matrix ``X`` contain the solution of the system of ODEs at each time step
+in the vector ``T``. The vector ``X`` is a matrix where the first column contains
+\(\theta\), and the second column contains \(\omega\) values at each time step.
+Notice that the vector ``T`` is not necessarily the same as ``T_vec`` since the
+solver may choose to sample the solution at different time steps.
 
 Extract solution
 ----------------
 
-.. code:: matlab
+To extract the solution at each time step, use the following code:
 
-  theta = sol(1,:);
-  omega = sol(2,:);
+.. code:: none
+
+  time  = T;
+  theta = X(1,:);
+  omega = X(2,:);
   x =  l*sin(theta);
   y = -l*cos(theta);
+
+this will give you the solution at each time step in the vectors ``time``,
+``theta``, ``omega``, and the cartesian coordinates of the pendulum in the
+vectors ``x``, and ``y``.
 
 Plot the solution
 -----------------
 
-.. code:: matlab
+Plot the solution in the cartesian coordinates making them as fancy as you want.
 
-  % Sample a circle and plot (the constraint)
-  xx = l*cos(0:pi/100:2*pi);
-  yy = l*sin(0:pi/100:2*pi);
-  plot( xx, yy, '-r', 'Linewidth', 1 );
-  hold on
-  axis equal
-  plot( x, y, '-o', 'MarkerSize', 6, 'Linewidth', 2, 'Color', 'blue' );
-  title('x,y');
+.. image:: ./images/test1_theta.png
+  :width: 80%
+  :align: center
 
-.. image:: ./images/Manual_ODE_TEST1_fig1.png
-   :width: 90%
-   :align: center
+  Plot of the angle \(\theta\) as a function of time.
 
-.. code:: matlab
 
-  plot( tt, theta, '-o', 'MarkerSize', 6, 'Linewidth', 2 );
-  hold on;
-  legend('Explicit Euler');
-  title('theta');
+.. image:: ./images/test1_omega.png
+  :width: 80%
+  :align: center
 
-.. image:: ./images/Manual_ODE_TEST1_fig2.png
-   :width: 90%
-   :align: center
-
-.. code:: matlab
-
-  plot( tt, omega, '-o', 'MarkerSize', 6, 'Linewidth', 2 );
-  hold on;
-  legend('Explicit Euler');
-  title('omega');
-
-.. image:: ./images/Manual_ODE_TEST1_fig3.png
-   :width: 90%
-   :align: center
-
-.. code:: matlab
-
-  ode.animatePlot( tt, sol, 10, 1 );
-
-.. image:: ./images/Manual_ODE_TEST1_mov1.mp4
-   :width: 90%
-   :align: center
+  Plot of the angular velocity \(\omega\) as a function of time.

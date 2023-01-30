@@ -255,6 +255,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_SavePNG.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ExplicitMethods_SSPRK3.m.rst
 
 .. toctree::
