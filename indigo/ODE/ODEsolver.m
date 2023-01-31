@@ -623,8 +623,8 @@ classdef ODEsolver < handle
 
         % Print percentage of completion
         if (verbose == true)
-          p_new = ceil(100*s/steps);
-          if (p_new > p + 4)
+          p_new = ceil(100*t_out(s)/t(end));
+          if (p_new > p + 9)
             p = p_new;
             fprintf('%3d%%\n', p);
           end
@@ -648,6 +648,9 @@ classdef ODEsolver < handle
             % If the substepping index is even, double the step size
             if (rem(k, 2) == 0)
               d_t = 2 * d_t;
+              warning([CMD, 'in %s solver, at t(%d) = %g, integration succedded ', ...
+                'disable one substepping layer.'], ...
+                this.m_name, s, t(s));
             end
           end
 
@@ -656,15 +659,15 @@ classdef ODEsolver < handle
           % If the substepping index is too high, abort
           k = k + 2;
           if (k > max_k)
-            error([CMD, 'in %s solver, at t(%d) = %g, integration failed', ...
+            error([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
               '(error code %d) with d_t = %g, aborting.'], ...
               this.m_name, s, t(s), ierr, d_t);
           end
 
           % Otherwise, try again with a smaller step
-          warning([CMD, 'in %s solver, at t(%d) = %g, integration failed', ...
-          '(error code %d), perfom substepping.'], ...
-          this.m_name, s, t(s), ierr, k);
+          warning([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
+            '(error code %d), adding substepping layer.'], ...
+            this.m_name, s, t(s), ierr);
           d_t = d_t/2;
           continue;
 
@@ -769,35 +772,35 @@ classdef ODEsolver < handle
       CMD = 'indigo::ODEsolver::adapt_step(...): ';
 
       % Collect optional inputs
-      A_tol   = 1e-6;
-      R_tol   = 1e-6;
-      fac     = 0.9;
+      A_tol   = 1e-9;
+      R_tol   = 1e-9;
+      fac     = 0.8;
       fac_min = 0.2;
-      fac_max = 2.0;
+      fac_max = 1.5;
 
       % Absolute tolerance
       if (nargin > 4)
-        A_tol  = 1e-6;
+        A_tol  = varargin{1};
       end
 
       % Relative tolerance
       if (nargin > 5)
-        R_tol  = 1e-6;
+        R_tol  = varargin{2};
       end
 
       % Safety factor
       if (nargin > 5)
-        fac    = 0.9;
+        fac    = varargin{3};
       end
 
       % Desent safety factor
       if (nargin > 5)
-        fac_min = 0.2;
+        fac_min = varargin{4};
       end
 
       % Ascent safety factor
       if (nargin > 5)
-        fac_max = 2.0;
+        fac_max = varargin{5};
       end
 
       % Check inputs number
@@ -807,13 +810,17 @@ classdef ODEsolver < handle
 
       % Compute the error with 2-norm
       e = sqrt(sum(((x_h - x_l)./( ...
-        A_tol + R_tol * max(abs(x_h), abs(x_l)) ...
-      ))^2)/length(x_h));
+        A_tol + R_tol * max(max(abs(x_h)), max(abs(x_l))) ...
+      )).^2)/length(x_h));
+
+      %e = max(abs(x_h - x_l))./( ...
+      %  A_tol + R_tol * max(max(abs(x_h)), max(abs(x_l))) ...
+      %);
 
       % Compute the suggested time step
       out = d_t * min(fac_max, max(fac_min, ...
-        fac * (1/e) ^ (1/(length(this.m_c)+1) ...
-      )));
+        fac * (1/e) ^ (1/(length(this.m_c)+1)) ...
+      ));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

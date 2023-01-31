@@ -55,7 +55,7 @@ solver_name = {
 
 for i = 2:length(solver_name)
   eval(strcat(['solver', solver_name{i}, '=', solver_name{i}, '();']));
-  eval(strcat(['solver', solver_name{i}, '.set_ode( ODE );']));
+  eval(strcat(['solver', solver_name{i}, '.set_ode(ODE);']));
 end
 
 %% Integrate the system of ODE
@@ -74,7 +74,7 @@ X_ini   = [theta_0, omega_0];
 % Solve the system of ODEs for each solver
 for i = 2:length(solver_name)
   eval(strcat(['[X_', solver_name{i}, ', T_', solver_name{i}, '] =', ...
-    'solver', solver_name{i}, '.solve( T_vec, X_ini, false, false, 20.0e+03 );']));
+    'solver', solver_name{i}, '.solve( T_vec, X_ini, false, true, 20.0e+03 );']));
 end
 
 %% Calculate exact solution of the ODE

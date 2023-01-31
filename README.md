@@ -32,6 +32,7 @@ Available [here](https://stoccodavide.github.io/indigo/)!
 - [ ] Implement Sarafyan 4(5) embedded Runge-Kutta method class.
 - [ ] Implement Bogacki–Shampine 2(3) embedded Runge-Kutta method class.
 - [ ] Implement Verner 6(5) embedded Runge-Kutta method class.
+- [ ] Implement Sun Geng 5 implicit Runge-Kutta method class.
 
 ## Authors
 
