@@ -12,6 +12,7 @@ addpath('./indigo');
 addpath('./indigo/ODE');
 addpath('./indigo/ODE/ExplicitMethods/');
 addpath('./indigo/ODE/ImplicitMethods/');
+addpath('./indigo/ODE/EmbeddedMethods/');
 
 % Tests folder
 addpath('./tests');
