@@ -11,7 +11,7 @@ Program Listing for File Ralston4.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Ralston's fourth-order method.
+   %> Class container for Ralston's method.
    %
    classdef Ralston4 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Ralston4.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Ralston's fourth-order method.
+       %> Ralston's method.
        %>
        %> \rst
        %> .. math::

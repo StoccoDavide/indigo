@@ -11,7 +11,7 @@ Program Listing for File CrankNicolson.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Crank-Nicolson second-order method (2 stages)
+   %> Class container for Crank-Nicolson method.
    %
    classdef CrankNicolson < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File CrankNicolson.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Crank-Nicolson second-order method (2 stages)
+       %> Crank-Nicolson method.
        %>
        %> \rst
        %> .. math::

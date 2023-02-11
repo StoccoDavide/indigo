@@ -11,7 +11,7 @@ Program Listing for File LobattoIIIB4.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Lobatto IIIB fourth-order method (3 stages)
+   %> Class container for Lobatto IIIB method.
    %
    classdef LobattoIIIB4 < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File LobattoIIIB4.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Lobatto IIIB fourth-order method (3 stages)
+       %> Lobatto IIIB method.
        %>
        %> \rst
        %> .. math::

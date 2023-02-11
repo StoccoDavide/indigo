@@ -14,7 +14,7 @@ classdef ODEsystem < Base
     %> \param t_ninv Number of invariants/hidden contraints of the system of ODEs.
     %
     function this = ODEsystem( t_name, t_neqn, t_ninv )
-      this@Base( t_name, t_neqn, t_ninv );
+      this@Base(t_name, t_neqn, t_ninv);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

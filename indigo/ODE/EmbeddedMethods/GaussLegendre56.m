@@ -1,5 +1,5 @@
 %
-%> Class container for Gauss-Legendre sixth-order (3 stages)
+%> Class container for Gauss-Legendre 5(6) method.
 %
 classdef GaussLegendre56 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef GaussLegendre56 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss-Legendre sixth-order embedded method (3 stages)
+    %> Gauss-Legendre 5(6) method.
     %>
     %> \rst
     %> .. math::

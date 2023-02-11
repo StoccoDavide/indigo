@@ -11,7 +11,7 @@ Program Listing for File ImplicitMidpoint.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Implicit midpoint second-order method (1 stage)
+   %> Class container for Implicit midpoint method.
    %
    classdef ImplicitMidpoint < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File ImplicitMidpoint.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Implicit midpoint second-order method (1 stage)
+       %> Implicit midpoint method.
        %>
        %> \rst
        %> .. math::

@@ -11,7 +11,7 @@ Program Listing for File RadauIA5.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Radau IA fifth-order method (3 stages)
+   %> Class container for Radau IA method.
    %
    classdef RadauIA5 < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File RadauIA5.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Radau IA fifth-order method (3 stages)
+       %> Radau IA method.
        %>
        %> \rst
        %> .. math::

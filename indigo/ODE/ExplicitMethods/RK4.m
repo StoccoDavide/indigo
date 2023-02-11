@@ -1,5 +1,5 @@
 %
-%> Class container for Runge-Kutta fourth-order method.
+%> Class container for Runge-Kutta 4 method.
 %
 classdef RK4 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef RK4 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Classic fourth-order Runge-Kutta's method.
+    %> Runge-Kutta 4 method.
     %>
     %> \rst
     %> .. math::

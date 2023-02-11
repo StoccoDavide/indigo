@@ -11,7 +11,7 @@ Program Listing for File ExplicitMidpoint.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Explicit midpoint second-order method.
+   %> Class container for Explicit midpoint method.
    %
    classdef ExplicitMidpoint < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File ExplicitMidpoint.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Explicit midpoint second-order method.
+       %> Explicit midpoint method.
        %>
        %> \rst
        %> .. math::

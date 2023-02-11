@@ -11,7 +11,7 @@ Program Listing for File RK38.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Runge-Kutta 3/8-rule third-order method.
+   %> Class container for Runge-Kutta 3/8-rule method.
    %
    classdef RK38 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File RK38.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Runge-Kutta 3/8-rule fourth-order method.
+       %> Runge-Kutta 3/8-rule method.
        %>
        %> \rst
        %> .. math::

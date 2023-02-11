@@ -100,7 +100,7 @@
 <span class="w">    </span><span class="c">%&gt;               \f$ (row vector).</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return An instance of the RKexplicit class.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The instance of the RKexplicit class.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">RKexplicit</span><span class="p">(</span> varargin <span class="p">)</span><span class="w"></span>
 
@@ -163,7 +163,7 @@
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param i   Index of the step to be computed.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param x_i \f$ i \f$-th node.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_i States value at \f$ i \f$-th node.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
@@ -220,7 +220,7 @@
 <span class="w">    </span><span class="c">%&gt; \right) = \mathbf{0}</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; by Newton method.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; by Newton's method.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param K   Initial guess for the \f$ \mathbf{K} \f$ variable to be found.</span><span class="w"></span>
@@ -245,8 +245,8 @@
 <span class="w">        </span><span class="n">fun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K_i</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_residual</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="n">jac</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K_i</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">step_jacobian</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">K_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="c">% Solve using Newton</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NewtonSolver</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="c">% Solve using Newton's method</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_newton_solver</span><span class="p">.</span><span class="n">solve_handle</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
 <span class="w">          </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
@@ -510,7 +510,7 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/logo.jpeg" alt="Logo"/>
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
             </a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -524,12 +524,12 @@
 <script>$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Manual_EXAMPLES.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
 </ul>
 
         </div>

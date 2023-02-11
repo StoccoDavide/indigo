@@ -1,6 +1,5 @@
 %
-%> Class container for The Runge–Kutta–Fehlberg method of first- and second-order
-%> method.
+%> Class container for Fehlberg 1(2) method.
 %
 classdef Fehlberg12 < RKexplicit
   %
@@ -8,7 +7,7 @@ classdef Fehlberg12 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Runge–Kutta–Fehlberg method of first- and second-order method.
+    %> Fehlberg 1(2) method.
     %>
     %> \rst
     %> .. math::

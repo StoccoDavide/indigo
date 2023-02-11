@@ -1,5 +1,5 @@
 %
-%> Class container for Ralston's third-order method.
+%> Class container for Ralston's method.
 %
 classdef Ralston3 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Ralston3 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Ralston's third-order method.
+    %> Ralston's method.
     %>
     %> \rst
     %> .. math::

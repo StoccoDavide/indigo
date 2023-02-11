@@ -11,7 +11,7 @@ Program Listing for File LobattoIIICS2.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Lobatto IIIC$^\star$ second-order method (2 stages)
+   %> Class container for Lobatto IIIC$^\star$ method.
    %
    classdef LobattoIIICS2 < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File LobattoIIICS2.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Lobatto IIIC$^\star$ second-order method (2 stages)
+       %> Lobatto IIIC$^\star$ method.
        %>
        %> \rst
        %> .. math::

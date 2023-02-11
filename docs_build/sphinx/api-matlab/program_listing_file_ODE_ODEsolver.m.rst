@@ -79,17 +79,21 @@ Program Listing for File ODEsolver.m
        %
        m_c;
        %
-       %> Maximum number of substeps (default = 5).
+       %> Maximum number of substeps.
        %
-       m_max_substeps;
+       m_max_substeps = 5;
        %
-       %> Maximum number of iterations in the projection process (default = 5).
+       %> Maximum number of iterations in the projection process.
        %
-       m_max_projection_iter;
+       m_max_projection_iter = 10;
        %
-       %> System of ODEs/DAEs to be solved (fake pointer).
+       %> System of ODEs/DAEs to be object handle (fake pointer).
        %
        m_ode;
+       %
+       %> Non-linear system solver.
+       %
+       m_newton_solver;
        %
      end
      %
@@ -113,6 +117,8 @@ Program Listing for File ODEsolver.m
    
          CMD = 'indigo::ODEsolver::ODEsolver(...): ';
    
+         this.m_newton_solver = NewtonSolver();
+   
          if (nargin == 4)
            t_name = varargin{1};
            t_A    = varargin{2};
@@ -134,10 +140,6 @@ Program Listing for File ODEsolver.m
    
          % Set the Butcher tableau
          this.set_tableau(t_A, t_b, t_b_e, t_c);
-   
-         % Set default values
-         this.m_max_substeps        = 5;
-         this.m_max_projection_iter = 5;
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -448,7 +450,7 @@ Program Listing for File ODEsolver.m
          num_invs = this.m_ode.get_num_invs();
          x        = x_tilde;
    
-         assert(length(x_tilde) ~= num_eqns, ...
+         assert(length(x_tilde) == num_eqns, ...
            [CMD, 'the number of states does not match the number of equations.']);
    
          % Check if there are any constraints
@@ -480,9 +482,9 @@ Program Listing for File ODEsolver.m
              x  = x + dx;
    
              % Check if the solution is found
-             if (max(abs(dx)) < tolerance && max(abs(H)) < tolerance)
+             if (max(abs(dx)) < tolerance || max(abs(H)) < tolerance)
                break;
-             elseif (k == MAX_ITER)
+             elseif (k == this.m_max_projection_iter)
                warning([CMD, 'maximum number of iterations reached.']);
              end
            end
@@ -500,7 +502,7 @@ Program Listing for File ODEsolver.m
        %>                 at each step.
        %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
        %>                vebose mode.
-       %> \param epsilon [optional, default = \f$ 1.0\mathrm{e}3 \f$] If
+       %> \param epsilon [optional, default = \f$ 10^{3} \f$] If
        %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
        %>                the computation is interrupted.
        %>
@@ -562,7 +564,7 @@ Program Listing for File ODEsolver.m
        %>                 at each step.
        %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
        %>                vebose mode.
-       %> \param epsilon [optional, default = \f$ 1.0\mathrm{e}3 \f$] If
+       %> \param epsilon [optional, default = \f$ 10^{3} \f$] If
        %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
        %>                the computation is interrupted.
        %>
@@ -635,8 +637,8 @@ Program Listing for File ODEsolver.m
    
            % Print percentage of completion
            if (verbose == true)
-             p_new = ceil(100*s/steps);
-             if (p_new > p + 4)
+             p_new = ceil(100*t_out(s)/t(end));
+             if (p_new > p + 9)
                p = p_new;
                fprintf('%3d%%\n', p);
              end
@@ -660,6 +662,9 @@ Program Listing for File ODEsolver.m
                % If the substepping index is even, double the step size
                if (rem(k, 2) == 0)
                  d_t = 2 * d_t;
+                 warning([CMD, 'in %s solver, at t(%d) = %g, integration succedded ', ...
+                   'disable one substepping layer.'], ...
+                   this.m_name, s, t(s));
                end
              end
    
@@ -668,15 +673,15 @@ Program Listing for File ODEsolver.m
              % If the substepping index is too high, abort
              k = k + 2;
              if (k > max_k)
-               error([CMD, 'in %s solver, at t(%d) = %g, integration failed', ...
+               error([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
                  '(error code %d) with d_t = %g, aborting.'], ...
                  this.m_name, s, t(s), ierr, d_t);
              end
    
              % Otherwise, try again with a smaller step
-             warning([CMD, 'in %s solver, at t(%d) = %g, integration failed', ...
-             '(error code %d), perfom substepping.'], ...
-             this.m_name, s, t(s), ierr, k);
+             warning([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
+               '(error code %d), adding substepping layer.'], ...
+               this.m_name, s, t(s), ierr);
              d_t = d_t/2;
              continue;
    
@@ -685,9 +690,10 @@ Program Listing for File ODEsolver.m
            % Store time solution
            t_out(s+1) = t_out(s) + d_t;
    
+   
            % Project solution on the invariants/hidden constraints
            if (project == true)
-             x_new = this.project(t(s+1), x_new);
+             x_new = this.project(x_new, t_out(s+1));
            end
    
            % Check the infinity norm of the solution
@@ -745,9 +751,9 @@ Program Listing for File ODEsolver.m
        %> So we put:
        %>
        %> \f[
-       %> h_{new} = h \min \left( f_{max} \max \left( f_{max}, f \left(
-       %>   \dfrac{1}{e} \right)^{\frac{1}{q+1}},
-       %> \right), \right)
+       %> h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
+       %>   \dfrac{1}{e} \right)^{\frac{1}{q+1}}
+       %> \right) \right)
        %> \f]
        %>
        %> for the new step size. Then, if \f$ e \leq 1 \f$, the computed step is
@@ -763,9 +769,9 @@ Program Listing for File ODEsolver.m
        %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
        %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
        %> \param d_t Actual advancing time step \f$ \Delta t\f$.
-       %> \param A_tol   [optional, default = \f$ 1e-6 \f$] Absolute tolerance
+       %> \param A_tol   [optional, default = \f$ 10^{-6} \f$] Absolute tolerance
        %>                 \f$ A_{tol} \f$.
-       %> \param R_tol   [optional, default = \f$ 1e-6 \f$] Relative tolerance
+       %> \param R_tol   [optional, default = \f$ 10^{-6} \f$] Relative tolerance
        %>                 \f$ R_{tol} \f$.
        %> \param fac     [optional, default = \f$ 0.9 \f$] Safety factor \f$ f \f$.
        %> \param fac_min [optional, default = \f$ 0.2 \f$] Minimum safety factor
@@ -781,35 +787,35 @@ Program Listing for File ODEsolver.m
          CMD = 'indigo::ODEsolver::adapt_step(...): ';
    
          % Collect optional inputs
-         A_tol   = 1e-6;
-         R_tol   = 1e-6;
-         fac     = 0.9;
+         A_tol   = 1e-9;
+         R_tol   = 1e-9;
+         fac     = 0.8;
          fac_min = 0.2;
-         fac_max = 2.0;
+         fac_max = 1.5;
    
          % Absolute tolerance
          if (nargin > 4)
-           A_tol  = 1e-6;
+           A_tol  = varargin{1};
          end
    
          % Relative tolerance
          if (nargin > 5)
-           R_tol  = 1e-6;
+           R_tol  = varargin{2};
          end
    
          % Safety factor
          if (nargin > 5)
-           fac    = 0.9;
+           fac    = varargin{3};
          end
    
          % Desent safety factor
          if (nargin > 5)
-           fac_min = 0.2;
+           fac_min = varargin{4};
          end
    
          % Ascent safety factor
          if (nargin > 5)
-           fac_max = 2.0;
+           fac_max = varargin{5};
          end
    
          % Check inputs number
@@ -819,13 +825,17 @@ Program Listing for File ODEsolver.m
    
          % Compute the error with 2-norm
          e = sqrt(sum(((x_h - x_l)./( ...
-           A_tol + R_tol * max(abs(x_h), abs(x_l)) ...
-         ))^2)/length(x_h));
+           A_tol + R_tol * max(max(abs(x_h)), max(abs(x_l))) ...
+         )).^2)/length(x_h));
+   
+         %e = max(abs(x_h - x_l))./( ...
+         %  A_tol + R_tol * max(max(abs(x_h)), max(abs(x_l))) ...
+         %);
    
          % Compute the suggested time step
          out = d_t * min(fac_max, max(fac_min, ...
-           fac * (1/e) ^ (1/(length(this.m_c)+1) ...
-         )));
+           fac * (1/e) ^ (1/(length(this.m_c)+1)) ...
+         ));
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

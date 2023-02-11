@@ -1,5 +1,5 @@
 %
-%> Class container for The Zonneveld method of thind- and fourth-order method.
+%> Class container for Zonneveld's 4(5) method.
 %
 classdef Zonnenveld45 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Zonnenveld45 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Zonneveld method of thind- and fourth-order method.
+    %> Zonneveld's 4(5) method.
     %>
     %> \rst
     %> .. math::

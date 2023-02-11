@@ -1,6 +1,5 @@
 %
-%> Class container for The Runge–Kutta–Fehlberg (Table I) method of fourth- and
-%> fifth-order method.
+%> Class container for Fehlberg 4(5) (Table I) method.
 %
 classdef Fehlberg45I < RKexplicit
   %
@@ -8,7 +7,7 @@ classdef Fehlberg45I < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Runge–Kutta–Fehlberg (Table I) method of fourth- and fifth-order method.
+    %> Fehlberg 4(5) (Table I) method.
     %>
     %> \rst
     %> .. math::

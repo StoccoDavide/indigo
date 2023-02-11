@@ -1,5 +1,5 @@
 %
-%> Class container for Lobatto IIIC fourth-order method (3 stages)
+%> Class container for Lobatto IIIC method.
 %
 classdef LobattoIIIC4 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef LobattoIIIC4 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Lobatto IIIC fourth-order method (3 stages)
+    %> Lobatto IIIC method.
     %>
     %> \rst
     %> .. math::

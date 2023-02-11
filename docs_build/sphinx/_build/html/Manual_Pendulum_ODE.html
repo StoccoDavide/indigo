@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendulum (ODE) &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The Three Body Problem" href="Manual_The_Three_Body_Problem.html" />
+    <link rel="prev" title="Examples" href="Manual_Examples_Index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pendulum-ode">
+<h1>Pendulum (ODE)<a class="headerlink" href="#pendulum-ode" title="Permalink to this headline">¶</a>
+</h1>
+<a class="reference internal image-reference" href="_images/pendulum_sketch.jpg"><img alt="_images/pendulum_sketch.jpg" class="align-center" src="_images/pendulum_sketch.jpg" style="width: 25%;"></a>
+<div class="section" id="load-ode">
+<h2>Load ODE<a class="headerlink" href="#load-ode" title="Permalink to this headline">¶</a>
+</h2>
+<p>Consider the ODE:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+   \theta' - \omega = 0 &amp; \\
+   \omega' - \dfrac{g}{\ell}\sin(\theta) = 0 &amp;
+\end{cases}\end{split}\]</div>
+<p>Define the class for the ODE to be integrated. In this case the class
+<code class="docutils literal notranslate"><span class="pre">PendulumODE</span></code> derived from the base class <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code>. The following code is
+the contents of the file <cite>PendulumODE.m</cite> cleared of comments and unnecessary
+lines:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>% Class container for the pendulum
+classdef PendulumODE &lt; ODEsystem
+  %
+  properties (SetAccess = protected, Hidden = true)
+    m_m;   % Pendulum mass (kg)
+    m_l;   % Pendulum length (m)
+    m_g;   % Gravity acceleration (m/s^2)
+    m_X_0; % Initial conditions
+  end
+  %
+  methods
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function this = PendulumODE( m, l, g, X_0 )
+
+      CMD = 'PendulumODE::PendulumODE(...): ';
+
+      % Set the number of equations and the number of invariants
+      num_eqns = 2;
+      num_invs = 1;
+
+      % Call the superclass constructor
+      this@ODEsystem('PendulumODE', num_eqns, num_invs);
+
+      % Check the input arguments
+      assert(m &gt; 0, ...
+        [CMD, 'pendulum mass must be positive.']);
+      assert(l &gt; 0, ...
+        [CMD, 'pendulum length must be positive.']);
+      assert(g &gt; 0, ...
+        [CMD, 'gravity acceleration must be positive.']);
+      assert(length(X_0) == 2, ...
+        [CMD, 'initial conditions must be a 2-vector.']);
+
+      this.m_m   = m;
+      this.m_l   = l;
+      this.m_g   = g;
+      this.m_X_0 = X_0;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = F( this, x, x_dot, ~ )
+
+      CMD = 'PendulumODE::F(...): ';
+
+      % Check the input arguments
+      assert(length(x) == this.m_num_eqns, ...
+        [CMD, 'invalid x vector length.']);
+      assert(length(x_dot) == this.m_num_eqns, ...
+        [CMD, 'invalid x_dot vector length.']);
+
+      % Evaluate the system
+      out    = zeros(2,1);
+      out(1) = x_dot(1) - x(2);
+      out(2) = x_dot(2) + this.m_g / this.m_l * x(1);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function [JF_x, JF_x_dot] = JF( this, ~, ~, ~ )
+
+      % Evaluate the system Jacobians
+      JF_x      = zeros(2);
+      JF_x_dot  = eye(2);
+      JF_x(1,2) = -1.0;
+      JF_x(2,1) = this.m_g / this.m_l;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = H( this, x, ~ )
+      out = [];
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = JH( this, x, ~ )
+      out = [];
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+  end
+  %
+end
+</pre></div>
+</div>
+</div>
+<div class="section" id="instantiate-the-ode">
+<h2>Instantiate the ODE<a class="headerlink" href="#instantiate-the-ode" title="Permalink to this headline">¶</a>
+</h2>
+<p>Having <code class="docutils literal notranslate"><span class="pre">PendulumODE.m</span></code> now can instantiate a <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code> class instance with
+the desired parameters, <em>e.g.</em> mass, length, gravity and initial conditions:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>% Pendulum parameters
+m = 1.0;  % mass (kg)
+l = 1.0;  % length (m)
+g = 9.81; % gravity (m/s^2)
+
+% Initial conditions
+theta_0 = 5*pi/180;
+omega_0 = 0.0;
+X_0     = [theta_0, omega_0];
+
+ODE = PendulumODE(m, l, g, X_0);
+</pre></div>
+</div>
+</div>
+<div class="section" id="choose-solver">
+<h2>Choose solver<a class="headerlink" href="#choose-solver" title="Permalink to this headline">¶</a>
+</h2>
+<p>Choose <code class="docutils literal notranslate"><span class="pre">ExplicitEuler</span></code> and  <code class="docutils literal notranslate"><span class="pre">RadauIA5</span></code> as solvers and attach the
+instantiated <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code> to them:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>solver1 = ExplicitEuler();
+solver2 = RadauIA5();
+solver1.set_ode(ODE);
+solver2.set_ode(ODE);
+</pre></div>
+</div>
+</div>
+<div class="section" id="integrate">
+<h2>Integrate<a class="headerlink" href="#integrate" title="Permalink to this headline">¶</a>
+</h2>
+<p>Select the range and the desired sampling steps for the numerical solution:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>d_t   = 0.05; % Desired time step (s)
+t_ini = 0.0;  % Initial time (s)
+t_end = 10.0; % Final time (s)
+T_vec = t_ini:d_t:t_end;
+</pre></div>
+</div>
+<p>Compute numerical solution using the <code class="docutils literal notranslate"><span class="pre">solve</span></code> method of the solvers:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>[X1, T1] = solver1.solve(T_vec, X_0);
+[X2, T2] = solver2.solve(T_vec, X_0);
+</pre></div>
+</div>
+<p>Now the matrices <code class="docutils literal notranslate"><span class="pre">X</span></code> contain the solution of the system of ODEs at each time
+step in the vectors <code class="docutils literal notranslate"><span class="pre">T</span></code>. The vectors <code class="docutils literal notranslate"><span class="pre">X</span></code> are matrices where the first row
+contains <span class="math notranslate nohighlight">\(\theta\)</span>, and the second row contains <span class="math notranslate nohighlight">\(\omega\)</span> values at
+each time step. Notice that the vectors <code class="docutils literal notranslate"><span class="pre">T</span></code> are not necessarily the same as
+<code class="docutils literal notranslate"><span class="pre">T_vec</span></code> since the solvers may choose to sample the solution at different time
+steps.</p>
+</div>
+<div class="section" id="extract-solution">
+<h2>Extract solution<a class="headerlink" href="#extract-solution" title="Permalink to this headline">¶</a>
+</h2>
+<p>To extract the solution at each time step, use the following code:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>time  = T1;
+theta = X1(1,:);
+omega = X1(2,:);
+x     =  l*sin(theta);
+y     = -l*cos(theta);
+</pre></div>
+</div>
+<p>this will give you the solution at each time step in the vectors <code class="docutils literal notranslate"><span class="pre">time</span></code>,
+<code class="docutils literal notranslate"><span class="pre">theta</span></code>, <code class="docutils literal notranslate"><span class="pre">omega</span></code>, and the cartesian coordinates of the pendulum in the
+vectors <code class="docutils literal notranslate"><span class="pre">x</span></code>, and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+</div>
+<div class="section" id="plot-the-solution">
+<h2>Plot the solution<a class="headerlink" href="#plot-the-solution" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><p><strong>Plot of the angle</strong> <span class="math notranslate nohighlight">\(\theta(t)\)</span> <strong>.</strong></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/pendulum_theta.png"><img alt="_images/pendulum_theta.png" class="align-center" src="_images/pendulum_theta.png" style="width: 80%;"></a>
+<ul class="simple">
+<li><p><strong>Plot of the angular velocity</strong> <span class="math notranslate nohighlight">\(\omega(t)\)</span> <strong>.</strong></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/pendulum_omega.png"><img alt="_images/pendulum_omega.png" class="align-center" src="_images/pendulum_omega.png" style="width: 80%;"></a>
+<ul class="simple">
+<li><p><strong>Plot of the energy</strong> <span class="math notranslate nohighlight">\(E(t)\)</span> <strong>.</strong></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/pendulum_energy.png"><img alt="_images/pendulum_energy.png" class="align-center" src="_images/pendulum_energy.png" style="width: 80%;"></a>
+<p>As we can notice the solution is drifting away from the exact solution. This is
+due to the fact that when solving the system of ODEs we are using a numerical
+method, and the numerical method is not exact. The numerical method is only
+approximating the solution of the system of ODEs. The numerical error can be
+controlled by choosing a smaller time step <code class="docutils literal notranslate"><span class="pre">d_t</span></code> or by using a more accurate
+numerical method. In addition to that, the numerical error can be reduced by
+enhancing the class <code class="docutils literal notranslate"><span class="pre">PendulumODE</span></code> with the invariants of the system of
+ODEs, <em>e.g.</em> the energy of the system, which can be used to correct the numerical
+solution at each time step.</p>
+</div>
+<div class="section" id="invariants-and-projection">
+<h2>Invariants and Projection<a class="headerlink" href="#invariants-and-projection" title="Permalink to this headline">¶</a>
+</h2>
+<p>Invariants are quantities that are conserved in the system of ODEs. In the case
+of the linear pendulum, the energy of the system is conserved. The energy (or
+invariant) of the system is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}(\mathbf{x}, t) =  mgl(\cos(\theta_0)-\cos(\theta)) +
+  \frac{1}{2}ml^2(\omega)^2\]</div>
+<p>Its derivative with respect to the states of the system is the invariant of the
+system:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{JH}_{\mathbf{x}}(\mathbf{x}, t) = \left[
+  mgl\sin(\theta-\theta_0), ~ ml^2\omega
+\right]\]</div>
+<p>The energy of the system is a function of the state of the system, <em>i.e.</em> the
+angle <span class="math notranslate nohighlight">\(\theta\)</span> and the angular velocity <span class="math notranslate nohighlight">\(\omega\)</span>. In order to use
+the variation of energy of the system as an invariant, we need to define the
+method <code class="docutils literal notranslate"><span class="pre">H</span></code> in the class <code class="docutils literal notranslate"><span class="pre">PendulumODE</span></code> to compute the invariant of the system
+at each time step:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>function out = H( this, x, ~ )
+
+  CMD = 'PendulumODE::H(...): ';
+
+  % Check the input arguments
+  assert(size(x,1) == this.m_num_eqns, ...
+    [CMD, 'invalid x vector length.']);
+
+  % Evaluate the system invariant
+  out = this.m_m.*this.m_g.*this.m_l.*(cos(this.m_X_0(1))-cos(x(1,:))) + ...
+        0.5.*this.m_m.*this.m_l^2.*(x(2,:)).^2;
+end
+</pre></div>
+</div>
+<p>and to compute its derivative with respect to the states of the system to obtain
+the method <code class="docutils literal notranslate"><span class="pre">JH</span></code>:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>function out = JH( this, x, ~ )
+
+  CMD = 'PendulumODE::JH(...): ';
+
+  % Check the input arguments
+  assert(size(x,1) == this.m_num_eqns, ...
+    [CMD, 'invalid x vector length.']);
+
+  % Evaluate the system gradient of the invariant
+  out = [this.m_m.*this.m_g.*this.m_l.*sin(x(1,:)), ...
+        this.m_m.*this.m_l^2.*x(2,:)];
+end
+</pre></div>
+</div>
+<p>Now we can use the variation of the system energy as an invariant to correct the
+numerical solution at each time step. To do so, we enable the projection in the
+solution process:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>[X, T] = solver.solve(T_vec, X_0, true);
+</pre></div>
+</div>
+<p>The plots of the angle and the angular velocity are now much better even with a
+simple numerical method like <code class="docutils literal notranslate"><span class="pre">ExplicitEuler</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Plot of the projected angle</strong> <span class="math notranslate nohighlight">\(\theta(t)\)</span> <strong>.</strong></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/pendulum_theta_proj.png"><img alt="_images/pendulum_theta_proj.png" class="align-center" src="_images/pendulum_theta_proj.png" style="width: 80%;"></a>
+<ul class="simple">
+<li><p><strong>Plot of the projected angular velocity</strong> <span class="math notranslate nohighlight">\(\omega(t)\)</span> <strong>.</strong></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/pendulum_omega_proj.png"><img alt="_images/pendulum_omega_proj.png" class="align-center" src="_images/pendulum_omega_proj.png" style="width: 80%;"></a>
+<ul class="simple">
+<li><p><strong>Plot of the projected energy</strong> <span class="math notranslate nohighlight">\(E(t)\)</span> <strong>.</strong></p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/pendulum_energy_proj.png"><img alt="_images/pendulum_energy_proj.png" class="align-center" src="_images/pendulum_energy_proj.png" style="width: 80%;"></a>
+<p>Note that also the natural frequency of the system is not matched by the
+numerical solution of the <code class="docutils literal notranslate"><span class="pre">ExplicitEuler</span></code> method. To incresase the accuracy
+of the numerical solution, we can use either a more accurate numerical method like
+<code class="docutils literal notranslate"><span class="pre">RungeKutta4</span></code> or a smaller time step <code class="docutils literal notranslate"><span class="pre">d_t</span></code>.</p>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-matlab/root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Manual_Examples_Index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pendulum (ODE)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-ode">Load ODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instantiate-the-ode">Instantiate the ODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#choose-solver">Choose solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integrate">Integrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-solution">Extract solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plot-the-solution">Plot the solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invariants-and-projection">Invariants and Projection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Manual_The_Three_Body_Problem.html">The Three Body Problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

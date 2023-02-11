@@ -1,5 +1,5 @@
 %
-%> Class container for Implicit midpoint second-order method (1 stage)
+%> Class container for Implicit midpoint method.
 %
 classdef ImplicitMidpoint < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef ImplicitMidpoint < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Implicit midpoint second-order method (1 stage)
+    %> Implicit midpoint method.
     %>
     %> \rst
     %> .. math::

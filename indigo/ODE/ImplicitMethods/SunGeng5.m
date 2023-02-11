@@ -1,5 +1,5 @@
 %
-%> Class container for Sun Geng (Radau) fifth-order method.
+%> Class container for Sun Geng's method.
 %
 classdef SunGeng5 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef SunGeng5 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Sun Geng (Radau) fifth-order method.
+    %> Sun Geng's method.
     %>
     %> \rst
     %> .. math::

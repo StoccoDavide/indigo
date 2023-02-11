@@ -26,9 +26,9 @@ Definition (``NewtonSolver.m``)
 
 
 
-Functions
----------
+Classes
+-------
 
 
-- :ref:`exhale_function_a00143_1a86bf5da3ed616857524e95fb134ed389`
+- :ref:`exhale_class_a00195`
 

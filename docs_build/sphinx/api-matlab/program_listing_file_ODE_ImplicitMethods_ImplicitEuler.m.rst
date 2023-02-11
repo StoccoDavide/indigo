@@ -11,7 +11,7 @@ Program Listing for File ImplicitEuler.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Implicit Euler first-order method (1 stage)
+   %> Class container for Implicit Euler method.
    %
    classdef ImplicitEuler < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File ImplicitEuler.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Implicit Euler first-order method (1 stage)
+       %> Implicit Euler method.
        %>
        %> \rst
        %> .. math::

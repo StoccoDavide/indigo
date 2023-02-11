@@ -1,5 +1,5 @@
 %
-%> Class container for Crank-Nicolson second-order method (2 stages)
+%> Class container for Crank-Nicolson method.
 %
 classdef CrankNicolson < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef CrankNicolson < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Crank-Nicolson second-order method (2 stages)
+    %> Crank-Nicolson method.
     %>
     %> \rst
     %> .. math::

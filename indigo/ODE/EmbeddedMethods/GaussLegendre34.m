@@ -1,5 +1,5 @@
 %
-%> Class container for Gauss-Legendre embedded fourth-order (2 stages)
+%> Class container for Gauss-Legendre 3(4) method.
 %
 classdef GaussLegendre34 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef GaussLegendre34 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss-Legendre fourth-order embedded method (2 stages)
+    %> Gauss-Legendre 3(4) method.
     %>
     %> \rst
     %> .. math::

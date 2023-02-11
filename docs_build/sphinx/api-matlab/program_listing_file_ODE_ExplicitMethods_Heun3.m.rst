@@ -11,7 +11,7 @@ Program Listing for File Heun3.m
 .. code-block:: MATLAB
 
    %
-   %> Calss container for Heun's third-order method.
+   %> Class container for Heun's method.
    %
    classdef Heun3 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Heun3.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Heun's third-order method.
+       %> Heun's method.
        %>
        %> \rst
        %> .. math::

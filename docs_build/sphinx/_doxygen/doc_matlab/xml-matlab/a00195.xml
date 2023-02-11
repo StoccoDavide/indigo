@@ -1,0 +1,1045 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+  <compounddef id="a00195" kind="class" language="C++" prot="public">
+    <compoundname>NewtonSolver</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00195_1ad728491ed11597eb8fc0408e95e8da39" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_function_handle</definition>
+        <argsstring></argsstring>
+        <name>m_function_handle</name>
+        <qualifiedname>NewtonSolver::m_function_handle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="44" column="10" bodyfile="NewtonSolver.m" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a023a1742b15296a92e4a91a086619940" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_jacobian_handle</definition>
+        <argsstring></argsstring>
+        <name>m_jacobian_handle</name>
+        <qualifiedname>NewtonSolver::m_jacobian_handle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="49" column="10" bodyfile="NewtonSolver.m" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a16b43a4590b3b7d2d2f10728b85505c4" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_tolerance</definition>
+        <argsstring></argsstring>
+        <name>m_tolerance</name>
+        <qualifiedname>NewtonSolver::m_tolerance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="54" column="10" bodyfile="NewtonSolver.m" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1aa758033e177cbbf5003356b67e01effc" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_max_iterations</definition>
+        <argsstring></argsstring>
+        <name>m_max_iterations</name>
+        <qualifiedname>NewtonSolver::m_max_iterations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="59" column="10" bodyfile="NewtonSolver.m" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a3f6bd13aaedee841a984e678cbf7d6ef" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_max_function_evaluations</definition>
+        <argsstring></argsstring>
+        <name>m_max_function_evaluations</name>
+        <qualifiedname>NewtonSolver::m_max_function_evaluations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="64" column="10" bodyfile="NewtonSolver.m" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1adaddac69ee7f64dbf1992ab3e1ec22cb" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_max_jacobian_evaluations</definition>
+        <argsstring></argsstring>
+        <name>m_max_jacobian_evaluations</name>
+        <qualifiedname>NewtonSolver::m_max_jacobian_evaluations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="69" column="10" bodyfile="NewtonSolver.m" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a11cde2c97e50b6086c77c1f0e831cbf4" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_max_relaxations</definition>
+        <argsstring></argsstring>
+        <name>m_max_relaxations</name>
+        <qualifiedname>NewtonSolver::m_max_relaxations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="74" column="10" bodyfile="NewtonSolver.m" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a716b0b5d554062abb6253136c47753d2" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_verbose</definition>
+        <argsstring></argsstring>
+        <name>m_verbose</name>
+        <qualifiedname>NewtonSolver::m_verbose</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="79" column="10" bodyfile="NewtonSolver.m" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a03314f418079d9f91da292ba1b354662" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_iterations</definition>
+        <argsstring></argsstring>
+        <name>m_iterations</name>
+        <qualifiedname>NewtonSolver::m_iterations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="84" column="10" bodyfile="NewtonSolver.m" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a0419ce309558190180db125fb66d04bf" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_function_evaluations</definition>
+        <argsstring></argsstring>
+        <name>m_function_evaluations</name>
+        <qualifiedname>NewtonSolver::m_function_evaluations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="89" column="10" bodyfile="NewtonSolver.m" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a27377575dbab67a03b449e4f45ba4b83" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_jacobian_evaluations</definition>
+        <argsstring></argsstring>
+        <name>m_jacobian_evaluations</name>
+        <qualifiedname>NewtonSolver::m_jacobian_evaluations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="94" column="10" bodyfile="NewtonSolver.m" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a11f43d22ae3d721cc881015d18281ffb" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_relaxations</definition>
+        <argsstring></argsstring>
+        <name>m_relaxations</name>
+        <qualifiedname>NewtonSolver::m_relaxations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="99" column="10" bodyfile="NewtonSolver.m" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a32b8d203d39b800967bb8e1eeb83d582" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_residuals</definition>
+        <argsstring></argsstring>
+        <name>m_residuals</name>
+        <qualifiedname>NewtonSolver::m_residuals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="104" column="10" bodyfile="NewtonSolver.m" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1a40bd74dd20e46025d07ca894c2094725" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_converged</definition>
+        <argsstring></argsstring>
+        <name>m_converged</name>
+        <qualifiedname>NewtonSolver::m_converged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="109" column="10" bodyfile="NewtonSolver.m" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00195_1af5115cb89ba4f1ac2fdc6e25b6e67e06" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property NewtonSolver::m_alpha</definition>
+        <argsstring></argsstring>
+        <name>m_alpha</name>
+        <qualifiedname>NewtonSolver::m_alpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="114" column="10" bodyfile="NewtonSolver.m" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="a00195_1a734fb3b1fb0710e341c9dbc10c313779" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::NewtonSolver</definition>
+        <argsstring>()</argsstring>
+        <name>NewtonSolver</name>
+        <qualifiedname>NewtonSolver::NewtonSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Newton&apos;s solver class constructor.</para>
+<para><simplesect kind="return"><para>The Newton&apos;s solver object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="126" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ab2437f1e91b5ac3597540a3acc44b35b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::set_tolerance</definition>
+        <argsstring>(in this, in t_tolerance)</argsstring>
+        <name>set_tolerance</name>
+        <qualifiedname>NewtonSolver::set_tolerance</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_tolerance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set algorithm tolerance.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_tolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The algorithm tolerance. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="136" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a4f09ff793fbc28f39b2d14042d2cf508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::get_tolerance</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_tolerance</name>
+        <qualifiedname>NewtonSolver::get_tolerance</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get algorithm tolerance.</para>
+<para><simplesect kind="return"><para>The algorithm tolerance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="156" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a3335b5d9e229b0a199b328be94ddf085" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::set_max_iterations</definition>
+        <argsstring>(in this, in t_max_iterations)</argsstring>
+        <name>set_max_iterations</name>
+        <qualifiedname>NewtonSolver::set_max_iterations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_max_iterations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set maximum allowed algorithm iterations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_max_iterations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum allowed algorithm iterations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="167" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a2521043181b64c727e80d7c688bc0bd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::get_max_iterations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_max_iterations</name>
+        <qualifiedname>NewtonSolver::get_max_iterations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set maximum allowed algorithm iterations.</para>
+<para><simplesect kind="return"><para>The maximum allowed algorithm iterations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="187" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1af87436c743e60bbe63a915a751f9eec1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::set_max_function_evaluations</definition>
+        <argsstring>(in this, in t_max_function_evaluations)</argsstring>
+        <name>set_max_function_evaluations</name>
+        <qualifiedname>NewtonSolver::set_max_function_evaluations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_max_function_evaluations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set maximum allowed function evaluations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_max_evaluations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum allowed function evaluations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="198" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ac166d75c7829c3434574bfa14d449cc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::get_max_function_evaluations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_max_function_evaluations</name>
+        <qualifiedname>NewtonSolver::get_max_function_evaluations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get maximum allowed function evaluations.</para>
+<para><simplesect kind="return"><para>The maximum allowed function evaluations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="218" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a0e5c49b48c68a2d5a7e2ab28c407da13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::set_max_jacobian_evaluations</definition>
+        <argsstring>(in this, in t_max_jacobian_evaluations)</argsstring>
+        <name>set_max_jacobian_evaluations</name>
+        <qualifiedname>NewtonSolver::set_max_jacobian_evaluations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_max_jacobian_evaluations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set maximum allowed jacobian evaluations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_max_evaluations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum allowed jacobian evaluations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="229" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a598b10959ca109cde607ca1d90d4a362" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::get_max_jacobian_evaluations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_max_jacobian_evaluations</name>
+        <qualifiedname>NewtonSolver::get_max_jacobian_evaluations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get maximum allowed jacobian evaluations.</para>
+<para><simplesect kind="return"><para>The maximum allowed jacobian evaluations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="249" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1acaef5b6fb6cb026a17fd29f8bf90cb75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::set_max_relaxations</definition>
+        <argsstring>(in this, in t_max_relaxations)</argsstring>
+        <name>set_max_relaxations</name>
+        <qualifiedname>NewtonSolver::set_max_relaxations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_max_relaxations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set maximum allowed algorithm relaxations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_max_relaxations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum allowed algorithm relaxations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="260" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ae9c642d18d3659488de1fcdbc5f3d203" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::get_max_relaxations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_max_relaxations</name>
+        <qualifiedname>NewtonSolver::get_max_relaxations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get maximum allowed algorithm relaxations.</para>
+<para><simplesect kind="return"><para>The maximum allowed algorithm relaxations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="280" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a77a789c34889417b2526548d741e3ed6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::set_alpha</definition>
+        <argsstring>(in this, in t_alpha)</argsstring>
+        <name>set_alpha</name>
+        <qualifiedname>NewtonSolver::set_alpha</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set relaxation factor.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The relaxation factor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="291" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ac2a1e8d5b317a15136765949e891b90a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::get_alpha</definition>
+        <argsstring>(in this)</argsstring>
+        <name>get_alpha</name>
+        <qualifiedname>NewtonSolver::get_alpha</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get relaxation factor.</para>
+<para><simplesect kind="return"><para>The relaxation factor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="308" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a839e1bdb090ecfc8642abbdc95514903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::enable_verbose</definition>
+        <argsstring>(in this)</argsstring>
+        <name>enable_verbose</name>
+        <qualifiedname>NewtonSolver::enable_verbose</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Enable verbose mode.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The relaxation factor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="319" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a8d1d1f6f8fa301aad3c446cc87625551" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::disable_verbose</definition>
+        <argsstring>(in this)</argsstring>
+        <name>disable_verbose</name>
+        <qualifiedname>NewtonSolver::disable_verbose</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Disable verbose mode.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The relaxation factor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="330" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ab8a33a2f0f1cbcde796448d577a54289" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::out_iterations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>out_iterations</name>
+        <qualifiedname>NewtonSolver::out_iterations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get algorithm iterations.</para>
+<para><simplesect kind="return"><para>The algorithm iterations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="341" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a176a1d10112a606bb917440ccfa5d453" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::out_function_evaluations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>out_function_evaluations</name>
+        <qualifiedname>NewtonSolver::out_function_evaluations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set function evaluations.</para>
+<para><simplesect kind="return"><para>The function evaluations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="352" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a751b28fed3ac77a8f794cefa4a17279d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::out_jacobian_evaluations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>out_jacobian_evaluations</name>
+        <qualifiedname>NewtonSolver::out_jacobian_evaluations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set jacobian evaluations.</para>
+<para><simplesect kind="return"><para>The jacobian evaluations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="363" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a78bffbb5480f1e44276496d176798183" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::out_relaxations</definition>
+        <argsstring>(in this)</argsstring>
+        <name>out_relaxations</name>
+        <qualifiedname>NewtonSolver::out_relaxations</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get algorithm relaxations.</para>
+<para><simplesect kind="return"><para>The algorithm relaxations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="374" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a6716d04335407e510e338e2f651bd77a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::out_residuals</definition>
+        <argsstring>(in this)</argsstring>
+        <name>out_residuals</name>
+        <qualifiedname>NewtonSolver::out_residuals</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get function evaluations.</para>
+<para><simplesect kind="return"><para>The function evaluations. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="385" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a896cc687a11f1e8543a41b77c671fe98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::out_converged</definition>
+        <argsstring>(in this)</argsstring>
+        <name>out_converged</name>
+        <qualifiedname>NewtonSolver::out_converged</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get convergence boolean value.</para>
+<para><simplesect kind="return"><para>The convergence boolean value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="396" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ac8d69e09f83b5d7517b8c6f11ace7b4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::solve_handle</definition>
+        <argsstring>(in this, in t_function_handle, in t_jacobian_handle, in x_ini)</argsstring>
+        <name>solve_handle</name>
+        <qualifiedname>NewtonSolver::solve_handle</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_function_handle</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_jacobian_handle</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_ini</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve non-linear system of equations <formula id="6">$ \mathbf{F}(\mathbf{x}) =
+\mathbf{0} $</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_function_handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function handle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t_jacobian_handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The jacobian handle. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_ini</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial guess vector <formula id="7">$ \mathbf{x} $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The solution vector <formula id="7">$ \mathbf{x} $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="412" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1ae01264d27680868efdb295e456145591" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::reset</definition>
+        <argsstring>(in this)</argsstring>
+        <name>reset</name>
+        <qualifiedname>NewtonSolver::reset</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Reset solver internal counter and variables.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t_function_handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function handle. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="425" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a01bd28b1fc1143ac7123690f79f6ff07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::eval_function</definition>
+        <argsstring>(in this, in x)</argsstring>
+        <name>eval_function</name>
+        <qualifiedname>NewtonSolver::eval_function</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Perform function <formula id="8">$ \mathbf{F}(\mathbf{x}) $</formula> evaluation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input vector <formula id="7">$ \mathbf{x} $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The function value <formula id="8">$ \mathbf{F}(\mathbf{x}) $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="443" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a59e28e1d49835d61b3212fb7427f12af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::eval_jacobian</definition>
+        <argsstring>(in this, in x)</argsstring>
+        <name>eval_jacobian</name>
+        <qualifiedname>NewtonSolver::eval_jacobian</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Perform function <formula id="9">$ \mathbf{JF}(\mathbf{x}) $</formula> evaluation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input vector <formula id="7">$ \mathbf{x} $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The jacobian value <formula id="9">$ \mathbf{JF}(\mathbf{x}) $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="464" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00195_1a4b7b23f8591840e5481be72f7466710c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function NewtonSolver::solve</definition>
+        <argsstring>(in this, in x_ini)</argsstring>
+        <name>solve</name>
+        <qualifiedname>NewtonSolver::solve</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_ini</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Solve non-linear system of equations <formula id="10">$ \mathbf{F} (\mathbf{x}) =
+\mathbf{0} $</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x_ini</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial guess for the vector <formula id="7">$ \mathbf{x} $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The solution <formula id="7">$ \mathbf{x} $</formula> and the output flag: <formula id="11">$ 0 $</formula> = success, <formula id="12">$ 1 $</formula> = failed because of bad initial point, <formula id="13">$ 2 $</formula> = failed because of bad dumping (step got too short). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="NewtonSolver.m" line="489" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Class container for a dumped Newton&apos;s method with affine invariant step.</para>
+<para><bold>Solution Algorithm:</bold></para>
+<para>Given a zeros of a vectorial function problem of the form <formula id="0">$ \mathbf{F}
+(\mathbf{x}) = \mathbf{0} $</formula>, where <formula id="1">$ \mathbf{F}: \mathbb{R}^n \rightarrow
+\mathbb{R}^n $</formula>, then the Newton&apos;s method is defined as:</para>
+<para><formula id="2">\[
+\mathbf{JF}(\mathbf{x}_k)\mathbf{h} = -\mathbf{F}(\mathbf{x}_k).
+\]</formula></para>
+<para>The dumped step is defined as:</para>
+<para><formula id="3">\[
+\mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{h}
+\]</formula></para>
+<para>where <formula id="4">$ \alpha_k $</formula> is a dumping coefficient that satisfies:</para>
+<para><formula id="5">\[
+\left\| \mathbf{JF}(\mathbf{x}_k)^{-1} \mathbf{F}(\mathbf{x}_{k+1}) \right\|
+\leq \left(1 - \dfrac{\alpha_k}{2}\right) \left\| \mathbf{JF}(\mathbf{x}_k)^{-1}
+\mathbf{F}(\mathbf{x}_k) \right\| = \left(1 - \dfrac{\alpha_k}{2} \right)
+\left\| \mathbf{h}  \right\|.
+\]</formula></para>
+<para><bold>Note:</bold></para>
+<para>For more details on the Newton&apos;s method with affine invariant step refer to: <ulink url="https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html">https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html</ulink>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>NewtonSolver</label>
+        <link refid="a00195"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>NewtonSolver</label>
+        <link refid="a00195"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>handle</label>
+      </node>
+    </collaborationgraph>
+    <location file="NewtonSolver.m" line="35" column="1" bodyfile="NewtonSolver.m" bodystart="36" bodyend="568"/>
+    <listofallmembers>
+      <member refid="a00195_1a8d1d1f6f8fa301aad3c446cc87625551" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>disable_verbose</name></member>
+      <member refid="a00195_1a839e1bdb090ecfc8642abbdc95514903" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>enable_verbose</name></member>
+      <member refid="a00195_1a01bd28b1fc1143ac7123690f79f6ff07" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>eval_function</name></member>
+      <member refid="a00195_1a59e28e1d49835d61b3212fb7427f12af" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>eval_jacobian</name></member>
+      <member refid="a00195_1ac2a1e8d5b317a15136765949e891b90a" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>get_alpha</name></member>
+      <member refid="a00195_1ac166d75c7829c3434574bfa14d449cc5" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>get_max_function_evaluations</name></member>
+      <member refid="a00195_1a2521043181b64c727e80d7c688bc0bd7" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>get_max_iterations</name></member>
+      <member refid="a00195_1a598b10959ca109cde607ca1d90d4a362" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>get_max_jacobian_evaluations</name></member>
+      <member refid="a00195_1ae9c642d18d3659488de1fcdbc5f3d203" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>get_max_relaxations</name></member>
+      <member refid="a00195_1a4f09ff793fbc28f39b2d14042d2cf508" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>get_tolerance</name></member>
+      <member refid="a00195_1af5115cb89ba4f1ac2fdc6e25b6e67e06" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_alpha</name></member>
+      <member refid="a00195_1a40bd74dd20e46025d07ca894c2094725" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_converged</name></member>
+      <member refid="a00195_1a0419ce309558190180db125fb66d04bf" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_function_evaluations</name></member>
+      <member refid="a00195_1ad728491ed11597eb8fc0408e95e8da39" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_function_handle</name></member>
+      <member refid="a00195_1a03314f418079d9f91da292ba1b354662" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_iterations</name></member>
+      <member refid="a00195_1a27377575dbab67a03b449e4f45ba4b83" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_jacobian_evaluations</name></member>
+      <member refid="a00195_1a023a1742b15296a92e4a91a086619940" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_jacobian_handle</name></member>
+      <member refid="a00195_1a3f6bd13aaedee841a984e678cbf7d6ef" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_max_function_evaluations</name></member>
+      <member refid="a00195_1aa758033e177cbbf5003356b67e01effc" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_max_iterations</name></member>
+      <member refid="a00195_1adaddac69ee7f64dbf1992ab3e1ec22cb" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_max_jacobian_evaluations</name></member>
+      <member refid="a00195_1a11cde2c97e50b6086c77c1f0e831cbf4" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_max_relaxations</name></member>
+      <member refid="a00195_1a11f43d22ae3d721cc881015d18281ffb" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_relaxations</name></member>
+      <member refid="a00195_1a32b8d203d39b800967bb8e1eeb83d582" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_residuals</name></member>
+      <member refid="a00195_1a16b43a4590b3b7d2d2f10728b85505c4" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_tolerance</name></member>
+      <member refid="a00195_1a716b0b5d554062abb6253136c47753d2" prot="private" virt="non-virtual"><scope>NewtonSolver</scope><name>m_verbose</name></member>
+      <member refid="a00195_1a734fb3b1fb0710e341c9dbc10c313779" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>NewtonSolver</name></member>
+      <member refid="a00195_1a896cc687a11f1e8543a41b77c671fe98" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>out_converged</name></member>
+      <member refid="a00195_1a176a1d10112a606bb917440ccfa5d453" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>out_function_evaluations</name></member>
+      <member refid="a00195_1ab8a33a2f0f1cbcde796448d577a54289" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>out_iterations</name></member>
+      <member refid="a00195_1a751b28fed3ac77a8f794cefa4a17279d" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>out_jacobian_evaluations</name></member>
+      <member refid="a00195_1a78bffbb5480f1e44276496d176798183" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>out_relaxations</name></member>
+      <member refid="a00195_1a6716d04335407e510e338e2f651bd77a" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>out_residuals</name></member>
+      <member refid="a00195_1ae01264d27680868efdb295e456145591" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>reset</name></member>
+      <member refid="a00195_1a77a789c34889417b2526548d741e3ed6" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>set_alpha</name></member>
+      <member refid="a00195_1af87436c743e60bbe63a915a751f9eec1" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>set_max_function_evaluations</name></member>
+      <member refid="a00195_1a3335b5d9e229b0a199b328be94ddf085" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>set_max_iterations</name></member>
+      <member refid="a00195_1a0e5c49b48c68a2d5a7e2ab28c407da13" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>set_max_jacobian_evaluations</name></member>
+      <member refid="a00195_1acaef5b6fb6cb026a17fd29f8bf90cb75" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>set_max_relaxations</name></member>
+      <member refid="a00195_1ab2437f1e91b5ac3597540a3acc44b35b" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>set_tolerance</name></member>
+      <member refid="a00195_1a4b7b23f8591840e5481be72f7466710c" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>solve</name></member>
+      <member refid="a00195_1ac8d69e09f83b5d7517b8c6f11ace7b4b" prot="public" virt="non-virtual"><scope>NewtonSolver</scope><name>solve_handle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

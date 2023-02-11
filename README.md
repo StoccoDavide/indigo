@@ -26,13 +26,13 @@ Available [here](https://stoccodavide.github.io/indigo/)!
 
 ### Tier -3
 
-- [ ] Implement Dormand-Prince 4(5) embedded Runge-Kutta method class.
-- [ ] Implement Cash-Karp 4(5) embedded Runge-Kutta method class.
+- [x] Implement Dormand-Prince 4(5) embedded Runge-Kutta method class.
+- [x] Implement Cash-Karp 4(5) embedded Runge-Kutta method class.
 - [x] Implement Fehlberg 7(8) embedded Runge-Kutta method class.
-- [ ] Implement Sarafyan 4(5) embedded Runge-Kutta method class.
-- [ ] Implement Bogacki–Shampine 2(3) embedded Runge-Kutta method class.
-- [ ] Implement Verner 6(5) embedded Runge-Kutta method class.
-- [ ] Implement Sun Geng 5 implicit Runge-Kutta method class.
+- [x] Implement Sarafyan 4(5) embedded Runge-Kutta method class.
+- [x] Implement Bogacki–Shampine 2(3) embedded Runge-Kutta method class.
+- [x] Implement Verner 6(5) embedded Runge-Kutta method class.
+- [x] Implement Sun Geng 5 implicit Runge-Kutta method class.
 
 ## Authors
 

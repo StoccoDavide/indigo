@@ -11,7 +11,7 @@ Program Listing for File Wray3.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Houwen's/Wray third-order method.
+   %> Class container for Wray's method.
    %
    classdef Wray3 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Wray3.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Van der Houwen's/Wray third-order method.
+       %> Wray's method.
        %>
        %> \rst
        %> .. math::

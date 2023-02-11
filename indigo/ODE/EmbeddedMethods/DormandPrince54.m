@@ -1,6 +1,5 @@
 %
-%> Class container for The Dormand-Prince embedded Runge-Kutta method of fifth and
-%> fourth-order accuracy.
+%> Class container for Dormand-Prince 5(4) method.
 %
 classdef DormandPrince54 < RKexplicit
   %
@@ -8,7 +7,7 @@ classdef DormandPrince54 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Dormand-Prince embedded Runge-Kutta method of fifth and fourth-order accuracy.
+    %> Dormand-Prince 5(4) method.
     %>
     %> \rst
     %> .. math::

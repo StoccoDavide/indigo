@@ -1,5 +1,5 @@
 %
-%> Class container for Ralston's fourth-order method.
+%> Class container for Ralston's method.
 %
 classdef Ralston4 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Ralston4 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Ralston's fourth-order method.
+    %> Ralston's method.
     %>
     %> \rst
     %> .. math::

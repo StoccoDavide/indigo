@@ -2,13 +2,26 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="dir_cbff95965789468e76a5a9510ca331c0" kind="dir">
     <compoundname>ODE/EmbeddedMethods</compoundname>
-    <innerfile refid="a00092">HeunEuler.m</innerfile>
-    <innerfile refid="a00095">Merson45.m</innerfile>
-    <innerfile refid="a00083">RKF12.m</innerfile>
-    <innerfile refid="a00089">RKF45I.m</innerfile>
-    <innerfile refid="a00077">RKF45II.m</innerfile>
-    <innerfile refid="a00086">RKF78.m</innerfile>
-    <innerfile refid="a00080">Zonnenveld45.m</innerfile>
+    <innerfile refid="a00095">BogackiShampine23.m</innerfile>
+    <innerfile refid="a00119">CashKarp45.m</innerfile>
+    <innerfile refid="a00110">DormandPrince54.m</innerfile>
+    <innerfile refid="a00122">Fehlberg12.m</innerfile>
+    <innerfile refid="a00113">Fehlberg45I.m</innerfile>
+    <innerfile refid="a00128">Fehlberg45II.m</innerfile>
+    <innerfile refid="a00104">Fehlberg78.m</innerfile>
+    <innerfile refid="a00131">GaussLegendre34.m</innerfile>
+    <innerfile refid="a00125">GaussLegendre56.m</innerfile>
+    <innerfile refid="a00134">HeunEuler21.m</innerfile>
+    <innerfile refid="a00089">LobattoIIIA12.m</innerfile>
+    <innerfile refid="a00107">LobattoIIIA34.m</innerfile>
+    <innerfile refid="a00083">LobattoIIIB12.m</innerfile>
+    <innerfile refid="a00101">LobattoIIIB34.m</innerfile>
+    <innerfile refid="a00080">LobattoIIIC12.m</innerfile>
+    <innerfile refid="a00098">LobattoIIIC34.m</innerfile>
+    <innerfile refid="a00137">Merson45.m</innerfile>
+    <innerfile refid="a00092">Sarafyan45.m</innerfile>
+    <innerfile refid="a00116">Verner65.m</innerfile>
+    <innerfile refid="a00086">Zonnenveld45.m</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

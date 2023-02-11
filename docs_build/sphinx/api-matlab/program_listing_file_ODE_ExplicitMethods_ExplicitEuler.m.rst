@@ -11,7 +11,7 @@ Program Listing for File ExplicitEuler.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Explicit Euler first-order method (1 stage)
+   %> Class container for Explicit Euler method.
    %
    classdef ExplicitEuler < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File ExplicitEuler.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Explicit Euler first-order method (1 stage)
+       %> Explicit Euler method.
        %>
        %> \rst
        %> .. math::

@@ -1,5 +1,5 @@
 %
-%> Class container for Generic third-order method.
+%> Class container for Generic method.
 %
 classdef Generic3 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Generic3 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Van der Generic third-order method (\f$ \alpha \neq 0, 2/3, 1 \f$).
+    %> Generic method (\f$ \alpha \neq 0, 2/3, 1 \f$).
     %>
     %> \rst
     %> .. math::

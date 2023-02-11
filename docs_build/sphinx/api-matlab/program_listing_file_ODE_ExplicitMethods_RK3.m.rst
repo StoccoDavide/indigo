@@ -11,7 +11,7 @@ Program Listing for File RK3.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Runge-Kutta third-order method.
+   %> Class container for Runge-Kutta 3 method.
    %
    classdef RK3 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File RK3.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Runge-Kutta third-order method.
+       %> Runge-Kutta 3 method.
        %>
        %>
        %> \rst

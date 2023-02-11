@@ -1,5 +1,5 @@
 %
-%> Class container for Lobatto IIIB second-order embedded method (2 stages)
+%> Class container for Lobatto IIIB 1(2) method.
 %
 classdef LobattoIIIB12 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef LobattoIIIB12 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Lobatto IIIB second-order embedded method (2 stages)
+    %> Lobatto IIIB 1(2) method.
     %>
     %> \rst
     %> .. math::

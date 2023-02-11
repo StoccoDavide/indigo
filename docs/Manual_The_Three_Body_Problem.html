@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Three Body Problem &#8212; indigo v</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="Manual_References.html" />
+    <link rel="prev" title="Pendulum (ODE)" href="Manual_Pendulum_ODE.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="the-three-body-problem">
+<h1>The Three Body Problem<a class="headerlink" href="#the-three-body-problem" title="Permalink to this headline">¶</a>
+</h1>
+<p>In this example we will tackle the simple yet famous Three Body Problem. The
+problem is to find the trajectories of three bodies in a two-dimensional space.
+The three bodies are assumed to be point masses and are subject to the
+gravitational force of each other.</p>
+<p>This problem is simple in the sense that the equations of motion are relatively
+simple. However, the problem presents numerical challenges due to the fact that
+the system of ODEs could be extremely stiff. This is due to the fact that the
+gravitational force is inversely proportional to the square of the distance
+between the bodies. This means that the force between two bodies can be very
+large when the bodies are close to each other. This can lead to very large
+accelerations and velocities. This can cause the numerical integration to
+become unstable. In addition, the problem is also very sensitive to the initial
+conditions. This means that even small perturbations in the initial conditions
+can lead to very different trajectories. For this reason is one of the most
+used test problems for numerical integration methods.</p>
+<div class="section" id="problem-statement">
+<h2>Problem statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a>
+</h2>
+<p>The equations of motion for the Three Body Problem are derived from the Lagrangian:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+  \mathcal{L} &amp;=
+    \frac{1}{2} m_1 (u_1^2 + v_1^2) +
+    \frac{1}{2} m_2 (u_2^2 + v_2^2) +
+    \frac{1}{2} m_3 (u_3^2 + v_3^2) ~ \dots \\[0.2em]
+    &amp; \qquad - \, \frac{G m_1 m_2}{\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}} ~ \dots \\[0.2em]
+    &amp; \qquad - \, \frac{G m_1 m_3}{\sqrt{(x_1 - x_3)^2 + (y_1 - y_3)^2}} ~ \dots \\[0.2em]
+    &amp; \qquad - \, \frac{G m_2 m_3}{\sqrt{(x_2 - x_3)^2 + (y_2 - y_3)^2}} ~ .
+\end{aligned}\end{split}\]</div>
+<p>The equations of motion are then derived by taking the partial derivatives of
+the Lagrangian with respect to the generalized coordinates and setting them
+equal to zero. The equations of motion written as a system of first order
+ODEs are then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+  x_1' - u_1 = 0 &amp; \\[0.5em]
+  x_2' - u_2 = 0 &amp; \\[0.5em]
+  x_3' - u_3 = 0 &amp; \\[0.5em]
+  y_1' - v_1 = 0 &amp; \\[0.5em]
+  y_2' - v_2 = 0 &amp; \\[0.5em]
+  y_3' - v_3 = 0 &amp; \\[0.5em]
+  u_1' + G m_2\dfrac{x_1 - x_2}{d_{12}^3} +
+         G m_3\dfrac{x_1 - x_3}{d_{13}^3} = 0 &amp; \\
+  u_2' + G m_3\dfrac{x_2 - x_3}{d_{23}^3} +
+         G m_1\dfrac{x_2 - x_1}{d_{12}^3} = 0 &amp; \\
+  u_3' + G m_1\dfrac{x_3 - x_1}{d_{13}^3} +
+         G m_2\dfrac{x_3 - x_2}{d_{23}^3} = 0 &amp; \\
+  v_1' + G m_2\dfrac{y_1 - y_2}{d_{12}^3} +
+         G m_3\dfrac{y_1 - y_3}{d_{13}^3} = 0 &amp; \\
+  v_2' + G m_3\dfrac{y_2 - y_3}{d_{23}^3} +
+         G m_1\dfrac{y_2 - y_1}{d_{12}^3} = 0 &amp; \\
+  v_3' + G m_1\dfrac{y_3 - y_1}{d_{13}^3} +
+         G m_2\dfrac{y_3 - y_2}{d_{23}^3} = 0 &amp; \\
+\end{cases}\end{split}\]</div>
+<p>where the distances between the bodies are defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+   d_{12} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2} \\
+   d_{13} = \sqrt{(x_1 - x_3)^2 + (y_1 - y_3)^2} \\
+   d_{23} = \sqrt{(x_2 - x_3)^2 + (y_2 - y_3)^2} \\
+\end{split}\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(G\)</span> is the gravitational constant, <span class="math notranslate nohighlight">\(m_1\)</span> is the mass of the
+first body, <span class="math notranslate nohighlight">\(m_2\)</span> is the mass of the second body, and <span class="math notranslate nohighlight">\(m_3\)</span> is the
+mass of the third mass. A feasible set of initial conditions for creating a
+remarkable stable orbit (infinity shaped like) are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+   x_1(0) =  0.97000436   \\[0.2em]
+   x_2(0) = -0.97000436   \\[0.2em]
+   x_3(0) =  0.0          \\[0.2em]
+   y_1(0) = -0.24308753   \\[0.2em]
+   y_2(0) =  0.24308753   \\[0.2em]
+   y_3(0) =  0.0          \\[0.2em]
+   u_1(0) =  0.93240737/2 \\[0.2em]
+   u_2(0) =  0.93240737/2 \\[0.2em]
+   u_3(0) = -0.93240737   \\[0.2em]
+   v_1(0) =  0.86473146/2 \\[0.2em]
+   v_2(0) =  0.86473146/2 \\[0.2em]
+   v_3(0) = -0.86473146
+\end{cases}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(G = 1\)</span>, <span class="math notranslate nohighlight">\(m_1 = 1\)</span>, <span class="math notranslate nohighlight">\(m_2 = 1\)</span>, and <span class="math notranslate nohighlight">\(m_3 = 1\)</span>.</p>
+<a class="reference internal image-reference" href="_images/Three-body_Problem_Animation_with_COM.gif"><img alt="_images/Three-body_Problem_Animation_with_COM.gif" class="align-center" src="_images/Three-body_Problem_Animation_with_COM.gif" style="width: 25%;"></a>
+</div>
+<div class="section" id="load-the-ode">
+<h2>Load the ODE<a class="headerlink" href="#load-the-ode" title="Permalink to this headline">¶</a>
+</h2>
+<p>Consider the implicit ODE defined in the previous section and define the
+class for the ODE to be integrated in the file <cite>ThreeBodyProblem.m</cite>. Notice that
+the class <code class="docutils literal notranslate"><span class="pre">ThreeBodyProblem</span></code> derived from the base class <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code>. The
+content of the file <cite>ThreeBodyProblem.m</cite>, will contain the methods <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">JF</span></code>
+for the evaluation of the system of ODEs and its Jacobian matrices with respect
+to the state variables and their derivatives, respectively.</p>
+<p>For more details on the implementation of the class <code class="docutils literal notranslate"><span class="pre">ThreeBodyProblem</span></code> please
+refer to the file <cite>ThreeBodyProblem.m</cite>. If you are interested easier implementation
+of the ODE system, please refer to the other examples present in the documentation.</p>
+</div>
+<div class="section" id="instantiate-the-ode">
+<h2>Instantiate the ODE<a class="headerlink" href="#instantiate-the-ode" title="Permalink to this headline">¶</a>
+</h2>
+<p>Having <code class="docutils literal notranslate"><span class="pre">ThreeBodyProblem.m</span></code> now can instantiate an <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code> class instance
+with the desired parameters, <em>e.g.</em> the gravitational constant and the masses of
+the masses of the bodies:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>G   = 1.0; % Gravitational constant
+m_1 = 1.0; % Body 1 mass
+m_2 = 1.0; % Body 2 mass
+m_3 = 1.0; % Body 3 mass
+ODE = ThreeBodyProblem(G, m_1, m_2, m_3);
+</pre></div>
+</div>
+</div>
+<div class="section" id="choose-solver">
+<h2>Choose solver<a class="headerlink" href="#choose-solver" title="Permalink to this headline">¶</a>
+</h2>
+<p>Choose a suitable solver for the ODE system. In this example we will use the
+<code class="docutils literal notranslate"><span class="pre">ExplicitEuler</span></code> solver, not because it is the best choice, but because it will
+allow us to visualize the drift of the numerical solution. After the solver is
+instantiated, attach the ODE system to the solver by calling the method <code class="docutils literal notranslate"><span class="pre">set_ode</span></code>
+method of the solver class:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>solver = ExplicitEuler(); % Initialize solver
+solver.setODE(ODE);       % Attach ODE to the solver
+</pre></div>
+</div>
+</div>
+<div class="section" id="integrate">
+<h2>Integrate<a class="headerlink" href="#integrate" title="Permalink to this headline">¶</a>
+</h2>
+<p>Select the range and the desired sampling steps for the numerical solution:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>d_t   = 0.005;      % Desired time step (s)
+t_ini = 0.0;        % Initial time (s)
+t_end = 6.32591398; % Final time (s)
+T_vec = t_ini:d_t:t_end;
+</pre></div>
+</div>
+<p>Notice that the period of the orbit is <span class="math notranslate nohighlight">\(T = 6.32591398\)</span> and the sampling
+step, choosen <span class="math notranslate nohighlight">\(\Delta t = 0.005\)</span>, is small enough to capture the orbit
+period without making the numerical solution drifting too much. Of course, the
+sampling step can be reduced to obtain a better numerical solution but it will
+increase the computational cost. If we try to increase the final time of the
+integration, the numerical solution will drift away from the orbit more and more
+as the time increases.</p>
+<p>For the initial condition we will use the initial condition given in the
+initial section:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>x_1 =  0.97000436;
+x_2 = -0.97000436;
+x_3 =  0.0;
+y_1 = -0.24308753;
+y_2 =  0.24308753;
+y_3 =  0.0;
+u_1 =  0.93240737/2;
+u_2 =  0.93240737/2;
+u_3 = -0.93240737;
+v_1 =  0.86473146/2;
+v_2 =  0.86473146/2;
+v_3 = -0.86473146;
+X_ini = [x_1, x_2, x_3, y_1, y_2, y_3, u_1, u_2, u_3, v_1, v_2, v_3];
+</pre></div>
+</div>
+<p>Finally, we can integrate the ODE system by calling the method <code class="docutils literal notranslate"><span class="pre">solve</span></code> of the
+solver class:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>[X, T] = solver.solve(T_vec, X_ini);
+</pre></div>
+</div>
+<p>Now the matrix <code class="docutils literal notranslate"><span class="pre">X</span></code> contain the solution of the system of ODEs at each time step
+in the vector <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
+</div>
+<div class="section" id="extract-solution">
+<h2>Extract solution<a class="headerlink" href="#extract-solution" title="Permalink to this headline">¶</a>
+</h2>
+<p>To extract the solution at each time step, we extract each row of the matrix
+<code class="docutils literal notranslate"><span class="pre">X</span></code> and store it in a vector:</p>
+<div class="highlight-none notranslate">
+<div class="highlight"><pre><span></span>x_1 = X(:,1);
+x_2 = X(:,2);
+x_3 = X(:,3);
+y_1 = X(:,4);
+y_2 = X(:,5);
+y_3 = X(:,6);
+u_1 = X(:,7);
+u_2 = X(:,8);
+u_3 = X(:,9);
+v_1 = X(:,10);
+v_2 = X(:,11);
+v_3 = X(:,12);
+</pre></div>
+</div>
+</div>
+<div class="section" id="plot-solution">
+<h2>Plot solution<a class="headerlink" href="#plot-solution" title="Permalink to this headline">¶</a>
+</h2>
+<p>Finally, we can plot the solution of the system of ODEs. For more details on
+the plotting of the solution, please refer to MATLAB online documentation.</p>
+<a class="reference internal image-reference" href="images/test1_theta.png"><img alt="images/test1_theta.png" class="align-center" src="images/test1_theta.png" style="width: 80%;"></a>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-matlab/root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Manual_Examples_Index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Manual_Pendulum_ODE.html">Pendulum (ODE)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Three Body Problem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-the-ode">Load the ODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instantiate-the-ode">Instantiate the ODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#choose-solver">Choose solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integrate">Integrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-solution">Extract solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plot-solution">Plot solution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

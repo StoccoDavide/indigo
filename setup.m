@@ -7,12 +7,15 @@ set(groot, 'defaulttextinterpreter',          'latex' );
 set(groot, 'defaultLegendInterpreter',        'latex' );
 set(0,     'defaultAxesFontSize',             18      );
 
-% Library folder
+% Library folders
 addpath('./indigo');
 addpath('./indigo/ODE');
 addpath('./indigo/ODE/ExplicitMethods/');
 addpath('./indigo/ODE/ImplicitMethods/');
 addpath('./indigo/ODE/EmbeddedMethods/');
 
-% Tests folder
-addpath('./tests');
+% Examples folder
+addpath('./examples');
+addpath('./examples/PendulumODE/');
+addpath('./examples/PendulumDAE/');
+addpath('./examples/ThreeBodyProblem/');

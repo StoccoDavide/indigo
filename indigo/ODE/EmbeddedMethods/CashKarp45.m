@@ -1,6 +1,5 @@
 %
-%> Class container for the Cash-Karp embedded Runge-Kutta method of fourth- and
-%> fifth-order method.
+%> Class container for Cash-Karp 4(5) method.
 %
 classdef CashKarp45 < RKexplicit
   %
@@ -8,7 +7,7 @@ classdef CashKarp45 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Cash-Karp embedded Runge-Kutta method of fourth- and fifth-order method.
+    %> Cash-Karp 4(5) method.
     %>
     %> \rst
     %> .. math::

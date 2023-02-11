@@ -67,17 +67,21 @@ classdef ODEsolver < handle
     %
     m_c;
     %
-    %> Maximum number of substeps (default = 5).
+    %> Maximum number of substeps.
     %
-    m_max_substeps;
+    m_max_substeps = 5;
     %
-    %> Maximum number of iterations in the projection process (default = 5).
+    %> Maximum number of iterations in the projection process.
     %
-    m_max_projection_iter;
+    m_max_projection_iter = 10;
     %
-    %> System of ODEs/DAEs to be solved (fake pointer).
+    %> System of ODEs/DAEs to be object handle (fake pointer).
     %
     m_ode;
+    %
+    %> Non-linear system solver.
+    %
+    m_newton_solver;
     %
   end
   %
@@ -101,6 +105,8 @@ classdef ODEsolver < handle
 
       CMD = 'indigo::ODEsolver::ODEsolver(...): ';
 
+      this.m_newton_solver = NewtonSolver();
+
       if (nargin == 4)
         t_name = varargin{1};
         t_A    = varargin{2};
@@ -122,10 +128,6 @@ classdef ODEsolver < handle
 
       % Set the Butcher tableau
       this.set_tableau(t_A, t_b, t_b_e, t_c);
-
-      % Set default values
-      this.m_max_substeps        = 5;
-      this.m_max_projection_iter = 5;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -436,7 +438,7 @@ classdef ODEsolver < handle
       num_invs = this.m_ode.get_num_invs();
       x        = x_tilde;
 
-      assert(length(x_tilde) ~= num_eqns, ...
+      assert(length(x_tilde) == num_eqns, ...
         [CMD, 'the number of states does not match the number of equations.']);
 
       % Check if there are any constraints
@@ -468,9 +470,9 @@ classdef ODEsolver < handle
           x  = x + dx;
 
           % Check if the solution is found
-          if (max(abs(dx)) < tolerance && max(abs(H)) < tolerance)
+          if (max(abs(dx)) < tolerance || max(abs(H)) < tolerance)
             break;
-          elseif (k == MAX_ITER)
+          elseif (k == this.m_max_projection_iter)
             warning([CMD, 'maximum number of iterations reached.']);
           end
         end
@@ -488,7 +490,7 @@ classdef ODEsolver < handle
     %>                 at each step.
     %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
     %>                vebose mode.
-    %> \param epsilon [optional, default = \f$ 1.0\mathrm{e}3 \f$] If
+    %> \param epsilon [optional, default = \f$ 10^{3} \f$] If
     %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
     %>                the computation is interrupted.
     %>
@@ -550,7 +552,7 @@ classdef ODEsolver < handle
     %>                 at each step.
     %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
     %>                vebose mode.
-    %> \param epsilon [optional, default = \f$ 1.0\mathrm{e}3 \f$] If
+    %> \param epsilon [optional, default = \f$ 10^{3} \f$] If
     %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
     %>                the computation is interrupted.
     %>
@@ -676,9 +678,10 @@ classdef ODEsolver < handle
         % Store time solution
         t_out(s+1) = t_out(s) + d_t;
 
+
         % Project solution on the invariants/hidden constraints
         if (project == true)
-          x_new = this.project(t(s+1), x_new);
+          x_new = this.project(x_new, t_out(s+1));
         end
 
         % Check the infinity norm of the solution
@@ -736,9 +739,9 @@ classdef ODEsolver < handle
     %> So we put:
     %>
     %> \f[
-    %> h_{new} = h \min \left( f_{max} \max \left( f_{max}, f \left(
-    %>   \dfrac{1}{e} \right)^{\frac{1}{q+1}},
-    %> \right), \right)
+    %> h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
+    %>   \dfrac{1}{e} \right)^{\frac{1}{q+1}}
+    %> \right) \right)
     %> \f]
     %>
     %> for the new step size. Then, if \f$ e \leq 1 \f$, the computed step is
@@ -754,9 +757,9 @@ classdef ODEsolver < handle
     %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
     %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
     %> \param d_t Actual advancing time step \f$ \Delta t\f$.
-    %> \param A_tol   [optional, default = \f$ 1e-6 \f$] Absolute tolerance
+    %> \param A_tol   [optional, default = \f$ 10^{-6} \f$] Absolute tolerance
     %>                 \f$ A_{tol} \f$.
-    %> \param R_tol   [optional, default = \f$ 1e-6 \f$] Relative tolerance
+    %> \param R_tol   [optional, default = \f$ 10^{-6} \f$] Relative tolerance
     %>                 \f$ R_{tol} \f$.
     %> \param fac     [optional, default = \f$ 0.9 \f$] Safety factor \f$ f \f$.
     %> \param fac_min [optional, default = \f$ 0.2 \f$] Minimum safety factor

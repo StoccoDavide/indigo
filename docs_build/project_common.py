@@ -102,7 +102,7 @@ primary_domain = 'cpp'
 highlight_language = 'cpp'
 
 html_theme = 'alabaster'#'sphinx_rtd_theme'#
-html_logo  = '../logo.jpeg'
+html_logo  = '../logo.png'
 
 email_automode       = True
 autodoc_member_order = 'bysource'

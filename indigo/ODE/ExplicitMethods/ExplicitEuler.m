@@ -1,5 +1,5 @@
 %
-%> Class container for Explicit Euler first-order method (1 stage)
+%> Class container for Explicit Euler method.
 %
 classdef ExplicitEuler < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef ExplicitEuler < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Explicit Euler first-order method (1 stage)
+    %> Explicit Euler method.
     %>
     %> \rst
     %> .. math::

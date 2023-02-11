@@ -59,7 +59,7 @@ classdef RKexplicit < ODEsolver
     %>               \f$ (row vector).
     %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
-    %> \return An instance of the RKexplicit class.
+    %> \return The instance of the RKexplicit class.
     %
     function this = RKexplicit( varargin )
 
@@ -122,7 +122,7 @@ classdef RKexplicit < ODEsolver
     %> \f]
     %>
     %> \param i   Index of the step to be computed.
-    %> \param x_i \f$ i \f$-th node.
+    %> \param x_i States value at \f$ i \f$-th node.
     %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
     %> \param t_k Time step \f$ t_k \f$.
     %> \param d_t Advancing time step \f$ \Delta t\f$.
@@ -179,7 +179,7 @@ classdef RKexplicit < ODEsolver
     %> \right) = \mathbf{0}
     %> \f]
     %>
-    %> by Newton method.
+    %> by Newton's method.
     %>
     %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param K   Initial guess for the \f$ \mathbf{K} \f$ variable to be found.
@@ -204,8 +204,8 @@ classdef RKexplicit < ODEsolver
         fun = @(K_i) this.step_residual(i, x_i, K_i, t_k, d_t);
         jac = @(K_i) this.step_jacobian(i, x_i, K_i, t_k, d_t);
 
-        % Solve using Newton
-        [K(:,i), ierr] = NewtonSolver(fun, jac, K(:,i));
+        % Solve using Newton's method
+        [K(:,i), ierr] = this.m_newton_solver.solve_handle(fun, jac, K(:,i));
 
         if (ierr > 0)
           return;

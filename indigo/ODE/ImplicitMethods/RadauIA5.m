@@ -1,5 +1,5 @@
 %
-%> Class container for Radau IA fifth-order method (3 stages)
+%> Class container for Radau IA method.
 %
 classdef RadauIA5 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef RadauIA5 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Radau IA fifth-order method (3 stages)
+    %> Radau IA method.
     %>
     %> \rst
     %> .. math::

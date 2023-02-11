@@ -1,5 +1,5 @@
 %
-%> Class container for Runge-Kutta third-order method.
+%> Class container for Runge-Kutta 3 method.
 %
 classdef RK3 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef RK3 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Runge-Kutta third-order method.
+    %> Runge-Kutta 3 method.
     %>
     %>
     %> \rst

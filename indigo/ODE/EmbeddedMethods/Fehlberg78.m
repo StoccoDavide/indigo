@@ -1,6 +1,5 @@
 %
-%> Class container for The Runge–Kutta–Fehlberg method of seventh- and
-%> eigth-order method.
+%> Class container for Fehlberg 7(8) method.
 %
 classdef Fehlberg78 < RKexplicit
   %
@@ -8,7 +7,7 @@ classdef Fehlberg78 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Runge–Kutta–Fehlberg method of seventh- and eigth-order method.
+    %> Fehlberg 7(8) method.
     %>
     %> \rst
     %> .. math::

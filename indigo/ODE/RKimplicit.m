@@ -6,7 +6,8 @@
 %> \f[
 %> \begin{array}{c|c}
 %>   \mathbf{c} & \mathbf{A} \\ \hline
-%>              & \mathbf{b}
+%>              & \mathbf{b} \\
+%>              & \hat{\mathbf{b}}
 %> \end{array}
 %> \f]
 %>
@@ -57,7 +58,7 @@ classdef RKimplicit < ODEsolver
     %>               \f$ (row vector).
     %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
-    %> \return An instance of the RKimplicit class.
+    %> \return The instance of the RKimplicit class.
     %
     function this = RKimplicit( varargin )
 
@@ -88,13 +89,12 @@ classdef RKimplicit < ODEsolver
     %> Compute the left hand side of the ODEs system to be solved:
     %>
     %> \f[
-    %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s
+    %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s}
     %>   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
     %> \right) = \mathbf{0}.
     %> \f]
     %>
-    %> \param i   Index of the step to be computed.
-    %> \param x_i \f$ i \f$-th node.
+    %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
     %> \param t_k Time step \f$ t_k \f$.
     %> \param d_t Advancing time step \f$ \Delta t\f$.
@@ -122,8 +122,7 @@ classdef RKimplicit < ODEsolver
         end
 
         % Compute the residuals
-        out(idx) = this.m_ode.F( tmp, K(idx), t_k + this.m_c(i) * d_t );
-
+        out(idx) = this.m_ode.F(tmp, K(idx), t_k + this.m_c(i) * d_t);
         idx = idx + nx;
       end
     end
@@ -148,7 +147,7 @@ classdef RKimplicit < ODEsolver
     %> \f]
     %>
     %> \param i   Index of the step to be computed.
-    %> \param x_i \f$ i \f$-th node.
+    %> \param x_i States value at \f$ i \f$-th node.
     %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
     %> \param t_k Time step \f$ t_k \f$.
     %> \param d_t Advancing time step \f$ \Delta t\f$.
@@ -183,7 +182,7 @@ classdef RKimplicit < ODEsolver
           end
 
           % Compute the Jacobians w.r.t. x and x_dot
-          [JF_x, JF_x_dot] = this.m_ode.JF( tmp, K(idx), t_k + this.m_c(i) * d_t );
+          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + this.m_c(i) * d_t);
 
           % Combine the Jacobians w.r.t. x and x_dot to obtain
           % the Jacobian w.r.t. K
@@ -206,7 +205,7 @@ classdef RKimplicit < ODEsolver
     %> \right) = \mathbf{0}
     %> \f]
     %>
-    %> by Newton method.
+    %> by Newton's method.
     %>
     %> \param x_k States value at \f$ k \f$-th time step \f$
     %>            \mathbf{x}(t_k) \f$.
@@ -219,12 +218,13 @@ classdef RKimplicit < ODEsolver
     %>         and the error control flag.
     %
     function [out, ierr] = solve_step( this, x_k, K0, t_k, d_t )
-      % Define the function handles
-      fun = @(K) this.step_residual( x_k, K, t_k, d_t );
-      jac = @(K) this.step_jacobian( x_k, K, t_k, d_t );
 
-      % Solve using Newton
-      [out, ierr] = NewtonSolver( fun, jac, K0 );
+      % Define the function handles
+      fun = @(K) this.step_residual(x_k, K, t_k, d_t);
+      jac = @(K) this.step_jacobian(x_k, K, t_k, d_t);
+
+      % Solve using Newton's method
+      [out, ierr] = this.m_newton_solver.solve_handle(fun, jac, K0);
 
       if ierr > 0
         return;
@@ -310,6 +310,7 @@ classdef RKimplicit < ODEsolver
     %>         error control flag.
     %
     function [x_out, x_dot_out, d_t_star, ierr] = step( this, x_k, x_dot_k, t_k, d_t )
+
       % Extract lengths
       nc = length(this.m_c);
       nx = length(x_k);
@@ -318,7 +319,7 @@ classdef RKimplicit < ODEsolver
       K0 = repmat(x_dot_k, nc, 1);
 
       % Solve the system to obtain K
-      [K, ierr] = this.solve_step( x_k, K0, t_k, d_t );
+      [K, ierr] = this.solve_step(x_k, K0, t_k, d_t);
 
       % Suggested time step for the next advancing step
       d_t_star = d_t;
@@ -367,12 +368,12 @@ classdef RKimplicit < ODEsolver
 
       out = true;
 
-      if (nargin == 4)
+      if (nargin == 3)
         t_A    = varargin{1};
         t_b    = varargin{2};
         t_b_e  = [];
-        t_c    = varargin{4};
-      elseif (nargin == 5)
+        t_c    = varargin{3};
+      elseif (nargin == 4)
         t_A    = varargin{1};
         t_b    = varargin{2};
         t_b_e  = varargin{3};

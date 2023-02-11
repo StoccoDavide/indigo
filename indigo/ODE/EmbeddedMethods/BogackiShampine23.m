@@ -1,6 +1,5 @@
 %
-%> Class container for The Bogacki–Shampine 2(3) embedded Runge-Kutta method of
-%> second- and third-order.
+%> Class container for Bogacki–Shampine 2(3) method.
 %
 classdef BogackiShampine23 < RKexplicit
   %
@@ -8,7 +7,7 @@ classdef BogackiShampine23 < RKexplicit
   %
   % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   %
-  %> Bogacki–Shampine 2(3) embedded Runge-Kutta method of second- and third-order.
+  %> Bogacki–Shampine 2(3) method.
   %>
   %> \rst
   %> .. math::

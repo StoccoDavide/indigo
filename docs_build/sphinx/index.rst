@@ -24,14 +24,14 @@ What's inside?
 .. toctree::
    :maxdepth: 3
 
-   Manual_MATLAB.rst
+   Manual_MATLAB_Toolbox.rst
    api-matlab/root.rst
-   Manual_MAPLE.rst
+   Manual_MAPLE_Package.rst
    Manual_MAPLE_API.rst
-   Manual_EXAMPLES.rst
-   references.rst
+   Manual_Examples_Index.rst
+   Manual_References.rst
 
-.. include:: authors.rst
+.. include:: Manual_Authors.rst
 
 License
 -------

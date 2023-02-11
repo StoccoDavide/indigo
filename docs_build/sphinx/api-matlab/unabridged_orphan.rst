@@ -40,7 +40,22 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_BogackiShampine23.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_CashKarp45.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_CrankNicolson.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_DormandPrince54.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -55,12 +70,42 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_Fehlberg12.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Fehlberg45I.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Fehlberg45II.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Fehlberg78.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_GaussLegendre2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_GaussLegendre34.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_GaussLegendre4.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_GaussLegendre56.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -90,7 +135,7 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_ODE_EmbeddedMethods_HeunEuler.m.rst
+   file_ODE_EmbeddedMethods_HeunEuler21.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -105,7 +150,17 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_LobattoIIIA12.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_LobattoIIIA2.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_LobattoIIIA34.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -115,7 +170,17 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_LobattoIIIB12.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_LobattoIIIB2.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_LobattoIIIB34.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -125,7 +190,17 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_ODE_EmbeddedMethods_LobattoIIIC12.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_ODE_ImplicitMethods_LobattoIIIC2.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_LobattoIIIC34.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -230,27 +305,12 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_ODE_EmbeddedMethods_RKF12.m.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_ODE_EmbeddedMethods_RKF45I.m.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_ODE_EmbeddedMethods_RKF45II.m.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   file_ODE_EmbeddedMethods_RKF78.m.rst
-
-.. toctree::
-   :maxdepth: 5
-
    file_ODE_RKimplicit.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Sarafyan45.m.rst
 
 .. toctree::
    :maxdepth: 5
@@ -261,6 +321,16 @@ Files
    :maxdepth: 5
 
    file_ODE_ExplicitMethods_SSPRK3.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_ImplicitMethods_SunGeng5.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_ODE_EmbeddedMethods_Verner65.m.rst
 
 .. toctree::
    :maxdepth: 5

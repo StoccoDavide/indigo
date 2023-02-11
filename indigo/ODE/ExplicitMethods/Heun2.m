@@ -1,5 +1,5 @@
 %
-%> Class container for Heun's second-order method.
+%> Class container for Heun's method.
 %
 classdef Heun2 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Heun2 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Heun's second-order method.
+    %> Heun's method.
     %>
     %> \rst
     %> .. math::

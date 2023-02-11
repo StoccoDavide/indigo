@@ -1,5 +1,5 @@
 %
-%> Calss container for Heun's third-order method.
+%> Class container for Heun's method.
 %
 classdef Heun3 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Heun3 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Heun's third-order method.
+    %> Heun's method.
     %>
     %> \rst
     %> .. math::

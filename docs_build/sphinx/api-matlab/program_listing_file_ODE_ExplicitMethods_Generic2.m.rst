@@ -11,7 +11,7 @@ Program Listing for File Generic2.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Generic second-order method.
+   %> Class container for Generic method.
    %
    classdef Generic2 < RKexplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File Generic2.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Van der Generic second-order method.
+       %> Generic method.
        %>
        %> \rst
        %> .. math::

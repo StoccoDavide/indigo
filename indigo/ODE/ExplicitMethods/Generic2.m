@@ -1,5 +1,5 @@
 %
-%> Class container for Generic second-order method.
+%> Class container for Generic method.
 %
 classdef Generic2 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Generic2 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Van der Generic second-order method.
+    %> Generic method.
     %>
     %> \rst
     %> .. math::

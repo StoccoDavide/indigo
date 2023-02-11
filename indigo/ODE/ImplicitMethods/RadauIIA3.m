@@ -1,5 +1,5 @@
 %
-%> Class container for Radau IIA third-order method (2 stages)
+%> Class container for Radau IIA method.
 %
 classdef RadauIIA3 < RKimplicit
   %
@@ -7,7 +7,7 @@ classdef RadauIIA3 < RKimplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Radau IIA third-order method (2 stages)
+    %> Radau IIA method.
     %>
     %> \rst
     %> .. math::

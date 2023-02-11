@@ -11,7 +11,7 @@ Program Listing for File RadauIIA3.m
 .. code-block:: MATLAB
 
    %
-   %> Class container for Radau IIA third-order method (2 stages)
+   %> Class container for Radau IIA method.
    %
    classdef RadauIIA3 < RKimplicit
      %
@@ -19,7 +19,7 @@ Program Listing for File RadauIIA3.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Radau IIA third-order method (2 stages)
+       %> Radau IIA method.
        %>
        %> \rst
        %> .. math::

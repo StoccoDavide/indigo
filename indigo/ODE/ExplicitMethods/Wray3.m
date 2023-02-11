@@ -1,5 +1,5 @@
 %
-%> Class container for Houwen's/Wray third-order method.
+%> Class container for Wray's method.
 %
 classdef Wray3 < RKexplicit
   %
@@ -7,7 +7,7 @@ classdef Wray3 < RKexplicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Van der Houwen's/Wray third-order method.
+    %> Wray's method.
     %>
     %> \rst
     %> .. math::
