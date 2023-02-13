@@ -85,8 +85,8 @@ classdef PendulumODE < ODEsystem
         [CMD, 'invalid x vector length.']);
 
       % Evaluate the system invariant
-      out = this.m_m.*this.m_g.*this.m_l.*(cos(this.m_X_0(1))-cos(x(1,:))) + ...
-            0.5.*this.m_m.*this.m_l^2.*(x(2,:)).^2;
+      out = -this.m_m.*this.m_g.*this.m_l.*(cos(x(1,:)) - cos(this.m_X_0(1))) + ...
+            0.5.*this.m_m.*this.m_l^2.*(x(2,:).^2 - this.m_X_0(2)^2);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

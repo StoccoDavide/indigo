@@ -12,16 +12,21 @@ l = 1.0;  % length (m)
 g = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-theta_0 = 5*pi/180;
-omega_0 = 0.0;
-X_0     = [theta_0; omega_0];
+theta_0  = -1.0-pi/2;
+omega_0  = -1.0;
+x_0      = l*cos(theta_0);
+y_0      = l*sin(theta_0);
+u_0      = -omega_0*sin(theta_0);
+v_0      = omega_0*cos(theta_0);
+lambda_0 = (u_0^2+v_0^2-y_0*g)/(x_0^2+y_0^2);
+X_0      = [x_0; y_0; u_0; v_0; lambda_0];
 
 ODE = PendulumDAE(m, l, g, X_0);
 
 %% Initialize the solver and set the ODE
 
 explicit_solver = {
-  'ExplicitEuler',    ...
+  ... % 'ExplicitEuler',    ...
   ... % 'ExplicitMidpoint', ...
   ... % 'Heun2',            ...
   ... % 'Wray3',            ...
@@ -54,18 +59,23 @@ implicit_solver = {
   ... % 'LobattoIIID4',     ...
   ... % 'RadauIA3',         ...
   ... % 'RadauIA5',         ...
-  ... % 'RadauIIA3',        ...
+  'RadauIIA3',        ...
   'RadauIIA5',        ...
+  ... % 'SunGeng5',         ...
 };
 
 explicit_embedded_solver = {
-  ... % 'HeunEuler',    ...
-  ... % 'Merson45',     ...
-  ... % 'RKF12',        ...
-  ... % 'RKF45I',       ...
-  ... % 'RKF45II',      ...
-  ... % 'RKF78',        ...
-  ... % 'Zonnenveld45', ...
+  ... % 'BogackiShampine23', ...
+  ... % 'CashKarp45',        ...
+  ... % 'DormandPrince45',   ...
+  ... % 'Fehlberg12',        ...
+  ... % 'Fehlberg45I',       ...
+  ... % 'Fehlberg45II',      ...
+  ... % 'Fehlberg78',        ...
+  ... % 'HeunEuler21',       ...
+  ... % 'Merson45',          ...
+  ... % 'Verner65',          ...
+  ... % 'Zonnenveld45',      ...
 };
 
 implicit_embedded_solver = {
@@ -94,7 +104,7 @@ end
 %% Integrate the system of ODE
 
 % Set integration interval
-d_t   = 0.1;
+d_t   = 0.05;
 t_ini = 0.0;
 t_end = 5.0;
 T_vec = t_ini:d_t:t_end;
@@ -120,7 +130,7 @@ figure();
 hold on; grid on; grid minor;
 % title(title_str);
 xlabel('$t$ (s)');
-ylabel('$\omega$ (rad/s)');
+ylabel('$x$ (m)');
 for i = 1:length(solver_name)
   eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(1,:), ''LineWidth'', linewidth );']));
 end
@@ -131,9 +141,75 @@ figure();
 hold on; grid on; grid minor;
 % title(title_str);
 xlabel('$t$ (s)');
-ylabel('$\theta$ (rad)');
+ylabel('$y$ (m)');
 for i = 1:length(solver_name)
   eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(2,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$u$ (m/s)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(3,:), ''LineWidth'', linewidth );']));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$v$ (m/s)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(4,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$\lambda$ (--)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(5,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$h_0$ (m)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', sqrt(X_', solver_name{i}, '(1,:).^2 + X_', solver_name{i}, '(2,:).^2), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$h_1$ (m$^2$/s)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(1,:).*X_', solver_name{i}, '(3,:) + X_', solver_name{i}, '(2,:).*X_', solver_name{i}, '(4,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$\theta$ (rad)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', atan2(X_', solver_name{i}, '(2,:), X_', solver_name{i}, '(1,:)), ''LineWidth'', linewidth );']));
 end
 legend(solver_name, 'Location', 'northwest');
 hold off;
@@ -172,7 +248,7 @@ figure();
 hold on; grid on; grid minor;
 % title(title_str);
 xlabel('$t$ (s)');
-ylabel('$\omega$ (rad/s)');
+ylabel('$x$ (m)');
 for i = 1:length(solver_name)
   eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(1,:), ''LineWidth'', linewidth );']));
 end
@@ -183,9 +259,75 @@ figure();
 hold on; grid on; grid minor;
 % title(title_str);
 xlabel('$t$ (s)');
-ylabel('$\theta$ (rad)');
+ylabel('$y$ (m)');
 for i = 1:length(solver_name)
   eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(2,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$u$ (m/s)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(3,:), ''LineWidth'', linewidth );']));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$v$ (m/s)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(4,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$\theta$ (rad)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', atan2(X_', solver_name{i}, '(2,:), X_', solver_name{i}, '(1,:)), ''LineWidth'', linewidth );']));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$\lambda$ (--)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(5,:), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$h_0$ (m)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', sqrt(X_', solver_name{i}, '(1,:).^2 + X_', solver_name{i}, '(2,:).^2), ''LineWidth'', linewidth );' ]));
+end
+legend(solver_name, 'Location', 'northwest');
+hold off;
+
+figure();
+hold on; grid on; grid minor;
+% title(title_str);
+xlabel('$t$ (s)');
+ylabel('$h_1$ (m$^2$/s)');
+for i = 1:length(solver_name)
+  eval(strcat(['plot( T_', solver_name{i}, ', X_', solver_name{i}, '(1,:).*X_', solver_name{i}, '(3,:) + X_', solver_name{i}, '(2,:).*X_', solver_name{i}, '(4,:), ''LineWidth'', linewidth );' ]));
 end
 legend(solver_name, 'Location', 'northwest');
 hold off;

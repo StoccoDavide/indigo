@@ -50,7 +50,7 @@ classdef NewtonSolver < handle
     %
     % Maximum allowed algorithm iterations.
     %
-    m_max_iterations = 50;
+    m_max_iterations = 25;
     %
     % Maximum allowed function evaluations.
     %
@@ -58,7 +58,7 @@ classdef NewtonSolver < handle
     %
     % Maximum allowed jacobian evaluations.
     %
-    m_max_jacobian_evaluations = 50;
+    m_max_jacobian_evaluations = 25;
     %
     % Maximum allowed algorithm relaxations.
     %
@@ -452,6 +452,7 @@ classdef NewtonSolver < handle
 
       % Set initial iteration
       ierr = 0;
+      out  = x_ini;
       if (any(isnan(x_ini)))
         fprintf(1, [CMD, 'bad initial point.\n']) ;
         ierr = 1;
@@ -476,7 +477,8 @@ classdef NewtonSolver < handle
         end
 
         % Relax the iteration process
-        tau = 1.0;
+        tau    = 1.0;
+        dumped = false;
         for j = 1:this.m_max_relaxations
           this.m_relaxations = j;
 

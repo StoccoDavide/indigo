@@ -41,18 +41,19 @@ classdef PendulumDAE < ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = F( this, x, x_dot, t )
+    function out = F( this, x, x_dot, ~ )
       out    = zeros(5,1);
+
       out(1) = x_dot(1) - x(3);
-      out(1) = x_dot(2) - x(4);
-      out(1) = this.m_m * x_dot(3) + x(5) * x(1);
-      out(1) = this.m_m * x_dot(4) + x(5) * x(2) + this.m_m * this.m_g;
-      out(1) = x(1).^2 + x(2).^2 - this.m_l;
+      out(2) = x_dot(2) - x(4);
+      out(3) = this.m_m * x_dot(3) + x(5) * x(1);
+      out(4) = this.m_m * x_dot(4) + x(5) * x(2) + this.m_m * this.m_g;
+      out(5) = x(1)^2 + x(2)^2 - this.m_l^2;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function [JF_x, JF_x_dot] = JF( this, x, x_dot, t )
+    function [JF_x, JF_x_dot] = JF( this, x, ~, ~ )
       JF_x     = zeros(5,5);
       JF_x_dot = zeros(5,5);
 
@@ -62,8 +63,8 @@ classdef PendulumDAE < ODEsystem
       JF_x(3,5) = x(1);
       JF_x(4,2) = x(5);
       JF_x(4,5) = x(2);
-      JF_x(5,1) = 2.*x(1);
-      JF_x(5,2) = 2.*x(2);
+      JF_x(5,1) = 2*x(1);
+      JF_x(5,2) = 2*x(2);
 
       JF_x_dot(1,1) = 1;
       JF_x_dot(2,2) = 1;
@@ -82,8 +83,10 @@ classdef PendulumDAE < ODEsystem
         [CMD, 'invalid x vector length.']);
 
       % Evaluate the system invariant
-      out = this.m_m.*this.m_g.*this.m_l.*(cos(this.m_X_0(1))-cos(x(1,:))) + ...
-            0.5.*this.m_m.*this.m_l^2.*(x(2,:)).^2;
+      out = this.m_m.*this.m_g.*this.m_l.*(x(2,:) - this.m_X_0(2)) + ...
+            0.5.*this.m_m.*this.m_l.*( ...
+              x(3,:).^2 - this.m_X_0(3)^2 + x(4,:).^2 - this.m_X_0(4)^2 ...
+            );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -97,8 +100,11 @@ classdef PendulumDAE < ODEsystem
         [CMD, 'invalid x vector length.']);
 
       % Evaluate the system gradient of the invariant
-      out = [this.m_m.*this.m_g.*this.m_l.*sin(x(1,:)), ...
-             this.m_m.*this.m_l^2.*x(2,:)];
+      out = [zeros(1,size(x,2)), ...
+             this.m_m.*this.m_g.*this.m_l, ...
+             this.m_m.*this.m_l.*x(3,:), ...
+             this.m_m.*this.m_l.*x(4,:), ...
+             zeros(1,size(x,2))];
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
