@@ -36,63 +36,63 @@ classdef NewtonSolver < handle
   %
   properties (Access = private)
     %
-    % Function handle.
+    %> Function handle.
     %
     m_function_handle;
     %
-    % Jacobian handle.
+    %> Jacobian handle.
     %
     m_jacobian_handle;
     %
-    % Algorithm tolerance.
+    %> Algorithm tolerance.
     %
     m_tolerance = 1.0e-8;
     %
-    % Maximum allowed algorithm iterations.
+    %> Maximum allowed algorithm iterations.
     %
     m_max_iterations = 25;
     %
-    % Maximum allowed function evaluations.
+    %> Maximum allowed function evaluations.
     %
     m_max_function_evaluations = 50;
     %
-    % Maximum allowed jacobian evaluations.
+    %> Maximum allowed jacobian evaluations.
     %
     m_max_jacobian_evaluations = 25;
     %
-    % Maximum allowed algorithm relaxations.
+    %> Maximum allowed algorithm relaxations.
     %
     m_max_relaxations = 10;
     %
-    % Verbose mode boolean.
+    %> Verbose mode boolean.
     %
     m_verbose = false;
     %
-    % Algorithm iterations.
+    %> Algorithm iterations.
     %
     m_iterations = 0;
     %
-    % Function evaluations.
+    %> Function evaluations.
     %
     m_function_evaluations = 0;
     %
-    % Jacobian evaluations.
+    %> Jacobian evaluations.
     %
     m_jacobian_evaluations = 0;
     %
-    % Algorithm relaxations.
+    %> Algorithm relaxations.
     %
     m_relaxations = 0;
     %
-    % Function residuals.
+    %> Function residuals.
     %
     m_residuals = 0.0;
     %
-    % Convergence boolean.
+    %> Convergence boolean.
     %
     m_converged = false;
     %
-    % Relaxation factor.
+    %> Relaxation factor.
     %
     m_alpha = 0.9;
   end

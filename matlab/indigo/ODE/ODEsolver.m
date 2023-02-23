@@ -83,6 +83,15 @@ classdef ODEsolver < handle
     %
     m_newton_solver;
     %
+    %> Verbose mode boolean.
+    %
+    m_verbose = false;
+    %
+    %
+    %> Projection mode boolean.
+    %
+    m_projection = false;
+    %
   end
   %
   methods
@@ -305,6 +314,40 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    %> Enable verbose mode.
+    %
+    function enable_verbose( this )
+      this.m_verbose = true;
+      this.m_newton_solver.enable_verbose();
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Disable verbose mode.
+    %
+    function disable_verbose( this )
+      this.m_verbose = false;
+      this.m_newton_solver.disable_verbose();
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Enable projection mode.
+    %
+    function enable_projection( this )
+      this.m_projection = true;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Disable verbose mode.
+    %
+    function disable_projection( this )
+      this.m_projection = false;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     %> Get the Butcher tableau.
     %>
     %> \return The matrix \f$ \mathbf{A} \f$ (lower triangular matrix), the
@@ -483,84 +526,15 @@ classdef ODEsolver < handle
     %
     %> Solve the system of ODEs/DAEs and calculate the approximate solution.
     %>
-    %> \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
-    %>                \right]^T \f$.
-    %> \param x_0     Initial states value \f$ \mathbf{x}(t_0) \f$.
-    %> \param project [optional, default = false] Apply projection to invariants
-    %>                 at each step.
-    %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
-    %>                vebose mode.
-    %> \param epsilon [optional, default = \f$ 10^{3} \f$] If
-    %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
-    %>                the computation is interrupted.
-    %>
-    %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-    %>         (\mathbf{t})\right] \f$ containing the approximated solution
-    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
-    %>
-    %> **Usage**
-    %>
-    %> Solve without the solution projection on invariants/hidden constraints and
-    %> disabled verbose mode.
-    %>
-    %> \rst
-    %> .. code-block:: none
-    %>
-    %>   sol = obj.solve(t, x_0);
-    %>
-    %> \endrst
-    %>
-    %> Solve with the solution projection on invariants/hidden constraints and
-    %> disabled verbose mode.
-    %>
-    %> \rst
-    %> .. code-block:: none
-    %>
-    %>   sol = obj.solve(t, x_0, true);
-    %>
-    %> \endrst
-    %>
-    %> Solve without the solution projection on invariants/hidden constraints and
-    %> enabled verbose mode.
-    %>
-    %> \rst
-    %> .. code-block:: none
-    %>
-    %>   sol = obj.solve(t, x_0, false, true);
-    %>
-    %> \endrst
-    %>
-    %> Plot the first component of the solution.
-    %>
-    %> \rst
-    %> .. code-block:: none
-    %>
-    %>   plot(t, sol(1,:));
-    %>
-    %> \endrst
-    %>
-    %> **Usage**
-    %>
-    %> Notice that the solve method is implemented through a while loop, thus
-    %> the final time step might not be exactly the same as the last element of
-    %> the desired input time vector \f$ \mathbf{t} \f$.
-    %>
-    %> \param t       Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
-    %>                \right]^T \f$.
-    %> \param x_0     Initial states value \f$ \mathbf{x}(t_0) \f$.
-    %> \param project [optional, default = false] Apply projection to invariants
-    %>                 at each step.
-    %> \param verbose [optional, default = \f$ \mathrm{false} \f$] Activate
-    %>                vebose mode.
-    %> \param epsilon [optional, default = \f$ 10^{3} \f$] If
-    %>                \f$ || \mathbf{x} ||_{\infty} > \varepsilon \f$
-    %>                the computation is interrupted.
+    %> \param t   Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+    %>            \right]^T \f$.
+    %> \param x_0 Initial states value \f$ \mathbf{x}(t_0) \f$.
     %>
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
     %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
     %
-    function [x_out, t_out] = solve( this, t, x_0, varargin )
+    function [x_out, t_out] = solve( this, t, x_0 )
 
       CMD = 'indigo::ODEsolver::solve(...): ';
 
@@ -569,32 +543,6 @@ classdef ODEsolver < handle
       if (num_eqns ~= length(x_0))
         error([CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
           this.m_name, length(x_0), num_eqns);
-      end
-
-      % Collect optional projection flag
-      if (nargin > 3)
-        project = varargin{1};
-      else
-        project = false;
-      end
-
-      % Collect optional verbose flag
-      if (nargin > 4)
-        verbose = varargin{2};
-      else
-        verbose = false;
-      end
-
-      % Collect optional epsilon value
-      if (nargin > 5)
-        epsilon = varargin{3};
-      else
-        epsilon = 1.0e3;
-      end
-
-      % Check number of input arguments
-      if (nargin > 6)
-        error([CMD, 'in %s solver, too many input arguments.'], this.m_name);
       end
 
       % Instantiate output
@@ -618,13 +566,17 @@ classdef ODEsolver < handle
       d_t_ini = t(2) - t(1);
       d_t     = d_t_ini;
 
-      while (t_out(s) <= t(end))
+      exit = false;
+      while (true)
 
-        % TODO: The while loop does not guarantee that the final time step
-        %       end in t(end)
+        % Check if the maximum number of substepping is reached
+        if (t_out(s) > t(end))
+          t_out(s) = t(end);
+          exit = true;
+        end
 
         % Print percentage of completion
-        if (verbose == true)
+        if (this.m_verbose == true)
           p_new = ceil(100*t_out(s)/t(end));
           if (p_new > p + 9)
             p = p_new;
@@ -637,22 +589,22 @@ classdef ODEsolver < handle
           this.step(x_out(:,s), x_out_dot(:,s), t_out(s), d_t);
 
         % Calculate the next time step with substepping logic
-        % TODO: Maybe it doesn't work because it does not take the drift into
-        % consideration
         if (ierr == 0)
 
           % Accept the step
           d_t = d_t_star;
 
-          % If substepping is enabled,
+          % If substepping is enabled, double the step size
           if (k > 0 && k < max_k)
             k = k - 1;
             % If the substepping index is even, double the step size
             if (rem(k, 2) == 0)
               d_t = 2 * d_t;
-              warning([CMD, 'in %s solver, at t(%d) = %g, integration succedded ', ...
-                'disable one substepping layer.'], ...
-                this.m_name, s, t(s));
+              if (this.m_verbose == true)
+                warning([CMD, 'in %s solver, at t(%d) = %g, integration ', ...
+                  'succedded disable one substepping layer.'], ...
+                  this.m_name, s, t(s));
+              end
             end
           end
 
@@ -660,16 +612,17 @@ classdef ODEsolver < handle
 
           % If the substepping index is too high, abort
           k = k + 2;
-          if (k > max_k)
-            error([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
+          assert(k < max_k, ...
+            [CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
               '(error code %d) with d_t = %g, aborting.'], ...
               this.m_name, s, t(s), ierr, d_t);
-          end
 
           % Otherwise, try again with a smaller step
-          warning([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
-            '(error code %d), adding substepping layer.'], ...
-            this.m_name, s, t(s), ierr);
+          if (this.m_verbose == true)
+            warning([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
+              '(error code %d), adding substepping layer.'], ...
+              this.m_name, s, t(s), ierr);
+          end
           d_t = d_t/2;
           continue;
 
@@ -678,32 +631,50 @@ classdef ODEsolver < handle
         % Store time solution
         t_out(s+1) = t_out(s) + d_t;
 
-
         % Project solution on the invariants/hidden constraints
-        if (project == true)
+        if (this.m_projection == true)
           x_new = this.project(x_new, t_out(s+1));
         end
 
         % Check the infinity norm of the solution
-        norm_x_new = norm(x_new, inf);
-        if (norm_x_new > epsilon)
-          fprintf([CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, ', ...
-          'computation interrupted.\n'], this.m_name, s, t(s), norm_x_new);
-          break;
-        end
+        assert(isfinite( norm(x_new, inf)), ...
+          [CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, computation ', ...
+          'interrupted.\n'], this.m_name, s, t(s),  norm(x_new, inf));
 
         % Store states solutions
         x_out(:,s+1)     = x_new;
         x_out_dot(:,s+1) = x_dot_new;
 
+        % Check if the final time step has been reached
+        if (exit)
+          break;
+        end
+
         % Update steps counter
         s = s + 1;
+
       end
 
       % Resize the output
       t_out     = t_out(:,1:s-1);
       x_out     = x_out(:,1:s-1);
       %x_out_dot = x_out_dot(:,1:s-1);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> A the system of ODEs/DAEs and calculate the approximate solution.
+    %>
+    %> \param t   Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+    %>            \right]^T \f$.
+    %> \param x_0 Initial states value \f$ \mathbf{x}(t_0) \f$.
+    %>
+    %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+    %>         (\mathbf{t})\right] \f$ containing the approximated solution
+    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
+    %
+    function x_out = advance( this, t, x_0 )
+      [x_out , ~] = this.solve([0, t], x_0);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

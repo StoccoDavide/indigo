@@ -138,8 +138,10 @@ X_ini = [x_1, x_2, x_3, y_1, y_2, y_3, u_1, u_2, u_3, v_1, v_2, v_3];
 
 % Solve the system of ODEs for each solver
 for i = 1:length(solver_name)
+  eval(strcat(['solver', solver_name{i}, '.disable_verbose();']));
+  eval(strcat(['solver', solver_name{i}, '.enable_projection();']));
   eval(strcat(['[X_', solver_name{i}, ', T_', solver_name{i}, '] =', ...
-    'solver', solver_name{i}, '.solve( T_vec, X_ini, false, true, 20.0e+09 );']));
+    'solver', solver_name{i}, '.solve( T_vec, X_ini, 20.0e+09 );']));
 end
 
 %% Plot results

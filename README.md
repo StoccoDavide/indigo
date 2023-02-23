@@ -1,38 +1,35 @@
 # INDIGO
 
-A new perspective in differential equations integration
+A Runge-Kutta differential equations integration
 
 ## Online Documentation
 
 Available [here](https://stoccodavide.github.io/indigo/)!
 
-## TODO List
+## TODO
 
-### Tier -1
+### Matlab
 
-- [x] Support for the embedded Runge-Kutta methods.
-- [x] Complete embedded Runge-Kutta methods.
-- [ ] Full-scale debugging of explicit Runge-Kutta methods.
-- [ ] Full-scale debugging of implicit Runge-Kutta methods.
 - [ ] Full-scale debugging of embedded Runge-Kutta methods.
-- [ ] Check *all* Butcher tableaus and maybe write the order and stages as method.
-
-### Tier -2
-
-- [ ] Complete MAPLE package with a `mpl` file (maybe a full package is better).
-- [ ] Complete MAPLE package documentation.
 - [ ] Complete MATLAB toolbox documentation.
 - [ ] Complete MATLAB examples documentation.
 
-### Tier -3
+### Maple
 
-- [x] Implement Dormand-Prince 4(5) embedded Runge-Kutta method class.
-- [x] Implement Cash-Karp 4(5) embedded Runge-Kutta method class.
-- [x] Implement Fehlberg 7(8) embedded Runge-Kutta method class.
-- [x] Implement Sarafyan 4(5) embedded Runge-Kutta method class.
-- [x] Implement Bogacki–Shampine 2(3) embedded Runge-Kutta method class.
-- [x] Implement Verner 6(5) embedded Runge-Kutta method class.
-- [x] Implement Sun Geng 5 implicit Runge-Kutta method class.
+- [ ] Complete package with a `mpl` file (maybe a full package is better).
+- [ ] Complete package documentation.
+
+### C++
+
+- [ ] Development of full C++ version.
+
+### Matlab MEX
+
+- [ ] Development of full Matlab MEX interface.
+
+### Python
+
+- [ ] Compile bindings.
 
 ## Authors
 
