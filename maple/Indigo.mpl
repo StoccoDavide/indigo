@@ -19,12 +19,11 @@ Indigo := module()
          load_matrices,
          load_equations,
          reduce_index_by_one,
-         X_sys,
-         E_sys,
-         G_sys,
-         A_sys,
-         r_sys,
-         history;
+         reduce_index_MBD_DAE3,
+         #reduce_index_MBD_DAE2, # TODO
+         #reduce_index_MBD_DAE1, # TODO
+         reduce_index,
+         reduction_steps;
 
   local  module_load,
          module_unload,
@@ -32,14 +31,14 @@ Indigo := module()
          veiling_strategy,
          pivoting_strategy,
          zero_strategy,
-         update_history,
+         DAE_type, # "Linear", "MBD3", "MBD2", "MBD1", "Generic"
+         update_reduction_steps,
          separate_matrices;
 
   global warning_level;
 
   uses IndigoUtils, LULEM;
 
-  # Package options
   option  package,
           load   = module_load,
           unload = module_unload;
@@ -118,21 +117,9 @@ Indigo := module()
   #}
   reset := proc( $ )
     # Internal variables
-    unprotect('X_sys', 'E_sys', 'G_sys', 'A_sys', 'r_sys');
-    X_sys := NULL;
-    E_sys := NULL;
-    G_sys := NULL;
-    A_sys := NULL;
-    r_sys := NULL;
-    protect('X_sys', 'E_sys', 'G_sys', 'A_sys', 'r_sys');
-    unprotect('history');
-    history := table([]);
-    history[parse("E")] := table([]);
-    history[parse("G")] := table([]);
-    history[parse("A")] := table([]);
-    history[parse("r")] := table([]);
-    history[parse("iter")] := 0;
-    protect('history');
+    unprotect('reduction_steps');
+    reduction_steps := [];
+    protect('reduction_steps');
 
     # Reset the LU decomposition strategies
     change_strategies();
@@ -145,18 +132,22 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  update_history := proc( i::integer, E::Matrix, G::Vector, A::Vector, r::integer, $ )
+  update_reduction_steps := proc( X::list, E::Matrix, G::Vector, A::Vector, r::integer, $ )
+    local tmp;
+    unprotect('reduction_steps');
+    tbl := table([
+      "X" = X,
+      "E" = E,
+      "G" = G,
+      "A" = A,
+      "r" = r
+      ]);
+    reduction_steps := [op(reduction_steps), tbl];
 
-    unprotect('history');
-    history[parse("iter")] := i;
-    history[parse("E")][i] := E;
-    history[parse("G")][i] := G;
-    history[parse("A")][i] := A;
-    history[parse("r")][i] := r;
-    protect('history');
+    protect('reduction_steps');
 
     return NULL;
-  end proc: # update_history
+  end proc: # update_reduction_steps
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -305,11 +296,9 @@ Indigo := module()
   #   r  - rank of E
   #}
   load_matrices := proc( E::Matrix, vars::list, G::Vector, $ )
-    unprotect('X_sys', 'E_sys', 'G_sys', 'A_sys', 'r_sys');
-    X_sys := vars;
-    E_sys, G_sys, A_sys, r_sys := separate_matrices(E, G);
-    protect('X_sys', 'E_sys', 'G_sys', 'A_sys', 'r_sys');
-    update_history(0, E_sys, G_sys, A_sys, r_sys);
+    local E_tmp, G_tmp, A_tmp, r_tmp;
+    E_tmp, G_tmp, A_tmp, r_tmp := separate_matrices(E, G);
+    update_reduction_steps(vars, E_tmp, G_tmp, A_tmp, r_tmp);
     return NULL;
   end proc:
 
@@ -347,18 +336,18 @@ Indigo := module()
   #
   # with the new algebraic part separated
   reduce_index_by_one := proc( $ )
-    local iter, E_tmp, G_tmp, A_tmp, nE, mE, nA, dA, H, F, nH, mH, Er, Gr, Ar, rr;
+    local X_tmp, E_tmp, G_tmp, A_tmp, nE, mE, nA, dA, H, F, nH, mH, Er, Gr, Ar, rr;
 
-    iter  := history[parse("iter")];
-    E_tmp := history[parse("E")][iter];
-    G_tmp := history[parse("G")][iter];
-    A_tmp := history[parse("A")][iter];
+    X_tmp := reduction_steps[-1]["X"];
+    E_tmp := reduction_steps[-1]["E"];
+    G_tmp := reduction_steps[-1]["G"];
+    A_tmp := reduction_steps[-1]["A"];
 
     # Check dimensions
     nE, mE := LinearAlgebra[Dimension](E_tmp);
     nA := LinearAlgebra[Dimension](A_tmp);
     assert(
-      nA+nE = mE, cat(
+      nA + nE = mE, cat(
       "Indigo::reduce_index_by_one(...): number of row of E (%d x %d) plus the ",
       "number of algebraic equations (%d) must be equal to the column of E."),
       nE, mE, nA
@@ -367,13 +356,13 @@ Indigo := module()
     # Separate algebraic and differential part
     dA := diff(A_tmp, t);
 
-    # E*dvars-G = dA
-    H, F := LinearAlgebra[GenerateMatrix](convert(dA, list), diff(X_sys, t));
+    # E * diff_vars - G = dA
+    H, F := LinearAlgebra[GenerateMatrix](convert(dA, list), diff(X_tmp, t));
 
     # Check dimensions
     nH, mH := LinearAlgebra[Dimension](H);
     assert(
-      (nH+nE = mE) and (mH = mE), cat(
+      (nH + nE = mE) and (mH = mE), cat(
       "Indigo::reduce_index_by_one(...): bad dimension of linear part of constraint ",
       "derivative A' = H vars' + F, size H = %d x %d, size E = %d x %d."),
       nH, mH, nE, mE
@@ -383,88 +372,82 @@ Indigo := module()
     Er, Gr, Ar, rr := separate_matrices(<E_tmp, H>, convert(<G_tmp, F>, Vector));
 
     if (LinearAlgebra[Dimension](Ar) = 0) then
-      print_message("Index-0 DAEs system has been reached.");
+      print_message("DAE0 system has been reached.");
       return false;
     else
-      update_history(history[parse("iter")]+1, Er, Gr, Ar, rr);
+      update_reduction_steps(reduction_steps[-1]["X"], Er, Gr, Ar, rr);
       return true;
     end if;
   end proc:
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-(*
-  DAE3_get_ODE_and_invariants := proc( Mass, Phi_in, f_in, qvars, vvars, lvars )
-    local tbl, n, m, f, q_D, v_D, v_dot,
+
+  reduce_index_MBD_DAE3 := proc( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
+    local tbl, n, m, f, dq, dv, v_dot,
           ODE_POS, ODE_VEL, tmp,
           Phi, Phi_P, Phi_t, A, A_rhs, g, bigM, bigRHS, bigVAR;
 
-    if type(f_in,'Vector') then
+    # Recast type of inputs
+    if type(f_in, Vector) then
       f := f_in;
     else
-      f := convert(f_in,Vector);
+      f := convert(f_in, Vector);
     end;
 
-
-    if type(Phi_in,'Vector') then
+    if type(Phi_in, Vector) then
       Phi := Phi_in;
     else
-      Phi := convert(Phi_in,Vector);
+      Phi := convert(Phi_in, Vector);
     end;
 
-    n, m:= Dimension( Mass );
-    if n <> m or n <> nops(vvars) then
-      print(
-        "DAE3_get_ODE_and_invariants: mass marrix must be square\n"
-        "and of the same size of the length of vvars", Mass, vvars
-      );
-    end;
+    # Check dimensions of inputs
+    n, m := LinearAlgebra[Dimension](Mass);
+    assert(
+      (n = m) and (n = nops(vvars)), cat(
+      "indigo::reduce_index_MBD_DAE3(...): mass matrix must be square and of the ",
+      "same size of the length of velocity variables."), Mass, vvars
+    );
 
-    n := nops( qvars );
-    m := Dimension( Phi );
+    n := nops(qvars);
+    assert(
+      (n = nops(vvars)), cat(
+      "indigo::reduce_index_MBD_DAE3(...): velocity variables and position ",
+      "variables must have the same size.")
+    );
 
-    if n <> nops(vvars) then
-      print(
-        "DAE3_get_ODE_and_invariants: qvars and vvars\n"
-        "must have the same length", qvars, vvars
-      );
-    end;
+    m := LinearAlgebra[Dimension](Phi);
+    assert(
+      (m = nops(lvars)), cat(
+      "indigo::reduce_index_MBD_DAE3(...): lambda variables must have the same ",
+      "length the number of constraints.")
+    );
 
-    if m <> nops(lvars) then
-      print(
-        "DAE3_get_ODE_and_invariants: lvars must have\n"
-        "the same length the number of constraints", lvars, Phi
-      );
-    end;
+    # Differential variables
+    dq := diff(qvars, t);
+    dv := diff(vvars, t);
 
-    # differential variables
-    q_D := map( diff, qvars, t );
-    v_D := map( diff, vvars, t );
+    # Definition of variable "derivative of velocities"
+    v_dot := map(map( cat, map2( op, 0, vvars ), __d ), (t));
 
-    # definition of variable "derivative of velocities"
-    v_dot := map( map( cat, map2( op, 0, vvars ), __d ), (t) );
+    # ODDE position part q' = v
+    ODE_POS := zip((x, y)-> x = y, dq, vvars);
 
-    # ode position part q' = v
-    ODE_POS := zip( (x,y)-> x = y, q_D, vvars );
+    # ODE velocity part v' = v__d
+    ODE_VEL := zip((x, y)-> x = y, dv, v_dot);
 
-    # ode velocity part v' = v__d
-    ODE_VEL := zip( (x,y)-> x = y, v_D, v_dot );
+    # Hidden contraint/invariant A(q,v,t)
+    A := subs(ODE_POS, diff(Phi, t));
 
-    # hidden contraint/invariant A(q,v,t)
-    A := subs( ODE_POS, diff(Phi,t) );
+    Phi_P, A_rhs := LinearAlgebra[GenerateMatrix](convert(A, list), vvars);
+    # Hidden invariant Phi_P v__d - g(q,v,t)
+    tmp, g := LinearAlgebra[GenerateMatrix](diff(convert(A, list), t), dv);
 
-    Phi_P, A_rhs := GenerateMatrix(convert(A,list),vvars);
-    # hidden invariant Phi_P v__d - g(q,v,t)
-    tmp, g := GenerateMatrix(diff(convert(A,list),t),v_D);
+    # Big linear system
+    bigM   := <<Mass, Phi_P>|<Transpose(Phi_P), Matrix(m, m)>>;
+    bigRHS := convert(<f, subs(ODE_POS, g)>, Vector);
+    bigVAR := [op(v_dot), op(lvars)];
 
-    if tb_dae_debug then
-      print("DAE3_get_ODE_and_invariants: Phi_P, tmp",Phi_P, tmp);
-    end;
-
-    # big linear system
-    bigM   := <<Mass,Phi_P>|<Transpose(Phi_P),Matrix(m,m)>>;
-    bigRHS := convert(<f,subs(ODE_POS,g)>,Vector);
-    bigVAR := [op(v_dot),op(lvars)];
-    # return the computed block
+    # Return the computed blocks
     return table([
       "m"       = m,
       "n"       = n,
@@ -472,15 +455,15 @@ Indigo := module()
       "VVARS"   = vvars,
       "LVARS"   = lvars,
       "VDOT"    = v_dot,
-      "ODE_RHS" = [op(map(rhs,ODE_POS)),op(map(rhs,ODE_VEL))],
       "ODE_POS" = ODE_POS,
       "ODE_VEL" = ODE_VEL,
+      "ODE_RHS" = [op(map(rhs, ODE_POS)), op(map(rhs, ODE_VEL))],
       "Phi"     = Phi,
       "Phi_P"   = Phi_P,
       "A_rhs"   = A_rhs,
       "A"       = A,
       "f"       = f,
-      "g"       = subs(ODE_POS,g),
+      "g"       = subs(ODE_POS, g),
       "bigVAR"  = bigVAR,
       "bigM"    = bigM,
       "bigRHS"  = bigRHS
@@ -488,11 +471,11 @@ Indigo := module()
   end proc:
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  DAE3_get_ODE_and_invariants_full := proc( Mass, Phi, f, qvars, vvars, lvars )
+(*
+  reduce_index_MBD_DAE3_full := proc( Mass, Phi, f, qvars, vvars, lvars )
     local tbl, n, m, bigETA;
 
-    tbl := DAE3_get_ODE_and_invariants( Mass, Phi, f, qvars, vvars, lvars );
+    tbl := reduce_index_MBD_DAE3( Mass, Phi, f, qvars, vvars, lvars );
 
     n := tbl["n"];
     m := tbl["m"];
@@ -500,22 +483,24 @@ Indigo := module()
     bigETA := convert(tbl["bigM"].<seq(mu||i,i=1..n+m)>,Vector);
 
     tbl["bigETA"]  := bigETA;
-    tbl["JbigETA"] := JACOBIAN(bigETA,[op(qvars),op(vvars)]);
+    tbl["JbigETA"] := JACOBIAN(bigETA, [op(qvars), op(vvars)] );
     tbl["JbigRHS"] := JACOBIAN(tbl["bigRHS"],[op(qvars),op(vvars)]);
 
-    # return the computed block
+    # Return the computed blocks
     return tbl;
   end proc:
 
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DAE3_get_ODE_and_invariants_baumgarte := proc( Mass, Phi, f_in, qvars, vvars, lvars )
+  reduce_index_MBD_DAE3_baumgarte := proc( Mass, Phi, f_in, qvars, vvars, lvars )
     local tbl;
-    tbl                 := DAE3_get_ODE_and_invariants_full( Mass, Phi, f_in, qvars, vvars, lvars );
+
+    tbl                 := reduce_index_MBD_DAE3_full( Mass, Phi, f_in, qvars, vvars, lvars );
     tbl["h"]            := tbl["g"]-2*eta*omega*tbl["A"]-omega^2*tbl["Phi"];
     tbl["bigRHS_stab"]  := convert(<tbl["f"] ,tbl["h"] >,Vector);
     tbl["JbigRHS_stab"] := JACOBIAN(tbl["bigRHS_stab"],[op(qvars),op(vvars)]);
+
+    # Return the computed blocks
     return tbl;
   end:
 

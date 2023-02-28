@@ -114,7 +114,7 @@ for i = 1:length(solver_name)
 
   % Solve the system of ODEs
   eval(strcat(['[X_', solver_name{i}, ', T_', solver_name{i}, '] =', ...
-    'solver', solver_name{i}, '.solve( T_vec, X_0, false, false, 20.0e+03 );']));
+    'solver', solver_name{i}, '.solve( T_vec, X_0 );']));
 
   % Calculate energy of the solution
   eval(strcat(['H_' solver_name{i}, ' = ODE.H( X_', solver_name{i}, ', T_', solver_name{i}, ' );']));
@@ -232,7 +232,7 @@ for i = 1:length(solver_name)
 
   % Solve the system of ODEs
   eval(strcat(['[X_', solver_name{i}, ', T_', solver_name{i}, '] =', ...
-    'solver', solver_name{i}, '.solve( T_vec, X_0, true, false, 20.0e+03 );']));
+    'solver', solver_name{i}, '.solve( T_vec, X_0 );']));
 
   % Calculate energy of the solution
   eval(strcat(['H_' solver_name{i}, ' = ODE.H( X_', solver_name{i}, ', T_', solver_name{i}, ' );']));

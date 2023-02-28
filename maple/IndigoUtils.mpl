@@ -1,92 +1,100 @@
-# # # # # # # # # # # # # # # # # # # # # # # # # # #
-#  ___           _ _             _   _ _   _ _      #
-# |_ _|_ __   __| (_) __ _  ___ | | | | |_(_) |___  #
-#  | || '_ \ / _` | |/ _` |/ _ \| | | | __| | / __| #
-#  | || | | | (_| | | (_| | (_) | |_| | |_| | \__ \ #
-# |___|_| |_|\__,_|_|\__, |\___/ \___/ \__|_|_|___/ #
-#                    |___/                          #
-# # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#               ___           _ _             _   _ _   _ _                   #
+#              |_ _|_ __   __| (_) __ _  ___ | | | | |_(_) |___               #
+#               | || '_ \ / _` | |/ _` |/ _ \| | | | __| | / __|              #
+#               | || | | | (_| | | (_| | (_) | |_| | |_| | \__ \              #
+#              |___|_| |_|\__,_|_|\__, |\___/ \___/ \__|_|_|___/              #
+#                                 |___/                                       #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# Authors: Davide Stocco and Enrico Bertolazzi
-# Date:    22/02/2023
+# Authors: Davide Stocco (University of Trento)
+#          Enrico Bertolazzi (University of Trento)
+#
+# License: BSD 3-Clause License
+#
+# This is a module for the 'IndigoUtils' package. It contains the auxiliary
+# functions to be used in the 'Indigo' package.
 
 IndigoUtils := module()
 
-  # Exported variables
-  export  # Symbol
-          drop_prefix,
-          get_position,
-          check_param,
-          check_table,
-          check_table_2,
-          to_string,
-          to_ruby_string,
-          to_string_and_split,
-          cat_symbol,
-          to_symbol,
-          to_vector,
-          join_symbol,
-          # Differentiation
-          do_diff,
-          do_gradient,
-          do_hessian,
-          do_jacobian,
-          # Function
-          extract_subs,
-          get_functions,
-          get_functions_in_list,
-          get_symbols,
-          get_function_prototype,
-          get_function_name,
-          get_function_body,
-          is_dependent_on,
-          get_symbols_recurr,
-          # Miscellaneous
-          get_perm_sorted_list,
-          compute_expression_cost,
-          # Messages
-          cprintf,
-          error_message,
-          warning_message,
-          print_title,
-          print_header,
-          print_message,
-          assert,
-          warning;
+  export # Symbol
+         DropPrefix,
+         GetPosition,
+         CheckParam,
+         CheckTable,
+         CheckTable_2,
+         ToString,
+         ToRubyString,
+         ToStringAndSplit,
+         CatSymbol,
+         ToSymbol,
+         ToVector,
+         JoinSymbol,
+         # Differentiation
+         DoDiff,
+         DoGradient,
+         DoHessian,
+         DoJacobian,
+         # Function
+         ExtractSubs,
+         GetFunctions,
+         GetFunctionsInList,
+         GetSymbols,
+         GetFunctionPrototype,
+         GetFunctionName,
+         GetFunctionBody,
+         IsDependentOn,
+         GetSymbolsRecurr,
+         # Miscellaneous
+         get_perm_sorted_list,
+         compute_expression_cost,
+         # Messages
+         cprintf,
+         ErrorMessage,
+         WarningMessage,
+         PrintTitle,
+         PrintHeader,
+         PrintMessage,
+         Assert,
+         Warning;
 
-  # Local variables
-  local   module_load,
-          module_unload,
-          lib_base_path;
+  local  ModuleLoad,
+         ModuleUnload,
+         lib_base_path;
 
-  # Package options
-  option  package,
-          load   = module_load,
-          unload = module_unload;
+  option package,
+         load   = ModuleLoad,
+         unload = ModuleUnload;
 
   description "Utilities for the 'Indigo' module";
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: module_unload
+  # Function: ModuleUnload
   #  Routines to load the module.
   #}
-  module_load := proc()
+  ModuleLoad := proc()
+
+    description "'IndigoUtils' module load procedure";
+
     #printf("Loading 'IndigoUtils'\n");
     return NULL;
-  end proc: # module_load
+  end proc: # ModuleLoad
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: module_unload
+  # Function: ModuleUnload
   #  Routines to unload the module.
   #}
-  module_unload := proc()
+  ModuleUnload := proc()
+
+    description "'IndigoUtils' module unload procedure";
+
     #printf("Unloading 'IndigoUtils'\n");
     return NULL;
-  end proc: # module_unload
+  end proc: # ModuleUnload
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -100,7 +108,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: drop_prefix
+  # Function: DropPrefix
   #  Drop the prefix of a string.
   #
   # Parameters:
@@ -109,14 +117,19 @@ IndigoUtils := module()
   # Return:
   #  the string without prefix
   #}
-  drop_prefix := proc( str::string, $ )
+  DropPrefix := proc(
+    str::{string},
+    $)::{string};
+
+    description "Drop the prefix of the input string <str>.";
+
     return StringTools[RegSubs]("([^#]+)#"="", str);
-  end proc: # drop_prefix
+  end proc: # DropPrefix
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_position
+  # Function: GetPosition
   #  Find a list in order to find the position of variable.
   #
   # Parameters:
@@ -126,7 +139,7 @@ IndigoUtils := module()
   # Return:
   #  the position of variable var in the list.
   #}
-  get_position := proc( var::{symbol,function,integer}, lst::list, $ )
+  GetPosition := proc( var::{symbol, function, integer}, lst::{list}, $ )
     local i;
     # Find the position
     if type(var,` function`) then
@@ -138,8 +151,8 @@ IndigoUtils := module()
         i := ListTools[Search](var, lst);
       end if;
       if (i = 0) then
-        error_message(
-          "IndigoUtils::get_position(...): failed for %s in %s.\n",
+        ErrorMessage(
+          "IndigoUtils::GetPosition(...): failed for %s in %s.\n",
           convert(var, string),
           convert(lst, string)
         );
@@ -147,19 +160,19 @@ IndigoUtils := module()
     elif type(var, `integer`) then
       i;
     else
-      error_message(
-        "IndigoUtils::get_position(...): failed for %s in %s.\n",
+      ErrorMessage(
+        "IndigoUtils::GetPosition(...): failed for %s in %s.\n",
         convert(var, string),
         convert(lst, string)
       );
     end if;
     return i;
-  end proc: # get_position
+  end proc: # GetPosition
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: check_param
+  # Function: CheckParam
   #  Check the parameter type.
   #
   # Parameters:
@@ -168,64 +181,64 @@ IndigoUtils := module()
   #  - tp         = parameter type
   #
   # Return:
-  #  NULL or warning
+  #  NULL or Warning
   #}
-  check_param := proc( param, param_name::string, tp, where::string, $ )
+  CheckParam := proc( param, param_name::string, tp, where::string, $ )
     if not type(param, tp) then
-      printf("IndigoUtils::get_position(...): parameter `%s` = %a\n", param_name, param);
-      error_message(
-        "IndigoUtils::get_position(...): parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
+      printf("IndigoUtils::GetPosition(...): parameter `%s` = %a\n", param_name, param);
+      ErrorMessage(
+        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
         param_name, convert(whattype(param), string), convert(tp, string), where
       );
     end if;
     return NULL;
-  end proc: # check_param
+  end proc: # CheckParam
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   # TODO
   (*
-  check_table := proc( t, e::string, msg::string, tp, $ )
+  CheckTable := proc( t, e::string, msg::string, tp, $ )
     if not type(t, `table`) then
-      error_message(msg);
+      ErrorMessage(msg);
     end if;
     if not member(e, [indices(t, 'nolist')]) then
-      error_message(msg);
+      ErrorMessage(msg);
     end if;
-    check_param(t[e], e, tp, "check_table");
+    CheckParam(t[e], e, tp, "CheckTable");
     return NULL;
-  end proc: # check_table
+  end proc: # CheckTable
   *)
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   # TODO
   (*
-  check_table_2 := proc( param::table, nameParam::string, tp, where::string, $ )
+  CheckTable_2 := proc( param::table, nameParam::string, tp, where::string, $ )
     local keywords;
     keywords := {indices(param,'nolist')};
     if not (nameParam in keywords) then
-      error_message(
-        "IndigoUtils::get_position(...): missing keyword `%s` in %s\nkeywords: %a\n",
+      ErrorMessage(
+        "IndigoUtils::GetPosition(...): missing keyword `%s` in %s\nkeywords: %a\n",
         convert(nameParam, string), where, keywords
       );
     end if;
     if not type(param[nameParam], tp) then
       printf("Parameter `%s` = %a\n", nameParam, param[nameParam]);
-      error_message(
-        "IndigoUtils::get_position(...): parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
+      ErrorMessage(
+        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
         nameParam, convert(whattype(param[nameParam]), string),
         convert(tp, string), where
       );
     end if;
     return NULL;
-  end proc: # check_table_2
+  end proc: # CheckTable_2
   *)
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: to_string
+  # Function: ToString
   #  Convert a symbol into a string. Variables of type 'x[dot](t)' are converted
   #  into 'x_dot(t)'.
   #
@@ -235,7 +248,7 @@ IndigoUtils := module()
   # Return:
   #  the string
   #}
-  to_string := proc( var, $ )
+  ToString := proc( var, $ )
     local str;
     if type(var,'string') then
       return var;
@@ -250,12 +263,12 @@ IndigoUtils := module()
       str := StringTools[RegSubs]("^[.]([0-9])"="0.\1", str);
       return str;
     end if;
-  end proc: # to_string
+  end proc: # ToString
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: to_string_and_split
+  # Function: ToStringAndSplit
   #  Convert a symbol or string into multiple strings. Variables of type
   #  'x[dot](t)' are converted into 'x_dot(t)'.
   #
@@ -265,12 +278,12 @@ IndigoUtils := module()
   # Return:
   #  the string
   #}
-  to_string_and_split := proc( var, $ )
+  ToStringAndSplit := proc( var, $ )
     local str;
     if type(var, 'string') then
       str := var;
     else
-      str := to_string(var);
+      str := ToString(var);
     end if;
     if (StringTools[Length](str) > 512) then
       str := StringTools[Join]([StringTools[LengthSplit](str, 512)], """+\n\t""");
@@ -278,12 +291,12 @@ IndigoUtils := module()
     # We do not substitute " with \" but ' with \'
     str := StringTools[SubstituteAll](str, "'", "\\'");
     return str;
-  end proc: # to_string_and_split
+  end proc: # ToStringAndSplit
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: to_ruby_string
+  # Function: ToRubyString
   #  Convert a symbol or string into a Ruby string. Variables of type 'x[dot](t)'
   #  are converted into 'x_dot(t)'.
   #
@@ -293,19 +306,19 @@ IndigoUtils := module()
   # Return:
   #  the string
   #}
-  to_ruby_string := proc( var, $ )
+  ToRubyString := proc( var, $ )
     local str;
-    str := to_string(var);
+    str := ToString(var);
     if (StringTools[Length](str) > 512) then
       str := StringTools[Join]([StringTools[LengthSplit](str, 512)], """+\n\t""");
     end if;
     return cat("""", str, """");
-  end proc: # to_ruby_string
+  end proc: # ToRubyString
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: cat_symbol
+  # Function: CatSymbol
   #  Concatenates symbols.
   #
   # Parameters:
@@ -314,14 +327,14 @@ IndigoUtils := module()
   # Return:
   #  the symbol
   #}
-  cat_symbol := proc()
+  CatSymbol := proc()
     return convert(cat(_passed), symbol);
-  end proc: # cat_symbol
+  end proc: # CatSymbol
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: to_symbol
+  # Function: ToSymbol
   #  Convert a symbol into a string. Variables of type 'x[dot](t)' are converted
   #  into 'x_dot(t)'.
   #
@@ -333,18 +346,18 @@ IndigoUtils := module()
   # Return:
   #  the symbol
   #}
-  to_symbol := proc( pre, var, post, $ )
+  ToSymbol := proc( pre, var, post, $ )
     local tmp;
     tmp := convert(op(0, var), string);
     tmp := StringTools[Substitute](tmp, "]", "");
     tmp := StringTools[Substitute](tmp, "[", "_");
     return convert(cat(pre, tmp, post), symbol);
-  end proc: # to_symbol
+  end proc: # ToSymbol
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: to_vector
+  # Function: ToVector
   #  Convert list matrix or anithing to a column vector.
   #
   # Parameters:
@@ -353,14 +366,14 @@ IndigoUtils := module()
   # Return:
   #  the Vector(v)
   #}
-  to_vector := proc( v, $ )
+  ToVector := proc( v, $ )
     return convert(convert(v, list), Vector);
-  end proc: # to_vector
+  end proc: # ToVector
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: join_symbol
+  # Function: JoinSymbol
   #  Combine a list of string/symbols into one unique symbol.
   #
   # Parameters:
@@ -369,14 +382,14 @@ IndigoUtils := module()
   # Return:
   #  the symbol
   #}
-  join_symbol := proc()
+  JoinSymbol := proc()
     local out, i;
     out := convert(_passed[1], symbol);
     for i from 2 to _npassed do
       out := cat(out, convert(_passed[i], symbol));
     end do;
     return out;
-  end proc: # join_symbol
+  end proc: # JoinSymbol
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -390,7 +403,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: do_diff
+  # Function: DoDiff
   #  Differentiate an expression with respect to a function.
   #
   # Parameters:
@@ -400,22 +413,22 @@ IndigoUtils := module()
   # Return:
   #  the expression derivative
   #}
-  do_diff := proc()
+  DoDiff := proc()
     local i, tmp1, tmp2, out;
-    tmp2 := do_diff(subs(f = tmp1, out), tmp1);
+    tmp2 := DoDiff(subs(f = tmp1, out), tmp1);
     subs(tmp1 = f, convert(tmp2, D));
     out := _passed[1];
     for i from 2 to _npassed do
-      tmp2 := do_diff(subs(_passed[i] = tmp1, out), tmp1);
+      tmp2 := DoDiff(subs(_passed[i] = tmp1, out), tmp1);
       out := subs(tmp1 = _passed[i], convert(tmp2, D));
     end do;
     return out;
-  end proc: # do_diff
+  end proc: # DoDiff
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: do_gradient
+  # Function: DoGradient
   #  Differentiate an scalar expression with respect to a list of functions.
   #
   # Parameters:
@@ -425,20 +438,20 @@ IndigoUtils := module()
   # Return:
   #  the expression gradient
   #}
-  do_gradient := proc( fnc, lst::list, $ )
+  DoGradient := proc( fnc, lst::list, $ )
     local i, n_x, out;
     n_x := nops(lst);
     out := Vector(n_x);
     for i from 1 to n_x do
-      out[i] := do_diff(fnc,lst[i]):
+      out[i] := DoDiff(fnc,lst[i]):
     end do;
     return out;
-  end proc: # do_gradient
+  end proc: # DoGradient
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: do_hessian
+  # Function: DoHessian
   #  Differentiate a vector of expressions (gradient) with respect to a list of
   #  functions.
   #
@@ -449,23 +462,23 @@ IndigoUtils := module()
   # Return:
   #  the expressions hessian
   #}
-  do_hessian := proc( fnc, lst::list, $ )
+  DoHessian := proc( fnc, lst::list, $ )
     local i, j, n_x, out;
     n_x := nops(lst);
     out := Matrix(n_x, n_x);
     for i from 1 to n_x do
       for j from i to n_x do
-        out[i,j] := do_diff(fnc, lst[i], lst[j]);
+        out[i,j] := DoDiff(fnc, lst[i], lst[j]);
         out[j,i] := out[i,j];
       end do;
     end do;
     return out;
-  end proc: # do_hessian
+  end proc: # DoHessian
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: do_jacobian
+  # Function: DoJacobian
   #  Differentiate an vector of expressions with respect to a list of functions.
   #
   # Parameters:
@@ -475,18 +488,18 @@ IndigoUtils := module()
   # Return:
   #  the expressions jacobian
   #}
-  do_jacobian := proc( fnc::Vector, lst::list, $ )
+  DoJacobian := proc( fnc::Vector, lst::list, $ )
     local i, j, n_f, n_x, out;
     n_f := LinearAlgebra[Dimension](fnc);
     n_x := nops(lst);
     out := Matrix(n_f, n_x);
     for i from 1 to n_f do
       for j from 1 to n_x do
-        out[i,j] := do_diff(fnc[i], lst[j]);
+        out[i,j] := DoDiff(fnc[i], lst[j]);
       end do;
     end do;
     return out;
-  end proc: # do_jacobian
+  end proc: # DoJacobian
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -500,7 +513,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: extract_subs
+  # Function: ExtractSubs
   #  Extract the list of the substitution list.
   #
   # Parameters:
@@ -509,9 +522,9 @@ IndigoUtils := module()
   # Return:
   #  the list of variables to substitute
   #}
-  extract_subs := proc( pars::list, $ )
+  ExtractSubs := proc( pars::list, $ )
     local  i, out;
-    check_param( pars, "extract_subs param", 'list', "extract_subs" ):
+    CheckParam( pars, "ExtractSubs param", 'list', "ExtractSubs" ):
     out := [];
     for i from 1 to nops(pars) do
       if (nops(pars[i]) > 1) then
@@ -524,7 +537,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_functions
+  # Function: GetFunctions
   #  Extract the list of the functions in the expression.
   #
   # Parameters:
@@ -533,7 +546,7 @@ IndigoUtils := module()
   #
   # Return:
   #  the list of functions
-  get_functions := proc ( expr, onlyD::boolean := false, $ )
+  GetFunctions := proc ( expr, onlyD::boolean := false, $ )
     local e, lst, tmp1, tmp2;
     lst := {};
     if type(expr, 'function') then
@@ -542,10 +555,10 @@ IndigoUtils := module()
         tmp2 := op(0, tmp1);
         if type(tmp1,'function') and (type(tmp2,'symbol') or
            type(tmp2, 'indexed')) then
-          lst := {tmp1} union get_functions(op(1, expr), onlyD);
+          lst := {tmp1} union GetFunctions(op(1, expr), onlyD);
         end if;
       else
-        lst := {tmp1} union get_functions(op(1, expr), onlyD);
+        lst := {tmp1} union GetFunctions(op(1, expr), onlyD);
       end if;
     else
       for e in expr do
@@ -553,10 +566,10 @@ IndigoUtils := module()
           #print("symbol",e);
         elif type(e, 'function') then
           #print("symbol",e);
-          lst := lst union get_functions(e, onlyD);
+          lst := lst union GetFunctions(e, onlyD);
         elif type(e, 'algebraic') then
           #print("algebraic",e);
-          lst := lst union get_functions(e, onlyD);
+          lst := lst union GetFunctions(e, onlyD);
         end if;
       end do;
     end if;
@@ -566,7 +579,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_functions_in_list
+  # Function: GetFunctionsInList
   #  Extract the list of the functions in the expression expr that are also in
   #  the list fncs.
   #
@@ -577,7 +590,7 @@ IndigoUtils := module()
   # Return:
   #  the list of functions found that also appear in the given list
   #}
-  get_functions_in_list := proc ( expr, fncs::list, $ )
+  GetFunctionsInList := proc ( expr, fncs::list, $ )
     local e, lst, tmp1, tmp2;
     lst := {};
     if type(expr,'function') then
@@ -586,13 +599,13 @@ IndigoUtils := module()
       if has(fncs,op(0,expr)) then
         #print("found", op(0, expr), op(1, expr));
         if nops(expr) > 0 then
-          lst := {tmp1} union get_functions_in_list(op(1, expr), fncs);
+          lst := {tmp1} union GetFunctionsInList(op(1, expr), fncs);
         else
           lst := {tmp1};
         end if;
       else
         if nops(expr) > 0 then
-          lst := {} union get_functions_in_list(op(1, expr), fncs);
+          lst := {} union GetFunctionsInList(op(1, expr), fncs);
         end if;
       end if;
     else
@@ -601,10 +614,10 @@ IndigoUtils := module()
           #print("symbol",e);
         elif type(e,'function') then
           #print("symbol",e);
-          lst := lst union get_functions_in_list(e, fncs);
+          lst := lst union GetFunctionsInList(e, fncs);
         elif type(e,'algebraic') then
           #print("algebraic",e);
-          lst := lst union get_functions_in_list(e, fncs);
+          lst := lst union GetFunctionsInList(e, fncs);
         end if;
       end do;
     end if;
@@ -614,7 +627,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_symbols
+  # Function: GetSymbols
   #  Extracts the list of the symbols in the expression.
   #
   # Parameters:
@@ -623,7 +636,7 @@ IndigoUtils := module()
   # Return:
   #  the list of symbols
   #}
-  get_symbols := proc( expr, $ )
+  GetSymbols := proc( expr, $ )
     local e, s, lst;
     lst := {};
     #print("expr=",expr);
@@ -636,11 +649,11 @@ IndigoUtils := module()
           #print("symbol",e);
           lst := lst union {e};
         else
-          lst := lst union get_symbols(s);
+          lst := lst union GetSymbols(s);
         end
       elif type(e, 'algebraic') then
         #print("algebraic",e);
-        lst := lst union get_symbols(e);
+        lst := lst union GetSymbols(e);
       end if;
     end do;
     return lst;
@@ -649,7 +662,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_function_prototype
+  # Function: GetFunctionPrototype
   #  Extracts a function ptototype f(x) from an expression of type 'f(x) = body'
   #   or 'f(x)'.
   #
@@ -659,7 +672,7 @@ IndigoUtils := module()
   # Return:
   #  the function prototype
   #}
-  get_function_prototype := proc ( expr, $ )
+  GetFunctionPrototype := proc ( expr, $ )
     if type(expr,`=`) then
       return lhs(expr);
     else
@@ -670,7 +683,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_function_name
+  # Function: GetFunctionName
   #  Extracts the function name from an expression of type 'f(x) = body' or
   #  'f(x)'.
   #
@@ -680,7 +693,7 @@ IndigoUtils := module()
   # Return:
   #  the name of the function
   #}
-  get_function_name := proc ( expr, $ )
+  GetFunctionName := proc ( expr, $ )
     local out;
     if type(expr, `=`) then
       out := op(1, expr);
@@ -690,8 +703,8 @@ IndigoUtils := module()
     if type(out, function) then
       return op(0, out);
     else
-      error_message(
-        "IndigoUtils::get_function_name(...): function expected.\n"
+      ErrorMessage(
+        "IndigoUtils::GetFunctionName(...): function expected.\n"
       );
     end if;
   end proc:
@@ -699,7 +712,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_function_body
+  # Function: GetFunctionBody
   #  Extracts the body from an expression of type 'f(x) = body' or 'f(x)'.
   #
   # Parameters:
@@ -708,7 +721,7 @@ IndigoUtils := module()
   # Return:
   #  the body of the function
   #}
-  get_function_body := proc ( expr, $ )
+  GetFunctionBody := proc ( expr, $ )
     if type(expr,`=`) then
       return op(2, expr);
     else
@@ -719,7 +732,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: is_dependent_on
+  # Function: IsDependentOn
   #  Checks if the expression expr depends on the variables in the list vars.
   #
   # Parameters:
@@ -729,7 +742,7 @@ IndigoUtils := module()
   # Return:
   #  true if expr depends on vars, false otherwise
   #}
-  is_dependent_on := proc ( expr::algebraic, vars::list(function), $ )
+  IsDependentOn := proc ( expr::algebraic, vars::list(function), $ )
     local var;
     for var in vars do
       if (has(expr, var)) then
@@ -742,7 +755,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_symbols_recurr
+  # Function: GetSymbolsRecurr
   #  Extracts the list of the symbols recursively from the expression.
   #
   # Parameters:
@@ -751,7 +764,7 @@ IndigoUtils := module()
   # Return:
   #  the list of symbols
   #}
-  get_symbols_recurr := proc ( data )
+  GetSymbolsRecurr := proc ( data )
     local tmp, key, kv;
 
     if type(data,'indexed') then
@@ -759,11 +772,11 @@ IndigoUtils := module()
     end if;
 
     if type(data, 'Array') then
-      return get_symbols_recurr(convert(data,'list'));
+      return GetSymbolsRecurr(convert(data,'list'));
     end if;
 
     if type(data, 'table') then
-      return get_symbols_recurr(op(2,op(1,data)));
+      return GetSymbolsRecurr(op(2,op(1,data)));
     end if;
 
     if type(data, 'list') then
@@ -772,37 +785,37 @@ IndigoUtils := module()
       elif type(data, 'list(table)') then
         tmp := {};
         for key in data do
-          tmp := tmp union get_symbols_recurr(key);
+          tmp := tmp union GetSymbolsRecurr(key);
         end do;
         return tmp;
       elif type(data, 'list(function(symbol))') then
-        return get_symbols(data);
+        return GetSymbols(data);
       #elif type(data,'list({string,symbol})') then
       # we have to check that it is not only a list of strings
       # while it can be a list of parameters (symbols)
       elif type(data, 'list({string})') then
         return {};
       elif type(data, 'list(algebraic)') then
-        return get_symbols(data);
+        return GetSymbols(data);
       elif type(data, 'list(anything=anything)') then
         tmp := {};
         for kv in data do
-          tmp := tmp union get_symbols_recurr(rhs(kv));
+          tmp := tmp union GetSymbolsRecurr(rhs(kv));
         end do;
         return tmp;
       elif type(data, 'list(anything)') then
         tmp := {};
         for kv in data do
-          tmp := tmp union get_symbols_recurr(kv);
+          tmp := tmp union GetSymbolsRecurr(kv);
         end do;
         return tmp;
       else
         return {};
       end if;
     elif type(data, 'anything=anything') then
-      return get_symbols(rhs(data));
+      return GetSymbols(rhs(data));
     elif type(data, 'algebraic') then
-      return get_symbols(data);
+      return GetSymbols(data);
     elif type(data, 'string') then
       return {};
     else
@@ -891,44 +904,44 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: error_message
+  # Function: ErrorMessage
   #  Print an error message in color and stops the
   #  execution.
   #
   # Parameters:
   #  - _passed = string to be printed
   #}
-  error_message := proc()
+  ErrorMessage := proc()
     local msg;
     #cprintf("red", "white", _passed);
     #msg := cat("Fatal error: ", sprintf(_passed));
     error cat(sprintf(_passed), "\n");
-  end proc: # error_message
+  end proc: # ErrorMessage
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: warning_message
-  #  Print a warning message in color.
+  # Function: WarningMessage
+  #  Print a Warning message in color.
   #
   # Parameters:
   #  - _passed = string to be printed
   #}
-  warning_message := proc()
+  WarningMessage := proc()
     #cprintf("magenta", "white", _passed);
-    WARNING(cat(_passed, "\n"));
-  end proc: # warning_message
+    Warning(cat(_passed, "\n"));
+  end proc: # WarningMessage
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: print_title
+  # Function: PrintTitle
   #  Print a title.
   #
   # Parameters:
   #  - _passed = string to be printed
   #}
-  print_title := proc()
+  PrintTitle := proc()
     local str, len;
     str := sprintf(_passed);
     len := StringTools[Length](str);
@@ -937,20 +950,20 @@ IndigoUtils := module()
       str, StringTools[SubString](cat(
         "====================================================================",
         "===================================================================="
-        ), 1..len)
+        ), 1..len);
     );
-  end proc: # print_title
+  end proc: # PrintTitle
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: print_header
+  # Function: PrintHeader
   #  Print an header.
   #
   # Parameters:
   #  - _passed = string to be printed
   #}
-  print_header := proc()
+  PrintHeader := proc()
     local str, len;
     str := sprintf(_passed);
     len := StringTools[Length](str);
@@ -959,52 +972,52 @@ IndigoUtils := module()
       str, StringTools[SubString](cat(
         "--------------------------------------------------------------------",
         "--------------------------------------------------------------------"
-        ), 1..len)
+        ), 1..len);
     );
-  end proc: # print_header
+  end proc: # PrintHeader
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: print_message
+  # Function: PrintMessage
   #  Print a message.
   #
   # Parameters:
   #  - _passed = string to be printed
   #}
-  print_message := proc()
+  PrintMessage := proc()
     printf(_passed);
-  end proc: # print_message
+  end proc: # PrintMessage
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: assert
+  # Function: Assert
   #  Checks if a condition is true and prints an error message if it is not.
   #
   # Parameters:
   #  - check = condition to be checked
   #}
-  assert := proc( check )
+  Assert := proc( check )
     if not check then
-      error_message(_passed[2..-1]);
+      ErrorMessage(_passed[2..-1]);
     end if;
-  end proc: # assert
+  end proc: # Assert
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: warning
-  #  Checks if a condition is true and prints a warning message if it is not.
+  # Function: Warning
+  #  Checks if a condition is true and prints a Warning message if it is not.
   #
   # Parameters:
   #  - check = condition to be checked
   #}
-  warning := proc( check )
+  Warning := proc( check )
     if not check then
-      warning_message(_passed[2..-1]);
+      WarningMessage(_passed[2..-1]);
     end if;
-  end proc: # warning
+  end proc: # Warning
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

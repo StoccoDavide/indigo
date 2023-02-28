@@ -499,7 +499,8 @@ classdef NewtonSolver < handle
         % Check if dumping failed
         if (dumped == false)
           if (this.m_verbose == true)
-            fprintf(1, [CMD, 'tau = %g, failed dumping iteration.\n', tau]);
+            fprintf(1, ...
+              [CMD, 'tau = %d, failed dumping iteration.\n'], tau);
           end
           ierr = 2;
           break;
@@ -510,7 +511,7 @@ classdef NewtonSolver < handle
         out = x;
         if (this.m_verbose == true)
           fprintf(1, ...
-            [CMD, 'iter %d: ||F||_inf = %14g, tau = %g.\n', i, norm(F, inf), tau]);
+             [CMD, 'iter %d: ||F||_inf = %f, tau = %1.4f.\n'], i, norm(F, inf), tau);
         end
 
         % Check if converged

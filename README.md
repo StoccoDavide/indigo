@@ -1,6 +1,6 @@
-# INDIGO
+# Indigo
 
-A Runge-Kutta differential equations integration
+A Runge-Kutta differential equations integrator...
 
 ## Online Documentation
 
@@ -48,4 +48,4 @@ Department of Industrial Engineering \
 University of Trento \
 email: enrico.bertolazzi@unitn.it
 
-### *That's All Folks!*
+*Documented by Davide Stocco*

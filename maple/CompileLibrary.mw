@@ -150,10 +150,8 @@ end;</Text-field>
 </Input>
 </Group>
 <Group hide-input="false" labelreference="L256783" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">libname := op(newlibname), cat(&quot;./&quot;, LibraryName, &quot;Utils&quot;);</Text-field>
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">libname := op(newlibname), cat(&quot;./&quot;, LibraryName, &quot;Utils&quot;):</Text-field>
 </Input>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzY0LUkjbWlHRiQ2JVEobGlibmFtZUYnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RKSZBc3NpZ247RicvRjNRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y9LyUpc3RyZXRjaHlHRj0vJSpzeW1tZXRyaWNHRj0vJShsYXJnZW9wR0Y9LyUubW92YWJsZWxpbWl0c0dGPS8lJ2FjY2VudEdGPS8lJ2xzcGFjZUdRLDAuMjc3Nzc3OGVtRicvJSdyc3BhY2VHRkwtSSNtc0dGJDYjUVYvTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL2xpYkYnLUY2Ni1RKCZjb21tYTtGJ0Y5RjsvRj9GMUZARkJGREZGRkgvRktRJjAuMGVtRicvRk5RLDAuMzMzMzMzM2VtRictRlA2I1Fgby9MaWJyYXJ5L0ZyYW1ld29ya3MvTWFwbGUuZnJhbWV3b3JrL1ZlcnNpb25zLzIwMjAvdG9vbGJveC9YT3B0aW1hL2xpYkYnRlMtRlA2I1Fhby9MaWJyYXJ5L0ZyYW1ld29ya3MvTWFwbGUuZnJhbWV3b3JrL1ZlcnNpb25zLzIwMjAvdG9vbGJveC9NYXBsZVNpbS9saWJGJ0ZTLUZQNiNRYG8vTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL3Rvb2xib3gvVHJ1c3NNZS9saWJGJ0ZTLUZQNiNRY28vTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL3Rvb2xib3gvTUJTeW1iYV9yNi9saWJGJ0ZTLUZQNiNRXm8vTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL3Rvb2xib3gvTFVMRU0vbGliRidGUy1GUDYjUWhvL0xpYnJhcnkvRnJhbWV3b3Jrcy9NYXBsZS5mcmFtZXdvcmsvVmVyc2lvbnMvMjAyMC90b29sYm94L01CU3ltYmFSZW5kZXJlci9saWJGJ0ZTLUZQNiNRLi4vSW5kaWdvVXRpbHNGJ0Y5">LV9JLFR5cGVzZXR0aW5nRzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiSSxtcHJpbnRzbGFzaEdGKDYkNyM+SShsaWJuYW1lR0YoNipRVi9MaWJyYXJ5L0ZyYW1ld29ya3MvTWFwbGUuZnJhbWV3b3JrL1ZlcnNpb25zLzIwMjAvbGliRihRYG8vTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL3Rvb2xib3gvWE9wdGltYS9saWJGKFFhby9MaWJyYXJ5L0ZyYW1ld29ya3MvTWFwbGUuZnJhbWV3b3JrL1ZlcnNpb25zLzIwMjAvdG9vbGJveC9NYXBsZVNpbS9saWJGKFFgby9MaWJyYXJ5L0ZyYW1ld29ya3MvTWFwbGUuZnJhbWV3b3JrL1ZlcnNpb25zLzIwMjAvdG9vbGJveC9UcnVzc01lL2xpYkYoUWNvL0xpYnJhcnkvRnJhbWV3b3Jrcy9NYXBsZS5mcmFtZXdvcmsvVmVyc2lvbnMvMjAyMC90b29sYm94L01CU3ltYmFfcjYvbGliRihRXm8vTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL3Rvb2xib3gvTFVMRU0vbGliRihRaG8vTGlicmFyeS9GcmFtZXdvcmtzL01hcGxlLmZyYW1ld29yay9WZXJzaW9ucy8yMDIwL3Rvb2xib3gvTUJTeW1iYVJlbmRlcmVyL2xpYkYoUS4uL0luZGlnb1V0aWxzRig3KkYvRjBGMUYyRjNGNEY1RjY=</Equation></Text-field>
-</Output>
 </Group>
 <Group labelreference="L256772" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME )
@@ -183,31 +181,7 @@ end proc:</Text-field>
 <Output><Text-field style="Line Printed Output" layout="Line Printed Output">'LULEM' module version 1.1, BSD 3-Clause License - Copyright (C) 2023, D. Stocco, M. Larcher, E. Bertolazzi, W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Text-field>
 </Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60iter%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A347%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `iter` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:347|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60E_tmp%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A348%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `E_tmp` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:348|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60G_tmp%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A349%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `G_tmp` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:349|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60A_tmp%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A350%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `A_tmp` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:350|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60nE%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A344%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `nE` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:344|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60mE%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A344%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `mE` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:344|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60nA%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A354%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `nA` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:354|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60dA%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A363%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `dA` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:363|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60dX%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A364%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `dX` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:364|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60H%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A344%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `H` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:344|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60F%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A344%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `F` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:344|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60nH%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A344%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `nH` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:344|</Font></Hyperlink></Text-field>
-</Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-reduce_index_by_one)%20%60mH%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A344%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-reduce_index_by_one) `mH` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:344|</Font></Hyperlink></Text-field>
+<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-update_reduction_steps)%20%60tbl%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A136%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-update_reduction_steps) `tbl` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:136|</Font></Hyperlink></Text-field>
 </Output>
 </Group>
 <Group labelreference="L256779" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -239,7 +213,7 @@ Unloading 'Indigo'
 'LULEM' module version 1.1, BSD 3-Clause License - Copyright (C) 2023, D. Stocco, M. Larcher, E. Bertolazzi, W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Text-field>
 </Output>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDY+LUkjbWlHRiQ2JVEmQV9zeXNGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRictSSNtb0dGJDYtUSIsRicvRjZRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y0LyUpc3RyZXRjaHlHRkAvJSpzeW1tZXRyaWNHRkAvJShsYXJnZW9wR0ZALyUubW92YWJsZWxpbWl0c0dGQC8lJ2FjY2VudEdGQC8lJ2xzcGFjZUdRJjAuMGVtRicvJSdyc3BhY2VHUSwwLjMzMzMzMzNlbUYnLUYvNiVRJkVfc3lzRidGMkY1RjgtRi82JVEmR19zeXNGJ0YyRjVGOC1GLzYlUSZYX3N5c0YnRjJGNUY4LUYvNiVRMmNoYW5nZV9zdHJhdGVnaWVzRidGMkY1RjgtRi82JVEoaGlzdG9yeUYnRjJGNUY4LUYvNiVRLWtlcm5lbF9idWlsZEYnRjJGNUY4LUYvNiVRL2xvYWRfZXF1YXRpb25zRidGMkY1RjgtRi82JVEubG9hZF9tYXRyaWNlc0YnRjJGNUY4LUYvNiVRJnJfc3lzRidGMkY1RjgtRi82JVE0cmVkdWNlX2luZGV4X2J5X29uZUYnRjJGNUY4LUYvNiVRJnJlc2V0RidGMkY1RjgtRi82JVEyc2V0X3dhcm5pbmdfbGV2ZWxGJ0YyRjUvJStmb3JlZ3JvdW5kR1EoWzAsMCwwXUYnLyUpcmVhZG9ubHlHRkBGPEY8LyUlb3BlbkdRJyZsc3FiO0YnLyUmY2xvc2VHUScmcnNxYjtGJw==">Ny9JJkFfc3lzRzYiSSZFX3N5c0dGJEkmR19zeXNHRiRJJlhfc3lzR0YkSTJjaGFuZ2Vfc3RyYXRlZ2llc0dGJEkoaGlzdG9yeUc2JCUqcHJvdGVjdGVkR0koX3N5c2xpYkdGJEkta2VybmVsX2J1aWxkR0YkSS9sb2FkX2VxdWF0aW9uc0dGJEkubG9hZF9tYXRyaWNlc0dGJEkmcl9zeXNHRiRJNHJlZHVjZV9pbmRleF9ieV9vbmVHRiRJJnJlc2V0R0YkSTJzZXRfd2FybmluZ19sZXZlbEdGJA==</Equation></Text-field>
+<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDY2LUkjbWlHRiQ2JVEyY2hhbmdlX3N0cmF0ZWdpZXNGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRictSSNtb0dGJDYtUSIsRicvRjZRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y0LyUpc3RyZXRjaHlHRkAvJSpzeW1tZXRyaWNHRkAvJShsYXJnZW9wR0ZALyUubW92YWJsZWxpbWl0c0dGQC8lJ2FjY2VudEdGQC8lJ2xzcGFjZUdRJjAuMGVtRicvJSdyc3BhY2VHUSwwLjMzMzMzMzNlbUYnLUYvNiVRLWtlcm5lbF9idWlsZEYnRjJGNUY4LUYvNiVRL2xvYWRfZXF1YXRpb25zRidGMkY1RjgtRi82JVEubG9hZF9tYXRyaWNlc0YnRjJGNUY4LUYvNiVRNnJlZHVjZV9pbmRleF9NQkRfREFFM0YnRjJGNUY4LUYvNiVRNHJlZHVjZV9pbmRleF9ieV9vbmVGJ0YyRjVGOC1GLzYlUTByZWR1Y3Rpb25fc3RlcHNGJ0YyRjVGOC1GLzYlUSZyZXNldEYnRjJGNUY4LUYvNiVRMnNldF93YXJuaW5nX2xldmVsRidGMkY1LyUrZm9yZWdyb3VuZEdRKFswLDAsMF1GJy8lKXJlYWRvbmx5R0ZARjxGPC8lJW9wZW5HUScmbHNxYjtGJy8lJmNsb3NlR1EnJnJzcWI7Ric=">NytJMmNoYW5nZV9zdHJhdGVnaWVzRzYiSS1rZXJuZWxfYnVpbGRHRiRJL2xvYWRfZXF1YXRpb25zR0YkSS5sb2FkX21hdHJpY2VzR0YkSTZyZWR1Y2VfaW5kZXhfTUJEX0RBRTNHRiRJNHJlZHVjZV9pbmRleF9ieV9vbmVHRiRJMHJlZHVjdGlvbl9zdGVwc0dGJEkmcmVzZXRHRiRJMnNldF93YXJuaW5nX2xldmVsR0Yk</Equation></Text-field>
 </Output>
 </Group>
 <Group hide-input="false" labelreference="L256782" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -261,9 +235,10 @@ module Indigo:
 
     set_warning_level( lvl::integer, $ )
 
-    change_strategies( { pivoting::procedure := LULEM:-PivotStrategy_Llength, 
-                         veiling::procedure := LULEM:-VeilingStrategy_n, 
-                         zero::procedure := LULEM:-ZeroStrategy_length }, $ )
+    change_strategies( { pivoting::procedure := LULEM:-PivotStrategy_Slength, 
+                         veiling::procedure := LULEM:-VeilingStrategy_L, 
+                         zero::procedure := LULEM:-ZeroStrategy_normalizer }, 
+                       $ )
 
     kernel_build( E, $ )
 
@@ -273,19 +248,9 @@ module Indigo:
 
     reduce_index_by_one( $ )
 
-    X_sys::exprseq = 
+    reduce_index_MBD_DAE3( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
 
-    E_sys::exprseq = 
-
-    G_sys::exprseq = 
-
-    A_sys::exprseq = 
-
-    r_sys::exprseq = 
-
-    package history:
-
-        iter::integer = 0
+    reduction_steps::list = []
 
 </Text-field>
 </Output>

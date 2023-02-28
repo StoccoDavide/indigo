@@ -524,9 +524,10 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the system of ODEs/DAEs and calculate the approximate solution.
+    %> Solve the system of ODEs/DAEs and calculate the approximate solution over
+    %> the a mesh of time points.
     %>
-    %> \param t   Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+    %> \param t   Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
     %>            \right]^T \f$.
     %> \param x_0 Initial states value \f$ \mathbf{x}(t_0) \f$.
     %>
@@ -557,8 +558,6 @@ classdef ODEsolver < handle
       x_out_dot(:,1) = zeros(num_eqns, 1);
 
       % Instantiate temporary variables
-      max_k = this.m_max_substeps * this.m_max_substeps;
-      k = 0; % Number of substepping
       s = 1; % Current step
       p = 0; % Current percentage
 
@@ -575,7 +574,7 @@ classdef ODEsolver < handle
           exit = true;
         end
 
-        % Print percentage of completion
+        % Print percentage of solution completion
         if (this.m_verbose == true)
           p_new = ceil(100*t_out(s)/t(end));
           if (p_new > p + 9)
@@ -585,61 +584,11 @@ classdef ODEsolver < handle
         end
 
         % Integrate system of ODEs/DAEs
-        [x_new, x_dot_new, d_t_star, ierr] = ...
-          this.step(x_out(:,s), x_out_dot(:,s), t_out(s), d_t);
-
-        % Calculate the next time step with substepping logic
-        if (ierr == 0)
-
-          % Accept the step
-          d_t = d_t_star;
-
-          % If substepping is enabled, double the step size
-          if (k > 0 && k < max_k)
-            k = k - 1;
-            % If the substepping index is even, double the step size
-            if (rem(k, 2) == 0)
-              d_t = 2 * d_t;
-              if (this.m_verbose == true)
-                warning([CMD, 'in %s solver, at t(%d) = %g, integration ', ...
-                  'succedded disable one substepping layer.'], ...
-                  this.m_name, s, t(s));
-              end
-            end
-          end
-
-        else
-
-          % If the substepping index is too high, abort
-          k = k + 2;
-          assert(k < max_k, ...
-            [CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
-              '(error code %d) with d_t = %g, aborting.'], ...
-              this.m_name, s, t(s), ierr, d_t);
-
-          % Otherwise, try again with a smaller step
-          if (this.m_verbose == true)
-            warning([CMD, 'in %s solver, at t(%d) = %g, integration failed ', ...
-              '(error code %d), adding substepping layer.'], ...
-              this.m_name, s, t(s), ierr);
-          end
-          d_t = d_t/2;
-          continue;
-
-        end
+        [x_new, x_dot_new, d_t_star] = ...
+          this.advance(x_out(:,s), x_out_dot(:,s), t_out(s), d_t);
 
         % Store time solution
-        t_out(s+1) = t_out(s) + d_t;
-
-        % Project solution on the invariants/hidden constraints
-        if (this.m_projection == true)
-          x_new = this.project(x_new, t_out(s+1));
-        end
-
-        % Check the infinity norm of the solution
-        assert(isfinite( norm(x_new, inf)), ...
-          [CMD, 'in %s solver, at t(%d) = %g, ||x||_inf = %g, computation ', ...
-          'interrupted.\n'], this.m_name, s, t(s),  norm(x_new, inf));
+        t_out(s+1) = t_out(s) + d_t_star;
 
         % Store states solutions
         x_out(:,s+1)     = x_new;
@@ -663,18 +612,123 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> A the system of ODEs/DAEs and calculate the approximate solution.
+    %> Advance using a generic integration method for a system of ODEs/DAEs of
+    %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The
+    %> step is based on the following formula:
     %>
-    %> \param t   Time vector \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
-    %>            \right]^T \f$.
-    %> \param x_0 Initial states value \f$ \mathbf{x}(t_0) \f$.
+    %> \f[
+    %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
+    %> \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)
+    %> \f]
     %>
-    %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-    %>         (\mathbf{t})\right] \f$ containing the approximated solution
-    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
+    %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
+    %> In the advvancing step, the system of ODEs/DAEs is also projected on the
+    %> manifold \f$ \mathcal{H}(\mathbf{x}, t) \f$. Substepping is also used to
+    %> ensure that the solution is accurate.
+    %>
+    %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
+    %>                (t_k) \f$.
+    %> \param t_k     Time step \f$ t_k \f$.
+    %> \param d_t     Advancing time step \f$ \Delta t\f$.
+    %>
+    %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$,
+    %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$ and the suggested time
+    %>         step for the next advancing step \f$ \Delta t_{k+1} \f$.
     %
-    function x_out = advance( this, t, x_0 )
-      [x_out , ~] = this.solve([0, t], x_0);
+    function [x_new, x_dot_new, d_t_star] = advance( this, x_k, x_dot_k, t_k, d_t )
+
+      CMD = 'indigo::ODEsolver::advance(...): ';
+
+      % Check initial conditions
+      num_eqns = this.m_ode.get_num_eqns();
+      if (num_eqns ~= length(x_k))
+        error([CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
+          this.m_name, length(x_k), num_eqns);
+      end
+
+      % Integrate system of ODEs/DAEs
+      [x_new, x_dot_new, d_t_star, ierr] =  this.step(x_k, x_dot_k, t_k, d_t);
+
+      % If the advance failed, try again with substepping
+      if (ierr ~= 0)
+
+        x_tmp     = x_k;
+        x_dot_tmp = x_dot_k;
+        t_tmp     = t_k;
+        d_t_tmp   = 0.5 * d_t;
+
+        max_k = this.m_max_substeps * this.m_max_substeps;
+        k = 2;
+        while (k > 0)
+          k
+
+          % Integrate system of ODEs/DAEs
+          [x_tmp, x_dot_tmp, t_tmp, d_t_star_tmp] = ...
+            this.step(x_tmp, x_dot_tmp, t_tmp, d_t_tmp);
+
+          % Calculate the next time step with substepping logic
+          if (ierr == 0)
+
+            % Accept the step
+            d_t_tmp = d_t_star_tmp;
+
+            % If substepping is enabled, double the step size
+            if (k > 0 && k < max_k)
+              k = k - 1;
+              % If the substepping index is even, double the step size
+              if (rem(k, 2) == 0)
+                d_t_tmp = 2.0 * d_t_tmp;
+                if (this.m_verbose == true)
+                  warning([CMD, 'in %s solver, at t = %g, integration ', ...
+                    'succedded disable one substepping layer.'], ...
+                    this.m_name, t_tmp);
+                end
+              end
+            end
+
+            % Check the infinity norm of the solution
+            assert(isfinite(norm(x_tmp, inf)), ...
+              [CMD, 'in %s solver, at t = %g, ||x||_inf = inf, computation ', ...
+              'interrupted.\n'], ...
+              this.m_name, t_tmp);
+
+          else
+
+            % If the substepping index is too high, abort the integration
+            k = k + 2;
+            assert(k < max_k, ...
+              [CMD, 'in %s solver, at t = %g, integration failed ', ...
+              '(error code %d) with d_t = %g, aborting.'], ...
+              this.m_name, t_tmp, ierr, d_t);
+
+            % Otherwise, try again with a smaller step
+            if (this.m_verbose == true)
+              warning([CMD, 'in %s solver, at t = %g, integration failed ', ...
+                '(error code %d), adding substepping layer.'], ...
+                this.m_name, t_tmp, ierr);
+            end
+            d_t_tmp = 0.5 * d_t_tmp;
+            continue;
+
+          end
+
+          % Store time solution
+          t_tmp = t_tmp + d_t_tmp;
+
+          % Project intermediate solution on the invariants/hidden constraints
+          if (this.m_projection == true)
+            x_tmp = this.project(x_tmp, t_tmp);
+          end
+
+        end
+
+        % Store states solutions
+        x_new     = x_tmp;
+        x_dot_new = x_dot_tmp;
+        d_t_star  = d_t_tmp;
+
+      end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
