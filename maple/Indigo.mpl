@@ -12,46 +12,46 @@
 
 Indigo := module()
 
-  export reset,
-         set_warning_level,
-         change_strategies,
-         kernel_build,
-         load_matrices,
-         load_equations,
-         reduce_index_by_one,
-         reduce_index_MBD_DAE3,
-         #reduce_index_MBD_DAE2, # TODO
-         #reduce_index_MBD_DAE1, # TODO
-         reduce_index,
-         reduction_steps;
+  export Reset,
+         SetWarningLevel,
+         ChangeStrategies,
+         KernelBuild,
+         LoadMatrices,
+         LoadEquations,
+         ReduceIndexByOne,
+         ReduceIndexMbdDae3,
+         # TODO: ReduceIndexMbdDae2
+         # TODO: ReduceIndexMbdDae1
+         ReduceIndex,
+         ReductionSteps;
 
-  local  module_load,
-         module_unload,
+  local  ModuleLoad,
+         ModuleUnload,
          lib_base_path,
-         veiling_strategy,
-         pivoting_strategy,
-         zero_strategy,
-         DAE_type, # "Linear", "MBD3", "MBD2", "MBD1", "Generic"
-         update_reduction_steps,
-         separate_matrices;
+         VeilingStrategy,
+         PivotingStrategy,
+         ZeroStrategy,
+         DAEtype, # "Linear", "MBD3", "MBD2", "MBD1", "Generic"
+         UpdateReductionSteps,
+         SeparateMatrices;
 
-  global warning_level;
+  global WarningLevel;
 
   uses IndigoUtils, LULEM;
 
   option  package,
-          load   = module_load,
-          unload = module_unload;
+          load   = ModuleLoad,
+          unload = ModuleUnload;
 
   description "'Indigo' module";
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: module_unload
+  # Function: ModuleUnload
   #  Routines to load the module.
   #}
-  module_load := proc()
+  ModuleLoad := proc()
 
     local i;
 
@@ -76,65 +76,65 @@ Indigo := module()
     with(LULEM);
 
     # Library internal variables
-    warning_level  := 1;
+    WarningLevel  := 1;
 
     # Reset the library
-    reset();
+    Reset();
 
     return NULL;
-  end proc: # module_load
+  end proc: # ModuleLoad
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: module_unload
+  # Function: ModuleUnload
   #  Routines to unload the module.
   #}
-  module_unload := proc()
+  ModuleUnload := proc()
     printf("Unloading 'Indigo'\n");
     return NULL;
-  end proc: # module_unload
+  end proc: # ModuleUnload
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: set_warning_level
+  # Function: SetWarningLevel
   #   Set the warning level.
   #
   # Parameters:
   #   lvl - warning level
   #}
-  set_warning_level := proc( lvl::integer, $ )
-    warning_level := lvl;
+  SetWarningLevel := proc( lvl::integer, $ )
+    WarningLevel := lvl;
     return NULL;
-  end proc: # set_warning_level
+  end proc: # SetWarningLevel
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: reset
+  # Function: Reset
   #   Reset the library.
   #}
-  reset := proc( $ )
+  Reset := proc( $ )
     # Internal variables
-    unprotect('reduction_steps');
-    reduction_steps := [];
-    protect('reduction_steps');
+    unprotect('ReductionSteps');
+    ReductionSteps := [];
+    protect('ReductionSteps');
 
     # Reset the LU decomposition strategies
-    change_strategies();
+    ChangeStrategies();
 
     # Reset the veiling variables
     ForgetVeil(Q);
 
     return NULL;
-  end proc: # reset
+  end proc: # Reset
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  update_reduction_steps := proc( X::list, E::Matrix, G::Vector, A::Vector, r::integer, $ )
-    local tmp;
-    unprotect('reduction_steps');
+  UpdateReductionSteps := proc( X::list, E::Matrix, G::Vector, A::Vector, r::integer, $ )
+    local tbl;
+    unprotect('ReductionSteps');
     tbl := table([
       "X" = X,
       "E" = E,
@@ -142,17 +142,17 @@ Indigo := module()
       "A" = A,
       "r" = r
       ]);
-    reduction_steps := [op(reduction_steps), tbl];
+    ReductionSteps := [op(ReductionSteps), tbl];
 
-    protect('reduction_steps');
+    protect('ReductionSteps');
 
     return NULL;
-  end proc: # update_reduction_steps
+  end proc: # UpdateReductionSteps
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: change_strategies
+  # Function: ChangeStrategies
   #   Change the strategies for the LU decomposition.
   #
   # Parameters:
@@ -160,21 +160,21 @@ Indigo := module()
   #   Pivoting - pivoting strategy
   #   Zero     - zero detection strategy
   #}
-  change_strategies := proc({
-    veiling::procedure  := VeilingStrategy_L,
-    pivoting::procedure := PivotStrategy_Slength,
-    zero::procedure     := ZeroStrategy_normalizer
+  ChangeStrategies := proc({
+    veiling::procedure  := VeilingStrategy_n,
+    pivoting::procedure := PivotingStrategy_Sindets,
+    zero::procedure     := ZeroStrategy_length
     }, $ )
 
-    veiling_strategy  := veiling;
-    pivoting_strategy := pivoting;
-    zero_strategy     := zero;
+    VeilingStrategy  := veiling;
+    PivotingStrategy := pivoting;
+    ZeroStrategy     := zero;
   end proc:
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: kernel_build
+  # Function: KernelBuild
   #   Build the kernel of a matrix.
   #
   # Parameters:
@@ -183,14 +183,15 @@ Indigo := module()
   # Returns:
   #   the kernel of E, the matrix N such that E*N = 0 and the rank of E
   #}
-  kernel_build := proc( E, $ )
-    local n, m, r, P, L, U, k, j, tmp, M, K, N;
+  KernelBuild := proc( E, $ )
+    local n, m, r, L, U, rr, cc, rnk, P, Q, k, j, tmp, M, K, N;
 
     # Get row and column dimensions
     n, m := LinearAlgebra[Dimension](E);
 
     # Decompose the matrix as E = P * L * U
-    P, L, U := LUD(E, Q, veiling_strategy, pivoting_strategy, zero_strategy);
+    L, U, rr, cc, rnk := LULEM[LU](E, 'K', VeilingStrategy, PivotingStrategy, ZeroStrategy);
+    P, Q := LULEM[PermutationMatrices](rr, cc);
     #print(P, L, U);
     #P, L, U := LinearAlgebra[LUDecomposition](E);
     #print(P, L, U);
@@ -241,7 +242,7 @@ Indigo := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: load_matrices
+  # Function: LoadMatrices
   #   Separate algebraic and differential equations.
   #
   # Parameters:
@@ -254,7 +255,7 @@ Indigo := module()
   #   A  - matrix of differential equations
   #   r  - rank of E
   #}
-  separate_matrices := proc( E::Matrix, G::Vector, $ )
+  SeparateMatrices := proc( E::Matrix, G::Vector, $ )
     local n, m, l, K, L, r;
 
     # Check input dimensions
@@ -262,17 +263,17 @@ Indigo := module()
     l := LinearAlgebra[Dimension](G);
     assert(
       n = m,
-      "Indigo::separate_matrices(...): input matrix E must be square (%d x %d).",
+      "Indigo::SeparateMatrices(...): input matrix E must be square (%d x %d).",
       n, m
     );
     assert(
       n = l, cat(
-      "Indigo::separate_matrices(...): input matrix E size (%d x %d) not consistent ",
+      "Indigo::SeparateMatrices(...): input matrix E size (%d x %d) not consistent ",
       "with vector G size (1 x %d)."),
       n, m, l
     );
 
-    K, L, r := kernel_build(E);
+    K, L, r := KernelBuild(E);
     return L.E, # Et
            L.G, # Gt
            K.G, # A
@@ -282,7 +283,7 @@ Indigo := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: load_matrices
+  # Function: LoadMatrices
   #   Separate algebraic and differential equations.
   #
   # Parameters:
@@ -295,10 +296,10 @@ Indigo := module()
   #   A  - matrix of differential equations
   #   r  - rank of E
   #}
-  load_matrices := proc( E::Matrix, vars::list, G::Vector, $ )
+  LoadMatrices := proc( E::Matrix, vars::list, G::Vector, $ )
     local E_tmp, G_tmp, A_tmp, r_tmp;
-    E_tmp, G_tmp, A_tmp, r_tmp := separate_matrices(E, G);
-    update_reduction_steps(vars, E_tmp, G_tmp, A_tmp, r_tmp);
+    E_tmp, G_tmp, A_tmp, r_tmp := SeparateMatrices(E, G);
+    UpdateReductionSteps(vars, E_tmp, G_tmp, A_tmp, r_tmp);
     return NULL;
   end proc:
 
@@ -306,19 +307,19 @@ Indigo := module()
 
   #{
   #
-  load_equations := proc( eqns::list, vars::list, $ )
+  LoadEquations := proc( eqns::list, vars::list, $ )
     local E, G;
 
     # Check input dimensions
     assert(
       nops(eqns) = nops(vars), cat(
-      "Indigo::load_equations(...): the number of equations (%d) must be the ",
+      "Indigo::LoadEquations(...): the number of equations (%d) must be the ",
       "same of the number of variables (%d)."),
       nops(eqns), nops(vars)
     );
 
     E, G := LinearAlgebra[GenerateMatrix](eqns, diff(vars, t)):
-    load_matrices(E, vars, G);
+    LoadMatrices(E, vars, G);
     return NULL;
   end proc:
 
@@ -335,20 +336,20 @@ Indigo := module()
   #          0 = Ar(x,t)
   #
   # with the new algebraic part separated
-  reduce_index_by_one := proc( $ )
+  ReduceIndexByOne := proc( $ )
     local X_tmp, E_tmp, G_tmp, A_tmp, nE, mE, nA, dA, H, F, nH, mH, Er, Gr, Ar, rr;
 
-    X_tmp := reduction_steps[-1]["X"];
-    E_tmp := reduction_steps[-1]["E"];
-    G_tmp := reduction_steps[-1]["G"];
-    A_tmp := reduction_steps[-1]["A"];
+    X_tmp := ReductionSteps[-1]["X"];
+    E_tmp := ReductionSteps[-1]["E"];
+    G_tmp := ReductionSteps[-1]["G"];
+    A_tmp := ReductionSteps[-1]["A"];
 
     # Check dimensions
     nE, mE := LinearAlgebra[Dimension](E_tmp);
     nA := LinearAlgebra[Dimension](A_tmp);
     assert(
       nA + nE = mE, cat(
-      "Indigo::reduce_index_by_one(...): number of row of E (%d x %d) plus the ",
+      "Indigo::ReduceIndexByOne(...): number of row of E (%d x %d) plus the ",
       "number of algebraic equations (%d) must be equal to the column of E."),
       nE, mE, nA
     );
@@ -363,26 +364,26 @@ Indigo := module()
     nH, mH := LinearAlgebra[Dimension](H);
     assert(
       (nH + nE = mE) and (mH = mE), cat(
-      "Indigo::reduce_index_by_one(...): bad dimension of linear part of constraint ",
+      "Indigo::ReduceIndexByOne(...): bad dimension of linear part of constraint ",
       "derivative A' = H vars' + F, size H = %d x %d, size E = %d x %d."),
       nH, mH, nE, mE
     );
 
     # Split matrices to be stored
-    Er, Gr, Ar, rr := separate_matrices(<E_tmp, H>, convert(<G_tmp, F>, Vector));
+    Er, Gr, Ar, rr := SeparateMatrices(<E_tmp, H>, convert(<G_tmp, F>, Vector));
 
     if (LinearAlgebra[Dimension](Ar) = 0) then
       print_message("DAE0 system has been reached.");
       return false;
     else
-      update_reduction_steps(reduction_steps[-1]["X"], Er, Gr, Ar, rr);
+      UpdateReductionSteps(ReductionSteps[-1]["X"], Er, Gr, Ar, rr);
       return true;
     end if;
   end proc:
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  reduce_index_MBD_DAE3 := proc( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
+  ReduceIndexMbdDae3 := proc( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
     local tbl, n, m, f, dq, dv, v_dot,
           ODE_POS, ODE_VEL, tmp,
           Phi, Phi_P, Phi_t, A, A_rhs, g, bigM, bigRHS, bigVAR;
@@ -404,21 +405,21 @@ Indigo := module()
     n, m := LinearAlgebra[Dimension](Mass);
     assert(
       (n = m) and (n = nops(vvars)), cat(
-      "indigo::reduce_index_MBD_DAE3(...): mass matrix must be square and of the ",
+      "indigo::ReduceIndexMbdDae3(...): mass matrix must be square and of the ",
       "same size of the length of velocity variables."), Mass, vvars
     );
 
     n := nops(qvars);
     assert(
       (n = nops(vvars)), cat(
-      "indigo::reduce_index_MBD_DAE3(...): velocity variables and position ",
+      "indigo::ReduceIndexMbdDae3(...): velocity variables and position ",
       "variables must have the same size.")
     );
 
     m := LinearAlgebra[Dimension](Phi);
     assert(
       (m = nops(lvars)), cat(
-      "indigo::reduce_index_MBD_DAE3(...): lambda variables must have the same ",
+      "indigo::ReduceIndexMbdDae3(...): lambda variables must have the same ",
       "length the number of constraints.")
     );
 
@@ -475,7 +476,7 @@ Indigo := module()
   reduce_index_MBD_DAE3_full := proc( Mass, Phi, f, qvars, vvars, lvars )
     local tbl, n, m, bigETA;
 
-    tbl := reduce_index_MBD_DAE3( Mass, Phi, f, qvars, vvars, lvars );
+    tbl := ReduceIndexMbdDae3( Mass, Phi, f, qvars, vvars, lvars );
 
     n := tbl["n"];
     m := tbl["m"];

@@ -101,10 +101,6 @@
 <Group labelreference="L256764" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">Unloading 'Indigo'
-Unloading 'LULEM'
-</Text-field>
-</Output>
 </Group>
 <Group hide-input="false" labelreference="L256778" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LibraryName := &quot;Indigo&quot;;</Text-field>
@@ -181,8 +177,6 @@ end proc:</Text-field>
 <Output><Text-field style="Line Printed Output" layout="Line Printed Output">'LULEM' module version 1.1, BSD 3-Clause License - Copyright (C) 2023, D. Stocco, M. Larcher, E. Bertolazzi, W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Text-field>
 </Output>
-<Output><Text-field style="HyperlinkWarning" layout="HyperlinkWarning"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Warning,%20(in%20Indigo%3A-update_reduction_steps)%20%60tbl%60%20is%20implicitly%20declared%20local%20%7C%2FUsers%2Fdavide%2FDocuments%2FGit%2Findigo%2Fmaple%2FIndigo.mpl%3A136%7C" hyperlink="true"><Font style="HyperlinkWarning">Warning, (in Indigo:-update_reduction_steps) `tbl` is implicitly declared local |/Users/davide/Documents/Git/indigo/maple/Indigo.mpl:136|</Font></Hyperlink></Text-field>
-</Output>
 </Group>
 <Group labelreference="L256779" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field style="Text" layout="Normal">Copy the library in the toolbox folder (Only for OSX!)</Text-field>
@@ -201,8 +195,7 @@ end proc:</Text-field>
 <Group hide-input="false" labelreference="L256750" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">Unloading 'LULEM'
-Unloading 'Indigo'
+<Output><Text-field style="Line Printed Output" layout="Line Printed Output">Unloading 'Indigo'
 </Text-field>
 </Output>
 </Group>
@@ -213,7 +206,7 @@ Unloading 'Indigo'
 'LULEM' module version 1.1, BSD 3-Clause License - Copyright (C) 2023, D. Stocco, M. Larcher, E. Bertolazzi, W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Text-field>
 </Output>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDY2LUkjbWlHRiQ2JVEyY2hhbmdlX3N0cmF0ZWdpZXNGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRictSSNtb0dGJDYtUSIsRicvRjZRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y0LyUpc3RyZXRjaHlHRkAvJSpzeW1tZXRyaWNHRkAvJShsYXJnZW9wR0ZALyUubW92YWJsZWxpbWl0c0dGQC8lJ2FjY2VudEdGQC8lJ2xzcGFjZUdRJjAuMGVtRicvJSdyc3BhY2VHUSwwLjMzMzMzMzNlbUYnLUYvNiVRLWtlcm5lbF9idWlsZEYnRjJGNUY4LUYvNiVRL2xvYWRfZXF1YXRpb25zRidGMkY1RjgtRi82JVEubG9hZF9tYXRyaWNlc0YnRjJGNUY4LUYvNiVRNnJlZHVjZV9pbmRleF9NQkRfREFFM0YnRjJGNUY4LUYvNiVRNHJlZHVjZV9pbmRleF9ieV9vbmVGJ0YyRjVGOC1GLzYlUTByZWR1Y3Rpb25fc3RlcHNGJ0YyRjVGOC1GLzYlUSZyZXNldEYnRjJGNUY4LUYvNiVRMnNldF93YXJuaW5nX2xldmVsRidGMkY1LyUrZm9yZWdyb3VuZEdRKFswLDAsMF1GJy8lKXJlYWRvbmx5R0ZARjxGPC8lJW9wZW5HUScmbHNxYjtGJy8lJmNsb3NlR1EnJnJzcWI7Ric=">NytJMmNoYW5nZV9zdHJhdGVnaWVzRzYiSS1rZXJuZWxfYnVpbGRHRiRJL2xvYWRfZXF1YXRpb25zR0YkSS5sb2FkX21hdHJpY2VzR0YkSTZyZWR1Y2VfaW5kZXhfTUJEX0RBRTNHRiRJNHJlZHVjZV9pbmRleF9ieV9vbmVHRiRJMHJlZHVjdGlvbl9zdGVwc0dGJEkmcmVzZXRHRiRJMnNldF93YXJuaW5nX2xldmVsR0Yk</Equation></Text-field>
+<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDY4LUkjbWlHRiQ2JVExQ2hhbmdlU3RyYXRlZ2llc0YnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RIixGJy9GNlEnbm9ybWFsRicvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRjQvJSlzdHJldGNoeUdGQC8lKnN5bW1ldHJpY0dGQC8lKGxhcmdlb3BHRkAvJS5tb3ZhYmxlbGltaXRzR0ZALyUnYWNjZW50R0ZALyUnbHNwYWNlR1EmMC4wZW1GJy8lJ3JzcGFjZUdRLDAuMzMzMzMzM2VtRictRi82JVEsS2VybmVsQnVpbGRGJ0YyRjVGOC1GLzYlUS5Mb2FkRXF1YXRpb25zRidGMkY1RjgtRi82JVEtTG9hZE1hdHJpY2VzRidGMkY1RjgtRi82JVEsUmVkdWNlSW5kZXhGJ0YyRjVGOC1GLzYlUTFSZWR1Y2VJbmRleEJ5T25lRidGMkY1RjgtRi82JVEzUmVkdWNlSW5kZXhNYmREYWUzRidGMkY1RjgtRi82JVEvUmVkdWN0aW9uU3RlcHNGJ0YyRjVGOC1GLzYlUSZSZXNldEYnRjJGNUY4LUYvNiVRMFNldFdhcm5pbmdMZXZlbEYnRjJGNS8lK2ZvcmVncm91bmRHUShbMCwwLDBdRicvJSlyZWFkb25seUdGQEY8RjwvJSVvcGVuR1EnJmxzcWI7RicvJSZjbG9zZUdRJyZyc3FiO0Yn">NyxJMUNoYW5nZVN0cmF0ZWdpZXNHNiJJLEtlcm5lbEJ1aWxkR0YkSS5Mb2FkRXF1YXRpb25zR0YkSS1Mb2FkTWF0cmljZXNHRiRJLFJlZHVjZUluZGV4R0YkSTFSZWR1Y2VJbmRleEJ5T25lR0YkSTNSZWR1Y2VJbmRleE1iZERhZTNHRiRJL1JlZHVjdGlvblN0ZXBzR0YkSSZSZXNldEdGJEkwU2V0V2FybmluZ0xldmVsR0Yk</Equation></Text-field>
 </Output>
 </Group>
 <Group hide-input="false" labelreference="L256782" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -231,26 +224,28 @@ Unloading 'Indigo'
 # 'Indigo' module
 module Indigo:
 
-    reset( $ )
+    Reset( $ )
 
-    set_warning_level( lvl::integer, $ )
+    SetWarningLevel( lvl::integer, $ )
 
-    change_strategies( { pivoting::procedure := LULEM:-PivotStrategy_Slength, 
-                         veiling::procedure := LULEM:-VeilingStrategy_L, 
-                         zero::procedure := LULEM:-ZeroStrategy_normalizer }, 
-                       $ )
+    ChangeStrategies( { pivoting::procedure := 
+                          LULEM:-PivotingStrategy_Sindets, 
+                        veiling::procedure := LULEM:-VeilingStrategy_n, 
+                        zero::procedure := LULEM:-ZeroStrategy_length }, $ )
 
-    kernel_build( E, $ )
+    KernelBuild( E, $ )
 
-    load_matrices( E::Matrix, vars::list, G::Vector, $ )
+    LoadMatrices( E::Matrix, vars::list, G::Vector, $ )
 
-    load_equations( eqns::list, vars::list, $ )
+    LoadEquations( eqns::list, vars::list, $ )
 
-    reduce_index_by_one( $ )
+    ReduceIndexByOne( $ )
 
-    reduce_index_MBD_DAE3( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
+    ReduceIndexMbdDae3( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
 
-    reduction_steps::list = []
+    ReduceIndex::symbol = Indigo:-ReduceIndex
+
+    ReductionSteps::list = []
 
 </Text-field>
 </Output>

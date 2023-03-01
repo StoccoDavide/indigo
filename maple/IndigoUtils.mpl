@@ -46,8 +46,8 @@ IndigoUtils := module()
          IsDependentOn,
          GetSymbolsRecurr,
          # Miscellaneous
-         get_perm_sorted_list,
-         compute_expression_cost,
+         GetPermSortedList,
+         GetExpressionCost,
          # Messages
          cprintf,
          ErrorMessage,
@@ -835,7 +835,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: get_perm_sorted_list
+  # Function: GetPermSortedList
   #  Compute the permutation that sorts a list.
   #
   # Parameters:
@@ -844,7 +844,7 @@ IndigoUtils := module()
   # Return:
   #  the permutation that sorts the list
   #}
-  get_perm_sorted_list := proc( idx::list, $ )
+  GetPermSortedList := proc( idx::list, $ )
     local idx_sorted, perm, e;
     idx_sorted := sort(idx);
     perm := [];
@@ -857,7 +857,7 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   #{
-  # Function: compute_expression_cost
+  # Function: GetExpressionCost
   #   Compute the overall cost of an algebraic expression.
   #
   # Parameters:
@@ -866,7 +866,7 @@ IndigoUtils := module()
   #  the overall cost number of mathematical operations
   #  (additions + multiplications + divisions + functions)
   #}
-  compute_expression_cost := proc( e::algebraic, $ )
+  GetExpressionCost := proc( e::algebraic, $ )
     local out;
     out := codegen:-cost(e);
     out := coeffs(out,[additions,multiplications,functions,divisions]);
@@ -950,7 +950,7 @@ IndigoUtils := module()
       str, StringTools[SubString](cat(
         "====================================================================",
         "===================================================================="
-        ), 1..len);
+        ), 1..len)
     );
   end proc: # PrintTitle
 
@@ -972,7 +972,7 @@ IndigoUtils := module()
       str, StringTools[SubString](cat(
         "--------------------------------------------------------------------",
         "--------------------------------------------------------------------"
-        ), 1..len);
+        ), 1..len)
     );
   end proc: # PrintHeader
 
