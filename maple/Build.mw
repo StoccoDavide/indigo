@@ -19,6 +19,7 @@
 <Font name="Ordered List 1" background="[255,255,255]" bold="false" executable="false" family="Avenir Next" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Maple Input" background="[255,255,255]" bold="true" executable="true" family="Menlo" foreground="[19,82,186]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Text Output" background="[255,255,255]" bold="false" executable="false" family="Menlo" foreground="[2,100,2]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Page Number" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Ordered List 2" background="[255,255,255]" bold="false" executable="false" family="Avenir Next" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Ordered List 3" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Ordered List 4" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
@@ -96,163 +97,205 @@
 <Task-table>
     <Task-category name="&lt;default&gt;"/>
 </Task-table>
+<Annotation-table>
+    <Annotation-category name="&lt;default&gt;"/>
+</Annotation-table>
 <Task/>
-<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Generate Library</Text-field></Title>
-<Group labelreference="L256764" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Build the Library</Text-field></Title><Presentation-Block>
+<Group view="code" labelreference="L752" drawlabel="true">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256778" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LibraryName := &quot;Indigo&quot;;</Text-field>
-</Input>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2JVEsTGlicmFyeU5hbWVGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRictSSNtb0dGJDYtUSkmQXNzaWduO0YnL0YzUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGPS8lKXN0cmV0Y2h5R0Y9LyUqc3ltbWV0cmljR0Y9LyUobGFyZ2VvcEdGPS8lLm1vdmFibGVsaW1pdHNHRj0vJSdhY2NlbnRHRj0vJSdsc3BhY2VHUSwwLjI3Nzc3NzhlbUYnLyUncnNwYWNlR0ZMLUkjbXNHRiQ2I1EnSW5kaWdvRidGOQ==">LV9JLFR5cGVzZXR0aW5nRzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiSSxtcHJpbnRzbGFzaEdGKDYkNyM+SSxMaWJyYXJ5TmFtZUdGKFEnSW5kaWdvRig3I0Yu</Equation></Text-field>
-</Output>
-</Group>
-<Group hide-input="false" labelreference="L256765" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">SOURCE_DIR := cat(currentdir(),&quot;/&quot;);</Text-field>
-</Input>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2JVErU09VUkNFX0RJUkYnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RKSZBc3NpZ247RicvRjNRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y9LyUpc3RyZXRjaHlHRj0vJSpzeW1tZXRyaWNHRj0vJShsYXJnZW9wR0Y9LyUubW92YWJsZWxpbWl0c0dGPS8lJ2FjY2VudEdGPS8lJ2xzcGFjZUdRLDAuMjc3Nzc3OGVtRicvJSdyc3BhY2VHRkwtSSNtc0dGJDYjUUovVXNlcnMvZGF2aWRlL0RvY3VtZW50cy9HaXQvaW5kaWdvL21hcGxlL0YnRjk=">LV9JLFR5cGVzZXR0aW5nRzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiSSxtcHJpbnRzbGFzaEdGKDYkNyM+SStTT1VSQ0VfRElSR0YoUUovVXNlcnMvZGF2aWRlL0RvY3VtZW50cy9HaXQvaW5kaWdvL21hcGxlL0YoNyNGLg==</Equation></Text-field>
-</Output>
-</Group>
-<Group hide-input="false" labelreference="L256766" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">BINARY_DIR := cat(currentdir(), &quot;/lib/&quot;, LibraryName, &quot;/lib/&quot;);</Text-field>
-</Input>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2JVErQklOQVJZX0RJUkYnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RKSZBc3NpZ247RicvRjNRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y9LyUpc3RyZXRjaHlHRj0vJSpzeW1tZXRyaWNHRj0vJShsYXJnZW9wR0Y9LyUubW92YWJsZWxpbWl0c0dGPS8lJ2FjY2VudEdGPS8lJ2xzcGFjZUdRLDAuMjc3Nzc3OGVtRicvJSdyc3BhY2VHRkwtSSNtc0dGJDYjUVkvVXNlcnMvZGF2aWRlL0RvY3VtZW50cy9HaXQvaW5kaWdvL21hcGxlL2xpYi9JbmRpZ28vbGliL0YnRjk=">LV9JLFR5cGVzZXR0aW5nRzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiSSxtcHJpbnRzbGFzaEdGKDYkNyM+SStCSU5BUllfRElSR0YoUVkvVXNlcnMvZGF2aWRlL0RvY3VtZW50cy9HaXQvaW5kaWdvL21hcGxlL2xpYi9JbmRpZ28vbGliL0YoNyNGLg==</Equation></Text-field>
-</Output>
-</Group>
-<Group labelreference="L256767" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check if le binary directory exists and remove the content</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools[Exists](BINARY_DIR) then
-  if FileTools[IsDirectory](BINARY_DIR) then
-    FileTools[RemoveDirectory](BINARY_DIR, recurse=true, forceremove=true):
-  end:
-end:</Text-field>
+<Group view="code" hide-input="false" labelreference="L742" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">ds := kernelopts('dirsep'):</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256768" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">FileTools[MakeDirectory](BINARY_DIR):</Text-field>
+<Group view="code" hide-input="false" labelreference="L743" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">MODULE_NAME := &quot;Indigo&quot;:</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256769" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Tolgo XOptima dalla path libname</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">newlibname := []:
-for tmp in [libname] do
-  if StringTools[Search](LibraryName,tmp) = 0 then
-    newlibname := [op(newlibname), tmp];
-  end;
-end;</Text-field>
+<Group view="code" labelreference="L751" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">MODULE_NAME_UTILS := &quot;IndigoUtils&quot;:</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256771" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">libname := op(newlibname), cat(&quot;./&quot;, LibraryName):</Text-field>
+<Group view="code" labelreference="L746" drawlabel="true">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">SOURCE_DIR  := cat(currentdir(), ds, &quot;lib&quot;):</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256783" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">libname := op(newlibname), cat(&quot;./&quot;, LibraryName, &quot;Utils&quot;):</Text-field>
+<Group view="code" hide-input="false" labelreference="L744" drawlabel="true">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">BINARY_DIR  := cat(currentdir(), ds, &quot;installer&quot;, ds, &quot;bin&quot;):</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256772" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME )
-  local bin_library_path, src_library_path;
-  bin_library_path := cat(BINARY_DIR, &quot;/&quot;, MODULE_NAME, &quot;.mla&quot;);
-  src_library_path := cat(SOURCE_DIR, &quot;/&quot;, MODULE_NAME, &quot;.mpl&quot;);
-  if FileTools[Exists](src_library_path) then
-    if FileTools[Exists](bin_library_path) then
-      FileTools[Remove](bin_library_path):
+<Group view="code" hide-input="false" labelreference="L740" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LIBRARY_MLA := cat(BINARY_DIR, ds, &quot;bin&quot;, ds, MODULE_NAME, &quot;.mla&quot;):</Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L749" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">INSTALL_MLA := cat(currentdir(), ds, &quot;installer&quot;, ds, MODULE_NAME, &quot;_install_binary.mla&quot;):
+</Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L747" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Check bin directory</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if not FileTools[Exists](BINARY_DIR) then
+  FileTools[MakeDirectory](BINARY_DIR);
+end if;
+</Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L745" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Check MLA file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools[Exists](LIBRARY_MLA) then
+  FileTools[Remove](LIBRARY_MLA);
+end if;
+</Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L758" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Check MLA installer file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools[Exists](INSTALL_MLA) then
+  FileTools[Remove](INSTALL_MLA);
+end if;
+</Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L754" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Library generation procedure</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME::{string} )
+
+  local bin_path, src_path;
+
+  bin_path := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;);
+  src_path := cat(SOURCE_DIR, ds, MODULE_NAME, &quot;.mpl&quot;);
+
+  if FileTools[Exists](src_path) then
+    if not FileTools[Exists](BINARY_DIR) then
+      FileTools[MakeDirectory](BINARY_DIR);
     end if;
-    read(src_library_path):
-    march('create', bin_library_path):
-    savelib(MODULE_NAME, bin_library_path):
+    if FileTools[Exists](bin_path) then
+      FileTools[Remove](bin_path):
+    end if;
+    read(src_path);
+    march('create', bin_path );
+    savelib(convert(MODULE_NAME, symbol), bin_path);
   else
-<Font encoding="UTF-8">    error(&quot;Missing file %1\134n&quot;, src_library_path);
-</Font>  end if:
-end proc:</Text-field>
+<Font encoding="UTF-8">    error &quot;Missing file %1.\134n&quot;, </Font>src_path;
+  end if;
+
+end proc:
+</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256773" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN('IndigoUtils');</Text-field>
+<Group view="code" hide-input="false" labelreference="L748" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Generate module</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME_UTILS);</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256775" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN('Indigo');</Text-field>
+<Group view="code" labelreference="L750" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'LULEM' module version 1.1, BSD 3-Clause License - Copyright (C) 2023, D. Stocco, M. Larcher, E. Bertolazzi, W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
+<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'LEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
+Current version: D. Stocco, M. Larcher, E. Bertolazzi.
+Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
+'LULEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
+Current version: D. Stocco, M. Larcher, E. Bertolazzi.
+Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
+'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
 </Text-field>
 </Output>
-</Group>
-<Group labelreference="L256779" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Copy the library in the toolbox folder (Only for OSX!)</Text-field>
-</Input>
-</Group>
-<Group hide-input="false" labelreference="L256780" drawlabel="true">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">system(cat(&quot;sudo -S cp -R ./lib/&quot;, LibraryName, &quot; /Library/Frameworks/Maple.framework/Versions/Current/toolbox/&quot;)):</Text-field>
-</Input>
-</Group>
-<Group hide-input="false" labelreference="L256781" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">system(cat(&quot;sudo chmod -R 777 /Library/Frameworks/Maple.framework/Versions/Current/toolbox/&quot;)):</Text-field>
-</Input>
-</Group>
+</Group></Presentation-Block>
 </Section>
-<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Test the Library</Text-field></Title>
-<Group hide-input="false" labelreference="L256750" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
+<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Create the Installer</Text-field></Title><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L753" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LICENSE := FileTools[Text][ReadFile](&quot;../LICENSE&quot;):</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">Unloading 'Indigo'
+</Group>
+<Group view="code" hide-input="false" labelreference="L755" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LOGO    := cat(&quot;installer&quot;, ds, &quot;logo_installer.png&quot;):</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group hide-input="false" labelreference="L757" drawlabel="true">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">InstallerBuilder[Build](
+  MODULE_NAME,
+  'uninstaller' = false,
+  'version'     = &quot;1.0&quot;,
+  'height'      = 550,
+  'width'       = 1000,
+  'author'      = &quot;D. Stocco and E. Bertolazzi&quot;,
+  'welcome'     = [
+     'text'  = &quot;Welcome to the Indigo Maple toolbox installer.&quot;,
+     'image' = LOGO
+   ],
+  'finish'      = [
+     'text'  = &quot;The Indigo Maple toolbox has been succesfully installed.&quot;, 
+     'image' = LOGO
+   ],
+  'target'      = INSTALL_MLA,
+  'license'     = [
+     'text'  = LICENSE,
+     'image' = LOGO
+   ],
+  'installation' = [
+     'validate' = proc()
+
+        local file, dest, n, r, d, f, limb, ds, RmDir;
+
+        ds   := kernelopts('dirsep');
+        file := cat(interface(worksheetdir), ds, &quot;bin&quot;);
+        dest := cat(kernelopts(mapledir), ds, &quot;toolbox&quot;, ds, &quot;LULEM&quot;, ds, &quot;lib&quot;, ds);
+
+        ###
+        RmDir := proc( dirpath::{string}, $ )
+
+          local d, dd, ds;
+
+          ds := kernelopts('dirsep');
+          if FileTools[Exists](dirpath) and FileTools[IsDirectory](dirpath) then
+            for d in FileTools[ListDirectory](dirpath, 'all') do
+              if evalb((d &lt;&gt; &quot;.&quot;) and (d &lt;&gt; &quot;..&quot;)) then
+                dd := cat(dirpath, ds, d);
+                if FileTools[Exists](dd) then
+                  if FileTools[IsDirectory](dd) then
+                    RmDir(dd);
+                    # FileTools[RemoveDirectory](dd, forceremove = true);
+                  else
+                   FileTools[Remove](dd);
+                  end if;
+                end if;
+              end if;
+            end do;
+            FileTools[RemoveDirectory](dirpath, forceremove = true);
+          end if;
+          return;
+        
+        end proc:
+        ###
+        RmDir(dest);        
+        FileTools[MakeDirectory](dest, recurse = true);
+        n  := 1 + length(file);
+        for r in FileTools[Walk](file, 'topdown', 'followlinks') do
+          limb := cat(dest, ds, r[dir][n..], ds);
+          for d in r[subdirs] do
+            ((d) -&gt; `if`(FileTools[Exists](d), 0, FileTools[MakeDirectory](d)))(cat(limb, d));
+          end do;
+          seq(FileTools[Copy](cat(r[dir], ds, f), cat(limb, f)), f = r[files]) 
+        end do;
+        return true;
+      end proc, 
+      'image' = LOGO
+   ]
+);
 </Text-field>
-</Output>
-</Group>
-<Group hide-input="false" labelreference="L256745" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">with(Indigo);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
-'LULEM' module version 1.1, BSD 3-Clause License - Copyright (C) 2023, D. Stocco, M. Larcher, E. Bertolazzi, W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
+</Group>
+<Group view="code" hide-input="false" labelreference="L756" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">#kernelopts(mapledir);
+#interface(worksheetdir);
 </Text-field>
-</Output>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDY4LUkjbWlHRiQ2JVExQ2hhbmdlU3RyYXRlZ2llc0YnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RIixGJy9GNlEnbm9ybWFsRicvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRjQvJSlzdHJldGNoeUdGQC8lKnN5bW1ldHJpY0dGQC8lKGxhcmdlb3BHRkAvJS5tb3ZhYmxlbGltaXRzR0ZALyUnYWNjZW50R0ZALyUnbHNwYWNlR1EmMC4wZW1GJy8lJ3JzcGFjZUdRLDAuMzMzMzMzM2VtRictRi82JVEsS2VybmVsQnVpbGRGJ0YyRjVGOC1GLzYlUS5Mb2FkRXF1YXRpb25zRidGMkY1RjgtRi82JVEtTG9hZE1hdHJpY2VzRidGMkY1RjgtRi82JVEsUmVkdWNlSW5kZXhGJ0YyRjVGOC1GLzYlUTFSZWR1Y2VJbmRleEJ5T25lRidGMkY1RjgtRi82JVEzUmVkdWNlSW5kZXhNYmREYWUzRidGMkY1RjgtRi82JVEvUmVkdWN0aW9uU3RlcHNGJ0YyRjVGOC1GLzYlUSZSZXNldEYnRjJGNUY4LUYvNiVRMFNldFdhcm5pbmdMZXZlbEYnRjJGNS8lK2ZvcmVncm91bmRHUShbMCwwLDBdRicvJSlyZWFkb25seUdGQEY8RjwvJSVvcGVuR1EnJmxzcWI7RicvJSZjbG9zZUdRJyZyc3FiO0Yn">NyxJMUNoYW5nZVN0cmF0ZWdpZXNHNiJJLEtlcm5lbEJ1aWxkR0YkSS5Mb2FkRXF1YXRpb25zR0YkSS1Mb2FkTWF0cmljZXNHRiRJLFJlZHVjZUluZGV4R0YkSTFSZWR1Y2VJbmRleEJ5T25lR0YkSTNSZWR1Y2VJbmRleE1iZERhZTNHRiRJL1JlZHVjdGlvblN0ZXBzR0YkSSZSZXNldEdGJEkwU2V0V2FybmluZ0xldmVsR0Yk</Equation></Text-field>
-</Output>
-</Group>
-<Group hide-input="false" labelreference="L256782" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">#with(IndigoUtils);</Text-field>
 </Input>
-</Group>
-<Group labelreference="L256751" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"># Describe(IndigoUtils):</Text-field>
-</Input>
-</Group>
-<Group labelreference="L256752" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(Indigo):</Text-field>
-</Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">
-# 'Indigo' module
-module Indigo:
-
-    Reset( $ )
-
-    SetWarningLevel( lvl::integer, $ )
-
-    ChangeStrategies( { pivoting::procedure := 
-                          LULEM:-PivotingStrategy_Sindets, 
-                        veiling::procedure := LULEM:-VeilingStrategy_n, 
-                        zero::procedure := LULEM:-ZeroStrategy_length }, $ )
-
-    KernelBuild( E, $ )
-
-    LoadMatrices( E::Matrix, vars::list, G::Vector, $ )
-
-    LoadEquations( eqns::list, vars::list, $ )
-
-    ReduceIndexByOne( $ )
-
-    ReduceIndexMbdDae3( Mass::Matrix, Phi_in, f_in, qvars, vvars, lvars )
-
-    ReduceIndex::symbol = Indigo:-ReduceIndex
-
-    ReductionSteps::list = []
-
-</Text-field>
-</Output>
-</Group>
+</Group></Presentation-Block>
 </Section><Presentation-Block>
-<Group view="presentation" inline-output="false" labelreference="L1" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbW9HRiQ2LVEifkYnLyUsbWF0aHZhcmlhbnRHUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGNC8lKXN0cmV0Y2h5R0Y0LyUqc3ltbWV0cmljR0Y0LyUobGFyZ2VvcEdGNC8lLm1vdmFibGVsaW1pdHNHRjQvJSdhY2NlbnRHRjQvJSdsc3BhY2VHUSYwLjBlbUYnLyUncnNwYWNlR0ZDLyUrZXhlY3V0YWJsZUdGNEYv">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbW9HRiQ2LVEifkYnLyUsbWF0aHZhcmlhbnRHUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGNC8lKXN0cmV0Y2h5R0Y0LyUqc3ltbWV0cmljR0Y0LyUobGFyZ2VvcEdGNC8lLm1vdmFibGVsaW1pdHNHRjQvJSdhY2NlbnRHRjQvJSdsc3BhY2VHUSYwLjBlbUYnLyUncnNwYWNlR0ZDLyUrZXhlY3V0YWJsZUdGNEYv</Equation></Text-field>
+<Group view="presentation" inline-output="false" labelreference="L741" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">JSFH</Equation></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L681" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
 </Group></Presentation-Block>
 </Worksheet>
