@@ -18,7 +18,10 @@
 Indigo := module()
 
   export Reset,
-         SetWarningLevel,
+         EnableWarningMode,
+         DisableWarningMode,
+         EnableVerboseMode,
+         DisableVerboseMode,
          SetVeilingSymbol,
          KernelBuild,
          # Wrapper
@@ -46,7 +49,8 @@ Indigo := module()
   local  ModuleLoad,
          ModuleUnload,
          lib_base_path,
-         WarningLevel,
+         WarningMode,
+         VerboseMode,
          VeilingSymbol,
          SeparateMatrices;
 
@@ -82,7 +86,8 @@ Indigo := module()
     end if;
 
     # Library internal variables
-    Indigo:-WarningLevel  := 1;
+    Indigo:-WarningMode   := true;
+    Indigo:-VerboseMode   := false;
     Indigo:-VeilingSymbol := "V";
 
     # Protected variables
@@ -107,15 +112,43 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  SetWarningLevel := proc(
-    lvl::{nonnegint},
-    $)::{nothing};
+  EnableWarningMode := proc( $ )::{nothing};
 
-    description "Set the warning level as <lvl>.";
+    description "Enable the warning mode.";
 
-    Indigo:-WarningLevel := lvl;
+    Indigo:-WarningMode := true;
     return NULL;
-  end proc: # SetWarningLevel
+  end proc: # EnableWarningMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  DisableWarningMode := proc( $ )::{nothing};
+
+    description "Disable the warning mode.";
+
+    Indigo:-WarningMode := false;
+    return NULL;
+  end proc: # DisableWarningMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  EnableVerboseMode := proc( $ )::{nothing};
+
+    description "Enable the verbose mode.";
+
+    Indigo:-VerboseMode := true;
+    return NULL;
+  end proc: # EnableVerboseMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  DisableVerboseMode := proc( $ )::{nothing};
+
+    description "Disable the verbose mode.";
+
+    Indigo:-VerboseMode := false;
+    return NULL;
+  end proc: # DisableVerboseMode
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -258,9 +291,11 @@ Indigo := module()
     description "Reduce the index of the loaded DAE system.";
 
     if evalb(Indigo:-SystemType = 'Empty') then
-      IndigoUtils:-PrintMessage(
-        "Indigo::ReduceIndex(...): no DAE system loaded yet."
-      );
+      if Indigo:-WarningMode then
+        IndigoUtils:-WarningMessage(
+          "Indigo::ReduceIndex(...): no DAE system loaded yet."
+        );
+      end if;
       return false;
     elif evalb(Indigo:-SystemType = 'Linear') then
       return Indigo:-ReduceIndex_Linear();
@@ -301,10 +336,12 @@ Indigo := module()
 
     # Check if the system is already loaded
     if evalb(Indigo:-SystemType <> 'Empty') then
-      IndigoUtils:-WarningMessage(
-        "Indigo::LoadMatrices_Linear(...): a system of equations is already "
-        "loaded, reduction steps and veiling variables will be overwritten."
-      );
+      if Indigo:-WarningMode then
+        IndigoUtils:-WarningMessage(
+          "Indigo::LoadMatrices_Linear(...): a system of equations is already "
+          "loaded, reduction steps and veiling variables will be overwritten."
+        );
+      end if;
       Indigo:-Reset();
     end if;
 
@@ -357,6 +394,79 @@ Indigo := module()
 
   ReduceIndexByOne_Linear := proc( $ )::{boolean};
 
+    description "Reduce the index of the 'Linear' type DAE system of equations "
+      "by one. Return true if the system of equations has been reduced to "
+      "index-0 DAE, false otherwise.";
+
+    local vars, E, G, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
+
+    assert(
+      evalb(Indigo:-SystemType = 'Linear'),
+      "Indigo::ReduceIndexByOne_Linear(...): system must be of type 'Linear' "
+      "but got '%s'.",
+      Indigo:-SystemType
+    );
+
+    vars := Indigo:-ReductionSteps[-1]["vars"];
+    E := Indigo:-ReductionSteps[-1]["E"];
+    G := Indigo:-ReductionSteps[-1]["G"];
+    f := Indigo:-ReductionSteps[-1]["f"];
+
+    (*
+    # Check dimensions
+    nE, mE := LinearAlgebra:-Dimension(E);
+    nA := LinearAlgebra:-Dimension(A);
+    assert(
+      nA + nE = mE,
+      "Indigo::ReduceIndexByOne_Linear(...): number of row of E (%d x %d) plus "
+      "the number of algebraic equations (%d) must be equal to the column of E.",
+      nE, mE, nA
+    );
+
+    # Separate algebraic and differential part
+    dA := diff(A, t);
+
+    # E * diff_vars - G = dA
+    H, F := LinearAlgebra:-GenerateMatrix(convert(dA, list), diff(vars, t));
+
+    # Check dimensions
+    nH, mH := LinearAlgebra:-Dimension(H);
+    assert(
+      (nH + nE = mE) and (mH = mE),
+      "Indigo::ReduceIndexByOne_Generic(...): bad dimension of linear part of "
+      "constraint derivative A' = H vars' + F, size H = %d x %d, size E = %d x %d.",
+      nH, mH, nE, mE
+    );
+
+    # Split matrices to be stored
+    tbl := Indigo:-SeparateMatrices(<E, H>, convert(<G, F>, Vector));
+
+    # Update reduction steps
+    unprotect(Indigo:-ReductionSteps);
+    Indigo:-ReductionSteps := [op(ReductionSteps),
+      table([
+        "vars" = vars,
+        "E"    = tbl["Et"],
+        "G"    = tbl["Gt"],
+        "A"    = tbl["A"],
+        "rank" = tbl["rank"]
+      ])
+    ];
+    protect(Indigo:-ReductionSteps);
+    *)
+
+    # Check if we have reached index-0 DAE
+    if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
+      if Indigo:-VerbosityMode then
+        IndigoUtils:-PrintMessage(
+          "Indigo::ReduceIndexByOne_Linear(...): index-0 DAE system has been "
+          "reached."
+        );
+      end if;
+      return false;
+    else
+      return true;
+    end if;
   end proc: # LoadEquationsByOne_Linear
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -441,10 +551,12 @@ Indigo := module()
 
     # Check if the system is already loaded
     if evalb(Indigo:-SystemType <> 'Empty') then
-      IndigoUtils:-WarningMessage(
-        "Indigo::LoadMatrices_Generic(...): a system of equations is already "
-        "loaded, reduction steps and veiling variables will be overwritten."
-      );
+      if Indigo:-WarningMode then
+        IndigoUtils:-WarningMessage(
+          "Indigo::LoadMatrices_Generic(...): a system of equations is already "
+          "loaded, reduction steps and veiling variables will be overwritten."
+        );
+      end if;
       Indigo:-Reset();
     end if;
 
@@ -500,7 +612,7 @@ Indigo := module()
 
   ReduceIndexByOne_Generic := proc( $ )::{boolean};
 
-    description "Reduce the index of the 'Linear' type DAE system of equations "
+    description "Reduce the index of the 'Generic' type DAE system of equations "
       "by one. Return true if the system of equations has been reduced to "
       "index-0 DAE, false otherwise.";
 
@@ -561,10 +673,12 @@ Indigo := module()
 
     # Check if we have reached index-0 DAE
     if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
-      IndigoUtils:-PrintMessage(
-        "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE system has been "
-        "reached."
-      );
+      if Indigo:-VerbosityMode then
+        IndigoUtils:-PrintMessage(
+          "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE system has been "
+          "reached."
+        );
+      end if;
       return false;
     else
       return true;
@@ -616,10 +730,12 @@ Indigo := module()
 
     # Check if the system is already loaded
     if not evalb(Indigo:-SystemType = 'Empty') then
-      IndigoUtils:-WarningMessage(
-        "Indigo::LoadMatrices_Mbd3(...): a system of equations is already "
-        "loaded, reduction steps and veiling variables will be overwritten."
-      );
+      if Indigo:-WarningMode then
+        IndigoUtils:-WarningMessage(
+          "Indigo::LoadMatrices_Mbd3(...): a system of equations is already "
+          "loaded, reduction steps and veiling variables will be overwritten."
+        );
+      end if;
       Indigo:-Reset();
     end if;
 
@@ -663,7 +779,7 @@ Indigo := module()
     # Load matrices
     Indigo:-LoadMbdMatrices(Mass, Phi, f, q_vars, v_vars, l_vars);
     return NULL;
-  end proc:
+  end proc: # LoadEquations_Mbd3
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -792,7 +908,7 @@ Indigo := module()
       ])
     ];
     protect(Indigo:-ReductionSteps);
-  end proc:
+  end proc: # ReduceIndex_Mbd3;
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 (*
