@@ -633,8 +633,7 @@ IndigoUtils := module()
     vars::{list(function)},
     $)::{boolean};
 
-    description "Checks if the expression <expr> depends on the list of "
-      "variables <vars>.";
+    description "Checks if the expression <expr> depends on the list of variables <vars>.";
 
     local i;
 
@@ -858,7 +857,7 @@ IndigoUtils := module()
     )::{nothing};
 
     description "Check if a condition <check> is true and prints an error "
-      "message if it is not.";
+                "message if it is not.";
 
     if not check then
       IndigoUtils:-ErrorMessage(_passed[2..-1]);

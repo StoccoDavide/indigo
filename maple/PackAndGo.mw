@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Worksheet>
-<Version major="2020" minor="2"/>
+<Version major="2021" minor="2"/>
 <Label-Scheme value="2" prefix=""/>
 <View-Properties presentation="true" autoexpanding_sections="true" UserProfileName="Maple Default Profile" NumericFormat-ApplyInteger="true" NumericFormat-ApplyRational="true" NumericFormat-ApplyExponent="false" editable="true">
 </View-Properties>
-<MapleNet-Properties prettyprint="3" warnlevel="3" compactdisplay="false" preplot="" helpbrowser="standard" displayprecision="-1" echo="1" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" historytimestamp="false" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="960" rtablesize="[10, 10]" useclientjvm="true" labelwidth="20" postplot="" typesetting="extended" ansi="false" ansicolor="[]" elisiondigitsthreshold="10000" showassumed="1" ansilprint="false" trailingsemicolon="true" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
+<MapleNet-Properties prettyprint="3" warnlevel="3" compactdisplay="false" preplot="" helpbrowser="standard" displayprecision="-1" echo="1" scientificx="true" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" historytimestamp="false" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="1120" rtablesize="[10, 10]" useclientjvm="true" format="document" labelwidth="20" postplot="" typesetting="extended" ansi="false" ansicolor="[]" elisiondigitsthreshold="10000" showassumed="1" ansilprint="false" trailingsemicolon="true" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
 <Styles>
 <Font name="Heading 1" background="[255,255,255]" bold="true" executable="false" family="Century Gothic" foreground="[195,69,11]" italic="false" opaque="false" readonly="false" size="20" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Warning" background="[255,255,255]" bold="false" executable="false" family="Courier New" foreground="[255,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
@@ -107,7 +107,7 @@
 </Input>
 </Group><Presentation-Block>
 <Group view="code" hide-input="false" labelreference="L256770" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">MODULE_NAME := &quot;Indigo&quot;:</Text-field>
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">MODULE_NAME       := &quot;Indigo&quot;:</Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L256801" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -115,15 +115,15 @@
 </Input>
 </Group>
 <Group view="code" labelreference="L256772" drawlabel="true">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">SOURCE_DIR  := cat(currentdir(), ds, &quot;lib&quot;):</Text-field>
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">SOURCE_DIR        := cat(currentdir(), ds, &quot;lib&quot;):</Text-field>
 </Input>
 </Group>
 <Group view="code" hide-input="false" labelreference="L256771" drawlabel="true">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">BINARY_DIR  := cat(currentdir(), ds, &quot;installer&quot;, ds, &quot;bin&quot;):</Text-field>
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">BINARY_DIR        := cat(currentdir(), ds, &quot;installer&quot;, ds, &quot;bin&quot;):</Text-field>
 </Input>
 </Group>
 <Group view="code" hide-input="false" labelreference="L256769" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LIBRARY_MLA := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;):
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LIBRARY_MLA       := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;):
 </Text-field>
 </Input>
 </Group></Presentation-Block>
@@ -174,12 +174,6 @@ end proc:
 <Group hide-input="false" labelreference="L256802" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
-'LEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
-Current version: D. Stocco, M. Larcher, E. Bertolazzi.
-Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
-</Text-field>
-</Output>
 </Group>
 <Group hide-input="false" labelreference="L256774" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field style="Text" layout="Normal">Create sources path</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">file := cat(interface(worksheetdir), ds, &quot;installer&quot;, ds, &quot;bin&quot;):
@@ -248,106 +242,10 @@ end do:</Text-field>
 <Group hide-input="false" labelreference="L256745" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">with(Indigo);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
-'LEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
-Current version: D. Stocco, M. Larcher, E. Bertolazzi.
-Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
-</Text-field>
-</Output>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDZMLUkjbWlHRiQ2JVEsS2VybmVsQnVpbGRGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRictSSNtb0dGJDYtUSIsRicvRjZRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y0LyUpc3RyZXRjaHlHRkAvJSpzeW1tZXRyaWNHRkAvJShsYXJnZW9wR0ZALyUubW92YWJsZWxpbWl0c0dGQC8lJ2FjY2VudEdGQC8lJ2xzcGFjZUdRJjAuMGVtRicvJSdyc3BhY2VHUSwwLjMzMzMzMzNlbUYnLUYvNiVRLkxvYWRFcXVhdGlvbnNGJ0YyRjVGOC1GLzYlUTZMb2FkRXF1YXRpb25zX0dlbmVyaWNGJ0YyRjVGOC1GLzYlUTVMb2FkRXF1YXRpb25zX0xpbmVhckYnRjJGNUY4LUYvNiVRM0xvYWRFcXVhdGlvbnNfTWJkM0YnRjJGNUY4LUYvNiVRLUxvYWRNYXRyaWNlc0YnRjJGNUY4LUYvNiVRNUxvYWRNYXRyaWNlc19HZW5lcmljRidGMkY1RjgtRi82JVE0TG9hZE1hdHJpY2VzX0xpbmVhckYnRjJGNUY4LUYvNiVRMkxvYWRNYXRyaWNlc19NYmQzRidGMkY1RjgtRi82JVEsUmVkdWNlSW5kZXhGJ0YyRjVGOC1GLzYlUTlSZWR1Y2VJbmRleEJ5T25lX0dlbmVyaWNGJ0YyRjVGOC1GLzYlUThSZWR1Y2VJbmRleEJ5T25lX0xpbmVhckYnRjJGNUY4LUYvNiVRNFJlZHVjZUluZGV4X0dlbmVyaWNGJ0YyRjVGOC1GLzYlUTNSZWR1Y2VJbmRleF9MaW5lYXJGJ0YyRjVGOC1GLzYlUTFSZWR1Y2VJbmRleF9NYmQzRidGMkY1RjgtRi82JVEvUmVkdWN0aW9uU3RlcHNGJ0YyRjVGOC1GLzYlUSZSZXNldEYnRjJGNUY4LUYvNiVRMVNldFZlaWxpbmdTeW1ib2xGJ0YyRjVGOC1GLzYlUTBTZXRXYXJuaW5nTGV2ZWxGJ0YyRjVGOC1GLzYlUStTeXN0ZW1UeXBlRidGMkY1LyUrZm9yZWdyb3VuZEdRKFswLDAsMF1GJy8lKXJlYWRvbmx5R0ZARjxGPC8lJW9wZW5HUScmbHNxYjtGJy8lJmNsb3NlR1EnJnJzcWI7Ric=">NzZJLEtlcm5lbEJ1aWxkRzYiSS5Mb2FkRXF1YXRpb25zR0YkSTZMb2FkRXF1YXRpb25zX0dlbmVyaWNHRiRJNUxvYWRFcXVhdGlvbnNfTGluZWFyR0YkSTNMb2FkRXF1YXRpb25zX01iZDNHRiRJLUxvYWRNYXRyaWNlc0dGJEk1TG9hZE1hdHJpY2VzX0dlbmVyaWNHRiRJNExvYWRNYXRyaWNlc19MaW5lYXJHRiRJMkxvYWRNYXRyaWNlc19NYmQzR0YkSSxSZWR1Y2VJbmRleEdGJEk5UmVkdWNlSW5kZXhCeU9uZV9HZW5lcmljR0YkSThSZWR1Y2VJbmRleEJ5T25lX0xpbmVhckdGJEk0UmVkdWNlSW5kZXhfR2VuZXJpY0dGJEkzUmVkdWNlSW5kZXhfTGluZWFyR0YkSTFSZWR1Y2VJbmRleF9NYmQzR0YkSS9SZWR1Y3Rpb25TdGVwc0dGJEkmUmVzZXRHRiRJMVNldFZlaWxpbmdTeW1ib2xHRiRJMFNldFdhcm5pbmdMZXZlbEdGJEkrU3lzdGVtVHlwZUdGJA==</Equation></Text-field>
-</Output>
 </Group>
 <Group labelreference="L256751" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(Indigo):</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">
-# 'Indigo' module
-module Indigo:
-
-    # Reset the library.
-    Reset( $ )
-
-    # Set the warning level as &lt;lvl&gt;.
-    SetWarningLevel( lvl::{nonnegint}, $ ) :: {nothing}
-
-    # Set the veiling symbol as a string &lt;sym&gt;.
-    SetVeilingSymbol( sym::{string}, $ ) :: {nothing}
-
-    # Build the kernel of a matrix &lt;E&gt;, and return the matrix N such that E*N = 
-    # 0 and the rank of E.
-    KernelBuild( E::{Matrix}, $ )
-
-    # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadMatrices( typ::{symbol} ) :: {nothing}
-
-    # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadEquations( typ::{symbol} ) :: {nothing}
-
-    # Reduce the index of the loaded DAE system.
-    ReduceIndex( $ )
-
-    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
-    # list of variables &lt;vars&gt; must be the same of the variables used in the 
-    # system of equations.
-    LoadMatrices_Linear( E::{Matrix}, G::{Matrix}, f::{Vector}, 
-                         vars::{Vector}, $ ) :: {nothing}
-
-    # Load a 'Linear' type system of equations &lt;eqns&gt;. The list of variables 
-    # &lt;vars&gt; must be the same of the variables used in the system of equations.
-    LoadEquations_Linear( eqns::{list}, vars::{list}, $ ) :: {nothing}
-
-    ReduceIndexByOne_Linear( $ )
-
-    # Reduce the index of the 'Linear' type DAE system of equations. Return 
-    # true if the system of equations has been reduced to index-0 DAE, false 
-    # otherwise.
-    ReduceIndex_Linear( $ )
-
-    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
-    # list of variables &lt;vars&gt; must be the same of the variables used in the 
-    # system of equations.
-    LoadMatrices_Generic( E::{Matrix}, G::{Vector}, vars::{list}, $ )
-                        :: {nothing}
-
-    # Load a 'Generic' type system of equations &lt;eqns&gt;. The list of variables 
-    # &lt;vars&gt; must be the same of the variables used in the system of equations.
-    LoadEquations_Generic( eqns::{list}, vars::{list}, $ ) :: {nothing}
-
-    # Reduce the index of the 'Linear' type DAE system of equations by one. 
-    # Return true if the system of equations has been reduced to index-0 DAE, 
-    # false otherwise.
-    ReduceIndexByOne_Generic( $ )
-
-    # Reduce the index of the 'Generic' type DAE system of equations. Return 
-    # true if the system of equations has been reduced to index-0 DAE, false 
-    # otherwise.
-    ReduceIndex_Generic( $ )
-
-    # Load a 'Mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
-    # constraint vector &lt;Phi&gt;, external force vector &lt;f&gt;, the position 
-    # variables &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange 
-    # multipliers &lt;l_vars&gt;.
-    LoadMatrices_Mbd3( Mass::{Matrix}, Phi::{Vector}, f::{Vector}, 
-                       q_vars::{list}, v_vars::{list}, l_vars::{list}, $ )
-                     :: {nothing}
-
-    # Load a 'Mdb' type system of equations &lt;eqns&gt; with the position variables 
-    # &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange multipliers 
-    # &lt;l_vars&gt;.
-    LoadEquations_Mbd3( eqns::{list}, q_vars::{list}, v_vars::{list}, 
-                        l_vars::{list}, $ ) :: {nothing}
-
-    # Reduce the index of the multibody DAE system of equations. Return true if 
-    # the system of equations has been reduced to index-0 DAE, false otherwise.
-    ReduceIndex_Mbd3( { baumgarte::{boolean} := false, 
-                        jacobians::{boolean} := false }, $ ) :: {boolean}
-
-    SystemType::symbol = Empty
-
-    ReductionSteps::list = []
-
-</Text-field>
-</Output>
 </Group>
 </Section><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L256800" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
