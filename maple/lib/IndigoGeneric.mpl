@@ -22,10 +22,7 @@
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  SeparateMatrices := proc(
-    E::{Matrix},
-    Gin::{Vector},
-    $)
+  SeparateMatrices := proc( E::Matrix, Gin::Vector, $ )
 
     description "Separate algebraic and differential equations from DAE system "
                 "equations matrix <E> and differential variables vector <G>. Return the "
@@ -51,20 +48,17 @@
 
     # Check input dimensions E
     n, m := LinearAlgebra:-Dimension(E);
-    assert(
-      n = m,
-      "Indigo::SeparateMatrices(...): input matrix E must be square (%d x %d).",
-      n, m
-    );
+    if n <> m then
+      error "Indigo::SeparateMatrices(...): input matrix E must be square (%d x %d).", n, m;
+    end if;
 
     # Check input dimensions G
     l := LinearAlgebra:-Dimension(G);
-    assert(
-      n = l,
-      "Indigo::SeparateMatrices(...): input matrix E size (%d x %d) not "
-      "consistent with vector G size (1 x %d).",
-      n, m, l
-    );
+    if n <> l then
+      error "Indigo::SeparateMatrices(...): input matrix E size (%d x %d) not "
+            "consistent with vector G size (1 x %d).",
+            n, m, l;
+    end if;
 
     # Build the kernel of E
     tbl := Indigo:-KernelBuild(E);
@@ -78,11 +72,7 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadMatrices_Generic := proc(
-    E::{Matrix},
-    G::{Vector},
-    vars::{list},
-    $)::{nothing};
+  LoadMatrices_Generic := proc( E::Matrix, G::Vector, vars::list, $ )
 
     description "Load a 'Generic' type system of equations as matrices <E> and "
                 "<G>. The list of variables <vars> must be the same of the variables "
@@ -122,10 +112,7 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadEquations_Generic := proc(
-    eqns::{list},
-    vars::{list},
-    $)::{nothing};
+  LoadEquations_Generic := proc( eqns::list, vars::list, $ )
 
     description "Load a 'Generic' type system of equations <eqns>. The list of "
                 "variables <vars> must be the same of the variables used in the "
@@ -134,12 +121,11 @@
     local E, G;
 
     # Check input dimensions
-    assert(
-      nops(eqns) = nops(vars),
-      "Indigo::LoadEquations_Generic(...): the number of equations (%d) must be "
-      "the same of the number of variables (%d).",
-      nops(eqns), nops(vars)
-    );
+    if nops(eqns) <> nops(vars) then
+      error "Indigo::LoadEquations_Generic(...): the number of equations (%d) must be "
+            "the same of the number of variables (%d).",
+            nops(eqns), nops(vars)
+    end if;
 
     # Build the matrices and load them
     E, G := LinearAlgebra:-GenerateMatrix(eqns, diff(vars, t)):
@@ -150,7 +136,7 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndexByOne_Generic := proc( $ )::{boolean};
+  ReduceIndexByOne_Generic := proc( $ )::boolean;
 
     description "Reduce the index of the 'Generic' type DAE system of equations "
                 "by one. Return true if the system of equations has been reduced "
@@ -158,12 +144,10 @@
 
     local vars, E, G, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
 
-    assert(
-      evalb(Indigo:-SystemType = 'Generic'),
-      "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'Generic' "
-      "but got '%s'.",
-      Indigo:-SystemType
-    );
+    if not evalb(Indigo:-SystemType = 'Generic') then
+      error "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'Generic' "
+            "but got '%s'.", Indigo:-SystemType;
+    end if;
 
     vars := Indigo:-DAEvars;
     E    := Indigo:-ReductionSteps[-1]["E"];
@@ -173,12 +157,11 @@
     # Check dimensions
     nE, mE := LinearAlgebra:-Dimension(E);
     nA := LinearAlgebra:-Dimension(A);
-    assert(
-      nA + nE = mE,
-      "Indigo::ReduceIndexByOne_Generic(...): number of row of E (%d x %d) plus "
-      "the number of algebraic equations (%d) must be equal to the column of E.",
-      nE, mE, nA
-    );
+    if nA + nE <> mE then
+      error "Indigo::ReduceIndexByOne_Generic(...): number of row of E (%d x %d) plus "
+            "the number of algebraic equations (%d) must be equal to the column of E.",
+            nE, mE, nA
+    end if;
 
     # Separate algebraic and differential part
     dA := diff(A, t);
@@ -188,12 +171,11 @@
 
     # Check dimensions
     nH, mH := LinearAlgebra:-Dimension(H);
-    assert(
-      (nH + nE = mE) and (mH = mE),
-      "Indigo::ReduceIndexByOne_Generic(...): bad dimension of linear part of "
-      "constraint derivative A' = H vars' + F, size H = %d x %d, size E = %d x %d.",
-      nH, mH, nE, mE
-    );
+    if  (nH + nE <> mE) or (mH <> mE) then
+      error "Indigo::ReduceIndexByOne_Generic(...): bad dimension of linear part of "
+            "constraint derivative A' = H vars' + F, size H = %d x %d, size E = %d x %d.",
+            nH, mH, nE, mE
+    end if;
 
     # Split matrices to be stored
     tbl := Indigo:-SeparateMatrices(<E, H>, convert(<G, F>, Vector));
@@ -224,7 +206,7 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndex_Generic := proc( $ )::{boolean};
+  ReduceIndex_Generic := proc( $ )::boolean;
 
     description "Reduce the index of the 'Generic' type DAE system of equations. "
       "Return true if the system of equations has been reduced to index-0 DAE (ODE), "

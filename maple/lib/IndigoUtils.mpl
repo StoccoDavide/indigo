@@ -95,9 +95,7 @@ IndigoUtils := module()
   #         |___/
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DropPrefix := proc(
-    str::{string},
-    $)::{string};
+  DropPrefix := proc( str::string, $ )::string;
 
     description "Drop the prefix of the input string <str>.";
 
@@ -106,10 +104,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetPosition := proc(
-    var::{symbol, function, integer},
-    lst::{list},
-    $)::{integer};
+  GetPosition := proc( var::{symbol, function, integer}, lst::list, $ )::integer;
 
     description "Find the position of variable <var> in the list <lst>.";
 
@@ -146,11 +141,11 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   CheckParam := proc(
-    param::{anything},
-    param_name::{string},
-    param_type::{anything},
-    where::{string},
-    $)::{nothing};
+    param::anything,
+    param_name::string,
+    param_type::anything,
+    where::string,
+    $)
 
     description "Check if the parameter <param>, with name <param_name> is of "
       "type <param_type>.";
@@ -171,14 +166,14 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   CheckTableField := proc(
-    tab::{table},
-    param_field::{string},
-    msg::{string},
-    param_type::{anything},
-    $)::{nothing};
+    tab::table,
+    param_field::string,
+    msg::string,
+    param_type::anything,
+    $)
 
     description "Check if the parameter field <param_field> in table <tab> is "
-      "of type <param_type>, if not print and error message <msg>.";
+                "of type <param_type>, if not print and error message <msg>.";
 
     if not type(tab, table) then
       IndigoUtils:-ErrorMessage(msg);
@@ -193,14 +188,14 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   CheckTableName := proc(
-    tab::{table},
-    param_name::{string},
-    param_type::{anything},
-    where::{string},
-    $)::{nothing};
+    tab::table,
+    param_name::string,
+    param_type::anything,
+    where::string,
+    $)
 
     description "Check is the parameter name <param_name> in table <tab> is of "
-      "type <param_type>.";
+                "type <param_type>.";
 
     local keywords;
 
@@ -224,12 +219,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToString := proc(
-    var::{anything},
-    $)::{string};
+  ToString := proc( var::anything, $ )::string;
 
     description "Convert a variable <var> into a string. Variables of type "
-      "'x[dot](t)' are converted into 'x_dot(t)'.";
+                "'x[dot](t)' are converted into 'x_dot(t)'.";
 
     local str;
 
@@ -250,12 +243,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToStringAndSplit := proc(
-    var::{anything},
-    $)::{string};
+  ToStringAndSplit := proc( var::anything, $ )::string;
 
     description "Convert a variable <var> into multiple strings. Variables of "
-      "type 'x[dot](t)' are converted into 'x_dot(t)'.";
+                "type 'x[dot](t)' are converted into 'x_dot(t)'.";
 
     local str;
 
@@ -274,12 +265,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToRubyString := proc(
-    var::{anything},
-    $)::{string};
+  ToRubyString := proc( var::anything, $ )::string;
 
     description "Convert a variable <var> into a Ruby string. Variables of type "
-      "'x[dot](t)' are converted into 'x_dot(t)'.";
+                "'x[dot](t)' are converted into 'x_dot(t)'.";
 
     local str;
 
@@ -292,7 +281,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  CatSymbol := proc()::{symbol};
+  CatSymbol := proc()::symbol;
 
     description "Concatenates input symbols.";
 
@@ -305,11 +294,11 @@ IndigoUtils := module()
     pre::{symbol, string},
     var::{symbol, string},
     post::{symbol, string},
-    $)::{symbol};
+    $)::symbol;
 
     description "Convert variable <var> into a string with prefix <pre> and "
-      "postfix <post>. Variables of type 'x[dot](t)' are converted into "
-      "'x_dot(t)'.";
+                "postfix <post>. Variables of type 'x[dot](t)' are converted into "
+                "'x_dot(t)'.";
 
     local str_pre, str_var, str_post;
 
@@ -323,9 +312,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToVector := proc(
-    var::{anything},
-    $)::{Vector};
+  ToVector := proc( var::anything, $ )::Vector;
 
     description "Convert a variable <var> to a column vector.";
 
@@ -334,7 +321,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  JoinSymbols := proc()::{symbol};
+  JoinSymbols := proc()::symbol;
 
     description "Combine a list of strings or symbols into one unique symbol.";
 
@@ -356,7 +343,7 @@ IndigoUtils := module()
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoDiff := proc()::{anything};
+  DoDiff := proc()::anything;
 
     description "Differentiate an expression with respect to a function.";
 
@@ -374,10 +361,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoGradient := proc(
-    fnc::{anything},
-    lst::{list},
-    $)::{anything};
+  DoGradient := proc( fnc::anything, lst::list, $ )::anything;
 
     description "Differentiate a scalar expression <fnc> with respect to a "
       "list of functions <lst>.";
@@ -394,13 +378,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoHessian := proc(
-    fnc::{anything},
-    lst::{list},
-    $)::{anything};
+  DoHessian := proc( fnc::anything, lst::list, $ )::anything;
 
     description "Differentiate a vector of expressions (gradient) <fnc> with "
-      "respect to a list <lst> of functions.";
+                "respect to a list <lst> of functions.";
 
     local i, j, n, out;
 
@@ -417,13 +398,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoJacobian := proc(
-    fnc::{Vector},
-    lst::{list},
-    $)::{anything};
+  DoJacobian := proc( fnc::{Vector}, lst::{list}, $ )::anything;
 
     description "Differentiate a vector of expressions <fnc> with respect to a "
-      "list <lst> of functions.";
+                "list <lst> of functions.";
 
     local i, j, m, n, out;
 
@@ -447,9 +425,7 @@ IndigoUtils := module()
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ExtractSubs := proc(
-    pars::{list},
-    $)::{list};
+  ExtractSubs := proc( pars::list, $ )::list;
 
     description "Extract the list variables to substitute from a list of "
       "parameters <pars>.";
@@ -469,12 +445,12 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   GetFunctions := proc (
-    expr::{anything},
-    onlyD::{boolean} := false,
-    $)::{anything};
+    expr::anything,
+    onlyD::boolean := false,
+    $ )::anything;
 
     description "Extract the list of the functions in the expression <expr>, "
-     "where <onlyD> is boolean to extract only the functions of the form D(f).";
+                "where <onlyD> is boolean to extract only the functions of the form D(f).";
 
     local e, lst, tmp1, tmp2;
 
@@ -506,12 +482,12 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   GetFunctionsInList := proc (
-    expr::{anything},
-    fncs::{list},
-    $)::{anything};
+    expr::anything,
+    fncs::list,
+    $)::anything;
 
     description "Extract the list of the functions in the expression <expr> "
-      "that are also in the list of functions <fncs>.";
+                "that are also in the list of functions <fncs>.";
 
     local e, lst, tmp1, tmp2;
 
@@ -544,9 +520,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetSymbols := proc(
-    expr::{anything},
-    $)::{anything};
+  GetSymbols := proc( expr::anything, $ )::anything;
 
     description "Extracts the list of the symbols in the expression <expr>.";
 
@@ -571,12 +545,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionPrototype := proc(
-    expr::{anything},
-    $)::{anything};
+  GetFunctionPrototype := proc( expr::anything, $ )::anything;
 
     description "Extracts the function prototype from an expression <expr> of "
-      "type 'f(x) = body' or 'f(x)'.";
+                "type 'f(x) = body' or 'f(x)'.";
 
     if type(expr, `=`) then
       return lhs(expr);
@@ -587,9 +559,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionName := proc(
-    expr::{anything},
-    $)::{anything};
+  GetFunctionName := proc( expr::anything, $ )::anything;
 
     description "Extracts the function name from an expression <expr> of type "
       "'f(x) = body' or 'f(x)'.";
@@ -612,12 +582,9 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionBody := proc(
-    expr::{anything},
-    $)::{anything};
+  GetFunctionBody := proc( expr::anything, $ )::anything;
 
-    description "Extracts the body from an expression <expr> of type 'f(x) = "
-      "body' or 'f(x)'.";
+    description "Extracts the body from an expression <expr> of type 'f(x) = body' or 'f(x)'.";
 
     if type(expr, `=`) then
       return op(2, expr);
@@ -629,9 +596,9 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   IsDependentOn := proc(
-    expr::{algebraic},
-    vars::{list(function)},
-    $)::{boolean};
+    expr::algebraic,
+    vars::list(function),
+    $)::boolean;
 
     description "Checks if the expression <expr> depends on the list of variables <vars>.";
 
@@ -647,12 +614,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetSymbolsRecurr := proc (
-    expr::{anything},
-    $)::{set, list};
+  GetSymbolsRecurr := proc ( expr::anything, $ )::{set, list};
 
     description "Extracts the set/list of the symbols recursively from the "
-      "expression <expr>.";
+                "expression <expr>.";
 
     local tmp, key, kv;
 
@@ -721,9 +686,7 @@ IndigoUtils := module()
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetPermSortedList := proc(
-    var::{list},
-    $)::{list};
+  GetPermSortedList := proc( var::list, $ )::list;
 
     description "Compute the permutation that sorts a list <var>.";
 
@@ -739,13 +702,11 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetExpressionCost := proc(
-    var::{algebraic},
-    $)::{integer};
+  GetExpressionCost := proc( var::algebraic, $ )::integer;
 
   description "Compute the overall cost of an algebraic expression <var> and "
-    "return the overall cost number of mathematical operations as (additions + "
-    "multiplications + divisions + functions)";
+              "return the overall cost number of mathematical operations as (additions + "
+              "multiplications + divisions + functions)";
 
     local out;
 
@@ -763,11 +724,7 @@ IndigoUtils := module()
   #                              |___/
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  cprintf := proc(
-    fg::{anything},
-    bg::{anything},
-    fmt::{anything}
-    )::{nothing};
+  cprintf := proc( fg::anything, bg::anything, fmt::anything )
 
     description "Print a message in color where <fg> is the foreground color, "
       "<bg> is the background color, <fmt> is the format string, and the "
@@ -782,7 +739,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ErrorMessage := proc()::{nothing};
+  ErrorMessage := proc()
 
     description "Print an error message.";
 
@@ -792,7 +749,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  WarningMessage := proc()::{nothing};
+  WarningMessage := proc()
 
     description "Print a warning message.";
 
@@ -802,7 +759,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  PrintTitle := proc()::{nothing};
+  PrintTitle := proc()
 
     description "Print a title.";
 
@@ -822,7 +779,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  PrintHeader := proc()::{nothing};
+  PrintHeader := proc()
 
     description "Print a header.";
 
@@ -842,7 +799,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  PrintMessage := proc()::{nothing};
+  PrintMessage := proc()
 
     description "Print a message.";
 
@@ -852,9 +809,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  Assert := proc(
-    check::{anything}
-    )::{nothing};
+  Assert := proc( check::anything ) # (check, _passed )
 
     description "Check if a condition <check> is true and prints an error "
                 "message if it is not.";
@@ -867,12 +822,10 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  Warning := proc(
-    check::{anything}
-    )::{nothing};
+  Warning := proc( check::anything )
 
     description "Check if a condition <check> is true and prints a warning "
-      "message if it is not.";
+                "message if it is not.";
 
     if not check then
       IndigoUtils:-WarningMessage(_passed[2..-1]);

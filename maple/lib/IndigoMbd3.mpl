@@ -22,13 +22,13 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   LoadMatrices_Mbd3 := proc(
-    Mass::{Matrix},
-    Phi::{Vector},
-    f::{Vector},
-    q_vars::{list},
-    v_vars::{list},
-    l_vars::{list},
-    $)::{nothing};
+    Mass::Matrix,
+    Phi::Vector,
+    f::Vector,
+    q_vars::list,
+    v_vars::list,
+    l_vars::list,
+    $)
 
     description "Load a 'Mbd3' type system of equations with mass matrix "
       "<Mass>, constraint vector <Phi>, external force vector <f>, the position "
@@ -66,11 +66,11 @@
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   LoadEquations_Mbd3 := proc(
-    eqns::{list},
-    q_vars::{list},
-    v_vars::{list},
-    l_vars::{list},
-    $)::{nothing};
+    eqns::list,
+    q_vars::list,
+    v_vars::list,
+    l_vars::list,
+    $)
 
     description "Load a 'Mdb' type system of equations <eqns> with the position "
       "variables <q_vars>, the velocity variables <v_vars> and the Lagrange "
@@ -90,9 +90,9 @@
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   ReduceIndex_Mbd3 := proc({
-    jacobians::{boolean} := false,
-    baumgarte::{boolean} := false
-    }, $)::{boolean};
+    jacobians::boolean := false,
+    baumgarte::boolean := false
+    }, $)::boolean;
 
     description "Reduce the index of the multibody DAE system of equations. "
       "Return true if  the system of equations has been reduced to index-0 "
@@ -102,34 +102,30 @@
       Phi_t, A_rhs, g, Mass_tot, f_tot, vars_tot, eta_tot, Jeta_tot, Jf_tot, h,
       f_stab, Jf_stab;
 
-    assert(
-      evalb(Indigo:-SystemType = "Mbd"),
-      "Indigo::ReduceIndex_Mbd3(...): system must be of type 'Mbd3' but got '%s'.",
-      Indigo:-SystemType
-    );
+    if not evalb(Indigo:-SystemType = "Mbd") then
+      error "Indigo::ReduceIndex_Mbd3(...): system must be of type 'Mbd3' but got '%s'.",
+            Indigo:-SystemType
+    end if;
 
     # Check dimensions of inputs
     n, m := LinearAlgebra:-Dimension(Mass);
-    assert(
-      (n = m) and (n = nops(v_vars)),
-      "Indigo::ReduceIndex_Mbd3(...): mass matrix must be square and of the same "
-      "size of the length of velocity variables.",
-      Mass, v_vars
-    );
+    if (n <> m) or (n <> nops(v_vars)) then
+      error "Indigo::ReduceIndex_Mbd3(...): mass matrix must be square and of the same "
+            "size of the length of velocity variables.",
+            Mass, v_vars
+    end if;
 
     n := nops(q_vars);
-    assert(
-      n = nops(v_vars),
-      "Indigo::ReduceIndex_Mbd3(...): velocity variables and position variables "
-      "must have the same size."
-    );
+    if n <> nops(v_vars) then
+      error "Indigo::ReduceIndex_Mbd3(...): velocity variables and position variables "
+            "must have the same size."
+    end if;
 
     m := LinearAlgebra:-Dimension(Phi);
-    assert(
-      (m = nops(l_vars)),
-      "Indigo::ReduceIndex_Mbd3(...): lambda variables must have the same length "
-      "the number of constraints."
-    );
+    if m <> nops(l_vars) then
+      error "Indigo::ReduceIndex_Mbd3(...): lambda variables must have the same length "
+            "the number of constraints."
+    end if;
 
     # Differential variables
     q_vars_t := diff(q_vars, t);

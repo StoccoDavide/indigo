@@ -22,12 +22,7 @@
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadMatrices_Linear := proc(
-    E::{Matrix},
-    G::{Matrix},
-    f::{Vector},
-    vars::{Vector},
-    $)::{nothing};
+  LoadMatrices_Linear := proc( E::Matrix, G::Matrix, f::Vector, vars::Vector, $ )
 
     description "Load a 'Generic' type system of equations as matrices <E> and "
       "<G>. The list of variables <vars> must be the same of the variables "
@@ -64,10 +59,7 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadEquations_Linear := proc(
-    eqns::{list},
-    vars::{list},
-    $)::{nothing};
+  LoadEquations_Linear := proc( eqns::list, vars::list, $ )
 
     description "Load a 'Linear' type system of equations <eqns>. The list of "
       "variables <vars> must be the same of the variables used in the system "
@@ -76,12 +68,11 @@
     local eqns_tmp, E, G, f;
 
     # Check input dimensions
-    assert(
-      nops(eqns) = nops(vars),
-      "Indigo::LoadEquations_Linear(...): the number of equations (%d) must be "
-      "the same of the number of variables (%d).",
-      nops(eqns), nops(vars)
-    );
+    if nops(eqns) <> nops(vars) then
+      error "Indigo::LoadEquations_Linear(...): the number of equations (%d) must be "
+            "the same of the number of variables (%d).",
+            nops(eqns), nops(vars)
+    end if;
 
     E, eqns_tmp := LinearAlgebra:-GenerateMatrix(eqns, diff(vars, t)):
     G, f := LinearAlgebra:-GenerateMatrix(eqns_tmp, vars):
@@ -91,7 +82,7 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndexByOne_Linear := proc( $ )::{boolean};
+  ReduceIndexByOne_Linear := proc( $ )::boolean;
 
     description "Reduce the index of the 'Linear' type DAE system of equations "
       "by one. Return true if the system of equations has been reduced to "
@@ -99,12 +90,11 @@
 
     local vars, E, G, A, nE, mE, nA, dA, H, F, f, nH, mH, tbl;
 
-    assert(
-      evalb(Indigo:-SystemType = 'Linear'),
-      "Indigo::ReduceIndexByOne_Linear(...): system must be of type 'Linear' "
-      "but got '%s'.",
-      Indigo:-SystemType
-    );
+    if not evalb(Indigo:-SystemType = 'Linear') then
+      error "Indigo::ReduceIndexByOne_Linear(...): system must be of type 'Linear' "
+            "but got '%s'.",
+            Indigo:-SystemType
+    end if;
 
     vars := Indigo:-DAEvars;
     E    := Indigo:-ReductionSteps[-1]["E"];
@@ -167,11 +157,11 @@
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndex_Linear := proc( $ )::{boolean};
+  ReduceIndex_Linear := proc( $ )::boolean;
 
     description "Reduce the index of the 'Linear' type DAE system of equations. "
-      "Return true if the system of equations has been reduced to index-0 DAE (ODE), "
-      "false otherwise.";
+                "Return true if the system of equations has been reduced to index-0 DAE (ODE), "
+                "false otherwise.";
 
     local out;
 

@@ -120,7 +120,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  EnableWarningMode := proc( $ )::{nothing};
+  EnableWarningMode := proc( $ )
 
     description "Enable the warning mode.";
 
@@ -130,7 +130,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DisableWarningMode := proc( $ )::{nothing};
+  DisableWarningMode := proc( $ )
 
     description "Disable the warning mode.";
 
@@ -140,7 +140,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  EnableVerboseMode := proc( $ )::{nothing};
+  EnableVerboseMode := proc( $ )
 
     description "Enable the verbose mode.";
 
@@ -150,7 +150,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DisableVerboseMode := proc( $ )::{nothing};
+  DisableVerboseMode := proc( $ )
 
     description "Disable the verbose mode.";
 
@@ -160,9 +160,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  SetVeilingSymbol := proc(
-    sym::{string},
-    $)::{nothing};
+  SetVeilingSymbol := proc( sym::string, $ )
 
     description "Set the veiling symbol as a string <sym>.";
 
@@ -172,7 +170,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  Reset := proc( $ )::{nothing};
+  Reset := proc( $ )
 
     description "Reset the library.";
 
@@ -195,7 +193,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetDifferentialEquations := proc($)
+  GetDifferentialEquations := proc($)::list;
     return convert( Indigo:-ReductionSteps[-1]["E"].<diff(Indigo:-DAEvars,t)> - Indigo:-ReductionSteps[-1]["G"], list);
   end proc;
 
@@ -241,12 +239,10 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  KernelBuild := proc(
-    E::{Matrix},
-    $)
+  KernelBuild := proc( E::Matrix, $ )::table;
 
     description "Build the kernel of a matrix <E>, and return the matrix N such "
-    "that E*N = 0 and the rank of E.";
+                "that E*N = 0 and the rank of E.";
 
     local n, m, tbl, r, P, Q, M, K, N, SS, z, apply_veil, do_veil;
 
@@ -316,17 +312,12 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadMatrices := proc(
-    typ::{symbol}
-    # _passed
-    )::{nothing};
+  LoadMatrices := proc( typ::{symbol} ) # (symbol, _passed)
 
     description "Load the matrices from the input DAE system of type <typ>.";
 
     if (_npassed < 2) then
-      IndigoUtils:-ErrorMessage(
-        "Indigo::LoadMatrices(...): no DAE system to load."
-      );
+      IndigoUtils:-ErrorMessage( "Indigo::LoadMatrices(...): no DAE system to load." );
     elif (typ = 'Linear') and (_npassed = 5) then
       Indigo:-LoadMatrices_Linear(_passed[2..-1]);
     elif (typ = 'Generic') and (_npassed = 4) then
@@ -334,18 +325,14 @@ Indigo := module()
     elif (typ = 'Mbd3') and (_npassed = 7) then
       Indigo:-LoadMatrices_Mbd3(_passed[2..-1]);
     else
-      IndigoUtils:-ErrorMessage(
-        "Indigo::LoadMatrices(...): invalid input arguments."
-      );
+      IndigoUtils:-ErrorMessage( "Indigo::LoadMatrices(...): invalid input arguments." );
     end if;
     return NULL;
   end proc: # LoadMatrices
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadEquations := proc(
-    # _passed
-  )::{nothing};
+  LoadEquations := proc( ) # arguments (_passed)
 
     description "Load the matrices from the input DAE system of type <typ>.";
 
@@ -373,7 +360,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndex := proc( $ )::{boolean};
+  ReduceIndex := proc( $ )::boolean;
 
     description "Reduce the index of the loaded DAE system.";
 
