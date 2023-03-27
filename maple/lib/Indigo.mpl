@@ -160,7 +160,9 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  SetVeilingSymbol := proc( sym::string, $ )
+  SetVeilingSymbol := proc(
+    sym::{string},
+    $)
 
     description "Set the veiling symbol as a string <sym>.";
 
@@ -187,86 +189,121 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetReductionSteps := proc($)
-    return Indigo:-ReductionSteps;
-  end proc;
+  GetReductionSteps := proc(
+    i::{nonnegint} := 0,
+    $)::{list(table)};
+
+    description "Get the list of reduction steps.";
+
+    if (i = 0) then
+      return Indigo:-ReductionSteps;
+    else
+      return Indigo:-ReductionSteps[i];
+    end if;
+  end proc: # GetReductionSteps
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetDifferentialEquations := proc($)::list;
-    return convert( Indigo:-ReductionSteps[-1]["E"].<diff(Indigo:-DAEvars,t)> - Indigo:-ReductionSteps[-1]["G"], list);
-  end proc;
+  GetDifferentialEquations := proc( $ )::{list};
+
+    description "Get the list of differential equations of the reduced system.";
+
+    return convert(Indigo:-ReductionSteps[-1]["E"].<diff(Indigo:-DAEvars, t)> -
+      Indigo:-ReductionSteps[-1]["G"], list);
+  end proc: # GetDifferentialEquations
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetHiddenConstraints := proc($)
-    return subs( op(Indigo:-GetVeilArgsSubs()), map( x-> op(convert(x["A"],list)), Indigo:-ReductionSteps ) );
-  end proc;
+  GetHiddenConstraints := proc( $ )::{list};
+
+    description "Get the list of hidden constraints of the reduced system.";
+
+    return subs(
+      op(Indigo:-GetVeilArgsSubs()), map(x -> op(convert(x["A"], list)),
+      Indigo:-ReductionSteps)
+    );
+  end proc: # GetHiddenConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetIndexOneConstraints := proc($)
-    return subs( op(Indigo:-GetVeilArgsSubs()),
-             LEM:-VeilList(parse(Indigo:-VeilingSymbol))
-           );
-  end proc;
+  GetIndexOneConstraints := proc( $ )::{list};
+
+    description "Get the list of index-1 constraints of the reduced system.";
+
+    return subs(
+      op(Indigo:-GetVeilArgsSubs()),
+      LEM:-VeilList(parse(Indigo:-VeilingSymbol))
+    );
+  end proc: # GetIndexOneConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetVeilArgsSubs := proc($)
+  GetVeilArgsSubs := proc( $ )::{list(algebraic = algebraic)};
+
+    description "Get the list of veil arguments substitutions.";
+
     local V_list, var_name, arg_list, L, R;
-    V_list   := LEM:-VeilList( parse(Indigo:-VeilingSymbol) );
-    arg_list := map( selectfun, V_list, map2(op,0,Indigo:-DAEvars) );
-    return zip( (L,R)->L=L(op(R)), lhs~(V_list), arg_list );
-  end proc;
+
+    V_list   := LEM:-VeilList(parse(Indigo:-VeilingSymbol));
+    arg_list := map(selectfun, V_list, map2(op, 0, Indigo:-DAEvars));
+    return zip((L, R) -> L = L(op(R)), lhs~(V_list), arg_list);
+  end proc: # GetVeilArgsSubs
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   RemoveTimeStates := proc(
-    arg::{list(algebraic),list(algebraic=algebraic),algebraic,algebraic=algebraic},
-    $)
+    arg::{algebraic,
+          algebraic = algebraic,
+          list(algebraic),
+          list(algebraic = algebraic)},
+    $)::{algebraic,
+         algebraic = algebraic,
+         list(algebraic),
+         list(algebraic = algebraic)};
+
+    description "Remove the time states from the system.";
+
     local x;
-    return subs( op( map(x->diff(x,t)=cat(op(0,x),__dot),Indigo:-DAEvars) ),
-                 op( map(x->x=op(0,x),Indigo:-DAEvars) ),
-                 arg );
-  end proc;
+
+    return subs(op(map(x -> diff(x, t) = cat(op(0, x), __dot), Indigo:-DAEvars)),
+                op(map(x -> x = op(0, x), Indigo:-DAEvars)),
+                arg);
+  end proc: # RemoveTimeStates
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetSystemType := proc($)
+  GetSystemType := proc( $ )::{symbol};
+
+    description "Return the type of the system.";
+
     return Indigo:-SystemType;
-  end proc;
+  end proc: # GetSystemType
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  KernelBuild := proc( E::Matrix, $ )::table;
+  KernelBuild := proc(
+    E::{Matrix},
+    $)::{table};
 
     description "Build the kernel of a matrix <E>, and return the matrix N such "
-                "that E*N = 0 and the rank of E.";
+      "that E*N = 0 and the rank of E.";
 
-    local n, m, tbl, r, P, Q, M, K, N, SS, z, apply_veil, do_veil;
-
-    # Check if to veil or not
-    do_veil    := LEM:-Veil[parse(Indigo:-VeilingSymbol)];
-    apply_veil := (z) -> `if`(LULEM:-VeilingStrategy(z), do_veil(z), z);
+    local n, m, tbl, r, P, Q, M, K, N, SS;
 
     # Get row and column dimensions
     n, m := LinearAlgebra:-Dimension(E);
 
     # Decompose the matrix as P.E.Q = L.U
-    tbl  := LULEM:-LU(E, parse(Indigo:-VeilingSymbol) );
+    tbl  := LULEM:-LU(E, parse(Indigo:-VeilingSymbol));
     P, Q := LULEM:-PermutationMatrices(tbl["r"], tbl["c"]);
 
-    #
-    # V[num] --> V[num]( params )
-    #
+    # V[num] -> V[num](params)
     SS := Indigo:-GetVeilArgsSubs();
     tbl["L"] := subs(SS,tbl["L"]);
     tbl["U"] := subs(SS,tbl["U"]);
 
     # Compute M = L^(-1).P^T
     M := LinearAlgebra:-LinearSolve(tbl["L"], LinearAlgebra:-Transpose(P));
-    #M := map(LEM:-Veil[parse(Indigo:-VeilingSymbol)],M);
 
     # Build the N matrix
     r := tbl["rank"];
@@ -283,18 +320,14 @@ Indigo := module()
       K := Matrix(0, m);
     end if;
 
-    #
-    # V E I L I N G
-    #
-    K := apply_veil~( K );
-    N := apply_veil~( N );
+    # Apply the veil to input matrices
+    K := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(K);
+    N := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(N);
 
-    #
-    # V[num] --> V[num]( params )
-    #
+    # V[num] -> V[num](params)
     SS := Indigo:-GetVeilArgsSubs();
-    K  := subs(SS,K);
-    N  := subs(SS,N);
+    K  := subs(SS, K);
+    N  := subs(SS, N);
 
     # Return the results
     return table([
@@ -312,12 +345,17 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadMatrices := proc( typ::{symbol} ) # (symbol, _passed)
+  LoadMatrices := proc(
+    typ::{symbol}
+    # _passed
+    )
 
     description "Load the matrices from the input DAE system of type <typ>.";
 
     if (_npassed < 2) then
-      IndigoUtils:-ErrorMessage( "Indigo::LoadMatrices(...): no DAE system to load." );
+      IndigoUtils:-ErrorMessage(
+        "Indigo::LoadMatrices(...): no DAE system to load."
+      );
     elif (typ = 'Linear') and (_npassed = 5) then
       Indigo:-LoadMatrices_Linear(_passed[2..-1]);
     elif (typ = 'Generic') and (_npassed = 4) then
@@ -325,24 +363,29 @@ Indigo := module()
     elif (typ = 'Mbd3') and (_npassed = 7) then
       Indigo:-LoadMatrices_Mbd3(_passed[2..-1]);
     else
-      IndigoUtils:-ErrorMessage( "Indigo::LoadMatrices(...): invalid input arguments." );
+      IndigoUtils:-ErrorMessage(
+        "Indigo::LoadMatrices(...): invalid input arguments."
+      );
     end if;
     return NULL;
   end proc: # LoadMatrices
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadEquations := proc( ) # arguments (_passed)
+  LoadEquations := proc(
+    typ::{symbol}
+    # _passed
+    )
 
     description "Load the matrices from the input DAE system of type <typ>.";
 
     if (_npassed < 3) then
       IndigoUtils:-PrintMessage(
-        "BAD USAGE: call as Indigo[LoadEquations]( 'type', ... )\n"
-        "where type is choosen between: 'Linear', 'Generic' or 'Mbd3'.\n"
+        "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...),\n"
+        "where type must be choosen between: 'Linear', 'Generic' or 'Mbd3'.\n"
       );
       IndigoUtils:-ErrorMessage(
-        "Indigo[LoadEquations]( 'type', ... ): no DAE system to load."
+        "Indigo[LoadEquations]('type', ... ): no DAE system to load."
       );
     elif (typ = 'Linear') and (_npassed = 3) then
       Indigo:-LoadEquations_Linear(_passed[2..-1]);
@@ -360,7 +403,7 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndex := proc( $ )::boolean;
+  ReduceIndex := proc( $ )::{boolean};
 
     description "Reduce the index of the loaded DAE system.";
 
@@ -388,9 +431,11 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-$include "./lib/IndigoLinear.mpl"
-$include "./lib/IndigoGeneric.mpl"
-$include "./lib/IndigoMbd3.mpl"
+$include "./lib/Indigo_Linear.mpl"
+$include "./lib/Indigo_Generic.mpl"
+$include "./lib/Indigo_Mbd3.mpl"
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 end module: # Indigo
 
