@@ -218,10 +218,11 @@ Indigo := module()
 
     description "Get the list of hidden constraints of the reduced system.";
 
-    return subs(
-      op(Indigo:-GetVeilArgsSubs()), map(x -> op(convert(x["A"], list)),
-      Indigo:-ReductionSteps)
-    );
+    #return subs(
+    #  op(Indigo:-GetVeilArgsSubs()),
+    #  map(x -> op(convert(x["A"], list)), Indigo:-ReductionSteps)
+    #);
+    return map(x -> op(convert(x["A"], list)), Indigo:-ReductionSteps);
   end proc: # GetHiddenConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -230,21 +231,25 @@ Indigo := module()
 
     description "Get the list of index-1 constraints of the reduced system.";
 
-    return subs(
-      op(Indigo:-GetVeilArgsSubs()),
-      LEM:-VeilList(parse(Indigo:-VeilingSymbol))
-    );
+    #return subs(
+    #  op(Indigo:-GetVeilArgsSubs()),
+    #  LEM:-VeilList(parse(Indigo:-VeilingSymbol))
+    #);
+    return LEM:-VeilList(parse(Indigo:-VeilingSymbol));
   end proc: # GetIndexOneConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetVeilArgsSubs := proc( $ )::{list(algebraic = algebraic)};
+  GetVeilArgsSubs := proc(
+    rng::{range} := 1..-1,
+    $)::{list(algebraic = algebraic)};
 
     description "Get the list of veil arguments substitutions.";
 
     local V_list, var_name, arg_list, L, R;
 
-    V_list   := LEM:-VeilList(parse(Indigo:-VeilingSymbol));
+    print("GetVeilArgsSubs", rng, LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol)));#, LEM:-VeilList(parse(Indigo:-VeilingSymbol)));
+    V_list   := LEM:-VeilList(parse(Indigo:-VeilingSymbol))[rng];
     arg_list := map(selectfun, V_list, map2(op, 0, Indigo:-DAEvars));
     return zip((L, R) -> L = L(op(R)), lhs~(V_list), arg_list);
   end proc: # GetVeilArgsSubs
@@ -288,19 +293,28 @@ Indigo := module()
     description "Build the kernel of a matrix <E>, and return the matrix N such "
       "that E*N = 0 and the rank of E.";
 
-    local n, m, tbl, r, P, Q, M, K, N, SS;
+    local n, m, tbl, r, P, Q, M, K, N, rng_b, rng_a, veil_subs;
 
     # Get row and column dimensions
     n, m := LinearAlgebra:-Dimension(E);
 
     # Decompose the matrix as P.E.Q = L.U
-    tbl  := LULEM:-LU(E, parse(Indigo:-VeilingSymbol));
-    P, Q := LULEM:-PermutationMatrices(tbl["r"], tbl["c"]);
+    rng_b := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
+    tbl   := LULEM:-LU(E, parse(Indigo:-VeilingSymbol));
+    rng_a := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
+    P, Q  := LULEM:-PermutationMatrices(tbl["r"], tbl["c"]);
 
+    print("KernelBuild1, rng_b", rng_b);
+    print("KernelBuild1, rng_a", rng_a);
+
+    # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
-    SS := Indigo:-GetVeilArgsSubs();
-    tbl["L"] := subs(SS,tbl["L"]);
-    tbl["U"] := subs(SS,tbl["U"]);
+    if (rng_a > rng_b) then
+      veil_subs := Indigo:-GetVeilArgsSubs(max(1, rng_b)..rng_a);
+      print("KernelBuild1, veil_subs", veil_subs);
+      tbl["L"] := subs(op(veil_subs), tbl["L"]);
+      tbl["U"] := subs(op(veil_subs), tbl["U"]);
+    end if;
 
     # Compute M = L^(-1).P^T
     M := LinearAlgebra:-LinearSolve(tbl["L"], LinearAlgebra:-Transpose(P));
@@ -321,13 +335,22 @@ Indigo := module()
     end if;
 
     # Apply the veil to input matrices
+    rng_b := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
     K := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(K);
     N := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(N);
+    rng_a := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
 
+    print("KernelBuild2, rng_b", rng_b);
+    print("KernelBuild2, rng_a", rng_a);
+
+    # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
-    SS := Indigo:-GetVeilArgsSubs();
-    K  := subs(SS, K);
-    N  := subs(SS, N);
+    if (rng_a > rng_b) then
+      veil_subs := Indigo:-GetVeilArgsSubs(max(1, rng_b)..rng_a);
+      print("KernelBuild2, veil_subs", veil_subs);
+      K := subs(op(veil_subs), K);
+      N := subs(op(veil_subs), N);
+    end if;
 
     # Return the results
     return table([

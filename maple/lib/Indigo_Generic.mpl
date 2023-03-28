@@ -14,17 +14,26 @@ SeparateMatrices := proc(
 
   description "Separate algebraic and differential equations from DAE system "
     "equations matrix <E> and differential variables vector <G>. Return the "
-    "algebraic equations matrix <Et>, the algebraic variables matrix <Gt>, "
-    "the differential equations matrix <A>, and the rank of <E>.";
+    "algebraic equations matrix <Et>, the algebraic variables matrix <Gt>, the "
+    "differential equations matrix <A>, and the rank of <E>.";
 
-  local n, m, l, tbl, SS, G_tmp;
+  local n, m, l, tbl, G_tmp, rng_b, rng_a, veil_subs;
 
   # Apply veil to input vector G
+  rng_b := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
   G_tmp := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(G);
+  rng_a := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
 
+  print("SeparateMatrices, rng_b", rng_b);
+  print("SeparateMatrices, rng_a", rng_a);
+
+  # Substitute the veil arguments with the dependent variables
   # V[num] -> V[num](params)
-  SS := Indigo:-GetVeilArgsSubs();
-  G_tmp := subs(SS, G_tmp);
+  if (rng_a > rng_b) then
+    veil_subs := Indigo:-GetVeilArgsSubs(max(1, rng_b)..rng_a);
+    print("SeparateMatrices, veil_subs", veil_subs);
+    G_tmp := subs(op(veil_subs), G_tmp);
+  end if;
 
   # Check input dimensions E
   n, m := LinearAlgebra:-Dimension(E);
@@ -134,7 +143,7 @@ ReduceIndexByOne_Generic := proc( $ )::{boolean};
     "by one. Return true if the system of equations has been reduced to "
     "index-0 DAE (ODE), false otherwise.";
 
-  local vars, E, G, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
+  local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
 
   if not evalb(Indigo:-SystemType = 'Generic') then
     IndigoUtils:-ErrorMessage(
@@ -192,8 +201,8 @@ ReduceIndexByOne_Generic := proc( $ )::{boolean};
   if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
     if Indigo:-VerboseMode then
       IndigoUtils:-PrintMessage(
-        "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) system has been "
-        "reached."
+        "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) system has "
+        "been reached."
       );
     end if;
     return false;

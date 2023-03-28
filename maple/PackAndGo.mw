@@ -368,7 +368,8 @@ module Indigo:
     GetSystemType( $ )
 
     # Get the list of veil arguments substitutions.
-    GetVeilArgsSubs( $ )
+    GetVeilArgsSubs( rng::{range} := 1 .. -1, $ )
+                   :: {list(algebraic = algebraic)}
 
     # Remove the time states from the system.
     RemoveTimeStates( arg::{algebraic, list(algebraic), list(algebraic = 

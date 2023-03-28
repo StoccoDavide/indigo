@@ -148,7 +148,7 @@ Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 plots[setcolors](&quot;spring&quot;):
 	
 plots[setoptions](axes=boxed,size=[800,300],axis[2]=[gridlines=[linestyle=dot]]
-                  #,labelfont= [TIMES,32], axesfont= [TIMES,16], titlefont= [TIMES,32], captionfont= [TIMES,32]
+                  #,labelfont= [TIMES,32], axesfont= [TIMES,16], titlefont=[TIMES,32], captionfont=[TIMES,32]
                   );</Text-field>
 </Input>
 </Group>
