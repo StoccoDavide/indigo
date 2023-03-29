@@ -128,33 +128,33 @@
 </Input>
 </Group></Presentation-Block>
 <Group labelreference="L256768" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check bin directory</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if not FileTools[Exists](BINARY_DIR) then
-  FileTools[MakeDirectory](BINARY_DIR);
+<Input><Text-field style="Text" layout="Normal">Check bin directory</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if not FileTools:-Exists(BINARY_DIR) then
+  FileTools:-MakeDirectory(BINARY_DIR);
 end if;
 </Text-field>
 </Input>
 </Group>
 <Group labelreference="L256773" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check MLA file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools[Exists](LIBRARY_MLA) then
-  FileTools[Remove](LIBRARY_MLA);
+<Input><Text-field style="Text" layout="Normal">Check MLA file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools:-Exists(LIBRARY_MLA) then
+  FileTools:-Remove(LIBRARY_MLA);
 end if;
 </Text-field>
 </Input>
 </Group>
 <Group labelreference="L256777" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Library generation procedure</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME::{string} )
+<Input><Text-field style="Text" layout="Normal">Library generation procedure</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME::string, $ )
 
   local bin_path, src_path;
 
   bin_path := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;);
   src_path := cat(SOURCE_DIR, ds, MODULE_NAME, &quot;.mpl&quot;);
 
-  if FileTools[Exists](src_path) then
-    if not FileTools[Exists](BINARY_DIR) then
-      FileTools[MakeDirectory](BINARY_DIR);
+  if FileTools:-Exists(src_path) then
+    if not FileTools:-Exists(BINARY_DIR) then
+      FileTools:-MakeDirectory(BINARY_DIR);
     end if;
-    if FileTools[Exists](bin_path) then
-      FileTools[Remove](bin_path):
+    if FileTools:-Exists(bin_path) then
+      FileTools:-Remove(bin_path):
     end if;
     read(src_path);
     march('create', bin_path);
@@ -174,12 +174,6 @@ end proc:
 <Group hide-input="false" labelreference="L256802" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
-'LEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
-Current version: D. Stocco, M. Larcher, E. Bertolazzi.
-Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
-</Text-field>
-</Output>
 </Group>
 <Group hide-input="false" labelreference="L256774" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field style="Text" layout="Normal">Create sources path</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">file := cat(interface(worksheetdir), ds, &quot;installer&quot;, ds, &quot;bin&quot;):
@@ -192,26 +186,26 @@ Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Input>
 </Group>
 <Group labelreference="L256799" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Procedure for deep directory removal</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">RmDir := proc( dirpath::{string}, $ )
+<Input><Text-field style="Text" layout="Normal">Procedure for deep directory removal</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">RmDir := proc( dirpath::string, $ )
 
   local d, dd, ds;
 
   ds := kernelopts('dirsep');
-  if FileTools[Exists](dirpath) and FileTools[IsDirectory](dirpath) then
-    for d in FileTools[ListDirectory](dirpath, 'all') do
+  if FileTools:-Exists(dirpath) and FileTools:-IsDirectory(dirpath) then
+    for d in FileTools:-ListDirectory(dirpath, 'all') do
       if evalb((d &lt;&gt; &quot;.&quot;) and (d &lt;&gt; &quot;..&quot;)) then
         dd := cat(dirpath, ds, d);
-        if FileTools[Exists](dd) then
-          if FileTools[IsDirectory](dd) then
+        if FileTools:-Exists(dd) then
+          if FileTools:-IsDirectory(dd) then
             RmDir(dd);
-            # FileTools[RemoveDirectory](dd, forceremove = true);
+            # FileTools:-RemoveDirectory(dd, forceremove = true);
           else
-           FileTools[Remove](dd);
+           FileTools:-Remove(dd);
           end if;
         end if;
       end if;
     end do;
-    FileTools[RemoveDirectory](dirpath, forceremove = true);
+    FileTools:-RemoveDirectory(dirpath, forceremove = true);
   end if;
   return;
 
@@ -221,7 +215,7 @@ end proc:
 </Group>
 <Group hide-input="false" labelreference="L256787" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field style="Text" layout="Normal">Check destination path</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">RmDir(dest);
-FileTools[MakeDirectory](dest, recurse = true);
+FileTools:-MakeDirectory(dest, recurse = true);
 </Text-field>
 </Input>
 </Group>
@@ -230,12 +224,12 @@ FileTools[MakeDirectory](dest, recurse = true);
 </Input>
 </Group>
 <Group hide-input="false" labelreference="L256784" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">for r in FileTools[Walk](file, 'topdown', 'followlinks') do
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">for r in FileTools:-Walk(file, 'topdown', 'followlinks') do
   limb := cat(dest, ds, r[dir][n..], ds);
   for d in r[subdirs] do
-    ((d) -&gt; `if`(FileTools[Exists](d), 0, FileTools[MakeDirectory](d)))(cat(limb, d));
+    ((d) -&gt; `if`(FileTools:-Exists(d), 0, FileTools:-MakeDirectory(d)))(cat(limb, d));
   end do;
-  seq(FileTools[Copy](cat(r[dir], ds, f), cat(limb, f)), f = r[files]);
+  seq(FileTools:-Copy(cat(r[dir], ds, f), cat(limb, f)), f = r[files]);
 end do:</Text-field>
 </Input>
 </Group>
@@ -245,137 +239,294 @@ end do:</Text-field>
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256745" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">with(Indigo);</Text-field>
+<Group labelreference="L256803" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(IndigoUtils):</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
-'LEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
-Current version: D. Stocco, M. Larcher, E. Bertolazzi.
-Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
+<Output><Text-field style="Line Printed Output" layout="Line Printed Output">
+# Utilities for the 'Indigo' module.
+module IndigoUtils:
+
+    # Drop the prefix of the input string &lt;str&gt;.
+    DropPrefix( str::string, $ ) :: string
+
+    # Find the position of variable &lt;var&gt; in the list &lt;lst&gt;.
+    GetPosition( var::{integer, symbol, function}, lst::list, $ ) :: integer
+
+    # Check if the parameter &lt;param&gt;, with name &lt;param_name&gt; is of type 
+    # &lt;param_type&gt;.
+    CheckParam( param::anything, param_name::string, param_type::anything, 
+                where::string, $ )
+
+    # Check if the parameter field &lt;param_field&gt; in table &lt;tab&gt; is of type 
+    # &lt;param_type&gt;, if not print and error message &lt;msg&gt;.
+    CheckTableField( tab::table, param_field::string, msg::string, 
+                     param_type::anything, $ )
+
+    # Check is the parameter name &lt;param_name&gt; in table &lt;tab&gt; is of type 
+    # &lt;param_type&gt;.
+    CheckTableName( tab::table, param_name::string, param_type::anything, 
+                    where::string, $ )
+
+    # Convert a variable &lt;var&gt; into a string. Variables of type 'x[dot](t)' are 
+    # converted into 'x_dot(t)'.
+    ToString( var::anything, $ ) :: string
+
+    # Convert a variable &lt;var&gt; into a Ruby string. Variables of type 
+    # 'x[dot](t)' are converted into 'x_dot(t)'.
+    ToRubyString( var::anything, $ ) :: string
+
+    # Convert a variable &lt;var&gt; into multiple strings. Variables of type 
+    # 'x[dot](t)' are converted into 'x_dot(t)'.
+    ToStringAndSplit( var::anything, $ ) :: string
+
+    # Concatenates input symbols.
+    CatSymbol( )
+
+    # Convert variable &lt;var&gt; into a string with prefix &lt;pre&gt; and postfix 
+    # &lt;post&gt;. Variables of type 'x[dot](t)' are converted into 'x_dot(t)'.
+    ToSymbol( pre::{string, symbol}, var::{string, symbol}, 
+              post::{string, symbol}, $ ) :: symbol
+
+    # Convert a variable &lt;var&gt; to a column vector.
+    ToVector( var::anything, $ ) :: Vector
+
+    # Combine a list of strings or symbols into one unique symbol.
+    JoinSymbols( )
+
+    # Differentiate an expression with respect to a function.
+    DoDiff( )
+
+    # Differentiate a scalar expression &lt;fnc&gt; with respect to a list of 
+    # functions &lt;lst&gt;.
+    DoGradient( fnc::anything, lst::list, $ ) :: anything
+
+    # Differentiate a vector of expressions (gradient) &lt;fnc&gt; with respect to a 
+    # list &lt;lst&gt; of functions.
+    DoHessian( fnc::anything, lst::list, $ ) :: anything
+
+    # Differentiate a vector of expressions &lt;fnc&gt; with respect to a list &lt;lst&gt; 
+    # of functions.
+    DoJacobian( fnc::Vector, lst::list, $ ) :: anything
+
+    # Extract the list variables to substitute from a list of parameters 
+    # &lt;pars&gt;.
+    ExtractSubs( pars::list, $ ) :: list
+
+    # Extract the list of the functions in the expression &lt;expr&gt;, where &lt;onlyD&gt; 
+    # is boolean to extract only the functions of the form D(f).
+    GetFunctions( expr::anything, onlyD::boolean := false, $ ) :: anything
+
+    # Extract the list of the functions in the expression &lt;expr&gt; that are also 
+    # in the list of functions &lt;fncs&gt;.
+    GetFunctionsInList( expr::anything, fncs::list, $ ) :: anything
+
+    # Extracts the list of the symbols in the expression &lt;expr&gt;.
+    GetSymbols( expr::anything, $ ) :: anything
+
+    # Extracts the function prototype from an expression &lt;expr&gt; of type 'f(x) = 
+    # body' or 'f(x)'.
+    GetFunctionPrototype( expr::anything, $ ) :: anything
+
+    # Extracts the function name from an expression &lt;expr&gt; of type 'f(x) = 
+    # body' or 'f(x)'.
+    GetFunctionName( expr::anything, $ ) :: anything
+
+    # Extracts the body from an expression &lt;expr&gt; of type 'f(x) = body' or 
+    # 'f(x)'.
+    GetFunctionBody( expr::anything, $ ) :: anything
+
+    # Checks if the expression &lt;expr&gt; depends on the list of variables &lt;vars&gt;.
+    IsDependentOn( expr::algebraic, vars::list(function), $ ) :: boolean
+
+    # Extracts the set/list of the symbols recursively from the expression 
+    # &lt;expr&gt;.
+    GetSymbolsRecurr( expr::anything, $ ) :: {list, set}
+
+    # Compute the permutation that sorts a list &lt;var&gt;.
+    GetPermSortedList( var::list, $ ) :: list
+
+    # Print a message in color where &lt;fg&gt; is the foreground color, &lt;bg&gt; is the 
+    # background color, &lt;fmt&gt; is the format string, and the remaining inputs 
+    # are string arguments
+    cprintf( fg::anything, bg::anything, fmt::anything )
+
+    # Print an error message.
+    ErrorMessage( )
+
+    # Print a warning message.
+    WarningMessage( )
+
+    # Print a title.
+    PrintTitle( )
+
+    # Print a header.
+    PrintHeader( )
+
+    # Print a message.
+    PrintMessage( )
+
+    # Check if a condition &lt;check&gt; is true and prints an error message if it is 
+    # not.
+    Assert( check::anything )
+
+    # Check if a condition &lt;check&gt; is true and prints a warning message if it 
+    # is not.
+    Warning( check::anything )
+
 </Text-field>
-</Output>
-<Output><Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWZlbmNlZEc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUklbXJvd0dGJDZmbi1JI21pR0YkNiVRM0Rpc2FibGVWZXJib3NlTW9kZUYnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21vR0YkNi1RIixGJy9GNlEnbm9ybWFsRicvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRjQvJSlzdHJldGNoeUdGQC8lKnN5bW1ldHJpY0dGQC8lKGxhcmdlb3BHRkAvJS5tb3ZhYmxlbGltaXRzR0ZALyUnYWNjZW50R0ZALyUnbHNwYWNlR1EmMC4wZW1GJy8lJ3JzcGFjZUdRLDAuMzMzMzMzM2VtRictRi82JVEzRGlzYWJsZVdhcm5pbmdNb2RlRidGMkY1RjgtRi82JVEyRW5hYmxlVmVyYm9zZU1vZGVGJ0YyRjVGOC1GLzYlUTJFbmFibGVXYXJuaW5nTW9kZUYnRjJGNUY4LUYvNiVROUdldERpZmZlcmVudGlhbEVxdWF0aW9uc0YnRjJGNUY4LUYvNiVRNUdldEhpZGRlbkNvbnN0cmFpbnRzRidGMkY1RjgtRi82JVE3R2V0SW5kZXhPbmVDb25zdHJhaW50c0YnRjJGNUY4LUYvNiVRMkdldFJlZHVjdGlvblN0ZXBzRidGMkY1RjgtRi82JVEuR2V0U3lzdGVtVHlwZUYnRjJGNUY4LUYvNiVRMEdldFZlaWxBcmdzU3Vic0YnRjJGNUY4LUYvNiVRLEtlcm5lbEJ1aWxkRidGMkY1RjgtRi82JVEuTG9hZEVxdWF0aW9uc0YnRjJGNUY4LUYvNiVRNkxvYWRFcXVhdGlvbnNfR2VuZXJpY0YnRjJGNUY4LUYvNiVRNUxvYWRFcXVhdGlvbnNfTGluZWFyRidGMkY1RjgtRi82JVEzTG9hZEVxdWF0aW9uc19NYmQzRidGMkY1RjgtRi82JVEtTG9hZE1hdHJpY2VzRidGMkY1RjgtRi82JVE1TG9hZE1hdHJpY2VzX0dlbmVyaWNGJ0YyRjVGOC1GLzYlUTRMb2FkTWF0cmljZXNfTGluZWFyRidGMkY1RjgtRi82JVEyTG9hZE1hdHJpY2VzX01iZDNGJ0YyRjVGOC1GLzYlUSxSZWR1Y2VJbmRleEYnRjJGNUY4LUYvNiVROVJlZHVjZUluZGV4QnlPbmVfR2VuZXJpY0YnRjJGNUY4LUYvNiVROFJlZHVjZUluZGV4QnlPbmVfTGluZWFyRidGMkY1RjgtRi82JVE0UmVkdWNlSW5kZXhfR2VuZXJpY0YnRjJGNUY4LUYvNiVRM1JlZHVjZUluZGV4X0xpbmVhckYnRjJGNUY4LUYvNiVRMVJlZHVjZUluZGV4X01iZDNGJ0YyRjVGOC1GLzYlUTFSZW1vdmVUaW1lU3RhdGVzRidGMkY1RjgtRi82JVEmUmVzZXRGJ0YyRjVGOC1GLzYlUTFTZXRWZWlsaW5nU3ltYm9sRidGMkY1LyUrZm9yZWdyb3VuZEdRKFswLDAsMF1GJy8lKXJlYWRvbmx5R0ZARjxGPC8lJW9wZW5HUScmbHNxYjtGJy8lJmNsb3NlR1EnJnJzcWI7Ric=">Nz5JM0Rpc2FibGVWZXJib3NlTW9kZUc2IkkzRGlzYWJsZVdhcm5pbmdNb2RlR0YkSTJFbmFibGVWZXJib3NlTW9kZUdGJEkyRW5hYmxlV2FybmluZ01vZGVHRiRJOUdldERpZmZlcmVudGlhbEVxdWF0aW9uc0dGJEk1R2V0SGlkZGVuQ29uc3RyYWludHNHRiRJN0dldEluZGV4T25lQ29uc3RyYWludHNHRiRJMkdldFJlZHVjdGlvblN0ZXBzR0YkSS5HZXRTeXN0ZW1UeXBlR0YkSTBHZXRWZWlsQXJnc1N1YnNHRiRJLEtlcm5lbEJ1aWxkR0YkSS5Mb2FkRXF1YXRpb25zR0YkSTZMb2FkRXF1YXRpb25zX0dlbmVyaWNHRiRJNUxvYWRFcXVhdGlvbnNfTGluZWFyR0YkSTNMb2FkRXF1YXRpb25zX01iZDNHRiRJLUxvYWRNYXRyaWNlc0dGJEk1TG9hZE1hdHJpY2VzX0dlbmVyaWNHRiRJNExvYWRNYXRyaWNlc19MaW5lYXJHRiRJMkxvYWRNYXRyaWNlc19NYmQzR0YkSSxSZWR1Y2VJbmRleEdGJEk5UmVkdWNlSW5kZXhCeU9uZV9HZW5lcmljR0YkSThSZWR1Y2VJbmRleEJ5T25lX0xpbmVhckdGJEk0UmVkdWNlSW5kZXhfR2VuZXJpY0dGJEkzUmVkdWNlSW5kZXhfTGluZWFyR0YkSTFSZWR1Y2VJbmRleF9NYmQzR0YkSTFSZW1vdmVUaW1lU3RhdGVzR0YkSSZSZXNldEdGJEkxU2V0VmVpbGluZ1N5bWJvbEdGJA==</Equation></Text-field>
 </Output>
 </Group>
 <Group labelreference="L256751" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(Indigo):</Text-field>
 </Input>
 <Output><Text-field style="Line Printed Output" layout="Line Printed Output">
-# 'Indigo' module
-module Indigo:
+# 'Indigo' module.
+object Indigo :: Indigo:
 
-    # Reset the library.
-    Reset( $ )
+    # Print 'LAST' module information.
+    Info( )
 
-    # Enable the warning mode.
-    EnableWarningMode( $ )
+    # 'Indigo' module load procedure.
+    ModuleLoad( )
 
-    # Disable the warning mode.
-    DisableWarningMode( $ )
+    # 'Indigo' module unload procedure.
+    ModuleUnload( )
+
+    # Copy the objects &lt;proto&gt; into &lt;self&gt;.
+    ModuleCopy( _self::LAST, proto::LAST, $ )
+
+    # Initialize the 'LAST' object with veiling label &lt;label&gt;.
+    InitLAST( _self::Indigo, label::{string, symbol} := NULL, $ )
+
+    # Clear the 'LAST' (and 'LEM') object.
+    ClearLAST( _self::Indigo, $ )
+
+    # Set the 'LAST' (and 'LEM') object &lt;obj&gt;.
+    SetLAST( _self::Indigo, obj::LAST, $ )
+
+    # Get the 'LAST' object.
+    GetLAST( _self::Indigo, $ ) :: LAST
+
+    # Set the 'LEM' object &lt;obj&gt;.
+    SetLEM( _self::LAST, obj::LEM, $ )
+
+    # Get the 'LEM' object.
+    GetLEM( _self::Indigo, $ ) :: LEM
 
     # Enable the verbose mode.
-    EnableVerboseMode( $ )
+    EnableVerboseMode( _self::Indigo, $ )
 
     # Disable the verbose mode.
-    DisableVerboseMode( $ )
+    DisableVerboseMode( _self::Indigo, $ )
 
     # Set the veiling symbol as a string &lt;sym&gt;.
-    SetVeilingSymbol( sym::{string}, $ )
+    SetVeilingSymbol( _self::Indigo, sym::string, $ )
+
+    # Reset the library.
+    Reset( _self::Indigo, label::{string, symbol} := NULL, $ )
+
+    # Get the list of reduction steps.
+    GetReductionSteps( _self::Indigo, i::nonnegint := 0, $ ) :: list(table)
+
+    # Get the list of differential equations of the reduced system.
+    GetDifferentialEquations( _self::Indigo, $ ) :: list
+
+    # Get the list of hidden constraints of the reduced system.
+    GetHiddenConstraints( _self::Indigo, $ ) :: list
+
+    # Get the list of index-1 constraints of the reduced system.
+    GetIndexOneConstraints( _self::Indigo, $ ) :: list
+
+    # Get the list of veil arguments substitutions.
+    GetVeilArgsSubs( _self::Indigo, rng::range := 1 .. -1, $ )
+                   :: list(algebraic = algebraic)
+
+    # Remove the time states from the system.
+    RemoveTimeStates( _self::Indigo, 
+                      arg::{algebraic, list(algebraic), list(algebraic = 
+                        algebraic), algebraic = algebraic}, 
+                      $ )
+                    :: {algebraic, list(algebraic), list(algebraic = algebraic), algebraic = algebraic}
+
+    # Return the type of the system.
+    GetSystemType( _self::Indigo, $ ) :: symbol
 
     # Build the kernel of a matrix &lt;E&gt;, and return the matrix N such that E*N = 
     # 0 and the rank of E.
-    KernelBuild( E::{Matrix}, $ ) :: {table}
+    KernelBuild( _self::Indigo, E::Matrix, $ ) :: table
 
     # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadMatrices( typ::{symbol} )
+    LoadMatrices( _self::Indigo, typ::symbol )
 
     # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadEquations( typ::{symbol} )
+    LoadEquations( _self::Indigo, typ::symbol )
 
     # Reduce the index of the loaded DAE system.
-    ReduceIndex( $ )
+    ReduceIndex( _self::Indigo, $ ) :: boolean
 
-    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
+    # Load a 'generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
     # list of variables &lt;vars&gt; must be the same of the variables used in the 
     # system of equations.
-    LoadMatrices_Linear( E::{Matrix}, G::{Matrix}, f::{Vector}, 
-                         vars::{Vector}, $ )
+    LoadMatrices_Linear( _self::Indigo, E::Matrix, G::Matrix, f::Vector, 
+                         vars::Vector, $ )
 
-    # Load a 'Linear' type system of equations &lt;eqns&gt;. The list of variables 
+    # Load a 'linear' type system of equations &lt;eqns&gt;. The list of variables 
     # &lt;vars&gt; must be the same of the variables used in the system of equations.
-    LoadEquations_Linear( eqns::{list}, vars::{lit}, $ )
+    LoadEquations_Linear( _self::Indigo, eqns::list, vars::list, $ )
 
-    # Reduce the index of the 'Linear' type DAE system of equations by one. 
+    # Reduce the index of the 'linear' type DAE system of equations by one. 
     # Return true if the system of equations has been reduced to index-0 DAE 
     # (ODE), false otherwise.
-    ReduceIndexByOne_Linear( $ )
+    ReduceIndexByOne_Linear( _self::Indigo, $ ) :: boolean
 
-    # Reduce the index of the 'Linear' type DAE system of equations. Return 
+    # Reduce the index of the 'linear' type DAE system of equations. Return 
     # true if the system of equations has been reduced to index-0 DAE (ODE), 
     # false otherwise.
-    ReduceIndex_Linear( $ )
+    ReduceIndex_Linear( _self::Indigo, $ ) :: boolean
 
-    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
+    # Separate algebraic and differential equations from DAE system equations 
+    # matrix &lt;E&gt; and differential variables vector &lt;G&gt;. Return the algebraic 
+    # equations matrix &lt;Et&gt;, the algebraic variables matrix &lt;Gt&gt;, the 
+    # differential equations matrix &lt;A&gt;, and the rank of &lt;E&gt;.
+    SeparateMatrices( _self::Indigo, E::Matrix, G::Vector, $ )
+
+    # Load a 'generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
     # list of variables &lt;vars&gt; must be the same of the variables used in the 
     # system of equations.
-    LoadMatrices_Generic( E::{Matrix}, G::{Vector}, vars::{list}, $ )
+    LoadMatrices_Generic( _self::Indigo, E::Matrix, G::Vector, vars::list, $ )
 
-    # Load a 'Generic' type system of equations &lt;eqns&gt;. The list of variables 
+    # Load a 'generic' type system of equations &lt;eqns&gt;. The list of variables 
     # &lt;vars&gt; must be the same of the variables used in the system of equations.
-    LoadEquations_Generic( eqns::{list}, vars::{list}, $ )
+    LoadEquations_Generic( _self::Indigo, eqns::list, vars::list, $ )
 
-    # Reduce the index of the 'Generic' type DAE system of equations by one. 
+    # Reduce the index of the 'generic' type DAE system of equations by one. 
     # Return true if the system of equations has been reduced to index-0 DAE 
     # (ODE), false otherwise.
-    ReduceIndexByOne_Generic( $ )
+    ReduceIndexByOne_Generic( _self::Indigo, $ ) :: boolean
 
-    # Reduce the index of the 'Generic' type DAE system of equations. Return 
+    # Reduce the index of the 'generic' type DAE system of equations. Return 
     # true if the system of equations has been reduced to index-0 DAE (ODE), 
     # false otherwise.
-    ReduceIndex_Generic( $ )
+    ReduceIndex_Generic( _self::Indogo, $ ) :: boolean
 
-    # Load a 'Mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
+    # Load a 'mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
     # constraint vector &lt;Phi&gt;, external force vector &lt;f&gt;, the position 
     # variables &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange 
     # multipliers &lt;l_vars&gt;.
-    LoadMatrices_Mbd3( Mass::{Matrix}, Phi::{Vector}, f::{Vector}, 
-                       q_vars::{list}, v_vars::{list}, l_vars::{list}, $ )
+    LoadMatrices_Mbd3( _self::Indigo, Mass::Matrix, Phi::Vector, f::Vector, 
+                       q_vars::list, v_vars::list, l_vars::list, $ )
 
     # Load a 'Mdb' type system of equations &lt;eqns&gt; with the position variables 
     # &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange multipliers 
     # &lt;l_vars&gt;.
-    LoadEquations_Mbd3( eqns::{list}, q_vars::{list}, v_vars::{list}, 
-                        l_vars::{list}, $ )
+    LoadEquations_Mbd3( _self::Indigo, eqns::list, q_vars::list, v_vars::list, 
+                        l_vars::list, $ )
 
     # Reduce the index of the multibody DAE system of equations. Return true if 
     # the system of equations has been reduced to index-0 DAE, false otherwise.
-    ReduceIndex_Mbd3( { baumgarte::{boolean} := false, 
-                        jacobians::{boolean} := false }, $ ) :: {boolean}
-
-    # Get the list of reduction steps.
-    GetReductionSteps( i::{nonnegint} := 0, $ ) :: {list(table)}
-
-    # Get the list of differential equations of the reduced system.
-    GetDifferentialEquations( $ )
-
-    # Get the list of hidden constraints of the reduced system.
-    GetHiddenConstraints( $ )
-
-    # Get the list of index-1 constraints of the reduced system.
-    GetIndexOneConstraints( $ )
-
-    # Return the type of the system.
-    GetSystemType( $ )
-
-    # Get the list of veil arguments substitutions.
-    GetVeilArgsSubs( rng::{range} := 1 .. -1, $ )
-                   :: {list(algebraic = algebraic)}
-
-    # Remove the time states from the system.
-    RemoveTimeStates( arg::{algebraic, list(algebraic), list(algebraic = 
-                        algebraic), algebraic = algebraic}, 
-                      $ )
-                    :: {algebraic, list(algebraic), list(algebraic = algebraic), algebraic = algebraic}
+    ReduceIndex_Mbd3( _self::Indigo, 
+                      { baumgarte::boolean := false, 
+                        jacobians::boolean := false }, $ ) :: boolean
 
 </Text-field>
 </Output>

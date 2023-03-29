@@ -7,9 +7,10 @@
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-SeparateMatrices := proc(
-  E::{Matrix},
-  G::{Vector},
+export SeparateMatrices::static := proc(
+  _self::Indigo,
+  E::Matrix,
+  G::Vector,
   $)
 
   description "Separate algebraic and differential equations from DAE system "
@@ -20,9 +21,9 @@ SeparateMatrices := proc(
   local n, m, l, tbl, G_tmp, rng_b, rng_a, veil_subs;
 
   # Apply veil to input vector G
-  rng_b := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
-  G_tmp := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(G);
-  rng_a := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
+  rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
+  G_tmp := _self:-m_LEM:-Veil~(_self:-m_LEM, G);
+  rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
 
   print("SeparateMatrices, rng_b", rng_b);
   print("SeparateMatrices, rng_a", rng_a);
@@ -30,7 +31,7 @@ SeparateMatrices := proc(
   # Substitute the veil arguments with the dependent variables
   # V[num] -> V[num](params)
   if (rng_a > rng_b) then
-    veil_subs := Indigo:-GetVeilArgsSubs(max(1, rng_b)..rng_a);
+    veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
     print("SeparateMatrices, veil_subs", veil_subs);
     G_tmp := subs(op(veil_subs), G_tmp);
   end if;
@@ -54,7 +55,7 @@ SeparateMatrices := proc(
   end if;
 
   # Build the kernel of E
-  tbl := Indigo:-KernelBuild(E);
+  tbl := _self:-KernelBuild(_self, E);
   return table([
     "Et"   = tbl["N"].E,
     "Gt"   = tbl["N"].G_tmp,
@@ -65,40 +66,41 @@ end proc: # SeparateMatrices
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-LoadMatrices_Generic := proc(
-  E::{Matrix},
-  G::{Vector},
-  vars::{list},
+export LoadMatrices_Generic::static := proc(
+  _self::Indigo,
+  E::Matrix,
+  G::Vector,
+  vars::list,
   $)
 
-  description "Load a 'Generic' type system of equations as matrices <E> and "
+  description "Load a 'generic' type system of equations as matrices <E> and "
     "<G>. The list of variables <vars> must be the same of the variables "
     "used in the system of equations.";
 
   local tbl;
 
   # Check if the system is already loaded
-  if evalb(Indigo:-SystemType <> 'Empty') then
-    if Indigo:-WarningMode then
+  if evalb(_self:-m_SystemType <> 'empty') then
+    if _self:-m_VerboseMode then
       IndigoUtils:-WarningMessage(
         "Indigo::LoadMatrices_Generic(...): a system of equations is already "
         "loaded, reduction steps and veiling variables will be overwritten."
       );
     end if;
-    Indigo:-Reset();
+    _self:-Reset(_self);
   end if;
 
   # store vars
-  Indigo:-DAEvars := vars;
+  _self:-m_SystemVars := vars;
 
   # Set system type
-  Indigo:-SystemType := 'Generic';
+  _self:-m_SystemType := 'generic';
 
   # Separate algebraic and differential equations
-  tbl := Indigo:-SeparateMatrices(E, G);
+  tbl := _self:-SeparateMatrices(_self, E, G);
 
   # Update reduction steps
-  Indigo:-ReductionSteps := [table([
+  _self:-m_ReductionSteps := [table([
     "E"    = tbl["Et"],
     "G"    = tbl["Gt"],
     "A"    = tbl["A"],
@@ -109,12 +111,13 @@ end proc: # LoadMatrices_Generic
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-LoadEquations_Generic := proc(
-  eqns::{list},
-  vars::{list},
+export LoadEquations_Generic::static := proc(
+  _self::Indigo,
+  eqns::list,
+  vars::list,
   $)
 
-  description "Load a 'Generic' type system of equations <eqns>. The list of "
+  description "Load a 'generic' type system of equations <eqns>. The list of "
     "variables <vars> must be the same of the variables used in the system "
     "of equations.";
 
@@ -131,31 +134,33 @@ LoadEquations_Generic := proc(
   # Build the matrices and load them
   E, G := LinearAlgebra:-GenerateMatrix(eqns, diff(vars, t)):
 
-  Indigo:-LoadMatrices_Generic(E, G, vars);
+  _self:-LoadMatrices_Generic(_self, E, G, vars);
   return NULL;
 end proc: # LoadEquations_Generic
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-ReduceIndexByOne_Generic := proc( $ )::{boolean};
+export ReduceIndexByOne_Generic::static := proc(
+  _self::Indigo,
+  $)::boolean;
 
-  description "Reduce the index of the 'Generic' type DAE system of equations "
+  description "Reduce the index of the 'generic' type DAE system of equations "
     "by one. Return true if the system of equations has been reduced to "
     "index-0 DAE (ODE), false otherwise.";
 
   local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
 
-  if not evalb(Indigo:-SystemType = 'Generic') then
+  if not evalb(_self:-m_SystemType = 'generic') then
     IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'Generic' "
-      "but got '%s'.", Indigo:-SystemType
+      "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'generic' "
+      "but got '%s'.", _self:-m_SystemType
     );
   end if;
 
-  vars := Indigo:-DAEvars;
-  E    := Indigo:-ReductionSteps[-1]["E"];
-  G    := Indigo:-ReductionSteps[-1]["G"];
-  A    := Indigo:-ReductionSteps[-1]["A"];
+  vars := _self:-m_SystemVars;
+  E    := _self:-m_ReductionSteps[-1]["E"];
+  G    := _self:-m_ReductionSteps[-1]["G"];
+  A    := _self:-m_ReductionSteps[-1]["A"];
 
   # Check dimensions
   nE, mE := LinearAlgebra:-Dimension(E);
@@ -185,10 +190,10 @@ ReduceIndexByOne_Generic := proc( $ )::{boolean};
   end if;
 
   # Split matrices to be stored
-  tbl := Indigo:-SeparateMatrices(<E, H>, convert(<G, F>, Vector));
+  tbl := _self:-SeparateMatrices(_self, <E, H>, convert(<G, F>, Vector));
 
   # Update reduction steps
-  Indigo:-ReductionSteps := [op(ReductionSteps),
+  _self:-m_ReductionSteps := [op(m_ReductionSteps),
     table([
       "E"    = tbl["Et"],
       "G"    = tbl["Gt"],
@@ -199,7 +204,7 @@ ReduceIndexByOne_Generic := proc( $ )::{boolean};
 
   # Check if we have reached index-0 DAE
   if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
-    if Indigo:-VerboseMode then
+    if _self:-m_VerboseMode then
       IndigoUtils:-PrintMessage(
         "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) system has "
         "been reached."
@@ -213,9 +218,11 @@ end proc: # ReduceIndexByOne_Generic
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-ReduceIndex_Generic := proc( $ )::{boolean};
+export ReduceIndex_Generic::static := proc(
+  _self::Indogo,
+  $)::boolean;
 
-  description "Reduce the index of the 'Generic' type DAE system of equations. "
+  description "Reduce the index of the 'generic' type DAE system of equations. "
     "Return true if the system of equations has been reduced to index-0 DAE "
     "(ODE), false otherwise.";
 
@@ -224,7 +231,7 @@ ReduceIndex_Generic := proc( $ )::{boolean};
   # Reduce index by one till index-0 DAE (ODE) condition is reached
   out := true;
   while (out) do
-    out := Indigo:-ReduceIndexByOne_Generic();
+    out := _self:-ReduceIndexByOne_Generic(_self);
   end do;
   return out;
 end proc: # ReduceIndex_Generic

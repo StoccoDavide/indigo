@@ -7,256 +7,299 @@
 #                                          |___/                              #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# Authors: Davide Stocco (University of Trento)
-#          Enrico Bertolazzi (University of Trento)
+# Current version authors:
+#   Davide Stocco     (University of Trento)
+#   Enrico Bertolazzi (University of Trento)
 #
 # License: BSD 3-Clause License
 #
-# This is a module for the 'Indigo' package. It contains the auxiliary
-# functions to be used in the 'Indigo' package.
+# This is a module for the 'Indigo' module.
 
-Indigo := module()
+unprotect('Indigo');
+module Indigo()
 
-  export Reset,
-         EnableWarningMode,
-         DisableWarningMode,
-         EnableVerboseMode,
-         DisableVerboseMode,
-         SetVeilingSymbol,
-         KernelBuild,
-         # Wrapper
-         LoadMatrices,
-         LoadEquations,
-         ReduceIndex,
-         # Linear
-         LoadMatrices_Linear,
-         LoadEquations_Linear,
-         ReduceIndexByOne_Linear,
-         ReduceIndex_Linear,
-         # Generic
-         LoadMatrices_Generic,
-         LoadEquations_Generic,
-         ReduceIndexByOne_Generic,
-         ReduceIndex_Generic,
-         # Mbd index-3
-         LoadMatrices_Mbd3,
-         LoadEquations_Mbd3,
-         ReduceIndex_Mbd3,
-         # Index reduction steps
-         GetReductionSteps,
-         GetDifferentialEquations,
-         GetHiddenConstraints,
-         GetIndexOneConstraints,
-         GetSystemType,
-         GetVeilArgsSubs,
-         RemoveTimeStates;
+  description "'Indigo' module.";
 
-  local  ModuleLoad,
-         ModuleUnload,
-         lib_base_path,
-         ReductionSteps,
-         SystemType,
-         WarningMode,
-         VerboseMode,
-         VeilingSymbol,
-         SeparateMatrices,
-         DAEvars;
-
-  option package,
-         load   = ModuleLoad,
-         unload = ModuleUnload;
-
-  description "'Indigo' module";
+  option object;
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ModuleLoad := proc()
+  local m_LAST           := NULL;
+  local m_VerboseMode    := false;
+  local m_SystemType     := 'empty';
+  local m_ReductionSteps := [];
+  local m_SystemVars     := [];
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export Info::static := proc()
+
+    description "Print 'LAST' module information.";
+
+    printf(
+      "+--------------------------------------------------------------------------+\n"
+      "| 'Indigo' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023  |\n"
+      "| Current version authors:                                                 |\n"
+      "|   Davide Stocco and Enrico Bertolazzi.                                   |\n"
+      "+--------------------------------------------------------------------------+\n"
+    );
+    return NULL;
+  end proc: # Info
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export ModuleLoad::static := proc()
 
     description "'Indigo' module load procedure.";
 
-    local i;
+    local i, lib_base_path;
 
-    # Display module init message
-    printf(
-      "'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, "
-      "D. Stocco and E. Bertolazzi.\n"
-    );
-
-    # Library path
-    lib_base_path := null;
+    lib_base_path := NULL;
     for i in [libname] do
       if (StringTools:-Search("Indigo", i) <> 0) then
         lib_base_path := i;
       end if;
     end do;
-    if (lib_base_path = null) then
-      error("Cannot find 'Indigo' module");
+    if (lib_base_path = NULL) then
+      error "cannot find 'Indigo' module.";
     end if;
-
-    # Library internal variables
-    Indigo:-WarningMode   := true;
-    Indigo:-VerboseMode   := false;
-    Indigo:-VeilingSymbol := "V";
-
-    # Protected variables
-    protect('Empty', 'Linear', 'Generic', 'Mbd3');
-
-    # Reset the library
-    Indigo:-Reset();
-
+    protect('empty', 'linear', 'generic', 'mbd3');
     return NULL;
   end proc: # ModuleLoad
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ModuleUnload := proc()
+  export ModuleUnload::static := proc()
 
     description "'Indigo' module unload procedure.";
 
-    # Protected variables
-    unprotect('Empty', 'Linear', 'Generic', 'Mbd3');
+    unprotect('empty', 'linear', 'generic', 'mbd3');
     return NULL;
   end proc: # ModuleUnload
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  EnableWarningMode := proc( $ )
+  export ModuleCopy::static := proc(
+    _self::LAST,
+    proto::LAST,
+    $)
 
-    description "Enable the warning mode.";
+    description "Copy the objects <proto> into <self>.";
 
-    Indigo:-WarningMode := true;
-    return NULL;
-  end proc: # EnableWarningMode
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  DisableWarningMode := proc( $ )
-
-    description "Disable the warning mode.";
-
-    Indigo:-WarningMode := false;
-    return NULL;
-  end proc: # DisableWarningMode
+    _self:-m_LAST           := proto:-m_LAST;
+    _self:-m_LEM            := proto:-m_LEM;
+    _self:-m_VerboseMode    := proto:-m_VerboseMode;
+    _self:-m_SystemType     := proto:-m_SystemType;
+    _self:-m_ReductionSteps := proto:-m_ReductionSteps;
+    _self:-m_SystemVars     := proto:-m_SystemVars;
+  end proc: # ModuleCopy
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  EnableVerboseMode := proc( $ )
+  export InitLAST::static := proc(
+    _self::Indigo,
+    label::{symbol, string} := NULL,
+    $)
+
+    description "Initialize the 'LAST' object with veiling label <label>.";
+
+    _self:-m_LAST := Object(LAST);
+    _self:-m_LEM  := _self:-m_LAST:-GetLEM(_self:-m_LAST);
+    _self:-m_LEM:-SetVeilingLabel(_self:-m_LEM, label);
+    return NULL;
+  end proc: # InitLAST
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export ClearLAST::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Clear the 'LAST' (and 'LEM') object.";
+
+    _self:-m_LAST := NULL;
+    _self:-m_LEM  := NULL;
+  end proc: # ClearLAST
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export SetLAST::static := proc(
+    _self::Indigo,
+    obj::LAST,
+    $)
+
+    description "Set the 'LAST' (and 'LEM') object <obj>.";
+
+    _self:-m_LAST := obj;
+    _self:-m_LEM  := _self:-m_LAST:-GetLEM(_self:-m_LAST);
+    return NULL;
+  end proc: # SetLAST
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export GetLAST::static := proc(
+    _self::Indigo,
+    $)::LAST;
+
+    description "Get the 'LAST' object.";
+
+    return _self:-m_LAST;
+  end proc: # GetLAST
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export SetLEM::static := proc(
+    _self::LAST,
+    obj::LEM,
+    $)
+
+    description "Set the 'LEM' object <obj>.";
+
+    _self:-m_LAST:-SetLEM(_self:-m_LAST, obj);
+    _self:-m_LEM := obj;
+    return NULL;
+  end proc: # SetLEM
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export GetLEM::static := proc(
+    _self::Indigo,
+    $)::LEM;
+
+    description "Get the 'LEM' object.";
+
+    return _self:-m_LEM;
+  end proc: # GetLEM
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export EnableVerboseMode::static := proc(
+    _self::Indigo,
+    $)
 
     description "Enable the verbose mode.";
 
-    Indigo:-VerboseMode := true;
+    _self:-m_VerboseMode := true;
     return NULL;
   end proc: # EnableVerboseMode
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DisableVerboseMode := proc( $ )
+  export DisableVerboseMode::static := proc(
+    _self::Indigo,
+    $)
 
     description "Disable the verbose mode.";
 
-    Indigo:-VerboseMode := false;
+    _self:-m_VerboseMode := false;
     return NULL;
   end proc: # DisableVerboseMode
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  SetVeilingSymbol := proc(
-    sym::{string},
+  export SetVeilingSymbol::static := proc(
+    _self::Indigo,
+    sym::string,
     $)
 
     description "Set the veiling symbol as a string <sym>.";
 
-    Indigo:-VeilingSymbol := sym;
+    _self:-VeilingSymbol := sym;
     return NULL;
   end proc: # SetVeilingSymbol
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  Reset := proc( $ )
+  export Reset::static := proc(
+    _self::Indigo,
+    label::{symbol, string} := NULL,
+    $)
 
     description "Reset the library.";
 
-    # Internal variables
-    Indigo:-SystemType     := 'Empty';
-    Indigo:-ReductionSteps := [];
-    Indigo:-DAEvars        := [];
+    if _self:-m_LAST = NULL then
+      _self:-InitLAST(_self, label);
+    end if;
 
-    # Reset the veiling variables
-    LEM:-VeilForget(parse(Indigo:-VeilingSymbol));
-
+    _self:-m_SystemType     := 'empty';
+    _self:-m_ReductionSteps := [];
+    _self:-m_SystemVars     := [];
+    _self:-m_LEM:-VeilForget(_self:-m_LEM);
     return NULL;
   end proc: # Reset
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetReductionSteps := proc(
-    i::{nonnegint} := 0,
-    $)::{list(table)};
+  export GetReductionSteps::static := proc(
+    _self::Indigo,
+    i::nonnegint := 0,
+    $)::list(table);
 
     description "Get the list of reduction steps.";
 
     if (i = 0) then
-      return Indigo:-ReductionSteps;
+      return _self:-m_ReductionSteps;
     else
-      return Indigo:-ReductionSteps[i];
+      return _self:-m_ReductionSteps[i];
     end if;
   end proc: # GetReductionSteps
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetDifferentialEquations := proc( $ )::{list};
+  export GetDifferentialEquations::static := proc(
+    _self::Indigo,
+    $)::list;
 
     description "Get the list of differential equations of the reduced system.";
 
-    return convert(Indigo:-ReductionSteps[-1]["E"].<diff(Indigo:-DAEvars, t)> -
-      Indigo:-ReductionSteps[-1]["G"], list);
+    return convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
+      _self:-m_ReductionSteps[-1]["G"], list);
   end proc: # GetDifferentialEquations
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetHiddenConstraints := proc( $ )::{list};
+  export GetHiddenConstraints::static := proc(
+    _self::Indigo,
+    $)::list;
 
     description "Get the list of hidden constraints of the reduced system.";
 
-    #return subs(
-    #  op(Indigo:-GetVeilArgsSubs()),
-    #  map(x -> op(convert(x["A"], list)), Indigo:-ReductionSteps)
-    #);
-    return map(x -> op(convert(x["A"], list)), Indigo:-ReductionSteps);
+    return map(x -> op(convert(x["A"], list)), _self:-m_ReductionSteps);
   end proc: # GetHiddenConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetIndexOneConstraints := proc( $ )::{list};
+  export GetIndexOneConstraints::static := proc(
+    _self::Indigo,
+    $)::list;
 
     description "Get the list of index-1 constraints of the reduced system.";
 
-    #return subs(
-    #  op(Indigo:-GetVeilArgsSubs()),
-    #  LEM:-VeilList(parse(Indigo:-VeilingSymbol))
-    #);
-    return LEM:-VeilList(parse(Indigo:-VeilingSymbol));
+    return _self:-m_LEM:-VeilList(_self:-m_LEM);
   end proc: # GetIndexOneConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetVeilArgsSubs := proc(
-    rng::{range} := 1..-1,
-    $)::{list(algebraic = algebraic)};
+  export GetVeilArgsSubs::static := proc(
+    _self::Indigo,
+    rng::range := 1..-1,
+    $)::list(algebraic = algebraic);
 
     description "Get the list of veil arguments substitutions.";
 
     local V_list, var_name, arg_list, L, R;
 
-    print("GetVeilArgsSubs", rng, LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol)));#, LEM:-VeilList(parse(Indigo:-VeilingSymbol)));
-    V_list   := LEM:-VeilList(parse(Indigo:-VeilingSymbol))[rng];
-    arg_list := map(selectfun, V_list, map2(op, 0, Indigo:-DAEvars));
+    print("GetVeilArgsSubs", rng, _self:-m_LEM:-VeilTableSize(_self:-m_LEM));#, _self:-m_LEM:-VeilList(_self:-m_LEM));
+
+    V_list   := _self:-m_LEM:-VeilList(_self:-m_LEM)[rng];
+    arg_list := map(selectfun, V_list, map2(op, 0, _self:-m_SystemVars));
     return zip((L, R) -> L = L(op(R)), lhs~(V_list), arg_list);
   end proc: # GetVeilArgsSubs
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  RemoveTimeStates := proc(
+  export RemoveTimeStates::static := proc(
+    _self::Indigo,
     arg::{algebraic,
           algebraic = algebraic,
           list(algebraic),
@@ -270,25 +313,30 @@ Indigo := module()
 
     local x;
 
-    return subs(op(map(x -> diff(x, t) = cat(op(0, x), __dot), Indigo:-DAEvars)),
-                op(map(x -> x = op(0, x), Indigo:-DAEvars)),
-                arg);
+    return subs(
+      op(map(x -> diff(x, t) = cat(op(0, x), __dot), _self:-m_SystemVars)),
+      op(map(x -> x = op(0, x), _self:-m_SystemVars)),
+      arg
+    );
   end proc: # RemoveTimeStates
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetSystemType := proc( $ )::{symbol};
+  export GetSystemType::static := proc(
+    _self::Indigo,
+    $)::symbol;
 
     description "Return the type of the system.";
 
-    return Indigo:-SystemType;
+    return _self:-m_SystemType;
   end proc: # GetSystemType
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  KernelBuild := proc(
-    E::{Matrix},
-    $)::{table};
+  export KernelBuild::static := proc(
+    _self::Indigo,
+    E::Matrix,
+    $)::table;
 
     description "Build the kernel of a matrix <E>, and return the matrix N such "
       "that E*N = 0 and the rank of E.";
@@ -299,10 +347,10 @@ Indigo := module()
     n, m := LinearAlgebra:-Dimension(E);
 
     # Decompose the matrix as P.E.Q = L.U
-    rng_b := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
-    tbl   := LULEM:-LU(E, parse(Indigo:-VeilingSymbol));
-    rng_a := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
-    P, Q  := LULEM:-PermutationMatrices(tbl["r"], tbl["c"]);
+    rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LAST);
+    tbl   := _self:-m_LAST:-LU(_self:-m_LAST, E);
+    rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LAST);
+    P, Q  := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
 
     print("KernelBuild1, rng_b", rng_b);
     print("KernelBuild1, rng_a", rng_a);
@@ -310,7 +358,7 @@ Indigo := module()
     # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
     if (rng_a > rng_b) then
-      veil_subs := Indigo:-GetVeilArgsSubs(max(1, rng_b)..rng_a);
+      veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
       print("KernelBuild1, veil_subs", veil_subs);
       tbl["L"] := subs(op(veil_subs), tbl["L"]);
       tbl["U"] := subs(op(veil_subs), tbl["U"]);
@@ -335,10 +383,10 @@ Indigo := module()
     end if;
 
     # Apply the veil to input matrices
-    rng_b := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
-    K := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(K);
-    N := LEM:-Veil[parse(Indigo:-VeilingSymbol)]~(N);
-    rng_a := LEM:-VeilTableSize(parse(Indigo:-VeilingSymbol));
+    rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
+    K := _self:-m_LEM:-Veil~(_self:-m_LEM, K);
+    N := _self:-m_LEM:-Veil~(_self:-m_LEM, N);
+    rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
 
     print("KernelBuild2, rng_b", rng_b);
     print("KernelBuild2, rng_a", rng_a);
@@ -346,7 +394,7 @@ Indigo := module()
     # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
     if (rng_a > rng_b) then
-      veil_subs := Indigo:-GetVeilArgsSubs(max(1, rng_b)..rng_a);
+      veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
       print("KernelBuild2, veil_subs", veil_subs);
       K := subs(op(veil_subs), K);
       N := subs(op(veil_subs), N);
@@ -368,8 +416,9 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadMatrices := proc(
-    typ::{symbol}
+  export LoadMatrices::static := proc(
+    _self::Indigo,
+    typ::symbol
     # _passed
     )
 
@@ -379,12 +428,12 @@ Indigo := module()
       IndigoUtils:-ErrorMessage(
         "Indigo::LoadMatrices(...): no DAE system to load."
       );
-    elif (typ = 'Linear') and (_npassed = 5) then
-      Indigo:-LoadMatrices_Linear(_passed[2..-1]);
-    elif (typ = 'Generic') and (_npassed = 4) then
-      Indigo:-LoadMatrices_Generic(_passed[2..-1]);
-    elif (typ = 'Mbd3') and (_npassed = 7) then
-      Indigo:-LoadMatrices_Mbd3(_passed[2..-1]);
+    elif (typ = 'linear') and (_npassed = 5) then
+      _self:-LoadMatrices_Linear(_self, _passed[2..-1]);
+    elif (typ = 'generic') and (_npassed = 4) then
+      _self:-LoadMatrices_Generic(_self, _passed[2..-1]);
+    elif (typ = 'mbd3') and (_npassed = 7) then
+      _self:-LoadMatrices_Mbd3(_self, _passed[2..-1]);
     else
       IndigoUtils:-ErrorMessage(
         "Indigo::LoadMatrices(...): invalid input arguments."
@@ -395,8 +444,9 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  LoadEquations := proc(
-    typ::{symbol}
+  export LoadEquations::static := proc(
+    _self::Indigo,
+    typ::symbol
     # _passed
     )
 
@@ -405,17 +455,17 @@ Indigo := module()
     if (_npassed < 3) then
       IndigoUtils:-PrintMessage(
         "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...),\n"
-        "where type must be choosen between: 'Linear', 'Generic' or 'Mbd3'.\n"
+        "where type must be choosen between: 'linear', 'generic' or 'mbd3'.\n"
       );
       IndigoUtils:-ErrorMessage(
         "Indigo[LoadEquations]('type', ... ): no DAE system to load."
       );
-    elif (typ = 'Linear') and (_npassed = 3) then
-      Indigo:-LoadEquations_Linear(_passed[2..-1]);
-    elif (typ = 'Generic') and (_npassed = 3) then
-      Indigo:-LoadEquations_Generic(_passed[2..-1]);
-    elif (typ = 'Mbd3') and (_npassed = 5) then
-      Indigo:-LoadEquations_Mbd3(_passed[2..-1]);
+    elif (typ = 'linear') and (_npassed = 3) then
+      _self:-LoadEquations_Linear(_self, _passed[2..-1]);
+    elif (typ = 'generic') and (_npassed = 3) then
+      _self:-LoadEquations_Generic(_self, _passed[2..-1]);
+    elif (typ = 'mbd3') and (_npassed = 5) then
+      _self:-LoadEquations_Mbd3(_self, _passed[2..-1]);
     else
       IndigoUtils:-ErrorMessage(
         "Indigo::LoadEquations(...): invalid input arguments."
@@ -426,27 +476,29 @@ Indigo := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ReduceIndex := proc( $ )::{boolean};
+  export ReduceIndex::static := proc(
+    _self::Indigo,
+    $)::boolean;
 
     description "Reduce the index of the loaded DAE system.";
 
-    if evalb(Indigo:-SystemType = 'Empty') then
-      if Indigo:-WarningMode then
+    if evalb(_self:-m_SystemType = 'empty') then
+      if _self:-m_VerboseMode then
         IndigoUtils:-WarningMessage(
           "Indigo::ReduceIndex(...): no DAE system loaded yet."
         );
       end if;
       return false;
-    elif evalb(Indigo:-SystemType = 'Linear') then
-      return Indigo:-ReduceIndex_Linear();
-    elif evalb(Indigo:-SystemType = 'Generic') then
-      return Indigo:-ReduceIndex_Generic();
-    elif evalb(Indigo:-SystemType = 'Mbd3') then
-      return Indigo:-ReduceIndex_Mbd3();
+    elif evalb(_self:-m_SystemType = 'linear') then
+      return _self:-ReduceIndex_Linear(_self);
+    elif evalb(_self:-m_SystemType = 'generic') then
+      return _self:-ReduceIndex_Generic(_self);
+    elif evalb(_self:-m_SystemType = 'mbd3') then
+      return _self:-ReduceIndex_Mbd3(_self);
     else
       IndigoUtils:-ErrorMessage(
         "Indigo::ReduceIndex(...): invalid system type '%s'.",
-        Indigo:-SystemType
+        _self:-m_SystemType
       );
       return false;
     end if;

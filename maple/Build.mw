@@ -136,43 +136,43 @@
 </Input>
 </Group>
 <Group view="code" labelreference="L747" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check bin directory</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if not FileTools[Exists](BINARY_DIR) then
-  FileTools[MakeDirectory](BINARY_DIR);
+<Input><Text-field style="Text" layout="Normal">Check bin directory</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if not FileTools:-Exists(BINARY_DIR) then
+  FileTools:-MakeDirectory(BINARY_DIR);
 end if;
 </Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L745" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check MLA file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools[Exists](LIBRARY_MLA) then
-  FileTools[Remove](LIBRARY_MLA);
+<Input><Text-field style="Text" layout="Normal">Check MLA file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools:-Exists(LIBRARY_MLA) then
+  FileTools:-Remove(LIBRARY_MLA);
 end if;
 </Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L758" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check MLA installer file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools[Exists](INSTALL_MLA) then
-  FileTools[Remove](INSTALL_MLA);
+<Input><Text-field style="Text" layout="Normal">Check MLA installer file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools:-Exists(INSTALL_MLA) then
+  FileTools:-Remove(INSTALL_MLA);
 end if;
 </Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L754" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Library generation procedure</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME::{string} )
+<Input><Text-field style="Text" layout="Normal">Library generation procedure</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME::string, $ )
 
   local bin_path, src_path;
 
   bin_path := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;);
   src_path := cat(SOURCE_DIR, ds, MODULE_NAME, &quot;.mpl&quot;);
 
-  if FileTools[Exists](src_path) then
-    if not FileTools[Exists](BINARY_DIR) then
-      FileTools[MakeDirectory](BINARY_DIR);
+  if FileTools:-Exists(src_path) then
+    if not FileTools:-Exists(BINARY_DIR) then
+      FileTools:-MakeDirectory(BINARY_DIR);
     end if;
-    if FileTools[Exists](bin_path) then
-      FileTools[Remove](bin_path):
+    if FileTools:-Exists(bin_path) then
+      FileTools:-Remove(bin_path):
     end if;
     read(src_path);
-    march('create', bin_path );
+    march('create', bin_path);
     savelib(convert(MODULE_NAME, symbol), bin_path);
   else
 <Font encoding="UTF-8">    error &quot;Missing file %1.\134n&quot;, </Font>src_path;
@@ -189,20 +189,11 @@ end proc:
 <Group view="code" labelreference="L750" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">'LEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
-Current version: D. Stocco, M. Larcher, E. Bertolazzi.
-Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
-'LULEM' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023
-Current version: D. Stocco, M. Larcher, E. Bertolazzi.
-Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
-'Indigo' module version 0.0, BSD 3-Clause License - Copyright (C) 2023, D. Stocco and E. Bertolazzi.
-</Text-field>
-</Output>
 </Group></Presentation-Block>
 </Section>
 <Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Create the Installer</Text-field></Title><Presentation-Block>
 <Group view="code" hide-input="false" labelreference="L753" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LICENSE := FileTools[Text][ReadFile](&quot;../LICENSE&quot;):</Text-field>
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LICENSE := FileTools:-Text:-ReadFile(&quot;../LICENSE&quot;):</Text-field>
 </Input>
 </Group>
 <Group view="code" hide-input="false" labelreference="L755" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -210,19 +201,19 @@ Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Input>
 </Group></Presentation-Block><Presentation-Block>
 <Group hide-input="false" labelreference="L757" drawlabel="true">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">InstallerBuilder[Build](
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">InstallerBuilder:-Build(
   MODULE_NAME,
   'uninstaller' = false,
   'version'     = &quot;1.0&quot;,
   'height'      = 550,
   'width'       = 1000,
-  'author'      = &quot;D. Stocco and E. Bertolazzi&quot;,
+  'author'      = &quot;Davide Stocco and Enrico Bertolazzi&quot;,
   'welcome'     = [
-     'text'  = &quot;Welcome to the Indigo Maple toolbox installer.&quot;,
+     'text'  = &quot;Welcome to the Indigo Maple module installer.&quot;,
      'image' = LOGO
    ],
   'finish'      = [
-     'text'  = &quot;The Indigo Maple toolbox has been succesfully installed.&quot;, 
+     'text'  = &quot;The Indigo Maple maodule has been succesfully installed.&quot;, 
      'image' = LOGO
    ],
   'target'      = INSTALL_MLA,
@@ -240,40 +231,40 @@ Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
         dest := cat(kernelopts(mapledir), ds, &quot;toolbox&quot;, ds, &quot;LULEM&quot;, ds, &quot;lib&quot;, ds);
 
         ###
-        RmDir := proc( dirpath::{string}, $ )
+        RmDir := proc( dirpath::string, $ )
 
           local d, dd, ds;
 
           ds := kernelopts('dirsep');
-          if FileTools[Exists](dirpath) and FileTools[IsDirectory](dirpath) then
-            for d in FileTools[ListDirectory](dirpath, 'all') do
+          if FileTools:-Exists(dirpath) and FileTools:-IsDirectory(dirpath) then
+            for d in FileTools:-ListDirectory(dirpath, 'all') do
               if evalb((d &lt;&gt; &quot;.&quot;) and (d &lt;&gt; &quot;..&quot;)) then
                 dd := cat(dirpath, ds, d);
-                if FileTools[Exists](dd) then
-                  if FileTools[IsDirectory](dd) then
+                if FileTools:-Exists(dd) then
+                  if FileTools:-IsDirectory(dd) then
                     RmDir(dd);
-                    # FileTools[RemoveDirectory](dd, forceremove = true);
+                    # FileTools:-RemoveDirectory(dd, forceremove = true);
                   else
-                   FileTools[Remove](dd);
+                   FileTools:-Remove(dd);
                   end if;
                 end if;
               end if;
             end do;
-            FileTools[RemoveDirectory](dirpath, forceremove = true);
+            FileTools:-RemoveDirectory(dirpath, forceremove = true);
           end if;
           return;
         
         end proc:
         ###
         RmDir(dest);        
-        FileTools[MakeDirectory](dest, recurse = true);
+        FileTools:-MakeDirectory(dest, recurse = true);
         n  := 1 + length(file);
-        for r in FileTools[Walk](file, 'topdown', 'followlinks') do
+        for r in FileTools:-Walk(file, 'topdown', 'followlinks') do
           limb := cat(dest, ds, r[dir][n..], ds);
           for d in r[subdirs] do
-            ((d) -&gt; `if`(FileTools[Exists](d), 0, FileTools[MakeDirectory](d)))(cat(limb, d));
+            ((d) -&gt; `if`(FileTools:-Exists(d), 0, FileTools:-MakeDirectory(d)))(cat(limb, d));
           end do;
-          seq(FileTools[Copy](cat(r[dir], ds, f), cat(limb, f)), f = r[files]) 
+          seq(FileTools:-Copy(cat(r[dir], ds, f), cat(limb, f)), f = r[files]) 
         end do;
         return true;
       end proc, 
@@ -291,11 +282,11 @@ Original code: W. Zhou, D. J. Jeffrey, J. Carette and R. M. Corless.
 </Group></Presentation-Block>
 </Section><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L741" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">JSFH</Equation></Text-field>
+<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
 </Group></Presentation-Block><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L681" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
+<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">JSFH</Equation></Text-field>
 </Input>
 </Group></Presentation-Block>
 </Worksheet>
