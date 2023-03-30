@@ -45,42 +45,37 @@ classdef SliderCrankDAE < ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    function out = Fa( this, s )
+      if s >= 2.5
+        out = this.m_Fa * (s - 2.5) ^ 2;
+      else
+        out = 0.0;
+      end
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = Fa_dot( this, s )
+      if s >= 2.5
+        out = 2 * this.m_Fa * (s - 2.5);
+      else
+        out = 0.0;
+      end
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     function out = F( this, x, x_dot, t )
-      out = [x_dot(1) - x(4);
-             x_dot(2) - x(5);
-             x_dot(3) - x(6);
-             0.2e1 * x_dot(5) * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) + 0.2e1 * x(5) ^ 2 * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) + 0.7e1 / 0.3e1 * this.m_l ^ 2 * this.m_m * x_dot(4) + 0.5e1 / 0.2e1 * this.m_l * (this.m_g * this.m_m - 0.2e1 / 0.5e1 * x(8)) * cos(x(1)) + sin(x(1)) * this.m_l * x(7) + this.m_Ta;
-             0.2e1 * this.m_l * (this.m_m * this.m_l * x_dot(4) * cos(-x(2) + x(1)) - this.m_m * x(4) ^ 2 * this.m_l * sin(-x(2) + x(1)) + 0.4e1 / 0.3e1 * x_dot(5) * this.m_l * this.m_m + (this.m_g * this.m_m - x(8)) * cos(x(2)) + sin(x(2)) * x(7));
-             0.3e1 * x_dot(6) * this.m_m + x(7) + this.m_Fa;
-             -cos(x(1)) * this.m_l - 0.2e1 * this.m_l * cos(x(2)) + x(3);
-             -this.m_l * (0.2e1 * sin(x(2)) + sin(x(1)))];
-
+      out = [x_dot(1) - x(4) x_dot(2) - x(5) x_dot(3) - x(6) 0.2e1 * x_dot(5) * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) + 0.2e1 * x(5) ^ 2 * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) + 0.7e1 / 0.3e1 * this.m_l ^ 2 * this.m_m * x_dot(4) + 0.5e1 / 0.2e1 * (this.m_g * this.m_m - 0.2e1 / 0.5e1 * x(8)) * this.m_l * cos(x(1)) + sin(x(1)) * this.m_l * x(7) + this.m_g 0.2e1 * (this.m_m * this.m_l * x_dot(4) * cos(-x(2) + x(1)) - this.m_m * x(4) ^ 2 * this.m_l * sin(-x(2) + x(1)) + 0.4e1 / 0.3e1 * x_dot(5) * this.m_l * this.m_m + (this.m_g * this.m_m - x(8)) * cos(x(2)) + sin(x(2)) * x(7)) * this.m_l 0.3e1 * x_dot(6) * this.m_m + x(7) + this.Fa(x(3)) -cos(x(1)) * this.m_l - 0.2e1 * this.m_l * cos(x(2)) + x(3) -this.m_l * (sin(x(1)) + 0.2e1 * sin(x(2)))];
 
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function [JF_x, JF_x_dot] = JF( this, x, x_dot, ~ )
-      JF_x = [0 0 0 -1 0 0 0 0;
-              0 0 0 0 -1 0 0 0;
-              0 0 0 0 0 -1 0 0;
-              -0.2e1 * x_dot(5) * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) + 0.2e1 * x(5) ^ 2 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) - 0.5e1 / 0.2e1 * this.m_l * (this.m_g * this.m_m - 0.2e1 / 0.5e1 * x(8)) * sin(x(1)) + cos(x(1)) * this.m_l * x(7) 0.2e1 * x_dot(5) * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) - 0.2e1 * x(5) ^ 2 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) 0 0 0.4e1 * x(5) * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) 0 sin(x(1)) * this.m_l -cos(x(1)) * this.m_l;
-              0.2e1 * this.m_l * (-this.m_m * this.m_l * x_dot(4) * sin(-x(2) + x(1)) - this.m_m * x(4) ^ 2 * this.m_l * cos(-x(2) + x(1))) 0.2e1 * this.m_l * (this.m_m * this.m_l * x_dot(4) * sin(-x(2) + x(1)) + this.m_m * x(4) ^ 2 * this.m_l * cos(-x(2) + x(1)) - (this.m_g * this.m_m - x(8)) * sin(x(2)) + cos(x(2)) * x(7)) 0 -0.4e1 * this.m_l ^ 2 * this.m_m * x(4) * sin(-x(2) + x(1)) 0 0 0.2e1 * this.m_l * sin(x(2)) -0.2e1 * this.m_l * cos(x(2));
-              0 0 0 0 0 0 1 0;
-              sin(x(1)) * this.m_l 0.2e1 * this.m_l * sin(x(2)) 1 0 0 0 0 0;
-              -cos(x(1)) * this.m_l -0.2e1 * this.m_l * cos(x(2)) 0 0 0 0 0 0];
+      JF_x = [0 0 0 -1 0 0 0 0; 0 0 0 0 -1 0 0 0; 0 0 0 0 0 -1 0 0; -0.2e1 * x_dot(5) * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) + 0.2e1 * x(5) ^ 2 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) - 0.5e1 / 0.2e1 * (this.m_g * this.m_m - 0.2e1 / 0.5e1 * x(8)) * this.m_l * sin(x(1)) + cos(x(1)) * this.m_l * x(7) 0.2e1 * x_dot(5) * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) - 0.2e1 * x(5) ^ 2 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) 0 0 0.4e1 * x(5) * this.m_l ^ 2 * this.m_m * sin(-x(2) + x(1)) 0 sin(x(1)) * this.m_l -cos(x(1)) * this.m_l; 0.2e1 * (-this.m_m * this.m_l * x_dot(4) * sin(-x(2) + x(1)) - this.m_m * x(4) ^ 2 * this.m_l * cos(-x(2) + x(1))) * this.m_l 0.2e1 * (this.m_m * this.m_l * x_dot(4) * sin(-x(2) + x(1)) + this.m_m * x(4) ^ 2 * this.m_l * cos(-x(2) + x(1)) - (this.m_g * this.m_m - x(8)) * sin(x(2)) + cos(x(2)) * x(7)) * this.m_l 0 -0.4e1 * this.m_m * x(4) * this.m_l ^ 2 * sin(-x(2) + x(1)) 0 0 0.2e1 * sin(x(2)) * this.m_l -0.2e1 * this.m_l * cos(x(2)); 0 0 this.Fa_dot(x(3)) 0 0 0 1 0; sin(x(1)) * this.m_l 0.2e1 * sin(x(2)) * this.m_l 1 0 0 0 0 0; -cos(x(1)) * this.m_l -0.2e1 * this.m_l * cos(x(2)) 0 0 0 0 0 0;];
 
-
-
-      JF_x_dot = [1 0 0 0 0 0 0 0;
-                  0 1 0 0 0 0 0 0;
-                  0 0 1 0 0 0 0 0;
-                  0 0 0 0.7e1 / 0.3e1 * this.m_l ^ 2 * this.m_m 0.2e1 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) 0 0 0;
-                  0 0 0 0.2e1 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) 0.8e1 / 0.3e1 * this.m_l ^ 2 * this.m_m 0 0 0;
-                  0 0 0 0 0 0.3e1 * this.m_m 0 0;
-                  0 0 0 0 0 0 0 0;
-                  0 0 0 0 0 0 0 0];
-
+      JF_x_dot = [1 0 0 0 0 0 0 0; 0 1 0 0 0 0 0 0; 0 0 1 0 0 0 0 0; 0 0 0 0.7e1 / 0.3e1 * this.m_l ^ 2 * this.m_m 0.2e1 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) 0 0 0; 0 0 0 0.2e1 * this.m_l ^ 2 * this.m_m * cos(-x(2) + x(1)) 0.8e1 / 0.3e1 * this.m_l ^ 2 * this.m_m 0 0 0; 0 0 0 0 0 0.3e1 * this.m_m 0 0; 0 0 0 0 0 0 0 0; 0 0 0 0 0 0 0 0;];
 
     end
     %
