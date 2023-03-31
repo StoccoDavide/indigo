@@ -15,14 +15,14 @@ export LoadMatrices_Linear::static := proc(
   vars::Vector,
   $)
 
-  description "Load a 'generic' type system of equations as matrices <E> and "
+  description "Load a 'Generic' type system of equations as matrices <E> and "
     "<G>. The list of variables <vars> must be the same of the variables "
     "used in the system of equations.";
 
   local tbl;
 
   # Check if the system is already loaded
-  if evalb(_self:-m_SystemType <> 'empty') then
+  if evalb(_self:-m_SystemType <> 'Empty') then
     if _self:-m_VerboseMode then
       IndigoUtils:-WarningMessage(
         "Indigo::LoadMatrices_Linear(...): a system of equations is already "
@@ -36,7 +36,7 @@ export LoadMatrices_Linear::static := proc(
   _self:-m_SystemVars := vars;
 
   # Set system type
-  _self:-m_SystemType := 'linear';
+  _self:-m_SystemType := 'Linear';
 
   # Update reduction steps
   _self:-m_ReductionSteps := [table([
@@ -56,7 +56,7 @@ export LoadEquations_Linear::static := proc(
   vars::list,
   $)
 
-  description "Load a 'linear' type system of equations <eqns>. The list of "
+  description "Load a 'Linear' type system of equations <eqns>. The list of "
     "variables <vars> must be the same of the variables used in the system "
     "of equations.";
 
@@ -82,15 +82,15 @@ export ReduceIndexByOne_Linear::static := proc(
   _self::Indigo,
   $)::boolean;
 
-  description "Reduce the index of the 'linear' type DAE system of equations "
+  description "Reduce the index of the 'Linear' type DAE system of equations "
     "by one. Return true if the system of equations has been reduced to "
     "index-0 DAE (ODE), false otherwise.";
 
   local vars, E, G, A, nE, mE, nA, dA, H, F, f, nH, mH, tbl;
 
-  if not evalb(_self:-m_SystemType = 'linear') then
+  if not evalb(_self:-m_SystemType = 'Linear') then
     IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Linear(...): system must be of type 'linear' "
+      "Indigo::ReduceIndexByOne_Linear(...): system must be of type 'Linear' "
       "but got '%s'.", _self:-m_SystemType
     );
   end if;
@@ -160,7 +160,7 @@ export ReduceIndex_Linear::static := proc(
   _self::Indigo,
   $)::boolean;
 
-  description "Reduce the index of the 'linear' type DAE system of equations. "
+  description "Reduce the index of the 'Linear' type DAE system of equations. "
     "Return true if the system of equations has been reduced to index-0 DAE "
     "(ODE), false otherwise.";
 

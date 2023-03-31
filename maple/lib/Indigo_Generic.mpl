@@ -25,15 +25,13 @@ export SeparateMatrices::static := proc(
   G_tmp := _self:-m_LEM:-Veil~(_self:-m_LEM, G);
   rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
 
-  print("SeparateMatrices, rng_b", rng_b);
-  print("SeparateMatrices, rng_a", rng_a);
-
   # Substitute the veil arguments with the dependent variables
   # V[num] -> V[num](params)
   if (rng_a > rng_b) then
     veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-    print("SeparateMatrices, veil_subs", veil_subs);
-    G_tmp := subs(op(veil_subs), G_tmp);
+    if (nops(veil_subs) > 0) then
+      G_tmp := subs(op(veil_subs), G_tmp);
+    end if;
   end if;
 
   # Check input dimensions E
@@ -73,14 +71,14 @@ export LoadMatrices_Generic::static := proc(
   vars::list,
   $)
 
-  description "Load a 'generic' type system of equations as matrices <E> and "
+  description "Load a 'Generic' type system of equations as matrices <E> and "
     "<G>. The list of variables <vars> must be the same of the variables "
     "used in the system of equations.";
 
   local tbl;
 
   # Check if the system is already loaded
-  if evalb(_self:-m_SystemType <> 'empty') then
+  if evalb(_self:-m_SystemType <> 'Empty') then
     if _self:-m_VerboseMode then
       IndigoUtils:-WarningMessage(
         "Indigo::LoadMatrices_Generic(...): a system of equations is already "
@@ -94,7 +92,7 @@ export LoadMatrices_Generic::static := proc(
   _self:-m_SystemVars := vars;
 
   # Set system type
-  _self:-m_SystemType := 'generic';
+  _self:-m_SystemType := 'Generic';
 
   # Separate algebraic and differential equations
   tbl := _self:-SeparateMatrices(_self, E, G);
@@ -117,7 +115,7 @@ export LoadEquations_Generic::static := proc(
   vars::list,
   $)
 
-  description "Load a 'generic' type system of equations <eqns>. The list of "
+  description "Load a 'Generic' type system of equations <eqns>. The list of "
     "variables <vars> must be the same of the variables used in the system "
     "of equations.";
 
@@ -144,15 +142,15 @@ export ReduceIndexByOne_Generic::static := proc(
   _self::Indigo,
   $)::boolean;
 
-  description "Reduce the index of the 'generic' type DAE system of equations "
+  description "Reduce the index of the 'Generic' type DAE system of equations "
     "by one. Return true if the system of equations has been reduced to "
     "index-0 DAE (ODE), false otherwise.";
 
   local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
 
-  if not evalb(_self:-m_SystemType = 'generic') then
+  if not evalb(_self:-m_SystemType = 'Generic') then
     IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'generic' "
+      "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'Generic' "
       "but got '%s'.", _self:-m_SystemType
     );
   end if;
@@ -193,7 +191,7 @@ export ReduceIndexByOne_Generic::static := proc(
   tbl := _self:-SeparateMatrices(_self, <E, H>, convert(<G, F>, Vector));
 
   # Update reduction steps
-  _self:-m_ReductionSteps := [op(m_ReductionSteps),
+  _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
     table([
       "E"    = tbl["Et"],
       "G"    = tbl["Gt"],
@@ -219,10 +217,10 @@ end proc: # ReduceIndexByOne_Generic
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 export ReduceIndex_Generic::static := proc(
-  _self::Indogo,
+  _self::Indigo,
   $)::boolean;
 
-  description "Reduce the index of the 'generic' type DAE system of equations. "
+  description "Reduce the index of the 'Generic' type DAE system of equations. "
     "Return true if the system of equations has been reduced to index-0 DAE "
     "(ODE), false otherwise.";
 

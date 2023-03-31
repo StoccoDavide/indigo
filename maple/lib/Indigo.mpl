@@ -25,8 +25,9 @@ module Indigo()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   local m_LAST           := NULL;
+  local m_LEM            := NULL;
   local m_VerboseMode    := false;
-  local m_SystemType     := 'empty';
+  local m_SystemType     := 'Empty';
   local m_ReductionSteps := [];
   local m_SystemVars     := [];
 
@@ -63,7 +64,7 @@ module Indigo()
     if (lib_base_path = NULL) then
       error "cannot find 'Indigo' module.";
     end if;
-    protect('empty', 'linear', 'generic', 'mbd3');
+    protect('Empty', 'Linear', 'Generic', 'Mbd3');
     return NULL;
   end proc: # ModuleLoad
 
@@ -73,15 +74,15 @@ module Indigo()
 
     description "'Indigo' module unload procedure.";
 
-    unprotect('empty', 'linear', 'generic', 'mbd3');
+    unprotect('Empty', 'Linear', 'Generic', 'Mbd3');
     return NULL;
   end proc: # ModuleUnload
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   export ModuleCopy::static := proc(
-    _self::LAST,
-    proto::LAST,
+    _self::Indigo,
+    proto::Indigo,
     $)
 
     description "Copy the objects <proto> into <self>.";
@@ -96,6 +97,31 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export CheckInit::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Check if the 'LAST' object is initialized.";
+
+    if (_self:-m_LAST = NULL) then
+      IndigoUtils:-ErrorMessage(
+        "Indigo:-CheckInit(...): the 'LAST' object is not initialized, use "
+        "'Indigo:-InitLAST(...)'' or other appropriate initialization methods "
+        "first."
+      );
+    end if;
+    if (_self:-m_LEM = NULL) then
+      IndigoUtils:-ErrorMessage(
+        "Indigo:-CheckInit(...): the 'LEM' object is not initialized, use "
+        "'Indigo:-InitLAST(...)'' or other appropriate initialization methods "
+        "first."
+      );
+    end if;
+    return NULL;
+  end proc: # CheckInit
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export InitLAST::static := proc(
     _self::Indigo,
     label::{symbol, string} := NULL,
@@ -104,8 +130,8 @@ module Indigo()
     description "Initialize the 'LAST' object with veiling label <label>.";
 
     _self:-m_LAST := Object(LAST);
+    _self:-m_LAST:-InitLEM(_self:-m_LAST, label);
     _self:-m_LEM  := _self:-m_LAST:-GetLEM(_self:-m_LAST);
-    _self:-m_LEM:-SetVeilingLabel(_self:-m_LEM, label);
     return NULL;
   end proc: # InitLAST
 
@@ -180,6 +206,8 @@ module Indigo()
     description "Enable the verbose mode.";
 
     _self:-m_VerboseMode := true;
+    _self:-m_LAST:-EnableVerboseMode(_self:-m_LAST);
+    _self:-m_LEM:-EnableVerboseMode(_self:-m_LEM);
     return NULL;
   end proc: # EnableVerboseMode
 
@@ -192,6 +220,8 @@ module Indigo()
     description "Disable the verbose mode.";
 
     _self:-m_VerboseMode := false;
+    _self:-m_LAST:-DisableVerboseMode(_self:-m_LAST);
+    _self:-m_LEM:-DisableVerboseMode(_self:-m_LEM);
     return NULL;
   end proc: # DisableVerboseMode
 
@@ -221,7 +251,7 @@ module Indigo()
       _self:-InitLAST(_self, label);
     end if;
 
-    _self:-m_SystemType     := 'empty';
+    _self:-m_SystemType     := 'Empty';
     _self:-m_ReductionSteps := [];
     _self:-m_SystemVars     := [];
     _self:-m_LEM:-VeilForget(_self:-m_LEM);
@@ -232,12 +262,23 @@ module Indigo()
 
   export GetReductionSteps::static := proc(
     _self::Indigo,
-    i::nonnegint := 0,
-    $)::list(table);
+    i::integer := NULL,
+    $)::{list(table), table};
 
     description "Get the list of reduction steps.";
 
-    if (i = 0) then
+    # Check if the reduction steps are available
+    if (_self:-m_ReductionSteps = []) then
+      IndigoUtils:-ErrorMessage(
+        "Indigo:-GetReductionSteps(...): reduction steps are not yet available, "
+        "please load the system matrices/equations and perform the system index "
+        "reduction first."
+      );
+      return NULL;
+    end if;
+
+    # Retrieve the list of reduction steps
+    if (i = NULL) then
       return _self:-m_ReductionSteps;
     else
       return _self:-m_ReductionSteps[i];
@@ -287,36 +328,36 @@ module Indigo()
 
     description "Get the list of veil arguments substitutions.";
 
-    local V_list, var_name, arg_list, L, R;
+    local V_list, V_deps, idx_list, idx_deps, arg_list;
 
-    print("GetVeilArgsSubs", rng, _self:-m_LEM:-VeilTableSize(_self:-m_LEM));#, _self:-m_LEM:-VeilList(_self:-m_LEM));
-
-    V_list   := _self:-m_LEM:-VeilList(_self:-m_LEM)[rng];
+    V_list   := _self:-m_LEM:-VeilList(_self:-m_LEM);
+    idx_list := select~(type, indets~(V_list), indexed);
     arg_list := map(selectfun, V_list, map2(op, 0, _self:-m_SystemVars));
-    return zip((L, R) -> L = L(op(R)), lhs~(V_list), arg_list);
+    idx_deps := zip(
+      (L, R) -> `if`(nops(R) > 0, L = op(R), L = NULL), lhs~(V_list), arg_list
+    );
+    V_deps := convert~(subs(op(idx_deps), idx_list), list);
+    return zip(
+      (L, R) -> L = `if`(nops(R) > 0 and (R[1] <> NULL), L(op(R)), L),
+      lhs~(V_list[rng]), V_deps[rng]
+    );
   end proc: # GetVeilArgsSubs
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   export RemoveTimeStates::static := proc(
     _self::Indigo,
-    arg::{algebraic,
-          algebraic = algebraic,
-          list(algebraic),
-          list(algebraic = algebraic)},
-    $)::{algebraic,
-         algebraic = algebraic,
-         list(algebraic),
-         list(algebraic = algebraic)};
+    expr::{algebraic, list(algebraic),
+           algebraic = algebraic, list(algebraic = algebraic)},
+    $)::{algebraic, list(algebraic),
+         algebraic = algebraic, list(algebraic = algebraic)};
 
     description "Remove the time states from the system.";
-
-    local x;
 
     return subs(
       op(map(x -> diff(x, t) = cat(op(0, x), __dot), _self:-m_SystemVars)),
       op(map(x -> x = op(0, x), _self:-m_SystemVars)),
-      arg
+      expr
     );
   end proc: # RemoveTimeStates
 
@@ -343,26 +384,30 @@ module Indigo()
 
     local n, m, tbl, r, P, Q, M, K, N, rng_b, rng_a, veil_subs;
 
+    # Check if LAST and LEM are initialized
+    _self:-CheckInit(_self);
+
     # Get row and column dimensions
     n, m := LinearAlgebra:-Dimension(E);
 
     # Decompose the matrix as P.E.Q = L.U
-    rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LAST);
-    tbl   := _self:-m_LAST:-LU(_self:-m_LAST, E);
-    rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LAST);
-    P, Q  := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
-
-    print("KernelBuild1, rng_b", rng_b);
-    print("KernelBuild1, rng_a", rng_a);
+    rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
+    _self:-m_LAST:-LU(_self:-m_LAST, E, veil_sanity_check = false);
+    rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
 
     # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
     if (rng_a > rng_b) then
       veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-      print("KernelBuild1, veil_subs", veil_subs);
-      tbl["L"] := subs(op(veil_subs), tbl["L"]);
-      tbl["U"] := subs(op(veil_subs), tbl["U"]);
+      if (nops(veil_subs) > 0) then
+        tbl["L"] := subs(op(veil_subs), tbl["L"]);
+        tbl["U"] := subs(op(veil_subs), tbl["U"]);
+      end if;
     end if;
+
+    # Retrieve the results of the LU decomposition
+    tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
+    P, Q := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
 
     # Compute M = L^(-1).P^T
     M := LinearAlgebra:-LinearSolve(tbl["L"], LinearAlgebra:-Transpose(P));
@@ -388,16 +433,14 @@ module Indigo()
     N := _self:-m_LEM:-Veil~(_self:-m_LEM, N);
     rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
 
-    print("KernelBuild2, rng_b", rng_b);
-    print("KernelBuild2, rng_a", rng_a);
-
     # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
     if (rng_a > rng_b) then
       veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-      print("KernelBuild2, veil_subs", veil_subs);
-      K := subs(op(veil_subs), K);
-      N := subs(op(veil_subs), N);
+      if (nops(veil_subs) > 0) then
+        K := subs(op(veil_subs), K);
+        N := subs(op(veil_subs), N);
+      end if;
     end if;
 
     # Return the results
@@ -424,16 +467,16 @@ module Indigo()
 
     description "Load the matrices from the input DAE system of type <typ>.";
 
-    if (_npassed < 2) then
+    if (_npassed < 3) then
       IndigoUtils:-ErrorMessage(
         "Indigo::LoadMatrices(...): no DAE system to load."
       );
-    elif (typ = 'linear') and (_npassed = 5) then
-      _self:-LoadMatrices_Linear(_self, _passed[2..-1]);
-    elif (typ = 'generic') and (_npassed = 4) then
-      _self:-LoadMatrices_Generic(_self, _passed[2..-1]);
-    elif (typ = 'mbd3') and (_npassed = 7) then
-      _self:-LoadMatrices_Mbd3(_self, _passed[2..-1]);
+    elif (typ = 'Linear') and (_npassed = 6) then
+      _self:-LoadMatrices_Linear(_self, _passed[3..-1]);
+    elif (typ = 'Generic') and (_npassed = 5) then
+      _self:-LoadMatrices_Generic(_self, _passed[3..-1]);
+    elif (typ = 'Mbd3') and (_npassed = 8) then
+      _self:-LoadMatrices_Mbd3(_self, _passed[3..-1]);
     else
       IndigoUtils:-ErrorMessage(
         "Indigo::LoadMatrices(...): invalid input arguments."
@@ -455,17 +498,17 @@ module Indigo()
     if (_npassed < 3) then
       IndigoUtils:-PrintMessage(
         "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...),\n"
-        "where type must be choosen between: 'linear', 'generic' or 'mbd3'.\n"
+        "where type must be choosen between: 'Linear', 'Generic' or 'Mbd3'.\n"
       );
       IndigoUtils:-ErrorMessage(
         "Indigo[LoadEquations]('type', ... ): no DAE system to load."
       );
-    elif (typ = 'linear') and (_npassed = 3) then
-      _self:-LoadEquations_Linear(_self, _passed[2..-1]);
-    elif (typ = 'generic') and (_npassed = 3) then
-      _self:-LoadEquations_Generic(_self, _passed[2..-1]);
-    elif (typ = 'mbd3') and (_npassed = 5) then
-      _self:-LoadEquations_Mbd3(_self, _passed[2..-1]);
+    elif (typ = 'Linear') and (_npassed = 4) then
+      _self:-LoadEquations_Linear(_self, _passed[3..-1]);
+    elif (typ = 'Generic') and (_npassed = 4) then
+      _self:-LoadEquations_Generic(_self, _passed[3..-1]);
+    elif (typ = 'Mbd3') and (_npassed = 6) then
+      _self:-LoadEquations_Mbd3(_self, _passed[3..-1]);
     else
       IndigoUtils:-ErrorMessage(
         "Indigo::LoadEquations(...): invalid input arguments."
@@ -482,18 +525,18 @@ module Indigo()
 
     description "Reduce the index of the loaded DAE system.";
 
-    if evalb(_self:-m_SystemType = 'empty') then
+    if evalb(_self:-m_SystemType = 'Empty') then
       if _self:-m_VerboseMode then
         IndigoUtils:-WarningMessage(
           "Indigo::ReduceIndex(...): no DAE system loaded yet."
         );
       end if;
       return false;
-    elif evalb(_self:-m_SystemType = 'linear') then
+    elif evalb(_self:-m_SystemType = 'Linear') then
       return _self:-ReduceIndex_Linear(_self);
-    elif evalb(_self:-m_SystemType = 'generic') then
+    elif evalb(_self:-m_SystemType = 'Generic') then
       return _self:-ReduceIndex_Generic(_self);
-    elif evalb(_self:-m_SystemType = 'mbd3') then
+    elif evalb(_self:-m_SystemType = 'Mbd3') then
       return _self:-ReduceIndex_Mbd3(_self);
     else
       IndigoUtils:-ErrorMessage(

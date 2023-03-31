@@ -393,7 +393,10 @@ object Indigo :: Indigo:
     ModuleUnload( )
 
     # Copy the objects &lt;proto&gt; into &lt;self&gt;.
-    ModuleCopy( _self::LAST, proto::LAST, $ )
+    ModuleCopy( _self::Indigo, proto::Indigo, $ )
+
+    # Check if the 'LAST' object is initialized.
+    CheckInit( _self::Indigo, $ )
 
     # Initialize the 'LAST' object with veiling label &lt;label&gt;.
     InitLAST( _self::Indigo, label::{string, symbol} := NULL, $ )
@@ -426,7 +429,8 @@ object Indigo :: Indigo:
     Reset( _self::Indigo, label::{string, symbol} := NULL, $ )
 
     # Get the list of reduction steps.
-    GetReductionSteps( _self::Indigo, i::nonnegint := 0, $ ) :: list(table)
+    GetReductionSteps( _self::Indigo, i::integer := NULL, $ )
+                     :: {table, list(table)}
 
     # Get the list of differential equations of the reduced system.
     GetDifferentialEquations( _self::Indigo, $ ) :: list
@@ -443,7 +447,7 @@ object Indigo :: Indigo:
 
     # Remove the time states from the system.
     RemoveTimeStates( _self::Indigo, 
-                      arg::{algebraic, list(algebraic), list(algebraic = 
+                      expr::{algebraic, list(algebraic), list(algebraic = 
                         algebraic), algebraic = algebraic}, 
                       $ )
                     :: {algebraic, list(algebraic), list(algebraic = algebraic), algebraic = algebraic}
@@ -464,22 +468,22 @@ object Indigo :: Indigo:
     # Reduce the index of the loaded DAE system.
     ReduceIndex( _self::Indigo, $ ) :: boolean
 
-    # Load a 'generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
+    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
     # list of variables &lt;vars&gt; must be the same of the variables used in the 
     # system of equations.
     LoadMatrices_Linear( _self::Indigo, E::Matrix, G::Matrix, f::Vector, 
                          vars::Vector, $ )
 
-    # Load a 'linear' type system of equations &lt;eqns&gt;. The list of variables 
+    # Load a 'Linear' type system of equations &lt;eqns&gt;. The list of variables 
     # &lt;vars&gt; must be the same of the variables used in the system of equations.
     LoadEquations_Linear( _self::Indigo, eqns::list, vars::list, $ )
 
-    # Reduce the index of the 'linear' type DAE system of equations by one. 
+    # Reduce the index of the 'Linear' type DAE system of equations by one. 
     # Return true if the system of equations has been reduced to index-0 DAE 
     # (ODE), false otherwise.
     ReduceIndexByOne_Linear( _self::Indigo, $ ) :: boolean
 
-    # Reduce the index of the 'linear' type DAE system of equations. Return 
+    # Reduce the index of the 'Linear' type DAE system of equations. Return 
     # true if the system of equations has been reduced to index-0 DAE (ODE), 
     # false otherwise.
     ReduceIndex_Linear( _self::Indigo, $ ) :: boolean
@@ -490,26 +494,26 @@ object Indigo :: Indigo:
     # differential equations matrix &lt;A&gt;, and the rank of &lt;E&gt;.
     SeparateMatrices( _self::Indigo, E::Matrix, G::Vector, $ )
 
-    # Load a 'generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
+    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
     # list of variables &lt;vars&gt; must be the same of the variables used in the 
     # system of equations.
     LoadMatrices_Generic( _self::Indigo, E::Matrix, G::Vector, vars::list, $ )
 
-    # Load a 'generic' type system of equations &lt;eqns&gt;. The list of variables 
+    # Load a 'Generic' type system of equations &lt;eqns&gt;. The list of variables 
     # &lt;vars&gt; must be the same of the variables used in the system of equations.
     LoadEquations_Generic( _self::Indigo, eqns::list, vars::list, $ )
 
-    # Reduce the index of the 'generic' type DAE system of equations by one. 
+    # Reduce the index of the 'Generic' type DAE system of equations by one. 
     # Return true if the system of equations has been reduced to index-0 DAE 
     # (ODE), false otherwise.
     ReduceIndexByOne_Generic( _self::Indigo, $ ) :: boolean
 
-    # Reduce the index of the 'generic' type DAE system of equations. Return 
+    # Reduce the index of the 'Generic' type DAE system of equations. Return 
     # true if the system of equations has been reduced to index-0 DAE (ODE), 
     # false otherwise.
-    ReduceIndex_Generic( _self::Indogo, $ ) :: boolean
+    ReduceIndex_Generic( _self::Indigo, $ ) :: boolean
 
-    # Load a 'mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
+    # Load a 'Mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
     # constraint vector &lt;Phi&gt;, external force vector &lt;f&gt;, the position 
     # variables &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange 
     # multipliers &lt;l_vars&gt;.

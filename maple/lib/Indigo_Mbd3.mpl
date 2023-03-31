@@ -18,7 +18,7 @@ export LoadMatrices_Mbd3::static := proc(
   l_vars::list,
   $)
 
-  description "Load a 'mbd3' type system of equations with mass matrix <Mass>, "
+  description "Load a 'Mbd3' type system of equations with mass matrix <Mass>, "
     "constraint vector <Phi>, external force vector <f>, the position variables "
     "<q_vars>, the velocity variables <v_vars> and the Lagrange multipliers "
     "<l_vars>.";
@@ -26,7 +26,7 @@ export LoadMatrices_Mbd3::static := proc(
   local tbl;
 
   # Check if the system is already loaded
-  if not evalb(_self:-m_SystemType = 'empty') then
+  if not evalb(_self:-m_SystemType = 'Empty') then
     if _self:-m_VerboseMode then
       IndigoUtils:-WarningMessage(
         "Indigo::LoadMatrices_Mbd3(...): a system of equations is already "
@@ -37,7 +37,7 @@ export LoadMatrices_Mbd3::static := proc(
   end if;
 
   # Set system type
-  _self:-m_SystemType := 'mbd3';
+  _self:-m_SystemType := 'Mbd3';
 
   # Separate algebraic and differential equations
   _self:-m_ReductionSteps := [table([
@@ -95,7 +95,7 @@ export ReduceIndex_Mbd3::static := proc(
 
   if not evalb(_self:-m_SystemType = "Mbd") then
     IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndex_Mbd3(...): system must be of type 'mbd3' but got "
+      "Indigo::ReduceIndex_Mbd3(...): system must be of type 'Mbd3' but got "
       "'%s'.", _self:-m_SystemType
     );
   end if;
