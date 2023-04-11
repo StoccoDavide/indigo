@@ -1,139 +1,159 @@
 The DAE of a Slider Crank
-======================
+=========================
 
-In this example we will solve the DAE resulting from a dynamic analysis of the slider crank mechanism. The mechanism is shown in the figure below.
+In this example we will solve the DAE resulting from a dynamic analysis of the
+slider crank mechanism. The figure below shows the mechanism.
 
-.. image:: images/pendulum_sketch.jpg
+.. image:: images/SliderCrank.png
     :align: center
-    :width: 25%
+    :width: 50%
+
+We clarify that the even though we are solving a DAE, the library
+integrates ODEs (hence all the names in the library refer to ODEs). To solve a
+DAE we use a high order method and avoid reducing the index.
 
 Problem statement
 -----------------
 
-The equations of motion for the Three Body Problem are derived from the Lagrangian:
+Hereafter we provide a brief overview of the problem. For more details see the
+file `SliderCrankDAE.mw`.
+
+The first step is to perform the kinematic analysis of the mechanism. Using the
+recursive formulation (mixed approach: relative coordinates + global angles), we
+obtain the following constraint equations:
 
 .. math::
 
   \begin{aligned}
-    \mathcal{L} &=
-      \frac{1}{2} m_1 (u_1^2 + v_1^2) +
-      \frac{1}{2} m_2 (u_2^2 + v_2^2) +
-      \frac{1}{2} m_3 (u_3^2 + v_3^2) ~ \dots \\[0.2em]
-      & \qquad - \, \frac{G m_1 m_2}{\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}} ~ \dots \\[0.2em]
-      & \qquad - \, \frac{G m_1 m_3}{\sqrt{(x_1 - x_3)^2 + (y_1 - y_3)^2}} ~ \dots \\[0.2em]
-      & \qquad - \, \frac{G m_2 m_3}{\sqrt{(x_2 - x_3)^2 + (y_2 - y_3)^2}} ~ .
+    & -cos(\theta_1(t)) L1 - 2 L1 cos(\theta_2(t)) + s(t) = 0 \\[0.2em]
+    & -L1 (sin(\theta_1(t)) + 2 sin(\theta_2(t))) = 0
   \end{aligned}
 
-The equations of motion are then derived by taking the partial derivatives of
-the Lagrangian with respect to the generalized coordinates and setting them
-equal to zero. The equations of motion written as a system of first order
-ODEs are then:
+where :math:`\theta_1(t)` and :math:`\theta_2(t)` are the angles of the crank
+and the shaft, respectively, and :math:`s(t)` is the position of the slider. We
+have chosen :math:`\theta_1(t)` as the independent coordinate, whilst
+:math:`\theta_2(t)` and :math:`s(t)` are the dependent coordinates.
+
+The next step is the position and velocity analysis, which can be easily
+performed by solving the system of constraint equations and their time
+derivatives. The resulting equations are:
+
+.. math::
+
+  \begin{aligned}
+    \theta_2(t) &= -arcsin(\frac{sin(\theta_1(t))}{2}) \\[0.2em]
+    s(t) &= L1 (cos(\theta_1(t)) + sqrt(3 + cos(\theta_1(t))^2)) \\[0.2em]
+    \dot{\theta_2(t)} &= -\frac{\dot{\theta_1(t)} cos(\theta_1(t))}{(2 cos(\theta_2(t)))} \\[0.2em]
+    \dot{s(t)} &= \frac{L1 \dot{\theta_1(t)} (sin(\theta_2(t)) cos(\theta_1(t)) - cos(\theta_2(t)) sin(\theta_1(t)))}{cos(\theta_2(t))}
+  \end{aligned}
+
+Now that we completed the kinematic analysis, we can proceed to the dynamic
+analysis. We perform the dynamic analysis using the Lagrange approach, obtaining
+the following DAE:
+
+.. math::
+
+  \begin{aligned}
+    & 2 \ddot{\theta_2(t)} L_1^2 m_1 cos(-\theta_2(t) + \theta_1(t)) + 2 \dot{\theta_2(t)}^2 L_1^2 m_1 sin(-\theta_2(t) + \theta_1(t)) + \frac{(7 L_1^2 m_1 \ddot{\theta_1(t)})}{3} + \frac{5 (g m_1 - \frac{(2 \lambda_2(t))}{5}) L_1 cos(\theta_1(t))}{2} + sin(\theta_1(t)) L_1 \lambda_1(t) + Ta = 0 \\[0.2em]
+    & 2 (m_1 L_1 \ddot{\theta_1(t)} cos(-\theta_2(t) + \theta_1(t)) - m_1 \dot{\theta_1(t)}^2 L_1 sin(-\theta_2(t) + \theta_1(t)) + \frac{4 \ddot{\theta_2(t)} L_1 m_1}{3} + (g m_1 - \lambda_2(t)) cos(\theta_2(t)) + sin(\theta_2(t)) \lambda_1(t)) L_1 = 0 \\[0.2em]
+    & 3 \ddot{s(t)} m_1 + \lambda_1(t) + Fa(s(t)) = 0 \\[0.2em]
+    & -cos(\theta_1(t)) L_1 - 2 L_1 cos(\theta_2(t)) + s(t) = 0 \\[0.2em]
+    & -L_1 (sin(\theta_1(t)) + 2 sin(\= 0 theta_2(t)))
+  \end{aligned}
+
+where we assumed:
+
+.. math::
+
+  \begin{aligned}
+    L_2 &= 2 L_1 \\[0.2em]
+    m_3 &= 3 m_1 \\[0.2em]
+    m_2 &= 2 m_1 \\[0.2em]
+    iz_1 &= \frac{1}{12} L_1^2 m_1 \\[0.2em]
+    iz_2 &= \frac{2}{3} L_1^2 m_1 \\[0.2em]
+    iz_3 &= 0
+  \end{aligned}
+
+in which :math:`L_1` is the length of the crank, :math:`m_1` is the mass of the
+crank, :math:`g` is the gravitational acceleration, :math:`\lambda_1(t)` and
+:math:`\lambda_2(t)` are the Lagrange multipliers associated with the
+constraint equations. In addition, we assumed to have the crank actuated by a
+torque :math:`Ta` and the slider to overcome a force :math:`Fa(s(t))`. The force
+can be define at will, in this case we have chosen:
+
+.. math::
+
+  Fa(s(t)) = \begin{cases}
+    Fa (s - 2.5) ^ 2 & \text{if } s(t) \leq 2.5 \\[0.2em]
+    0 & \text{otherwise}
+  \end{cases}
+
+where :math:`Fa` is a constant.
+
+A feasible set of initial conditions can be obtained by solving the system of
+constraint equations and their time derivatives at :math:`t=0`:
 
 .. math::
 
   \begin{cases}
-    x_1' - u_1 = 0 & \\[0.5em]
-    x_2' - u_2 = 0 & \\[0.5em]
-    x_3' - u_3 = 0 & \\[0.5em]
-    y_1' - v_1 = 0 & \\[0.5em]
-    y_2' - v_2 = 0 & \\[0.5em]
-    y_3' - v_3 = 0 & \\[0.5em]
-    u_1' + G m_2\dfrac{x_1 - x_2}{d_{12}^3} +
-           G m_3\dfrac{x_1 - x_3}{d_{13}^3} = 0 & \\
-    u_2' + G m_3\dfrac{x_2 - x_3}{d_{23}^3} +
-           G m_1\dfrac{x_2 - x_1}{d_{12}^3} = 0 & \\
-    u_3' + G m_1\dfrac{x_3 - x_1}{d_{13}^3} +
-           G m_2\dfrac{x_3 - x_2}{d_{23}^3} = 0 & \\
-    v_1' + G m_2\dfrac{y_1 - y_2}{d_{12}^3} +
-           G m_3\dfrac{y_1 - y_3}{d_{13}^3} = 0 & \\
-    v_2' + G m_3\dfrac{y_2 - y_3}{d_{23}^3} +
-           G m_1\dfrac{y_2 - y_1}{d_{12}^3} = 0 & \\
-    v_3' + G m_1\dfrac{y_3 - y_1}{d_{13}^3} +
-           G m_2\dfrac{y_3 - y_2}{d_{23}^3} = 0 & \\
+     \theta_1(0) &= \frac{1}{3} \pi \\[0.2em]
+     \dot{\theta_1}(0) &= 0 \\[0.2em]
+     \theta_2(0) &= -arcsin(\frac{1}{4} \sqrt{3}) \\[0.2em]
+     s(0) &= \frac{1}{2} L1 (1 + \sqrt{13}) \\[0.2em]
+     \dot{theta_2}(0) &= 0 \\[0.2em]
+     \dot{s}(0) &= 0
   \end{cases}
 
-
-where the distances between the bodies are defined as:
-
-.. math::
-
-  \begin{split}
-     d_{12} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2} \\
-     d_{13} = \sqrt{(x_1 - x_3)^2 + (y_1 - y_3)^2} \\
-     d_{23} = \sqrt{(x_2 - x_3)^2 + (y_2 - y_3)^2} \\
-  \end{split}
-
-and :math:`G` is the gravitational constant, :math:`m_1` is the mass of the
-first body, :math:`m_2` is the mass of the second body, and :math:`m_3` is the
-mass of the third mass. A feasible set of initial conditions for creating a
-remarkable stable orbit (infinity shaped like) are:
+The initial conditions are for the Lagrange multipliers can be obtained from
+DAE transformed into an ODE:
 
 .. math::
 
   \begin{cases}
-     x_1(0) =  0.97000436   \\[0.2em]
-     x_2(0) = -0.97000436   \\[0.2em]
-     x_3(0) =  0.0          \\[0.2em]
-     y_1(0) = -0.24308753   \\[0.2em]
-     y_2(0) =  0.24308753   \\[0.2em]
-     y_3(0) =  0.0          \\[0.2em]
-     u_1(0) =  0.93240737/2 \\[0.2em]
-     u_2(0) =  0.93240737/2 \\[0.2em]
-     u_3(0) = -0.93240737   \\[0.2em]
-     v_1(0) =  0.86473146/2 \\[0.2em]
-     v_2(0) =  0.86473146/2 \\[0.2em]
-     v_3(0) = -0.86473146
+     \lambda_1(0) &= \frac{-0.4006907142 L_1 Fa(\frac{1}{2} L_1 (1 + \sqrt{13})) - 0.4063232683 L_1 g m_1 - 0.5417643578 Ta}{L_1}
+     \lambda_2(0) &= \frac{1.235140062 L_1 g m_1 + 0.1335630204 L_1 Fa(\frac{1}{2} L1 (1 + \sqrt{13})) + 0.3135200802 Ta}{L_1}
   \end{cases}
 
-where :math:`G = 1`, :math:`m_1 = 1`, :math:`m_2 = 1`, and :math:`m_3 = 1`.
-
-.. image:: images/Three-body_Problem_Animation_with_COM.gif
-    :align: center
-    :width: 25%
-
-Load the ODE
+Load the DAE
 ------------
 
 Consider the implicit DAE defined in the previous section and define the
 class for the DAE to be integrated in the file `SliderCrankDAE.m`. Notice that
-the class ``SliderCrankDAE`` derived from the base class ``ODEsystem``. The
-content of the file `ThreeBodyProblem.m`, will contain the methods ``F`` and ``JF``
-for the evaluation of the system of ODEs and its Jacobian matrices with respect
+the class ``SliderCrankDAE`` is derived from the base class ``ODEsystem``. The
+content of the file `SliderCrankDAE.m`, will contain the methods ``F`` and
+``JF`` for the evaluation of the DAE and its Jacobian matrices with respect
 to the state variables and their derivatives, respectively.
 
-For more details on the implementation of the class ``ThreeBodyProblem`` please
-refer to the file `ThreeBodyProblem.m`. If you are interested easier implementation
-of the ODE system, please refer to the other examples present in the documentation.
+For more details on the implementation of the class ``SliderCrankDAE`` please
+refer to the file `SliderCrankDAE.m`.
 
-Instantiate the ODE
+Instantiate the DAE
 -------------------
 
-Having ``ThreeBodyProblem.m`` now can instantiate an ``ODEsystem`` class instance
-with the desired parameters, *e.g.* the gravitational constant and the masses of
-the masses of the bodies:
+Having ``SliderCrankDAE.m`` we can now instantiate an ``ODEsystem`` class
+instance with the desired parameters, *e.g.,* the gravitational constant, the
+mass of the crank, the crank length, the actuation torque and the force:
 
 .. code:: none
 
-  G   = 1.0; % Gravitational constant
-  m_1 = 1.0; % Body 1 mass
-  m_2 = 1.0; % Body 2 mass
-  m_3 = 1.0; % Body 3 mass
-  ODE = ThreeBodyProblem(G, m_1, m_2, m_3);
+  g   = 9.81; % gravitational constant (m/s^2)
+  m   = 1.0;  % crank mass (kg)
+  l   = 1.0;  % crank length (m)
+  Fa  = 10.0; % force (N)
+  Ta  = 10.0; % torque (Nm)
+  DAE = SliderCrankDAE(G, m_1, m_2, m_3);
 
 Choose solver
 -------------
 
-Choose a suitable solver for the ODE system. In this example we will use the
-``ExplicitEuler`` solver, not because it is the best choice, but because it will
-allow us to visualize the drift of the numerical solution. After the solver is
-instantiated, attach the ODE system to the solver by calling the method ``set_ode``
-method of the solver class:
+Choose a suitable solver for the DAE system. In this example we will use the
+``ImplicitEuler`` solver. Afterwards, attach the ODE system to the solver by
+calling the method ``set_ode`` method of the solver class:
 
 .. code:: none
 
-  solver = ExplicitEuler(); % Initialize solver
+  solver = ImplicitEuler(); % Initialize solver
   solver.setODE(ODE);       % Attach ODE to the solver
-
 
 Integrate
 ---------
@@ -142,37 +162,13 @@ Select the range and the desired sampling steps for the numerical solution:
 
 .. code:: none
 
-  d_t   = 0.005;      % Desired time step (s)
-  t_ini = 0.0;        % Initial time (s)
-  t_end = 6.32591398; % Final time (s)
+  d_t   = 0.05;
+  t_ini = 0.0;
+  t_end = 10.0;
   T_vec = t_ini:d_t:t_end;
 
-Notice that the period of the orbit is :math:`T = 6.32591398` and the sampling
-step, choosen :math:`\Delta t = 0.005`, is small enough to capture the orbit
-period without making the numerical solution drifting too much. Of course, the
-sampling step can be reduced to obtain a better numerical solution but it will
-increase the computational cost. If we try to increase the final time of the
-integration, the numerical solution will drift away from the orbit more and more
-as the time increases.
-
-For the initial condition we will use the initial condition given in the
-initial section:
-
-.. code:: none
-
-  x_1 =  0.97000436;
-  x_2 = -0.97000436;
-  x_3 =  0.0;
-  y_1 = -0.24308753;
-  y_2 =  0.24308753;
-  y_3 =  0.0;
-  u_1 =  0.93240737/2;
-  u_2 =  0.93240737/2;
-  u_3 = -0.93240737;
-  v_1 =  0.86473146/2;
-  v_2 =  0.86473146/2;
-  v_3 = -0.86473146;
-  X_ini = [x_1, x_2, x_3, y_1, y_2, y_3, u_1, u_2, u_3, v_1, v_2, v_3];
+For the initial condition we will use the initial condition computed by the file
+`initial_conditions.m`.
 
 Finally, we can integrate the ODE system by calling the method ``solve`` of the
 solver class:
@@ -181,35 +177,14 @@ solver class:
 
   [X, T] = solver.solve(T_vec, X_ini);
 
-Now the matrix ``X`` contain the solution of the system of ODEs at each time step
-in the vector ``T``.
-
-Extract solution
-----------------
-
-To extract the solution at each time step, we extract each row of the matrix
-``X`` and store it in a vector:
-
-.. code:: none
-
-  x_1 = X(:,1);
-  x_2 = X(:,2);
-  x_3 = X(:,3);
-  y_1 = X(:,4);
-  y_2 = X(:,5);
-  y_3 = X(:,6);
-  u_1 = X(:,7);
-  u_2 = X(:,8);
-  u_3 = X(:,9);
-  v_1 = X(:,10);
-  v_2 = X(:,11);
-  v_3 = X(:,12);
+Now the matrix ``X`` contain the solution of the DAE at each time step in the
+vector ``T``.
 
 Plot solution
 -------------
 
-Finally, we can plot the solution of the system of ODEs. For more details on
-the plotting of the solution, please refer to MATLAB online documentation.
+Finally, we can plot the solution of the DAE. For more details on the plotting
+of the solution, please refer to MATLAB file `SliderCrankDAE_Run.m`.
 
 .. image:: ./images/test1_theta.png
   :width: 80%

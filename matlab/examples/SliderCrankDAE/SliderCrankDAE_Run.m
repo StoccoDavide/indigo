@@ -7,7 +7,7 @@ close all;
 %% Instantiate system object
 
 % Slider Crank parameters
-Fa = 10.0;  % force (N)
+Fa = 10.0; % force (N)
 Ta = 10.0; % torque (Nm)
 m  = 1.0;  % mass (kg)
 l  = 1.0;  % length (m)
@@ -158,7 +158,7 @@ hold off;
 
 %% Animate the mechanism
 
-for j = 1:length(solver_name)
+for j = 1:1%length(solver_name)
     fprintf(['Animating the mechanism with the ', solver_name{j}, ...
              ' solution.\n'])
 
