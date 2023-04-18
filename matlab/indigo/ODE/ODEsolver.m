@@ -42,6 +42,13 @@
 %> \f[
 %> \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
 %> \f]
+%>
+%> - A_tol   \f$ 10^{-6} \f$] Absolute tolerance  \f$ A_{tol} \f$.
+%> - R_tol   default = \f$ 10^{-4} \f$] Relative tolerance \f$ R_{tol} \f$.
+%> - fac     default = \f$ 0.9 \f$] Safety factor \f$ f \f$.
+%> - fac_min default = \f$ 0.2 \f$] Minimum safety factor \f$ f_{min} \f$.
+%> - fac_max default = \f$ 2.0 \f$]Maximum safety factor \f$ f_{max} \f$.
+%>
 %
 classdef ODEsolver < handle
   %
@@ -50,6 +57,14 @@ classdef ODEsolver < handle
     %> Name of the solver.
     %
     m_name;
+    %
+    %> Order of the solver.
+    %
+    m_order;
+    %
+    %> True if explicit RK
+    %
+    m_explicit;
     %
     %> Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
     %
@@ -92,6 +107,14 @@ classdef ODEsolver < handle
     %
     m_projection = false;
     %
+    % tolerance
+    m_A_tol   = 1e-6; % Absolute tolerance
+    m_R_tol   = 1e-4; % Relative tolerance
+    % adaptive step
+    m_fac     = 0.9;  % Safety factor
+    m_fac_min = 0.2;  % Desent safety factor
+    m_fac_max = 1.5;  % Ascent safety factor
+
   end
   %
   methods
@@ -101,42 +124,26 @@ classdef ODEsolver < handle
     %> Class constructor for ODEsolver, which requires the name of the solver
     %> used to integrate the system of ODEs/DAEs as input.
     %>
-    %> \param t_name The name of the solver.
-    %> \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-    %> \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %> \param t_b_e  The embedded weights vector \f$ \hat{\mathbf{b}} \f$
-    %>               (row vector).
-    %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %> \param name  The name of the solver.
+    %> \param order Order of the RK method.
+    %> \param tbl   - A     The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %>              - b     The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %>              - b_e    The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %>              - c     The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
     %> \return An instance of the ODEsolver class.
     %
-    function this = ODEsolver( varargin )
-
-      CMD = 'indigo::ODEsolver::ODEsolver(...): ';
-
-      this.m_newton_solver = NewtonSolver();
-
-      if (nargin == 4)
-        t_name = varargin{1};
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = [];
-        t_c    = varargin{4};
-      elseif (nargin == 5)
-        t_name = varargin{1};
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = varargin{4};
-        t_c    = varargin{5};
-      else
-        error([CMD, 'Wrong number of input arguments.']);
-      end
+    function this = ODEsolver( name, order, tbl, explicit )
+      CMD = 'indigo::ODEsolver::ODEsolver( name, order, tbl ): ';
 
       % Collect input arguments
-      this.m_name = t_name;
+      this.m_name          = name;
+      this.m_order         = order;
+      this.m_explicit      = explicit;
+      this.m_newton_solver = NewtonSolver();
 
       % Set the Butcher tableau
-      this.set_tableau(t_A, t_b, t_b_e, t_c);
+      this.set_tableau( tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -199,8 +206,7 @@ classdef ODEsolver < handle
 
       CMD = 'indigo::ODEsolver::set_max_substeps(...)';
 
-      assert(t_max_substeps >= 0, ...
-        [CMD, 'invalid maximum number of substeps.']);
+      assert(t_max_substeps >= 0, [CMD, 'invalid maximum number of substeps.']);
 
       this.m_max_substeps = t_max_substeps;
     end
@@ -225,8 +231,7 @@ classdef ODEsolver < handle
 
       CMD = 'indigo::ODEsolver::set_max_projection_iter(...)';
 
-      assert(t_max_projection_iter > 0, ...
-        [CMD, 'invalid maximum number of iterations.']);
+      assert(t_max_projection_iter > 0, [CMD, 'invalid maximum number of iterations.']);
 
       this.m_max_projection_iter = t_max_projection_iter;
     end
@@ -355,11 +360,11 @@ classdef ODEsolver < handle
     %>         weights vector \f$ \hat{\mathbf{b}} \f$ (row vector), and nodes
     %>         vector \f$ \mathbf{c} \f$ (column vector).
     %
-    function [A, b, b_e, c] = get_tableau( this )
-      A   = this.m_A;
-      b   = this.m_b;
-      b_e = this.m_b_e;
-      c   = this.m_c;
+    function res = get_tableau( this )
+      res.A   = this.m_A;
+      res.b   = this.m_b;
+      res.c   = this.m_c;
+      res.b_e = this.m_b_e;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -372,19 +377,19 @@ classdef ODEsolver < handle
     %>            (row vector).
     %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
     %
-    function set_tableau( this, A, b, b_e, c )
+    function set_tableau( this, tbl )
 
-      CMD = 'indigo::ODEsolver::set_tableau(...): ';
+      CMD = 'indigo::ODEsolver::set_tableau( tbl ): ';
 
       % Check the Butcher tableau
-      ok = this.check_tableau(A, b, b_e, c);
+      ok = this.check_tableau( tbl );
       assert( ok, [CMD, 'invalid tableau detected.'] );
 
       % Set the tableau
-      this.m_A   = A;
-      this.m_b   = b;
-      this.m_b_e = b_e;
-      this.m_c   = c;
+      this.m_A   = tbl.A;
+      this.m_b   = tbl.b;
+      this.m_b_e = tbl.b_e;
+      this.m_c   = tbl.c;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -770,67 +775,28 @@ classdef ODEsolver < handle
     %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
     %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
     %> \param d_t Actual advancing time step \f$ \Delta t\f$.
-    %> \param A_tol   [optional, default = \f$ 10^{-6} \f$] Absolute tolerance
-    %>                 \f$ A_{tol} \f$.
-    %> \param R_tol   [optional, default = \f$ 10^{-6} \f$] Relative tolerance
-    %>                 \f$ R_{tol} \f$.
-    %> \param fac     [optional, default = \f$ 0.9 \f$] Safety factor \f$ f \f$.
-    %> \param fac_min [optional, default = \f$ 0.2 \f$] Minimum safety factor
-    %>                \f$ f_{min} \f$.
-    %> \param fac_max [optional, default = \f$ 2.0 \f$]Maximum safety factor
-    %>                \f$ f_{max} \f$.
-    %>
     %> \return The suggested time step for the next advancing step \f$ \Delta
     %>         t_{k+1} \f$.
     %>
-    function out = adapt_step( this, x_h, x_l, d_t, varargin )
+    function out = adapt_step( this, x_h, x_l, d_t )
 
       CMD = 'indigo::ODEsolver::adapt_step(...): ';
 
-      % Collect optional inputs
-      A_tol   = 1e-6;
-      R_tol   = 1e-4;
-      fac     = 0.9;
-      fac_min = 0.2;
-      fac_max = 1.5;
-
-      % Absolute tolerance
-      if (nargin > 4)
-        A_tol = varargin{1};
-      end
-
-      % Relative tolerance
-      if (nargin > 5)
-        R_tol = varargin{2};
-      end
-
-      % Safety factor
-      if (nargin > 5)
-        fac = varargin{3};
-      end
-
-      % Desent safety factor
-      if (nargin > 5)
-        fac_min = varargin{4};
-      end
-
-      % Ascent safety factor
-      if (nargin > 5)
-        fac_max = varargin{5};
-      end
-
-      % Check inputs number
-      if (nargin > 8)
-        error([CMD 'wrong number of input arguments.']);
-      end
-
       % Compute the error with 2-norm
-      r = (x_h - x_l)./ ( A_tol + (R_tol/2)*(abs(x_h)+abs(x_l)) );
+      r = (x_h - x_l)./ ( this.m_A_tol + (this.m_R_tol/2)*(abs(x_h)+abs(x_l)) );
       e = norm(r,2)/length(x_h);
 
       % Compute the suggested time step
-      q   = length(this.m_c)+0;
-      out = d_t * min(fac_max, max(fac_min, fac * (1/(e)) ^ (1/q)));
+      q   = this.m_order+1;
+      out = d_t * min(this.m_fac_max, max(this.m_fac_min, this.m_fac * (1/(e)) ^ (1/q)));
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function info( this )
+      fprintf('Method:  %s\n', this.m_name);
+      fprintf('order:   %d\n', this.m_order);
+      fprintf('explicit %d\n', this.m_explicit);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -867,15 +833,14 @@ classdef ODEsolver < handle
     %
     %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
     %>
-    %> \param A   Matrix \f$ \mathbf{A} \f$.
-    %> \param b   Weights vector \f$ \mathbf{b} \f$.
-    %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
-    %>            (row vector).
-    %> \param c   Nodes vector \f$ \mathbf{c} \f$.
+    %> - A   Matrix \f$ \mathbf{A} \f$.
+    %> - b   Weights vector \f$ \mathbf{b} \f$.
+    %> - c   Nodes vector \f$ \mathbf{c} \f$.
+    %> - b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    check_tableau( varargin )
+    check_tableau( tbl )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

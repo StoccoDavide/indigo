@@ -51,37 +51,19 @@ classdef RKimplicit < ODEsolver
     %> Initialize the class with the implicit Runge-Kutta method name and its
     %> Butcher tableau.
     %>
-    %> \param t_name The name of the solver.
-    %> \param t_A    The matrix \f$ \mathbf{A} \f$.
-    %> \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %> \param t_b_e  [optional] The embedded weights vector \f$ \hat{\mathbf{b}}
-    %>               \f$ (row vector).
-    %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %> \param name  The name of the solver.
+    %> \param order The order of the scheme.
+    %> \param tbl - A    The matrix \f$ \mathbf{A} \f$.
+    %>            - b    The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %>            - b_e  [optional] The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %>            - c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
     %> \return The instance of the RKimplicit class.
     %
-    function this = RKimplicit( varargin )
-
-      CMD = 'indigo::RKimplicit::RKimplicit(...): ';
-
-      if (nargin == 4)
-        t_name = varargin{1};
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = [];
-        t_c    = varargin{4};
-      elseif (nargin == 5)
-        t_name = varargin{1};
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = varargin{4};
-        t_c    = varargin{5};
-      else
-        error([CMD, 'Wrong number of input arguments.']);
-      end
-
+    function this = RKimplicit( name, order, tbl )
+      CMD = 'indigo::RKimplicit::RKimplicit( name, order, tbl ): ';
       % Call the superclass constructor
-      this@ODEsolver(t_name, t_A, t_b, t_b_e, t_c);
+      this@ODEsolver( name, order, tbl, false );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -170,7 +152,7 @@ classdef RKimplicit < ODEsolver
         tmp = x_k;
         jdx = 1:nx;
         for j = 1:nc
-          tmp = tmp + d_t * this.m_A(i,j) * K(jdx);
+          tmp = tmp + d_t * (this.m_A(i,j) * K(jdx));
           jdx = jdx + nx;
         end
         jdx = 1:nx;
@@ -182,11 +164,11 @@ classdef RKimplicit < ODEsolver
           end
 
           % Compute the Jacobians w.r.t. x and x_dot
-          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + this.m_c(i) * d_t);
+          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + d_t * this.m_c(i) );
 
           % Combine the Jacobians w.r.t. x and x_dot to obtain
           % the Jacobian w.r.t. K
-          out(idx,jdx) = JF_x * d_t * this.m_A(i,j) + JF_x_dot * mask;
+          out(idx,jdx) = (d_t * this.m_A(i,j)) * JF_x  + JF_x_dot * mask;
 
           jdx = jdx + nx;
         end
@@ -355,32 +337,23 @@ classdef RKimplicit < ODEsolver
     %
     %> Check Butcher tableau consistency for an implict Runge-Kutta method.
     %>
-    %> \param A   Matrix \f$ \mathbf{A} \f$.
-    %> \param b   Weights vector \f$ \mathbf{b} \f$.
-    %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
-    %> \param c   Nodes vector \f$ \mathbf{c} \f$.
+    %> - A   Matrix \f$ \mathbf{A} \f$.
+    %> - b   Weights vector \f$ \mathbf{b} \f$.
+    %> - c   Nodes vector \f$ \mathbf{c} \f$.
+    %> - b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    function out = check_tableau( varargin )
+    function out = check_tableau( tbl )
 
-      CMD = 'indigo::RKimplicit::check_tableau(...): ';
+      CMD = 'indigo::RKimplicit::check_tableau( tbl ): ';
 
       out = true;
 
-      if (nargin == 3)
-        t_A    = varargin{1};
-        t_b    = varargin{2};
-        t_b_e  = [];
-        t_c    = varargin{3};
-      elseif (nargin == 4)
-        t_A    = varargin{1};
-        t_b    = varargin{2};
-        t_b_e  = varargin{3};
-        t_c    = varargin{4};
-      else
-        error([CMD, 'Wrong number of input arguments.']);
-      end
+      t_A   = tbl.A;
+      t_b   = tbl.b;
+      t_b_e = tbl.b_e;
+      t_c   = tbl.c;
 
       % Check matrix A
       if (~isnumeric(t_A))

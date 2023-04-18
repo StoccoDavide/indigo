@@ -21,12 +21,11 @@ classdef GaussLegendre2 < RKimplicit
     %> \endrst
     %
     function this = GaussLegendre2()
-      this@RKimplicit( ...
-        'GaussLegendre2', ...
-        [1/2], ...
-        [1], ...
-        [1/2]' ...
-      );
+      tbl.A   = [1/2];
+      tbl.b   = 1;
+      tbl.c   = 1/2;
+      tbl.b_e = [];
+      this@RKimplicit( 'GaussLegendre2', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

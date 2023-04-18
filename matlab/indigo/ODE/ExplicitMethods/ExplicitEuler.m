@@ -21,12 +21,11 @@ classdef ExplicitEuler < RKexplicit
     %> \endrst
     %
     function this = ExplicitEuler()
-      this@RKexplicit( ...
-        'ExplicitEuler', ...
-        [0], ...
-        [1], ...
-        [0]' ...
-      );
+      tbl.A   = 0;
+      tbl.b   = 1;
+      tbl.c   = 0;
+      tbl.b_e = [];
+      this@RKexplicit( 'ExplicitEuler', 1, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

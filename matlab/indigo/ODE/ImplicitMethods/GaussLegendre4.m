@@ -24,12 +24,11 @@ classdef GaussLegendre4 < RKimplicit
     %
     function this = GaussLegendre4()
       t = sqrt(3)/6;
-      this@RKimplicit( ...
-        'GaussLegendre4', ...
-        [1/4, 1/4-t; 1/4+t, 1/4], ...
-        [1/2, 1/2], ...
-        [1/2-t, 1/2+t]' ...
-      );
+      tbl.A   = [1/4, 1/4-t; 1/4+t, 1/4];
+      tbl.b   = [1/2, 1/2];
+      tbl.c   = [1/2-t, 1/2+t]';
+      tbl.b_e = [];
+      this@RKimplicit( 'GaussLegendre4', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

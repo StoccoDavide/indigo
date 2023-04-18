@@ -21,12 +21,11 @@ classdef ImplicitMidpoint < RKimplicit
     %> \endrst
     %
     function this = ImplicitMidpoint()
-      this@RKimplicit( ...
-        'ImplicitMidpoint', ...
-        [1/2], ...
-        [1], ...
-        [1/2]' ...
-      );
+      tbl.A   = 1/2;
+      tbl.b   = 1;
+      tbl.c   = 1/2;
+      tbl.b_e = [];
+      this@RKimplicit( 'ImplicitMidpoint', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -22,12 +22,11 @@ classdef LobattoIIIB2 < RKimplicit
     %> \endrst
     %
     function this = LobattoIIIB2()
-      this@RKimplicit( ...
-        'LobattoIIIB2', ...
-        [1/2, 0; 1/2, 0], ...
-        [1/2, 1/2], ...
-        [0, 1]' ...
-      );
+      tbl.A   = [1/2, 0; 1/2, 0];
+      tbl.b   = [1/2, 1/2];
+      tbl.c   = [0, 1]';
+      tbl.b_e = [];
+      this@RKimplicit( 'LobattoIIIB2', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

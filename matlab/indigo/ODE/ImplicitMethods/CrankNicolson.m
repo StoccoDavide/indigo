@@ -22,12 +22,11 @@ classdef CrankNicolson < RKimplicit
     %> \endrst
     %
     function this = CrankNicolson()
-      this@RKimplicit( ...
-        'CrankNicolson', ...
-        [0, 0; 1/2, 1/2], ...
-        [1/2, 1/2], ...
-        [0, 1]' ...
-      );
+      tbl.A   = [0, 0; 1/2, 1/2];
+      tbl.b   = [1/2, 1/2];
+      tbl.c   = [0, 1]';
+      tbl.b_e = [];
+      this@RKimplicit( 'CrankNicolson', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

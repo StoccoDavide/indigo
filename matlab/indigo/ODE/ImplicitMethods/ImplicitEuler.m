@@ -21,12 +21,11 @@ classdef ImplicitEuler < RKimplicit
     %> \endrst
     %
     function this = ImplicitEuler()
-      this@RKimplicit( ...
-        'ImplicitEuler', ...
-        [1], ...
-        [1], ...
-        [1]' ...
-      );
+      tbl.A   = 1;
+      tbl.b   = 1;
+      tbl.c   = 1;
+      tbl.b_e = [];
+      this@RKimplicit( 'ImplicitEuler', 1, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

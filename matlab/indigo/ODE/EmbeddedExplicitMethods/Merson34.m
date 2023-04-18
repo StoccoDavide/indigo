@@ -1,13 +1,13 @@
 %
 %> Class container for Merson's 4(5) method.
 %
-classdef Merson45 < RKexplicit
+classdef Merson34 < RKexplicit
   %
   methods
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Merson's 4(5) method.
+    %> Merson's 3(4) method.
     %>
     %> \rst
     %> .. math::
@@ -16,7 +16,7 @@ classdef Merson45 < RKexplicit
     %>       0 &   0 &   0 &    0 & 0 & 0 \\
     %>     1/3 & 1/3 &   0 &    0 & 0 & 0 \\
     %>     1/3 & 1/6 & 1/6 &    0 & 0 & 0 \\
-    %>     1/2 & 1/8 &   0 &  1/8 & 0 & 0 \\
+    %>     1/2 & 1/8 &   0 &  3/8 & 0 & 0 \\
     %>       1 & 1/2 &   0 & -3/2 & 2 & 0 \\
     %>     \hline
     %>        &  1/6 & 0 &  2/3 & 1/6 &   0 \\
@@ -25,18 +25,18 @@ classdef Merson45 < RKexplicit
     %>
     %> \endrst
     %
-    function this = Merson45()
-        this@RKexplicit( ...
-        'Merson45', ...
-        [0,   0,   0,    0, 0; ...
-         1/3, 0,   0,    0, 0; ...
-         1/6, 1/6, 0,    0, 0; ...
-         1/8, 0,   1/8,  0, 0; ...
-         1/2, 0,   -3/2, 2, 0], ...
-        [1/9,  0, 9/20, 16/45, 1/12, 0], ...
-        [1/10, 0, 3/10,   2/5,  1/5, 0], ...
-        [0, 1/3, 1/3, 1/2, 1, 1]' ...
-      );
+    % [2]	P.M. Lukehart, "Algorithm 218. Kutta Merson" Comm. Assoc. Comput. Mach. , 6 : 12 (1963) pp. 737–738
+    %
+    function this = Merson34()
+      tbl.A   = [0,   0,   0,    0, 0; ...
+                 1/3, 0,   0,    0, 0; ...
+                 1/6, 1/6, 0,    0, 0; ...
+                 1/8, 0,   3/8,  0, 0; ...
+                 1/2, 0,   -3/2, 2, 0];
+      tbl.b   = [1/2, 0,   -3/2, 2, 0];
+      tbl.c   = [0,  1/3,  1/3,   1/2,    1]';
+      tbl.b_e = [1/6,  0,    0,   2/3,    1/6];
+      this@RKexplicit( 'Merson34', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

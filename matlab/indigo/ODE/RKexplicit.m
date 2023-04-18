@@ -52,18 +52,18 @@ classdef RKexplicit < ODEsolver
     %> Initialize the class with the explicit Runge-Kutta method name and its
     %> Butcher tableau.
     %>
-    %> \param t_name The name of the solver.
-    %> \param t_A    The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-    %> \param t_b    The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %> \param t_b_e  [optional] The embedded weights vector \f$ \hat{\mathbf{b}}
-    %>               \f$ (row vector).
-    %> \param t_c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %> \param name  The name of the solver.
+    %> \param order The order of the solver.
+    %> \param tbl   - A   The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %>              - b   The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %>              - c   The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %>              - b_e [optional] The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
     %>
     %> \return The instance of the RKexplicit class.
     %
-    function this = RKexplicit( varargin )
+    function this = RKexplicit( name, order, tbl )
       % Call the superclass constructor
-      this@ODEsolver( varargin{:} );
+      this@ODEsolver( name, order, tbl, true );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -338,25 +338,16 @@ classdef RKexplicit < ODEsolver
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    function out = check_tableau( varargin )
+    function out = check_tableau( tbl )
 
-      CMD = 'indigo::RKexplicit::check_tableau(...): ';
-
-      if (nargin == 3)
-        A   = varargin{1};
-        b   = varargin{2};
-        b_e = [];
-        c   = varargin{3};
-      elseif (nargin == 4)
-        A   = varargin{1};
-        b   = varargin{2};
-        b_e = varargin{3};
-        c   = varargin{4};
-      else
-        error([CMD, 'Wrong number of input arguments.']);
-      end
+      CMD = 'indigo::RKexplicit::check_tableau( tbl ): ';
 
       out = true;
+
+      A   = tbl.A;
+      b   = tbl.b;
+      c   = tbl.c;
+      b_e = tbl.b_e;
 
       % Check matrix A
       if (~isnumeric(A))
