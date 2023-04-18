@@ -27,6 +27,7 @@ module Indigo()
   local m_LAST           := NULL;
   local m_LEM            := NULL;
   local m_VerboseMode    := false;
+  local m_WarningMode    := true;
   local m_SystemType     := 'Empty';
   local m_ReductionSteps := [];
   local m_SystemVars     := [];
@@ -90,6 +91,7 @@ module Indigo()
     _self:-m_LAST           := proto:-m_LAST;
     _self:-m_LEM            := proto:-m_LEM;
     _self:-m_VerboseMode    := proto:-m_VerboseMode;
+    _self:-m_WarningMode    := proto:-m_WarningMode;
     _self:-m_SystemType     := proto:-m_SystemType;
     _self:-m_ReductionSteps := proto:-m_ReductionSteps;
     _self:-m_SystemVars     := proto:-m_SystemVars;
@@ -227,6 +229,64 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export SetVerboseMode::static := proc(
+    _self::Indigo,
+    mode::boolean,
+    $)
+
+    description "Set the verbosity of the module to <mode>.";
+
+    _self:-m_VerboseMode := mode;
+    _self:-m_LAST:-SetVerboseMode(_self:-m_LAST, mode);
+    _self:-m_LEM:-SetVerboseMode(_self:-m_LEM, mode);
+    return NULL;
+  end proc: # SetVerboseMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export EnableWarningMode::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Enable the warning mode of the module.";
+
+    _self:-m_WarningMode := true;
+    _self:-m_LAST:-EnableWarningMode(_self:-m_LAST);
+    _self:-m_LEM:-EnableWarningMode(_self:-m_LEM);
+    return NULL;
+  end proc: # EnableWarningMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export DisableWarningMode::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Disable the warning mode of the module.";
+
+    _self:-m_WarningMode := false;
+    _self:-m_LAST:-DisableWarningMode(_self:-m_LAST);
+    _self:-m_LEM:-DisableWarningMode(_self:-m_LEM);
+    return NULL;
+  end proc: # DisableWarningMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export SetWarningMode::static := proc(
+    _self::Indigo,
+    mode::boolean,
+    $)
+
+    description "Set the warning mode of the module to <mode>.";
+
+    _self:-m_WarningMode := mode;
+    _self:-m_LAST:-SetWarningMode(_self:-m_LAST, mode);
+    _self:-m_LEM:-SetWarningMode(_self:-m_LEM, mode);
+    return NULL;
+  end proc: # SetWarningMode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export SetVeilingSymbol::static := proc(
     _self::Indigo,
     sym::string,
@@ -254,7 +314,7 @@ module Indigo()
     _self:-m_SystemType     := 'Empty';
     _self:-m_ReductionSteps := [];
     _self:-m_SystemVars     := [];
-    _self:-m_LEM:-VeilForget(_self:-m_LEM);
+    _self:-m_LEM:-ForgetVeil(_self:-m_LEM);
     return NULL;
   end proc: # Reset
 
@@ -291,7 +351,8 @@ module Indigo()
     _self::Indigo,
     $)::list;
 
-    description "Get the list of differential equations of the reduced system.";
+    description "Get the list of differential equations of the reduced implicit "
+      "system of the type F(x,x',t) = 0.";
 
     return convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
       _self:-m_ReductionSteps[-1]["G"], list);

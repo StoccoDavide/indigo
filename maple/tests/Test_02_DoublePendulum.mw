@@ -96,461 +96,215 @@
 <Task-table>
     <Task-category name="&lt;default&gt;"/>
 </Task-table>
-<Task/>
-<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Build the Library</Text-field></Title>
-<Group hide-input="false" labelreference="L256747" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
+<Task/><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L766" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart;
+interface(rtablesize = 200);
+kernelopts(assertlevel = 2);</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256765" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">ds := kernelopts('dirsep'):</Text-field>
-</Input>
-</Group><Presentation-Block>
-<Group view="code" hide-input="false" labelreference="L256770" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">MODULE_NAME := &quot;Indigo&quot;:</Text-field>
+<Group view="code" hide-input="false" labelreference="L761" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Create a LAST object</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj := Object(Indigo);</Text-field>
 </Input>
 </Group>
-<Group view="code" labelreference="L256801" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">MODULE_NAME_UTILS := &quot;IndigoUtils&quot;:</Text-field>
-</Input>
-</Group>
-<Group view="code" labelreference="L256772" drawlabel="true">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">SOURCE_DIR  := cat(currentdir(), ds, &quot;lib&quot;):</Text-field>
-</Input>
-</Group>
-<Group view="code" hide-input="false" labelreference="L256771" drawlabel="true">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">BINARY_DIR  := cat(currentdir(), ds, &quot;installer&quot;, ds, &quot;bin&quot;):</Text-field>
-</Input>
-</Group>
-<Group view="code" hide-input="false" labelreference="L256769" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LIBRARY_MLA := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;):
-</Text-field>
-</Input>
-</Group></Presentation-Block>
-<Group labelreference="L256768" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check bin directory</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if not FileTools:-Exists(BINARY_DIR) then
-  FileTools:-MakeDirectory(BINARY_DIR);
-end if;
+<Group view="code" labelreference="L759" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Print some information</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-Info(Indigo_obj);
 </Text-field>
 </Input>
 </Group>
-<Group labelreference="L256773" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check MLA file</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">if FileTools:-Exists(LIBRARY_MLA) then
-  FileTools:-Remove(LIBRARY_MLA);
-end if;
-</Text-field>
+<Group view="code" labelreference="L774" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-InitLAST(Indigo_obj);</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256777" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Library generation procedure</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN := proc( MODULE_NAME::string, $ )
-
-  local bin_path, src_path;
-
-  bin_path := cat(BINARY_DIR, ds, MODULE_NAME, &quot;.mla&quot;);
-  src_path := cat(SOURCE_DIR, ds, MODULE_NAME, &quot;.mpl&quot;);
-
-  if FileTools:-Exists(src_path) then
-    if not FileTools:-Exists(BINARY_DIR) then
-      FileTools:-MakeDirectory(BINARY_DIR);
-    end if;
-    if FileTools:-Exists(bin_path) then
-      FileTools:-Remove(bin_path):
-    end if;
-    read(src_path);
-    march('create', bin_path);
-    savelib(convert(MODULE_NAME, symbol), bin_path);
-  else
-<Font encoding="UTF-8">    error &quot;Missing file %1.\134n&quot;, </Font>src_path;
-  end if;
-
-end proc:
-</Text-field>
+<Group view="code" hide-input="false" labelreference="L738" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LAST_obj := Indigo_obj:-GetLAST(Indigo_obj);</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256760" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Generate module</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME_UTILS);</Text-field>
+<Group view="code" hide-input="false" labelreference="L736" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LEM_obj := Indigo_obj:-GetLEM(Indigo_obj);</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256802" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME);</Text-field>
+<Group view="code" labelreference="L779" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LEM_obj := LEM_obj:-SetVeilingStrategyPars(LEM_obj,
+  functions = 10
+);</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256774" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Create sources path</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">file := cat(interface(worksheetdir), ds, &quot;installer&quot;, ds, &quot;bin&quot;):
-</Text-field>
+<Group view="code" labelreference="L747" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">LULEM settings</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-DisableVerboseMode(Indigo_obj);</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256788" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Create destination path</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">dest := cat(kernelopts(mapledir), ds, &quot;toolbox&quot;, ds, MODULE_NAME, ds, &quot;lib&quot;, ds):
-</Text-field>
+<Group view="code" labelreference="L775" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-DisableWarningMode(Indigo_obj);</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256799" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Procedure for deep directory removal</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">RmDir := proc( dirpath::string, $ )
-
-  local d, dd, ds;
-
-  ds := kernelopts('dirsep');
-  if FileTools:-Exists(dirpath) and FileTools:-IsDirectory(dirpath) then
-    for d in FileTools:-ListDirectory(dirpath, 'all') do
-      if evalb((d &lt;&gt; &quot;.&quot;) and (d &lt;&gt; &quot;..&quot;)) then
-        dd := cat(dirpath, ds, d);
-        if FileTools:-Exists(dd) then
-          if FileTools:-IsDirectory(dd) then
-            RmDir(dd);
-            # FileTools:-RemoveDirectory(dd, forceremove = true);
-          else
-           FileTools:-Remove(dd);
-          end if;
-        end if;
-      end if;
-    end do;
-    FileTools:-RemoveDirectory(dirpath, forceremove = true);
-  end if;
-  return;
-
-end proc:
-</Text-field>
+<Group view="code" labelreference="L757" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">DAEs system</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256787" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Check destination path</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">RmDir(dest);
-FileTools:-MakeDirectory(dest, recurse = true);
-</Text-field>
+<Group hide-input="false" labelreference="L742" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"># First order
+eq1 := diff(x__1(t),t) = u__1(t):
+eq2 := diff(y__1(t),t) = v__1(t):
+eq3 := diff(x__2(t),t) = u__2(t):
+eq4 := diff(y__2(t),t) = v__2(t):
+
+# Equations of motion
+eq5 := m__1*diff(u__1(t),t) + lambda__1(t)*(2*x__1(t)) - lambda__2(t)*(2*x__2(t) - 2*x__1(t)) = 0:
+eq6 := m__1*diff(v__1(t),t) + lambda__1(t)*(2*y__1(t)) - lambda__2(t)*(2*y__2(t) - 2*y__1(t)) = -m__1*g:
+eq7 := m__2*diff(u__1(t),t) + lambda__2(t)*(2*x__2(t) - 2*x__1(t)) = 0:
+eq8 := m__2*diff(v__1(t),t) + lambda__2(t)*(2*y__2(t) - 2*y__1(t)) = -m__2*g:
+
+# Constraints
+eq9 := x__1(t)^2 + y__1(t)^2 = ell__1^2:
+eq10 := (x__2(t)-x__1(t))^2 + (y__2(t)-y__1(t))^2 = ell__2^2:
+
+DAE := [eq||(1..10)]: &lt;%&gt;;</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256785" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal">Copy the binaries in the toolbox folder</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">n := 1 + length(file):</Text-field>
+<Group hide-input="false" labelreference="L776" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">vars  := [x__1(t), y__1(t), x__2(t), y__2(t), u__1(t), v__1(t), u__2(t), v__2(t), lambda__1(t), lambda__2(t)]: &lt;%&gt;;</Text-field>
 </Input>
 </Group>
-<Group hide-input="false" labelreference="L256784" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">for r in FileTools:-Walk(file, 'topdown', 'followlinks') do
-  limb := cat(dest, ds, r[dir][n..], ds);
-  for d in r[subdirs] do
-    ((d) -&gt; `if`(FileTools:-Exists(d), 0, FileTools:-MakeDirectory(d)))(cat(limb, d));
-  end do;
-  seq(FileTools:-Copy(cat(r[dir], ds, f), cat(limb, f)), f = r[files]);
-end do:</Text-field>
+<Group view="code" hide-input="false" labelreference="L734" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Test 'SystemType'</Text-field>
 </Input>
 </Group>
-</Section>
-<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Test the Library</Text-field></Title>
-<Group hide-input="false" labelreference="L256750" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
+<Group view="code" hide-input="false" labelreference="L754" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-Reset(Indigo_obj);</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256803" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(IndigoUtils):</Text-field>
+<Group view="code" hide-input="false" labelreference="L769" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Test 'LoadMatrices'</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">E_tmp, G_tmp := LinearAlgebra:-GenerateMatrix(DAE, diff(vars, t));
+Indigo_obj:-LoadMatrices(Indigo_obj, 'Generic', E_tmp, G_tmp, vars);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">
-# Utilities for the 'Indigo' module.
-module IndigoUtils:
-
-    # Drop the prefix of the input string &lt;str&gt;.
-    DropPrefix( str::string, $ ) :: string
-
-    # Find the position of variable &lt;var&gt; in the list &lt;lst&gt;.
-    GetPosition( var::{integer, symbol, function}, lst::list, $ ) :: integer
-
-    # Check if the parameter &lt;param&gt;, with name &lt;param_name&gt; is of type 
-    # &lt;param_type&gt;.
-    CheckParam( param::anything, param_name::string, param_type::anything, 
-                where::string, $ )
-
-    # Check if the parameter field &lt;param_field&gt; in table &lt;tab&gt; is of type 
-    # &lt;param_type&gt;, if not print and error message &lt;msg&gt;.
-    CheckTableField( tab::table, param_field::string, msg::string, 
-                     param_type::anything, $ )
-
-    # Check is the parameter name &lt;param_name&gt; in table &lt;tab&gt; is of type 
-    # &lt;param_type&gt;.
-    CheckTableName( tab::table, param_name::string, param_type::anything, 
-                    where::string, $ )
-
-    # Convert a variable &lt;var&gt; into a string. Variables of type 'x[dot](t)' are 
-    # converted into 'x_dot(t)'.
-    ToString( var::anything, $ ) :: string
-
-    # Convert a variable &lt;var&gt; into a Ruby string. Variables of type 
-    # 'x[dot](t)' are converted into 'x_dot(t)'.
-    ToRubyString( var::anything, $ ) :: string
-
-    # Convert a variable &lt;var&gt; into multiple strings. Variables of type 
-    # 'x[dot](t)' are converted into 'x_dot(t)'.
-    ToStringAndSplit( var::anything, $ ) :: string
-
-    # Concatenates input symbols.
-    CatSymbol( )
-
-    # Convert variable &lt;var&gt; into a string with prefix &lt;pre&gt; and postfix 
-    # &lt;post&gt;. Variables of type 'x[dot](t)' are converted into 'x_dot(t)'.
-    ToSymbol( pre::{string, symbol}, var::{string, symbol}, 
-              post::{string, symbol}, $ ) :: symbol
-
-    # Convert a variable &lt;var&gt; to a column vector.
-    ToVector( var::anything, $ ) :: Vector
-
-    # Combine a list of strings or symbols into one unique symbol.
-    JoinSymbols( )
-
-    # Differentiate an expression with respect to a function.
-    DoDiff( )
-
-    # Differentiate a scalar expression &lt;fnc&gt; with respect to a list of 
-    # functions &lt;lst&gt;.
-    DoGradient( fnc::anything, lst::list, $ ) :: anything
-
-    # Differentiate a vector of expressions (gradient) &lt;fnc&gt; with respect to a 
-    # list &lt;lst&gt; of functions.
-    DoHessian( fnc::anything, lst::list, $ ) :: anything
-
-    # Differentiate a vector of expressions &lt;fnc&gt; with respect to a list &lt;lst&gt; 
-    # of functions.
-    DoJacobian( fnc::Vector, lst::list, $ ) :: anything
-
-    # Extract the list variables to substitute from a list of parameters 
-    # &lt;pars&gt;.
-    ExtractSubs( pars::list, $ ) :: list
-
-    # Extract the list of the functions in the expression &lt;expr&gt;, where &lt;onlyD&gt; 
-    # is boolean to extract only the functions of the form D(f).
-    GetFunctions( expr::anything, onlyD::boolean := false, $ ) :: anything
-
-    # Extract the list of the functions in the expression &lt;expr&gt; that are also 
-    # in the list of functions &lt;fncs&gt;.
-    GetFunctionsInList( expr::anything, fncs::list, $ ) :: anything
-
-    # Extracts the list of the symbols in the expression &lt;expr&gt;.
-    GetSymbols( expr::anything, $ ) :: anything
-
-    # Extracts the function prototype from an expression &lt;expr&gt; of type 'f(x) = 
-    # body' or 'f(x)'.
-    GetFunctionPrototype( expr::anything, $ ) :: anything
-
-    # Extracts the function name from an expression &lt;expr&gt; of type 'f(x) = 
-    # body' or 'f(x)'.
-    GetFunctionName( expr::anything, $ ) :: anything
-
-    # Extracts the body from an expression &lt;expr&gt; of type 'f(x) = body' or 
-    # 'f(x)'.
-    GetFunctionBody( expr::anything, $ ) :: anything
-
-    # Checks if the expression &lt;expr&gt; depends on the list of variables &lt;vars&gt;.
-    IsDependentOn( expr::algebraic, vars::list(function), $ ) :: boolean
-
-    # Extracts the set/list of the symbols recursively from the expression 
-    # &lt;expr&gt;.
-    GetSymbolsRecurr( expr::anything, $ ) :: {list, set}
-
-    # Compute the permutation that sorts a list &lt;var&gt;.
-    GetPermSortedList( var::list, $ ) :: list
-
-    # Print a message in color where &lt;fg&gt; is the foreground color, &lt;bg&gt; is the 
-    # background color, &lt;fmt&gt; is the format string, and the remaining inputs 
-    # are string arguments
-    cprintf( fg::anything, bg::anything, fmt::anything )
-
-    # Print an error message.
-    ErrorMessage( )
-
-    # Print a warning message.
-    WarningMessage( )
-
-    # Print a title.
-    PrintTitle( )
-
-    # Print a header.
-    PrintHeader( )
-
-    # Print a message.
-    PrintMessage( )
-
-    # Check if a condition &lt;check&gt; is true and prints an error message if it is 
-    # not.
-    Assert( check::anything )
-
-    # Check if a condition &lt;check&gt; is true and prints a warning message if it 
-    # is not.
-    Warning( check::anything )
-
-</Text-field>
-</Output>
 </Group>
-<Group labelreference="L256751" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(Indigo):</Text-field>
+<Group view="code" hide-input="false" labelreference="L755" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetSystemType(Indigo_obj);</Text-field>
 </Input>
-<Output><Text-field style="Line Printed Output" layout="Line Printed Output">
-# 'Indigo' module.
-object Indigo :: Indigo:
-
-    # Print 'LAST' module information.
-    Info( )
-
-    # 'Indigo' module load procedure.
-    ModuleLoad( )
-
-    # 'Indigo' module unload procedure.
-    ModuleUnload( )
-
-    # Copy the objects &lt;proto&gt; into &lt;self&gt;.
-    ModuleCopy( _self::Indigo, proto::Indigo, $ )
-
-    # Check if the 'LAST' object is initialized.
-    CheckInit( _self::Indigo, $ )
-
-    # Initialize the 'LAST' object with veiling label &lt;label&gt;.
-    InitLAST( _self::Indigo, label::{string, symbol} := NULL, $ )
-
-    # Clear the 'LAST' (and 'LEM') object.
-    ClearLAST( _self::Indigo, $ )
-
-    # Set the 'LAST' (and 'LEM') object &lt;obj&gt;.
-    SetLAST( _self::Indigo, obj::LAST, $ )
-
-    # Get the 'LAST' object.
-    GetLAST( _self::Indigo, $ ) :: LAST
-
-    # Set the 'LEM' object &lt;obj&gt;.
-    SetLEM( _self::LAST, obj::LEM, $ )
-
-    # Get the 'LEM' object.
-    GetLEM( _self::Indigo, $ ) :: LEM
-
-    # Enable the verbose mode.
-    EnableVerboseMode( _self::Indigo, $ )
-
-    # Disable the verbose mode.
-    DisableVerboseMode( _self::Indigo, $ )
-
-    # Set the verbosity of the module to &lt;mode&gt;.
-    SetVerboseMode( _self::Indigo, mode::boolean, $ )
-
-    # Enable the warning mode of the module.
-    EnableWarningMode( _self::Indigo, $ )
-
-    # Disable the warning mode of the module.
-    DisableWarningMode( _self::Indigo, $ )
-
-    # Set the warning mode of the module to &lt;mode&gt;.
-    SetWarningMode( _self::Indigo, mode::boolean, $ )
-
-    # Set the veiling symbol as a string &lt;sym&gt;.
-    SetVeilingSymbol( _self::Indigo, sym::string, $ )
-
-    # Reset the library.
-    Reset( _self::Indigo, label::{string, symbol} := NULL, $ )
-
-    # Get the list of reduction steps.
-    GetReductionSteps( _self::Indigo, i::integer := NULL, $ )
-                     :: {table, list(table)}
-
-    # Get the list of differential equations of the reduced implicit system of 
-    # the type F(x,x',t) = 0.
-    GetDifferentialEquations( _self::Indigo, $ ) :: list
-
-    # Get the list of hidden constraints of the reduced system.
-    GetHiddenConstraints( _self::Indigo, $ ) :: list
-
-    # Get the list of index-1 constraints of the reduced system.
-    GetIndexOneConstraints( _self::Indigo, $ ) :: list
-
-    # Get the list of veil arguments substitutions.
-    GetVeilArgsSubs( _self::Indigo, rng::range := 1 .. -1, $ )
-                   :: list(algebraic = algebraic)
-
-    # Remove the time states from the system.
-    RemoveTimeStates( _self::Indigo, 
-                      expr::{algebraic, list(algebraic), list(algebraic = 
-                        algebraic), algebraic = algebraic}, 
-                      $ )
-                    :: {algebraic, list(algebraic), list(algebraic = algebraic), algebraic = algebraic}
-
-    # Return the type of the system.
-    GetSystemType( _self::Indigo, $ ) :: symbol
-
-    # Build the kernel of a matrix &lt;E&gt;, and return the matrix N such that E*N = 
-    # 0 and the rank of E.
-    KernelBuild( _self::Indigo, E::Matrix, $ ) :: table
-
-    # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadMatrices( _self::Indigo, typ::symbol )
-
-    # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadEquations( _self::Indigo, typ::symbol )
-
-    # Reduce the index of the loaded DAE system.
-    ReduceIndex( _self::Indigo, $ ) :: boolean
-
-    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
-    # list of variables &lt;vars&gt; must be the same of the variables used in the 
-    # system of equations.
-    LoadMatrices_Linear( _self::Indigo, E::Matrix, G::Matrix, f::Vector, 
-                         vars::Vector, $ )
-
-    # Load a 'Linear' type system of equations &lt;eqns&gt;. The list of variables 
-    # &lt;vars&gt; must be the same of the variables used in the system of equations.
-    LoadEquations_Linear( _self::Indigo, eqns::list, vars::list, $ )
-
-    # Reduce the index of the 'Linear' type DAE system of equations by one. 
-    # Return true if the system of equations has been reduced to index-0 DAE 
-    # (ODE), false otherwise.
-    ReduceIndexByOne_Linear( _self::Indigo, $ ) :: boolean
-
-    # Reduce the index of the 'Linear' type DAE system of equations. Return 
-    # true if the system of equations has been reduced to index-0 DAE (ODE), 
-    # false otherwise.
-    ReduceIndex_Linear( _self::Indigo, $ ) :: boolean
-
-    # Separate algebraic and differential equations from DAE system equations 
-    # matrix &lt;E&gt; and differential variables vector &lt;G&gt;. Return the algebraic 
-    # equations matrix &lt;Et&gt;, the algebraic variables matrix &lt;Gt&gt;, the 
-    # differential equations matrix &lt;A&gt;, and the rank of &lt;E&gt;.
-    SeparateMatrices( _self::Indigo, E::Matrix, G::Vector, $ )
-
-    # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
-    # list of variables &lt;vars&gt; must be the same of the variables used in the 
-    # system of equations.
-    LoadMatrices_Generic( _self::Indigo, E::Matrix, G::Vector, vars::list, $ )
-
-    # Load a 'Generic' type system of equations &lt;eqns&gt;. The list of variables 
-    # &lt;vars&gt; must be the same of the variables used in the system of equations.
-    LoadEquations_Generic( _self::Indigo, eqns::list, vars::list, $ )
-
-    # Reduce the index of the 'Generic' type DAE system of equations by one. 
-    # Return true if the system of equations has been reduced to index-0 DAE 
-    # (ODE), false otherwise.
-    ReduceIndexByOne_Generic( _self::Indigo, $ ) :: boolean
-
-    # Reduce the index of the 'Generic' type DAE system of equations. Return 
-    # true if the system of equations has been reduced to index-0 DAE (ODE), 
-    # false otherwise.
-    ReduceIndex_Generic( _self::Indigo, $ ) :: boolean
-
-    # Load a 'Mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
-    # constraint vector &lt;Phi&gt;, external force vector &lt;f&gt;, the position 
-    # variables &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange 
-    # multipliers &lt;l_vars&gt;.
-    LoadMatrices_Mbd3( _self::Indigo, Mass::Matrix, Phi::Vector, f::Vector, 
-                       q_vars::list, v_vars::list, l_vars::list, $ )
-
-    # Load a 'Mdb' type system of equations &lt;eqns&gt; with the position variables 
-    # &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange multipliers 
-    # &lt;l_vars&gt;.
-    LoadEquations_Mbd3( _self::Indigo, eqns::list, q_vars::list, v_vars::list, 
-                        l_vars::list, $ )
-
-    # Reduce the index of the multibody DAE system of equations. Return true if 
-    # the system of equations has been reduced to index-0 DAE, false otherwise.
-    ReduceIndex_Mbd3( _self::Indigo, 
-                      { baumgarte::boolean := false, 
-                        jacobians::boolean := false }, $ ) :: boolean
-
-</Text-field>
-</Output>
 </Group>
-</Section><Presentation-Block>
-<Group view="presentation" inline-output="false" labelreference="L256800" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbW9HRiQ2LVEifkYnLyUsbWF0aHZhcmlhbnRHUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGNC8lKXN0cmV0Y2h5R0Y0LyUqc3ltbWV0cmljR0Y0LyUobGFyZ2VvcEdGNC8lLm1vdmFibGVsaW1pdHNHRjQvJSdhY2NlbnRHRjQvJSdsc3BhY2VHUSYwLjBlbUYnLyUncnNwYWNlR0ZDLyUrZXhlY3V0YWJsZUdGNEYv">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbW9HRiQ2LVEifkYnLyUsbWF0aHZhcmlhbnRHUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGNC8lKXN0cmV0Y2h5R0Y0LyUqc3ltbWV0cmljR0Y0LyUobGFyZ2VvcEdGNC8lLm1vdmFibGVsaW1pdHNHRjQvJSdhY2NlbnRHRjQvJSdsc3BhY2VHUSYwLjBlbUYnLyUncnNwYWNlR0ZDLyUrZXhlY3V0YWJsZUdGNEYv</Equation></Text-field>
+<Group view="code" hide-input="false" labelreference="L752" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L764" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Test 'Reset'</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-Reset(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L735" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"><Font foreground="[255,0,0]"># op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Font></Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L760" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Test 'LoadEquations'</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-LoadEquations(Indigo_obj, 'Generic', DAE, vars);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L743" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetSystemType(Indigo_obj);</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L744" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L739" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Test 'ReduceIndexByOne_Generic'</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-ReduceIndexByOne_Generic(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L748" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L751" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LAST_obj:-GetResults(LAST_obj, &quot;pivots&quot;);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L745" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-ReduceIndexByOne_Generic(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L762" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L750" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LAST_obj:-GetResults(LAST_obj, &quot;pivots&quot;);</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L767" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-ReduceIndexByOne_Generic(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L770" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L763" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LAST_obj:-GetResults(LAST_obj, &quot;pivots&quot;);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L758" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj))): &lt;%&gt;;</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L778" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetDifferentialEquations(Indigo_obj): &lt;%&gt;;</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L771" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetIndexOneConstraints(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L772" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetVeilArgsSubs(Indigo_obj);</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L737" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Test 'ReduceIndex'</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-Reset(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L741" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"><Font foreground="[255,0,0]"># op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -1)));</Font></Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L740" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-LoadEquations(Indigo_obj, 'Generic', DAE, vars);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L753" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetSystemType(Indigo_obj);</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L732" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-ReduceIndex(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L733" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"><Font encoding="UTF-8">#\302\240op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj, -2)));</Font></Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L773" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"># op(eval(Indigo_obj:-GetReductionSteps(Indigo_obj))): &lt;%&gt;;</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L746" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">LAST_obj:-GetResults(LAST_obj, &quot;pivots&quot;);</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" hide-input="false" labelreference="L777" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetDifferentialEquations(Indigo_obj): &lt;%&gt;;</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L765" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetIndexOneConstraints(Indigo_obj);</Text-field>
+</Input>
+</Group>
+<Group view="code" hide-input="false" labelreference="L768" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Indigo_obj:-GetVeilArgsSubs(Indigo_obj);</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L756" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">JSFH</Equation></Text-field>
 </Input>
 </Group></Presentation-Block>
 </Worksheet>
