@@ -62,27 +62,8 @@ classdef RKexplicit < ODEsolver
     %> \return The instance of the RKexplicit class.
     %
     function this = RKexplicit( varargin )
-
-      CMD = 'indigo::RKexplicit::RKexplicit(...): ';
-
-      if (nargin == 4)
-        t_name = varargin{1};
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = [];
-        t_c    = varargin{4};
-      elseif (nargin == 5)
-        t_name = varargin{1};
-        t_A    = varargin{2};
-        t_b    = varargin{3};
-        t_b_e  = varargin{4};
-        t_c    = varargin{5};
-      else
-        error([CMD, 'Wrong number of input arguments.']);
-      end
-
       % Call the superclass constructor
-      this@ODEsolver(t_name, t_A, t_b, t_b_e, t_c);
+      this@ODEsolver( varargin{:} );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -335,7 +316,7 @@ classdef RKexplicit < ODEsolver
 
       % Adapt next time step
       if (~isempty(this.m_b_e))
-        x_e = x_k + d_t * K * this.m_b_e';
+        x_e      = x_k + d_t * K * this.m_b_e';
         d_t_star = this.adapt_step(x_out, x_e, d_t_star);
       end
     end

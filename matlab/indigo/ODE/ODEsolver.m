@@ -372,27 +372,13 @@ classdef ODEsolver < handle
     %>            (row vector).
     %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
     %
-    function set_tableau( this, varargin )
+    function set_tableau( this, A, b, b_e, c )
 
       CMD = 'indigo::ODEsolver::set_tableau(...): ';
 
-      if (nargin == 4)
-        A   = varargin{1};
-        b   = varargin{2};
-        b_e = [];
-        c   = varargin{3};
-      elseif (nargin == 5)
-        A   = varargin{1};
-        b   = varargin{2};
-        b_e = varargin{3};
-        c   = varargin{4};
-      else
-        error([CMD, 'Wrong number of input arguments.']);
-      end
-
       % Check the Butcher tableau
-      assert(this.check_tableau(A, b, b_e, c), ...
-        [CMD, 'invalid tableau detected.']);
+      ok = this.check_tableau(A, b, b_e, c);
+      assert( ok, [CMD, 'invalid tableau detected.'] );
 
       % Set the tableau
       this.m_A   = A;
@@ -588,7 +574,7 @@ classdef ODEsolver < handle
           this.advance(x_out(:,s), x_out_dot(:,s), t_out(s), d_t);
 
         % Store time solution
-        t_out(s+1) = t_out(s) + d_t_star;
+        t_out(s+1) = t_out(s) + d_t;
 
         % Store states solutions
         x_out(:,s+1)     = x_new;
@@ -602,11 +588,13 @@ classdef ODEsolver < handle
         % Update steps counter
         s = s + 1;
 
+        % use new suggested timestep
+        d_t = d_t_star;
       end
 
       % Resize the output
-      t_out     = t_out(:,1:s-1);
-      x_out     = x_out(:,1:s-1);
+      t_out = t_out(:,1:s-1);
+      x_out = x_out(:,1:s-1);
       %x_out_dot = x_out_dot(:,1:s-1);
     end
     %
@@ -648,7 +636,7 @@ classdef ODEsolver < handle
       end
 
       % Integrate system of ODEs/DAEs
-      [x_new, x_dot_new, d_t_star, ierr] =  this.step(x_k, x_dot_k, t_k, d_t);
+      [x_new, x_dot_new, d_t_star, ierr] = this.step(x_k, x_dot_k, t_k, d_t);
 
       % If the advance failed, try again with substepping
       if (ierr ~= 0)
@@ -800,25 +788,25 @@ classdef ODEsolver < handle
       CMD = 'indigo::ODEsolver::adapt_step(...): ';
 
       % Collect optional inputs
-      A_tol   = 1e-9;
-      R_tol   = 1e-9;
-      fac     = 0.8;
+      A_tol   = 1e-6;
+      R_tol   = 1e-4;
+      fac     = 0.9;
       fac_min = 0.2;
       fac_max = 1.5;
 
       % Absolute tolerance
       if (nargin > 4)
-        A_tol  = varargin{1};
+        A_tol = varargin{1};
       end
 
       % Relative tolerance
       if (nargin > 5)
-        R_tol  = varargin{2};
+        R_tol = varargin{2};
       end
 
       % Safety factor
       if (nargin > 5)
-        fac    = varargin{3};
+        fac = varargin{3};
       end
 
       % Desent safety factor
@@ -837,18 +825,12 @@ classdef ODEsolver < handle
       end
 
       % Compute the error with 2-norm
-      e = sqrt(sum(((x_h - x_l)./( ...
-        A_tol + R_tol * max(max(abs(x_h)), max(abs(x_l))) ...
-      )).^2)/length(x_h));
-
-      %e = max(abs(x_h - x_l))./( ...
-      %  A_tol + R_tol * max(max(abs(x_h)), max(abs(x_l))) ...
-      %);
+      r = (x_h - x_l)./ ( A_tol + (R_tol/2)*(abs(x_h)+abs(x_l)) );
+      e = norm(r,2)/length(x_h);
 
       % Compute the suggested time step
-      out = d_t * min(fac_max, max(fac_min, ...
-        fac * (1/e) ^ (1/(length(this.m_c)+1)) ...
-      ));
+      q   = length(this.m_c)+0;
+      out = d_t * min(fac_max, max(fac_min, fac * (1/(e)) ^ (1/q)));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
