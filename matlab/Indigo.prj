@@ -1,12 +1,12 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="240535206" file="/Users/enrico/Ricerca/Software/REPOS/myReposGit/_Stocco/Indigo/matlab/Indigo.prj" location="/Users/enrico/Ricerca/Software/REPOS/myReposGit/_Stocco/Indigo/matlab" name="Indigo" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="193096033" file="/Users/enrico/Ricerca/Software/REPOS/myReposGit/_Stocco/Indigo/matlab/Indigo.prj" location="/Users/enrico/Ricerca/Software/REPOS/myReposGit/_Stocco/Indigo/matlab" name="Indigo" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Indigo</param.appname>
-    <param.authnamewatermark>Enrico Bertolazzi</param.authnamewatermark>
+    <param.authnamewatermark>Enrico Bertolazzi &amp; C</param.authnamewatermark>
     <param.email>enrico.bertolazzi@unitn.it</param.email>
     <param.company>Unversità Degli Studi di Trento</param.company>
     <param.summary>A MATLAB toolboxfor ODE and DAE integration.</param.summary>
     <param.description>This MATLAB toolbox is a collection of integrators for ordinary differential and differential-algebraic equations (ODEs/DAEs), which has been originally developed for the course of Mechatronics System Simulation at the University of Trento (Italy) held by Prof. Francesco Biral and Prof. Enrico Bertolazzi.</param.description>
-    <param.screenshot>/Users/enrico/Downloads/logo.png</param.screenshot>
+    <param.screenshot>/Users/enrico/Ricerca/Software/REPOS/myReposGit/_Stocco/Indigo/maple/installer/logo_installer.png</param.screenshot>
     <param.version>0.1</param.version>
     <param.output>${PROJECT_ROOT}/Indigo.mltbx</param.output>
     <param.products.name />
@@ -42,7 +42,6 @@
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.authnamewatermark />
       <param.email />
       <param.company />
       <param.output />
@@ -139,7 +138,7 @@
       <vista>false</vista>
       <linux>false</linux>
       <solaris>false</solaris>
-      <osver>13.3</osver>
+      <osver>13.3.1</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>maci64</arch>
