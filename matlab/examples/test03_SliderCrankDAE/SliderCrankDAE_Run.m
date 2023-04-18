@@ -6,27 +6,22 @@ close all;
 
 %% Instantiate system object
 
-% Pendulum parameters
-Ta = 10.0;   % torque (Nm)
-w  = 1.0;  % rotational speed (1/(rad s))
+% Slider Crank parameters
+Fa = 10.0; % force (N)
+Ta = 10.0; % torque (Nm)
 m  = 1.0;  % mass (kg)
 l  = 1.0;  % length (m)
 g  = 9.81; % gravity (m/s^2)
 
-% Initial conditions
-theta1_0  = 0;
-theta2_0  = 0;
-s_0       = 3 * l;
-r_0       = w;
-u_0       = -1 / 2 * w;
-v_0       = 0;
-lambda1_0 = 4.5 * w^2 * m * l;
-lambda2_0 = 1.0 * g * m;
-lambda3_0 = -1.5 * l * g * m + 1.0 * Ta;
-X_0       = [theta1_0, theta2_0, s_0, r_0, u_0, v_0, ...
-             lambda1_0, lambda2_0, lambda3_0];
+data.Fa = Fa;
+data.Ta = Ta;
+data.m  = m;
+data.l  = l;
+data.g  = g;
 
-ODE = SliderCrankDAE(Ta, w, m, l, g, X_0);
+X_0 = initial_conditions( pi / 3, 0.0, data );
+
+ODE = SliderCrankDAE(Fa, Ta, m, l, g, X_0);
 
 %% Initialize the solver and set the ODE
 
@@ -50,7 +45,7 @@ implicit_solver = {
   ... % 'GaussLegendre2',   ...
   ... % 'GaussLegendre4',   ...
   ... % 'GaussLegendre6',   ...
-  ... % 'ImplicitEuler',    ...
+  'ImplicitEuler',    ...
   ... % 'ImplicitMidpoint', ...
   ... % 'LobattoIIIA2',     ...
   ... % 'LobattoIIIA4',     ...
@@ -64,8 +59,8 @@ implicit_solver = {
   ... % 'LobattoIIID4',     ...
   ... % 'RadauIA3',         ...
   ... % 'RadauIA5',         ...
-  'RadauIIA3',        ...
-  'RadauIIA5',        ...
+  ... % 'RadauIIA3',        ...
+  ... % 'RadauIIA5',        ...
   ... % 'SunGeng5',         ...
 };
 
@@ -163,11 +158,14 @@ hold off;
 
 %% Animate the mechanism
 
-for j = 1:length(solver_name)
+for j = 1:1%length(solver_name)
+    fprintf(['Animating the mechanism with the ', solver_name{j}, ...
+             ' solution.\n'])
+
     x1 = eval(strcat(['X_', solver_name{j}, '(1,:);'])); % theta1
     x2 = eval(strcat(['X_', solver_name{j}, '(2,:);'])); % theta1
     x3 = eval(strcat(['X_', solver_name{j}, '(3,:);'])); % s
-    
+
     pad = 0.1;
 
     figure();
@@ -178,27 +176,27 @@ for j = 1:length(solver_name)
     xlim([-l - 2 * pad, 3 * l + 2 * pad]);
     ylim([-l - 2 * pad, l + 2 * pad]);
     plot(0.0, 0.0, 'o', 'color', 'k');
-    
+
     for i = 1:length(x1)
         % Crank
-        a1 = plot([0.0, l * cos(x1(i))], [0.0, l * sin(x1(i))], 'color', 'r');
-        a2 = plot(l * cos(x1(i)), l * sin(x1(i)), 'o', 'color', 'r');
-    
+        a1 = plot([0.0, l * cos(x1(i))], [0.0, l * sin(x1(i))], 'color', rgb('Red'));
+        a2 = plot(l * cos(x1(i)), l * sin(x1(i)), 'o', 'color', rgb('Red'));
+
         % Shaft
         a3 = plot([l * cos(x1(i)), l * (cos(x1(i)) + 2 * cos(x2(i)))], ...
-                  [l * sin(x1(i)), l * (sin(x1(i)) + 2 * sin(x2(i)))], 'color', 'g');
+                  [l * sin(x1(i)), l * (sin(x1(i)) + 2 * sin(x2(i)))], 'color', rgb('Green'));
         a4 = plot(l * (cos(x1(i)) + 2 * cos(x2(i))), ...
-                  l * (sin(x1(i)) + 2 * sin(x2(i))), 'o', 'color', 'g');
-        
+                  l * (sin(x1(i)) + 2 * sin(x2(i))), 'o', 'color', rgb('Green'));
+
         % Slider
         a5  = plot([x3(i) - 1.5 * pad, x3(i) + 1.5 * pad, x3(i) + 1.5 * pad, ...
                     x3(i) - 1.5 * pad, x3(i) - 1.5 * pad], ...
                    [-pad, -pad, pad, pad, -pad], ...
-                   'color', 'b');
-        a6  = plot(x3(i), 0.0, 'o', 'color', 'b');
-    
-        pause(0.01);
-    
+                   'color', rgb('Blue'));
+        a6  = plot(x3(i), 0.0, 'o', 'color', rgb('Blue'));
+
+        pause(0.05);
+
         if i ~= length(x1)
             delete(a1);
             delete(a2);
@@ -207,7 +205,10 @@ for j = 1:length(solver_name)
             delete(a5);
             delete(a6);
         end
+
+        progress_bar(1, length(x1), 1, i, 1);
     end
+    hold off;
 end
 
 %% That's All Folks!
