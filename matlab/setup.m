@@ -24,8 +24,8 @@ addpath('./indigo/ODE/ImplicitMethods/');
 addpath('./indigo/ODE/EmbeddedExplicitMethods/');
 addpath('./indigo/ODE/EmbeddedImplicitMethods/');
 
-% Examples folder
-addpath('./examples');
-addpath('./examples/PendulumODE/');
-addpath('./examples/PendulumDAE/');
-addpath('./examples/ThreeBodyProblem/');
+% Examples folder do not add example in toolbox
+% addpath('./examples');
+% addpath('./examples/PendulumODE/');
+% addpath('./examples/PendulumDAE/');
+% addpath('./examples/ThreeBodyProblem/');
