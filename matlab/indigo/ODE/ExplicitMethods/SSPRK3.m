@@ -28,9 +28,9 @@ classdef SSPRK3 < RKexplicit
                  1,   0,   0; ...
                  1/4, 1/4, 0];
       tbl.b   = [1/6, 1/6, 2/3];
-      tbl.c   = [0, 1, 1/2]';
       tbl.b_e = [];
-      this@RKexplicit( 'SSPRK3', 3, tbl );
+      tbl.c   = [0, 1, 1/2]';
+      this@RKexplicit('SSPRK3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

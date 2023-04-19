@@ -32,9 +32,9 @@ classdef Sarafyan45 < RKexplicit
                  1,    -4/3, 5/3,  0,   0, 0; ...
                  -5/2, 15/4, -5/2, 3/4, 0, 0];
       tbl.b   = [1/6, 2/3, 2/3, 1/6, 0, 0];
-      tbl.c   = [0, 1, 3/2, 2, 5/2]';
       tbl.b_e = [0, 0, 0, 0, 1, 0];
-    this@RKexplicit( 'Sarafyan45', 5, tbl );
+      tbl.c   = [0, 1, 3/2, 2, 5/2]';
+    this@RKexplicit('Sarafyan45', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

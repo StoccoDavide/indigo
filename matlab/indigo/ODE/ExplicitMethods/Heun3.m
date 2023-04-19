@@ -27,9 +27,9 @@ classdef Heun3 < RKexplicit
                  1/3, 0,   0; ...
                  0,   2/3, 0];
       tbl.b   = [1/4, 0, 3/4];
-      tbl.c   = [0, 1/3, 2/3]';
       tbl.b_e = [];
-      this@RKexplicit( 'Heun3', 3, tbl );
+      tbl.c   = [0, 1/3, 2/3]';
+      this@RKexplicit('Heun3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

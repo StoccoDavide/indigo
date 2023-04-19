@@ -24,9 +24,9 @@ classdef ExplicitMidpoint < RKexplicit
     function this = ExplicitMidpoint()
       tbl.A   = [0, 0; 1/2, 0];
       tbl.b   = [0, 1];
-      tbl.c   = [0, 1/2]';
       tbl.b_e = [];
-      this@RKexplicit( 'ExplicitMidpoint', 2, tbl );
+      tbl.c   = [0, 1/2]';
+      this@RKexplicit('ExplicitMidpoint', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

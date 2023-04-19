@@ -52,18 +52,19 @@ classdef RKexplicit < ODEsolver
     %> Initialize the class with the explicit Runge-Kutta method name and its
     %> Butcher tableau.
     %>
-    %> \param name  The name of the solver.
-    %> \param order The order of the solver.
-    %> \param tbl   - A   The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-    %>              - b   The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %>              - c   The nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %>              - b_e [optional] The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %> \param name    The name of the solver.
+    %> \param order   The order of the solver.
+    %> \param tbl.A   The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %> \param tbl.b   The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %> \param tbl.b_e [optional] The embedded weights vector \f$ \hat{\mathbf{b}}
+    %>               \f$ (row vector).
+    %> \param tbl.c   The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
     %> \return The instance of the RKexplicit class.
     %
     function this = RKexplicit( name, order, tbl )
       % Call the superclass constructor
-      this@ODEsolver( name, order, tbl, true );
+      this@ODEsolver( name, order, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -315,7 +316,7 @@ classdef RKexplicit < ODEsolver
       x_dot_out = K(:,end);
 
       % Adapt next time step
-      if (~isempty(this.m_b_e))
+      if (this.m_adaptive_step)
         x_e      = x_k + d_t * K * this.m_b_e';
         d_t_star = this.adapt_step(x_out, x_e, d_t_star);
       end
@@ -331,10 +332,10 @@ classdef RKexplicit < ODEsolver
     %
     %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
     %>
-    %> \param A   Matrix \f$ \mathbf{A} \f$.
-    %> \param b   Weights vector \f$ \mathbf{b} \f$.
-    %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
-    %> \param c   Nodes vector \f$ \mathbf{c} \f$.
+    %> \param tbl.A   Matrix \f$ \mathbf{A} \f$.
+    %> \param tbl.b   Weights vector \f$ \mathbf{b} \f$.
+    %> \param tbl.b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
+    %> \param tbl.c   Nodes vector \f$ \mathbf{c} \f$.
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %

@@ -31,9 +31,9 @@ classdef Generic3 < RKexplicit
                  alpha, 0, 0; ...
                  1+(1-alpha)/(alpha*(3*alpha-2)), -(1-alpha)/(alpha*(3*alpha-2)), 0];
       tbl.b   = [0, alpha, 1];
-      tbl.c   = [1/2-1/(6*alpha), 1/(6*alpha(1-alpha)), (2-3*alpha)/(6*(1-alpha))]';
       tbl.b_e = [];
-      this@RKexplicit( 'Generic3', 3, tbl );
+      tbl.c   = [1/2-1/(6*alpha), 1/(6*alpha(1-alpha)), (2-3*alpha)/(6*(1-alpha))]';
+      this@RKexplicit('Generic3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

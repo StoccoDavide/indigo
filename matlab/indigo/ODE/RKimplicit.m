@@ -51,19 +51,19 @@ classdef RKimplicit < ODEsolver
     %> Initialize the class with the implicit Runge-Kutta method name and its
     %> Butcher tableau.
     %>
-    %> \param name  The name of the solver.
-    %> \param order The order of the scheme.
-    %> \param tbl - A    The matrix \f$ \mathbf{A} \f$.
-    %>            - b    The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %>            - b_e  [optional] The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
-    %>            - c    The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %> \param name    The name of the solver.
+    %> \param order   The order of the scheme.
+    %> \param tbl.A   The matrix \f$ \mathbf{A} \f$.
+    %> \param tbl.b   The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %> \param tbl.b_e [optional] The embedded weights vector \f$ \hat{\mathbf{b}}
+    %>                \f$ (row vector).
+    %> \param tbl.c   The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
     %> \return The instance of the RKimplicit class.
     %
     function this = RKimplicit( name, order, tbl )
-      CMD = 'indigo::RKimplicit::RKimplicit( name, order, tbl ): ';
       % Call the superclass constructor
-      this@ODEsolver( name, order, tbl, false );
+      this@ODEsolver(name, order, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -152,7 +152,7 @@ classdef RKimplicit < ODEsolver
         tmp = x_k;
         jdx = 1:nx;
         for j = 1:nc
-          tmp = tmp + d_t * (this.m_A(i,j) * K(jdx));
+          tmp = tmp + d_t * this.m_A(i,j) * K(jdx);
           jdx = jdx + nx;
         end
         jdx = 1:nx;
@@ -164,11 +164,11 @@ classdef RKimplicit < ODEsolver
           end
 
           % Compute the Jacobians w.r.t. x and x_dot
-          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + d_t * this.m_c(i) );
+          [JF_x, JF_x_dot] = this.m_ode.JF(tmp, K(idx), t_k + d_t * this.m_c(i));
 
           % Combine the Jacobians w.r.t. x and x_dot to obtain
           % the Jacobian w.r.t. K
-          out(idx,jdx) = (d_t * this.m_A(i,j)) * JF_x  + JF_x_dot * mask;
+          out(idx, jdx) = d_t * this.m_A(i,j) * JF_x  + JF_x_dot * mask;
 
           jdx = jdx + nx;
         end
@@ -320,7 +320,7 @@ classdef RKimplicit < ODEsolver
       x_dot_out = K(end + 1 - nx:end);
 
       % Adapt next time step
-      if (~isempty(this.m_b_e))
+      if (this.m_adaptive_step)
         x_e = x_k + d_t * reshape(K, nx, nc) * this.m_b_e';
         d_t_star = this.adapt_step(x_out, x_e, d_t_star);
       end
@@ -337,91 +337,93 @@ classdef RKimplicit < ODEsolver
     %
     %> Check Butcher tableau consistency for an implict Runge-Kutta method.
     %>
-    %> - A   Matrix \f$ \mathbf{A} \f$.
-    %> - b   Weights vector \f$ \mathbf{b} \f$.
-    %> - c   Nodes vector \f$ \mathbf{c} \f$.
-    %> - b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
+    %> \param tbl.A   Matrix \f$ \mathbf{A} \f$.
+    %> \param tbl.b   Weights vector \f$ \mathbf{b} \f$.
+    %> \param tbl.b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$.
+    %> \param tbl.c   Nodes vector \f$ \mathbf{c} \f$.
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
     function out = check_tableau( tbl )
 
-      CMD = 'indigo::RKimplicit::check_tableau( tbl ): ';
+      CMD = 'indigo::RKimplicit::check_tableau(...): ';
 
+      % Collect input data
+      A   = tbl.A;
+      b   = tbl.b;
+      b_e = tbl.b_e;
+      c   = tbl.c;
+
+      % Prepare output
       out = true;
 
-      t_A   = tbl.A;
-      t_b   = tbl.b;
-      t_b_e = tbl.b_e;
-      t_c   = tbl.c;
-
       % Check matrix A
-      if (~isnumeric(t_A))
+      if (~isnumeric(A))
         warning([CMD, 'A must be a numeric matrix.']);
         out = false;
       end
-      if (size(t_A, 1) ~= size(t_A, 2))
+      if (size(A, 1) ~= size(A, 2))
         warning([CMD, 'matrix A is not a square matrix.']);
         out = false;
       end
-      if (any(isnan(t_A)))
+      if (any(isnan(A)))
         warning([CMD, 'matrix A found with NaN values.']);
         out = false;
       end
 
       % Check vector b
-      if (~isnumeric(t_b))
+      if (~isnumeric(b))
         warning([CMD, 'b must be a numeric vector.']);
         out = false;
       end
-      if (~isrow(t_b))
+      if (~isrow(b))
         warning([CMD, 'vector b is not a row vector.']);
         out = false;
       end
-      if (size(t_A, 2) ~= size(t_b, 2))
+      if (size(A, 2) ~= size(b, 2))
         warning([CMD, 'vector b is not consistent with the size of matrix A.']);
         out = false;
       end
-      if (any(isnan(t_b)))
+      if (any(isnan(b)))
         warning([CMD, 'vector b found with NaN values.']);
         out = false;
       end
 
       % Check vector b_e
-      if ~isempty(t_b_e)
-        if (~isnumeric(t_b_e))
+      if ~isempty(b_e)
+        if (~isnumeric(b_e))
           warning([CMD, 'b_e must be a numeric vector.']);
           out = false;
         end
-        if (~isrow(t_b_e))
+        if (~isrow(b_e))
           warning([CMD, 'vector b_e is not a row vector.']);
           out = false;
         end
-        if (size(t_A, 2) ~= size(t_b_e, 2))
+        if (size(A, 2) ~= size(b_e, 2))
           warning([CMD, ...
             'vector b_e is not consistent with the size of matrix A.']);
           out = false;
         end
-        if (any(isnan(t_b_e)))
+        if (any(isnan(b_e)))
           warning([CMD, 'vector b_e found with NaN values.']);
           out = false;
         end
       end
 
       % Check vector c
-      if (~isnumeric(t_c))
+      if (~isnumeric(c))
         warning([CMD, 'c must be a numeric vector.']);
         out = false;
       end
-      if (~iscolumn(t_c))
+      if (~iscolumn(c))
         warning([CMD, 'vector c is not a column vector.']);
         out = false;
       end
-      if (size(t_A, 1) ~= size(t_c, 1))
+      if (size(A, 1) ~= size(c, 1))
         warning([CMD, 'vector c is not consistent with the size of matrix A.']);
         out = false;
       end
-      if (any(isnan(t_c)))
+      if (any(isnan(c)))
         warning([CMD, 'vector c found with NaN values.']);
         out = false;
       end

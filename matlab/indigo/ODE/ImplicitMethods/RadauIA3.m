@@ -25,9 +25,9 @@ classdef RadauIA3 < RKimplicit
       tbl.A   = [1/4, -1/4; ...
                  1/4, 5/12];
       tbl.b   = [1/4, 3/4];
-      tbl.c   = [0, 2/3]';
       tbl.b_e = [];
-      this@RKimplicit( 'RadauIA3', 3, tbl );
+      tbl.c   = [0, 2/3]';
+      this@RKimplicit('RadauIA3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

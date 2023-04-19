@@ -27,9 +27,9 @@ classdef Ralston3 < RKexplicit
                  1/2, 0,   0; ...
                  0,   3/4, 0];
       tbl.b   = [2/9, 1/3, 4/9];
-      tbl.c   = [0, 1/2, 3/4]';
       tbl.b_e = [];
-      this@RKexplicit( 'Ralston3', 3, tbl );
+      tbl.c   = [0, 1/2, 3/4]';
+      this@RKexplicit('Ralston3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

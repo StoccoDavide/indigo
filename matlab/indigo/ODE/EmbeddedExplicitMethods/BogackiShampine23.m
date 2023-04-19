@@ -30,9 +30,9 @@ classdef BogackiShampine23 < RKexplicit
                0,   3/4, 0,   0; ...
                2/9, 1/3, 4/9, 0];
     tbl.b   = [7/24, 1/4, 1/3, 1/8];
-    tbl.c   = [0,    1/2, 3/4, 1]';
-    tbl.b_e = [2/9,  1/3, 4/9, 0];
-    this@RKexplicit('BogackiShampine23', 3, tbl );
+    tbl.b_e = [2/9, 1/3, 4/9, 0];
+    tbl.c   = [0, 1/2, 3/4, 1]';
+    this@RKexplicit('BogackiShampine23', 3, tbl);
   end
   %
   % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

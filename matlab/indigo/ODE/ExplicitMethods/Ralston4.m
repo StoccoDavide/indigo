@@ -52,9 +52,9 @@ classdef Ralston4 < RKexplicit
                  A31, A32,  0,   0; ...
                  A41, A42,  A43, 0];
       tbl.b   = [B1, B2, B3, B4];
-      tbl.c   = [0, C2, C3, 1]';
       tbl.b_e = [];
-      this@RKexplicit( 'Ralston4', 4, tbl );
+      tbl.c   = [0, C2, C3, 1]';
+      this@RKexplicit('Ralston4', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

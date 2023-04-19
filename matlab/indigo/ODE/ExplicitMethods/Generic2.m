@@ -25,9 +25,9 @@ classdef Generic2 < RKexplicit
     function this = Generic2( alpha )
       tbl.A   = [0, 0; alpha, 0];
       tbl.b   = [0, alpha];
-      tbl.c   = [1-alpha/2, alpha/2]'
       tbl.b_e = []
-      this@RKexplicit( 'Generic2', 2, tbl );
+      tbl.c   = [1-alpha/2, alpha/2]'
+      this@RKexplicit('Generic2', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

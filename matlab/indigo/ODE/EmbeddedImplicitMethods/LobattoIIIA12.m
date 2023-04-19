@@ -25,9 +25,9 @@ classdef LobattoIIIA12 < RKimplicit
     function this = LobattoIIIA12()
       tbl.A   = [0, 0; 1/2, 1/2];
       tbl.b   = [1/2, 1/2];
-      tbl.c   = [0, 1]';
       tbl.b_e = [1, 0];
-      this@RKimplicit( 'LobattoIIIA12', 2, tbl ); % order  = 2*s-2
+      tbl.c   = [0, 1]';
+      this@RKimplicit('LobattoIIIA12', 2, tbl); % order = 2*s-2
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

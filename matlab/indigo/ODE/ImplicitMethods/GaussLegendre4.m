@@ -26,9 +26,9 @@ classdef GaussLegendre4 < RKimplicit
       t = sqrt(3)/6;
       tbl.A   = [1/4, 1/4-t; 1/4+t, 1/4];
       tbl.b   = [1/2, 1/2];
-      tbl.c   = [1/2-t, 1/2+t]';
       tbl.b_e = [];
-      this@RKimplicit( 'GaussLegendre4', 4, tbl );
+      tbl.c   = [1/2-t, 1/2+t]';
+      this@RKimplicit('GaussLegendre4', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

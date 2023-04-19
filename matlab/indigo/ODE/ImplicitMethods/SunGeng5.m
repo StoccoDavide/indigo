@@ -38,9 +38,9 @@ classdef SunGeng5 < RKimplicit
                  (328+167*sqrt(6))/1800, (16+sqrt(6))/72,        (-2-3*sqrt(6))/450; ...
                  (85-10*sqrt(6))/180,    (85+10*sqrt(6))/180,    1/18];
       tbl.b   = [(16-sqrt(6))/36, (16+sqrt(6))/36, 1/9];
-      tbl.c   = [(4-sqrt(6))/10, (4+sqrt(6))/10, 1]';
       tbl.b_e = [];
-      this@RKimplicit( 'SunGeng5', 5, tbl );
+      tbl.c   = [(4-sqrt(6))/10, (4+sqrt(6))/10, 1]';
+      this@RKimplicit('SunGeng5', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

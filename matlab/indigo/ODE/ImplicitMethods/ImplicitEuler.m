@@ -23,9 +23,9 @@ classdef ImplicitEuler < RKimplicit
     function this = ImplicitEuler()
       tbl.A   = 1;
       tbl.b   = 1;
-      tbl.c   = 1;
       tbl.b_e = [];
-      this@RKimplicit( 'ImplicitEuler', 1, tbl );
+      tbl.c   = 1;
+      this@RKimplicit('ImplicitEuler', 1, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

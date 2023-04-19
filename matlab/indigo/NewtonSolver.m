@@ -510,7 +510,7 @@ classdef NewtonSolver < handle
         out = x;
         if (this.m_verbose == true)
           fprintf(1, [CMD, 'iter %d: ||F||_inf = %f, tau = %1.4f.\n'], ...
-                     i, norm(F, inf), tau);
+            i, norm(F, inf), tau);
         end
 
         % Check if converged

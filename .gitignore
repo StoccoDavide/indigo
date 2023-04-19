@@ -33,6 +33,7 @@
 
 # Matlab
 *.asv
+*.mltbx
 
 # Maple
 *.mla
@@ -40,4 +41,3 @@
 
 # MacOS
 .DS_Store
-Indigo.mltbx

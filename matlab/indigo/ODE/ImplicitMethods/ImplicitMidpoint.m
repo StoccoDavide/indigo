@@ -23,9 +23,9 @@ classdef ImplicitMidpoint < RKimplicit
     function this = ImplicitMidpoint()
       tbl.A   = 1/2;
       tbl.b   = 1;
-      tbl.c   = 1/2;
       tbl.b_e = [];
-      this@RKimplicit( 'ImplicitMidpoint', 2, tbl );
+      tbl.c   = 1/2;
+      this@RKimplicit('ImplicitMidpoint', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

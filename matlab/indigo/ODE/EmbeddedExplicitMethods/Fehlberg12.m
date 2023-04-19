@@ -28,9 +28,9 @@ classdef Fehlberg12 < RKexplicit
                 1/2,   0,       0; ...
                 1/256, 255/256, 0];
      tbl.b   = [1/512, 255/256, 1/512];
-     tbl.c   = [0, 1/2, 1]';
      tbl.b_e = [1/256, 255/256, 0];
-     this@RKexplicit( 'Fehlberg12', 2, tbl );
+     tbl.c   = [0, 1/2, 1]';
+     this@RKexplicit('Fehlberg12', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

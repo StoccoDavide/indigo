@@ -27,9 +27,9 @@ classdef Wray3 < RKexplicit
                  8/15, 0,    0; ...
                  1/4,  5/12, 0];
       tbl.b   = [1/4, 0, 3/4];
-      tbl.c   = [0, 8/15, 2/3]';
       tbl.b_e = [];
-      this@RKexplicit( 'Wray3', 3, tbl );
+      tbl.c   = [0, 8/15, 2/3]';
+      this@RKexplicit('Wray3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

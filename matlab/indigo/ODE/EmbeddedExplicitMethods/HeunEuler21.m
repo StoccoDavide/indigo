@@ -26,9 +26,9 @@ classdef HeunEuler21 < RKexplicit
       tbl.A   = [0, 0; ...
                  1, 1];
       tbl.b   = [1/2, 1/2];
-      tbl.c   = [0, 1]';
       tbl.b_e = [1, 0];
-      this@RKexplicit( 'HeunEuler21', 2, tbl );
+      tbl.c   = [0, 1]';
+      this@RKexplicit('HeunEuler21', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

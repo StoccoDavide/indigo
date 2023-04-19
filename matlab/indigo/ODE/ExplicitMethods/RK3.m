@@ -28,9 +28,9 @@ classdef RK3 < RKexplicit
                  1/2, 0, 0; ...
                  -1,  2, 0];
       tbl.b   = [1/6, 2/3, 1/6];
-      tbl.c   = [0, 1/2, 1]';
       tbl.b_e = [];
-      this@RKexplicit( 'RK3', 3, tbl );
+      tbl.c   = [0, 1/2, 1]';
+      this@RKexplicit('RK3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

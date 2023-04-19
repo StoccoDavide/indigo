@@ -42,13 +42,6 @@
 %> \f[
 %> \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
 %> \f]
-%>
-%> - A_tol   \f$ 10^{-6} \f$] Absolute tolerance  \f$ A_{tol} \f$.
-%> - R_tol   default = \f$ 10^{-4} \f$] Relative tolerance \f$ R_{tol} \f$.
-%> - fac     default = \f$ 0.9 \f$] Safety factor \f$ f \f$.
-%> - fac_min default = \f$ 0.2 \f$] Minimum safety factor \f$ f_{min} \f$.
-%> - fac_max default = \f$ 2.0 \f$]Maximum safety factor \f$ f_{max} \f$.
-%>
 %
 classdef ODEsolver < handle
   %
@@ -61,10 +54,6 @@ classdef ODEsolver < handle
     %> Order of the solver.
     %
     m_order;
-    %
-    %> True if explicit RK
-    %
-    m_explicit;
     %
     %> Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
     %
@@ -102,19 +91,37 @@ classdef ODEsolver < handle
     %
     m_verbose = false;
     %
+    %> Progress bar boolean.
+    %
+    m_progress_bar = true;
     %
     %> Projection mode boolean.
     %
     m_projection = false;
     %
-    % tolerance
-    m_A_tol   = 1e-6; % Absolute tolerance
-    m_R_tol   = 1e-4; % Relative tolerance
-    % adaptive step
-    m_fac     = 0.9;  % Safety factor
-    m_fac_min = 0.2;  % Desent safety factor
-    m_fac_max = 1.5;  % Ascent safety factor
-
+    %> Aadaptive step mode boolean.
+    %
+    m_adaptive_step = false;
+    %
+    %> Absolute tolerance for adaptive step.
+    %
+    m_A_tol = 1e-6;
+    %
+    %> Relative tolerance for adaptive step.
+    %
+    m_R_tol = 1e-4;
+    %
+    %> Safety factor for adaptive step.
+    %
+    m_fac = 0.9;
+    %
+    %> Minimum safety factor for adaptive step.
+    %
+    m_fac_min = 0.2;
+    %
+    %> Maximum safety factor for adaptive step.
+    %
+    m_fac_max = 1.5;
   end
   %
   methods
@@ -124,26 +131,25 @@ classdef ODEsolver < handle
     %> Class constructor for ODEsolver, which requires the name of the solver
     %> used to integrate the system of ODEs/DAEs as input.
     %>
-    %> \param name  The name of the solver.
-    %> \param order Order of the RK method.
-    %> \param tbl   - A     The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-    %>              - b     The weights vector \f$ \mathbf{b} \f$ (row vector).
-    %>              - b_e    The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
-    %>              - c     The nodes vector \f$ \mathbf{c} \f$ (column vector).
+    %> \param t_name  The name of the solver.
+    %> \param t_order Order of the RK method.
+    %> \param tbl.A   The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+    %> \param tbl.b   The weights vector \f$ \mathbf{b} \f$ (row vector).
+    %> \param tbl.b_e The embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row
+    %>                vector).
+    %> \param tbl.c   The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
     %> \return An instance of the ODEsolver class.
     %
-    function this = ODEsolver( name, order, tbl, explicit )
-      CMD = 'indigo::ODEsolver::ODEsolver( name, order, tbl ): ';
+    function this = ODEsolver( t_name, t_order, tbl )
 
       % Collect input arguments
-      this.m_name          = name;
-      this.m_order         = order;
-      this.m_explicit      = explicit;
+      this.m_name          = t_name;
+      this.m_order         = t_order;
       this.m_newton_solver = NewtonSolver();
 
       % Set the Butcher tableau
-      this.set_tableau( tbl );
+      this.set_tableau(tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -164,6 +170,26 @@ classdef ODEsolver < handle
     %
     function set_name( this, t_name )
       this.m_name = t_name;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the order of the method used to integrate the system of ODEs/DAEs.
+    %>
+    %> \return The order of the solver.
+    %
+    function t_order = get_order( this )
+      t_order = this.m_order;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the order of the method used to integrate the system of ODEs/DAEs.
+    %>
+    %> \param t_order The order of the solver.
+    %
+    function set_order( this, t_order )
+      this.m_order = t_order;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -206,7 +232,8 @@ classdef ODEsolver < handle
 
       CMD = 'indigo::ODEsolver::set_max_substeps(...)';
 
-      assert(t_max_substeps >= 0, [CMD, 'invalid maximum number of substeps.']);
+      assert(t_max_substeps >= 0, ...
+        [CMD, 'invalid maximum number of substeps.']);
 
       this.m_max_substeps = t_max_substeps;
     end
@@ -231,7 +258,8 @@ classdef ODEsolver < handle
 
       CMD = 'indigo::ODEsolver::set_max_projection_iter(...)';
 
-      assert(t_max_projection_iter > 0, [CMD, 'invalid maximum number of iterations.']);
+      assert(t_max_projection_iter > 0, ...
+        [CMD, 'invalid maximum number of iterations.']);
 
       this.m_max_projection_iter = t_max_projection_iter;
     end
@@ -319,10 +347,111 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    %> Get the absolute tolerance for adaptive step.
+    %>
+    %> \return The absolute tolerance for adaptive step.
+    %
+    function t_A_tol = get_A_tol( this )
+      t_A_tol = this.m_A_tol;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set absolute tolerance for adaptive step.
+    %>
+    %> \param t_A_tol The absolute tolerance for adaptive step.
+    %
+    function set_A_tol( this, t_A_tol )
+      this.m_A_tol = t_A_tol;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the relative tolerance for adaptive step.
+    %>
+    %> \return The relative tolerance for adaptive step.
+    %
+    function t_R_tol = get_R_tol( this )
+      t_R_tol = this.m_R_tol;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set relative tolerance for adaptive step.
+    %>
+    %> \param t_R_tol The relative tolerance for adaptive step.
+    %
+    function set_R_tol( this, t_R_tol )
+      this.m_R_tol = t_R_tol;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the safety factor for adaptive step.
+    %>
+    %> \return The safety factor for adaptive step.
+    %
+    function t_fac = get_fac( this )
+      t_fac = this.m_fac;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set safety factor for adaptive step.
+    %>
+    %> \param t_fac The safety factor for adaptive step.
+    %
+    function set_fac( this, t_fac )
+      this.m_fac = t_fac;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the minimum safety factor for adaptive step.
+    %>
+    %> \return The minimum safety factor for adaptive step.
+    %
+    function t_min_fac = get_min_fac( this )
+      t_min_fac = this.m_min_fac;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the minimum safety factor for adaptive step.
+    %>
+    %> \param t_min_fac The minimum safety factor for adaptive step.
+    %
+    function set_min_fac( this, t_min_fac )
+      this.m_min_fac = t_min_fac;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the maximum safety factor for adaptive step.
+    %>
+    %> \return The maximum safety factor for adaptive step.
+    %
+    function t_max_fac = get_max_fac( this )
+      t_max_fac = this.m_max_fac;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the maximum safety factor for adaptive step.
+    %>
+    %> \param t_max_fac The maximum safety factor for adaptive step.
+    %
+    function set_max_fac( this, t_max_fac )
+      this.m_max_fac = t_max_fac;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     %> Enable verbose mode.
     %
     function enable_verbose( this )
-      this.m_verbose = true;
+      this.m_verbose      = true;
+      this.m_progress_bar = false;
       this.m_newton_solver.enable_verbose();
     end
     %
@@ -332,7 +461,24 @@ classdef ODEsolver < handle
     %
     function disable_verbose( this )
       this.m_verbose = false;
+      this.m_progress_bar = false;
       this.m_newton_solver.disable_verbose();
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Enable progress bar.
+    %
+    function enable_progress_bar( this )
+      this.m_progress_bar = true;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Disable progress bar.
+    %
+    function disable_progress_bar( this )
+      this.m_progress_bar = false;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -345,10 +491,66 @@ classdef ODEsolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Disable verbose mode.
+    %> Disable projection mode.
     %
     function disable_projection( this )
       this.m_projection = false;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Enable adaptive step mode.
+    %
+    function enable_adaptive_step( this )
+      this.m_adaptive_step = true;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Disable adaptive step mode.
+    %
+    function disable_adaptive_step( this )
+      this.m_adaptive_step = false;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the steps of the method used to integrate the system of ODEs/DAEs.
+    %>
+    %> \return The steps of the solver.
+    %
+    function out = get_steps( this )
+      out = length(this.m_b);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Check if the solver is explicit.
+    %>
+    %> \return True if the solver is explicit, false otherwise.
+    %
+    function out = is_explicit( this )
+      out = istril(this.m_A);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Check if the solver is implicit.
+    %>
+    %> \return True if the solver is implicit, false otherwise.
+    %
+    function out = is_implicit( this )
+      out = ~istril(this.m_A);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Check if the solver is embedded.
+    %>
+    %> \return True if the solver is embedded, false otherwise.
+    %
+    function out = is_embedded( this )
+      out = ~isempty(this.m_b_e);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -360,11 +562,11 @@ classdef ODEsolver < handle
     %>         weights vector \f$ \hat{\mathbf{b}} \f$ (row vector), and nodes
     %>         vector \f$ \mathbf{c} \f$ (column vector).
     %
-    function res = get_tableau( this )
-      res.A   = this.m_A;
-      res.b   = this.m_b;
-      res.c   = this.m_c;
-      res.b_e = this.m_b_e;
+    function out = get_tableau( this )
+      out.A   = this.m_A;
+      out.b   = this.m_b;
+      out.c   = this.m_c;
+      out.b_e = this.m_b_e;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -379,10 +581,10 @@ classdef ODEsolver < handle
     %
     function set_tableau( this, tbl )
 
-      CMD = 'indigo::ODEsolver::set_tableau( tbl ): ';
+      CMD = 'indigo::ODEsolver::set_tableau(...): ';
 
       % Check the Butcher tableau
-      ok = this.check_tableau( tbl );
+      ok = this.check_tableau(tbl);
       assert( ok, [CMD, 'invalid tableau detected.'] );
 
       % Set the tableau
@@ -390,6 +592,9 @@ classdef ODEsolver < handle
       this.m_b   = tbl.b;
       this.m_b_e = tbl.b_e;
       this.m_c   = tbl.c;
+
+      % Update the solver properties
+      this.m_adaptive_step = this.is_embedded();
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -516,7 +721,7 @@ classdef ODEsolver < handle
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Solve the system of ODEs/DAEs and calculate the approximate solution over
-    %> the a mesh of time points.
+    %> the mesh of time points.
     %>
     %> \param t   Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
     %>            \right]^T \f$.
@@ -524,83 +729,188 @@ classdef ODEsolver < handle
     %>
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
-    %>         \f$ \mathbf{x}(t) \f$ of the system of ODEs/DAEs.
+    %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
+    %>         system of ODEs/DAEs.
     %
-    function [x_out, t_out] = solve( this, t, x_0 )
+    function [x_out, x_dot_out, t] = solve( this, t, x_0 )
 
       CMD = 'indigo::ODEsolver::solve(...): ';
 
       % Check initial conditions
       num_eqns = this.m_ode.get_num_eqns();
-      if (num_eqns ~= length(x_0))
-        error([CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
-          this.m_name, length(x_0), num_eqns);
-      end
+      assert(num_eqns == length(x_0), ...
+        [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
+        this.m_name, length(x_0), num_eqns);
 
       % Instantiate output
-      safety_length  = 2*length(t);
+      x_out      = zeros(num_eqns, length(t));
+      x_dot_out  = zeros(num_eqns, length(t));
+
+      % Store first step
+      x_out(:,1) = x_0(:);
+
+      % Instantiate temporary variables
+      s   = 1;         % Current step
+      p   = 0;         % Current percentage
+      tol = sqrt(eps); % Tolerance
+
+      % Update the current step
+      x_s     = x_out(:,1);
+      x_dot_s = x_dot_out(:,1);
+      t_s     = t(1);
+      d_t_s   = t(2) - t(1);
+      d_t_tmp = d_t_s;
+
+      % Start progress bar
+      if (this.m_verbose == false)
+        progress_bar('_start');
+      end
+
+      while (true)
+        % Print percentage of solution completion
+        if (this.m_verbose == false)
+          progress_bar(ceil(100*t_s/t(end)))
+        end
+
+        % Integrate system of ODEs/DAEs
+        [x_s, x_dot_s, d_t_star] = this.advance(x_s, x_dot_s, t_s, d_t_s);
+
+        % Update the current step
+        t_s = t_s + d_t_s;
+
+        % Saturate the suggested timestep
+        mesh_point_bool = abs(t_s - t(s+1)) < tol;
+        saturation_bool = t_s + d_t_star > t(s+1) + tol;
+        if (this.m_adaptive_step && ~mesh_point_bool && saturation_bool)
+          d_t_tmp = d_t_star;
+          d_t_s   = t(s+1) - t_s;
+        else
+          d_t_s = d_t_star;
+        end
+
+        % Store solution if the step is a mesh point
+        if (~this.m_adaptive_step || mesh_point_bool)
+
+          % Update temporaries
+          s     = s+1;
+          d_t_s = d_t_tmp;
+
+          % Update outputs
+          x_out(:,s)     = x_s;
+          x_dot_out(:,s) = x_dot_s;
+
+          % Check if the current step is the last one
+          if (abs(t_s - t(end)) < tol)
+            break;
+          end
+        end
+      end
+
+      % End progress bar
+      if (this.m_verbose == false)
+        progress_bar(100);
+        progress_bar(strcat([this.m_name, ' completed!']));
+      end
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Solve the system of ODEs/DAEs and calculate the approximate solution over
+    %> the suggested mesh of time points.
+    %>
+    %> \param t     Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots,
+    %>              t_n \right]^T \f$.
+    %> \param x_0   Initial states value \f$ \mathbf{x}(t_0) \f$.
+    %> \param t_min [optional] Minimum timestep \f$ \Delta t_{\mathrm{min}} \f$.
+    %> \param t_max [optional] Maximum timestep \f$ \Delta t_{\mathrm{max}} \f$.
+    %>
+    %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+    %>         (\mathbf{t})\right] \f$ containing the approximated solution
+    %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
+    %>         system of ODEs/DAEs.
+    %
+    function [x_out, x_dot_out, t] = solve_adaptive_step( this, t, x_0, varargin )
+
+      CMD = 'indigo::ODEsolver::solve_adaptive(...): ';
+
+      % Collect optional arguments
+      if (nargin == 4)
+        d_t = t(2) - t(1);
+        t_min = 0.5*d_t;
+        t_max = 1.5*d_t;
+      elseif (nargin == 6)
+        t_min = varargin{1};
+        t_max = varargin{2};
+        d_t = (t_max + t_min)/2.0;
+        % Check time step interval
+        assert(t_max > t_min && t_min > 0,
+          [CMD, 'invalid time bounds detected.']);
+      else
+        error([CMD, 'invalid number of inputs detected.']);
+      end
+
+      % Check initial conditions
+      num_eqns = this.m_ode.get_num_eqns();
+      assert(num_eqns == length(x_0), ...
+        [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
+        this.m_name, length(x_0), num_eqns);
+
+      % Instantiate output
+      safety_length  = ceil(1.5/f_min)*length(t);
       t_out          = zeros(1, safety_length);
       x_out          = zeros(num_eqns, safety_length);
-      x_out_dot      = zeros(num_eqns, safety_length);
+      x_dot_out      = zeros(num_eqns, safety_length);
 
-      % Initialize first step
-      t_out(:,1)     = t(1);
-      x_out(:,1)     = x_0(:);
-      x_out_dot(:,1) = zeros(num_eqns, 1);
+      % Store first step
+      t_out(1)   = t(1);
+      x_out(:,1) = x_0(:);
 
       % Instantiate temporary variables
       s = 1; % Current step
       p = 0; % Current percentage
 
-      % Compute the initial step size
-      d_t_ini = t(2) - t(1);
-      d_t     = d_t_ini;
+      % Start progress bar
+      if (this.m_verbose == false)
+        progress_bar('_start');
+      end
 
-      exit = false;
       while (true)
-
-        % Check if the maximum number of substepping is reached
-        if (t_out(s) > t(end))
-          t_out(s) = t(end);
-          exit = true;
-        end
-
         % Print percentage of solution completion
-        if (this.m_verbose == true)
-          p_new = ceil(100*t_out(s)/t(end));
-          if (p_new > p + 9)
-            p = p_new;
-            fprintf('%3d%%\n', p);
-          end
+        if (this.m_verbose == false)
+          progress_bar(ceil(100*t_s/t(end)))
         end
 
         % Integrate system of ODEs/DAEs
         [x_new, x_dot_new, d_t_star] = ...
-          this.advance(x_out(:,s), x_out_dot(:,s), t_out(s), d_t);
+          this.advance(x_out(:,s), x_dot_out(:,s), t_out(s), d_t);
 
-        % Store time solution
-        t_out(s+1) = t_out(s) + d_t;
-
-        % Store states solutions
+        % Store solution
+        t_out(s+1)       = t_out(s) + d_t;
         x_out(:,s+1)     = x_new;
-        x_out_dot(:,s+1) = x_dot_new;
+        x_dot_out(:,s+1) = x_dot_new;
 
-        % Check if the final time step has been reached
-        if (exit)
-          break;
+        % Saturate the suggested timestep
+        d_t = max(min(d_t_star, t_max), t_min);
+
+        % Check if the current step is the last one
+        if (t_out(s+1) + d_t > t(end))
+          d_t = t(end) - t_out(s+1);
         end
 
         % Update steps counter
-        s = s + 1;
+        s = s+1;
+      end
 
-        % use new suggested timestep
-        d_t = d_t_star;
+      % End progress bar
+      if (this.m_verbose == false)
+        progress_bar(100);
+        progress_bar(strcat([this.m_name, ' completed!']));
       end
 
       % Resize the output
-      t_out = t_out(:,1:s-1);
-      x_out = x_out(:,1:s-1);
-      %x_out_dot = x_out_dot(:,1:s-1);
+      t_out     = t_out(:,1:s-1);
+      x_out     = x_out(:,1:s-1);
+      x_dot_out = x_dot_out(:,1:s-1);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -635,10 +945,14 @@ classdef ODEsolver < handle
 
       % Check initial conditions
       num_eqns = this.m_ode.get_num_eqns();
-      if (num_eqns ~= length(x_k))
-        error([CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
-          this.m_name, length(x_k), num_eqns);
-      end
+      assert(num_eqns == length(x_k), ...
+        [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
+        this.m_name, length(x_k), num_eqns);
+
+      % Check step size
+      assert(d_t > 0, ...
+        [CMD, 'in %s solver, d_t is %f, expected > 0.'], ...
+        this.m_name, d_t);
 
       % Integrate system of ODEs/DAEs
       [x_new, x_dot_new, d_t_star, ierr] = this.step(x_k, x_dot_k, t_k, d_t);
@@ -654,8 +968,6 @@ classdef ODEsolver < handle
         max_k = this.m_max_substeps * this.m_max_substeps;
         k = 2;
         while (k > 0)
-          k
-
           % Integrate system of ODEs/DAEs
           [x_tmp, x_dot_tmp, t_tmp, d_t_star_tmp] = ...
             this.step(x_tmp, x_dot_tmp, t_tmp, d_t_tmp);
@@ -713,14 +1025,12 @@ classdef ODEsolver < handle
           if (this.m_projection == true)
             x_tmp = this.project(x_tmp, t_tmp);
           end
-
         end
 
         % Store states solutions
         x_new     = x_tmp;
         x_dot_new = x_dot_tmp;
         d_t_star  = d_t_tmp;
-
       end
     end
     %
@@ -775,28 +1085,30 @@ classdef ODEsolver < handle
     %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
     %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
     %> \param d_t Actual advancing time step \f$ \Delta t\f$.
+    %>
     %> \return The suggested time step for the next advancing step \f$ \Delta
     %>         t_{k+1} \f$.
-    %>
+    %
     function out = adapt_step( this, x_h, x_l, d_t )
 
-      CMD = 'indigo::ODEsolver::adapt_step(...): ';
-
       % Compute the error with 2-norm
-      r = (x_h - x_l)./ ( this.m_A_tol + (this.m_R_tol/2)*(abs(x_h)+abs(x_l)) );
-      e = norm(r,2)/length(x_h);
+      r = (x_h - x_l) ./ (this.m_A_tol + 0.5*this.m_R_tol*(abs(x_h)+abs(x_l)));
+      e = norm(r, 2)/length(x_h);
 
       % Compute the suggested time step
-      q   = this.m_order+1;
-      out = d_t * min(this.m_fac_max, max(this.m_fac_min, this.m_fac * (1/(e)) ^ (1/q)));
+      q   = this.m_order + 1;
+      out = d_t * min(this.m_fac_max, max(this.m_fac_min, this.m_fac*(1/e)^(1/q)));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function info( this )
-      fprintf('Method:  %s\n', this.m_name);
-      fprintf('order:   %d\n', this.m_order);
-      fprintf('explicit %d\n', this.m_explicit);
+      fprintf('Method:\t%s\n',       this.m_name);
+      fprintf('\t- order:\t%d\n',    this.get_order());
+      fprintf('\t- steps:\t%d\n',    this.get_order());
+      fprintf('\t- explicit:\t%d\n', this.is_explicit());
+      fprintf('\t- implicit:\t%d\n', this.is_implicit());
+      fprintf('\t- embedded:\t%d\n', this.is_embedded());
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -833,10 +1145,11 @@ classdef ODEsolver < handle
     %
     %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
     %>
-    %> - A   Matrix \f$ \mathbf{A} \f$.
-    %> - b   Weights vector \f$ \mathbf{b} \f$.
-    %> - c   Nodes vector \f$ \mathbf{c} \f$.
-    %> - b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$ (row vector).
+    %> \param tbl.A   Matrix \f$ \mathbf{A} \f$.
+    %> \param tbl.b   Weights vector \f$ \mathbf{b} \f$.
+    %> \param tbl.b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}}
+    %>                \f$ (row vector).
+    %> \param tbl.c   Nodes vector \f$ \mathbf{c} \f$.
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %

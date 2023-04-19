@@ -13,14 +13,14 @@ classdef GaussLegendre56 < RKimplicit
     %> .. math::
     %>
     %>   \begin{array}{c|ccc}
-    %>     1/2-t &     w & z-t_2 & w-t_4 \\
-    %>       1/2 & w+t_3 &     z & w-t_3 \\
-    %>     1/2+t & w+t_4 & z+t_2 &     w \\
+    %>     1/2-t_1 &     w & z-t_2 & w-t_4 \\
+    %>         1/2 & w+t_3 &     z & w-t_3 \\
+    %>     1/2+t_1 & w+t_4 & z+t_2 &     w \\
     %>     \hline
     %>           &  5/18 &   4/9 &  5/18 \\
     %>           &  -5/6 &   8/3 &  -5/6
     %>   \end{array}
-    %>   \quad t   = \displaystyle\frac{\sqrt{15}}{10}
+    %>   \quad t_1 = \displaystyle\frac{\sqrt{15}}{10}
     %>   \quad t_2 = \displaystyle\frac{\sqrt{15}}{15}
     %>   \quad t_3 = \displaystyle\frac{\sqrt{15}}{24}
     %>   \quad t_4 = \displaystyle\frac{\sqrt{15}}{30}
@@ -30,19 +30,19 @@ classdef GaussLegendre56 < RKimplicit
     %> \endrst
     %
     function this = GaussLegendre56()
-      t  = sqrt(15)/10;
-      t2 = sqrt(15)/15;
-      t3 = sqrt(15)/24;
-      t4 = sqrt(15)/30;
-      w  = 5/36;
-      z  = 2/9;
-      tbl.A   = [w,    z-t2, w-t4; ...
-                 w+t3, z,    w-t3; ...
-                 w+t4, z+t2, w ];
-      tbl.b   = [5/18,4/9,5/18];
-      tbl.c   = [1/2-t,1/2,1/2+t]';
+      t_1 = sqrt(15)/10;
+      t_2 = sqrt(15)/15;
+      t_3 = sqrt(15)/24;
+      t_4 = sqrt(15)/30;
+      w   = 5/36;
+      z   = 2/9;
+      tbl.A   = [w,     z-t_2, w-t_4; ...
+                 w+t_3, z,     w-t_3; ...
+                 w+t_4, z+t_2, w];
+      tbl.b   = [5/18, 4/9, 5/18];
       tbl.b_e = [-5/6, 8/3, -5/6];
-      this@RKimplicit( 'GaussLegendre56', 6, tbl );
+      tbl.c   = [1/2-t_1, 1/2, 1/2+t_1]';
+      this@RKimplicit('GaussLegendre56', 6, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

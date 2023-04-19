@@ -29,9 +29,9 @@ classdef RK38 < RKexplicit
                  -1/3, 1,  0, 0; ...
                  1,    -1, 1, 0];
       tbl.b   = [1/8, 3/8, 3/8, 1/8];
-      tbl.c   = [0, 1/3, 2/3, 1]';
       tbl.b_e = [];
-      this@RKexplicit( 'RK38', 4, tbl );
+      tbl.c   = [0, 1/3, 2/3, 1]';
+      this@RKexplicit('RK38', 4, tbl);
     end
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   end

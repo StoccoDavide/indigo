@@ -35,9 +35,9 @@ classdef RadauIA5 < RKimplicit
                  1/9,  11/45+7*sqrt(6)/360,   11/45-43*sqrt(6)/360; ...
                  1/9,  11/45+43*sqrt(6)/360,  11/45-7*sqrt(6)/360 ];
       tbl.b   = [1/9, 4/9+sqrt(6)/36, 4/9-sqrt(6)/36] ;
-      tbl.c   = [0,   3/5-sqrt(6)/10, 3/5+sqrt(6)/10]';
       tbl.b_e = [];
-      this@RKimplicit( 'RadauIA5', 5, tbl );
+      tbl.c   = [0,   3/5-sqrt(6)/10, 3/5+sqrt(6)/10]';
+      this@RKimplicit('RadauIA5', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

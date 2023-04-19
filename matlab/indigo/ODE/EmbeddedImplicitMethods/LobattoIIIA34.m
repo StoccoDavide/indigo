@@ -29,9 +29,9 @@ classdef LobattoIIIA34 < RKimplicit
                  5/24, 1/3, -1/24; ...
                  1/6,  2/3, 1/6];
       tbl.b   = [1/6, 2/3, 1/6];
-      tbl.c   = [0, 1/2, 1]';
       tbl.b_e = [-1/2, 2, -1/2];
-      this@RKimplicit( 'LobattoIIIA34', 4, tbl );
+      tbl.c   = [0, 1/2, 1]';
+      this@RKimplicit('LobattoIIIA34', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
