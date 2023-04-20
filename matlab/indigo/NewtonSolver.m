@@ -497,8 +497,8 @@ classdef NewtonSolver < handle
         end
 
         % Check if dumping failed
-        if (dumped == false)
-          if (this.m_verbose == true)
+        if (~dumped)
+          if (this.m_verbose)
             fprintf(1, [CMD, 'tau = %d, failed dumping iteration.\n'], tau);
           end
           ierr = 2;
@@ -508,7 +508,7 @@ classdef NewtonSolver < handle
         % Update solution
         x   = x_dump;
         out = x;
-        if (this.m_verbose == true)
+        if (this.m_verbose)
           fprintf(1, [CMD, 'iter %d: ||F||_inf = %f, tau = %1.4f.\n'], ...
             i, norm(F, inf), tau);
         end

@@ -112,7 +112,7 @@ for i = 1:length(solver_name)
     'solver', solver_name{i}, '.solve( T_vec, X_0 );']));
 
   % Calculate energy of the solution
-  eval(strcat(['H_' solver_name{i}, ' = ODE.H( X_', solver_name{i}, ', T_', solver_name{i}, ' );']));
+  eval(strcat(['h_' solver_name{i}, ' = ODE.h( X_', solver_name{i}, ', T_', solver_name{i}, ' );']));
 
 end
 
@@ -149,7 +149,7 @@ hold on; grid on; grid minor;
 xlabel('$t$ (s)');
 ylabel('$E$ (J)');
 for i = 1:length(solver_name)
-  eval(strcat(['plot( T_', solver_name{i}, ', H_', solver_name{i}, '(1,:), ''LineWidth'', linewidth );' ]));
+  eval(strcat(['plot( T_', solver_name{i}, ', h_', solver_name{i}, '(1,:), ''LineWidth'', linewidth );' ]));
 end
 legend(solver_name, 'Location', 'northwest');
 hold off;
@@ -164,7 +164,7 @@ for i = 1:length(solver_name)
     'solver', solver_name{i}, '.solve( T_vec, X_0 );']));
 
   % Calculate energy of the solution
-  eval(strcat(['H_' solver_name{i}, ' = ODE.H( X_', solver_name{i}, ', T_', solver_name{i}, ' );']));
+  eval(strcat(['h_' solver_name{i}, ' = ODE.h( X_', solver_name{i}, ', T_', solver_name{i}, ' );']));
 
 end
 
@@ -201,7 +201,7 @@ hold on; grid on; grid minor;
 xlabel('$t$ (s)');
 ylabel('$E$ (J)');
 for i = 1:length(solver_name)
-  eval(strcat(['plot( T_', solver_name{i}, ', H_', solver_name{i}, '(1,:), ''LineWidth'', linewidth );' ]));
+  eval(strcat(['plot( T_', solver_name{i}, ', h_', solver_name{i}, '(1,:), ''LineWidth'', linewidth );' ]));
 end
 legend(solver_name, 'Location', 'northwest');
 hold off;

@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (DAE version)
-classdef SliderCrank < ODEsystem
+classdef SliderCrank < ImplicitODE
   %
   properties (SetAccess = protected, Hidden = true)
     m_Fa;  % Step force applied to the piston (N)
@@ -16,14 +16,14 @@ classdef SliderCrank < ODEsystem
     %
     function this = SliderCrank( Fa, Ta, m, l, g, X_0 )
 
-      CMD = 'SliderCrankDAE::SliderCrankDAE(...): ';
+      CMD = 'SliderCrank::SliderCrank(...): ';
 
       % Set the number of equations and the number of invariants
       num_eqns = 8;
       num_invs = 0;
 
       % Call the superclass constructor
-      this@ODEsystem('SliderCrankDAE', num_eqns, num_invs);
+      this@ImplicitODE('SliderCrank', num_eqns, num_invs);
 
       % Check the input arguments
       assert(m > 0, ...
@@ -81,13 +81,13 @@ classdef SliderCrank < ODEsystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = H( this, ~, ~ )
+    function out = h( this, ~, ~ )
 
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = JH( this, ~, ~ )
+    function out = Jh( this, ~, ~ )
 
     end
     %

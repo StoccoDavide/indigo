@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3217075280" file="/Users/davide/Documents/Git/indigo/matlab/Indigo.prj" location="/Users/davide/Documents/Git/indigo/matlab" name="Indigo" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="2474418072" file="/Users/davide/Documents/Git/indigo/matlab/Indigo.prj" location="/Users/davide/Documents/Git/indigo/matlab" name="Indigo" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Indigo</param.appname>
     <param.authnamewatermark>D. Stocco, S. Taddei, E. Bertolazzi</param.authnamewatermark>
     <param.email>davide.stocco@unitn.it</param.email>
@@ -14,7 +14,7 @@
     <param.products.version />
     <param.platforms />
     <param.guid>dd12544a-13a4-45ac-988d-819b17c69ecf</param.guid>
-    <param.exclude.filters />
+    <param.exclude.filters>.DS_Store</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -47,7 +47,6 @@
       <param.products.id />
       <param.products.version />
       <param.platforms />
-      <param.exclude.filters />
       <param.exclude.pcodedmfiles />
       <param.examples />
       <param.demosxml />
@@ -76,16 +75,13 @@
       <param.additional.sw.linux.url />
     </unset>
     <fileset.rootdir>
-      <file>${PROJECT_ROOT}/indigo</file>
+      <file>${PROJECT_ROOT}</file>
     </fileset.rootdir>
     <fileset.rootfiles>
-      <file>${PROJECT_ROOT}/indigo/.DS_Store</file>
-      <file>${PROJECT_ROOT}/indigo/Base.m</file>
-      <file>${PROJECT_ROOT}/indigo/NewtonSolver.m</file>
-      <file>${PROJECT_ROOT}/indigo/ODE</file>
-      <file>${PROJECT_ROOT}/indigo/SavePNG.m</file>
-      <file>${PROJECT_ROOT}/indigo/progress_bar.m</file>
-      <file>${PROJECT_ROOT}/indigo/rgb.m</file>
+      <file>${PROJECT_ROOT}/README.md</file>
+      <file>${PROJECT_ROOT}/examples</file>
+      <file>${PROJECT_ROOT}/indigo</file>
+      <file>${PROJECT_ROOT}/setup.m</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />

@@ -18,11 +18,19 @@ set(0,     'defaultAxesFontSize',             18      );
 
 % Library folders
 addpath('./indigo');
+
+% Utilities
+addpath('./indigo/Utils');
+
+% ODE classes
 addpath('./indigo/ODE');
-addpath('./indigo/ODE/ExplicitMethods/');
-addpath('./indigo/ODE/ImplicitMethods/');
-addpath('./indigo/ODE/EmbeddedExplicitMethods/');
-addpath('./indigo/ODE/EmbeddedImplicitMethods/');
+
+% Runge-Kutta methods
+addpath('./indigo/RungeKutta');
+addpath('./indigo/RungeKutta/ExplicitMethods/');
+addpath('./indigo/RungeKutta/ImplicitMethods/');
+addpath('./indigo/RungeKutta/EmbeddedExplicitMethods/');
+addpath('./indigo/RungeKutta/EmbeddedImplicitMethods/');
 
 % Examples folder do not add example in toolbox
 % addpath('./examples');

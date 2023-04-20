@@ -102,7 +102,7 @@ T_vec = t_ini:d_t:t_end;
 % Set initial conditions
 infinity_solution = true;
 
-if (infinity_solution == true)
+if (infinity_solution)
 
   x_1 =  0.97000436;
   x_2 = -0.97000436;
@@ -138,7 +138,6 @@ X_ini = [x_1, x_2, x_3, y_1, y_2, y_3, u_1, u_2, u_3, v_1, v_2, v_3];
 
 % Solve the system of ODEs for each solver
 for i = 1:length(solver_name)
-  eval(strcat(['solver', solver_name{i}, '.enable_verbose();']));
   eval(strcat(['solver', solver_name{i}, '.enable_projection();']));
   eval(strcat(['[X_', solver_name{i}, ', ~, T_', solver_name{i}, '] =', ...
     'solver', solver_name{i}, '.solve( T_vec, X_ini );']));
@@ -178,7 +177,7 @@ hold off;
 
 generate_logo = false;
 
-if (generate_logo == true)
+if (generate_logo)
 
   % Select solver
   solver_id = 1;
@@ -211,7 +210,7 @@ end
 
 animate_solution = true;
 
-if (animate_solution == true)
+if (animate_solution)
 
   % Select solver
   solver_id = 1;
@@ -255,7 +254,10 @@ if (animate_solution == true)
     'Color', color_map(3,:), 'MarkerFaceColor', color_map(3,:));
 
   % Animate solution with for loop
-  for i = 1:ceil(length(eval(strcat(['T_', solver_name{solver_id}]))))
+  fprintf('Animating solution...\n');
+  progress_bar('_start');
+  frames = ceil(length(eval(strcat(['T_', solver_name{solver_id}]))));
+  for i = 1:frames
 
     tic;
 
@@ -281,6 +283,9 @@ if (animate_solution == true)
     ylim([-1.5, 1.5]);
     drawnow;
 
+    % Update progrss bar
+    progress_bar(100*i/frames);
+
     time = toc;
     pause(min(0.0, max(0.0, ...
       eval(strcat(['T_', solver_name{solver_id}, '(1,i)']))/speed - time)) ...
@@ -288,6 +293,7 @@ if (animate_solution == true)
   end
   legend(solver_name{solver_id}, 'Location', 'southwest');
   hold off;
+  progress_bar('Animation completed!');
 
 end
 
