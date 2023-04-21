@@ -17,65 +17,22 @@
 
 IndigoUtils := module()
 
-  export # Symbol
-         DropPrefix,
-         GetPosition,
-         CheckParam,
-         CheckTableField,
-         CheckTableName,
-         ToString,
-         ToRubyString,
-         ToStringAndSplit,
-         CatSymbol,
-         ToSymbol,
-         ToVector,
-         JoinSymbols,
-         # Differentiation
-         DoDiff,
-         DoGradient,
-         DoHessian,
-         DoJacobian,
-         # Function
-         ExtractSubs,
-         GetFunctions,
-         GetFunctionsInList,
-         GetSymbols,
-         GetFunctionPrototype,
-         GetFunctionName,
-         GetFunctionBody,
-         IsDependentOn,
-         GetSymbolsRecurr,
-         # Miscellaneous
-         GetPermSortedList,
-         # Messages
-         cprintf,
-         ErrorMessage,
-         WarningMessage,
-         PrintTitle,
-         PrintHeader,
-         PrintMessage,
-         Assert,
-         Warning;
-
-  local  ModuleLoad,
-         ModuleUnload;
+  description "Utilities for the 'Indigo' module.";
 
   option package,
          load   = ModuleLoad,
          unload = ModuleUnload;
 
-  description "Utilities for the 'Indigo' module.";
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ModuleLoad := proc()
+  local ModuleLoad := proc()
     description "'IndigoUtils' module load procedure.";
     return NULL;
   end proc: # ModuleLoad
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ModuleUnload := proc()
+  local ModuleUnload := proc()
     description "'IndigoUtils' module unload procedure.";
     return NULL;
   end proc: # ModuleUnload
@@ -89,7 +46,7 @@ IndigoUtils := module()
   #         |___/
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DropPrefix := proc(
+  export DropPrefix := proc(
     str::string,
     $)::string;
 
@@ -100,7 +57,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetPosition := proc(
+  export GetPosition := proc(
     var::{symbol, function, integer},
     lst::list,
     $)::integer;
@@ -139,7 +96,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  CheckParam := proc(
+  export CheckParam := proc(
     param::anything,
     param_name::string,
     param_type::anything,
@@ -155,7 +112,8 @@ IndigoUtils := module()
         param_name, param
       );
       IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
+        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, "
+        "expected of type `%s` in %s\n",
         param_name, convert(whattype(param), string), convert(tp, string), where
       );
     end if;
@@ -164,7 +122,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  CheckTableField := proc(
+  export CheckTableField := proc(
     tab::table,
     param_field::string,
     msg::string,
@@ -180,13 +138,15 @@ IndigoUtils := module()
     if not member(param_field, [indices(t, 'nolist')]) then
       IndigoUtils:-ErrorMessage(msg);
     end if;
-    IndigoUtils:-CheckParam(tab[param_field], param_field, param_type, "CheckTableField");
+    IndigoUtils:-CheckParam(
+      tab[param_field], param_field, param_type, "CheckTableField"
+    );
     return NULL;
   end proc: # CheckTableField
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  CheckTableName := proc(
+  export CheckTableName := proc(
     tab::table,
     param_name::string,
     param_type::anything,
@@ -208,8 +168,8 @@ IndigoUtils := module()
     if not type(tab[param_name], param_type) then
       printf("Parameter `%s` = %a\n", param_name, tab[param_name]);
       IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, expected "
-        "of type `%s` in %s.\n",
+        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, "
+        "expected of type `%s` in %s.\n",
         param_name, convert(whattype(tab[param_name]), string),
         convert(param_type, string), where
       );
@@ -219,7 +179,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToString := proc(
+  export ToString := proc(
     var::anything,
     $)::string;
 
@@ -245,7 +205,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToStringAndSplit := proc(
+  export ToStringAndSplit := proc(
     var::anything,
     $)::string;
 
@@ -260,7 +220,9 @@ IndigoUtils := module()
       str := IndigoUtils:-ToString(var);
     end if;
     if (StringTools:-Length(str) > 512) then
-      str := StringTools:-Join([StringTools:-LengthSplit(str, 512)], """+\n\t""");
+      str := StringTools:-Join(
+        [StringTools:-LengthSplit(str, 512)], """+\n\t"""
+      );
     end if;
     # We do not substitute " with \" but ' with \'
     str := StringTools:-SubstituteAll(str, "'", "\\'");
@@ -269,7 +231,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToRubyString := proc(
+  export ToRubyString := proc(
     var::anything,
     $)::string;
 
@@ -280,14 +242,16 @@ IndigoUtils := module()
 
     str := IndigoUtils:-ToString(var);
     if (StringTools:-Length(str) > 512) then
-      str := StringTools:-Join([StringTools:-LengthSplit(str, 512)], """+\n\t""");
+      str := StringTools:-Join(
+        [StringTools:-LengthSplit(str, 512)], """+\n\t"""
+      );
     end if;
     return cat("""", str, """");
   end proc: # ToRubyString
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  CatSymbol := proc(
+  export CatSymbol := proc(
     # _passed
     )::symbol;
 
@@ -298,7 +262,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToSymbol := proc(
+  export ToSymbol := proc(
     pre::{symbol, string},
     var::{symbol, string},
     post::{symbol, string},
@@ -320,7 +284,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ToVector := proc(
+  export ToVector := proc(
     var::anything,
     $)::Vector;
 
@@ -331,7 +295,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  JoinSymbols := proc(
+  export JoinSymbols := proc(
     # _passed
     )::symbol;
 
@@ -355,7 +319,7 @@ IndigoUtils := module()
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoDiff := proc(
+  export DoDiff := proc(
     # _passed
     )::anything;
 
@@ -363,11 +327,11 @@ IndigoUtils := module()
 
     local i, tmp1, tmp2, out;
 
-    tmp2 := IndigoUtils:-DoDiff(subs(f = tmp1, out), tmp1);
+    tmp2 := diff(subs(f = tmp1, out), tmp1);
     subs(tmp1 = f, convert(tmp2, D));
     out := _passed[1];
     for i from 2 to _npassed do
-      tmp2 := IndigoUtils:-DoDiff(subs(_passed[i] = tmp1, out), tmp1);
+      tmp2 := diff(subs(_passed[i] = tmp1, out), tmp1);
       out  := subs(tmp1 = _passed[i], convert(tmp2, D));
     end do;
     return out;
@@ -375,7 +339,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoGradient := proc(
+  export DoGradient := proc(
     fnc::anything,
     lst::list,
     $)::anything;
@@ -395,7 +359,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoHessian := proc(
+  export DoHessian := proc(
     fnc::anything,
     lst::list,
     $)::anything;
@@ -418,7 +382,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  DoJacobian := proc(
+  export DoJacobian := proc(
     fnc::Vector,
     lst::list,
     $)::anything;
@@ -448,7 +412,7 @@ IndigoUtils := module()
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ExtractSubs := proc(
+  export ExtractSubs := proc(
     pars::list,
     $)::list;
 
@@ -469,7 +433,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctions := proc(
+  export GetFunctions := proc(
     expr::anything,
     onlyD::boolean := false,
     $ )::anything;
@@ -506,7 +470,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionsInList := proc(
+  export GetFunctionsInList := proc(
     expr::anything,
     fncs::list,
     $)::anything;
@@ -545,7 +509,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetSymbols := proc(
+  export GetSymbols := proc(
     expr::anything,
     $)::anything;
 
@@ -572,7 +536,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionPrototype := proc(
+  export GetFunctionPrototype := proc(
     expr::anything,
     $)::anything;
 
@@ -588,7 +552,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionName := proc(
+  export GetFunctionName := proc(
     expr::anything,
     $)::anything;
 
@@ -613,7 +577,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetFunctionBody := proc(
+  export GetFunctionBody := proc(
     expr::anything,
     $)::anything;
 
@@ -629,7 +593,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  IsDependentOn := proc(
+  export IsDependentOn := proc(
     expr::algebraic,
     vars::list(function),
     $)::boolean;
@@ -649,7 +613,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetSymbolsRecurr := proc(
+  export GetSymbolsRecurr := proc(
     expr::anything,
     $)::{set, list};
 
@@ -723,7 +687,7 @@ IndigoUtils := module()
   #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  GetPermSortedList := proc(
+  export GetPermSortedList := proc(
     var::list,
     $)::list;
 
@@ -748,7 +712,7 @@ IndigoUtils := module()
   #                              |___/
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  cprintf := proc(
+  export cprintf := proc(
     fg::anything,
     bg::anything,
     fmt::anything
@@ -767,7 +731,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  ErrorMessage := proc(
+  export ErrorMessage := proc(
     # _passed
     )
 
@@ -779,7 +743,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  WarningMessage := proc(
+  export WarningMessage := proc(
     # _passed
     )
 
@@ -791,7 +755,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  PrintTitle := proc(
+  export PrintTitle := proc(
     # _passed
     )
 
@@ -813,7 +777,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  PrintHeader := proc(
+  export PrintHeader := proc(
     # _passed
     )
 
@@ -835,7 +799,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  PrintMessage := proc(
+  export PrintMessage := proc(
     # _passed
     )
 
@@ -847,7 +811,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  Assert := proc(
+  export Assert := proc(
     check::anything
     # _passed
     )
@@ -863,7 +827,7 @@ IndigoUtils := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  Warning := proc(
+  export Warning := proc(
     check::anything
     # _passed
     )

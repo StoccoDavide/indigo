@@ -198,6 +198,7 @@ classdef ExplicitRungeKutta < BaseRungeKutta
           [K(:,i), ierr] = this.m_newton_solver.solve_handle(fun, jac, K(:,i));
 
           if (ierr > 0)
+            out = NaN*K;
             return;
           end
         end

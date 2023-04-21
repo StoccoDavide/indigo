@@ -88,7 +88,7 @@ solver_name = [ ...
 
 for i = 1:length(solver_name)
   eval(strcat(['solver', solver_name{i}, '=', solver_name{i}, '();']));
-  eval(strcat(['solver', solver_name{i}, '.set_ode( ODE );']));
+  eval(strcat(['solver', solver_name{i}, '.set_system( ODE );']));
 end
 
 %% Integrate the system of ODE

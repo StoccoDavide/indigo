@@ -74,7 +74,7 @@
 %>
 %> \endrst
 %
-classdef ThreeBodyProblem < ImplicitODE
+classdef ThreeBodyProblem < ImplicitSystem
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -109,7 +109,7 @@ classdef ThreeBodyProblem < ImplicitODE
       num_invs = 0;
 
       % Call the superclass constructor
-      this@ImplicitODE('ThreeBodyProblem2D', num_eqns, num_invs);
+      this@ImplicitSystem('ThreeBodyProblem2D', num_eqns, num_invs);
 
       % Check the input arguments
       assert(G > 0, ...

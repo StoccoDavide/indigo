@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Worksheet>
-<Version major="2021" minor="2"/>
+<Version major="2020" minor="2"/>
 <Label-Scheme value="2" prefix=""/>
 <View-Properties presentation="true" autoexpanding_sections="true" UserProfileName="Maple Default Profile" NumericFormat-ApplyInteger="true" NumericFormat-ApplyRational="true" NumericFormat-ApplyExponent="false" editable="true">
 </View-Properties>
-<MapleNet-Properties prettyprint="3" warnlevel="3" compactdisplay="false" preplot="" helpbrowser="standard" displayprecision="-1" echo="1" scientificx="true" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" historytimestamp="false" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="1600" rtablesize="[10, 10]" useclientjvm="true" format="document" labelwidth="20" postplot="" typesetting="extended" ansi="false" ansicolor="[]" elisiondigitsthreshold="10000" showassumed="1" ansilprint="false" trailingsemicolon="true" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
+<MapleNet-Properties prettyprint="3" warnlevel="3" compactdisplay="false" preplot="" helpbrowser="standard" displayprecision="-1" echo="1" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" historytimestamp="false" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="960" rtablesize="[10, 10]" useclientjvm="true" labelwidth="20" postplot="" typesetting="extended" ansi="false" ansicolor="[]" elisiondigitsthreshold="10000" showassumed="1" ansilprint="false" trailingsemicolon="true" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
 <Styles>
 <Font name="Heading 1" background="[255,255,255]" bold="true" executable="false" family="Century Gothic" foreground="[195,69,11]" italic="false" opaque="false" readonly="false" size="20" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Warning" background="[255,255,255]" bold="false" executable="false" family="Courier New" foreground="[255,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
@@ -172,7 +172,7 @@ end proc:
 <Input><Text-field style="Text" layout="Normal">Generate module</Text-field><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME_UTILS);</Text-field>
 </Input>
 </Group>
-<Group labelreference="L256804" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Group hide-input="false" labelreference="L256804" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">GEN(MODULE_NAME_CODEGEN);</Text-field>
 </Input>
 </Group>
@@ -276,13 +276,13 @@ module IndigoUtils:
     # converted into 'x_dot(t)'.
     ToString( var::anything, $ ) :: string
 
-    # Convert a variable &lt;var&gt; into a Ruby string. Variables of type 
-    # 'x[dot](t)' are converted into 'x_dot(t)'.
-    ToRubyString( var::anything, $ ) :: string
-
     # Convert a variable &lt;var&gt; into multiple strings. Variables of type 
     # 'x[dot](t)' are converted into 'x_dot(t)'.
     ToStringAndSplit( var::anything, $ ) :: string
+
+    # Convert a variable &lt;var&gt; into a Ruby string. Variables of type 
+    # 'x[dot](t)' are converted into 'x_dot(t)'.
+    ToRubyString( var::anything, $ ) :: string
 
     # Concatenates input symbols.
     CatSymbol( )
@@ -377,6 +377,71 @@ module IndigoUtils:
     # Check if a condition &lt;check&gt; is true and prints a warning message if it 
     # is not.
     Warning( check::anything )
+
+</Text-field>
+</Output>
+</Group>
+<Group labelreference="L256805" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">Describe(IndigoCodegen):</Text-field>
+</Input>
+<Output><Text-field style="Line Printed Output" layout="Line Printed Output">
+# Code Generation for the 'IndigoCodegen' module.
+module IndigoCodegen:
+
+    # Set the working directory to &lt;dname&gt; for the code generation.
+    SetWorkingDirectory( dname::string, $ )
+
+    # Generate a file named &lt;fname&gt; with the content &lt;str&gt;.
+    GenerateFile( fname::string, str::string, $ )
+
+    # Procedure that creates an empty file &lt;fname&gt;.
+    ClearFile( fname::string, $ )
+
+    # Set options for code generation optimization.
+    SetCodegenOptions( { coercetypes::boolean := 
+                           _m_CodegenOptions[parse(&quot;coercetypes&quot;)], 
+                         deducereturn::boolean := 
+                           _m_CodegenOptions[parse(&quot;deducereturn&quot;)], 
+                         deducetypes::boolean := 
+                           _m_CodegenOptions[parse(&quot;deducetypes&quot;)], 
+                         defaulttype::symbol := 
+                           _m_CodegenOptions[parse(&quot;defaulttype&quot;)], 
+                         digits::posint := _m_CodegenOptions[parse(&quot;digits&quot;)], 
+                         functionprecision::symbol := 
+                           _m_CodegenOptions[parse(&quot;functionprecision&quot;)], 
+                         optimize::boolean := 
+                           _m_CodegenOptions[parse(&quot;optimize&quot;)], 
+                         reduceanalysis::boolean := 
+                           _m_CodegenOptions[parse(&quot;reduceanalysis&quot;)] }, 
+                       $ )
+
+    # Get options for CodeGeneration.
+    GetCodegenOptions( field::string := &quot;all&quot;, $ )
+
+    # Apply indentation &lt;ind&gt; to string &lt;str&gt;.
+    ApplyIndent( ind::string, str::string, $ ) :: string
+
+    # Translate the vector &lt;vec&gt; with variables &lt;vars&gt; into a Matlab function 
+    # named &lt;name&gt; and save it in the working directory.
+    VectorToMatlab( name::string, vars::list(list(symbol)), 
+                    vec::{Vector, list}, data::list(symbol) := [], $ )
+                  :: string
+
+    # Translate the matrix &lt;mat&gt; with variables &lt;vars&gt; into a Matlab function 
+    # named &lt;name&gt; and save it in the working directory.
+    MatrixToMatlab( name::string, vars::list(list(symbol)), mat::Matrix, 
+                    data::list(symbol) := [], $ ) :: string
+
+    # Remove all dependencies of the variables &lt;vars&gt; from expression &lt;expr&gt;.
+    RemoveDependencies( expr::anything, vars::{symbol, list(symbol)}, $ )
+                      :: anything
+
+    # Generate an implicit system for the equations &lt;F&gt; and invariants &lt;h&gt; with 
+    # states variables &lt;x&gt; and states variables derivatives &lt;x_dot&gt;.
+    ImplicitSystem( name::string, vars::{Vector(algebraic), list(algebraic)}, 
+                    eqns::{Vector(algebraic), list(algebraic)} := [NULL], 
+                    invs::{Vector(algebraic), list(algebraic)} := [NULL], 
+                    data::list(symbol = anything) := [], $ ) :: string
 
 </Text-field>
 </Output>

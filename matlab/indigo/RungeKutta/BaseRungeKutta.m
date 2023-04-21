@@ -206,7 +206,7 @@ classdef BaseRungeKutta < handle
     %>
     %> \return The system of ODEs/DAEs to be solved.
     %
-    function t_ode = get_ode( this )
+    function t_ode = get_system( this )
       t_ode = this.m_ode;
     end
     %
@@ -216,7 +216,7 @@ classdef BaseRungeKutta < handle
     %>
     %> \param t_ode The system of ODEs/DAEs to be solved.
     %
-    function set_ode( this, t_ode )
+    function set_system( this, t_ode )
       this.m_ode = t_ode;
     end
     %

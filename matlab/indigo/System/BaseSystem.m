@@ -2,7 +2,7 @@
 %> Class container for the system of Ordinary Differential Equations (ODEs)
 %> or Differential Algebraic Equations (DAEs).
 %
-classdef BaseODE < handle
+classdef BaseSystem < handle
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -31,7 +31,7 @@ classdef BaseODE < handle
     %> \param t_num_inv The number of invariants/hidden contraints of the system
     %>                  of ODEs/DAEs.
     %
-    function this = BaseODE( t_name, t_num_eqns, t_num_invs )
+    function this = BaseSystem( t_name, t_num_eqns, t_num_invs )
       this.m_name     = t_name;
       this.m_num_eqns = t_num_eqns;
       this.m_num_invs = t_num_invs;

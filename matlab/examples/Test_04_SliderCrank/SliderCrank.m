@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (DAE version)
-classdef SliderCrank < ImplicitODE
+classdef SliderCrank < ImplicitSystem
   %
   properties (SetAccess = protected, Hidden = true)
     m_Fa;  % Step force applied to the piston (N)
@@ -23,7 +23,7 @@ classdef SliderCrank < ImplicitODE
       num_invs = 0;
 
       % Call the superclass constructor
-      this@ImplicitODE('SliderCrank', num_eqns, num_invs);
+      this@ImplicitSystem('SliderCrank', num_eqns, num_invs);
 
       % Check the input arguments
       assert(m > 0, ...

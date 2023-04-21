@@ -14,7 +14,7 @@
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
 %> independent variable \f$ t \f$.
 %
-classdef ImplicitODE < BaseODE
+classdef ImplicitSystem < BaseSystem
   %
   methods
     %
@@ -27,8 +27,8 @@ classdef ImplicitODE < BaseODE
     %> \param t_ninv Number of invariants/hidden contraints of the implicit
     %>              system of ODEs.
     %
-    function this = ImplicitODE( t_name, t_neqn, t_ninv )
-      this@BaseODE(t_name, t_neqn, t_ninv);
+    function this = ImplicitSystem( t_name, t_neqn, t_ninv )
+      this@BaseSystem(t_name, t_neqn, t_ninv);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

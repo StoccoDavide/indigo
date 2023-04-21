@@ -22,8 +22,8 @@ addpath('./indigo');
 % Utilities
 addpath('./indigo/Utils');
 
-% ODE classes
-addpath('./indigo/ODE');
+% Systems classes
+addpath('./indigo/System');
 
 % Runge-Kutta methods
 addpath('./indigo/RungeKutta');

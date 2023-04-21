@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (DAE version)
-classdef PendulumDAE < ImplicitODE
+classdef PendulumDAE < ImplicitSystem
   %
   properties (SetAccess = protected, Hidden = true)
     m_m;   % Pendulum mass (kg)
@@ -21,7 +21,7 @@ classdef PendulumDAE < ImplicitODE
       num_invs = 1;
 
       % Call the superclass constructor
-      this@ImplicitODE('PendulumODE', num_eqns, num_invs);
+      this@ImplicitSystem('PendulumODE', num_eqns, num_invs);
 
       % Check the input arguments
       assert(m > 0, ...

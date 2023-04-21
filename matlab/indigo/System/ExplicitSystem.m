@@ -22,7 +22,7 @@
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
 %> independent variable \f$ t \f$.
 %
-classdef ExplicitODE < BaseODE
+classdef ExplicitSystem < BaseSystem
   %
   methods
     %
@@ -34,8 +34,8 @@ classdef ExplicitODE < BaseODE
     %> \param t_neqn Number of equations of the system of ODEs.
     %> \param t_ninv Number of invariants/hidden contraints of the system of ODEs.
     %
-    function this = ExplicitODE( t_name, t_neqn, t_ninv )
-      this@BaseODE(t_name, t_neqn, t_ninv);
+    function this = ExplicitSystem( t_name, t_neqn, t_ninv )
+      this@BaseSystem(t_name, t_neqn, t_ninv);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
