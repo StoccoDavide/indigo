@@ -31,7 +31,7 @@ classdef PendulumCodegen_Explicit < ExplicitSystem
 
       % User data
       if (nargin == 0)
-        % Set default values
+        % Keep default values
       elseif (nargin == 3)
         this.m_m = varargin{1};
         this.m_l = varargin{2};

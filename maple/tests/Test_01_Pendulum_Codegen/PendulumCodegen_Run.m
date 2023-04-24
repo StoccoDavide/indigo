@@ -13,7 +13,7 @@ g = 9.81; % gravity (m/s^2)
 
 % Initial conditions
 theta_0 = -1.0;
-omega_0 = -1.0;
+omega_0 = 0.0;
 X_0     = [theta_0; omega_0];
 
 ODE = PendulumCodegen_Explicit();

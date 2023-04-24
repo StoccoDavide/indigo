@@ -424,21 +424,29 @@ module IndigoCodegen:
 
     # Generate an implicit system for the equations &lt;F&gt; and invariants &lt;h&gt; with 
     # states variables &lt;x&gt; and states variables derivatives &lt;x_dot&gt;.
-    ImplicitSystem( name::string, vars::{Vector(algebraic), list(algebraic)}, 
-                    eqns::{Vector(algebraic), list(algebraic)} := [NULL], 
-                    invs::{Vector(algebraic), list(algebraic)} := [NULL], 
-                    { data::list(symbol = anything) := [], 
-                      info::string := &quot;No class description provided.&quot; }, $ )
-                  :: string
+    ImplicitSystemToMatlab( name::string, 
+                            vars::{Vector(algebraic), list(algebraic)}, 
+                            eqns::{Vector(algebraic), list(algebraic)} := 
+                              [NULL], 
+                            invs::{Vector(algebraic), list(algebraic)} := 
+                              [NULL], 
+                            { data::list(symbol = anything) := [], 
+                              info::string := &quot;No class description 
+                                provided.&quot; }, 
+                            $ ) :: string
 
     # Generate an explicit system for the equations &lt;F&gt; and invariants &lt;h&gt; with 
     # states variables &lt;x&gt; and states variables derivatives &lt;x_dot&gt;.
-    ExplicitSystem( name::string, vars::{Vector(algebraic), list(algebraic)}, 
-                    eqns::{Vector(algebraic), list(algebraic)} := [NULL], 
-                    invs::{Vector(algebraic), list(algebraic)} := [NULL], 
-                    { data::list(symbol = anything) := [], 
-                      info::string := &quot;No class description provided.&quot; }, $ )
-                  :: string
+    ExplicitSystemToMatlab( name::string, 
+                            vars::{Vector(algebraic), list(algebraic)}, 
+                            eqns::{Vector(algebraic), list(algebraic)} := 
+                              [NULL], 
+                            invs::{Vector(algebraic), list(algebraic)} := 
+                              [NULL], 
+                            { data::list(symbol = anything) := [], 
+                              info::string := &quot;No class description 
+                                provided.&quot; }, 
+                            $ ) :: string
 
 </Text-field>
 </Output>

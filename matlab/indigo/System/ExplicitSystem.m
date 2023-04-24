@@ -83,7 +83,7 @@ classdef ExplicitSystem < BaseSystem
     %>         \f$ \mathbf{x}' \f$.
     %
     function [JF_x, JF_x_dot] = JF( this, x, x_dot, t )
-      JF_x     = -this.Jf(x,t);
+      JF_x     = -this.Jf(x, x_dot, t);
       JF_x_dot = eye(length(x));
     end
     %
@@ -123,19 +123,20 @@ classdef ExplicitSystem < BaseSystem
     %>   \partial \mathbf{x}
     %> \f]
     %>
-    %> \param x States \f$ \mathbf{x} \f$.
-    %> \param t Independent variable \f$ t \f$.
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$ of the ODEs system
     %>         with respect to the states \f$ \mathbf{x} \f$.
     %
-    function out = Jf( this, x, t )
+    function out = Jf( this, x, x_dot, t )
       TA = this.TA(x,t);
-      Jb = this.Jb(x,t);
       out = zeros(length(x));
       for i = 1:size(TA, 3)
-        out = out + TA(:,:,i) \ Jb(:,:);
+        out(:,i) = TA(:,:,i) * x_dot;
       end
+      out = this.A(x,t) \ (this.Jb(x,t) - out);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

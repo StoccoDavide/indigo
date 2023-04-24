@@ -30,7 +30,7 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       this = this@ImplicitSystem('PendulumCodegen_Implicit', 2, 1);
       % User data
       if (nargin == 0)
-        % Set default values
+        % Keep default values
       elseif (nargin == 3)
         this.m_m = varargin{1};
         this.m_l = varargin{2};

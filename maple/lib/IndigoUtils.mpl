@@ -446,7 +446,7 @@ IndigoUtils := module()
     for i from 1 to m do
       for j from 1 to n do
         for k from 1 to l do
-          out[i, j, l] := IndigoUtils:-DoDiff(mat[i, j], lst[l]);
+          out[i, j, k] := IndigoUtils:-DoDiff(mat[i, j], lst[k]);
         end do;
       end do;
     end do;
