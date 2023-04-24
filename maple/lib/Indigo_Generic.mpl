@@ -37,18 +37,18 @@ export SeparateMatrices::static := proc(
   # Check input dimensions E
   n, m := LinearAlgebra:-Dimension(E);
   if (n <> m) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::SeparateMatrices(...): input matrix E must be square (got E = "
-      "%d x %d).", n, m
+    error(
+      "input matrix E must be square (got E = %d x %d).",
+      n, m
     );
   end if;
 
   # Check input dimensions G
   l := LinearAlgebra:-Dimension(G_tmp);
   if (n <> l) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::SeparateMatrices(...): input matrix E size (got E = %d x %d) "
-      "is not consistent with vector G size (got G = 1 x %d).", n, m, l
+    error(
+      "input matrix E size (got E = %d x %d) is not consistent with vector G "
+       "size (got G = 1 x %d).", n, m, l
     );
   end if;
 
@@ -80,7 +80,7 @@ export LoadMatrices_Generic::static := proc(
   # Check if the system is already loaded
   if evalb(_self:-m_SystemType <> 'Empty') then
     if _self:-m_VerboseMode then
-      IndigoUtils:-WarningMessage(
+      WARNING(
         "Indigo::LoadMatrices_Generic(...): a system of equations is already "
         "loaded, reduction steps and veiling variables will be overwritten."
       );
@@ -123,9 +123,9 @@ export LoadEquations_Generic::static := proc(
 
   # Check input dimensions
   if (nops(eqns) <> nops(vars)) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::LoadEquations_Generic(...): the number of equations (%d) must be "
-      "the same of the number of variables (%d).", nops(eqns), nops(vars)
+    error(
+      "the number of equations (%d) must be the same of the number of variables "
+      "(%d).", nops(eqns), nops(vars)
     );
   end if;
 
@@ -149,9 +149,9 @@ export ReduceIndexByOne_Generic::static := proc(
   local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
 
   if not evalb(_self:-m_SystemType = 'Generic') then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Generic(...): system must be of type 'Generic' "
-      "but got '%s'.", _self:-m_SystemType
+    error(
+      "system must be of type 'Generic' but got '%s'.",
+      _self:-m_SystemType
     );
   end if;
 
@@ -164,9 +164,9 @@ export ReduceIndexByOne_Generic::static := proc(
   nE, mE := LinearAlgebra:-Dimension(E);
   nA := LinearAlgebra:-Dimension(A);
   if (nA + nE <> mE) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Generic(...): number of row of E (%d x %d) plus "
-      "the number of algebraic equations (%d) must be equal to the column of E.",
+    error(
+      "number of row of E (%d x %d) plus the number of algebraic equations "
+      "(%d) must be equal to the column of E.",
       nE, mE, nA
     );
   end if;
@@ -180,9 +180,9 @@ export ReduceIndexByOne_Generic::static := proc(
   # Check dimensions
   nH, mH := LinearAlgebra:-Dimension(H);
   if  (nH + nE <> mE) or (mH <> mE) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Generic(...): bad dimension of linear part of "
-      "constraint derivative A' = H vars' + F, size H = %d x %d, size E = %d x %d.",
+    error(
+      "bad dimension of linear part of constraint derivative "
+      "A' = H vars' + F, size H = %d x %d, size E = %d x %d.",
       nH, mH, nE, mE
     );
   end if;
@@ -203,7 +203,7 @@ export ReduceIndexByOne_Generic::static := proc(
   # Check if we have reached index-0 DAE
   if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
     if _self:-m_VerboseMode then
-      IndigoUtils:-PrintMessage(
+      printf(
         "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) system has "
         "been reached."
       );

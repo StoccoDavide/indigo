@@ -134,7 +134,7 @@ classdef ExplicitSystem < BaseSystem
       Jb = this.Jb(x,t);
       out = zeros(length(x));
       for i = 1:size(TA, 3)
-        out = out + TA(:,:,i) \ Jb(:,:,i);
+        out = out + TA(:,:,i) \ Jb(:,:);
       end
     end
     %

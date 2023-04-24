@@ -303,15 +303,18 @@ module IndigoUtils:
 
     # Differentiate a scalar expression &lt;fnc&gt; with respect to a list of 
     # functions &lt;lst&gt;.
-    DoGradient( fnc::anything, lst::list, $ ) :: anything
+    DoGradient( fnc::algebraic, lst::{Vector, list}, $ ) :: Vector
 
     # Differentiate a vector of expressions (gradient) &lt;fnc&gt; with respect to a 
     # list &lt;lst&gt; of functions.
-    DoHessian( fnc::anything, lst::list, $ ) :: anything
+    DoHessian( fnc::algebraic, lst::{Vector, list}, $ ) :: Matrix
 
     # Differentiate a vector of expressions &lt;fnc&gt; with respect to a list &lt;lst&gt; 
     # of functions.
-    DoJacobian( fnc::Vector, lst::list, $ ) :: anything
+    DoJacobian( fnc::Vector, lst::{Vector, list}, $ ) :: Matrix
+
+    # Differentiate a matrix &lt;mat&gt; with respect to a list of functions &lt;lst&gt;.
+    DoTensor( mat::Matrix, lst::{Vector, list}, $ ) :: Array
 
     # Extract the list variables to substitute from a list of parameters 
     # &lt;pars&gt;.
@@ -349,34 +352,6 @@ module IndigoUtils:
 
     # Compute the permutation that sorts a list &lt;var&gt;.
     GetPermSortedList( var::list, $ ) :: list
-
-    # Print a message in color where &lt;fg&gt; is the foreground color, &lt;bg&gt; is the 
-    # background color, &lt;fmt&gt; is the format string, and the remaining inputs 
-    # are string arguments
-    cprintf( fg::anything, bg::anything, fmt::anything )
-
-    # Print an error message.
-    ErrorMessage( )
-
-    # Print a warning message.
-    WarningMessage( )
-
-    # Print a title.
-    PrintTitle( )
-
-    # Print a header.
-    PrintHeader( )
-
-    # Print a message.
-    PrintMessage( )
-
-    # Check if a condition &lt;check&gt; is true and prints an error message if it is 
-    # not.
-    Assert( check::anything )
-
-    # Check if a condition &lt;check&gt; is true and prints a warning message if it 
-    # is not.
-    Warning( check::anything )
 
 </Text-field>
 </Output>
@@ -424,13 +399,24 @@ module IndigoCodegen:
     # Translate the vector &lt;vec&gt; with variables &lt;vars&gt; into a Matlab function 
     # named &lt;name&gt; and save it in the working directory.
     VectorToMatlab( name::string, vars::list(list(symbol)), 
-                    vec::{Vector, list}, data::list(symbol) := [], $ )
-                  :: string
+                    vec::{Vector, list}, 
+                    { data::list(symbol) := [], 
+                      info::string := &quot;No function description provided.&quot; }, 
+                    $ ) :: string
 
     # Translate the matrix &lt;mat&gt; with variables &lt;vars&gt; into a Matlab function 
     # named &lt;name&gt; and save it in the working directory.
     MatrixToMatlab( name::string, vars::list(list(symbol)), mat::Matrix, 
-                    data::list(symbol) := [], $ ) :: string
+                    { data::list(symbol) := [], 
+                      info::string := &quot;No function description provided.&quot; }, 
+                    $ ) :: string
+
+    # Translate the tensor &lt;ten&gt; with variables &lt;vars&gt; into a Matlab function 
+    # named &lt;name&gt; and save it in the working directory.
+    TensorToMatlab( name::string, vars::list(list(symbol)), ten::Array, 
+                    { data::list(symbol) := [], 
+                      info::string := &quot;No function description provided.&quot; }, 
+                    $ ) :: string
 
     # Remove all dependencies of the variables &lt;vars&gt; from expression &lt;expr&gt;.
     RemoveDependencies( expr::anything, vars::{symbol, list(symbol)}, $ )
@@ -441,7 +427,18 @@ module IndigoCodegen:
     ImplicitSystem( name::string, vars::{Vector(algebraic), list(algebraic)}, 
                     eqns::{Vector(algebraic), list(algebraic)} := [NULL], 
                     invs::{Vector(algebraic), list(algebraic)} := [NULL], 
-                    data::list(symbol = anything) := [], $ ) :: string
+                    { data::list(symbol = anything) := [], 
+                      info::string := &quot;No class description provided.&quot; }, $ )
+                  :: string
+
+    # Generate an explicit system for the equations &lt;F&gt; and invariants &lt;h&gt; with 
+    # states variables &lt;x&gt; and states variables derivatives &lt;x_dot&gt;.
+    ExplicitSystem( name::string, vars::{Vector(algebraic), list(algebraic)}, 
+                    eqns::{Vector(algebraic), list(algebraic)} := [NULL], 
+                    invs::{Vector(algebraic), list(algebraic)} := [NULL], 
+                    { data::list(symbol = anything) := [], 
+                      info::string := &quot;No class description provided.&quot; }, $ )
+                  :: string
 
 </Text-field>
 </Output>

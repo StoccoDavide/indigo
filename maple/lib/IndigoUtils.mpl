@@ -76,19 +76,17 @@ IndigoUtils := module()
         i := ListTools:-Search(var, lst);
       end if;
       if (i = 0) then
-        IndigoUtils:-ErrorMessage(
-          "IndigoUtils::GetPosition(...): failed for %s in %s.\n",
-          convert(var, string),
-          convert(lst, string)
+        error(
+          "failed for %s in %s.",
+          convert(var, string), convert(lst, string)
         );
       end if;
     elif type(var, integer) then
       i;
     else
-      IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetPosition(...): failed for %s in %s.\n",
-        convert(var, string),
-        convert(lst, string)
+      error(
+        "failed for %s in %s.",
+        convert(var, string), convert(lst, string)
       );
     end if;
     return i;
@@ -111,9 +109,8 @@ IndigoUtils := module()
         "IndigoUtils::GetPosition(...): parameter `%s` = %a\n",
         param_name, param
       );
-      IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, "
-        "expected of type `%s` in %s\n",
+      error(
+        "parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
         param_name, convert(whattype(param), string), convert(tp, string), where
       );
     end if;
@@ -133,10 +130,10 @@ IndigoUtils := module()
       "of type <param_type>, if not print and error message <msg>.";
 
     if not type(tab, table) then
-      IndigoUtils:-ErrorMessage(msg);
+      error(msg);
     end if;
     if not member(param_field, [indices(t, 'nolist')]) then
-      IndigoUtils:-ErrorMessage(msg);
+      error(msg);
     end if;
     IndigoUtils:-CheckParam(
       tab[param_field], param_field, param_type, "CheckTableField"
@@ -160,16 +157,15 @@ IndigoUtils := module()
 
     keywords := {indices(tab,'nolist')};
     if not (param_name in keywords) then
-      IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetPosition(...): missing keyword `%s` in %s\nkeywords: "
-        "%a.\n", convert(param_name, string), where, keywords
+      error(
+        "missing keyword `%s` in %s.\nKeywords: %a.",
+        convert(param_name, string), where, keywords
       );
     end if;
     if not type(tab[param_name], param_type) then
       printf("Parameter `%s` = %a\n", param_name, tab[param_name]);
-      IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetPosition(...): parameter `%s` is of type `%s`, "
-        "expected of type `%s` in %s.\n",
+      error(
+        "parameter `%s` is of type `%s`, expected of type `%s` in %s.",
         param_name, convert(whattype(tab[param_name]), string),
         convert(param_type, string), where
       );
@@ -340,16 +336,23 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   export DoGradient := proc(
-    fnc::anything,
-    lst::list,
-    $)::anything;
+    fnc::algebraic,
+    lst::{Vector, list},
+    $)::Vector;
 
     description "Differentiate a scalar expression <fnc> with respect to a "
       "list of functions <lst>.";
 
     local i, n, out;
 
-    n   := nops(lst);
+    # Extract dimensions
+    if type(lst, Vector) then
+      n := LinearAlgebra:-Dimension(lst);
+    else
+      n := nops(lst);
+    end if;
+
+    # Differentiate
     out := Vector(n);
     for i from 1 to n do
       out[i] := IndigoUtils:-DoDiff(fnc, lst[i]):
@@ -360,16 +363,23 @@ IndigoUtils := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   export DoHessian := proc(
-    fnc::anything,
-    lst::list,
-    $)::anything;
+    fnc::algebraic,
+    lst::{Vector, list},
+    $)::Matrix;
 
     description "Differentiate a vector of expressions (gradient) <fnc> with "
       "respect to a list <lst> of functions.";
 
     local i, j, n, out;
 
-    n   := nops(lst);
+    # Extract dimensions
+    if type(lst, Vector) then
+      n := LinearAlgebra:-Dimension(lst);
+    else
+      n := nops(lst);
+    end if;
+
+    # Differentiate
     out := Matrix(n, n);
     for i from 1 to n do
       for j from i to n do
@@ -384,16 +394,23 @@ IndigoUtils := module()
 
   export DoJacobian := proc(
     fnc::Vector,
-    lst::list,
-    $)::anything;
+    lst::{Vector, list},
+    $)::Matrix;
 
     description "Differentiate a vector of expressions <fnc> with respect to a "
       "list <lst> of functions.";
 
     local i, j, m, n, out;
 
+    # Extract dimensions
     m := LinearAlgebra:-Dimension(fnc);
-    n := nops(lst);
+    if type(lst, Vector) then
+      n := LinearAlgebra:-Dimension(lst);
+    else
+      n := nops(lst);
+    end if;
+
+    # Differentiate
     out := Matrix(m, n);
     for i from 1 to m do
       for j from 1 to n do
@@ -402,6 +419,39 @@ IndigoUtils := module()
     end do;
     return out;
   end proc: # DoJacobian
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export DoTensor := proc(
+    mat::Matrix,
+    lst::{Vector, list},
+    $)::Array;
+
+    description "Differentiate a matrix <mat> with respect to a list of "
+      "functions <lst>.";
+
+    local i, j, k, m, n, l, out;
+
+    # Extract dimensions
+    m := LinearAlgebra:-RowDimension(mat);
+    n := LinearAlgebra:-ColumnDimension(mat);
+    if type(lst, Vector) then
+      l := LinearAlgebra:-Dimension(lst);
+    else
+      l := nops(lst);
+    end if;
+
+    # Differentiate
+    out := Array(1..m, 1..n, 1..l);
+    for i from 1 to m do
+      for j from 1 to n do
+        for k from 1 to l do
+          out[i, j, l] := IndigoUtils:-DoDiff(mat[i, j], lst[l]);
+        end do;
+      end do;
+    end do;
+    return out;
+  end proc: # DoTensor
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   #   _____                 _   _
@@ -569,9 +619,7 @@ IndigoUtils := module()
     if type(out, function) then
       return op(0, out);
     else
-      IndigoUtils:-ErrorMessage(
-        "IndigoUtils::GetFunctionName(...): function expected.\n"
-      );
+      error("invalid input detected.");
     end if;
   end proc: # GetFunctionName
 
@@ -702,144 +750,6 @@ IndigoUtils := module()
     end do;
     return perm;
   end proc: # GetPermSortedList
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  #   __  __
-  #  |  \/  | ___  ___ ___  __ _  __ _  ___  ___
-  #  | |\/| |/ _ \/ __/ __|/ _` |/ _` |/ _ \/ __|
-  #  | |  | |  __/\__ \__ \ (_| | (_| |  __/\__ \
-  #  |_|  |_|\___||___/___/\__,_|\__, |\___||___/
-  #                              |___/
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export cprintf := proc(
-    fg::anything,
-    bg::anything,
-    fmt::anything
-    )
-
-    description "Print a message in color where <fg> is the foreground color, "
-      "<bg> is the background color, <fmt> is the format string, and the "
-      "remaining inputs are string arguments";
-
-    print(Typesetting:-mtext(
-      sprintf(fmt, _passed[4..-1]),
-      mathcolor = fg, mathbackground = bg#, fontweight = "bold"
-    ));
-    return NULL;
-  end proc: # cprintf
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export ErrorMessage := proc(
-    # _passed
-    )
-
-    description "Print an error message.";
-
-    ERROR(cat(sprintf(_passed), "\n"));
-    return NULL;
-  end proc: # ErrorMessage
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export WarningMessage := proc(
-    # _passed
-    )
-
-    description "Print a warning message.";
-
-    WARNING(cat(_passed, "\n"));
-    return NULL;
-  end proc: # WarningMessage
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export PrintTitle := proc(
-    # _passed
-    )
-
-    description "Print a title.";
-
-    local str, len;
-
-    str := sprintf(_passed);
-    len := StringTools:-Length(str);
-    printf(
-      "\n%s\n%s\n\n",
-      str, StringTools:-SubString(cat(
-        "====================================================================",
-        "===================================================================="
-        ), 1..len)
-    );
-    return NULL;
-  end proc: # PrintTitle
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export PrintHeader := proc(
-    # _passed
-    )
-
-    description "Print a header.";
-
-    local str, len;
-
-    str := sprintf(_passed);
-    len := StringTools:-Length(str);
-    printf(
-      "\n%s\n%s\n",
-      str, StringTools:-SubString(cat(
-        "--------------------------------------------------------------------",
-        "--------------------------------------------------------------------"
-        ), 1..len)
-    );
-    return NULL;
-  end proc: # PrintHeader
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export PrintMessage := proc(
-    # _passed
-    )
-
-    description "Print a message.";
-
-    printf(_passed);
-    return NULL;
-  end proc: # PrintMessage
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export Assert := proc(
-    check::anything
-    # _passed
-    )
-
-    description "Check if a condition <check> is true and prints an error "
-      "message if it is not.";
-
-    if not check then
-      IndigoUtils:-ErrorMessage(_passed[2..-1]);
-    end if;
-    return NULL;
-  end proc: # Assert
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export Warning := proc(
-    check::anything
-    # _passed
-    )
-
-    description "Check if a condition <check> is true and prints a warning "
-      "message if it is not.";
-
-    if not check then
-      IndigoUtils:-WarningMessage(_passed[2..-1]);
-    end if;
-    return NULL;
-  end proc: # Warning
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

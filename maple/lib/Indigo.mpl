@@ -106,17 +106,15 @@ module Indigo()
     description "Check if the 'LAST' object is initialized.";
 
     if (_self:-m_LAST = NULL) then
-      IndigoUtils:-ErrorMessage(
-        "Indigo:-CheckInit(...): the 'LAST' object is not initialized, use "
-        "'Indigo:-InitLAST(...)'' or other appropriate initialization methods "
-        "first."
+      error(
+        "the 'LAST' object is not initialized, use 'Indigo:-InitLAST(...)'' or "
+        "other appropriate initialization methods first."
       );
     end if;
     if (_self:-m_LEM = NULL) then
-      IndigoUtils:-ErrorMessage(
-        "Indigo:-CheckInit(...): the 'LEM' object is not initialized, use "
-        "'Indigo:-InitLAST(...)'' or other appropriate initialization methods "
-        "first."
+      error(
+        "the 'LEM' object is not initialized, use 'Indigo:-InitLAST(...)'' or "
+        "other appropriate initialization methods first."
       );
     end if;
     return NULL;
@@ -329,10 +327,9 @@ module Indigo()
 
     # Check if the reduction steps are available
     if (_self:-m_ReductionSteps = []) then
-      IndigoUtils:-ErrorMessage(
-        "Indigo:-GetReductionSteps(...): reduction steps are not yet available, "
-        "please load the system matrices/equations and perform the system index "
-        "reduction first."
+      error(
+        "reduction steps are not yet available, please load the system "
+        "matrices/equations and perform the system index reduction first."
       );
       return NULL;
     end if;
@@ -529,9 +526,7 @@ module Indigo()
     description "Load the matrices from the input DAE system of type <typ>.";
 
     if (_npassed < 3) then
-      IndigoUtils:-ErrorMessage(
-        "Indigo::LoadMatrices(...): no DAE system to load."
-      );
+      error("no system to load.");
     elif (typ = 'Linear') and (_npassed = 6) then
       _self:-LoadMatrices_Linear(_self, _passed[3..-1]);
     elif (typ = 'Generic') and (_npassed = 5) then
@@ -539,9 +534,7 @@ module Indigo()
     elif (typ = 'Mbd3') and (_npassed = 8) then
       _self:-LoadMatrices_Mbd3(_self, _passed[3..-1]);
     else
-      IndigoUtils:-ErrorMessage(
-        "Indigo::LoadMatrices(...): invalid input arguments."
-      );
+      error("invalid input arguments.");
     end if;
     return NULL;
   end proc: # LoadMatrices
@@ -557,13 +550,11 @@ module Indigo()
     description "Load the matrices from the input DAE system of type <typ>.";
 
     if (_npassed < 3) then
-      IndigoUtils:-PrintMessage(
-        "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...),\n"
-        "where type must be choosen between: 'Linear', 'Generic' or 'Mbd3'.\n"
+      WARNING(
+        "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...), "
+        "where type must be choosen between: 'Linear', 'Generic' or 'Mbd3'."
       );
-      IndigoUtils:-ErrorMessage(
-        "Indigo[LoadEquations]('type', ... ): no DAE system to load."
-      );
+      error("no system to load.");
     elif (typ = 'Linear') and (_npassed = 4) then
       _self:-LoadEquations_Linear(_self, _passed[3..-1]);
     elif (typ = 'Generic') and (_npassed = 4) then
@@ -571,9 +562,7 @@ module Indigo()
     elif (typ = 'Mbd3') and (_npassed = 6) then
       _self:-LoadEquations_Mbd3(_self, _passed[3..-1]);
     else
-      IndigoUtils:-ErrorMessage(
-        "Indigo::LoadEquations(...): invalid input arguments."
-      );
+      error("invalid input arguments.");
     end if;
     return NULL;
   end proc: # LoadEquations
@@ -588,7 +577,7 @@ module Indigo()
 
     if evalb(_self:-m_SystemType = 'Empty') then
       if _self:-m_VerboseMode then
-        IndigoUtils:-WarningMessage(
+        WARNING(
           "Indigo::ReduceIndex(...): no DAE system loaded yet."
         );
       end if;
@@ -600,8 +589,8 @@ module Indigo()
     elif evalb(_self:-m_SystemType = 'Mbd3') then
       return _self:-ReduceIndex_Mbd3(_self);
     else
-      IndigoUtils:-ErrorMessage(
-        "Indigo::ReduceIndex(...): invalid system type '%s'.",
+      error(
+        "invalid system type '%s'.",
         _self:-m_SystemType
       );
       return false;

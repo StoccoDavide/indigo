@@ -24,7 +24,7 @@ export LoadMatrices_Linear::static := proc(
   # Check if the system is already loaded
   if evalb(_self:-m_SystemType <> 'Empty') then
     if _self:-m_VerboseMode then
-      IndigoUtils:-WarningMessage(
+      WARNING(
         "Indigo::LoadMatrices_Linear(...): a system of equations is already "
         "loaded, reduction steps and veiling variables will be overwritten."
       );
@@ -64,9 +64,10 @@ export LoadEquations_Linear::static := proc(
 
   # Check input dimensions
   if (nops(eqns) <> nops(vars)) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::LoadEquations_Linear(...): the number of equations (%d) must be "
-      "the same of the number of variables (%d).", nops(eqns), nops(vars)
+    error(
+      "the number of equations (%d) must be the same of the number of variables "
+      "(%d).",
+      nops(eqns), nops(vars)
     );
   end if;
 
@@ -89,9 +90,9 @@ export ReduceIndexByOne_Linear::static := proc(
   local vars, E, G, A, nE, mE, nA, dA, H, F, f, nH, mH, tbl;
 
   if not evalb(_self:-m_SystemType = 'Linear') then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndexByOne_Linear(...): system must be of type 'Linear' "
-      "but got '%s'.", _self:-m_SystemType
+    error(
+      "system must be of type 'Linear' but got '%s'.",
+      _self:-m_SystemType
     );
   end if;
 
@@ -143,9 +144,9 @@ export ReduceIndexByOne_Linear::static := proc(
   # Check if we have reached index-0 DAE
   if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
     if _self:-m_VerboseMode then
-      IndigoUtils:-PrintMessage(
-        "Indigo::ReduceIndexByOne_Linear(...): index-0 DAE (ODE) system has been "
-        "reached."
+      printf(
+        "Indigo::ReduceIndexByOne_Linear(...): index-0 DAE (ODE) system has "
+        "been reached."
       );
     end if;
     return false;

@@ -28,7 +28,7 @@ export LoadMatrices_Mbd3::static := proc(
   # Check if the system is already loaded
   if not evalb(_self:-m_SystemType = 'Empty') then
     if _self:-m_VerboseMode then
-      IndigoUtils:-WarningMessage(
+      WARNING(
         "Indigo::LoadMatrices_Mbd3(...): a system of equations is already "
         "loaded, reduction steps and veiling variables will be overwritten."
       );
@@ -94,34 +94,33 @@ export ReduceIndex_Mbd3::static := proc(
     f_stab, Jf_stab;
 
   if not evalb(_self:-m_SystemType = "Mbd") then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndex_Mbd3(...): system must be of type 'Mbd3' but got "
-      "'%s'.", _self:-m_SystemType
+    error(
+      "system must be of type 'Mbd3' but got '%s'.",
+      _self:-m_SystemType
     );
   end if;
 
   # Check dimensions of inputs
   n, m := LinearAlgebra:-Dimension(Mass);
   if (n <> m) or (n <> nops(v_vars)) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndex_Mbd3(...): mass matrix must be square and of the "
-      "same size of the length of velocity variables.", Mass, v_vars
+    error(
+      "mass matrix must be square and of the same size of the length of velocity "
+      "variables.",
+      Mass, v_vars
     );
   end if;
 
   n := nops(q_vars);
   if (n <> nops(v_vars)) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndex_Mbd3(...): velocity variables and position "
-      "variables must have the same size."
+    error(
+      "velocity variables and position variables must have the same size."
     );
   end if;
 
   m := LinearAlgebra:-Dimension(Phi);
   if (m <> nops(l_vars)) then
-    IndigoUtils:-ErrorMessage(
-      "Indigo::ReduceIndex_Mbd3(...): lambda variables must have the same "
-      "length of the number of constraints."
+    error(
+      "lambda variables must have the same length of the number of constraints."
     );
   end if;
 

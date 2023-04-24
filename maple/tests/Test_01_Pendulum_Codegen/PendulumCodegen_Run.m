@@ -12,16 +12,11 @@ l = 1.0;  % length (m)
 g = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-theta_0  = -1.0-pi/2;
-omega_0  = -1.0;
-x_0      = l*cos(theta_0);
-y_0      = l*sin(theta_0);
-u_0      = -omega_0*sin(theta_0);
-v_0      = omega_0*cos(theta_0);
-lambda_0 = (u_0^2+v_0^2-y_0*g)/(x_0^2+y_0^2);
-X_0      = [x_0; y_0; u_0; v_0; lambda_0];
+theta_0 = -1.0;
+omega_0 = -1.0;
+X_0     = [theta_0; omega_0];
 
-ODE = PendulumCodegen();
+ODE = PendulumCodegen_Explicit();
 
 %% Initialize the solver and set the ODE
 
@@ -59,7 +54,7 @@ implicit_solver = {
   ... % 'LobattoIIID4',     ...
   ... % 'RadauIA3',         ...
   ... % 'RadauIA5',         ...
-  ... % 'RadauIIA3',        ...
+  'RadauIIA3',        ...
   'RadauIIA5',        ...
   ... % 'SunGeng5',         ...
 };
