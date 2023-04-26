@@ -6,15 +6,15 @@ classdef BaseSystem < handle
   %
   properties (SetAccess = protected, Hidden = true)
     %
-    %> Name of the system of ODEs/DAEs (used in warning/error messages).
+    %> Name of the system.
     %
     m_name;
     %
-    %> Number of equations of the system of ODEs/DAEs.
+    %> Number of equations of the system.
     %
     m_num_eqns;
     %
-    %> Number of invariants/hidden contraints of the system of ODEs/DAEs.
+    %> Number of invariants/hidden contraints of the system.
     %
     m_num_invs;
   end
@@ -23,13 +23,12 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Class constructor for a system of ODEs/DAEs that requires the following
-    %> inputs:
+    %> Class constructor for a system that requires the following inputs:
     %>
-    %> \param t_num_ame The name of the system of ODEs/DAEs.
-    %> \param t_num_eqn The number of equations of the system of ODEs/DAEs.
+    %> \param t_num_ame The name of the system.
+    %> \param t_num_eqn The number of equations of the system.
     %> \param t_num_inv The number of invariants/hidden contraints of the system
-    %>                  of ODEs/DAEs.
+    %>                 .
     %
     function this = BaseSystem( t_name, t_num_eqns, t_num_invs )
       this.m_name     = t_name;
@@ -39,9 +38,9 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the system of ODEs/DAEs name.
+    %> Get the system name.
     %>
-    %> \return The system of ODEs/DAEs name.
+    %> \return The system name.
     %
     function out = get_name( this )
       out = this.m_name;
@@ -49,9 +48,9 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the number of equations of the system of ODEs/DAEs.
+    %> Get the number of equations of the system.
     %>
-    %> \return The number of equations of the system of ODEs/DAEs.
+    %> \return The number of equations of the system.
     %
     function t_num_eqns = get_num_eqns( this )
       t_num_eqns = this.m_num_eqns;
@@ -59,9 +58,9 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the number of equations of the system of ODEs/DAEs.
+    %> Set the number of equations of the system.
     %>
-    %> \param t_num_eqns The number of equations of the system of ODEs/DAEs.
+    %> \param t_num_eqns The number of equations of the system.
     %
     function set_num_eqns( this, t_num_eqns )
       this.m_num_eqns = t_num_eqns;
@@ -69,10 +68,9 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the number of invariants/hidden contraints of the system of ODEs/DAEs.
+    %> Get the number of invariants/hidden contraints of the system.
     %>
-    %> \return The number of invariants/hidden contraints of the system of
-    %>         ODEs/DAEs.
+    %> \return The number of invariants/hidden contraints of the system.
     %
     function t_num_invs = get_num_invs( this )
       t_num_invs = this.m_num_invs;
@@ -80,10 +78,10 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the number of invariants/hidden constraints of the system of ODEs/DAEs.
+    %> Set the number of invariants/hidden constraints of the system.
     %>
-    %> \param t_num_invs The number of invariants/hidden constraints of the system
-    %>                   of ODEs/DAEs.
+    %> \param t_num_invs The number of invariants/hidden constraints of the
+    %>                   system.
     %
     function set_num_invs( this, t_num_invs )
       this.m_num_invs = t_num_invs;
@@ -95,25 +93,33 @@ classdef BaseSystem < handle
   %
   methods (Abstract)
     %
-    %> Get the system of ODEs/DAEs type.
+    %> Get the system type.
     %>
-    %> \return The system of ODEs/DAEs type.
+    %> \return The system type.
     %
     type()
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Check if the system of ODEs/DAEs is explicit.
+    %> Check if the system is explicit.
     %>
-    %> \return True if the system of ODEs/DAEs is explicit, false otherwise.
+    %> \return True if the system is explicit, false otherwise.
     %
     is_explicit()
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Check if the system of ODEs/DAEs is implicit.
+    %> Check if the system is explicit.
     %>
-    %> \return True if the system of ODEs/DAEs is implicit, false otherwise.
+    %> \return True if the system is explicit, false otherwise.
+    %
+    is_semiexplicit()
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Check if the system is implicit.
+    %>
+    %> \return True if the system is implicit, false otherwise.
     %
     is_implicit()
     %

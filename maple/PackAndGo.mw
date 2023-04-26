@@ -393,60 +393,48 @@ module IndigoCodegen:
     # Get options for CodeGeneration.
     GetCodegenOptions( field::string := &quot;all&quot;, $ )
 
-    # Apply indentation &lt;ind&gt; to string &lt;str&gt;.
-    ApplyIndent( ind::string, str::string, $ ) :: string
-
-    # Translate the vector &lt;vec&gt; with variables &lt;vars&gt; into a Matlab function 
-    # named &lt;name&gt; and save it in the working directory.
-    VectorToMatlab( name::string, vars::list(list(symbol)), 
-                    vec::{Vector, list}, 
-                    { data::list(symbol) := [], 
-                      info::string := &quot;No function description provided.&quot; }, 
-                    $ ) :: string
-
-    # Translate the matrix &lt;mat&gt; with variables &lt;vars&gt; into a Matlab function 
-    # named &lt;name&gt; and save it in the working directory.
-    MatrixToMatlab( name::string, vars::list(list(symbol)), mat::Matrix, 
-                    { data::list(symbol) := [], 
-                      info::string := &quot;No function description provided.&quot; }, 
-                    $ ) :: string
-
-    # Translate the tensor &lt;ten&gt; with variables &lt;vars&gt; into a Matlab function 
-    # named &lt;name&gt; and save it in the working directory.
-    TensorToMatlab( name::string, vars::list(list(symbol)), ten::Array, 
-                    { data::list(symbol) := [], 
-                      info::string := &quot;No function description provided.&quot; }, 
-                    $ ) :: string
-
-    # Remove all dependencies of the variables &lt;vars&gt; from expression &lt;expr&gt;.
-    RemoveDependencies( expr::anything, vars::{symbol, list(symbol)}, $ )
-                      :: anything
-
-    # Generate an implicit system for the equations &lt;F&gt; and invariants &lt;h&gt; with 
-    # states variables &lt;x&gt; and states variables derivatives &lt;x_dot&gt;.
+    # Generate an implicit system for the firt-order differential equations 
+    # &lt;eqns&gt;, invariants &lt;invs&gt; with states variables &lt;vars&gt; and states 
+    # variables, system data &lt;data&gt; and description &lt;info&gt;.
     ImplicitSystemToMatlab( name::string, 
                             vars::{Vector(algebraic), list(algebraic)}, 
-                            eqns::{Vector(algebraic), list(algebraic)} := 
-                              [NULL], 
-                            invs::{Vector(algebraic), list(algebraic)} := 
-                              [NULL], 
-                            { data::list(symbol = anything) := [], 
+                            eqns::{Vector(algebraic), list(algebraic)}, 
+                            invs::{Vector(algebraic), list(algebraic)} := [], 
+                            { algs::{list(algebraic = algebraic), 
+                                Vector(algebraic) = algebraic} := [], 
+                              data::list(symbol = algebraic) := [], 
                               info::string := &quot;No class description 
                                 provided.&quot; }, 
                             $ ) :: string
 
-    # Generate an explicit system for the equations &lt;F&gt; and invariants &lt;h&gt; with 
-    # states variables &lt;x&gt; and states variables derivatives &lt;x_dot&gt;.
+    # Generate an explicit system for the firt-order differential equations 
+    # &lt;eqns&gt;, invariants &lt;invs&gt; with states variables &lt;vars&gt; and states 
+    # variables, system data &lt;data&gt; and description &lt;info&gt;.
     ExplicitSystemToMatlab( name::string, 
                             vars::{Vector(algebraic), list(algebraic)}, 
-                            eqns::{Vector(algebraic), list(algebraic)} := 
-                              [NULL], 
-                            invs::{Vector(algebraic), list(algebraic)} := 
-                              [NULL], 
-                            { data::list(symbol = anything) := [], 
+                            eqns::{Vector(algebraic), list(algebraic)}, 
+                            invs::{Vector(algebraic), list(algebraic)} := [], 
+                            { algs::{list(algebraic = algebraic), 
+                                Vector(algebraic) = algebraic} := [], 
+                              data::list(symbol = algebraic) := [], 
                               info::string := &quot;No class description 
                                 provided.&quot; }, 
                             $ ) :: string
+
+    # Generate a semi explicit system for the firt-order differential equations 
+    # &lt;eqns&gt;, invariants &lt;invs&gt; with states variables &lt;vars&gt; and states 
+    # variables, system data &lt;data&gt; and description &lt;info&gt;.
+    SemiExplicitSystemToMatlab( name::string, 
+                                vars::{Vector(algebraic), list(algebraic)}, 
+                                eqns::{Vector(algebraic), list(algebraic)}, 
+                                invs::{Vector(algebraic), list(algebraic)} := 
+                                  [], 
+                                { algs::{list(algebraic = algebraic), 
+                                    Vector(algebraic) = algebraic} := [], 
+                                  data::list(symbol = algebraic) := [], 
+                                  info::string := &quot;No class description 
+                                    provided.&quot; }, 
+                                $ ) :: string
 
 </Text-field>
 </Output>
@@ -509,6 +497,15 @@ object Indigo :: Indigo:
     # Set the warning mode of the module to &lt;mode&gt;.
     SetWarningMode( _self::Indigo, mode::boolean, $ )
 
+    # Enable the unveil mode of the module.
+    EnableUnveilMode( _self::Indigo, $ )
+
+    # Disable the unveil mode of the module.
+    DisableUnveilMode( _self::Indigo, $ )
+
+    # Set the unveil mode of the module to &lt;mode&gt;.
+    SetUnveilMode( _self::Indigo, mode::boolean, $ )
+
     # Set the veiling symbol as a string &lt;sym&gt;.
     SetVeilingSymbol( _self::Indigo, sym::string, $ )
 
@@ -519,14 +516,23 @@ object Indigo :: Indigo:
     GetReductionSteps( _self::Indigo, i::integer := NULL, $ )
                      :: {table, list(table)}
 
+    # Get the user-defined system invariants.
+    GetUserInvariants( _self::Indigo, $ ) :: list(algebraic)
+
+    # Set the user-defined system invariants to &lt;invs&gt;.
+    SetUserInvariants( _self::Indigo, invs::list(algebraic), $ )
+
+    # Clear the user-defined system invariants.
+    ClearUserInvariants( _self::Indigo, $ )
+
     # Get the list of differential equations of the reduced implicit system of 
     # the type F(x,x',t) = 0.
     GetDifferentialEquations( _self::Indigo, $ ) :: list
 
-    # Get the list of hidden constraints of the reduced system.
-    GetHiddenConstraints( _self::Indigo, $ ) :: list
+    # Get the invariants of the reduced system.
+    GetInvariants( _self::Indigo, $ ) :: list
 
-    # Get the list of index-1 constraints of the reduced system.
+    # Get the index-1 constraints of the reduced system.
     GetIndexOneConstraints( _self::Indigo, $ ) :: list
 
     # Get the list of veil arguments substitutions.
@@ -547,14 +553,30 @@ object Indigo :: Indigo:
     # 0 and the rank of E.
     KernelBuild( _self::Indigo, E::Matrix, $ ) :: table
 
-    # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadMatrices( _self::Indigo, typ::symbol )
+    # Load the matrices from the input system of type &lt;type&gt;.
+    LoadMatrices( _self::Indigo, type::symbol )
 
-    # Load the matrices from the input DAE system of type &lt;typ&gt;.
-    LoadEquations( _self::Indigo, typ::symbol )
+    # Load the matrices from the input system of type &lt;type&gt;.
+    LoadEquations( _self::Indigo, type::symbol )
 
-    # Reduce the index of the loaded DAE system.
-    ReduceIndex( _self::Indigo, $ ) :: boolean
+    # Reduce the index of the loaded system.
+    ReduceIndex( _self::Indigo, 
+                 { max_iter::integer := 10 }, $ ) :: boolean
+
+    # Generate Matlab code for the loaded system with name &lt;name&gt;, indigo class 
+    # &lt;type&gt;, output file './&lt;fname&gt;.m', optional internal class data &lt;data&gt;, 
+    # and class information string &lt;info&gt;.
+    GenerateMatlabCode( _self::Indigo, name::string, type::string, 
+                        { data::list(symbol = algebraic) := [], 
+                          info::string := &quot;No class description provided.&quot; }, 
+                        $ ) :: string
+
+    # Generate Matlab code for the loaded system with name &lt;name&gt;, indigo class 
+    # &lt;type&gt;, output file './&lt;fname&gt;.m', optional internal class data &lt;data&gt;, 
+    # and class information string &lt;info&gt;.
+    SystemToMatlab( _self::Indigo, name::string, type::string, fname::string, 
+                    { data::list(symbol = algebraic) := [], 
+                      info::string := &quot;No class description provided.&quot; }, $ )
 
     # Load a 'Generic' type system of equations as matrices &lt;E&gt; and &lt;G&gt;. The 
     # list of variables &lt;vars&gt; must be the same of the variables used in the 
@@ -593,32 +615,35 @@ object Indigo :: Indigo:
 
     # Reduce the index of the 'Generic' type DAE system of equations by one. 
     # Return true if the system of equations has been reduced to index-0 DAE 
-    # (ODE), false otherwise.
+    # (ODE) or index-1 DAE, false otherwise.
     ReduceIndexByOne_Generic( _self::Indigo, $ ) :: boolean
 
-    # Reduce the index of the 'Generic' type DAE system of equations. Return 
-    # true if the system of equations has been reduced to index-0 DAE (ODE), 
-    # false otherwise.
-    ReduceIndex_Generic( _self::Indigo, $ ) :: boolean
+    # Reduce the index of the 'Generic' type DAE system of equations. A maximum 
+    # of &lt;max_iter&gt; reduction steps is performed. Return true if the system of 
+    # equations has been reduced to index-0 DAE (ODE) or index-1 DAE (if 
+    # veiling variables are used), false otherwise.
+    ReduceIndex_Generic( _self::Indigo, 
+                         { max_iter::integer := 10 }, $ ) :: boolean
 
-    # Load a 'Mbd3' type system of equations with mass matrix &lt;Mass&gt;, 
+    # Load a 'MultiBody' type system of equations with mass matrix &lt;Mass&gt;, 
     # constraint vector &lt;Phi&gt;, external force vector &lt;f&gt;, the position 
     # variables &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange 
     # multipliers &lt;l_vars&gt;.
-    LoadMatrices_Mbd3( _self::Indigo, Mass::Matrix, Phi::Vector, f::Vector, 
-                       q_vars::list, v_vars::list, l_vars::list, $ )
+    LoadMatrices_MultiBody( _self::Indigo, Mass::Matrix, Phi::Vector, 
+                            f::Vector, q_vars::list, v_vars::list, 
+                            l_vars::list, $ )
 
     # Load a 'Mdb' type system of equations &lt;eqns&gt; with the position variables 
     # &lt;q_vars&gt;, the velocity variables &lt;v_vars&gt; and the Lagrange multipliers 
     # &lt;l_vars&gt;.
-    LoadEquations_Mbd3( _self::Indigo, eqns::list, q_vars::list, v_vars::list, 
-                        l_vars::list, $ )
+    LoadEquations_MultiBody( _self::Indigo, eqns::list, q_vars::list, 
+                             v_vars::list, l_vars::list, $ )
 
     # Reduce the index of the multibody DAE system of equations. Return true if 
     # the system of equations has been reduced to index-0 DAE, false otherwise.
-    ReduceIndex_Mbd3( _self::Indigo, 
-                      { baumgarte::boolean := false, 
-                        jacobians::boolean := false }, $ ) :: boolean
+    ReduceIndex_MultiBody( _self::Indigo, 
+                           { baumgarte::boolean := false, 
+                             jacobians::boolean := false }, $ ) :: boolean
 
 </Text-field>
 </Output>

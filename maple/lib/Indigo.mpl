@@ -31,6 +31,7 @@ module Indigo()
   local m_SystemType     := 'Empty';
   local m_ReductionSteps := [];
   local m_SystemVars     := [];
+  local m_SystemInvs     := [];
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -65,7 +66,7 @@ module Indigo()
     if (lib_base_path = NULL) then
       error "cannot find 'Indigo' module.";
     end if;
-    protect('Empty', 'Linear', 'Generic', 'Mbd3');
+    protect('Empty', 'Linear', 'Generic', 'MultiBody');
     return NULL;
   end proc: # ModuleLoad
 
@@ -75,7 +76,7 @@ module Indigo()
 
     description "'Indigo' module unload procedure.";
 
-    unprotect('Empty', 'Linear', 'Generic', 'Mbd3');
+    unprotect('Empty', 'Linear', 'Generic', 'MultiBody');
     return NULL;
   end proc: # ModuleUnload
 
@@ -95,6 +96,7 @@ module Indigo()
     _self:-m_SystemType     := proto:-m_SystemType;
     _self:-m_ReductionSteps := proto:-m_ReductionSteps;
     _self:-m_SystemVars     := proto:-m_SystemVars;
+    _self:-m_SystemInvs     := proto:-m_SystemInvs;
   end proc: # ModuleCopy
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -312,6 +314,7 @@ module Indigo()
     _self:-m_SystemType     := 'Empty';
     _self:-m_ReductionSteps := [];
     _self:-m_SystemVars     := [];
+    _self:-m_SystemInvs     := [];
     _self:-m_LEM:-ForgetVeil(_self:-m_LEM);
     return NULL;
   end proc: # Reset
@@ -344,6 +347,42 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export GetUserInvariants::static := proc(
+    _self::Indigo,
+    $)::list(algebraic);
+
+    description "Get the user-defined system invariants.";
+
+    return _self:-m_SystemInvs;
+  end proc: # GetUserInvariants
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export SetUserInvariants::static := proc(
+    _self::Indigo,
+    invs::list(algebraic),
+    $)
+
+    description "Set the user-defined system invariants to <invs>.";
+
+    _self:-m_SystemInvs := invs;
+    return NULL;
+  end proc: # SetUserInvariants
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export ClearUserInvariants::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Clear the user-defined system invariants.";
+
+    _self:-m_SystemInvs := [];
+    return NULL;
+  end proc: # ClearUserInvariants
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export GetDifferentialEquations::static := proc(
     _self::Indigo,
     $)::list;
@@ -357,14 +396,14 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export GetHiddenConstraints::static := proc(
+  export GetInvariants::static := proc(
     _self::Indigo,
     $)::list;
 
-    description "Get the list of hidden constraints of the reduced system.";
+    description "Get the invariants of the reduced system.";
 
     return map(x -> op(convert(x["A"], list)), _self:-m_ReductionSteps);
-  end proc: # GetHiddenConstraints
+  end proc: # GetInvariants
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -372,7 +411,7 @@ module Indigo()
     _self::Indigo,
     $)::list;
 
-    description "Get the list of index-1 constraints of the reduced system.";
+    description "Get the index-1 constraints of the reduced system.";
 
     return _self:-m_LEM:-VeilList(_self:-m_LEM);
   end proc: # GetIndexOneConstraints
@@ -519,20 +558,20 @@ module Indigo()
 
   export LoadMatrices::static := proc(
     _self::Indigo,
-    typ::symbol
+    type::symbol
     # _passed
     )
 
-    description "Load the matrices from the input DAE system of type <typ>.";
+    description "Load the matrices from the input system of type <type>.";
 
     if (_npassed < 3) then
       error("no system to load.");
-    elif (typ = 'Linear') and (_npassed = 6) then
+    elif (type = 'Linear') and (_npassed = 6) then
       _self:-LoadMatrices_Linear(_self, _passed[3..-1]);
-    elif (typ = 'Generic') and (_npassed = 5) then
+    elif (type = 'Generic') and (_npassed = 5) then
       _self:-LoadMatrices_Generic(_self, _passed[3..-1]);
-    elif (typ = 'Mbd3') and (_npassed = 8) then
-      _self:-LoadMatrices_Mbd3(_self, _passed[3..-1]);
+    elif (type = 'MultiBody') and (_npassed = 8) then
+      _self:-LoadMatrices_MultiBody(_self, _passed[3..-1]);
     else
       error("invalid input arguments.");
     end if;
@@ -543,24 +582,24 @@ module Indigo()
 
   export LoadEquations::static := proc(
     _self::Indigo,
-    typ::symbol
+    type::symbol
     # _passed
     )
 
-    description "Load the matrices from the input DAE system of type <typ>.";
+    description "Load the matrices from the input system of type <type>.";
 
     if (_npassed < 3) then
       WARNING(
         "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...), "
-        "where type must be choosen between: 'Linear', 'Generic' or 'Mbd3'."
+        "where type must be choosen between: 'Linear', 'Generic' or 'MultiBody'."
       );
       error("no system to load.");
-    elif (typ = 'Linear') and (_npassed = 4) then
+    elif (type = 'Linear') and (_npassed = 4) then
       _self:-LoadEquations_Linear(_self, _passed[3..-1]);
-    elif (typ = 'Generic') and (_npassed = 4) then
+    elif (type = 'Generic') and (_npassed = 4) then
       _self:-LoadEquations_Generic(_self, _passed[3..-1]);
-    elif (typ = 'Mbd3') and (_npassed = 6) then
-      _self:-LoadEquations_Mbd3(_self, _passed[3..-1]);
+    elif (type = 'MultiBody') and (_npassed = 6) then
+      _self:-LoadEquations_MultiBody(_self, _passed[3..-1]);
     else
       error("invalid input arguments.");
     end if;
@@ -571,37 +610,120 @@ module Indigo()
 
   export ReduceIndex::static := proc(
     _self::Indigo,
+    {max_iter::integer := 10},
     $)::boolean;
 
-    description "Reduce the index of the loaded DAE system.";
+    description "Reduce the index of the loaded system.";
 
     if evalb(_self:-m_SystemType = 'Empty') then
-      if _self:-m_VerboseMode then
-        WARNING(
-          "Indigo::ReduceIndex(...): no DAE system loaded yet."
-        );
+      if _self:-m_WarningMode then
+        WARNING("Indigo::ReduceIndex(...): no system loaded yet.");
       end if;
       return false;
     elif evalb(_self:-m_SystemType = 'Linear') then
       return _self:-ReduceIndex_Linear(_self);
     elif evalb(_self:-m_SystemType = 'Generic') then
       return _self:-ReduceIndex_Generic(_self);
-    elif evalb(_self:-m_SystemType = 'Mbd3') then
-      return _self:-ReduceIndex_Mbd3(_self);
+    elif evalb(_self:-m_SystemType = 'MultiBody') then
+      return _self:-ReduceIndex_MultiBody(_self);
     else
-      error(
-        "invalid system type '%s'.",
-        _self:-m_SystemType
-      );
+      error("invalid system type '%s'.", _self:-m_SystemType);
       return false;
     end if;
   end proc: # ReduceIndex
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export GenerateMatlabCode::static := proc(
+    _self::Indigo,
+    name::string,
+    type::string,
+    {
+    data::list(symbol = algebraic) := [],
+    info::string                   := "No class description provided."
+    }, $)::string;
+
+    description "Generate Matlab code for the loaded system with name <name>, "
+      "indigo class <type>, output file './<fname>.m', optional internal class "
+      "data <data>, and class information string <info>.";
+
+    local vars, eqns, invs, algs;
+
+    # Get system data
+    if evalb(_self:-m_SystemType = 'Empty') then
+      if _self:-m_WarningMode then
+        WARNING("Indigo::ReduceIndex(...): no system loaded yet.");
+      end if;
+    elif evalb(_self:-m_SystemType = 'Linear') then
+      # TODO: implement
+    elif evalb(_self:-m_SystemType = 'Generic') then
+      vars := _self:-SystemVars;
+      eqns := _self:-m_ReductionSteps[-1]["A"];
+      invs := [
+        op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
+      ];
+      algs := _self:-GetIndexOneConstraints(_self);
+    elif evalb(_self:-m_SystemType = 'MultiBody') then
+      # TODO: implement
+    else
+      error("invalid system type '%s'.", _self:-m_SystemType);
+    end if;
+
+    # Generate class body string
+    if (type = "Implicit") then
+      return IndigoCodegen:-ImplicitSystemToMatlab(
+        name, vars, eqns, invs,
+        parse("algs") = algs,
+        parse("data") = data,
+        parse("info") = info
+      );
+    elif (type = "Explicit") then
+      return IndigoCodegen:-ExplicitSystemToMatlab(
+        name, vars, eqns, invs,
+        parse("algs") = algs,
+        parse("data") = data,
+        parse("info") = info
+      );
+    elif (type = "SemiExplicit") then
+      return IndigoCodegen:-SemiExplicitSystemToMatlab(
+        name, vars, eqns, invs,
+        parse("algs") = algs,
+        parse("data") = data,
+        parse("info") = info
+      );
+    else
+      error("unknown indigo class type '%s'.", type);
+    end if;
+    return "";
+  end proc: # GenerateMatlabCode
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export SystemToMatlab::static := proc(
+    _self::Indigo,
+    name::string,
+    type::string,
+    fname::string,
+    {
+    data::list(symbol = algebraic) := [],
+    info::string                   := "No class description provided."
+    }, $)
+
+    description "Generate Matlab code for the loaded system with name <name>, "
+      "indigo class <type>, output file './<fname>.m', optional internal class "
+      "data <data>, and class information string <info>.";
+
+    IndigoCodegen:-GenerateFile(cat("./", name, ".m"), _self:-GenerateMatlabCode(
+      name, type, parse("data") = data, parse("info") = info
+    ));
+    return NULL;
+  end proc: # SystemToMatlab
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 $include "./lib/Indigo_Linear.mpl"
 $include "./lib/Indigo_Generic.mpl"
-$include "./lib/Indigo_Mbd3.mpl"
+$include "./lib/Indigo_MultiBody.mpl"
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

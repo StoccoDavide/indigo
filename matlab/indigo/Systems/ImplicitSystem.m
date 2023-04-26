@@ -1,5 +1,5 @@
 %
-%> Class container for an implicit system of ODEs of the form:
+%> Class container for an implicit system of ODEs/DAEs of the form:
 %>
 %> \f[
 %> \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
@@ -20,12 +20,12 @@ classdef ImplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Class constructor for a implicit system of ODEs.
+    %> Class constructor for a implicit system.
     %>
-    %> \param t_name Name of the implicit system of ODEs.
-    %> \param t_neqn Number of equations of the implicit system of ODEs.
+    %> \param t_name Name of the implicit system.
+    %> \param t_neqn Number of equations of the implicit system.
     %> \param t_ninv Number of invariants/hidden contraints of the implicit
-    %>              system of ODEs.
+    %>              system.
     %
     function this = ImplicitSystem( t_name, t_neqn, t_ninv )
       this@BaseSystem(t_name, t_neqn, t_ninv);
@@ -39,20 +39,20 @@ classdef ImplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the function \f$ \mathbf{F} \f$ of the system of ODEs.
+    %> Evaluate the function \f$ \mathbf{F} \f$ of the s.
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
-    %> \return The value of the system of ODEs function \f$ \mathbf{F} \f$.
+    %> \return The value of the s function \f$ \mathbf{F} \f$.
     %
     F( this, x, x_dot, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Evaluate the Jacobians with respect to the states \f$ \mathbf{x} \f$ of
-    %> the system of ODEs:
+    %> the s:
     %>
     %> \f[
     %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
@@ -75,15 +75,15 @@ classdef ImplicitSystem < BaseSystem
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
-    %>         \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect to
-    %>         the states \f$ \mathbf{x} \f$ and the states derivatives
-    %>         \f$ \mathbf{x}' \f$.
+    %>         \mathbf{JF}_{\mathbf{x}'} \f$ of the system with respect to the
+    %>         states \f$ \mathbf{x} \f$ and the states derivatives \f$
+    %>         \mathbf{x}' \f$.
     %
     JF( this, x, x_dot, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the invariants/hidden contraints of the system of ODEs:
+    %> Evaluate the invariants/hidden contraints of the s:
     %>
     %> \f[
     %> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}.
@@ -98,8 +98,7 @@ classdef ImplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the invariants/hidden contraints of the system
-    %> of ODEs:
+    %> Evaluate the Jacobian of the invariants/hidden contraints of the system:
     %>
     %> \f[
     %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, t ) =
@@ -113,8 +112,8 @@ classdef ImplicitSystem < BaseSystem
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The value of the Jacobian of the invariants/hidden contraints
-    %>         \f$ \mathbf{Jh}_{\mathbf{x}} \f$.
+    %> \return The value of the Jacobian of the invariants/hidden contraints \f$
+    %>         \mathbf{Jh}_{\mathbf{x}} \f$.
     %
     Jh( this, x, t )
     %
@@ -124,9 +123,9 @@ classdef ImplicitSystem < BaseSystem
   %
   methods (Static)
     %
-    %> Get the system of ODEs/DAEs type.
+    %> Get the system type.
     %>
-    %> \return The system of ODEs/DAEs type.
+    %> \return The system type.
     %
     function out = type()
       out = 'implicit';
@@ -134,9 +133,9 @@ classdef ImplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Check if the system of ODEs/DAEs is explicit.
+    %> Check if the system is explicit.
     %>
-    %> \return True if the system of ODEs/DAEs is explicit, false otherwise.
+    %> \return True if the system is explicit, false otherwise.
     %
     function out = is_explicit()
       out = false;
@@ -144,9 +143,19 @@ classdef ImplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Check if the system of ODEs/DAEs is implicit.
+    %> Check if the system is semiexplicit.
     %>
-    %> \return True if the system of ODEs/DAEs is implicit, false otherwise.
+    %> \return True if the system is semiexplicit, false otherwise.
+    %
+    function out = is_semiexplicit()
+      out = false;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Check if the system is implicit.
+    %>
+    %> \return True if the system is implicit, false otherwise.
     %
     function out = is_implicit()
       out = true;

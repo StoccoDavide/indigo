@@ -14,9 +14,6 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
   %
   properties (SetAccess = protected, Hidden = true)
     % User data
-    m_m = 1.0;
-    m_l = 1.0;
-    m_g = 9.81;
   end
   %
   methods
@@ -31,10 +28,7 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % User data
       if (nargin == 0)
         % Keep default values
-      elseif (nargin == 3)
-        this.m_m = varargin{1};
-        this.m_l = varargin{2};
-        this.m_g = varargin{3};
+      elseif (nargin == 0)
       else
         error('wrong number of input arguments.');
       end
@@ -46,15 +40,16 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the residual of the implicit system F(x, x_dot).
 
       % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
       theta_dot = in_2(1);
       omega_dot = in_2(2);
+
+      % Generated assignments code
+      l = 0.10e1;
+      g = 3;
 
       % Generated function code
       out_1 = theta_dot - omega;
@@ -82,13 +77,13 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the Jacobian of F with respect to x.
 
       % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
+
+      % Generated assignments code
+      % None
 
       % Generated function code
       out_1_2 = -1;
@@ -107,13 +102,13 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the Jacobian of F with respect to x_dot.
 
       % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta_dot = in_1(1);
       omega_dot = in_1(2);
+
+      % Generated assignments code
+      % None
 
       % Generated function code
       out_1_1 = 1;
@@ -131,13 +126,13 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the residual of the invariants h.
 
       % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
+
+      % Generated assignments code
+      % None
 
       % Generated function code
       out_1 = 0;
@@ -153,13 +148,13 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the Jacobian of h with respect to x.
 
       % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
+
+      % Generated assignments code
+      % None
 
       % Generated function code
       % None

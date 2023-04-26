@@ -144,7 +144,7 @@ export ReduceIndexByOne_Generic::static := proc(
 
   description "Reduce the index of the 'Generic' type DAE system of equations "
     "by one. Return true if the system of equations has been reduced to "
-    "index-0 DAE (ODE), false otherwise.";
+    "index-0 DAE (ODE) or index-1 DAE, false otherwise.";
 
   local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
 
@@ -218,17 +218,18 @@ end proc: # ReduceIndexByOne_Generic
 
 export ReduceIndex_Generic::static := proc(
   _self::Indigo,
+  {max_iter::integer := 10},
   $)::boolean;
 
   description "Reduce the index of the 'Generic' type DAE system of equations. "
-    "Return true if the system of equations has been reduced to index-0 DAE "
-    "(ODE), false otherwise.";
+    "A maximum of <max_iter> reduction steps is performed. Return true if the "
+    "system of equations has been reduced to index-0 DAE (ODE) or index-1 DAE "
+    "(if veiling variables are used), false otherwise.";
 
-  local out;
+  local out, i;
 
-  # Reduce index by one till index-0 DAE (ODE) condition is reached
   out := true;
-  while (out) do
+  for i from 1 to max_iter while (out) do
     out := _self:-ReduceIndexByOne_Generic(_self);
   end do;
   return out;

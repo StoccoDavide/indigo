@@ -1,14 +1,14 @@
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#   __  __ _         _ _____
-#  |  \/  | |__   __| |___ /
-#  | |\/| | '_ \ / _` | |_ \
-#  | |  | | |_) | (_| |___) |
-#  |_|  |_|_.__/ \__,_|____/
-#
+#   __  __       _ _   _ ____            _
+#  |  \/  |_   _| | |_(_) __ )  ___   __| |_   _
+#  | |\/| | | | | | __| |  _ \ / _ \ / _` | | | |
+#  | |  | | |_| | | |_| | |_) | (_) | (_| | |_| |
+#  |_|  |_|\__,_|_|\__|_|____/ \___/ \__,_|\__, |
+#                                          |___/
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export LoadMatrices_Mbd3::static := proc(
+export LoadMatrices_MultiBody::static := proc(
   _self::Indigo,
   Mass::Matrix,
   Phi::Vector,
@@ -18,10 +18,10 @@ export LoadMatrices_Mbd3::static := proc(
   l_vars::list,
   $)
 
-  description "Load a 'Mbd3' type system of equations with mass matrix <Mass>, "
-    "constraint vector <Phi>, external force vector <f>, the position variables "
-    "<q_vars>, the velocity variables <v_vars> and the Lagrange multipliers "
-    "<l_vars>.";
+  description "Load a 'MultiBody' type system of equations with mass matrix "
+    "<Mass>, constraint vector <Phi>, external force vector <f>, the position "
+    "variables <q_vars>, the velocity variables <v_vars> and the Lagrange "
+    "multipliers <l_vars>.";
 
   local tbl;
 
@@ -29,7 +29,7 @@ export LoadMatrices_Mbd3::static := proc(
   if not evalb(_self:-m_SystemType = 'Empty') then
     if _self:-m_VerboseMode then
       WARNING(
-        "Indigo::LoadMatrices_Mbd3(...): a system of equations is already "
+        "Indigo::LoadMatrices_MultiBody(...): a system of equations is already "
         "loaded, reduction steps and veiling variables will be overwritten."
       );
     end if;
@@ -37,7 +37,7 @@ export LoadMatrices_Mbd3::static := proc(
   end if;
 
   # Set system type
-  _self:-m_SystemType := 'Mbd3';
+  _self:-m_SystemType := 'MultiBody';
 
   # Separate algebraic and differential equations
   _self:-m_ReductionSteps := [table([
@@ -49,11 +49,11 @@ export LoadMatrices_Mbd3::static := proc(
     "l_vars" = l_vars
   ])];
   return NULL;
-end proc: # LoadMatrices_Mbd3
+end proc: # LoadMatrices_MultiBody
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export LoadEquations_Mbd3::static := proc(
+export LoadEquations_MultiBody::static := proc(
   _self::Indigo,
   eqns::list,
   q_vars::list,
@@ -68,17 +68,17 @@ export LoadEquations_Mbd3::static := proc(
   local tmp, Mass, Phi, f;
 
   # Build the matrices
-  tmp, f := LinearAlgebra:-GenerateMatrix(eqns, [op(v_vars), op(l_vars)]);
+  tmp, f    := LinearAlgebra:-GenerateMatrix(eqns, [op(v_vars), op(l_vars)]);
   Mass, Phi := LinearAlgebra:-GenerateMatrix(tmp, v_vars);
 
   # Load matrices
-  _self:-LoadMbdMatrices(_self, Mass, Phi, f, q_vars, v_vars, l_vars);
+  _self:-LoadMultiBodyMatrices(_self, Mass, Phi, f, q_vars, v_vars, l_vars);
   return NULL;
-end proc: # LoadEquations_Mbd3
+end proc: # LoadEquations_MultiBody
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export ReduceIndex_Mbd3::static := proc(
+export ReduceIndex_MultiBody::static := proc(
   _self::Indigo,
   {
   jacobians::boolean := false,
@@ -93,9 +93,9 @@ export ReduceIndex_Mbd3::static := proc(
     Phi_t, A_rhs, g, Mass_tot, f_tot, vars_tot, eta_tot, Jeta_tot, Jf_tot, h,
     f_stab, Jf_stab;
 
-  if not evalb(_self:-m_SystemType = "Mbd") then
+  if not evalb(_self:-m_SystemType = 'MultiBody') then
     error(
-      "system must be of type 'Mbd3' but got '%s'.",
+      "system must be of type 'MultiBody' but got '%s'.",
       _self:-m_SystemType
     );
   end if;
@@ -206,6 +206,6 @@ export ReduceIndex_Mbd3::static := proc(
     ])
   ];
   return true;
-end proc: # ReduceIndex_Mbd3;
+end proc: # ReduceIndex_MultiBody;
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
