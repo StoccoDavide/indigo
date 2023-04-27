@@ -15,8 +15,6 @@ classdef PendulumCodegen_Explicit < ExplicitSystem
   properties (SetAccess = protected, Hidden = true)
     % User data
     m_m = 1.0;
-    m_l = 1.0;
-    m_g = 9.81;
   end
   %
   methods
@@ -32,10 +30,8 @@ classdef PendulumCodegen_Explicit < ExplicitSystem
       % User data
       if (nargin == 0)
         % Keep default values
-      elseif (nargin == 3)
+      elseif (nargin == 1)
         this.m_m = varargin{1};
-        this.m_l = varargin{2};
-        this.m_g = varargin{3};
       else
         error('wrong number of input arguments.');
       end
@@ -43,98 +39,64 @@ classdef PendulumCodegen_Explicit < ExplicitSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_A = A( this, in_1, t )
-      % Calculate the matrix A of the explicit system.
+    function out_f = f( this, in_1, t )
+      % Calculate the vector f of the semiexplicit system.
 
       % Extract properties
       m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated function code
-      out_1_1 = 1;
-      out_2_2 = 1;
+      % Evaluate assignments
+      l1 = 0.10e1;
+      g2 = 3;
 
-      % Store outputs
-      out_A = zeros(2,2);
-      out_A(1,1) = out_1_1;
-      out_A(2,2) = out_2_2;
-    end % A
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_TA = TA( this, in_1, t )
-      % Calculate the tensor of A with respect to x.
-
-      % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
-
-      % Extract inputs
-      theta = in_1(1);
-      omega = in_1(2);
-
-      % Generated function code
-      % None
-
-      % Store outputs
-      out_TA = zeros(2, 2, 2);
-    end % TA
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_b = b( this, in_1, t )
-      % Calculate the vector b of the explicit system.
-
-      % Extract properties
-      m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
-
-      % Extract inputs
-      theta = in_1(1);
-      omega = in_1(2);
-
-      % Generated function code
+      % Evaluate function
       out_1 = omega;
       t3 = sin(theta);
-      out_2 = t3 / l * g;
+      out_2 = t3 / l1 * g2 * g;
 
       % Store outputs
-      out_b = zeros(2,1);
-      out_b(1) = out_1;
-      out_b(2) = out_2;
-    end % b
+      out_f = zeros(2,1);
+      out_f(1) = out_1;
+      out_f(2) = out_2;
+    end % f
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_Jb = Jb( this, in_1, t )
-      % Calculate the Jacobian of b with respect to x.
+    function out_Jf = Jf( this, in_1, t )
+      % Calculate the Jacobian of f with respect to x.
 
       % Extract properties
       m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated function code
+      % Evaluate assignments
+      l1 = 0.10e1;
+      g2 = 3;
+      D1_g2 = 0;
+      D2_g2 = 0;
+
+      % Evaluate function
       out_1_2 = 1;
-      t3 = cos(theta);
-      out_2_1 = t3 / l * g;
+      t2 = 0.1e1 / l1;
+      t3 = sin(theta);
+      t4 = t3 * t2;
+      t7 = cos(theta);
+      out_2_1 = t7 * t2 * g2 * g + t4 * D1_g2 * g;
+      out_2_2 = t4 * D2_g2 * g;
 
       % Store outputs
-      out_Jb = zeros(2,2);
-      out_Jb(1,2) = out_1_2;
-      out_Jb(2,1) = out_2_1;
-    end % Jb
+      out_Jf = zeros(2,2);
+      out_Jf(1,2) = out_1_2;
+      out_Jf(2,1) = out_2_1;
+      out_Jf(2,2) = out_2_2;
+    end % Jf
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -143,14 +105,15 @@ classdef PendulumCodegen_Explicit < ExplicitSystem
 
       % Extract properties
       m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated function code
+      % Evaluate assignments
+      % None
+
+      % Evaluate function
       out_1 = 0;
 
       % Store outputs
@@ -165,14 +128,15 @@ classdef PendulumCodegen_Explicit < ExplicitSystem
 
       % Extract properties
       m = this.m_m;
-      l = this.m_l;
-      g = this.m_g;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated function code
+      % Evaluate assignments
+      % None
+
+      % Evaluate function
       % None
 
       % Store outputs

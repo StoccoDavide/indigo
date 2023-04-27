@@ -23,8 +23,8 @@ IndigoCodegen := module()
          load   = ModuleLoad,
          unload = ModuleUnload;
 
-  local m_CodegenOptions,
-        m_WorkingDirectory;
+  local m_CodegenOptions;
+  local m_WorkingDirectory;
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -242,7 +242,7 @@ IndigoCodegen := module()
       end do;
     end do;
 
-    # Extract the function as a list of assignments
+    # Extract the function
     lst     := [];
     outputs := "";
     if type(vec, Vector) then
@@ -285,12 +285,12 @@ IndigoCodegen := module()
       properties, "\n",
       indent, "% Extract inputs\n",
       inputs, "\n",
-      indent, "% Generated assignments code\n",
+      indent, "% Evaluate assignments\n",
       assignments, "\n",
-      indent, "% Generated function code\n"
+      indent, "% Evaluate function\n"
     );
 
-    # Convert to Matlab code all the assigments
+    # Convert to Matlab code all the assignments
     IndigoCodegen:-TranslateToMatlab(lst);
     out := cat(out, IndigoCodegen:-ApplyIndent(indent,
       `if`(% = "", "% None\n", %)
@@ -353,7 +353,7 @@ IndigoCodegen := module()
       end do;
     end do;
 
-    # Extract the function as a list of assignments
+    # Extract the function
     lst     := [];
     outputs := "";
     rows    := LinearAlgebra:-RowDimension(mat);
@@ -382,7 +382,7 @@ IndigoCodegen := module()
     );
 
     # Convert to code the algebraic assignments
-    algs_tmp := map(x -> `if`(has(vec, lhs(x)), x, NULL), algs);
+    algs_tmp := map(x -> `if`(has(mat, lhs(x)), x, NULL), algs);
     IndigoCodegen:-TranslateToMatlab(algs_tmp);
     assignments := IndigoCodegen:-ApplyIndent(indent,
       `if`(% = "", "% None\n", %)
@@ -395,12 +395,12 @@ IndigoCodegen := module()
       properties, "\n",
       indent, "% Extract inputs\n",
       inputs, "\n",
-      indent, "% Generated assignments code\n",
+      indent, "% Evaluate assignments\n",
       assignments, "\n",
-      indent, "% Generated function code\n"
+      indent, "% Evaluate function\n"
     );
 
-    # Convert to code all the assigments
+    # Convert to code all the assignments
     IndigoCodegen:-TranslateToMatlab(lst);
     out := cat(out, IndigoCodegen:-ApplyIndent(indent,
       `if`(% = "", "% None\n", %)
@@ -463,7 +463,7 @@ IndigoCodegen := module()
       end do;
     end do;
 
-    # Extract the function as a list of assignments
+    # Extract the function
     lst     := [];
     outputs := "";
     dims    := op~(2, [ArrayDims(ten)]);
@@ -493,7 +493,7 @@ IndigoCodegen := module()
     );
 
     # Convert to code the algebraic assignments
-    algs_tmp := map(x -> `if`(has(vec, lhs(x)), x, NULL), algs);
+    algs_tmp := map(x -> `if`(has(tan, lhs(x)), x, NULL), algs);
     IndigoCodegen:-TranslateToMatlab(algs_tmp);
     assignments := IndigoCodegen:-ApplyIndent(indent,
       `if`(% = "", "% None\n", %)
@@ -506,12 +506,12 @@ IndigoCodegen := module()
       properties, "\n",
       indent, "% Extract inputs\n",
       inputs, "\n",
-      indent, "% Generated assignments code\n",
+      indent, "% Evaluate assignments\n",
       assignments, "\n",
-      indent, "% Generated function code\n"
+      indent, "% Evaluate function\n"
     );
 
-    # Convert to code all the assigments
+    # Convert to code all the assignments
     IndigoCodegen:-TranslateToMatlab(lst);
     out := cat(out, IndigoCodegen:-ApplyIndent(indent,
       `if`(% = "", "% None\n", %)
@@ -575,9 +575,9 @@ IndigoCodegen := module()
       "equations <eqns>, invariants <invs> with states variables <vars> and "
       "states variables, system data <data> and description <info>.";
 
-    local i, bar, vars_tmp, eqns_tmp, invs_tmp, algs_tmp, algs_var, algs_dot,
-      vars_dot, x, x_dot, F, JF_x, JF_x_dot, h, Jh, A, GA, A_GA, mk_vars_dot,
-      rm_deps, data_str, properties;
+    local i, bar, vars_tmp, eqns_tmp, invs_tmp, algs_tmp, vars_dot, x, x_dot, F,
+      JF_x, JF_x_dot, h, Jh, GA, mk_algs_var, mk_algs_dot, mk_vars_dot, rm_deps,
+      data_str, assignments, properties;
 
     # Indentation string
     i   := "  ";
@@ -619,65 +619,75 @@ IndigoCodegen := module()
     Jh       := IndigoUtils:-DoJacobian(invs_tmp, vars_tmp);
 
     # Calculate assignments derivatives
-    algs_var    := [];
-    algs_grd    := [];
     GA          := [];
-    algs_dot    := [];
+    mk_algs_var := [];
     mk_algs_dot := [];
+
     if (nops(algs_tmp) > 0) then
-      algs_var := lhs~(algs_tmp);
+      # Transform assignments from (var[j])(f) to var_j
+      map(x -> `if`(
+          type(x, function),
+          op(0, x),
+          x
+        ), lhs~(algs_tmp)
+      );
+      map(x -> `if`(
+          type(x, indexed),
+          convert(cat(op(0, x), "_", op(1..-1, x)), symbol),
+          x
+        ), %
+      );
+      mk_algs_var := lhs~(algs_tmp) =~ map(
+        x -> `if`(
+          type(op(0, x), indexed),
+          convert(cat(op(0, op(0, x)), op(1..-1, op(0, x))), symbol),
+          x
+        ), %
+      );
 
       # Calculate assignments derivatives
-      for u in algs_tmp do
-        for v in vars_tmp do
-          tmp := IndigoUtils:-DoDiff(lhs(u), v); print(%);
-          if not evalb(tmp = 0) then
-            algs_grd := [op(algs_grd), tmp];
-            GA       := [op(GA), tmp = IndigoUtils:-DoDiff(rhs(u), v)];
-          end if;
-        end do;
-      end do;
-      print("algs_grd = ", algs_grd);
-      print("GA = ", GA);
+      GA := map(y -> op(convert(
+        remove[flatten](x -> lhs(x) = 0,
+          IndigoUtils:-DoGradient(lhs(y), vars_tmp) =~
+          IndigoUtils:-DoGradient(rhs(y), vars_tmp)
+        ), list)), algs_tmp);
 
-      # Transform assignments from D[i](var[j])(f) to D_i_var[j]
-      algs_dot := zip((x, y) -> cat(x, "_", y),
+      # Transform assignments derivatives from D[i](var[j])(f) to D_i_var_j
+      lhs~(GA);
+      zip((x, y) -> cat(x, "_", y),
         map(x -> `if`(
-          type(x, indexed),
-          cat(op(0, x), "_", op(1, x)),
-          x
-        ), op~(0, op~(0, algs_grd))),
+            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
+          ), op~(0, op~(0, %))
+        ),
         map(x -> `if`(
-          type(x, indexed),
-          op(0, x)[op(1, x)], x
-        ), op~(1, op~(0, algs_grd)))
+            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
+          ), op~(1, op~(0, %)))
       );
-      mk_algs_dot := algs_grd =~ algs_dot
+      mk_algs_dot := %% =~ %;
     end if;
 
     # Generate expressions without variable dependency
-    rm_deps  := [
-      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot)),
-      #op(algs_var =~ op~(0, algs_var)),
-      op(mk_algs_dot)
-    ]; print(%);
+    rm_deps := [
+      op(mk_algs_var), op(mk_algs_dot),
+      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot))
+    ];
     x        := convert(subs(op(rm_deps), vars_tmp), list);
     x_dot    := convert(subs(op(rm_deps), vars_dot), list);
     F        := subs(op(rm_deps), eqns_tmp);
-    JF_x     := subs(op(rm_deps), JF_x); print(%);
-    JF_x_dot := subs(op(rm_deps), JF_x_dot); print(%);
+    JF_x     := subs(op(rm_deps), JF_x);
+    JF_x_dot := subs(op(rm_deps), JF_x_dot);
     h        := subs(op(rm_deps), invs_tmp);
     Jh       := subs(op(rm_deps), Jh);
-    A        := subs(op(rm_deps), algs_tmp);
-    GA       := subs(op(rm_deps), GA);
-    A_GA     := [op(A), op(GA)];
+
+    # Generate assignments
+    assignments := subs(op(rm_deps), [op(algs_tmp), op(GA)]); print(<%>);
 
     # Generate properties
     if (nops(data) > 0) then
       data_str   := cat~(op(cat~(i, i, "m_", convert~(data, string), ";\n")));
       properties := lhs~(data);
     else
-      data_str   := cat(i, i, "% None");
+      data_str   := cat(i, i, "% None\n");
       properties := [];
     end if;
 
@@ -699,7 +709,7 @@ IndigoCodegen := module()
       i, "%\n",
       i, "properties (SetAccess = protected, Hidden = true)\n",
       i, i, "% User data\n",
-      data_str, "\n",
+      data_str,
       i, "end\n",
       i, "%\n",
       i, "methods\n",
@@ -730,7 +740,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "F", [x, x_dot], F,
-          parse("algs") = A,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the residual of the implicit system F(x, x_dot)."
       )),
@@ -750,7 +760,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "JF_x", [x], JF_x,
-          parse("algs") = A_GA,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of F with respect to x."
       )),
@@ -761,7 +771,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "JF_x_dot", [x_dot], JF_x_dot,
-          parse("algs") = A_GA,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of F with respect to x_dot."
       )),
@@ -772,7 +782,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "h", [x], h,
-          parse("algs") = A,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the residual of the invariants h."
       )),
@@ -783,7 +793,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jh", [x], Jh,
-          parse("algs") = A_GA,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to x."
       )),
@@ -823,7 +833,8 @@ IndigoCodegen := module()
       "states variables, system data <data> and description <info>.";
 
     local i, bar, vars_tmp, eqns_tmp, invs_tmp, algs_tmp, vars_dot, x, x_dot, A,
-      b, f, Jf, h, Jh, mk_vars_dot, rm_deps, data_str, properties;
+      b, f, Jf, h, Jh, GA, mk_algs_var, mk_algs_dot, mk_vars_dot, rm_deps,
+      data_str, assignments, properties;
 
     # Indentation string
     i   := "  ";
@@ -878,8 +889,59 @@ IndigoCodegen := module()
     Jf := IndigoUtils:-DoJacobian(f, vars_tmp);
     Jh := IndigoUtils:-DoJacobian(invs_tmp, vars_tmp);
 
+    # Calculate assignments derivatives
+    GA          := [];
+    mk_algs_var := [];
+    mk_algs_dot := [];
+
+    if (nops(algs_tmp) > 0) then
+      # Transform assignments from (var[j])(f) to var_j
+      map(x -> `if`(
+          type(x, function),
+          op(0, x),
+          x
+        ), lhs~(algs_tmp)
+      );
+      map(x -> `if`(
+          type(x, indexed),
+          convert(cat(op(0, x), "_", op(1..-1, x)), symbol),
+          x
+        ), %
+      );
+      mk_algs_var := lhs~(algs_tmp) =~ map(
+        x -> `if`(
+          type(op(0, x), indexed),
+          convert(cat(op(0, op(0, x)), op(1..-1, op(0, x))), symbol),
+          x
+        ), %
+      );
+
+      # Calculate assignments derivatives
+      GA := map(y -> op(convert(
+        remove[flatten](x -> lhs(x) = 0 and rhs(x) = 0,
+          IndigoUtils:-DoGradient(lhs(y), vars_tmp) =~
+          IndigoUtils:-DoGradient(rhs(y), vars_tmp)
+        ), list)), algs_tmp);
+
+      # Transform assignments derivatives from D[i](var[j])(f) to D_i_var_j
+      lhs~(GA);
+      zip((x, y) -> cat(x, "_", y),
+        map(x -> `if`(
+            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
+          ), op~(0, op~(0, %))
+        ),
+        map(x -> `if`(
+            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
+          ), op~(1, op~(0, %)))
+      );
+      mk_algs_dot := %% =~ %
+    end if;
+
     # Generate expressions without variable dependency
-    rm_deps  := [op(vars_tmp), op(vars_dot)] =~ op~(0, [op(vars_tmp), op(vars_dot)]);
+    rm_deps := [
+      op(mk_algs_var), op(mk_algs_dot),
+      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot))
+    ];
     x        := convert(subs(op(rm_deps), vars_tmp), list);
     x_dot    := convert(subs(op(rm_deps), vars_dot), list);
     f        := subs(op(rm_deps), f);
@@ -887,12 +949,15 @@ IndigoCodegen := module()
     h        := subs(op(rm_deps), invs_tmp);
     Jh       := subs(op(rm_deps), Jh);
 
+    # Generate assignments
+    assignments := subs(op(rm_deps), [op(algs_tmp), op(GA)]);
+
     # Generate properties
     if (nops(data) > 0) then
       data_str   := cat~(op(cat~(i, i, "m_", convert~(data, string), ";\n")));
       properties := lhs~(data);
     else
-      data_str   := cat(i, i, "% None");
+      data_str   := cat(i, i, "% None\n");
       properties := [];
     end if;
 
@@ -914,7 +979,7 @@ IndigoCodegen := module()
       i, "%\n",
       i, "properties (SetAccess = protected, Hidden = true)\n",
       i, i, "% User data\n",
-      data_str, "\n",
+      data_str,
       i, "end\n",
       i, "%\n",
       i, "methods\n",
@@ -946,7 +1011,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "f", [x], f,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the vector f of the semiexplicit system."
       )),
@@ -957,7 +1022,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jf", [x], Jf,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of f with respect to x."
       )),
@@ -968,7 +1033,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "h", [x], h,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the residual of the invariants h."
       )),
@@ -979,7 +1044,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jh", [x], Jh,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to x."
       )),
@@ -1019,7 +1084,8 @@ IndigoCodegen := module()
       "states variables, system data <data> and description <info>.";
 
     local i, bar, vars_tmp, eqns_tmp, invs_tmp, algs_tmp, vars_dot, x, x_dot, A,
-      TA, b, Jb, h, Jh, mk_vars_dot, rm_deps, data_str, properties;
+      TA, b, Jb, h, Jh, GA, mk_algs_var, mk_algs_dot, mk_vars_dot, rm_deps,
+      data_str, assignments, properties;
 
     # Indentation string
     i   := "  ";
@@ -1073,8 +1139,59 @@ IndigoCodegen := module()
     Jb := IndigoUtils:-DoJacobian(b, vars_tmp);
     Jh := IndigoUtils:-DoJacobian(invs_tmp, vars_tmp);
 
+    # Calculate assignments derivatives
+    GA          := [];
+    mk_algs_var := [];
+    mk_algs_dot := [];
+
+    if (nops(algs_tmp) > 0) then
+      # Transform assignments from (var[j])(f) to var_j
+      map(x -> `if`(
+          type(x, function),
+          op(0, x),
+          x
+        ), lhs~(algs_tmp)
+      );
+      map(x -> `if`(
+          type(x, indexed),
+          convert(cat(op(0, x), "_", op(1..-1, x)), symbol),
+          x
+        ), %
+      );
+      mk_algs_var := lhs~(algs_tmp) =~ map(
+        x -> `if`(
+          type(op(0, x), indexed),
+          convert(cat(op(0, op(0, x)), op(1..-1, op(0, x))), symbol),
+          x
+        ), %
+      );
+
+      # Calculate assignments derivatives
+      GA := map(y -> op(convert(
+        remove[flatten](x -> lhs(x) = 0 and rhs(x) = 0,
+          IndigoUtils:-DoGradient(lhs(y), vars_tmp) =~
+          IndigoUtils:-DoGradient(rhs(y), vars_tmp)
+        ), list)), algs_tmp);
+
+      # Transform assignments derivatives from D[i](var[j])(f) to D_i_var_j
+      lhs~(GA);
+      zip((x, y) -> cat(x, "_", y),
+        map(x -> `if`(
+            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
+          ), op~(0, op~(0, %))
+        ),
+        map(x -> `if`(
+            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
+          ), op~(1, op~(0, %)))
+      );
+      mk_algs_dot := %% =~ %
+    end if;
+
     # Generate expressions without variable dependency
-    rm_deps  := [op(vars_tmp), op(vars_dot)] =~ op~(0, [op(vars_tmp), op(vars_dot)]);
+    rm_deps := [
+      op(mk_algs_var), op(mk_algs_dot),
+      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot))
+    ];
     x        := convert(subs(op(rm_deps), vars_tmp), list);
     x_dot    := convert(subs(op(rm_deps), vars_dot), list);
     A        := subs(op(rm_deps), A);
@@ -1084,12 +1201,15 @@ IndigoCodegen := module()
     h        := subs(op(rm_deps), invs_tmp);
     Jh       := subs(op(rm_deps), Jh);
 
+    # Generate assignments
+    assignments := subs(op(rm_deps), [op(algs_tmp), op(GA)]);
+
     # Generate properties
     if (nops(data) > 0) then
       data_str   := cat~(op(cat~(i, i, "m_", convert~(data, string), ";\n")));
       properties := lhs~(data);
     else
-      data_str   := cat(i, i, "% None");
+      data_str   := cat(i, i, "% None\n");
       properties := [];
     end if;
 
@@ -1111,7 +1231,7 @@ IndigoCodegen := module()
       i, "%\n",
       i, "properties (SetAccess = protected, Hidden = true)\n",
       i, i, "% User data\n",
-      data_str, "\n",
+      data_str,
       i, "end\n",
       i, "%\n",
       i, "methods\n",
@@ -1143,7 +1263,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "A", [x], A,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the matrix A of the explicit system."
       )),
@@ -1154,7 +1274,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-TensorToMatlab(
           "TA", [x], TA,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the tensor of A with respect to x."
       )),
@@ -1165,7 +1285,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "b", [x], b,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the vector b of the explicit system."
       )),
@@ -1176,7 +1296,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jb", [x], Jb,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of b with respect to x."
       )),
@@ -1187,7 +1307,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "h", [x], h,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the residual of the invariants h."
       )),
@@ -1198,7 +1318,7 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jh", [x], Jh,
-          parse("algs") = algs_tmp,
+          parse("algs") = assignments,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to x."
       )),

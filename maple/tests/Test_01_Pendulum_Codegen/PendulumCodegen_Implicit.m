@@ -14,6 +14,7 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
   %
   properties (SetAccess = protected, Hidden = true)
     % User data
+    m_m = 1.0;
   end
   %
   methods
@@ -28,7 +29,8 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % User data
       if (nargin == 0)
         % Keep default values
-      elseif (nargin == 0)
+      elseif (nargin == 1)
+        this.m_m = varargin{1};
       else
         error('wrong number of input arguments.');
       end
@@ -40,6 +42,7 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the residual of the implicit system F(x, x_dot).
 
       % Extract properties
+      m = this.m_m;
 
       % Extract inputs
       theta = in_1(1);
@@ -47,14 +50,14 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       theta_dot = in_2(1);
       omega_dot = in_2(2);
 
-      % Generated assignments code
-      l = 0.10e1;
-      g = 3;
+      % Evaluate assignments
+      l1 = 0.10e1;
+      g2 = 3;
 
-      % Generated function code
-      out_1 = theta_dot - omega;
+      % Evaluate function
+      out_1 = theta - omega;
       t3 = sin(theta);
-      out_2 = omega_dot - t3 / l * g;
+      out_2 = omega - t3 / l1 * g2 * g;
 
       % Store outputs
       out_F = zeros(2,1);
@@ -77,23 +80,34 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the Jacobian of F with respect to x.
 
       % Extract properties
+      m = this.m_m;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated assignments code
-      % None
+      % Evaluate assignments
+      l1 = 0.10e1;
+      g2 = 3;
+      D1_g2 = 0;
+      D2_g2 = 0;
 
-      % Generated function code
+      % Evaluate function
+      out_1_1 = 1;
       out_1_2 = -1;
-      t3 = cos(theta);
-      out_2_1 = -t3 / l * g;
+      t2 = 0.1e1 / l1;
+      t3 = sin(theta);
+      t4 = t3 * t2;
+      t7 = cos(theta);
+      out_2_1 = -t7 * t2 * g2 * g - t4 * D1_g2 * g;
+      out_2_2 = -t4 * D2_g2 * g + 1;
 
       % Store outputs
       out_JF_x = zeros(2,2);
+      out_JF_x(1,1) = out_1_1;
       out_JF_x(1,2) = out_1_2;
       out_JF_x(2,1) = out_2_1;
+      out_JF_x(2,2) = out_2_2;
     end % JF_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -102,22 +116,20 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the Jacobian of F with respect to x_dot.
 
       % Extract properties
+      m = this.m_m;
 
       % Extract inputs
       theta_dot = in_1(1);
       omega_dot = in_1(2);
 
-      % Generated assignments code
+      % Evaluate assignments
       % None
 
-      % Generated function code
-      out_1_1 = 1;
-      out_2_2 = 1;
+      % Evaluate function
+      % None
 
       % Store outputs
       out_JF_x_dot = zeros(2,2);
-      out_JF_x_dot(1,1) = out_1_1;
-      out_JF_x_dot(2,2) = out_2_2;
     end % JF_x_dot
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -126,15 +138,16 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the residual of the invariants h.
 
       % Extract properties
+      m = this.m_m;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated assignments code
+      % Evaluate assignments
       % None
 
-      % Generated function code
+      % Evaluate function
       out_1 = 0;
 
       % Store outputs
@@ -148,15 +161,16 @@ classdef PendulumCodegen_Implicit < ImplicitSystem
       % Calculate the Jacobian of h with respect to x.
 
       % Extract properties
+      m = this.m_m;
 
       % Extract inputs
       theta = in_1(1);
       omega = in_1(2);
 
-      % Generated assignments code
+      % Evaluate assignments
       % None
 
-      % Generated function code
+      % Evaluate function
       % None
 
       % Store outputs

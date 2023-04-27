@@ -27,11 +27,11 @@ export SeparateMatrices::static := proc(
 
   # Substitute the veil arguments with the dependent variables
   # V[num] -> V[num](params)
+    print("SeparateMatrices", max(1, rng_b)..rng_a);
   if (rng_a > rng_b) then
     veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-    if (nops(veil_subs) > 0) then
-      G_tmp := subs(op(veil_subs), G_tmp);
-    end if;
+    G_tmp := subs(op(veil_subs), G_tmp);
+    print("SeparateMatrices", veil_subs);
   end if;
 
   # Check input dimensions E

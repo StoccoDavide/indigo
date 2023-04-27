@@ -494,13 +494,14 @@ module Indigo()
 
     # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
+    print("KernelBuild1", max(1, rng_b)..rng_a);
     if (rng_a > rng_b) then
       veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-      if (nops(veil_subs) > 0) then
-        tbl["L"] := subs(op(veil_subs), tbl["L"]);
-        tbl["U"] := subs(op(veil_subs), tbl["U"]);
-      end if;
+      tbl["L"] := subs(op(veil_subs), tbl["L"]);
+      tbl["U"] := subs(op(veil_subs), tbl["U"]);
+      print("KernelBuild1", veil_subs);
     end if;
+    print("id1", <Indigo_obj:-GetIndexOneConstraints(Indigo_obj)>);
 
     # Retrieve the results of the LU decomposition
     tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
@@ -525,20 +526,20 @@ module Indigo()
     end if;
 
     # Apply the veil to input matrices
-    rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
     K := _self:-m_LEM:-Veil~(_self:-m_LEM, K);
     N := _self:-m_LEM:-Veil~(_self:-m_LEM, N);
     rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
 
     # Substitute the veil arguments with the dependent variables
     # V[num] -> V[num](params)
+    print("KernelBuild2", max(1, rng_b)..rng_a);
     if (rng_a > rng_b) then
       veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-      if (nops(veil_subs) > 0) then
-        K := subs(op(veil_subs), K);
-        N := subs(op(veil_subs), N);
-      end if;
+      K := subs(op(veil_subs), K);
+      N := subs(op(veil_subs), N);
+      print("KernelBuild2", veil_subs);
     end if;
+    print("id1", <Indigo_obj:-GetIndexOneConstraints(Indigo_obj)>);
 
     # Return the results
     return table([
@@ -657,12 +658,13 @@ module Indigo()
     elif evalb(_self:-m_SystemType = 'Linear') then
       # TODO: implement
     elif evalb(_self:-m_SystemType = 'Generic') then
-      vars := _self:-SystemVars;
-      eqns := _self:-m_ReductionSteps[-1]["A"];
+      vars := _self:-m_SystemVars;
+      eqns := _self:-GetDifferentialEquations(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
       ];
-      algs := _self:-GetIndexOneConstraints(_self);
+      _self:-GetIndexOneConstraints(_self);
+      algs := subs(op(_self:-GetVeilArgsSubs(_self)), lhs~(%)) =~ rhs~(%);
     elif evalb(_self:-m_SystemType = 'MultiBody') then
       # TODO: implement
     else
