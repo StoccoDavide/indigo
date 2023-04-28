@@ -18,21 +18,10 @@ export SeparateMatrices::static := proc(
     "algebraic equations matrix <Et>, the algebraic variables matrix <Gt>, the "
     "differential equations matrix <A>, and the rank of <E>.";
 
-  local n, m, l, tbl, G_tmp, rng_b, rng_a, veil_subs;
+  local n, m, l, tbl, G_tmp;
 
   # Apply veil to input vector G
-  rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
   G_tmp := _self:-m_LEM:-Veil~(_self:-m_LEM, G);
-  rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
-
-  # Substitute the veil arguments with the dependent variables
-  # V[num] -> V[num](params)
-    print("SeparateMatrices", max(1, rng_b)..rng_a);
-  if (rng_a > rng_b) then
-    veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-    G_tmp := subs(op(veil_subs), G_tmp);
-    print("SeparateMatrices", veil_subs);
-  end if;
 
   # Check input dimensions E
   n, m := LinearAlgebra:-Dimension(E);
@@ -88,8 +77,9 @@ export LoadMatrices_Generic::static := proc(
     _self:-Reset(_self);
   end if;
 
-  # store vars
+  # Store system variables
   _self:-m_SystemVars := vars;
+  _self:-m_LEM:-SetVeilingDependency(_self:-m_LEM, convert(vars, set));
 
   # Set system type
   _self:-m_SystemType := 'Generic';

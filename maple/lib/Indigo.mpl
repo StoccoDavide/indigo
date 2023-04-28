@@ -413,7 +413,7 @@ module Indigo()
 
     description "Get the index-1 constraints of the reduced system.";
 
-    return _self:-m_LEM:-VeilList(_self:-m_LEM);
+    return _self:-m_LEM:-VeilList(_self:-m_LEM, parse("dependency") = true);
   end proc: # GetIndexOneConstraints
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -479,7 +479,7 @@ module Indigo()
     description "Build the kernel of a matrix <E>, and return the matrix N such "
       "that E*N = 0 and the rank of E.";
 
-    local n, m, tbl, r, P, Q, M, K, N, rng_b, rng_a, veil_subs;
+    local n, m, tbl, r, P, Q, M, K, N;
 
     # Check if LAST and LEM are initialized
     _self:-CheckInit(_self);
@@ -488,20 +488,7 @@ module Indigo()
     n, m := LinearAlgebra:-Dimension(E);
 
     # Decompose the matrix as P.E.Q = L.U
-    rng_b := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
-    _self:-m_LAST:-LU(_self:-m_LAST, E, veil_sanity_check = false);
-    rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
-
-    # Substitute the veil arguments with the dependent variables
-    # V[num] -> V[num](params)
-    print("KernelBuild1", max(1, rng_b)..rng_a);
-    if (rng_a > rng_b) then
-      veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-      tbl["L"] := subs(op(veil_subs), tbl["L"]);
-      tbl["U"] := subs(op(veil_subs), tbl["U"]);
-      print("KernelBuild1", veil_subs);
-    end if;
-    print("id1", <Indigo_obj:-GetIndexOneConstraints(Indigo_obj)>);
+    _self:-m_LAST:-LU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
 
     # Retrieve the results of the LU decomposition
     tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
@@ -528,18 +515,6 @@ module Indigo()
     # Apply the veil to input matrices
     K := _self:-m_LEM:-Veil~(_self:-m_LEM, K);
     N := _self:-m_LEM:-Veil~(_self:-m_LEM, N);
-    rng_a := _self:-m_LEM:-VeilTableSize(_self:-m_LEM);
-
-    # Substitute the veil arguments with the dependent variables
-    # V[num] -> V[num](params)
-    print("KernelBuild2", max(1, rng_b)..rng_a);
-    if (rng_a > rng_b) then
-      veil_subs := _self:-GetVeilArgsSubs(_self, max(1, rng_b)..rng_a);
-      K := subs(op(veil_subs), K);
-      N := subs(op(veil_subs), N);
-      print("KernelBuild2", veil_subs);
-    end if;
-    print("id1", <Indigo_obj:-GetIndexOneConstraints(Indigo_obj)>);
 
     # Return the results
     return table([
@@ -635,7 +610,7 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export GenerateMatlabCode::static := proc(
+  export TranslateToMatlab::static := proc(
     _self::Indigo,
     name::string,
     type::string,
@@ -663,8 +638,7 @@ module Indigo()
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
       ];
-      _self:-GetIndexOneConstraints(_self);
-      algs := subs(op(_self:-GetVeilArgsSubs(_self)), lhs~(%)) =~ rhs~(%);
+      algs := _self:-GetIndexOneConstraints(_self);
     elif evalb(_self:-m_SystemType = 'MultiBody') then
       # TODO: implement
     else
@@ -697,29 +671,31 @@ module Indigo()
       error("unknown indigo class type '%s'.", type);
     end if;
     return "";
-  end proc: # GenerateMatlabCode
+  end proc: # TranslateToMatlab
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export SystemToMatlab::static := proc(
+  export GenerateMatlabCode::static := proc(
     _self::Indigo,
     name::string,
     type::string,
-    fname::string,
     {
     data::list(symbol = algebraic) := [],
     info::string                   := "No class description provided."
     }, $)
 
     description "Generate Matlab code for the loaded system with name <name>, "
-      "indigo class <type>, output file './<fname>.m', optional internal class "
+      "indigo class <type>, output file './<name>.m', optional internal class "
       "data <data>, and class information string <info>.";
 
-    IndigoCodegen:-GenerateFile(cat("./", name, ".m"), _self:-GenerateMatlabCode(
-      name, type, parse("data") = data, parse("info") = info
-    ));
+    IndigoCodegen:-GenerateFile(
+      cat("./", name, ".m"),
+      _self:-TranslateToMatlab(
+        _self, name, type, parse("data") = data, parse("info") = info
+      )
+    );
     return NULL;
-  end proc: # SystemToMatlab
+  end proc: # GenerateMatlabCode
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
