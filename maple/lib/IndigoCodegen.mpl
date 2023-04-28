@@ -190,7 +190,7 @@ IndigoCodegen := module()
     out := StringTools:-SubstituteAll(out, "\n", cat("\n", ind));
 
     # Remove indentation from last line
-    out :=  StringTools:-Take(out, length(out) - length(ind));
+    out := StringTools:-Take(out, length(out) - length(ind));
 
     # Remove indentation empty lines or lines with only spaces
     out := StringTools:-SubstituteAll(out, "\n" || ind || "\n", "\n\n");
@@ -205,6 +205,7 @@ IndigoCodegen := module()
     vars::list(list(symbol)),
     vec::{list, Vector},
     {
+    indent::string                      := "  ",
     algs::{Vector(algebraic) = algebraic,
            list(algebraic = algebraic)} := [],
     data::list(symbol)                  := [],
@@ -214,35 +215,30 @@ IndigoCodegen := module()
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and save it in the working directory.";
 
-    local indent, properties, inputs, assignments, outputs, dims, i, j, lst,
-      out;
-
-    # Indentation string
-    indent := "  ";
+    local header, properties, inputs, assignments, elements, outputs,
+          dims, i, j, lst, tmp;
 
     # Extract the function properties
     if (nops(data) > 0) then
       properties := "";
       for i from 1 to nops(data) do
-        properties := cat(properties,
-          indent, convert(data[i], string), " = this.m_", convert(data[i], string), ";\n"
-        );
+        tmp := convert(data[i], string);
+        properties := cat( properties, indent, tmp, " = this.m_", tmp, ";\n" );
       end do;
     else
-      properties := cat(indent, "% None\n");
+      properties := cat(indent, "% No properties!\n");
     end if;
 
     # Extract the function inputs
     inputs := "";
     for j from 1 to nops(vars) do
       for i from 1 to nops(vars[j]) do
-        inputs := cat(inputs,
-          indent, convert(vars[j][i], string), " = in_", j, "(", i, ");\n"
-        );
+        tmp := convert(vars[j][i], string);
+        inputs := cat(inputs, indent, tmp, " = in_", j, "(", i, ");\n" );
       end do;
     end do;
 
-    # Extract the function
+    # Extract the elements
     lst     := [];
     outputs := "";
     if type(vec, Vector) then
@@ -260,52 +256,36 @@ IndigoCodegen := module()
     end do;
 
     # Generate method header
-    out := cat("function out_", name, " = ", name, "( this");
+    header := cat("function out_", name, " = ", name, "( this");
     for j from 1 to nops(vars) do
-      out := cat(out, ", ", "in_", j);
+      header := cat(header, ", ", "in_", j);
     end do;
-    out := cat(out, ", t )\n");
-
-    # Add description
-    out := cat(out,
-      indent, "% ", info, "\n"
-    );
+    header := cat( header, ", t )\n", indent, "% ", info, "\n" );
 
     # Convert to code the algebraic assignments
-    IndigoCodegen:-TranslateToMatlab(algs);
+    tmp         := IndigoCodegen:-TranslateToMatlab(algs);
     assignments := IndigoCodegen:-ApplyIndent(indent,
-      `if`(% = "", "% None\n", %)
+      `if`(tmp = "", "% No assignments\n", tmp)
     );
 
-    # Add the method body
-    out := cat(out,
-      "\n",
-      indent, "% Extract properties\n",
-      properties, "\n",
-      indent, "% Extract inputs\n",
-      inputs, "\n",
-      indent, "% Evaluate assignments\n",
-      assignments, "\n",
-      indent, "% Evaluate function\n"
+    # Convert to Matlab code all the elements
+    tmp      := IndigoCodegen:-TranslateToMatlab(lst);
+    elements := IndigoCodegen:-ApplyIndent(indent,
+      `if`(tmp = "", "% No elements\n", tmp)
     );
 
-    # Convert to Matlab code all the assignments
-    IndigoCodegen:-TranslateToMatlab(lst);
-    out := cat(out, IndigoCodegen:-ApplyIndent(indent,
-      `if`(% = "", "% None\n", %)
-    ));
-
-    # Store the results
-    out := cat(out,
-      "\n",
+    # Return function body the code
+    return cat(
+      header,
+      indent, "% Extract properties\n",    properties,  "\n",
+      indent, "% Extract inputs\n",        inputs,      "\n",
+      indent, "% Evaluate assignments\n",  assignments, "\n",
+      indent, "% Evaluate elements\n",     elements,    "\n",
       indent, "% Store outputs\n",
       indent, "out_", name, " = zeros(", dims, ",1);\n",
       outputs,
       "end % ", name, "\n"
     );
-
-    # Return the code
-    return out;
   end proc: # VectorToMatlab
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -574,29 +554,25 @@ IndigoCodegen := module()
 
     local i, bar, vars_tmp, eqns_tmp, invs_tmp, algs_tmp, vars_dot, x, x_dot, F,
       JF_x, JF_x_dot, h, Jh, GA, mk_algs_var, mk_algs_dot, mk_vars_dot, rm_deps,
-      data_str, algs_fun, algs_grd, properties;
-
-    # Indentation string
-    i   := "  ";
-    bar := "% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+      data_str, algs_fun, algs_grd, properties, tmp, tmp1, tmp2;
 
     # Convert to proper types
-    if type(vars, Vector) then
+    if not type(vars, list) then
       vars_tmp := convert(vars, list);
     else
       vars_tmp := vars;
     end if;
-    if type(eqns, list) then
+    if not type(eqns, Vector) then
       eqns_tmp := convert(eqns, Vector);
     else
       eqns_tmp := eqns;
     end if;
-    if type(invs, list) then
+    if not type(invs, Vector) then
       invs_tmp := convert(invs, Vector);
     else
       invs_tmp := invs;
     end if;
-    if type(algs, Vector) then
+    if not type(algs, list) then
       algs_tmp := convert(algs, list);
     else
       algs_tmp := algs;
@@ -622,27 +598,29 @@ IndigoCodegen := module()
 
     if (nops(algs_tmp) > 0) then
       # Transform assignments from (var[j])(f) to var_j
-      map(x -> `if`(
+      tmp := map(x -> `if`(
           type(x, function),
           op(0, x),
           x
         ), lhs~(algs_tmp)
       );
-      map(x -> `if`(
+      tmp := map(x -> `if`(
           type(x, indexed),
           convert(cat(op(0, x), "_", op(1..-1, x)), symbol),
           x
-        ), %
+        ), tmp
       );
       mk_algs_var := lhs~(algs_tmp) =~ map(
         x -> `if`(
           type(op(0, x), indexed),
           convert(cat(op(0, op(0, x)), op(1..-1, op(0, x))), symbol),
           x
-        ), %
+        ), tmp
       );
 
       # Calculate assignments derivatives
+      # algs_tmp is a list [..., L = R, ...] --> [..., Grad(L) = Grad(R), ...]
+      # removing  [..., 0 = 0, ...] -->  [...,...]
       GA := map(y -> op(convert(
         remove[flatten](x -> lhs(x) = 0,
           IndigoUtils:-DoGradient(lhs(y), vars_tmp) =~
@@ -650,23 +628,25 @@ IndigoCodegen := module()
         ), list)), algs_tmp);
 
       # Transform assignments derivatives from D[i](var[j])(f) to D_i_var_j
-      lhs~(GA);
-      zip((x, y) -> cat(x, "_", y),
-        map(x -> `if`(
-            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
-          ), op~(0, op~(0, %))
-        ),
-        map(x -> `if`(
-            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
-          ), op~(1, op~(0, %)))
-      );
-      mk_algs_dot := %% =~ %;
+      tmp  := lhs~(GA);
+      tmp1 :=  map(
+        x -> `if`( type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x ),
+        op~(0, op~(0, tmp)) # D[i](var[j])(f) --> D[i]
+      ); # D[i](var[j])(f) --> D_i
+      tmp1 := map(
+        x -> `if`( type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x ),
+        op~(1, op~(0, tmp)) # D[i](var[j])(f) --> var[j]
+      ); #  D[i](var[j])(f) --> var_j
+      # D[i](var[j])(f) -> D[i](var[j])(f) = D_i_var_j
+      mk_algs_dot := tmp =~ zip( (x, y) -> cat(x, "_", y), tmp1, tmp2 );
     end if;
 
     # Generate expressions without variable dependency
     rm_deps := [
-      op(mk_algs_dot), op(mk_algs_var),
-      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot))
+      op(mk_algs_dot), # D[i](var[j])(f) -> D[i](var[j])(f) = D_i_var_j
+      op(mk_algs_var), # (var[j])(f) -> var_j
+      op(vars_tmp =~ op~(0, vars_tmp)), # var(x) --> var
+      op(vars_dot =~ op~(0, vars_dot))  # var_dot(x) --> var_dot
     ];
     x        := convert(subs(op(rm_deps), vars_tmp), list);
     x_dot    := convert(subs(op(rm_deps), vars_dot), list);
@@ -680,12 +660,16 @@ IndigoCodegen := module()
     algs_fun := subs(op(rm_deps), algs_tmp);
     algs_grd := [op(algs_fun), op(subs(op(rm_deps), GA))];
 
+    # Indentation string
+    i   := "  ";
+    bar := "% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+
     # Generate properties
     if (nops(data) > 0) then
       data_str   := cat~(op(cat~(i, i, "m_", convert~(data, string), ";\n")));
       properties := lhs~(data);
     else
-      data_str   := cat(i, i, "% None\n");
+      data_str   := cat(i, i, "% No Properties\n");
       properties := [];
     end if;
 
@@ -715,12 +699,12 @@ IndigoCodegen := module()
       i, i, bar,
       i, i, "%\n",
       i, i, "function this = ", name, "( varargin )\n",
-      i, i, i, "% Constructor for '", name, "'' class.\n",
+      i, i, i, "% Constructor for '", name, "' class.\n",
       "\n",
       i, i, i, "% Superclass constructor\n",
-      i, i, i, "this = this@ImplicitSystem('", name, "', ",
-        LinearAlgebra:-Dimension(eqns_tmp), ", ", LinearAlgebra:-Dimension(invs_tmp),
-      ");\n",
+      i, i, i, "num_equations  = ", LinearAlgebra:-Dimension(eqns_tmp), ";\n",
+      i, i, i, "num_invariants = ", LinearAlgebra:-Dimension(invs_tmp), ";\n",
+      i, i, i, "this = this@ImplicitSystem('", name, "', num_equations, num_invariants);\n",
       i, i, i, "% User data\n",
       i, i, i, "if (nargin == 0)\n",
       i, i, i, i, "% Keep default values\n",
@@ -832,11 +816,7 @@ IndigoCodegen := module()
 
     local i, bar, vars_tmp, eqns_tmp, invs_tmp, algs_tmp, vars_dot, x, x_dot, A,
       b, f, Jf, h, Jh, GA, mk_algs_var, mk_algs_dot, mk_vars_dot, rm_deps,
-      data_str, algs_fun, algs_grd, properties;
-
-    # Indentation string
-    i   := "  ";
-    bar := "% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+      data_str, algs_fun, algs_grd, properties, tmp, tmp1, tmp2;
 
     # Convert to proper types
     if type(vars, Vector) then
@@ -866,15 +846,16 @@ IndigoCodegen := module()
     );
     mk_vars_dot := diff(vars_tmp, t) =~ vars_dot;
 
-    # Extract f from: F = x_dot - f(x,t)
+    # Extract f from: F = A(x,t) * x_dot - b(x,t)
     eqns_tmp := subs(op(mk_vars_dot), eqns_tmp);
-    A, b:= LinearAlgebra:-GenerateMatrix(convert(eqns_tmp, list), vars_dot);
+    A, b     := LinearAlgebra:-GenerateMatrix(convert(eqns_tmp, list), vars_dot);
 
-    # Check if A is full rank
-    if (LinearAlgebra:-Rank(A) <> LinearAlgebra:-ColumnDimension(A)) then
+    # Check if A is square and full rank
+    if (LinearAlgebra:-RowDimension(A) <> LinearAlgebra:-ColumnDimension(A) ) or
+       (LinearAlgebra:-Rank(A) <> LinearAlgebra:-ColumnDimension(A)) then
       error(
         "the system cannot be transformed into an explicit form, the matrix A "
-        "is not full rank."
+        "is not square or full rank."
       );
       return NULL;
     end if;
@@ -894,24 +875,24 @@ IndigoCodegen := module()
 
     if (nops(algs_tmp) > 0) then
       # Transform assignments from (var[j])(f) to var_j
-      map(x -> `if`(
+      tmp := map(x -> `if`(
           type(x, function),
           op(0, x),
           x
         ), lhs~(algs_tmp)
       );
-      map(x -> `if`(
+      tmp := map(x -> `if`(
           type(x, indexed),
           convert(cat(op(0, x), "_", op(1..-1, x)), symbol),
           x
-        ), %
+        ), tmp
       );
       mk_algs_var := lhs~(algs_tmp) =~ map(
         x -> `if`(
           type(op(0, x), indexed),
           convert(cat(op(0, op(0, x)), op(1..-1, op(0, x))), symbol),
           x
-        ), %
+        ), tmp
       );
 
       # Calculate assignments derivatives
@@ -922,23 +903,24 @@ IndigoCodegen := module()
         ), list)), algs_tmp);
 
       # Transform assignments derivatives from D[i](var[j])(f) to D_i_var_j
-      lhs~(GA);
-      zip((x, y) -> cat(x, "_", y),
-        map(x -> `if`(
-            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
-          ), op~(0, op~(0, %))
-        ),
-        map(x -> `if`(
-            type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x
-          ), op~(1, op~(0, %)))
+      tmp  := lhs~(GA);
+      tmp1 := map(
+        x -> `if`( type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x ),
+        op~(0, op~(0, %))
       );
-      mk_algs_dot := %% =~ %
+      tmp2 := map(
+        x -> `if`( type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x ),
+        op~(1, op~(0, %))
+      );
+      mk_algs_dot := tmp =~ zip((x, y) -> cat(x, "_", y), tmp1, tmp2 );
     end if;
 
     # Generate expressions without variable dependency
     rm_deps := [
-      op(mk_algs_var), op(mk_algs_dot),
-      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot))
+      op(mk_algs_var),
+      op(mk_algs_dot),
+      op(vars_tmp =~ op~(0, vars_tmp)),
+      op(vars_dot =~ op~(0, vars_dot))
     ];
     x        := convert(subs(op(rm_deps), vars_tmp), list);
     x_dot    := convert(subs(op(rm_deps), vars_dot), list);
@@ -951,12 +933,16 @@ IndigoCodegen := module()
     algs_fun := subs(op(rm_deps), algs_tmp);
     algs_grd := [op(algs_fun), op(subs(op(rm_deps), GA))];
 
+    # Indentation string
+    i   := "  ";
+    bar := "% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+
     # Generate properties
     if (nops(data) > 0) then
       data_str   := cat~(op(cat~(i, i, "m_", convert~(data, string), ";\n")));
       properties := lhs~(data);
     else
-      data_str   := cat(i, i, "% None\n");
+      data_str   := cat(i, i, "% No Properties\n");
       properties := [];
     end if;
 
@@ -986,12 +972,12 @@ IndigoCodegen := module()
       i, i, bar,
       i, i, "%\n",
       i, i, "function this = ", name, "( varargin )\n",
-      i, i, i, "% Constructor for '", name, "'' class.\n",
+      i, i, i, "% Constructor for '", name, "' class.\n",
       "\n",
       i, i, i, "% Superclass constructor\n",
-      i, i, i, "this = this@ExplicitSystem('", name, "', ",
-        LinearAlgebra:-Dimension(eqns_tmp), ", ", LinearAlgebra:-Dimension(invs_tmp),
-      ");\n",
+      i, i, i, "num_equations  = ", LinearAlgebra:-Dimension(eqns_tmp), ";\n",
+      i, i, i, "num_invariants = ", LinearAlgebra:-Dimension(invs_tmp), ";\n",
+      i, i, i, "this = this@ExplicitSystem('", name, "', num_equations, num_invariants);\n",
       "\n",
       i, i, i, "% User data\n",
       i, i, i, "if (nargin == 0)\n",
@@ -1187,17 +1173,19 @@ IndigoCodegen := module()
 
     # Generate expressions without variable dependency
     rm_deps := [
-      op(mk_algs_var), op(mk_algs_dot),
-      op(vars_tmp =~ op~(0, vars_tmp)), op(vars_dot =~ op~(0, vars_dot))
+      op(mk_algs_var),
+      op(mk_algs_dot),
+      op(vars_tmp =~ op~(0, vars_tmp)),
+      op(vars_dot =~ op~(0, vars_dot))
     ];
-    x        := convert(subs(op(rm_deps), vars_tmp), list);
-    x_dot    := convert(subs(op(rm_deps), vars_dot), list);
-    A        := subs(op(rm_deps), A);
-    TA       := subs(op(rm_deps), TA);
-    b        := subs(op(rm_deps), b);
-    Jb       := subs(op(rm_deps), Jb);
-    h        := subs(op(rm_deps), invs_tmp);
-    Jh       := subs(op(rm_deps), Jh);
+    x     := convert(subs(op(rm_deps), vars_tmp), list);
+    x_dot := convert(subs(op(rm_deps), vars_dot), list);
+    A     := subs(op(rm_deps), A);
+    TA    := subs(op(rm_deps), TA);
+    b     := subs(op(rm_deps), b);
+    Jb    := subs(op(rm_deps), Jb);
+    h     := subs(op(rm_deps), invs_tmp);
+    Jh    := subs(op(rm_deps), Jh);
 
     # Generate assignments
     algs_fun := subs(op(rm_deps), algs_tmp);
@@ -1208,7 +1196,7 @@ IndigoCodegen := module()
       data_str   := cat~(op(cat~(i, i, "m_", convert~(data, string), ";\n")));
       properties := lhs~(data);
     else
-      data_str   := cat(i, i, "% None\n");
+      data_str   := cat(i, i, "% No Properties\n");
       properties := [];
     end if;
 
@@ -1238,12 +1226,12 @@ IndigoCodegen := module()
       i, i, bar,
       i, i, "%\n",
       i, i, "function this = ", name, "( varargin )\n",
-      i, i, i, "% Constructor for '", name, "'' class.\n",
+      i, i, i, "% Constructor for '", name, "' class.\n",
       "\n",
       i, i, i, "% Superclass constructor\n",
-      i, i, i, "this = this@SemiExplicitSystem('", name, "', ",
-        LinearAlgebra:-Dimension(eqns_tmp), ", ", LinearAlgebra:-Dimension(invs_tmp),
-      ");\n",
+      i, i, i, "num_equations  = ", LinearAlgebra:-Dimension(eqns_tmp), ";\n",
+      i, i, i, "num_invariants = ", LinearAlgebra:-Dimension(invs_tmp), ";\n",
+      i, i, i, "this = this@SemiExplicitSystem('", name, "', num_equations, num_invariants);\n",
       "\n",
       i, i, i, "% User data\n",
       i, i, i, "if (nargin == 0)\n",

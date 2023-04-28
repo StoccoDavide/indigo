@@ -494,8 +494,8 @@ module Indigo()
     tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
     P, Q := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
 
-    # Compute M = L^(-1).P^T
-    M := LinearAlgebra:-LinearSolve(tbl["L"], LinearAlgebra:-Transpose(P));
+    # Compute M = L^(-1).P
+    M := LinearAlgebra:-LinearSolve(tbl["L"], P);
 
     # Build the N matrix
     r := tbl["rank"];

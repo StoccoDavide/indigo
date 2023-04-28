@@ -104,9 +104,9 @@ end
 %% Integrate the system of ODE
 
 % Set integration interval
-d_t   = 0.001;
-t_ini = 0.0;
-t_end = 0.5;
+d_t   = 0.01;
+t_ini = 0;
+t_end = 5;
 T_vec = t_ini:d_t:t_end;
 
 % Solve the system of ODEs for each solver
