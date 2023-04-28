@@ -633,7 +633,7 @@ IndigoCodegen := module()
         x -> `if`( type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x ),
         op~(0, op~(0, tmp)) # D[i](var[j])(f) --> D[i]
       ); # D[i](var[j])(f) --> D_i
-      tmp1 := map(
+      tmp2 := map(
         x -> `if`( type(x, indexed), convert(cat(op(0, x), "_", op(1..-1, x)), symbol), x ),
         op~(1, op~(0, tmp)) # D[i](var[j])(f) --> var[j]
       ); #  D[i](var[j])(f) --> var_j
