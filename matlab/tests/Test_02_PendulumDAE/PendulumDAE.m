@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (DAE version)
-classdef PendulumDAE < ImplicitSystem
+classdef PendulumDAE < Indigo_ImplicitSystem
   %
   properties (SetAccess = protected, Hidden = true)
     m_m;   % Pendulum mass (kg)
@@ -21,17 +21,13 @@ classdef PendulumDAE < ImplicitSystem
       num_invs = 1;
 
       % Call the superclass constructor
-      this@ImplicitSystem('PendulumODE', num_eqns, num_invs);
+      this@Indigo_ImplicitSystem('PendulumODE', num_eqns, num_invs);
 
       % Check the input arguments
-      assert(m > 0, ...
-        [CMD, 'pendulum mass must be positive.']);
-      assert(l > 0, ...
-        [CMD, 'pendulum length must be positive.']);
-      assert(g > 0, ...
-        [CMD, 'gravity acceleration must be positive.']);
-      assert(length(X_0) == num_eqns, ...
-        [CMD, 'invalid initial conditions vector size.']);
+      assert(m > 0, [CMD, 'pendulum mass must be positive.']);
+      assert(l > 0, [CMD, 'pendulum length must be positive.']);
+      assert(g > 0, [CMD, 'gravity acceleration must be positive.']);
+      assert(length(X_0) == num_eqns, [CMD, 'invalid initial conditions vector size.']);
 
       this.m_m   = m;
       this.m_l   = l;

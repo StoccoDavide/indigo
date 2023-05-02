@@ -206,7 +206,7 @@ for j = 1:1%length(solver_name)
             delete(a6);
         end
 
-        progress_bar(1, length(x1), 1, i, 1);
+        Indigo_progress_bar(1, length(x1), 1, i, 1);
     end
     hold off;
 end

@@ -93,7 +93,7 @@ solver_name = { ...
 
 solver = {};
 for k=1:4
-  solver{k} = eval(sprintf('%s()',solver_name{k}));
+  solver{k} = Indigo(solver_name{k});
   solver{k}.set_system( ODE );
 end
 

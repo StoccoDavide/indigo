@@ -27,10 +27,10 @@ addpath('./indigo/Systems');
 
 % Runge-Kutta methods
 addpath('./indigo/RungeKutta');
-addpath('./indigo/RungeKutta/ExplicitMethods/');
-addpath('./indigo/RungeKutta/ImplicitMethods/');
-addpath('./indigo/RungeKutta/EmbeddedExplicitMethods/');
-addpath('./indigo/RungeKutta/EmbeddedImplicitMethods/');
+addpath('./indigo/RungeKutta/ExplicitMethods');
+addpath('./indigo/RungeKutta/ImplicitMethods');
+addpath('./indigo/RungeKutta/EmbeddedExplicitMethods');
+addpath('./indigo/RungeKutta/EmbeddedImplicitMethods');
 
 % Examples folder do not add example in toolbox
 % addpath('./examples');
