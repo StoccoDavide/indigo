@@ -1,56 +1,61 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00101" kind="file" language="C++">
-    <compoundname>LobattoIIIB34.m</compoundname>
-    <innerclass refid="a00251" prot="public">LobattoIIIB34</innerclass>
+    <compoundname>RadauIA5.m</compoundname>
+    <innerclass refid="a00419" prot="public">RadauIA5</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Lobatto<sp/>IIIB<sp/>3(4)<sp/>method.</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Radau<sp/>IA<sp/>method.</highlight></codeline>
 <codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4" refid="a00251" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00251" kindref="compound">LobattoIIIB34</ref><sp/>&lt;<sp/><ref refid="a00431" kindref="compound">RKimplicit</ref></highlight></codeline>
+<codeline lineno="4" refid="a00419" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00419" kindref="compound">RadauIA5</ref><sp/>&lt;<sp/><ref refid="a00435" kindref="compound">ImplicitRungeKutta</ref></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
 <codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Lobatto<sp/>IIIB<sp/>3(4)<sp/>method.</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Radau<sp/>IA<sp/>method.</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\rst</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>..<sp/>math::</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\begin{array}{c|ccc}</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>1/6<sp/>&amp;<sp/>-1/6<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>1/2<sp/>&amp;<sp/>1/6<sp/>&amp;<sp/><sp/>1/3<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1<sp/>&amp;<sp/>1/6<sp/>&amp;<sp/><sp/>5/6<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/6<sp/><sp/>&amp;<sp/><sp/>2/3<sp/>&amp;<sp/>1/6<sp/>\\</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>-1/2<sp/>&amp;<sp/><sp/>2<sp/><sp/><sp/>&amp;<sp/>-1/2</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\end{array}</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00251" kindref="compound">LobattoIIIB34</ref>()</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00431" kindref="compound">RKimplicit</ref>(<sp/>...</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00251" kindref="compound">LobattoIIIB34</ref>&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="29" refid="a00251_1ad2e1cbaa720b5b3502999997f92b014e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/6,<sp/>-1/6,<sp/>0;<sp/>...</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/6,<sp/>1/3,<sp/><sp/>0;<sp/>...</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/6,<sp/>5/6,<sp/><sp/>0],<sp/>...</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/6,<sp/>2/3,<sp/>1/6],<sp/>...</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[-1/2,<sp/>2,<sp/>1/2],<sp/>...</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/>1/2,<sp/>1]&apos;<sp/>...</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="42"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/>\begin{array}{c|ccc}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>\frac{1}{9}<sp/>&amp;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{-1<sp/>-<sp/>\sqrt{6}}{18}<sp/>&amp;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{-1<sp/>+<sp/>\sqrt{6}}{18}<sp/>\\</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{3}{5}<sp/>-<sp/>\frac{\sqrt{6}}{10}<sp/>&amp;<sp/>\frac{1}{9}<sp/>&amp;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{11}{45}<sp/>+<sp/>\frac{7\sqrt{6}}{360}<sp/>&amp;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{11}{45}<sp/>-<sp/>\frac{43\sqrt{6}}{360}<sp/>\\</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{3}{5}<sp/>+<sp/>\frac{\sqrt{6}}{10}<sp/>&amp;<sp/>\frac{1}{9}<sp/>&amp;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{11}{45}<sp/>+<sp/>\frac{43\sqrt{6}}{360}<sp/>&amp;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\frac{11}{45}<sp/>-<sp/>\frac{7\sqrt{6}}{360}<sp/>\\</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>\hline</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>\frac{1}{9}<sp/>&amp;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\frac{4}{9}<sp/>+<sp/>\frac{\sqrt{6}}{36}<sp/>&amp;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\frac{4}{9}<sp/>-<sp/>\frac{\sqrt{6}}{36}<sp/>\\</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/>\end{array}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00419" kindref="compound">RadauIA5</ref>()</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[1/9,<sp/><sp/>(-1-sqrt(6))/18,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>(-1+sqrt(6))/18;<sp/>...</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/9,<sp/><sp/>11/45+7*sqrt(6)/360,<sp/><sp/><sp/>11/45-43*sqrt(6)/360;<sp/>...</highlight></codeline>
+<codeline lineno="36" refid="a00419_1abbed32e0ce8f3f079274adfb1cc02f8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/9,<sp/><sp/>11/45+43*sqrt(6)/360,<sp/><sp/>11/45-7*sqrt(6)/360<sp/>];</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[1/9,<sp/>4/9+sqrt(6)/36,<sp/>4/9-sqrt(6)/36]<sp/>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[0,<sp/><sp/><sp/>3/5-sqrt(6)/10,<sp/>3/5+sqrt(6)/10]&apos;;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00435" kindref="compound">ImplicitRungeKutta</ref>(&apos;<ref refid="a00419" kindref="compound">RadauIA5</ref>&apos;,<sp/>5,<sp/>tbl);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="ODE/EmbeddedMethods/LobattoIIIB34.m"/>
+    <location file="indigo/RungeKutta/ImplicitMethods/RadauIA5.m"/>
   </compounddef>
 </doxygen>

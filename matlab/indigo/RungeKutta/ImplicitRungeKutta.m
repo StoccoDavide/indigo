@@ -104,7 +104,8 @@ classdef ImplicitRungeKutta < BaseRungeKutta
         end
 
         % Compute the residuals
-        out(idx) = this.m_ode.F(tmp, K(idx), t_k + this.m_c(i) * d_t);
+        v = 0; % TODO
+        out(idx) = this.m_ode.F(tmp, K(idx), v, t_k + this.m_c(i) * d_t);
         idx = idx + nx;
       end
     end
@@ -165,8 +166,9 @@ classdef ImplicitRungeKutta < BaseRungeKutta
 
           % Compute the Jacobians with respect to x and x_dot
           t_tmp    = t_k + d_t * this.m_c(i);
-          JF_x     = this.m_ode.JF_x(tmp, K(idx), t_tmp);
-          JF_x_dot = this.m_ode.JF_x_dot(tmp, K(idx), t_tmp);
+          v = 0; % TODO
+          JF_x     = this.m_ode.JF_x(tmp, K(idx), v, t_tmp);
+          JF_x_dot = this.m_ode.JF_x_dot(tmp, K(idx), v, t_tmp);
 
           % Combine the Jacobians with respect to x and x_dot to obtain the
           % Jacobian with respect to K
@@ -224,7 +226,7 @@ classdef ImplicitRungeKutta < BaseRungeKutta
     %> **Solution Algorithm**
     %>
     %> Consider a Runge-Kutta method, written for a system of ODEs of the
-    %> form \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, t) \f$:
+    %> form \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, \mathbf{v}, t) \f$:
     %>
     %>  \f[
     %>  \begin{array}{l}

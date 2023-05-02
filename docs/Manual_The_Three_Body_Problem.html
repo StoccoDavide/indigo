@@ -4,9 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>The Three Body Problem &#8212; indigo v0.2-13-gdae6576
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Three Body Problem &#8212; indigo v0.2-20-gf58cf20
 </title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
@@ -39,7 +38,7 @@
 
           <div class="body" role="main">
             
-  <section id="the-three-body-problem">
+  <div class="section" id="the-three-body-problem">
 <h1>The Three Body Problem<a class="headerlink" href="#the-three-body-problem" title="Permalink to this headline">¶</a>
 </h1>
 <p>In this example we will tackle the simple yet famous Three Body Problem. The
@@ -57,7 +56,7 @@ become unstable. In addition, the problem is also very sensitive to the initial
 conditions. This means that even small perturbations in the initial conditions
 can lead to very different trajectories. For this reason is one of the most
 used test problems for numerical integration methods.</p>
-<section id="problem-statement">
+<div class="section" id="problem-statement">
 <h2>Problem statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a>
 </h2>
 <p>The equations of motion for the Three Body Problem are derived from the Lagrangian:</p>
@@ -124,8 +123,8 @@ remarkable stable orbit (infinity shaped like) are:</p>
 \end{cases}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(G = 1\)</span>, <span class="math notranslate nohighlight">\(m_1 = 1\)</span>, <span class="math notranslate nohighlight">\(m_2 = 1\)</span>, and <span class="math notranslate nohighlight">\(m_3 = 1\)</span>.</p>
 <a class="reference internal image-reference" href="_images/Three-body_Problem_Animation_with_COM.gif"><img alt="_images/Three-body_Problem_Animation_with_COM.gif" class="align-center" src="_images/Three-body_Problem_Animation_with_COM.gif" style="width: 25%;"></a>
-</section>
-<section id="load-the-ode">
+</div>
+<div class="section" id="load-the-ode">
 <h2>Load the ODE<a class="headerlink" href="#load-the-ode" title="Permalink to this headline">¶</a>
 </h2>
 <p>Consider the implicit ODE defined in the previous section and define the
@@ -137,8 +136,8 @@ to the state variables and their derivatives, respectively.</p>
 <p>For more details on the implementation of the class <code class="docutils literal notranslate"><span class="pre">ThreeBodyProblem</span></code> please
 refer to the file <cite>ThreeBodyProblem.m</cite>. If you are interested easier implementation
 of the ODE system, please refer to the other examples present in the documentation.</p>
-</section>
-<section id="instantiate-the-ode">
+</div>
+<div class="section" id="instantiate-the-ode">
 <h2>Instantiate the ODE<a class="headerlink" href="#instantiate-the-ode" title="Permalink to this headline">¶</a>
 </h2>
 <p>Having <code class="docutils literal notranslate"><span class="pre">ThreeBodyProblem.m</span></code> now can instantiate an <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code> class instance
@@ -152,8 +151,8 @@ m_3 = 1.0; % Body 3 mass
 ODE = ThreeBodyProblem(G, m_1, m_2, m_3);
 </pre></div>
 </div>
-</section>
-<section id="choose-solver">
+</div>
+<div class="section" id="choose-solver">
 <h2>Choose solver<a class="headerlink" href="#choose-solver" title="Permalink to this headline">¶</a>
 </h2>
 <p>Choose a suitable solver for the ODE system. In this example we will use the
@@ -166,8 +165,8 @@ method of the solver class:</p>
 solver.setODE(ODE);       % Attach ODE to the solver
 </pre></div>
 </div>
-</section>
-<section id="integrate">
+</div>
+<div class="section" id="integrate">
 <h2>Integrate<a class="headerlink" href="#integrate" title="Permalink to this headline">¶</a>
 </h2>
 <p>Select the range and the desired sampling steps for the numerical solution:</p>
@@ -211,8 +210,8 @@ solver class:</p>
 </div>
 <p>Now the matrix <code class="docutils literal notranslate"><span class="pre">X</span></code> contain the solution of the system of ODEs at each time step
 in the vector <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
-</section>
-<section id="extract-solution">
+</div>
+<div class="section" id="extract-solution">
 <h2>Extract solution<a class="headerlink" href="#extract-solution" title="Permalink to this headline">¶</a>
 </h2>
 <p>To extract the solution at each time step, we extract each row of the matrix
@@ -232,15 +231,15 @@ v_2 = X(:,11);
 v_3 = X(:,12);
 </pre></div>
 </div>
-</section>
-<section id="plot-solution">
+</div>
+<div class="section" id="plot-solution">
 <h2>Plot solution<a class="headerlink" href="#plot-solution" title="Permalink to this headline">¶</a>
 </h2>
 <p>Finally, we can plot the solution of the system of ODEs. For more details on
 the plotting of the solution, please refer to MATLAB online documentation.</p>
 <a class="reference internal image-reference" href="images/test1_theta.png"><img alt="images/test1_theta.png" class="align-center" src="images/test1_theta.png" style="width: 80%;"></a>
-</section>
-</section>
+</div>
+</div>
 
 
 
@@ -294,7 +293,7 @@ the plotting of the solution, please refer to MATLAB online documentation.</p>
       &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

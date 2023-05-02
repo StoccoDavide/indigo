@@ -93,6 +93,113 @@ classdef BaseSystem < handle
   %
   methods (Abstract)
     %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the system invariants \f$ \mathbf{h} \f$:
+    %>
+    %> \f[
+    %> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The invariants \f$ \mathbf{h} \f$..
+    %
+    h( this, x, v, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{h}( \mathbf{x}, \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> } + \dfrac{
+    %>   \partial \mathbf{h}
+    %> }{
+    %>   \partial \mathbf{v}
+    %> } \dfrac{
+    %>   \partial \mathbf{v}( \mathbf{x}, t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{x}} \f$.
+    %
+    Jh_x( this, x, v, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with
+    %> respect to the index-1 variables \f$ \mathbf{v} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{h}
+    %> }{
+    %>   \partial \mathbf{v}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{v}} \f$.
+    %
+    Jh_v( this, x, v, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the system index-1 variables \f$ \mathbf{v} \f$:
+    %>
+    %> \f[
+    %> \mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The invariants \f$ \mathbf{h} \f$..
+    %
+    v( this, x, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system index-1 variables \f$ \mathbf{v} \f$
+    %> with respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{h}( \mathbf{x}, \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jv}_{\mathbf{x}} \f$.
+    %
+    Jv_x( this, x, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %
     %> Get the system type.
     %>
     %> \return The system type.

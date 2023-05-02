@@ -129,7 +129,7 @@ classdef Pendulum < ImplicitSystem
       out_5_5 = x;
 
       % Store outputs
-      out_JF_x = zeros(5, 5, [1 .. -3]);
+      out_JF_x = zeros(5, 5);
       out_JF_x(1, 5) = out_1, 5;
       out_JF_x(4, 5) = out_4, 5;
       out_JF_x(5, 5) = out_5, 5;
@@ -175,7 +175,7 @@ classdef Pendulum < ImplicitSystem
       out_5_3 = m;
 
       % Store outputs
-      out_JF_x_dot = zeros(5, 5, [1 .. -3]);
+      out_JF_x_dot = zeros(5, 5);
       out_JF_x_dot(1, 5) = out_1, 5;
       out_JF_x_dot(5, 3) = out_5, 3;
     end % JF_x_dot
@@ -260,7 +260,7 @@ classdef Pendulum < ImplicitSystem
       out_3_5 = -2 * t4 * (-t1 - t2);
 
       % Store outputs
-      out_Jh = zeros(3, 5, [1 .. -3]);
+      out_Jh = zeros(3, 5);
       out_Jh(3, 5) = out_3, 5;
       out_Jh(3, 1) = out_3, 1;
       out_Jh(3, 2) = out_3, 2;

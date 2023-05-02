@@ -1,54 +1,50 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00176" kind="file" language="C++">
-    <compoundname>Generic2.m</compoundname>
-    <innerclass refid="a00287" prot="public">Generic2</innerclass>
+    <compoundname>Heun2.m</compoundname>
+    <innerclass refid="a00307" prot="public">Heun2</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Generic<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4" refid="a00287" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00287" kindref="compound">Generic2</ref><sp/>&lt;<sp/><ref refid="a00427" kindref="compound">RKexplicit</ref></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Generic<sp/>method.</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Heun</highlight><highlight class="stringliteral">&apos;s<sp/>method.</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="4" refid="a00307" refkind="compound"><highlight class="stringliteral">classdef<sp/>Heun2<sp/>&lt;<sp/>ExplicitRungeKutta</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Heun&apos;</highlight><highlight class="normal">s<sp/>method.</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\rst</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>..<sp/>math::</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\begin{array}{c|cc}</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>\alpha<sp/>&amp;<sp/>\alpha<sp/>&amp;<sp/><sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1-\frac{1}{2\alpha}</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>\frac{1}{2\alpha}</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\end{array}</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00287" kindref="compound">Generic2</ref>(<sp/>alpha<sp/>)</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">@<ref refid="a00427" kindref="compound">RKexplicit</ref>(<sp/>...</highlight></codeline>
-<codeline lineno="28" refid="a00287_1af0c0c1d8acd3a462202ac95992399695" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&apos;Generic2&apos;</highlight><highlight class="normal">,<sp/>...</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/><sp/><sp/><sp/><sp/>0;<sp/>...</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>alpha,<sp/>0],<sp/>...</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/>alpha],<sp/>...</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1-alpha/2,<sp/>alpha/2]</highlight><highlight class="stringliteral">&apos;<sp/>...</highlight></codeline>
-<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="40"><highlight class="stringliteral">end</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/2<sp/>&amp;<sp/>1/2</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\end{array}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00307" kindref="compound">Heun2</ref>()</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[0,<sp/>0;<sp/>1,<sp/>0];</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[1/2,<sp/>1/2];</highlight></codeline>
+<codeline lineno="27" refid="a00307_1a52a019ab60379f741eb458cd89df5a7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[0,<sp/>1]&apos;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00347" kindref="compound">ExplicitRungeKutta</ref>(&apos;<ref refid="a00307" kindref="compound">Heun2</ref>&apos;,<sp/>2,<sp/>tbl);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="ODE/ExplicitMethods/Generic2.m"/>
+    <location file="indigo/RungeKutta/ExplicitMethods/Heun2.m"/>
   </compounddef>
 </doxygen>

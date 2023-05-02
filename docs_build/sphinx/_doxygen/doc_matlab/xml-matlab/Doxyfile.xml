@@ -29,7 +29,7 @@
   <option  id='INLINE_INHERITED_MEMB' default='no' type='bool'><value>YES</value></option>
   <option  id='FULL_PATH_NAMES' default='yes' type='bool'><value>YES</value></option>
   <option  id='STRIP_FROM_PATH' default='no' type='stringlist'>
-    <value><![CDATA[/Users/davide/Documents/Git/indigo/indigo]]></value>
+    <value><![CDATA[/Users/davide/Documents/Git/indigo/matlab]]></value>
   </option>
   <option  id='STRIP_FROM_INC_PATH' default='yes' type='stringlist'>
   </option>
@@ -123,7 +123,7 @@
   <option  id='WARN_LINE_FORMAT' default='yes' type='string'><value><![CDATA["at line $line of file $file"]]></value></option>
   <option  id='WARN_LOGFILE' default='yes' type='string'><value><![CDATA[]]></value></option>
   <option  id='INPUT' default='no' type='stringlist'>
-    <value><![CDATA[../../indigo]]></value>
+    <value><![CDATA[../../matlab/indigo]]></value>
   </option>
   <option  id='INPUT_ENCODING' default='yes' type='string'><value><![CDATA[UTF-8]]></value></option>
   <option  id='INPUT_FILE_ENCODING' default='yes' type='stringlist'>
@@ -157,7 +157,7 @@
   </option>
   <option  id='USE_MDFILE_AS_MAINPAGE' default='yes' type='string'><value><![CDATA[]]></value></option>
   <option  id='FORTRAN_COMMENT_AFTER' default='yes' type='int'><value>72</value></option>
-  <option  id='SOURCE_BROWSER' default='no' type='bool'><value>YES</value></option>
+  <option  id='SOURCE_BROWSER' default='yes' type='bool'><value>NO</value></option>
   <option  id='INLINE_SOURCES' default='yes' type='bool'><value>NO</value></option>
   <option  id='STRIP_CODE_COMMENTS' default='yes' type='bool'><value>YES</value></option>
   <option  id='REFERENCED_BY_RELATION' default='yes' type='bool'><value>NO</value></option>
@@ -169,7 +169,7 @@
   <option  id='ALPHABETICAL_INDEX' default='yes' type='bool'><value>YES</value></option>
   <option  id='IGNORE_PREFIX' default='yes' type='stringlist'>
   </option>
-  <option  id='GENERATE_HTML' default='no' type='bool'><value>NO</value></option>
+  <option  id='GENERATE_HTML' default='yes' type='bool'><value>YES</value></option>
   <option  id='HTML_OUTPUT' default='yes' type='string'><value><![CDATA[html]]></value></option>
   <option  id='HTML_FILE_EXTENSION' default='yes' type='string'><value><![CDATA[.html]]></value></option>
   <option  id='HTML_HEADER' default='yes' type='string'><value><![CDATA[]]></value></option>

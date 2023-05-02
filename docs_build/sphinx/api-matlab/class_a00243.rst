@@ -1,0 +1,26 @@
+.. _exhale_class_a00243:
+
+Class Merson34
+==============
+
+- Defined in :ref:`file_indigo_RungeKutta_EmbeddedExplicitMethods_Merson34.m`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: Merson34
+   :project: doc_matlab
+   :members:
+   :protected-members:
+   :undoc-members:

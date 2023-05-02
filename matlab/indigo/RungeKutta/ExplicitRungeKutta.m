@@ -114,7 +114,8 @@ classdef ExplicitRungeKutta < BaseRungeKutta
     function out = step_residual( this, i, x_i, K, t_k, d_t )
 
       % Compute the residuals
-      out = this.m_ode.F(x_i, K, t_k + this.m_c(i) * d_t);
+      v = 0; % TODO
+      out = this.m_ode.F(x_i, K, v, t_k + this.m_c(i) * d_t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -147,7 +148,8 @@ classdef ExplicitRungeKutta < BaseRungeKutta
     function out = step_jacobian( this, i, x_i, K, t_k, d_t )
 
       % Compute the Jacobians
-      out = this.m_ode.JF_x_dot(x_i, K, t_k + this.m_c(i) * d_t);
+      v = 0; % TODO
+      out = this.m_ode.JF_x_dot(x_i, K, v, t_k + this.m_c(i) * d_t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -209,13 +211,13 @@ classdef ExplicitRungeKutta < BaseRungeKutta
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Compute an integration step using the explicit Runge-Kutta method for a
-    %> system of ODEs of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
-    %> \mathbf{0} \f$.
+    %> system of ODEs of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}',
+    %> \mathbf{v}, t) = \mathbf{0} \f$.
     %>
     %> **Solution Algorithm**
     %>
     %> Consider a Runge-Kutta method, written for a system of ODEs of the
-    %> form \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, t) \f$:
+    %> form \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, \mathbf{v}, t) \f$:
     %>
     %>  \f[
     %>  \begin{array}{l}

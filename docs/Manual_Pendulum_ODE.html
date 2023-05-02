@@ -4,9 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>Pendulum (ODE) &#8212; indigo v0.2-13-gdae6576
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendulum (ODE) &#8212; indigo v0.2-20-gf58cf20
 </title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
@@ -39,11 +38,11 @@
 
           <div class="body" role="main">
             
-  <section id="pendulum-ode">
+  <div class="section" id="pendulum-ode">
 <h1>Pendulum (ODE)<a class="headerlink" href="#pendulum-ode" title="Permalink to this headline">¶</a>
 </h1>
 <a class="reference internal image-reference" href="_images/pendulum_sketch.jpg"><img alt="_images/pendulum_sketch.jpg" class="align-center" src="_images/pendulum_sketch.jpg" style="width: 25%;"></a>
-<section id="load-ode">
+<div class="section" id="load-ode">
 <h2>Load ODE<a class="headerlink" href="#load-ode" title="Permalink to this headline">¶</a>
 </h2>
 <p>Consider the ODE:</p>
@@ -146,8 +145,8 @@ classdef PendulumODE &lt; ODEsystem
 end
 </pre></div>
 </div>
-</section>
-<section id="instantiate-the-ode">
+</div>
+<div class="section" id="instantiate-the-ode">
 <h2>Instantiate the ODE<a class="headerlink" href="#instantiate-the-ode" title="Permalink to this headline">¶</a>
 </h2>
 <p>Having <code class="docutils literal notranslate"><span class="pre">PendulumODE.m</span></code> now can instantiate a <code class="docutils literal notranslate"><span class="pre">ODEsystem</span></code> class instance with
@@ -166,8 +165,8 @@ X_0     = [theta_0, omega_0];
 ODE = PendulumODE(m, l, g, X_0);
 </pre></div>
 </div>
-</section>
-<section id="choose-solver">
+</div>
+<div class="section" id="choose-solver">
 <h2>Choose solver<a class="headerlink" href="#choose-solver" title="Permalink to this headline">¶</a>
 </h2>
 <p>Choose <code class="docutils literal notranslate"><span class="pre">ExplicitEuler</span></code> and  <code class="docutils literal notranslate"><span class="pre">RadauIA5</span></code> as solvers and attach the
@@ -179,8 +178,8 @@ solver1.set_ode(ODE);
 solver2.set_ode(ODE);
 </pre></div>
 </div>
-</section>
-<section id="integrate">
+</div>
+<div class="section" id="integrate">
 <h2>Integrate<a class="headerlink" href="#integrate" title="Permalink to this headline">¶</a>
 </h2>
 <p>Select the range and the desired sampling steps for the numerical solution:</p>
@@ -203,8 +202,8 @@ contains <span class="math notranslate nohighlight">\(\theta\)</span>, and the s
 each time step. Notice that the vectors <code class="docutils literal notranslate"><span class="pre">T</span></code> are not necessarily the same as
 <code class="docutils literal notranslate"><span class="pre">T_vec</span></code> since the solvers may choose to sample the solution at different time
 steps.</p>
-</section>
-<section id="extract-solution">
+</div>
+<div class="section" id="extract-solution">
 <h2>Extract solution<a class="headerlink" href="#extract-solution" title="Permalink to this headline">¶</a>
 </h2>
 <p>To extract the solution at each time step, use the following code:</p>
@@ -219,8 +218,8 @@ y     = -l*cos(theta);
 <p>this will give you the solution at each time step in the vectors <code class="docutils literal notranslate"><span class="pre">time</span></code>,
 <code class="docutils literal notranslate"><span class="pre">theta</span></code>, <code class="docutils literal notranslate"><span class="pre">omega</span></code>, and the cartesian coordinates of the pendulum in the
 vectors <code class="docutils literal notranslate"><span class="pre">x</span></code>, and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
-</section>
-<section id="plot-the-solution">
+</div>
+<div class="section" id="plot-the-solution">
 <h2>Plot the solution<a class="headerlink" href="#plot-the-solution" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
@@ -244,8 +243,8 @@ numerical method. In addition to that, the numerical error can be reduced by
 enhancing the class <code class="docutils literal notranslate"><span class="pre">PendulumODE</span></code> with the invariants of the system of
 ODEs, <em>e.g.</em> the energy of the system, which can be used to correct the numerical
 solution at each time step.</p>
-</section>
-<section id="invariants-and-projection">
+</div>
+<div class="section" id="invariants-and-projection">
 <h2>Invariants and Projection<a class="headerlink" href="#invariants-and-projection" title="Permalink to this headline">¶</a>
 </h2>
 <p>Invariants are quantities that are conserved in the system of ODEs. In the case
@@ -322,8 +321,8 @@ simple numerical method like <code class="docutils literal notranslate"><span cl
 numerical solution of the <code class="docutils literal notranslate"><span class="pre">ExplicitEuler</span></code> method. To incresase the accuracy
 of the numerical solution, we can use either a more accurate numerical method like
 <code class="docutils literal notranslate"><span class="pre">RungeKutta4</span></code> or a smaller time step <code class="docutils literal notranslate"><span class="pre">d_t</span></code>.</p>
-</section>
-</section>
+</div>
+</div>
 
 
 
@@ -377,7 +376,7 @@ of the numerical solution, we can use either a more accurate numerical method li
       &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

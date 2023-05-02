@@ -2,21 +2,23 @@
 %> Class container for an explicit system of ODEs of the form:
 %>
 %> \f[
-%> \mathbf{x}' = \mathbf{f}( \mathbf{x}, t )
-%>             = \mathbf{A}(\mathbf{x}, t)^{-1} \mathbf{b}( \mathbf{x}, t )
+%> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
+%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t )^{-1}
+%> \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
 %> \f]
 %>
 %> or equivalently:
 %>
 %> \f[
-%> \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{x}' - \mathbf{f}(
-%> \mathbf{x}, t ) = \mathbf{0}
+%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+%> \mathbf{x}' - \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
 %> \f]
 %>
-%> with *optional* invariants of the form:
+%> with *optional* index-1 variables \f$ \mathbf{v}( \mathbf{x}, t ) \f$, and
+%> invariants of the form:
 %>
 %> \f[
-%> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}
+%> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
 %> \f]
 %>
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
@@ -42,14 +44,15 @@ classdef ExplicitSystem < BaseSystem
     %
     %> Evaluate the system function \f$ \mathbf{F} \f$.
     %>
-    %> \param x     States \f$ \mathbf{x} \f$.
-    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param t     Independent variable \f$ t \f$.
+    %> \param x         States \f$ \mathbf{x} \f$.
+    %> \param x_dot     States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
+    %> \param t         Independent variable \f$ t \f$.
     %>
     %> \return The system function \f$ \mathbf{F} \f$.
     %
-    function out = F( this, x, x_dot, t )
-      out = x_dot - this.f(x,t);
+    function out = F( this, x, x_dot, v, t )
+      out = x_dot - this.f(x, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -59,30 +62,31 @@ classdef ExplicitSystem < BaseSystem
     %> \f$ \mathbf{x}' \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
+    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> },
     %> \qquad
-    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', t ) =
+    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}'
     %> }.
     %> \f]
     %>
-    %> \param x     States \f$ \mathbf{x} \f$.
-    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param t     Independent variable \f$ t \f$.
+    %> \param x         States \f$ \mathbf{x} \f$.
+    %> \param x_dot     States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
+    %> \param t         Independent variable \f$ t \f$.
     %>
     %> \return The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
     %>         \mathbf{JF}_{\mathbf{x}'} \f$.
     %
-    function [JF_x, JF_x_dot] = JF( this, x, ~, t )
-      JF_x     = -this.Jf(x, t);
+    function [JF_x, JF_x_dot] = JF( this, x, ~, v, t )
+      JF_x     = -this.Jf_x(x, v, t) - this.Jf_v(x, v, t) * this.Jv_x(x, t);
       JF_x_dot = eye(length(x));
     end
     %
@@ -94,39 +98,64 @@ classdef ExplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the system invariants \f$ \mathbf{h} \f$:
+    %> Evaluate the system function \f$ \mathbf{f} \f$:
     %>
     %> \f[
-    %> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}.
+    %> \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The invariants \f$ \mathbf{h} \f$.
+    %> \return The function \f$ \mathbf{f} \f$.
     %
-    f( this, x, t )
+    f( this, x, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{f} \f$ with
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, t ) =
+    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{h}( \mathbf{x}, t )
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param v Index-1 variables \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{x}} \f$.
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$.
     %
-    Jf( this, x, t )
+    Jf_x( this, x, v, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{f} \f$ with
+    %> respect to the index-1 variables \f$ \mathbf{v} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{v}
+    %> }
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v     Index-1 variables \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{v}} \f$.
+    %
+    Jf_v( this, x, x_dot, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

@@ -1,51 +1,222 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00023" kind="file" language="C++">
-    <compoundname>RadauIA3.m</compoundname>
-    <innerclass refid="a00399" prot="public">RadauIA3</innerclass>
+    <compoundname>ExplicitSystem.m</compoundname>
+    <innerclass refid="a00443" prot="public">ExplicitSystem</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Radau<sp/>IA<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4" refid="a00399" refkind="compound"><highlight class="normal">classdef<sp/><ref refid="a00399" kindref="compound">RadauIA3</ref><sp/>&lt;<sp/><ref refid="a00431" kindref="compound">RKimplicit</ref></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Radau<sp/>IA<sp/>method.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\rst</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>..<sp/>math::</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\begin{array}{c|cc}</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>1/4<sp/>&amp;<sp/>-1/4<sp/>\\</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>2/3<sp/>&amp;<sp/>1/4<sp/>&amp;<sp/>5/12<sp/>\\</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/4<sp/>&amp;<sp/><sp/>3/4</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\end{array}</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\endrst</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00399" kindref="compound">RadauIA3</ref>()</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@<ref refid="a00431" kindref="compound">RKimplicit</ref>(<sp/>...</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;<ref refid="a00399" kindref="compound">RadauIA3</ref>&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="27" refid="a00399_1a7d5dbaa64418b8e8114f4fecf06964bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/4,<sp/>-1/4;<sp/>1/4,<sp/>5/12],<sp/>...</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1/4,<sp/>3/4],<sp/>...</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[0,<sp/>2/3]&apos;<sp/>...</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="37"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>an<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>system<sp/>of<sp/>ODEs<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">%&gt;<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>=<sp/>\mathbf{f}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">%&gt;<sp/>\mathbf{A}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)^{-1}</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">%&gt;<sp/>\mathbf{b}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral">%&gt;<sp/>or<sp/>equivalently:</highlight></codeline>
+<codeline lineno="11"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="12"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="13"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">%&gt;<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>-<sp/>\mathbf{f}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="15"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="16"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="17"><highlight class="stringliteral">%&gt;<sp/>with<sp/>*optional*<sp/>index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>\f$,<sp/>and</highlight></codeline>
+<codeline lineno="18"><highlight class="stringliteral">%&gt;<sp/>invariants<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="19"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="20"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="21"><highlight class="stringliteral">%&gt;<sp/>\mathbf{h}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="22"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="23"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="24"><highlight class="stringliteral">%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>are<sp/>the<sp/>unknown<sp/>functions<sp/>(states)<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="25"><highlight class="stringliteral">%&gt;<sp/>independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="26"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="27" refid="a00443" refkind="compound"><highlight class="stringliteral">classdef<sp/>ExplicitSystem<sp/>&lt;<sp/>BaseSystem</highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="29"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
+<codeline lineno="30"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="31"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/>for<sp/>a<sp/>explicit<sp/>system.</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_name<sp/>Name<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_neqn<sp/>Number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_ninv<sp/>Number<sp/>of<sp/>invariants<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>this<sp/>=<sp/>ExplicitSystem(<sp/>t_name,<sp/>t_neqn,<sp/>t_ninv<sp/>)</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this@BaseSystem(t_name,<sp/>t_neqn,<sp/>t_ninv);</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="42" refid="a00443_1a245cefd36b4c028611e1155197badde1" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$.</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/><sp/><sp/><sp/><sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$.</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>F(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>x_dot<sp/>-<sp/>this.f(x,<sp/>v,<sp/>t);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="58" refid="a00443_1ad55cef460b6d6b0ecaefebf6afd06eaa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobians<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$<sp/>with</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>states<sp/>derivatives<sp/>of</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>\f$:</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>},</highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\qquad</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}&apos;</highlight><highlight class="normal">}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="74"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;</highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="79"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/><sp/><sp/><sp/><sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>Jacobians<sp/>\f$<sp/>\mathbf{JF}_{\mathbf{x}}<sp/>\f$<sp/>and<sp/>\f$</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{JF}_{\mathbf{x}</highlight><highlight class="stringliteral">&apos;}<sp/>\f$.</highlight></codeline>
+<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[JF_x,<sp/>JF_x_dot]<sp/>=<sp/>JF(<sp/>this,<sp/>x,<sp/>~,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>JF_x<sp/><sp/><sp/><sp/><sp/>=<sp/>-this.Jf_x(x,<sp/>v,<sp/>t)<sp/>-<sp/>this.Jf_v(x,<sp/>v,<sp/>t)<sp/>*<sp/>this.Jv_x(x,<sp/>t);</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>JF_x_dot<sp/>=<sp/>eye(length(x));</highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="93" refid="a00443_1a503193938c3b6bf500b405b39dc5243d" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
+<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="99"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="100"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="101"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{f}<sp/>\f$:</highlight></codeline>
+<codeline lineno="102"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{f}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}.</highlight></codeline>
+<codeline lineno="105"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="107"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="108"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
+<codeline lineno="109"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="110"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="111"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>function<sp/>\f$<sp/>\mathbf{f}<sp/>\f$.</highlight></codeline>
+<codeline lineno="112"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="113"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>f(<sp/>this,<sp/>x,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="114"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="115"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="116"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="117"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{f}<sp/>\f$<sp/>with</highlight></codeline>
+<codeline lineno="118"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$:</highlight></codeline>
+<codeline lineno="119" refid="a00443_1a888eb3ad021198e5e7b3caa661def131" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="120"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="121"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{Jf}_{\mathbf{x}}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="122"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="123"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{f}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="124"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="125"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight></codeline>
+<codeline lineno="126"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
+<codeline lineno="127"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="128"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="129"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="130"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
+<codeline lineno="131"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="132"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="133"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>Jacobian<sp/>\f$<sp/>\mathbf{Jf}_{\mathbf{x}}<sp/>\f$.</highlight></codeline>
+<codeline lineno="134"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="135"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Jf_x(<sp/>this,<sp/>x,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="136"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="137"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="138"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{f}<sp/>\f$<sp/>with</highlight></codeline>
+<codeline lineno="140"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$:</highlight></codeline>
+<codeline lineno="141"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="142" refid="a00443_1a120997d4288592dfbc432ff067445533" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="143"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{Jf}_{\mathbf{v}}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{f}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="146"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
+<codeline lineno="147"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{v}</highlight></codeline>
+<codeline lineno="148"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="150"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="151"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="152"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/><sp/><sp/><sp/><sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>Jacobian<sp/>\f$<sp/>\mathbf{Jf}_{\mathbf{v}}<sp/>\f$.</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>Jf_v(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>methods<sp/>(Static)</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="166" refid="a00443_1a3c9eb6cfd97aa08addc3c8867ef29cc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>system<sp/>type.</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>system<sp/>type.</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>type()</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>&apos;explicit&apos;;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>explicit.</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>explicit,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="179" refid="a00443_1a28215313384c0db014a41d1f64560b0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_explicit()</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>true;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>semiexplicit.</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>semiexplicit,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="190" refid="a00443_1ad4d5320e5114320ed1d2347f44989c10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_semiexplicit()</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>implicit.</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>implicit,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_implicit()</highlight></codeline>
+<codeline lineno="201" refid="a00443_1a8132c559076c2f974f59194f1726235c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="208"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="ODE/ImplicitMethods/RadauIA3.m"/>
+    <location file="indigo/Systems/ExplicitSystem.m"/>
   </compounddef>
 </doxygen>

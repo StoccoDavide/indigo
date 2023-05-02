@@ -362,11 +362,9 @@ IndigoCodegen := module()
 
     local tmp;
 
-    tmp := cat( seq( cat(dims[i],", "), i=1..nops(dims) ) );
+    tmp := cat(seq(cat(dims[i], ", "), i = 1..nops(dims)-1), dims[-1]);
     if (nops(dims) <= 1) then
-      tmp := cat(tmp, "1");
-    else
-      tmp := tmp[1..-3];
+      tmp := cat(tmp, ", 1");
     end if;
 
     return cat(
@@ -649,13 +647,6 @@ IndigoCodegen := module()
         ), tmp
       );
 
-      # Retrieve all assignments derivatives from function elements
-      tmp := indets(GA, typefunc(anything, typefunc(specindex(posint, D))));
-
-
-
-
-
       # Calculate assignments derivatives
       # from     [..., L = R, ...] -> [..., Grad(L) = Grad(R), ...]
       # removing [..., 0 = 0, ...] -> [..., ...]
@@ -692,7 +683,7 @@ IndigoCodegen := module()
     JF_x     := subs(op(rm_deps), JF_x);
     JF_x_dot := subs(op(rm_deps), JF_x_dot);
     h        := subs(op(rm_deps), invs_tmp);
-    Jh       := subs(op(rm_deps), Jh);
+    Jh      := subs(op(rm_deps), Jh);
 
     # Generate assignments
     algs_fun := subs(op(rm_deps), algs_tmp);

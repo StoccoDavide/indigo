@@ -602,13 +602,14 @@ classdef BaseRungeKutta < handle
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Project the ODEs system solution \f$ \mathbf{x} \f$ on the invariants
-    %> \f$ \mathbf{h} (\mathbf{x}, t) = \mathbf{0} \f$. The constrained
-    %> minimization problem to be solved is:
+    %> \f$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0} \f$. The
+    %> constrained minimization problem to be solved is:
     %>
     %> \f[
     %> \textrm{minimize} \quad
     %> \dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
-    %> \textrm{subject to} \quad \mathbf{h}(\mathbf{x}, t) = \mathbf{0}.
+    %> \textrm{subject to} \quad \mathbf{h}(\mathbf{x}, \mathbf{v}, t) =
+    %> \mathbf{0}.
     %> \f]
     %>
     %> **Solution Algorithm**
@@ -618,7 +619,7 @@ classdef BaseRungeKutta < handle
     %> \f[
     %> \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
     %> \frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
-    %> \boldsymbol{\lambda} \cdot \mathbf{h}(\mathbf{x}, t).
+    %> \boldsymbol{\lambda} \cdot \mathbf{h}(\mathbf{x}, \mathbf{v}, t).
     %> \f]
     %>
     %> The solution of the problem is obtained by solving the following:
@@ -627,14 +628,14 @@ classdef BaseRungeKutta < handle
     %> \left\{\begin{array}{l}
     %> \mathbf{x} + \mathbf{Jh}_\mathbf{x}^T \boldsymbol{\lambda} =
     %> \widetilde{\mathbf{x}} \\[0.5em]
-    %> \mathbf{h}(\mathbf{x}, t) = \mathbf{0}
+    %> \mathbf{h}(\mathbf{x}, \mathbf{v}, t) = \mathbf{0}
     %> \end{array}\right.
     %> \f]
     %>
     %> Using the Taylor expansion of the Lagrangian:
     %>
     %> \f[
-    %> \mathbf{h}(\mathbf{x}, t) + \mathbf{Jh}_\mathbf{x} \delta\mathbf{x} +
+    %> \mathbf{h}(\mathbf{x}, \mathbf{v}, t) + \mathbf{Jh}_\mathbf{x} \delta\mathbf{x} +
     %> \mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
     %> \f]
     %>
@@ -658,7 +659,7 @@ classdef BaseRungeKutta < handle
     %> =
     %> \begin{bmatrix}
     %> \widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
-    %> -\mathbf{h}(\mathbf{x}, t)
+    %> -\mathbf{h}(\mathbf{x}, \mathbf{v}, t)
     %> \end{bmatrix}
     %> \f]
     %>
@@ -917,8 +918,8 @@ classdef BaseRungeKutta < handle
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Advance using a generic integration method for a system of ODEs/DAEs of
-    %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The
-    %> step is based on the following formula:
+    %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) =
+    %> \mathbf{0} \f$. The step is based on the following formula:
     %>
     %> \f[
     %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
@@ -927,8 +928,8 @@ classdef BaseRungeKutta < handle
     %>
     %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
     %> In the advvancing step, the system of ODEs/DAEs is also projected on the
-    %> manifold \f$ \mathcal{h}(\mathbf{x}, t) \f$. Substepping is also used to
-    %> ensure that the solution is accurate.
+    %> manifold \f$ \mathcal{h}(\mathbf{x}, \mathbf{v}, t) \f$. Substepping is
+    %> also used to ensure that the solution is accurate.
     %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
     %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
@@ -1119,9 +1120,9 @@ classdef BaseRungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute a step using a generic integration method for a system of ODEs/DAEs of
-    %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$. The
-    %> step is based on the following formula:
+    %> Compute a step using a generic integration method for a system of
+    %> ODEs/DAEs of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v},
+    %> t) = \mathbf{0} \f$. The step is based on the following formula:
     %>
     %> \f[
     %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +

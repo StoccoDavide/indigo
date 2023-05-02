@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class ImplicitSystem &#8212; indigo v0.2-20-gf58cf20
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class LobattoIIIA12" href="class_a00267.html" />
+    <link rel="prev" title="Class ImplicitRungeKutta" href="class_a00435.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="class-implicitsystem">
+<span id="exhale-class-a00447"></span><h1>Class ImplicitSystem<a class="headerlink" href="#class-implicitsystem" title="Permalink to this headline">¶</a>
+</h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_indigo_Systems_ImplicitSystem.m.html#file-indigo-systems-implicitsystem-m"><span class="std std-ref">File ImplicitSystem.m</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
+</h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">BaseSystem</span></code> (<a class="reference internal" href="class_a00439.html#exhale-class-a00439"><span class="std std-ref">Class BaseSystem</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
+</h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv414ImplicitSystem">
+<span id="_CPPv314ImplicitSystem"></span><span id="_CPPv214ImplicitSystem"></span><span id="ImplicitSystem"></span><span class="target" id="a00447"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ImplicitSystem</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="class_a00439.html#_CPPv410BaseSystem" title="BaseSystem"><span class="n"><span class="pre">BaseSystem</span></span></a><a class="headerlink" href="#_CPPv414ImplicitSystem" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class container for an implicit system of ODEs/DAEs of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) = \mathbf{0}
+\]</div>
+
+<p>with <em>optional</em> index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v}( \mathbf{x}, t ) \)</span>, and invariants of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> are the unknown functions (states) of the independent variable <span class="math notranslate nohighlight">\( t \)</span>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem14ImplicitSystemE2in2in2in">
+<span id="_CPPv3N14ImplicitSystem14ImplicitSystemE2in2in2in"></span><span id="_CPPv2N14ImplicitSystem14ImplicitSystemE2in2in2in"></span><span id="ImplicitSystem::ImplicitSystem__in.in.in"></span><span class="target" id="a00447_1ad72f6c1365c2adb608c90c9531a6b65a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ImplicitSystem</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">t_name</span></span>, </span><span class="n sig-param"><span class="pre">t_neqn</span></span>, </span><span class="n sig-param"><span class="pre">t_ninv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem14ImplicitSystemE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class constructor for a implicit system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>t_name</strong> – Name of the system. </p></li>
+<li><p><strong>t_neqn</strong> – Number of equations of the system. </p></li>
+<li><p><strong>t_ninv</strong> – Number of invariants of the system. </p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem2JFE2in2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem2JFE2in2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem2JFE2in2in2in2in2in"></span><span id="ImplicitSystem::JF__in.in.in.in.in"></span><span class="target" id="a00447_1a9a737e9567533d23be6280f447b46f12"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem2JFE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobians of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> and states derivatives of <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+},
+\qquad
+\mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+}{
+  \partial \mathbf{x}'
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobians <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}} \)</span> and <span class="math notranslate nohighlight">\(
+        \mathbf{JF}_{\mathbf{x}'} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem1FE2in2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem1FE2in2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem1FE2in2in2in2in2in"></span><span id="ImplicitSystem::F__in.in.in.in.in"></span><span class="target" id="a00447_1a84baed986d640ad9d6003016089acb21"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem1FE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem4JF_xE2in2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem4JF_xE2in2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem4JF_xE2in2in2in2in2in"></span><span id="ImplicitSystem::JF_x__in.in.in.in.in"></span><span class="target" id="a00447_1ad68792de3caf34d399037b0962d9bd0a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem4JF_xE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem8JF_x_dotE2in2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem8JF_x_dotE2in2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem8JF_x_dotE2in2in2in2in2in"></span><span id="ImplicitSystem::JF_x_dot__in.in.in.in.in"></span><span class="target" id="a00447_1a447aa2e67b15331265390adde0068d4c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_x_dot</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem8JF_x_dotE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the states derivative <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+}{
+  \partial \mathbf{x}'
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}'} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem4JF_vE2in2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem4JF_vE2in2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem4JF_vE2in2in2in2in2in"></span><span id="ImplicitSystem::JF_v__in.in.in.in.in"></span><span class="target" id="a00447_1a8d60b2d4b6acfadc7a09ceaeddb8b294"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem4JF_vE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+}{
+  \partial \mathbf{v}
+}
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{v}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem8get_nameE2in">
+<span id="_CPPv3N14ImplicitSystem8get_nameE2in"></span><span id="_CPPv2N14ImplicitSystem8get_nameE2in"></span><span id="ImplicitSystem::get_name__in"></span><span class="target" id="a00439_1a0ca0d36d03cebd0107b7efebc5866813"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem8get_nameE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the system name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The system name. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem12get_num_eqnsE2in">
+<span id="_CPPv3N14ImplicitSystem12get_num_eqnsE2in"></span><span id="_CPPv2N14ImplicitSystem12get_num_eqnsE2in"></span><span id="ImplicitSystem::get_num_eqns__in"></span><span class="target" id="a00439_1aee9c5df609481456a95b6b8c33ab1516"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_eqns</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem12get_num_eqnsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the number of equations of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The number of equations of the system. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem12set_num_eqnsE2in2in">
+<span id="_CPPv3N14ImplicitSystem12set_num_eqnsE2in2in"></span><span id="_CPPv2N14ImplicitSystem12set_num_eqnsE2in2in"></span><span id="ImplicitSystem::set_num_eqns__in.in"></span><span class="target" id="a00439_1a4a2edb7225e10604216f4fb3ff89dc8b"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_eqns</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_num_eqns</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem12set_num_eqnsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the number of equations of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_num_eqns</strong> – The number of equations of the system. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem12get_num_invsE2in">
+<span id="_CPPv3N14ImplicitSystem12get_num_invsE2in"></span><span id="_CPPv2N14ImplicitSystem12get_num_invsE2in"></span><span id="ImplicitSystem::get_num_invs__in"></span><span class="target" id="a00439_1aa45fb65fe1cab35541ae2849acaf5fa1"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_invs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem12get_num_invsE2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the number of invariants of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The number of invariants of the system. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem12set_num_invsE2in2in">
+<span id="_CPPv3N14ImplicitSystem12set_num_invsE2in2in"></span><span id="_CPPv2N14ImplicitSystem12set_num_invsE2in2in"></span><span id="ImplicitSystem::set_num_invs__in.in"></span><span class="target" id="a00439_1a35551d4c23e9a8323fcdd1f4c7ed6582"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_num_invs</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">t_num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem12set_num_invsE2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Set the number of invariants of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>t_num_invs</strong> – The number of invariants of the system. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem1hE2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem1hE2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem1hE2in2in2in2in"></span><span id="ImplicitSystem::h__in.in.in.in"></span><span class="target" id="a00439_1a7628c920c263ae996636f2592f3bdd2f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">h</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem1hE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the system invariants <span class="math notranslate nohighlight">\( \mathbf{h} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The invariants <span class="math notranslate nohighlight">\( \mathbf{h} \)</span>.. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem4Jh_xE2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem4Jh_xE2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem4Jh_xE2in2in2in2in"></span><span id="ImplicitSystem::Jh_x__in.in.in.in"></span><span class="target" id="a00439_1a0e4aca2d6cad3a72649fcf12fe003453"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jh_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem4Jh_xE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system invariants <span class="math notranslate nohighlight">\( \mathbf{h} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{h}( \mathbf{x}, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+} + \dfrac{
+  \partial \mathbf{h}
+}{
+  \partial \mathbf{v}
+} \dfrac{
+  \partial \mathbf{v}( \mathbf{x}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jh}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem4Jh_vE2in2in2in2in">
+<span id="_CPPv3N14ImplicitSystem4Jh_vE2in2in2in2in"></span><span id="_CPPv2N14ImplicitSystem4Jh_vE2in2in2in2in"></span><span id="ImplicitSystem::Jh_v__in.in.in.in"></span><span class="target" id="a00439_1a29ac10f30190f65aa4eabab598321c95"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jh_v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem4Jh_vE2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system invariants <span class="math notranslate nohighlight">\( \mathbf{h} \)</span> with respect to the index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{h}
+}{
+  \partial \mathbf{v}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>v</strong> – Index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jh}_{\mathbf{v}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem1vE2in2in2in">
+<span id="_CPPv3N14ImplicitSystem1vE2in2in2in"></span><span id="_CPPv2N14ImplicitSystem1vE2in2in2in"></span><span id="ImplicitSystem::v__in.in.in"></span><span class="target" id="a00439_1af26dd59d558ab6a0633e6538153690ff"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem1vE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the system index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The invariants <span class="math notranslate nohighlight">\( \mathbf{h} \)</span>.. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem4Jv_xE2in2in2in">
+<span id="_CPPv3N14ImplicitSystem4Jv_xE2in2in2in"></span><span id="_CPPv2N14ImplicitSystem4Jv_xE2in2in2in"></span><span id="ImplicitSystem::Jv_x__in.in.in"></span><span class="target" id="a00439_1ab8993beb6a64c0e2482cfd6198494ca4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jv_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem4Jv_xE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system index-1 variables <span class="math notranslate nohighlight">\( \mathbf{v} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{h}( \mathbf{x}, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jv}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem4typeEv">
+<span id="_CPPv3N14ImplicitSystem4typeEv"></span><span id="_CPPv2N14ImplicitSystem4typeEv"></span><span id="ImplicitSystem::type"></span><span class="target" id="a00447_1aeb5bd5b721e670a88bd872f3fc499495"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem4typeEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the system type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The system type. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem11is_explicitEv">
+<span id="_CPPv3N14ImplicitSystem11is_explicitEv"></span><span id="_CPPv2N14ImplicitSystem11is_explicitEv"></span><span id="ImplicitSystem::is_explicit"></span><span class="target" id="a00447_1ab98d78ff80989ef35d6ba02a6489bbca"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_explicit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem11is_explicitEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check if the system is explicit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>True if the system is explicit, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem15is_semiexplicitEv">
+<span id="_CPPv3N14ImplicitSystem15is_semiexplicitEv"></span><span id="_CPPv2N14ImplicitSystem15is_semiexplicitEv"></span><span id="ImplicitSystem::is_semiexplicit"></span><span class="target" id="a00447_1a050d2071acf16068a3c872104a9fec84"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_semiexplicit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem15is_semiexplicitEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check if the system is semiexplicit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>True if the system is semiexplicit, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N14ImplicitSystem11is_implicitEv">
+<span id="_CPPv3N14ImplicitSystem11is_implicitEv"></span><span id="_CPPv2N14ImplicitSystem11is_implicitEv"></span><span id="ImplicitSystem::is_implicit"></span><span class="target" id="a00447_1aee8cdf695c1bb8ad2d201ed04b06c89a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_implicit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N14ImplicitSystem11is_implicitEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check if the system is implicit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>True if the system is implicit, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</dd>
+</dl>
+
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

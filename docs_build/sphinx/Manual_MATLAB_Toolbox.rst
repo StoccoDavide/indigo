@@ -1,42 +1,63 @@
 MATLAB Toolbox
 ==============
 
-Thr ``indigo`` MATLAB toolbox collects multiple integrators for ordinary
-differential and differential-algebraic equations (ODEs/DAEs). The toolbox
-provides a unified interface for the integration of ODEs/DAEs, which allows to
+The ``indigo`` MATLAB toolbox collects multiple integrators for differential and
+differential-algebraic equations (ODEs/DAEs). The toolbox provides an efficient
+interface for the integration of dynamical systems, which allows to easily
 switch between different integration methods without changing the code of the
-system of ODEs/DAEs. The toolbox is written in MATLAB and it is compatible with
-MATLAB R2017b and later.
+system of ODEs/DAEs. The toolbox is structured through a set of classes and
+functions which are described in the following sections.
 
 Installation
 ------------
 
-Download the latest toolbox release from the repository
-`releases <https://github.com/StoccoDavide/indigo/releases>`__
-section. Analogously the latest development version can be downloaded from the
-GitHub `repository <https://github.com/StoccoDavide/indigo>`__. In both cases
-the pakage is a compressed file in `.zip` format. Unzip the file and add the
-folder to the MATLAB path. In case you want to install the MATLAB toolbox
-system-wide, you can open the `indigo.mtlbx` file and follow the instructions.
-If you are using MATLAB R2017b or later, you can install the toolbox directly
-from the Add-On Explorer by clicking on the `Get Add-Ons` button in the Add-On
-Explorer tab. Then search for `indigo` and install the toolbox.
+Before talking about the structure of the toolbox, let's see how to install it.
+There are multiple ways to install the toolbox.
+
+- The easiest way is to download the latest toolbox release from the repository
+  `releases <https://github.com/StoccoDavide/indigo/releases>`__ section. In
+  this case, the package is a compressed in a `.zip` file format. Unzip the file
+  and add the folder to the MATLAB path using the `setup.m` file.
+- Analogously the latest development version can be downloaded from the GitHub
+  `repository <https://github.com/StoccoDavide/indigo>`__ and add the folder to
+  the MATLAB path using the `setup.m` file. If you want to install the MATLAB
+  toolbox system-wide, compile the MATLAB toolbox using the project file
+  `Indigo.prj` in the `matlab` folder of the repository. The complied toolbox will
+  be saved in the file `indigo.mtlbx`. Open the `indigo.mtlbx` file and follow the
+  instructions.
+- You can also install the toolbox directly from the Add-On Explorer by clicking
+  on the `Get Add-Ons` button in the Add-On Explorer tab. Then search for
+  `indigo` and install the toolbox.
 
 Structure
 ---------
 
-The toolbox is structured through the following classes and functions.
+The toolbox is structured into three sections: the first section contains the
+Runge-Kutta solvers, the second section contains the types of ODEs/DAEs systems
+that can be integrated, and the third section contains the utilities functions
+used by the solvers.
 
-- **Base:** (Abstract) class container for the system of Ordinary Differential
-  Equations (ODEs) or Differential Algebraic Equations (DAEs).
-- **ODEsystem:** (Abstract) class container for a system of Ordinary Differential
-  Equations (ODEs).
+The Runge-Kutta are contained in the folder ``indigo/RungeKutta``,
+and implements into the following classes:
+
 - **ODEsolver:** (Abstract) class container for solvers of the system of Ordinary
   Differential Equations (ODEs) or Differential Algebraic Equations (DAEs).
 - **RKexplicit:** (Abstract) class implementing the function step for the explicit
   (and explicit-embedded) Runge-Kutta integration method.
 - **RKimplicit:** (Abstract) class implementing the function step for the implicit
   (and implicit-embedded) Runge-Kutta integration method.
+
+The types of ODEs/DAEs systems, which are contained in the folder
+``indigo/ODEsystem``, and are implements into the following classes:
+
+- **Base:** (Abstract) class container for the system of Ordinary Differential
+  Equations (ODEs) or Differential Algebraic Equations (DAEs).
+- **ODEsystem:** (Abstract) class container for a system of Ordinary Differential
+  Equations (ODEs).
+
+The utilities functions, which are contained in the folder ``indigo/Utils``, and
+are implements into the following functions:
+
 - **NewtonSolver:** function implementing a Newton solver with affine invariant
   step for the explicit and implicit Runge-Kutta solvers.
 - **SavePNG:** function for saving the current figure as a PNG file.
@@ -138,5 +159,5 @@ To use the toolbox you just have to follow the following steps.
    animate the solution of the system of ODEs/DAEs.
 
 For further details, please refer to the documentation of the classes and
-functions. Analogously, the examples provided in the ``Examples`` section can be
+functions. Analogously, the examples provided in the ``tests`` section can be
 used as a starting point for the usage of the ``indigo`` toolbox.
