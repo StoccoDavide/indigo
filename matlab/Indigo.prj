@@ -7,7 +7,7 @@
     <param.summary>An Integrator for Differential and Differential-Algebraic Equations</param.summary>
     <param.description>This MATLAB toolbox is a collection of integrators for ordinary differential and differential-algebraic equations (ODEs/DAEs), which has been originally developed for the course of Mechatronics System Simulation at the University of Trento (Italy) held by Prof. Francesco Biral and Prof. Enrico Bertolazzi.</param.description>
     <param.screenshot>/Users/davide/Documents/Git/indigo/docs_build/logo.png</param.screenshot>
-    <param.version>0.4</param.version>
+    <param.version>0.3</param.version>
     <param.output>${PROJECT_ROOT}/Indigo.mltbx</param.output>
     <param.products.name />
     <param.products.id />
