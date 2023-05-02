@@ -601,8 +601,8 @@ classdef BaseRungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Project the ODEs system solution \f$ \mathbf{x} \f$ on the invariants/hidden
-    %> constraints \f$ \mathbf{h} (\mathbf{x}, t) = \mathbf{0} \f$. The constrained
+    %> Project the ODEs system solution \f$ \mathbf{x} \f$ on the invariants
+    %> \f$ \mathbf{h} (\mathbf{x}, t) = \mathbf{0} \f$. The constrained
     %> minimization problem to be solved is:
     %>
     %> \f[
@@ -663,7 +663,7 @@ classdef BaseRungeKutta < handle
     %> \f]
     %>
     %> where \f$ \mathbf{Jh}_\mathbf{x} \f$ is the Jacobian of the invariants/
-    %> hidden constraints with respect to the states \f$ \mathbf{x} \f$.
+    %> with respect to the states \f$ \mathbf{x} \f$.
     %>
     %> \param x_tilde The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
     %> \param t The time \f$ t \f$ at which the states are evaluated.
@@ -696,9 +696,9 @@ classdef BaseRungeKutta < handle
           % |         | |        | = |               |
           % \ Jh   0  / \ lambda /   \      -h       /
 
-          % Evaluate the invariants/hidden constraints vector and its Jacobian
+          % Evaluate the invariants vector and its Jacobian
           h  = this.m_ode.h(x, t);
-          Jh = this.m_ode.Jh(x, t);
+          Jh = this.m_ode.Jh_x(x, t);
 
           % Compute the solution of the linear system
           A   = [eye(num_eqns), Jh.'; ...
@@ -1021,17 +1021,17 @@ classdef BaseRungeKutta < handle
 
           % Store time solution
           t_tmp = t_tmp + d_t_tmp;
-
-          % Project intermediate solution on the invariants/hidden constraints
-          if (this.m_projection)
-            x_tmp = this.project(x_tmp, t_tmp);
-          end
         end
 
-        % Store states solutions
+        % Store output states substepping solutions
         x_new     = x_tmp;
         x_dot_new = x_dot_tmp;
         d_t_star  = d_t_tmp;
+      end
+
+      % Project intermediate solution on the invariants
+      if (this.m_projection)
+        x_new = this.project(x_new, t_k+d_t);
       end
     end
     %

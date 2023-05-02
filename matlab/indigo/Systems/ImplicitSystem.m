@@ -5,7 +5,7 @@
 %> \mathbf{F}( \mathbf{x}, \mathbf{x}', t ) = \mathbf{0}
 %> \f]
 %>
-%> with *optional* invariants/hidden constraints of the form:
+%> with *optional* invariants of the form:
 %>
 %> \f[
 %> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}
@@ -22,10 +22,9 @@ classdef ImplicitSystem < BaseSystem
     %
     %> Class constructor for a implicit system.
     %>
-    %> \param t_name Name of the implicit system.
-    %> \param t_neqn Number of equations of the implicit system.
-    %> \param t_ninv Number of invariants/hidden contraints of the implicit
-    %>              system.
+    %> \param t_name Name of the system.
+    %> \param t_neqn Number of equations of the system.
+    %> \param t_ninv Number of invariants of the system.
     %
     function this = ImplicitSystem( t_name, t_neqn, t_ninv )
       this@BaseSystem(t_name, t_neqn, t_ninv);
@@ -33,26 +32,9 @@ classdef ImplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-  end
-  %
-  methods (Abstract)
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Evaluate the function \f$ \mathbf{F} \f$ of the s.
-    %>
-    %> \param x     States \f$ \mathbf{x} \f$.
-    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param t     Independent variable \f$ t \f$.
-    %>
-    %> \return The value of the s function \f$ \mathbf{F} \f$.
-    %
-    F( this, x, x_dot, t )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Evaluate the Jacobians with respect to the states \f$ \mathbf{x} \f$ of
-    %> the s:
+    %> Evaluate the Jacobians of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$ and states derivatives of
+    %> \f$ \mathbf{x}' \f$:
     %>
     %> \f[
     %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
@@ -75,15 +57,79 @@ classdef ImplicitSystem < BaseSystem
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
-    %>         \mathbf{JF}_{\mathbf{x}'} \f$ of the system with respect to the
-    %>         states \f$ \mathbf{x} \f$ and the states derivatives \f$
-    %>         \mathbf{x}' \f$.
+    %>         \mathbf{JF}_{\mathbf{x}'} \f$.
     %
-    JF( this, x, x_dot, t )
+    function [JF_x, JF_x_dot] = JF( this, x, x_dot, t )
+      JF_x     = this.JF_x(x, x_dot, t);
+      JF_x_dot = this.JF_x_dot(x, x_dot, t);
+    end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the invariants/hidden contraints of the s:
+  end
+  %
+  methods (Abstract)
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the system function \f$ \mathbf{F} \f$.
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The system function \f$ \mathbf{F} \f$.
+    %
+    F( this, x, x_dot, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
+    %
+    JF_x( this, x, x_dot, t )
+    %
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the states derivative \f$ \mathbf{x}' \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', t )
+    %> }{
+    %>   \partial \mathbf{x}'
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}'} \f$.
+    %
+    JF_x_dot( this, x, x_dot, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the system invariants function \f$ \mathbf{h} \f$:
     %>
     %> \f[
     %> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}.
@@ -92,13 +138,14 @@ classdef ImplicitSystem < BaseSystem
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The value of the invariants/hidden contraints \f$ \mathbf{h} \f$.
+    %> \return The invariants \f$ \mathbf{h} \f$.
     %
     h( this, x, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the invariants/hidden contraints of the system:
+    %> Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
     %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, t ) =
@@ -112,10 +159,9 @@ classdef ImplicitSystem < BaseSystem
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The value of the Jacobian of the invariants/hidden contraints \f$
-    %>         \mathbf{Jh}_{\mathbf{x}} \f$.
+    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{x}} \f$.
     %
-    Jh( this, x, t )
+    Jh_x( this, x, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

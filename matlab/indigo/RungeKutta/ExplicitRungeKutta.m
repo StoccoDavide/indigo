@@ -147,7 +147,7 @@ classdef ExplicitRungeKutta < BaseRungeKutta
     function out = step_jacobian( this, i, x_i, K, t_k, d_t )
 
       % Compute the Jacobians
-      [~, out] = this.m_ode.JF(x_i, K, t_k + this.m_c(i) * d_t);
+      out = this.m_ode.JF_x_dot(x_i, K, t_k + this.m_c(i) * d_t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

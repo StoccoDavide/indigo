@@ -53,19 +53,32 @@ classdef PendulumODE < ImplicitSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function [JF_x, JF_x_dot] = JF( this, x, ~, ~ )
+    function out = JF_x( this, x, ~, ~ )
 
-      CMD = 'PendulumODE::JF(...): ';
+      CMD = 'PendulumODE::JF_x(...): ';
 
       % Check the input arguments
       assert(length(x) == this.m_num_eqns, ...
         [CMD, 'invalid x vector length.']);
 
-      % Evaluate the system Jacobians
-      JF_x      = zeros(2);
-      JF_x_dot  = eye(2);
-      JF_x(1,2) = -1.0;
-      JF_x(2,1) = this.m_g / this.m_l * cos(x(1));
+      % Evaluate the system Jacobian
+      out = zeros(2);
+      out(1,2) = -1.0;
+      out(2,1) = this.m_g / this.m_l * cos(x(1));
+    end
+        %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = JF_x_dot( this, x, ~, ~ )
+
+      CMD = 'PendulumODE::JF_x_dot(...): ';
+
+      % Check the input arguments
+      assert(length(x) == this.m_num_eqns, ...
+        [CMD, 'invalid x vector length.']);
+
+      % Evaluate the system Jacobian
+      out  = eye(2);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -85,9 +98,9 @@ classdef PendulumODE < ImplicitSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = Jh( this, x, ~ )
+    function out = Jh_x( this, x, ~ )
 
-      CMD = 'PendulumODE::Jh(...): ';
+      CMD = 'PendulumODE::Jh_x(...): ';
 
       % Check the input arguments
       assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);

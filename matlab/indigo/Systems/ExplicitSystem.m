@@ -13,7 +13,7 @@
 %> \mathbf{x}, t ) = \mathbf{0}
 %> \f]
 %>
-%> with *optional* invariants/hidden constraints of the form:
+%> with *optional* invariants of the form:
 %>
 %> \f[
 %> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}
@@ -28,11 +28,11 @@ classdef ExplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Class constructor for a system of ODEs.
+    %> Class constructor for a explicit system.
     %>
-    %> \param t_name Name of the system of ODEs.
-    %> \param t_neqn Number of equations of the system of ODEs.
-    %> \param t_ninv Number of invariants/hidden contraints of the system of ODEs.
+    %> \param t_name Name of the system.
+    %> \param t_neqn Number of equations of the system.
+    %> \param t_ninv Number of invariants of the system.
     %
     function this = ExplicitSystem( t_name, t_neqn, t_ninv )
       this@BaseSystem(t_name, t_neqn, t_ninv);
@@ -40,13 +40,13 @@ classdef ExplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the function \f$ \mathbf{F} \f$ of the system of ODEs.
+    %> Evaluate the system function \f$ \mathbf{F} \f$.
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
-    %> \return The value of the system of ODEs function \f$ \mathbf{F} \f$.
+    %> \return The system function \f$ \mathbf{F} \f$.
     %
     function out = F( this, x, x_dot, t )
       out = x_dot - this.f(x,t);
@@ -54,8 +54,9 @@ classdef ExplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobians with respect to the states \f$ \mathbf{x} \f$ and
-    %> the states defivatives \f$ \mathbf{x}' \f$ of the system of ODEs:
+    %> Evaluate the Jacobians of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$ and states derivatives of
+    %> \f$ \mathbf{x}' \f$:
     %>
     %> \f[
     %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', t ) =
@@ -78,9 +79,7 @@ classdef ExplicitSystem < BaseSystem
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobians \f$ \mathbf{JF}_{\mathbf{x}} \f$ and \f$
-    %>         \mathbf{JF}_{\mathbf{x}'} \f$ of the ODEs system with respect to
-    %>         the states \f$ \mathbf{x} \f$ and the states derivatives
-    %>         \f$ \mathbf{x}' \f$.
+    %>         \mathbf{JF}_{\mathbf{x}'} \f$.
     %
     function [JF_x, JF_x_dot] = JF( this, x, ~, t )
       JF_x     = -this.Jf(x, t);
@@ -95,43 +94,37 @@ classdef ExplicitSystem < BaseSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the function \f$ \mathbf{f} \f$ of the system of ODEs as:
+    %> Evaluate the system invariants \f$ \mathbf{h} \f$:
     %>
     %> \f[
-    %> \mathbf{f}( \mathbf{x}, t ) = \mathbf{A}(\mathbf{x}, t)^{-1} \mathbf{b}(
-    %> \mathbf{x}, t )
+    %> \mathbf{h}( \mathbf{x}, t ) = \mathbf{0}.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The value of the system of ODEs function \f$ \mathbf{F} \f$.
+    %> \return The invariants \f$ \mathbf{h} \f$.
     %
     f( this, x, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian with respect to the states \f$ \mathbf{x} \f$ of
-    %> the system of ODEs:
+    %> Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, t ) =
+    %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{f}( \mathbf{x}, t )
+    %>   \partial \mathbf{h}( \mathbf{x}, t )
     %> }{
     %>   \partial \mathbf{x}
-    %> } =
-    %> \dfrac{
-    %>   \partial \mathbf{A}^{-1} \mathbf{b}
-    %> }{
-    %>   \partial \mathbf{x}
+    %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$ of the ODEs system
-    %>         with respect to the states \f$ \mathbf{x} \f$.
+    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{x}} \f$.
     %
     Jf( this, x, t )
     %

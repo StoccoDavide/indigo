@@ -14,7 +14,7 @@ classdef BaseSystem < handle
     %
     m_num_eqns;
     %
-    %> Number of invariants/hidden contraints of the system.
+    %> Number of invariants of the system.
     %
     m_num_invs;
   end
@@ -27,7 +27,7 @@ classdef BaseSystem < handle
     %>
     %> \param t_num_ame The name of the system.
     %> \param t_num_eqn The number of equations of the system.
-    %> \param t_num_inv The number of invariants/hidden contraints of the system
+    %> \param t_num_inv The number of invariants of the system.
     %>                 .
     %
     function this = BaseSystem( t_name, t_num_eqns, t_num_invs )
@@ -68,9 +68,9 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the number of invariants/hidden contraints of the system.
+    %> Get the number of invariants of the system.
     %>
-    %> \return The number of invariants/hidden contraints of the system.
+    %> \return The number of invariants of the system.
     %
     function t_num_invs = get_num_invs( this )
       t_num_invs = this.m_num_invs;
@@ -78,9 +78,9 @@ classdef BaseSystem < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the number of invariants/hidden constraints of the system.
+    %> Set the number of invariants of the system.
     %>
-    %> \param t_num_invs The number of invariants/hidden constraints of the
+    %> \param t_num_invs The number of invariants of the
     %>                   system.
     %
     function set_num_invs( this, t_num_invs )

@@ -118,7 +118,7 @@ end
 %> \param field   The field to be checked.
 %> \param default The default value to be returned if the field is not found.
 %>
-%> \return out The value of the field, or the default value if the field is not
+%> \return out The field, or the default value if the field is not
 %>             found.
 %
 function out = default_option( opts, field, default )
