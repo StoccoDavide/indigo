@@ -24,14 +24,10 @@ classdef PendulumODE < ImplicitSystem
       this@ImplicitSystem('PendulumODE', num_eqns, num_invs);
 
       % Check the input arguments
-      assert(m > 0, ...
-        [CMD, 'pendulum mass must be positive.']);
-      assert(l > 0, ...
-        [CMD, 'pendulum length must be positive.']);
-      assert(g > 0, ...
-        [CMD, 'gravity acceleration must be positive.']);
-      assert(length(X_0) == num_eqns, ...
-        [CMD, 'invalid initial conditions vector size.']);
+      assert(m > 0, [CMD, 'pendulum mass must be positive.']);
+      assert(l > 0, [CMD, 'pendulum length must be positive.']);
+      assert(g > 0, [CMD, 'gravity acceleration must be positive.']);
+      assert(length(X_0) == num_eqns, [CMD, 'invalid initial conditions vector size.']);
 
       this.m_m   = m;
       this.m_l   = l;
@@ -46,10 +42,8 @@ classdef PendulumODE < ImplicitSystem
       CMD = 'PendulumODE::F(...): ';
 
       % Check the input arguments
-      assert(length(x) == this.m_num_eqns, ...
-        [CMD, 'invalid x vector length.']);
-      assert(length(x_dot) == this.m_num_eqns, ...
-        [CMD, 'invalid x_dot vector length.']);
+      assert(length(x) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
+      assert(length(x_dot) == this.m_num_eqns, [CMD, 'invalid x_dot vector length.']);
 
       % Evaluate the system
       out    = zeros(2,1);
@@ -96,8 +90,7 @@ classdef PendulumODE < ImplicitSystem
       CMD = 'PendulumODE::Jh(...): ';
 
       % Check the input arguments
-      assert(size(x,1) == this.m_num_eqns, ...
-        [CMD, 'invalid x vector length.']);
+      assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
 
       % Evaluate the system gradient of the invariant
       out = [this.m_m.*this.m_g.*this.m_l.*sin(x(1,:)), ...
