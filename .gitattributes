@@ -1,2 +1,2 @@
-docs/* linguist-vendored
-docs_build/* linguist-vendored
+docs/* linguist-vendored=true
+docs_build/* linguist-vendored=true
