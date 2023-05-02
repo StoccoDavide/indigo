@@ -157,19 +157,19 @@ classdef ImplicitRungeKutta < BaseRungeKutta
         end
         jdx = 1:nx;
         for j = 1:nc
-          % Mask for the Jacobian w.r.t. x_dot
+          % Mask for the Jacobian with respect to x_dot
           mask = 0;
           if (i == j)
             mask = 1;
           end
 
-          % Compute the Jacobians w.r.t. x and x_dot
+          % Compute the Jacobians with respect to x and x_dot
           t_tmp    = t_k + d_t * this.m_c(i);
           JF_x     = this.m_ode.JF_x(tmp, K(idx), t_tmp);
           JF_x_dot = this.m_ode.JF_x_dot(tmp, K(idx), t_tmp);
 
-          % Combine the Jacobians w.r.t. x and x_dot to obtain
-          % the Jacobian w.r.t. K
+          % Combine the Jacobians with respect to x and x_dot to obtain the
+          % Jacobian with respect to K
           out(idx, jdx) = d_t * this.m_A(i,j) * JF_x  + JF_x_dot * mask;
 
           jdx = jdx + nx;
