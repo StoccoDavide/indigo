@@ -10,22 +10,22 @@ sys.path.append(os.path.abspath("./_ext"))
 
 rst_prolog = ".. |xml| replace:: %s\n" % (project)
 
-extensions.append('breathe');
-extensions.append('exhale');
+extensions.append('breathe')
+extensions.append('exhale')
 extensions.append('maple')
 
 breathe_projects = {
-  "doc_matlab": "_doxygen/"+"doc_matlab/xml-matlab",
+  "doc_matlab": "_doxygen/doc_matlab/xml-matlab",
 }
 
 breathe_default_project = "doc_matlab"
 
-dir_path_matlab = os.path.dirname(os.path.realpath(__file__))+"/../../../indigo"
+dir_path_matlab = os.path.dirname(os.path.realpath(__file__))+"/../../matlab"
 dir_path_matlab = Path(dir_path_matlab).resolve()
 
 doxygen_common_stdin = """
         EXTRACT_ALL         = YES
-        SOURCE_BROWSER      = YES
+        SOURCE_BROWSER      = NO
         EXTRACT_STATIC      = YES
         HIDE_SCOPE_NAMES    = NO
         CALLER_GRAPH        = YES
@@ -47,7 +47,7 @@ doxygen_common_stdin = """
         INLINE_INHERITED_MEMB = YES
         EXTRACT_PRIVATE       = YES
         PREDEFINED           += protected=private
-        GENERATE_HTML         = NO
+        GENERATE_HTML         = YES
 """
 
 doc_matlab = {
@@ -57,7 +57,7 @@ doc_matlab = {
     "exhaleExecutesDoxygen": True,
     "doxygenStripFromPath":  str(dir_path_matlab),
     "exhaleDoxygenStdin":   '''
-        INPUT               = ../../indigo
+        INPUT               = ../../matlab/indigo
         PREDEFINED         += protected=private
         XML_OUTPUT          = xml-matlab
         EXTENSION_MAPPING   = .m=C++

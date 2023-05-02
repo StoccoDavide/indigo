@@ -1,2 +1,10 @@
-docs/* linguist-vendored=true
-docs_build/* linguist-vendored=true
+# Vendored folders
+docs/** linguist-vendored
+docs_build/** linguist-vendored
+
+# Vendored extensions
+*.css linguist-vendored
+*.html linguist-vendored
+*.htm linguist-vendored
+*.bat linguist-vendored
+*.xml linguist-vendored

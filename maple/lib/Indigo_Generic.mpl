@@ -18,7 +18,7 @@ export SeparateMatrices::static := proc(
     "algebraic equations matrix <Et>, the algebraic variables matrix <Gt>, the "
     "differential equations matrix <A>, and the rank of <E>.";
 
-  local n, m, r, P, Q, G_tmp, tbl, Et, GA;
+  local n, m, r, P, Q, G_tmp, tbl, Et, GtA;
 
   # Check if LAST and LEM are initialized
   _self:-CheckInit(_self);
@@ -29,13 +29,13 @@ export SeparateMatrices::static := proc(
   # Check input dimensions E
   n, m := LinearAlgebra:-Dimension(E);
   if (n <> m) then
-    error( "input matrix E must be square (got E = %d x %d).", n, m );
+    error("input matrix E must be square (got E = %d x %d).", n, m);
   end if;
 
   # Check input dimensions G
   r := LinearAlgebra:-Dimension(G_tmp);
   if (n <> r) then
-    error( "input vector G is 1 x %d, expeced 1 x %d.", r, n );
+    error("input vector G is 1 x %d, expeced 1 x %d.", r, n);
   end if;
 
   # Build the kernel of E
@@ -48,17 +48,17 @@ export SeparateMatrices::static := proc(
   P, Q := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
   r    := tbl["rank"];
 
-  # Compute Et = L^(-1).P.E (first `r` rows) = U.Q^T
+  # Compute Et = L^(-1).P.E (first 'r' rows) = U.Q^T
   Et := tbl["U"].LinearAlgebra:-Transpose(Q);
   Et := Et[1..r,1..-1];
 
-  # Compute <Gt,A> = L^(-1).P.G
-  GA := LinearAlgebra:-LinearSolve(tbl["L"], P.G_tmp);
+  # Compute <Gt, A> = L^(-1).P.G
+  GtA := LinearAlgebra:-LinearSolve(tbl["L"], P.G_tmp);
 
   return table([
     "Et"   = Et,
-    "Gt"   = GA[1..r],
-    "A"    = GA[r+1..-1],
+    "Gt"   = GtA[1..r],
+    "A"    = GtA[r+1..-1],
     "rank" = r
   ]);
 end proc: # SeparateMatrices
