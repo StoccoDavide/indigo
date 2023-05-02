@@ -192,16 +192,6 @@ classdef BaseRungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the order of the method used to integrate the system of ODEs/DAEs.
-    %>
-    %> \param t_order The order of the solver.
-    %
-    function set_order( this, t_order )
-      this.m_order = t_order;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
     %> Get the system of ODEs/DAEs to be solved.
     %>
     %> \return The system of ODEs/DAEs to be solved.
@@ -1116,7 +1106,6 @@ classdef BaseRungeKutta < handle
     function info( this )
       fprintf('Runge-Kutta Solver:\t%s\n', this.m_name);
       fprintf('\t- order:\t%d\n',    this.get_order());
-      fprintf('\t- steps:\t%d\n',    this.get_order());
       fprintf('\t- explicit:\t%d\n', this.is_explicit());
       fprintf('\t- implicit:\t%d\n', this.is_implicit());
       fprintf('\t- embedded:\t%d\n', this.is_embedded());

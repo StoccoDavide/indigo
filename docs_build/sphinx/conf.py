@@ -20,7 +20,7 @@ breathe_projects = {
 
 breathe_default_project = "doc_matlab"
 
-dir_path_matlab = os.path.dirname(os.path.realpath(__file__))+"../../../indigo"
+dir_path_matlab = os.path.dirname(os.path.realpath(__file__))+"/../../../indigo"
 dir_path_matlab = Path(dir_path_matlab).resolve()
 
 doxygen_common_stdin = """
