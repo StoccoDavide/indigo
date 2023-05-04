@@ -1,221 +1,126 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00017" kind="file" language="C++">
-    <compoundname>ImplicitSystem.m</compoundname>
-    <innerclass refid="a00447" prot="public">ImplicitSystem</innerclass>
+    <compoundname>generate_rgb.m</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function generate_rgb</definition>
+        <argsstring>(in str)</argsstring>
+        <name>generate_rgb</name>
+        <param>
+          <type>in</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute Rgb triple for given CSS color name. The function returns the RGB (Red-Green-Blue) triple corresponding to the color name by the CSS3 proposed standard [1], which contains 139 different colors (an RGB triple is a 1x3 vector of numbers between 0 and 1). The input color name is case insensitive, and for gray colors both spellings (gray and grey) are allowed.</para>
+<para><bold>Usage:</bold><itemizedlist>
+<listitem><para>c = Indigo.Utils.generate_rgb(&apos;DarkRed&apos;): returns c = [0.5430 0 0].</para>
+</listitem><listitem><para>c = Indigo.Utils.generate_rgb(&apos;Green&apos;): returns c = [0 0.5 0].</para>
+</listitem><listitem><para>plot(x, y, &apos;color&apos;, generate_rgb(&apos;Orange&apos;)): plots an orange line through x and y.</para>
+</listitem><listitem><para>Indigo.Utils.show_colors(): shows all the available colors.</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Background:</bold> The color names of [1] have already been ratified in [2], and according to [3] they are accepted by almost all web browsers and are used in Microsoft&apos;s .net framework. All but four colors agree with the X11 colornames, as detailed in [4]. Of these the most important clash is green, defined as [0 0.5 0] by CSS and [0 1 0] by X11. The definition of green in Matlab matches the X11 definition and gives a very light green, called lime by CSS (many users of Matlab have discovered this when trying to color graphs with &apos;g-&apos;). Note that cyan and aqua are synonyms as well as magenta and fuchsia.</para>
+<para><bold>About:</bold> This program is public domain and may be distributed freely. Author: Kristjan Jonasson, Dept. of Computer Science, University of Iceland (<ulink url="mailto:jonasson@hi.is">jonasson@hi.is</ulink>). June 2009.</para>
+<para><bold>References:</bold> [1] &quot;CSS Color module level 3&quot;, W3C (World Wide Web Consortium) working draft 21 July 2008, <ulink url="http://www.w3.org/TR/css3-color">http://www.w3.org/TR/css3-color</ulink> [2] &quot;Scalable Vector Graphics (SVG) 1.1 specification&quot;, W3C recommendation 14 January 2003, edited in place 30 April 2009, <ulink url="http://www.w3.org/TR/SVG">http://www.w3.org/TR/SVG</ulink> [3] &quot;Web colors&quot;, <ulink url="http://en.wikipedia.org/wiki/Web_colors">http://en.wikipedia.org/wiki/Web_colors</ulink> [4] &quot;X11 color names&quot; <ulink url="http://en.wikipedia.org/wiki/X11_color_names">http://en.wikipedia.org/wiki/X11_color_names</ulink></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Color string name.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Red-Green-Blue triple. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+Utils/generate_rgb.m" line="44" column="11" declfile="+Indigo/+Utils/generate_rgb.m" declline="44" declcolumn="11"/>
+      </memberdef>
+      </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>an<sp/>implicit<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>of<sp/>the<sp/>form:</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="5"><highlight class="normal">%&gt;<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
-<codeline lineno="6"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="7"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>with<sp/>*optional*<sp/>index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>\f$,<sp/>and</highlight></codeline>
-<codeline lineno="9"><highlight class="stringliteral">%&gt;<sp/>invariants<sp/>of<sp/>the<sp/>form:</highlight></codeline>
-<codeline lineno="10"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="11"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="12"><highlight class="stringliteral">%&gt;<sp/>\mathbf{h}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
-<codeline lineno="13"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="14"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="15"><highlight class="stringliteral">%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>are<sp/>the<sp/>unknown<sp/>functions<sp/>(states)<sp/>of<sp/>the</highlight></codeline>
-<codeline lineno="16"><highlight class="stringliteral">%&gt;<sp/>independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
-<codeline lineno="17"><highlight class="stringliteral">%</highlight></codeline>
-<codeline lineno="18" refid="a00447" refkind="compound"><highlight class="stringliteral">classdef<sp/>ImplicitSystem<sp/>&lt;<sp/>BaseSystem</highlight></codeline>
-<codeline lineno="19"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="20"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="21"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="22"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="23"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="24"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/>for<sp/>a<sp/>implicit<sp/>system.</highlight></codeline>
-<codeline lineno="25"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="26"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_name<sp/>Name<sp/>of<sp/>the<sp/>system.</highlight></codeline>
-<codeline lineno="27"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_neqn<sp/>Number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system.</highlight></codeline>
-<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_ninv<sp/>Number<sp/>of<sp/>invariants<sp/>of<sp/>the<sp/>system.</highlight></codeline>
-<codeline lineno="29"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="30"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>this<sp/>=<sp/>ImplicitSystem(<sp/>t_name,<sp/>t_neqn,<sp/>t_ninv<sp/>)</highlight></codeline>
-<codeline lineno="31"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this@BaseSystem(t_name,<sp/>t_neqn,<sp/>t_ninv);</highlight></codeline>
-<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="33" refid="a00447_1ad72f6c1365c2adb608c90c9531a6b65a" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobians<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$<sp/>with</highlight></codeline>
-<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>states<sp/>derivatives<sp/>of</highlight></codeline>
-<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$:</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
-<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
-<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>},</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\qquad</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}</highlight><highlight class="stringliteral">&apos;}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
-<codeline lineno="52"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>\f$.</highlight></codeline>
-<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/><sp/><sp/><sp/><sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
-<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
-<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>Jacobians<sp/>\f$<sp/>\mathbf{JF}_{\mathbf{x}}<sp/>\f$<sp/>and<sp/>\f$</highlight></codeline>
-<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{JF}_{\mathbf{x}&apos;</highlight><highlight class="normal">}<sp/>\f$.</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>[JF_x,<sp/>JF_x_dot]<sp/>=<sp/>JF(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>JF_x<sp/>=<sp/>this.JF_x(x,<sp/>x_dot,<sp/>v,<sp/>t)<sp/>+<sp/>...</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.JF_v(x,<sp/>x_dot,<sp/>v,<sp/>t)<sp/>*<sp/>this.Jv_x(x,<sp/>t);</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>JF_x_dot<sp/>=<sp/>this.JF_x_dot(x,<sp/>x_dot,<sp/>v,<sp/>t);</highlight></codeline>
-<codeline lineno="68" refid="a00447_1a9a737e9567533d23be6280f447b46f12" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$.</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>\f$.</highlight></codeline>
-<codeline lineno="82"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/><sp/><sp/><sp/><sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
-<codeline lineno="83"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
-<codeline lineno="84"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$.</highlight></codeline>
-<codeline lineno="86"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>F(<sp/>this,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="90"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$<sp/>with</highlight></codeline>
-<codeline lineno="92" refid="a00447_1a84baed986d640ad9d6003016089acb21" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$:</highlight></codeline>
-<codeline lineno="93"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
-<codeline lineno="99"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight></codeline>
-<codeline lineno="100"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
-<codeline lineno="101"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="102"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="103"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
-<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/><sp/><sp/><sp/><sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>Jacobian<sp/>\f$<sp/>\mathbf{JF}_{\mathbf{x}}<sp/>\f$.</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>JF_x(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$<sp/>with</highlight></codeline>
-<codeline lineno="116" refid="a00447_1ad68792de3caf34d399037b0962d9bd0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>derivative<sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;<sp/>\f$:</highlight></codeline>
-<codeline lineno="117"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="118"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="119"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{x}&apos;</highlight><highlight class="normal">}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
-<codeline lineno="120"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
-<codeline lineno="121"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;</highlight></codeline>
-<codeline lineno="124"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}.</highlight></codeline>
-<codeline lineno="125"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="126"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="127"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
-<codeline lineno="128"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/><sp/><sp/><sp/><sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>Jacobian<sp/>\f$<sp/>\mathbf{JF}_{\mathbf{x}</highlight><highlight class="stringliteral">&apos;}<sp/>\f$.</highlight></codeline>
-<codeline lineno="133"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="134"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>JF_x_dot(<sp/>this,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="135"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="136"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="137"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="138"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Evaluate<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>system<sp/>function<sp/>\f$<sp/>\mathbf{F}<sp/>\f$<sp/>with</highlight></codeline>
-<codeline lineno="139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>respect<sp/>to<sp/>the<sp/>index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$:</highlight></codeline>
-<codeline lineno="140"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="141" refid="a00447_1a447aa2e67b15331265390adde0068d4c" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="142"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{JF}_{\mathbf{v}}(<sp/>\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\dfrac{</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="145"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}{</highlight></codeline>
-<codeline lineno="146"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\partial<sp/>\mathbf{v}</highlight></codeline>
-<codeline lineno="147"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>}</highlight></codeline>
-<codeline lineno="148"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="149"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="150"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/><sp/><sp/><sp/><sp/>States<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
-<codeline lineno="151"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot<sp/>States<sp/>derivatives<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>\f$.</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>v<sp/><sp/><sp/><sp/><sp/>Index-1<sp/>variables<sp/>\f$<sp/>\mathbf{v}<sp/>\f$.</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>Jacobian<sp/>\f$<sp/>\mathbf{JF}_{\mathbf{v}}<sp/>\f$.</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>JF_v(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x,<sp/>x_dot,<sp/>v,<sp/>t<sp/>)</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/>methods<sp/>(Static)</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="165" refid="a00447_1a8d60b2d4b6acfadc7a09ceaeddb8b294" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>system<sp/>type.</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>system<sp/>type.</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>type()</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>&apos;implicit&apos;;</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>explicit.</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>explicit,<sp/>false<sp/>otherwise.</highlight></codeline>
-<codeline lineno="178" refid="a00447_1aeb5bd5b721e670a88bd872f3fc499495" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_explicit()</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>semiexplicit.</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>semiexplicit,<sp/>false<sp/>otherwise.</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="189" refid="a00447_1ab98d78ff80989ef35d6ba02a6489bbca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_semiexplicit()</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>implicit.</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>implicit,<sp/>false<sp/>otherwise.</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_implicit()</highlight></codeline>
-<codeline lineno="200" refid="a00447_1a050d2071acf16068a3c872104a9fec84" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>true;</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="207"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Compute<sp/>Rgb<sp/>triple<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>given<sp/>CSS<sp/>color<sp/>name.<sp/>The<sp/>function<sp/>returns<sp/>the<sp/>RGB</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;<sp/>(Red-Green-Blue)<sp/>triple<sp/>corresponding<sp/>to<sp/>the<sp/>color<sp/>name<sp/>by<sp/>the<sp/>CSS3</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">%&gt;<sp/>proposed<sp/>standard<sp/>[1],<sp/>which<sp/>contains<sp/>139<sp/>different<sp/>colors<sp/>(an<sp/>RGB<sp/>triple</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">%&gt;<sp/>is<sp/>a<sp/>1x3<sp/>vector<sp/>of<sp/>numbers<sp/>between<sp/>0<sp/>and<sp/>1).<sp/>The<sp/>input<sp/>color<sp/>name<sp/>is<sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">%&gt;<sp/>insensitive,<sp/>and<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>gray<sp/>colors<sp/>both<sp/>spellings<sp/>(gray<sp/>and<sp/>grey)<sp/>are<sp/>allowed.</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">%&gt;<sp/><sp/><sp/>**Usage:**</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>c<sp/>=<sp/>Indigo.Utils.generate_rgb(</highlight><highlight class="stringliteral">&apos;DarkRed&apos;</highlight><highlight class="normal">):<sp/>returns<sp/>c<sp/>=<sp/>[0.5430<sp/>0<sp/>0].</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>c<sp/>=<sp/>Indigo.Utils.generate_rgb(</highlight><highlight class="stringliteral">&apos;Green&apos;</highlight><highlight class="normal">):<sp/>returns<sp/>c<sp/>=<sp/>[0<sp/>0.5<sp/>0].</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>plot(x,<sp/>y,<sp/></highlight><highlight class="stringliteral">&apos;color&apos;</highlight><highlight class="normal">,<sp/><ref refid="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" kindref="member">generate_rgb</ref>(</highlight><highlight class="stringliteral">&apos;Orange&apos;</highlight><highlight class="normal">)):<sp/>plots<sp/>an<sp/>orange<sp/>line<sp/>through</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>x<sp/>and<sp/>y.</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>Indigo.Utils.<ref refid="a00023_1a0f96702c9a77aeb61fe8039ecafc43b1" kindref="member">show_colors</ref>():<sp/>shows<sp/>all<sp/>the<sp/>available<sp/>colors.</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">%&gt;<sp/><sp/><sp/>**Background:**</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>The<sp/>color<sp/>names<sp/>of<sp/>[1]<sp/>have<sp/>already<sp/>been<sp/>ratified<sp/>in<sp/>[2],<sp/>and</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>according<sp/>to<sp/>[3]<sp/>they<sp/>are<sp/>accepted<sp/>by<sp/>almost<sp/>all<sp/>web<sp/>browsers<sp/>and<sp/>are</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>used<sp/>in<sp/>Microsoft</highlight><highlight class="stringliteral">&apos;s<sp/>.net<sp/>framework.<sp/>All<sp/>but<sp/>four<sp/>colors<sp/>agree<sp/>with</highlight></codeline>
+<codeline lineno="19"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>the<sp/>X11<sp/>colornames,<sp/>as<sp/>detailed<sp/>in<sp/>[4].<sp/>Of<sp/>these<sp/>the<sp/>most<sp/>important</highlight></codeline>
+<codeline lineno="20"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>clash<sp/>is<sp/>green,<sp/>defined<sp/>as<sp/>[0<sp/>0.5<sp/>0]<sp/>by<sp/>CSS<sp/>and<sp/>[0<sp/>1<sp/>0]<sp/>by<sp/>X11.<sp/>The</highlight></codeline>
+<codeline lineno="21"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>definition<sp/>of<sp/>green<sp/>in<sp/>Matlab<sp/>matches<sp/>the<sp/>X11<sp/>definition<sp/>and<sp/>gives<sp/>a</highlight></codeline>
+<codeline lineno="22"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>very<sp/>light<sp/>green,<sp/>called<sp/>lime<sp/>by<sp/>CSS<sp/>(many<sp/>users<sp/>of<sp/>Matlab<sp/>have</highlight></codeline>
+<codeline lineno="23"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>discovered<sp/>this<sp/>when<sp/>trying<sp/>to<sp/>color<sp/>graphs<sp/>with<sp/>&apos;</highlight><highlight class="normal">g-</highlight><highlight class="stringliteral">&apos;).<sp/>Note<sp/>that</highlight></codeline>
+<codeline lineno="24"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>cyan<sp/>and<sp/>aqua<sp/>are<sp/>synonyms<sp/>as<sp/>well<sp/>as<sp/>magenta<sp/>and<sp/>fuchsia.</highlight></codeline>
+<codeline lineno="25"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="26"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>**About:**</highlight></codeline>
+<codeline lineno="27"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>public<sp/>domain<sp/>and<sp/>may<sp/>be<sp/>distributed<sp/>freely.</highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>Author:<sp/>Kristjan<sp/>Jonasson,<sp/>Dept.<sp/>of<sp/>Computer<sp/>Science,<sp/>University<sp/>of</highlight></codeline>
+<codeline lineno="29"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>Iceland<sp/>(jonasson@hi.is).<sp/>June<sp/>2009.</highlight></codeline>
+<codeline lineno="30"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="31"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>**References:**</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[1]<sp/>&quot;CSS<sp/>Color<sp/>module<sp/>level<sp/>3&quot;,<sp/>W3C<sp/>(World<sp/>Wide<sp/>Web<sp/>Consortium)</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>working<sp/>draft<sp/>21<sp/>July<sp/>2008,<sp/>http://www.w3.org/TR/css3-color</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[2]<sp/>&quot;Scalable<sp/>Vector<sp/>Graphics<sp/>(SVG)<sp/>1.1<sp/>specification&quot;,<sp/>W3C</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>recommendation<sp/>14<sp/>January<sp/>2003,<sp/>edited<sp/>in<sp/>place<sp/>30<sp/>April<sp/>2009,</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>http://www.w3.org/TR/SVG</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[3]<sp/>&quot;Web<sp/>colors&quot;,<sp/>http://en.wikipedia.org/wiki/Web_colors</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[4]<sp/>&quot;X11<sp/>color<sp/>names&quot;<sp/>http://en.wikipedia.org/wiki/X11_color_names</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral">%&gt;<sp/>\param<sp/>str<sp/>Color<sp/>string<sp/>name.</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral">%&gt;<sp/>\return<sp/>Red-Green-Blue<sp/>triple.</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="44" refid="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" refkind="member"><highlight class="stringliteral">function<sp/>out<sp/>=<sp/>generate_rgb(<sp/>str<sp/>)</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.Utils.<ref refid="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" kindref="member">generate_rgb</ref>(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/>%<sp/>First<sp/>time<sp/>rgb<sp/>is<sp/>called</highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/>[num,<sp/>name]<sp/>=<sp/>Indigo.Utils.get_colors();</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/>name<sp/>=<sp/>lower(name);</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/>num<sp/><sp/>=<sp/>reshape(hex2dec(num),<sp/>[],<sp/>3);</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/>%<sp/>Divide<sp/>most<sp/>numbers<sp/>by<sp/>256<sp/>for<sp/>&quot;aesthetic&quot;<sp/>reasons<sp/>(green<sp/>=<sp/>[0<sp/>0.5<sp/>0])</highlight></codeline>
+<codeline lineno="54"><highlight class="stringliteral"><sp/><sp/>I<sp/>=<sp/>num<sp/>&lt;<sp/>240;</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/>%<sp/>Interpolate<sp/>F0-FF<sp/>linearly<sp/>from<sp/>240/256<sp/>to<sp/>1.0</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/>num(I)<sp/><sp/>=<sp/>num(I)/256;</highlight></codeline>
+<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/>num(~I)<sp/>=<sp/>((num(~I)<sp/>-<sp/>240)/15<sp/>+<sp/>15)/16;<sp/>%<sp/>+<sp/>240;</highlight></codeline>
+<codeline lineno="59"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/>%<sp/>Show<sp/>colors<sp/>chart</highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/>if<sp/>strcmpi(str,<sp/>&apos;</highlight><highlight class="normal">chart</highlight><highlight class="stringliteral">&apos;)</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Indigo.Utils.show_colors()</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/>else</highlight></codeline>
+<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>k<sp/>=<sp/>find(strcmpi(str,<sp/>name));<sp/>%#ok&lt;STLOW&gt;</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>if<sp/>isempty(k)</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>error([CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>color<sp/></highlight><highlight class="stringliteral">&apos;&apos;</highlight><highlight class="stringliteral">&apos;,<sp/>str,<sp/>&apos;</highlight><highlight class="stringliteral">&apos;&apos;</highlight><highlight class="normal">.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
+<codeline lineno="67"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>num(k(1),<sp/>:);</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
-    <location file="indigo/Systems/ImplicitSystem.m"/>
+    <location file="+Indigo/+Utils/generate_rgb.m"/>
   </compounddef>
 </doxygen>

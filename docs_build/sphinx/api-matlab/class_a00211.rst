@@ -1,25 +1,26 @@
 .. _exhale_class_a00211:
 
-Class BogackiShampine23
-=======================
+Class Implicit
+==============
 
-- Defined in :ref:`file_indigo_RungeKutta_EmbeddedExplicitMethods_BogackiShampine23.m`
+- Defined in :ref:`file_+Indigo_+RungeKutta_Implicit.m`
 
 
 Inheritance Relationships
 -------------------------
 
-Base Type
-*********
+Base Types
+**********
 
-- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
+- ``public Indigo::RungeKutta::Method``
+- ``public Indigo::Systems::System``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: BogackiShampine23
+.. doxygenclass:: Implicit
    :project: doc_matlab
    :members:
    :protected-members:

@@ -387,8 +387,8 @@ module Indigo()
     _self::Indigo,
     $)::list;
 
-    description "Get the list of differential equations of the reduced implicit "
-      "system of the type F(x,x',t) = 0.";
+    description "Get the list of differential equations of the implicit system "
+      "of the type F(x,x',t) = 0.";
 
     return convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
       _self:-m_ReductionSteps[-1]["G"], list);
@@ -400,25 +400,25 @@ module Indigo()
     _self::Indigo,
     $)::list;
 
-    description "Get the invariants of the reduced system.";
+    description "Get the invariants of the system.";
 
     return map(x -> op(convert(x["A"], list)), _self:-m_ReductionSteps);
   end proc: # GetInvariants
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export GetIndexOneConstraints::static := proc(
+  export GetVeils::static := proc(
     _self::Indigo,
     $)::list;
 
-    description "Get the index-1 constraints of the reduced system.";
+    description "Get the veils of the system.";
 
     return _self:-m_LEM:-VeilList(_self:-m_LEM, parse("dependency") = true);
-  end proc: # GetIndexOneConstraints
+  end proc: # GetVeils
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export GetVeilArgsSubs::static := proc(
+  export GetVeilsSubs::static := proc(
     _self::Indigo,
     rng::range := 1..-1,
     $)::list(algebraic = algebraic);
@@ -438,7 +438,7 @@ module Indigo()
       (L, R) -> L = `if`(nops(R) > 0 and (R[1] <> NULL), L(op(R)), L),
       lhs~(V_list[rng]), V_deps[rng]
     );
-  end proc: # GetVeilArgsSubs
+  end proc: # GetVeilsSubs
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -623,7 +623,7 @@ module Indigo()
       "indigo class <type>, output file './<fname>.m', optional internal class "
       "data <data>, and class information string <info>.";
 
-    local vars, eqns, invs, algs;
+    local vars, eqns, veil, invs;
 
     # Get system data
     if evalb(_self:-m_SystemType = 'Empty') then
@@ -635,10 +635,10 @@ module Indigo()
     elif evalb(_self:-m_SystemType = 'Generic') then
       vars := _self:-m_SystemVars;
       eqns := _self:-GetDifferentialEquations(_self);
+      veil := _self:-GetVeils(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
       ];
-      algs := _self:-GetIndexOneConstraints(_self);
     elif evalb(_self:-m_SystemType = 'MultiBody') then
       # TODO: implement
     else
@@ -648,22 +648,25 @@ module Indigo()
     # Generate class body string
     if (type = "Implicit") then
       return IndigoCodegen:-ImplicitSystemToMatlab(
-        name, vars, eqns, invs,
-        parse("algs") = algs,
+        name, vars, eqns,
+        parse("veil") = veil,
+        parse("invs") = invs,
         parse("data") = data,
         parse("info") = info
       );
     elif (type = "Explicit") then
       return IndigoCodegen:-ExplicitSystemToMatlab(
-        name, vars, eqns, invs,
-        parse("algs") = algs,
+        name, vars, eqns,
+        parse("veil") = veil,
+        parse("invs") = invs,
         parse("data") = data,
         parse("info") = info
       );
     elif (type = "SemiExplicit") then
       return IndigoCodegen:-SemiExplicitSystemToMatlab(
-        name, vars, eqns, invs,
-        parse("algs") = algs,
+        name, vars, eqns,
+        parse("veil") = veil,
+        parse("invs") = invs,
         parse("data") = data,
         parse("info") = info
       );

@@ -1,9 +1,9 @@
 .. _exhale_class_a00227:
 
-Class Fehlberg45I
-=================
+Class NewtonSolver
+==================
 
-- Defined in :ref:`file_indigo_RungeKutta_EmbeddedExplicitMethods_Fehlberg45I.m`
+- Defined in :ref:`file_+Indigo_NewtonSolver.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
+- ``public handle``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: Fehlberg45I
+.. doxygenclass:: NewtonSolver
    :project: doc_matlab
    :members:
    :protected-members:

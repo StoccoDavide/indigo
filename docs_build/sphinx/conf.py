@@ -57,7 +57,7 @@ doc_matlab = {
     "exhaleExecutesDoxygen": True,
     "doxygenStripFromPath":  str(dir_path_matlab),
     "exhaleDoxygenStdin":   '''
-        INPUT               = ../../matlab/indigo
+        INPUT               = ../../matlab/+Indigo
         PREDEFINED         += protected=private
         XML_OUTPUT          = xml-matlab
         EXTENSION_MAPPING   = .m=C++

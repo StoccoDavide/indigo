@@ -11,42 +11,47 @@ Directories
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo.rst
+   dir_+Indigo.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_RungeKutta.rst
+   dir_+Indigo_+RungeKutta.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_RungeKutta_EmbeddedExplicitMethods.rst
+   dir_+Indigo_+RungeKutta_+Methods.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_RungeKutta_EmbeddedImplicitMethods.rst
+   dir_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_RungeKutta_ExplicitMethods.rst
+   dir_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_RungeKutta_ImplicitMethods.rst
+   dir_+Indigo_+RungeKutta_+Methods_+Explicit.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_Systems.rst
+   dir_+Indigo_+RungeKutta_+Methods_+Implicit.rst
 
 .. toctree::
    :maxdepth: 5
 
-   dir_indigo_Utils.rst
+   dir_+Indigo_+Systems.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_+Indigo_+Utils.rst
 
 Files
 *****
@@ -55,329 +60,339 @@ Files
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_BaseRungeKutta.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_BogackiShampine23.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Systems_BaseSystem.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_CashKarp45.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_BogackiShampine23.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_CrankNicolson.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_CashKarp45.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_DormandPrince54.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_CrankNicolson.m.rst
+   file_+Indigo_+RungeKutta_Explicit.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_DormandPrince54.m.rst
+   file_+Indigo_+Systems_Explicit.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_ExplicitEuler.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_ExplicitEuler.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_ExplicitMidpoint.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_ExplicitMidpoint.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitRungeKutta.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Fehlberg12.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Systems_ExplicitSystem.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Fehlberg45I.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Fehlberg12.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Fehlberg45II.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Fehlberg45I.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Fehlberg78.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Fehlberg45II.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_GaussLegendre2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Fehlberg78.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_GaussLegendre34.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_GaussLegendre2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_GaussLegendre4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_GaussLegendre34.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_GaussLegendre56.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_GaussLegendre4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_GaussLegendre6.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_GaussLegendre56.m.rst
+   file_+Indigo_+Utils_generate_rgb.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_GaussLegendre6.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Generic2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Utils_generate_rgb.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Generic3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Generic2.m.rst
+   file_+Indigo_+Utils_get_colors.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Generic3.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Heun2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Heun2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Heun3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Heun3.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_HeunEuler21.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_HeunEuler21.m.rst
+   file_+Indigo_+RungeKutta_Implicit.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_ImplicitEuler.m.rst
+   file_+Indigo_+Systems_Implicit.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_ImplicitMidpoint.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_ImplicitEuler.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitRungeKutta.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_ImplicitMidpoint.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Systems_ImplicitSystem.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_LobattoIIIA12.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_LobattoIIIA12.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIIA2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIIA2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_LobattoIIIA34.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_LobattoIIIA34.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIIA4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIIA4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_LobattoIIIB12.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_LobattoIIIB12.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIIB2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIIB2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_LobattoIIIB34.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_LobattoIIIB34.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIIB4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIIB4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_LobattoIIIC12.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_LobattoIIIC12.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIIC2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIIC2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedImplicit_LobattoIIIC34.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedImplicitMethods_LobattoIIIC34.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIIC4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIIC4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIICS2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIICS2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIICS4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIICS4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIID2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIID2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_LobattoIIID4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_LobattoIIID4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Merson34.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Merson34.m.rst
+   file_+Indigo_+RungeKutta_Method.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_NewtonSolver.m.rst
+   file_+Indigo_NewtonSolver.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Utils_progress_bar.m.rst
+   file_+Indigo_+Utils_progress_bar.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_RadauIA3.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_RadauIA3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_RadauIA5.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_RadauIA5.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_RadauIIA3.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_RadauIIA3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_RadauIIA5.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_RadauIIA5.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Ralston2.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Ralston2.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Ralston3.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Ralston3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Ralston4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Ralston4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_RK3.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_RK3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_RK38.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_RK38.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_RK4.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_RK4.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Sarafyan45.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Sarafyan45.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Utils_save_png.m.rst
+   file_+Indigo_+Utils_save_png.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_Systems_SemiExplicitSystem.m.rst
+   file_+Indigo_+Systems_SemiExplicit.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_SSPRK3.m.rst
+   file_+Indigo_+Utils_show_colors.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ImplicitMethods_SunGeng5.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_SSPRK3.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Verner65.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+Implicit_SunGeng5.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_ExplicitMethods_Wray3.m.rst
+   file_+Indigo_+Systems_System.m.rst
 
 .. toctree::
    :maxdepth: 5
 
-   file_indigo_RungeKutta_EmbeddedExplicitMethods_Zonnenveld45.m.rst
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Verner65.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_+Indigo_+RungeKutta_+Methods_+Explicit_Wray3.m.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_Zonnenveld45.m.rst

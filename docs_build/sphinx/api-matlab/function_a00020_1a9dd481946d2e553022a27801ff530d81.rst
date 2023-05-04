@@ -1,0 +1,14 @@
+.. _exhale_function_a00020_1a9dd481946d2e553022a27801ff530d81:
+
+Function default_option
+=======================
+
+- Defined in :ref:`file_+Indigo_+Utils_progress_bar.m`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: default_option(in, in, in)
+   :project: doc_matlab

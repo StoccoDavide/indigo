@@ -1,9 +1,9 @@
 .. _exhale_class_a00215:
 
-Class CashKarp45
-================
+Class Method
+============
 
-- Defined in :ref:`file_indigo_RungeKutta_EmbeddedExplicitMethods_CashKarp45.m`
+- Defined in :ref:`file_+Indigo_+RungeKutta_Method.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
+- ``public handle``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: CashKarp45
+.. doxygenclass:: Method
    :project: doc_matlab
    :members:
    :protected-members:

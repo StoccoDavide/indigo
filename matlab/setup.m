@@ -16,21 +16,8 @@ set(groot, 'defaulttextinterpreter',          'latex' );
 set(groot, 'defaultLegendInterpreter',        'latex' );
 set(0,     'defaultAxesFontSize',             18      );
 
-% Library folders
-addpath('./indigo');
-
-% Utilities
-addpath('./indigo/Utils');
-
-% Systems classes
-addpath('./indigo/Systems');
-
-% Runge-Kutta methods
-addpath('./indigo/RungeKutta');
-addpath('./indigo/RungeKutta/ExplicitMethods/');
-addpath('./indigo/RungeKutta/ImplicitMethods/');
-addpath('./indigo/RungeKutta/EmbeddedExplicitMethods/');
-addpath('./indigo/RungeKutta/EmbeddedImplicitMethods/');
+% Indigo folder
+addpath('./');
 
 % Examples folder do not add example in toolbox
 % addpath('./examples');

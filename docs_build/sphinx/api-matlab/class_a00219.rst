@@ -1,9 +1,9 @@
 .. _exhale_class_a00219:
 
-Class DormandPrince54
-=====================
+Class SemiExplicit
+==================
 
-- Defined in :ref:`file_indigo_RungeKutta_EmbeddedExplicitMethods_DormandPrince54.m`
+- Defined in :ref:`file_+Indigo_+Systems_SemiExplicit.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
+- ``public Indigo::Systems::System``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: DormandPrince54
+.. doxygenclass:: SemiExplicit
    :project: doc_matlab
    :members:
    :protected-members:

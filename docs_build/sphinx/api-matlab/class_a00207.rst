@@ -1,32 +1,26 @@
 .. _exhale_class_a00207:
 
-Class BaseRungeKutta
-====================
+Class Explicit
+==============
 
-- Defined in :ref:`file_indigo_RungeKutta_BaseRungeKutta.m`
+- Defined in :ref:`file_+Indigo_+RungeKutta_Explicit.m`
 
 
 Inheritance Relationships
 -------------------------
 
-Base Type
-*********
+Base Types
+**********
 
-- ``public handle``
-
-
-Derived Types
-*************
-
-- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
-- ``public ImplicitRungeKutta`` (:ref:`exhale_class_a00435`)
+- ``public Indigo::RungeKutta::Method``
+- ``public Indigo::Systems::System``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: BaseRungeKutta
+.. doxygenclass:: Explicit
    :project: doc_matlab
    :members:
    :protected-members:

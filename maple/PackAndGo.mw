@@ -399,12 +399,14 @@ module IndigoCodegen:
     ImplicitSystemToMatlab( name::string, 
                             vars::{Vector(algebraic), list(algebraic)}, 
                             eqns::{Vector(algebraic), list(algebraic)}, 
-                            invs::{Vector(algebraic), list(algebraic)} := [], 
-                            { algs::{list(algebraic = algebraic), 
-                                Vector(algebraic) = algebraic} := [], 
-                              data::list(symbol = algebraic) := [], 
+                            { data::list(symbol = algebraic) := [], 
+                              indent::string := &quot;  &quot;, 
                               info::string := &quot;No class description 
-                                provided.&quot; }, 
+                                provided.&quot;, 
+                              invs::{Vector(algebraic), list(algebraic)} := 
+                                [], 
+                              veil::{list(algebraic = algebraic), 
+                                Vector(algebraic) = algebraic} := [] }, 
                             $ ) :: string
 
     # Generate an explicit system for the firt-order differential equations 
@@ -417,6 +419,7 @@ module IndigoCodegen:
                             { algs::{list(algebraic = algebraic), 
                                 Vector(algebraic) = algebraic} := [], 
                               data::list(symbol = algebraic) := [], 
+                              indent::string := &quot;  &quot;, 
                               info::string := &quot;No class description 
                                 provided.&quot; }, 
                             $ ) :: string
@@ -432,6 +435,7 @@ module IndigoCodegen:
                                 { algs::{list(algebraic = algebraic), 
                                     Vector(algebraic) = algebraic} := [], 
                                   data::list(symbol = algebraic) := [], 
+                                  indent::string := &quot;  &quot;, 
                                   info::string := &quot;No class description 
                                     provided.&quot; }, 
                                 $ ) :: string
@@ -516,19 +520,19 @@ object Indigo :: Indigo:
     # Clear the user-defined system invariants.
     ClearUserInvariants( _self::Indigo, $ )
 
-    # Get the list of differential equations of the reduced implicit system of 
-    # the type F(x,x',t) = 0.
+    # Get the list of differential equations of the implicit system of the type 
+    # F(x,x',t) = 0.
     GetDifferentialEquations( _self::Indigo, $ ) :: list
 
-    # Get the invariants of the reduced system.
+    # Get the invariants of the system.
     GetInvariants( _self::Indigo, $ ) :: list
 
-    # Get the index-1 constraints of the reduced system.
-    GetIndexOneConstraints( _self::Indigo, $ ) :: list
+    # Get the veils of the system.
+    GetVeils( _self::Indigo, $ ) :: list
 
     # Get the list of veil arguments substitutions.
-    GetVeilArgsSubs( _self::Indigo, rng::range := 1 .. -1, $ )
-                   :: list(algebraic = algebraic)
+    GetVeilsSubs( _self::Indigo, rng::range := 1 .. -1, $ )
+                :: list(algebraic = algebraic)
 
     # Remove the time states from the system.
     RemoveTimeStates( _self::Indigo, 
@@ -642,7 +646,7 @@ object Indigo :: Indigo:
 </Group>
 </Section><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L256806" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
+<Input><Text-field style="Text" layout="Normal"><Equation executable="true" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">JSFH</Equation></Text-field>
 </Input>
 </Group></Presentation-Block>
 </Worksheet>

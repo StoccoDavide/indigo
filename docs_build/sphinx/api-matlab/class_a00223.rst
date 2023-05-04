@@ -1,9 +1,9 @@
 .. _exhale_class_a00223:
 
-Class Fehlberg12
-================
+Class System
+============
 
-- Defined in :ref:`file_indigo_RungeKutta_EmbeddedExplicitMethods_Fehlberg12.m`
+- Defined in :ref:`file_+Indigo_+Systems_System.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public ExplicitRungeKutta`` (:ref:`exhale_class_a00347`)
+- ``public handle``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: Fehlberg12
+.. doxygenclass:: System
    :project: doc_matlab
    :members:
    :protected-members:

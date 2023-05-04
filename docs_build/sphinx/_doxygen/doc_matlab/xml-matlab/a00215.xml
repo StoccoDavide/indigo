@@ -1,508 +1,411 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
   <compounddef id="a00215" kind="class" language="C++" prot="public">
-    <compoundname>CashKarp45</compoundname>
-    <basecompoundref refid="a00347" prot="public" virt="non-virtual">ExplicitRungeKutta</basecompoundref>
+    <compoundname>Method</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">handle</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="a00215_1a4cba1ac7e65c4492ead66b623772d8de" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>Method::m_name</qualifiedname>
+        <briefdescription>
+<para>Name of the solver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="55" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a4cd0c736a608bea6c275940494977ec8" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_order</definition>
+        <argsstring></argsstring>
+        <name>m_order</name>
+        <qualifiedname>Method::m_order</qualifiedname>
+        <briefdescription>
+<para>Order of the solver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="60" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a14b95940b3801f08b8a2071f9614e0ba" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_A</definition>
+        <argsstring></argsstring>
+        <name>m_A</name>
+        <qualifiedname>Method::m_A</qualifiedname>
+        <briefdescription>
+<para>Matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="65" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a7f623511dd1ec91f70c6938f91f2174c" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_b</definition>
+        <argsstring></argsstring>
+        <name>m_b</name>
+        <qualifiedname>Method::m_b</qualifiedname>
+        <briefdescription>
+<para>Weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="70" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a1ec2cac3e5dfc0f924764d52af46ca63" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_b_e</definition>
+        <argsstring></argsstring>
+        <name>m_b_e</name>
+        <qualifiedname>Method::m_b_e</qualifiedname>
+        <briefdescription>
+<para>Embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="75" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1ac5caf3091f9c8faad57f2c926d3a3532" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_c</definition>
+        <argsstring></argsstring>
+        <name>m_c</name>
+        <qualifiedname>Method::m_c</qualifiedname>
+        <briefdescription>
+<para>Nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="80" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a99c84cc9e55df602b00d4edd232ca773" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_is_explicit</definition>
+        <argsstring></argsstring>
+        <name>m_is_explicit</name>
+        <qualifiedname>Method::m_is_explicit</qualifiedname>
+        <briefdescription>
+<para>Boolean to check if the method is explicit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="85" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1ae2cc7433d8182d04e90ec4cadc3a02a5" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_is_embedded</definition>
+        <argsstring></argsstring>
+        <name>m_is_embedded</name>
+        <qualifiedname>Method::m_is_embedded</qualifiedname>
+        <briefdescription>
+<para>Boolean to check if the method is embedded. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="90" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a9e761713aeb43f4798c35665d1887516" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_max_substeps</definition>
+        <argsstring></argsstring>
+        <name>m_max_substeps</name>
+        <qualifiedname>Method::m_max_substeps</qualifiedname>
+        <briefdescription>
+<para>Maximum number of substeps. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="95" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1abbf92d711050009460416e432f801850" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_max_projection_iter</definition>
+        <argsstring></argsstring>
+        <name>m_max_projection_iter</name>
+        <qualifiedname>Method::m_max_projection_iter</qualifiedname>
+        <briefdescription>
+<para>Maximum number of iterations in the projection process. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="100" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a32507ebb9c9aa897931f9caeb732ea7f" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_sys</definition>
+        <argsstring></argsstring>
+        <name>m_sys</name>
+        <qualifiedname>Method::m_sys</qualifiedname>
+        <briefdescription>
+<para><ref refid="a00223" kindref="compound">System</ref> of ODEs/DAEs to be object handle (fake pointer). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="105" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a52e52bb3dd8ee855b0a49ffd91c89927" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_newton_solver</definition>
+        <argsstring></argsstring>
+        <name>m_newton_solver</name>
+        <qualifiedname>Method::m_newton_solver</qualifiedname>
+        <briefdescription>
+<para>Non-linear system solver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="110" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1aa7663b79ffd99aa6c7d8575c927d0d81" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_verbose</definition>
+        <argsstring></argsstring>
+        <name>m_verbose</name>
+        <qualifiedname>Method::m_verbose</qualifiedname>
+        <briefdescription>
+<para>Verbose mode boolean. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="115" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1af4496c91c48e7fc884fd6d845e934694" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_progress_bar</definition>
+        <argsstring></argsstring>
+        <name>m_progress_bar</name>
+        <qualifiedname>Method::m_progress_bar</qualifiedname>
+        <briefdescription>
+<para>Progress bar boolean. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="120" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a7048f3341a7200d3186cd2eee1bdcc5e" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_projection</definition>
+        <argsstring></argsstring>
+        <name>m_projection</name>
+        <qualifiedname>Method::m_projection</qualifiedname>
+        <briefdescription>
+<para>Projection mode boolean. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="125" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1ac906f76058dfe3a507833082c573a418" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_adaptive_step</definition>
+        <argsstring></argsstring>
+        <name>m_adaptive_step</name>
+        <qualifiedname>Method::m_adaptive_step</qualifiedname>
+        <briefdescription>
+<para>Aadaptive step mode boolean. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="130" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a634d6bb5e36d67757d26f4348cc8618f" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_A_tol</definition>
+        <argsstring></argsstring>
+        <name>m_A_tol</name>
+        <qualifiedname>Method::m_A_tol</qualifiedname>
+        <briefdescription>
+<para>Absolute tolerance for adaptive step. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="135" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a10e58aa6081718a63829c95d33fd8725" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_R_tol</definition>
+        <argsstring></argsstring>
+        <name>m_R_tol</name>
+        <qualifiedname>Method::m_R_tol</qualifiedname>
+        <briefdescription>
+<para>Relative tolerance for adaptive step. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="140" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a0adc8253e2093a678e7ab635846e9d15" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_fac</definition>
+        <argsstring></argsstring>
+        <name>m_fac</name>
+        <qualifiedname>Method::m_fac</qualifiedname>
+        <briefdescription>
+<para>Safety factor for adaptive step. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="145" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1a1448604bf5016f38531812f847377df6" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_fac_min</definition>
+        <argsstring></argsstring>
+        <name>m_fac_min</name>
+        <qualifiedname>Method::m_fac_min</qualifiedname>
+        <briefdescription>
+<para>Minimum safety factor for adaptive step. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="150" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="a00215_1afff1c17a13ecc04d32aea7cfc57bde1e" prot="private" static="no" mutable="no">
+        <type>Property</type>
+        <definition>Property Method::m_fac_max</definition>
+        <argsstring></argsstring>
+        <name>m_fac_max</name>
+        <qualifiedname>Method::m_fac_max</qualifiedname>
+        <briefdescription>
+<para>Maximum safety factor for adaptive step. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="155" column="10" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00215_1ad4c5f034ca49c65d980924e66e9db98f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a4b44d76b408f5c960f6b3d8e1eaf4d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function CashKarp45::CashKarp45</definition>
-        <argsstring>()</argsstring>
-        <name>CashKarp45</name>
-        <qualifiedname>CashKarp45::CashKarp45</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Cash-Karp 4(5) method.</para>
-<para><verbatim>embed:rst:leading-asterisk
-*  .. math::
-* 
-*    \begin{array}{c|ccccc}
-*        0  &amp;          0 &amp;       0 &amp;         0 &amp;            0 &amp;        0 &amp; 0 \\
-*      1/5  &amp;        1/5 &amp;       0 &amp;         0 &amp;            0 &amp;        0 &amp; 0 \\
-*      3/10 &amp;       3/40 &amp;    9/40 &amp;         0 &amp;            0 &amp;        0 &amp; 0 \\
-*      3/5  &amp;       9/40 &amp;   -9/10 &amp;       6/5 &amp;            0 &amp;        0 &amp; 0 \\
-*      1    &amp;     -11/54 &amp;     5/2 &amp;    -70/27 &amp;        35/27 &amp;        0 &amp; 0 \\
-*      7/8  &amp; 1631/55296 &amp; 175/512 &amp; 575/13824 &amp; 44275/110592 &amp; 253/4096 &amp; 0 \\
-*      \hline
-*         &amp; 37/378     &amp; 0 &amp;     250/621 &amp;     125/594 &amp;         0 &amp; 512/1771 \\
-*         &amp; 2825/27648 &amp; 0 &amp; 18575/48384 &amp; 13525/55296 &amp; 277/14336 &amp; 1/4 \\
-*    \end{array}
-* 
-*  </verbatim> </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/EmbeddedExplicitMethods/CashKarp45.m" line="32" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00347_1aa0086a86787a794ad5b3b4e74231b9c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ExplicitRungeKutta::step_node</definition>
-        <argsstring>(in this, in i, in x_k, in K, in d_t)</argsstring>
-        <name>step_node</name>
-        <qualifiedname>ExplicitRungeKutta::step_node</qualifiedname>
+        <definition>function Method::Method</definition>
+        <argsstring>(in t_name, in t_order, in tbl)</argsstring>
+        <name>Method</name>
+        <qualifiedname>Method::Method</qualifiedname>
         <param>
           <type>in</type>
-          <declname>this</declname>
+          <declname>t_name</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>i</declname>
+          <declname>t_order</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>x_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>K</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>d_t</declname>
+          <declname>tbl</declname>
         </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the node as:</para>
-<para><formula id="86">\[
-\mathbf{x}_i = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
-  a_{ij} \mathbf{K}_j.
-\]</formula></para>
+<para>Class constructor for ODEsolver, which requires the name of the solver used to integrate the system of ODEs/DAEs as input.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>i</parametername>
+<parametername>t_name</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Index of the node to be computed. </para>
+<para>The name of the solver. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>x_k</parametername>
+<parametername>t_order</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States value at <formula id="50">$ k $</formula>-th time step <formula id="51">$ \mathbf{x}(t_k) $</formula>. </para>
+<para>Order of the RK method. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>K</parametername>
+<parametername>tbl.A</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Variable <formula id="87">$ \mathbf{K} $</formula> of the system to be solved. </para>
+<para>The matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>d_t</parametername>
+<parametername>tbl.b</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Advancing time step <formula id="54">$ \Delta t$</formula>.</para>
+<para>The weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tbl.b_e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tbl.c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector).</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The residual of the ODEs system to be solved. </para>
+<simplesect kind="return"><para>An instance of the ODEsolver class. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/ExplicitRungeKutta.m" line="90" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="176" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00347_1af463df48c109519e7034c3dba0876fd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ab7e49caeeb0ec95db8daeb777d8e34d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function ExplicitRungeKutta::step_residual</definition>
-        <argsstring>(in this, in i, in x_i, in K, in t_k, in d_t)</argsstring>
-        <name>step_residual</name>
-        <qualifiedname>ExplicitRungeKutta::step_residual</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>i</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_i</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>K</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>d_t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Compute the left hand side of the ODEs system to be solved:</para>
-<para><formula id="88">\[
-\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
-  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
-\right) = \mathbf{0}.
-\]</formula></para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>i</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Index of the step to be computed. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>x_i</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States value at <formula id="89">$ i $</formula>-th node. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>K</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Variable <formula id="87">$ \mathbf{K} $</formula> of the system to be solved. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>t_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Time step <formula id="53">$ t_k $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>d_t</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Advancing time step <formula id="54">$ \Delta t$</formula>.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The residual of the ODEs system to be solved. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/ExplicitRungeKutta.m" line="119" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00347_1a10af04b088531cff3f8384f5af946676" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ExplicitRungeKutta::step_jacobian</definition>
-        <argsstring>(in this, in i, in x_i, in K, in t_k, in d_t)</argsstring>
-        <name>step_jacobian</name>
-        <qualifiedname>ExplicitRungeKutta::step_jacobian</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>i</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_i</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>K</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>d_t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Compute the Jacobian of the ODEs system of equations:</para>
-<para><formula id="90">\[
-\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
-  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
-\right) = \mathbf{0}
-\]</formula></para>
-<para>to be solved in the <formula id="87">$ \mathbf{K} $</formula> variable:</para>
-<para><formula id="91">\[
-\dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(
-  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij} \mathbf{K}_j,
-  \, \mathbf{K}_i, \, t_k + c_i \Delta t
-\right)
-\]</formula></para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>i</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Index of the step to be computed. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>x_i</parametername>
-</parameternamelist>
-<parameterdescription>
-<para><formula id="89">$ i $</formula>-th node. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>K</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Variable <formula id="87">$ \mathbf{K} $</formula> of the system to be solved. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>t_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Time step <formula id="53">$ t_k $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>d_t</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Advancing time step <formula id="54">$ \Delta t$</formula>.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The Jacobian of the ODEs system of equations to be solved. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/ExplicitRungeKutta.m" line="154" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00347_1ad4066163cd9af25c18711b9747abe46d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function ExplicitRungeKutta::solve_step</definition>
-        <argsstring>(in this, in x_k, in K_0, in t_k, in d_t)</argsstring>
-        <name>solve_step</name>
-        <qualifiedname>ExplicitRungeKutta::solve_step</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>K_0</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>d_t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Solve the <formula id="89">$ i $</formula>-th explicit step of the ODEs system to find the <formula id="92">$ \mathbf{K}_i $</formula> variable:</para>
-<para><formula id="90">\[
-\mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
-  a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
-\right) = \mathbf{0}
-\]</formula></para>
-<para>by Newton&apos;s method.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>x_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States value at <formula id="50">$ k $</formula>-th time step <formula id="51">$ \mathbf{x}(t_k) $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>K</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Initial guess for the <formula id="87">$ \mathbf{K} $</formula> variable to be found. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>t_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Time step <formula id="53">$ t_k $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>d_t</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Advancing time step <formula id="54">$ \Delta t$</formula>.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The <formula id="87">$ \mathbf{K} $</formula> variables of the ODEs system to be solved and the error control flag. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/ExplicitRungeKutta.m" line="183" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00347_1a6f77841f140bda8b5954798b9e69a35f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>function</type>
-        <definition>function ExplicitRungeKutta::step</definition>
-        <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
-        <name>step</name>
-        <qualifiedname>ExplicitRungeKutta::step</qualifiedname>
-        <reimplements refid="a00207_1ac8feb86e8e0f10ad53db04f3cedac12d">step</reimplements>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x_dot_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t_k</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>d_t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Compute an integration step using the explicit Runge-Kutta method for a system of ODEs of the form <formula id="93">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;,
-\mathbf{v}, t) = \mathbf{0} $</formula>.</para>
-<para><bold>Solution Algorithm</bold></para>
-<para>Consider a Runge-Kutta method, written for a system of ODEs of the form <formula id="94">$ \mathbf{x}&apos; = \mathbf{f}(\mathbf{x}, \mathbf{v}, t) $</formula>:</para>
-<para><formula id="95">\[
- \begin{array}{l}
- \mathbf{K}_i = \mathbf{f} \left(
-   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
-   \, t_k + c_i \Delta t
-   \right), \qquad i = 1, 2, \ldots, s \\
- \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
- \mathbf{K}_j \, ,
- \end{array}
- \]</formula></para>
-<para>Beacuse of the nature of the matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular) the <formula id="96">$ s$</formula> stages for a generic explicit Runge-Kutta method take the form:</para>
-<para><formula id="97">\[
-\mathbf{K}_i = \mathbf{f} \left(
-  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
-  \mathbf{K}_j, \, t_k + c_i \Delta t
-  \right), \qquad i = 1, 2, \ldots, s.
-\]</formula></para>
-<para>Then the explicit Runge-Kutta method for an implicit system of ODEs of the form <formula id="98">$\mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, t) = \mathbf{0} $</formula> can be written as:</para>
-<para><formula id="99">\[
-\begin{array}{l}
-\mathbf{F}_i \left(
-  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1} a_{ij}
-    \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
-\right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\
-\mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.
-\end{array}
-\]</formula></para>
-<para>It is important to notice that the system of <formula id="100">$ s $</formula> equations <formula id="101">$ \mathbf{F}_i $</formula> is a triangular system (which may be non-linear in the <formula id="92">$ \mathbf{K}_i $</formula> variables), so it can be solved using forward substitution and the solution of the system is the vector <formula id="102">$ \mathbf{K}
-$</formula>. Thus, the final system to be solved is the following:</para>
-<para><formula id="103">\[
-\left\{\begin{array}{l}
-\mathbf{F}_1 \left(
-  \mathbf{x}_k, \, \mathbf{K}_1, \, t_k + c_1 \Delta t
-\right) = \mathbf{0} \\
-\mathbf{F}_2 \left(
-  \mathbf{x}_k + \Delta t \, a_{21} \mathbf{K}_1, \,
-  \mathbf{K}_2, \, t_k + c_2 \Delta t
-\right) = \mathbf{0} \\
-~~ \vdots \\
-\mathbf{F}_s \left(
-  \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s-1} a_{sj}
-  \mathbf{K}_j, \, \mathbf{K}_s, \, t_k + c_s \Delta t
-\right) = \mathbf{0}
-\end{array}\right.
-\]</formula></para>
-<para>The <formula id="92">$ \mathbf{K}_i $</formula> variable are computed using the Newton&apos;s method.</para>
-<para><bold>Note</bold></para>
-<para>Another approach is to directly solve the whole system of equations by Newton&apos;smethod. In other words, the system of equations is solved iteratively by computing the Jacobian matrixes of the system and using them to compute the solution. This approach is used in the implicit Runge-Kutta method. For this reason, a Butcher tableau relative to an explicit Runge-Kutta method can also be used in the <computeroutput><ref refid="a00435" kindref="compound">ImplicitRungeKutta</ref></computeroutput> class.</para>
-<para>The suggested time step for the next advancing step <formula id="57">$ \Delta t_{k+1} $</formula>, is the same as the input time step <formula id="104">$ \Delta t $</formula> since in the explicit Runge-Kutta method the time step is not modified through any error control method.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>x_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States value at <formula id="50">$ k $</formula>-th time step <formula id="51">$ \mathbf{x}(t_k) $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>x_dot_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States derivative at <formula id="50">$ k $</formula>-th time step <formula id="52">$ \mathbf{x}&apos;
-               (t_k) $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>t_k</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Time step <formula id="53">$ t_k $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>d_t</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Advancing time step <formula id="54">$ \Delta t$</formula>.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The approximation of the states at <formula id="79">$ k+1 $</formula>-th time step <formula id="105">$
-        \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula>, the approximation of the states derivatives at <formula id="79">$ k+1 $</formula>-th time step <formula id="106">$ \mathbf{x}&apos;_{k+1}
-        (t_{k}+\Delta t) $</formula>, the suggested time step for the next advancing step <formula id="57">$ \Delta t_{k+1} $</formula>, and the error control flag. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/ExplicitRungeKutta.m" line="317" column="15"/>
-      </memberdef>
-      <memberdef kind="function" id="a00207_1aeb3f8ba803ac9fecd776815b205cee28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function BaseRungeKutta::get_name</definition>
+        <definition>function Method::get_name</definition>
         <argsstring>(in this)</argsstring>
         <name>get_name</name>
-        <qualifiedname>BaseRungeKutta::get_name</qualifiedname>
+        <qualifiedname>Method::get_name</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -510,21 +413,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the name of the method used to integrate the system of ODEs/DAEs.</para>
+<para>Get the name of the solver used to integrate the system of ODEs/DAEs.</para>
 <para><simplesect kind="return"><para>The name of the solver. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="194" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="194" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a1c7bc2a3dc8c7749abb11876f33f31c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ac3b95addb4b417635cdb3c795328e77b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_name</definition>
+        <definition>function Method::set_name</definition>
         <argsstring>(in this, in t_name)</argsstring>
         <name>set_name</name>
-        <qualifiedname>BaseRungeKutta::set_name</qualifiedname>
+        <qualifiedname>Method::set_name</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -536,7 +439,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the name of the method used to integrate the system of ODEs/DAEs.</para>
+<para>Set the name of the solver used to integrate the system of ODEs/DAEs.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_name</parametername>
@@ -550,14 +453,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="205" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="205" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1ae61b25757c0cd66d0797ab9b8aa03eee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a14ecbd8193b3d24d4ccbac6670789d5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_order</definition>
+        <definition>function Method::get_order</definition>
         <argsstring>(in this)</argsstring>
         <name>get_order</name>
-        <qualifiedname>BaseRungeKutta::get_order</qualifiedname>
+        <qualifiedname>Method::get_order</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -565,21 +468,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the order of the method used to integrate the system of ODEs/DAEs.</para>
+<para>Get the order of the solver used to integrate the system of ODEs/DAEs.</para>
 <para><simplesect kind="return"><para>The order of the solver. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="216" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="216" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a5d6dad170d0a6aa2a23954db92244f21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ab70badfa1aa018b38728be78a8092959" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_system</definition>
+        <definition>function Method::get_system</definition>
         <argsstring>(in this)</argsstring>
         <name>get_system</name>
-        <qualifiedname>BaseRungeKutta::get_system</qualifiedname>
+        <qualifiedname>Method::get_system</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -594,21 +497,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="227" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="227" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1afe67104e1c6be10f95204e3f3baeb807" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a325315196a02b1af6d99160e23ca29ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_system</definition>
-        <argsstring>(in this, in t_ode)</argsstring>
+        <definition>function Method::set_system</definition>
+        <argsstring>(in this, in t_sys)</argsstring>
         <name>set_system</name>
-        <qualifiedname>BaseRungeKutta::set_system</qualifiedname>
+        <qualifiedname>Method::set_system</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>t_ode</declname>
+          <declname>t_sys</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -616,7 +519,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <para>Set the system of ODEs/DAEs to be solved.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>t_ode</parametername>
+<parametername>t_sys</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The system of ODEs/DAEs to be solved. </para>
@@ -627,14 +530,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="238" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="238" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a5e66e0f28ab2ba4d3a8ce4f52df4bb8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1acc90adf014230fd346a98d4dc978e49a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_max_substeps</definition>
+        <definition>function Method::get_max_substeps</definition>
         <argsstring>(in this)</argsstring>
         <name>get_max_substeps</name>
-        <qualifiedname>BaseRungeKutta::get_max_substeps</qualifiedname>
+        <qualifiedname>Method::get_max_substeps</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -649,14 +552,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="249" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="249" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a43f3a0945313fe798fd22599bead1b7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1aefd7629c76e713d3843de859ee3e8242" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_max_substeps</definition>
+        <definition>function Method::set_max_substeps</definition>
         <argsstring>(in this, in t_max_substeps)</argsstring>
         <name>set_max_substeps</name>
-        <qualifiedname>BaseRungeKutta::set_max_substeps</qualifiedname>
+        <qualifiedname>Method::set_max_substeps</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -682,14 +585,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="260" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="260" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a2fa5d768630ce369529a5c8b9e7322b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a1c56f6d1da5e2d218697380d920bc9a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_max_projection_iter</definition>
+        <definition>function Method::get_max_projection_iter</definition>
         <argsstring>(in this)</argsstring>
         <name>get_max_projection_iter</name>
-        <qualifiedname>BaseRungeKutta::get_max_projection_iter</qualifiedname>
+        <qualifiedname>Method::get_max_projection_iter</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -704,14 +607,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="277" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="277" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1adcea0bf28eecc195bb1d47272d122ed1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a561d0a11655c606bc22855857158a9b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_max_projection_iter</definition>
+        <definition>function Method::set_max_projection_iter</definition>
         <argsstring>(in this, in t_max_projection_iter)</argsstring>
         <name>set_max_projection_iter</name>
-        <qualifiedname>BaseRungeKutta::set_max_projection_iter</qualifiedname>
+        <qualifiedname>Method::set_max_projection_iter</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -737,14 +640,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="288" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="288" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1adeb736ed6918d9da807c7a7843d8b77b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a89eccb7c28e8b206921abfd6cb804dc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_A</definition>
+        <definition>function Method::get_A</definition>
         <argsstring>(in this)</argsstring>
         <name>get_A</name>
-        <qualifiedname>BaseRungeKutta::get_A</qualifiedname>
+        <qualifiedname>Method::get_A</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -752,21 +655,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix).</para>
-<para><simplesect kind="return"><para>The matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
+<para>Get the matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix).</para>
+<para><simplesect kind="return"><para>The matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="305" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="305" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1afa8fb6ad9cb609c3475f87cafd0be62e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1abda5167ad1b40f8a31a09d0b220fb9de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_A</definition>
+        <definition>function Method::set_A</definition>
         <argsstring>(in this, in t_A)</argsstring>
         <name>set_A</name>
-        <qualifiedname>BaseRungeKutta::set_A</qualifiedname>
+        <qualifiedname>Method::set_A</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -778,13 +681,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix).</para>
+<para>Set the matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_A</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
+<para>The matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -792,14 +695,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="316" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="316" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a51fefb4d1d481ae3af840a421dd54898" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a43f9731d6a806fca0ddf051225efc103" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_b</definition>
+        <definition>function Method::get_b</definition>
         <argsstring>(in this)</argsstring>
         <name>get_b</name>
-        <qualifiedname>BaseRungeKutta::get_b</qualifiedname>
+        <qualifiedname>Method::get_b</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -807,21 +710,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector).</para>
-<para><simplesect kind="return"><para>The weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector). </para>
+<para>Get the weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector).</para>
+<para><simplesect kind="return"><para>The weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector). </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="327" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="327" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a8c810c384e99e26ecee39323827f74d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a6379b34c8b01f736529b4304c0c3236d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_b</definition>
+        <definition>function Method::set_b</definition>
         <argsstring>(in this, in t_b)</argsstring>
         <name>set_b</name>
-        <qualifiedname>BaseRungeKutta::set_b</qualifiedname>
+        <qualifiedname>Method::set_b</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -833,13 +736,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector).</para>
+<para>Set the weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_b</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector). </para>
+<para>The weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -847,14 +750,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="338" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="338" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a333c795491dbe9402bc0724545b7f7f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a1c66473a6c75f376439caac97566e6e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_b_e</definition>
+        <definition>function Method::get_b_e</definition>
         <argsstring>(in this)</argsstring>
         <name>get_b_e</name>
-        <qualifiedname>BaseRungeKutta::get_b_e</qualifiedname>
+        <qualifiedname>Method::get_b_e</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -862,21 +765,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector).</para>
-<para><simplesect kind="return"><para>The embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
+<para>Get the embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector).</para>
+<para><simplesect kind="return"><para>The embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="349" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="349" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a611293772e9f9f6afc5c22463d65c18b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ab8846715dfec8ebc03e18de15321a4a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_b_e</definition>
+        <definition>function Method::set_b_e</definition>
         <argsstring>(in this, in t_b_e)</argsstring>
         <name>set_b_e</name>
-        <qualifiedname>BaseRungeKutta::set_b_e</qualifiedname>
+        <qualifiedname>Method::set_b_e</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -888,13 +791,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector).</para>
+<para>Set the embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_b_e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
+<para>The embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -902,14 +805,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="361" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="361" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a8c45e071550c7710e63a3ba98acbf261" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a12ec509b4afc6bb757a511415b3ab34b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_c</definition>
+        <definition>function Method::get_c</definition>
         <argsstring>(in this)</argsstring>
         <name>get_c</name>
-        <qualifiedname>BaseRungeKutta::get_c</qualifiedname>
+        <qualifiedname>Method::get_c</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -917,21 +820,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector).</para>
-<para><simplesect kind="return"><para>The nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector). </para>
+<para>Get the nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector).</para>
+<para><simplesect kind="return"><para>The nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector). </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="372" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="372" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1ad1266525a7dfd8bab120a2495b79d6fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ac3e26c755421bb8491eb385339e975c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_c</definition>
+        <definition>function Method::set_c</definition>
         <argsstring>(in this, in t_c)</argsstring>
         <name>set_c</name>
-        <qualifiedname>BaseRungeKutta::set_c</qualifiedname>
+        <qualifiedname>Method::set_c</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -943,13 +846,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set the nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector).</para>
+<para>Set the nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_c</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector). </para>
+<para>The nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -957,14 +860,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="383" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="383" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a6e5449c0618ce832add333448d82cb32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1aaa5e36beec220ef9eb5b38ad5ec69b21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_A_tol</definition>
+        <definition>function Method::get_A_tol</definition>
         <argsstring>(in this)</argsstring>
         <name>get_A_tol</name>
-        <qualifiedname>BaseRungeKutta::get_A_tol</qualifiedname>
+        <qualifiedname>Method::get_A_tol</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -979,14 +882,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="394" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="394" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1afb9733d7a08c3730f9fdc86c91daa2af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1aab77980e9e53160ccafd681c0368706b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_A_tol</definition>
+        <definition>function Method::set_A_tol</definition>
         <argsstring>(in this, in t_A_tol)</argsstring>
         <name>set_A_tol</name>
-        <qualifiedname>BaseRungeKutta::set_A_tol</qualifiedname>
+        <qualifiedname>Method::set_A_tol</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1012,14 +915,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="405" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="405" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1af96dcced73959829843c4bf05005f233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a313380b4d469c799a890c84619b72908" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_R_tol</definition>
+        <definition>function Method::get_R_tol</definition>
         <argsstring>(in this)</argsstring>
         <name>get_R_tol</name>
-        <qualifiedname>BaseRungeKutta::get_R_tol</qualifiedname>
+        <qualifiedname>Method::get_R_tol</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1034,14 +937,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="416" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="416" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a0ee99fdd4b436d31d16f2ab7e6e919fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1aa831237cd00923d2d42bbf77fdb4de56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_R_tol</definition>
+        <definition>function Method::set_R_tol</definition>
         <argsstring>(in this, in t_R_tol)</argsstring>
         <name>set_R_tol</name>
-        <qualifiedname>BaseRungeKutta::set_R_tol</qualifiedname>
+        <qualifiedname>Method::set_R_tol</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1067,14 +970,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="427" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="427" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a38e9bac0aee9be9dfdda922c945c5ea0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a2d2fe916b830c691914636131935b2e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_fac</definition>
+        <definition>function Method::get_fac</definition>
         <argsstring>(in this)</argsstring>
         <name>get_fac</name>
-        <qualifiedname>BaseRungeKutta::get_fac</qualifiedname>
+        <qualifiedname>Method::get_fac</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1089,14 +992,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="438" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="438" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1ae86c3a4513d1475b0f60f0376eafed3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ac3eb90821d3b5213e29bf33b7f4714dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_fac</definition>
+        <definition>function Method::set_fac</definition>
         <argsstring>(in this, in t_fac)</argsstring>
         <name>set_fac</name>
-        <qualifiedname>BaseRungeKutta::set_fac</qualifiedname>
+        <qualifiedname>Method::set_fac</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1122,14 +1025,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="449" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="449" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1adefc781221c1fdbbf69b242710230910" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a54cc50a90f789c3cd573d6dd7e32b972" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_min_fac</definition>
+        <definition>function Method::get_min_fac</definition>
         <argsstring>(in this)</argsstring>
         <name>get_min_fac</name>
-        <qualifiedname>BaseRungeKutta::get_min_fac</qualifiedname>
+        <qualifiedname>Method::get_min_fac</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1144,14 +1047,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="460" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="460" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a628400f6195ad3a2f5b5a76ce7dbef82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a4c743ed45992ebb140b88990dd0facd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_min_fac</definition>
+        <definition>function Method::set_min_fac</definition>
         <argsstring>(in this, in t_min_fac)</argsstring>
         <name>set_min_fac</name>
-        <qualifiedname>BaseRungeKutta::set_min_fac</qualifiedname>
+        <qualifiedname>Method::set_min_fac</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1177,14 +1080,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="471" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="471" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a014bd0d0edfa1b02b734a2e7ab1f890a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a44aa185f039bdac887f8c2ae3535e998" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_max_fac</definition>
+        <definition>function Method::get_max_fac</definition>
         <argsstring>(in this)</argsstring>
         <name>get_max_fac</name>
-        <qualifiedname>BaseRungeKutta::get_max_fac</qualifiedname>
+        <qualifiedname>Method::get_max_fac</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1199,14 +1102,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="482" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="482" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a7e2c2eed88fd05cd05a0362657969c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a69fcbefb957510dce9947744c12a94b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_max_fac</definition>
+        <definition>function Method::set_max_fac</definition>
         <argsstring>(in this, in t_max_fac)</argsstring>
         <name>set_max_fac</name>
-        <qualifiedname>BaseRungeKutta::set_max_fac</qualifiedname>
+        <qualifiedname>Method::set_max_fac</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1232,14 +1135,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="493" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="493" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a5e097d93469de52870eeb11d2d58c6f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1abfea4b11891ca90560f4974b1428ba28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::enable_verbose</definition>
+        <definition>function Method::enable_verbose</definition>
         <argsstring>(in this)</argsstring>
         <name>enable_verbose</name>
-        <qualifiedname>BaseRungeKutta::enable_verbose</qualifiedname>
+        <qualifiedname>Method::enable_verbose</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1251,14 +1154,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="502" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="502" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a524bf726f57276bc4c1f828541730995" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ab62f1af87fc378efa1c1dde5d179399c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::disable_verbose</definition>
+        <definition>function Method::disable_verbose</definition>
         <argsstring>(in this)</argsstring>
         <name>disable_verbose</name>
-        <qualifiedname>BaseRungeKutta::disable_verbose</qualifiedname>
+        <qualifiedname>Method::disable_verbose</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1270,14 +1173,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="513" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="513" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a676349835f4ac9029726fba901d67b46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1afcaf3c6015e19d92f67cab09c4f57baa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::enable_progress_bar</definition>
+        <definition>function Method::enable_progress_bar</definition>
         <argsstring>(in this)</argsstring>
         <name>enable_progress_bar</name>
-        <qualifiedname>BaseRungeKutta::enable_progress_bar</qualifiedname>
+        <qualifiedname>Method::enable_progress_bar</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1289,14 +1192,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="524" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="524" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a8bf5832e21dca9abfb07003a76183099" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a830a0108174a978a0ac3c99815780fc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::disable_progress_bar</definition>
+        <definition>function Method::disable_progress_bar</definition>
         <argsstring>(in this)</argsstring>
         <name>disable_progress_bar</name>
-        <qualifiedname>BaseRungeKutta::disable_progress_bar</qualifiedname>
+        <qualifiedname>Method::disable_progress_bar</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1308,14 +1211,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="533" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="533" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a61a459a24adc434e22765a97fd2ece6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1afa1bac1a45254d64914202ed294321bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::enable_projection</definition>
+        <definition>function Method::enable_projection</definition>
         <argsstring>(in this)</argsstring>
         <name>enable_projection</name>
-        <qualifiedname>BaseRungeKutta::enable_projection</qualifiedname>
+        <qualifiedname>Method::enable_projection</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1327,14 +1230,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="542" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="542" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a9a3e46a189b07fa91e2fe3cbb851226f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ad4ae16d74b93dc8cc64b8237a2ab1f75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::disable_projection</definition>
+        <definition>function Method::disable_projection</definition>
         <argsstring>(in this)</argsstring>
         <name>disable_projection</name>
-        <qualifiedname>BaseRungeKutta::disable_projection</qualifiedname>
+        <qualifiedname>Method::disable_projection</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1346,14 +1249,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="551" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="551" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a1369a2d85248e9d1a0d2102d2593bf38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ad3c48272d740cc81709d4291ba03e84e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::enable_adaptive_step</definition>
+        <definition>function Method::enable_adaptive_step</definition>
         <argsstring>(in this)</argsstring>
         <name>enable_adaptive_step</name>
-        <qualifiedname>BaseRungeKutta::enable_adaptive_step</qualifiedname>
+        <qualifiedname>Method::enable_adaptive_step</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1365,14 +1268,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="560" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="560" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1ae70b21e627ffecc053cf1dda7c143bcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ab52842d540497334173016095c77175b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::disable_adaptive_step</definition>
+        <definition>function Method::disable_adaptive_step</definition>
         <argsstring>(in this)</argsstring>
         <name>disable_adaptive_step</name>
-        <qualifiedname>BaseRungeKutta::disable_adaptive_step</qualifiedname>
+        <qualifiedname>Method::disable_adaptive_step</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1384,14 +1287,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="569" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="569" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a7b139ff49c3fb811ce1dcf8088217b4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a5218dd05558135553f1e2913f1998ceb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_steps</definition>
+        <definition>function Method::get_stages</definition>
         <argsstring>(in this)</argsstring>
-        <name>get_steps</name>
-        <qualifiedname>BaseRungeKutta::get_steps</qualifiedname>
+        <name>get_stages</name>
+        <qualifiedname>Method::get_stages</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1399,21 +1302,21 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get the steps of the method used to integrate the system of ODEs/DAEs.</para>
-<para><simplesect kind="return"><para>The steps of the solver. </para>
+<para>Get the stages number of the solver used to integrate the system of ODEs/DAEs.</para>
+<para><simplesect kind="return"><para>The stages number of the solver. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="580" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="581" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a1a356de925c46acb99b6ec552f483d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a7fefab5d0f3a8e80aea0098c482a9c24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::is_explicit</definition>
+        <definition>function Method::is_explicit</definition>
         <argsstring>(in this)</argsstring>
         <name>is_explicit</name>
-        <qualifiedname>BaseRungeKutta::is_explicit</qualifiedname>
+        <qualifiedname>Method::is_explicit</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1428,14 +1331,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="591" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="592" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1aa02ca9f1ac34b0ff1b055b66feec4957" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a6482ca3668e186097e5cf5c5268847db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::is_implicit</definition>
+        <definition>function Method::is_implicit</definition>
         <argsstring>(in this)</argsstring>
         <name>is_implicit</name>
-        <qualifiedname>BaseRungeKutta::is_implicit</qualifiedname>
+        <qualifiedname>Method::is_implicit</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1450,14 +1353,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="602" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="603" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1ac2679cc2fd97c9e97c94a67b914f91a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1aa629e131ba4e85af1104dc560ce1cda7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::is_embedded</definition>
+        <definition>function Method::is_embedded</definition>
         <argsstring>(in this)</argsstring>
         <name>is_embedded</name>
-        <qualifiedname>BaseRungeKutta::is_embedded</qualifiedname>
+        <qualifiedname>Method::is_embedded</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1472,14 +1375,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="613" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="614" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a51a63e7657ff582958c89c3c67f72a86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a150be38119366343fe34348c0bacf019" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::get_tableau</definition>
+        <definition>function Method::get_tableau</definition>
         <argsstring>(in this)</argsstring>
         <name>get_tableau</name>
-        <qualifiedname>BaseRungeKutta::get_tableau</qualifiedname>
+        <qualifiedname>Method::get_tableau</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1488,20 +1391,20 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </briefdescription>
         <detaileddescription>
 <para>Get the Butcher tableau.</para>
-<para><simplesect kind="return"><para>The matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix), the weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector), the embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector), and nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector). </para>
+<para><simplesect kind="return"><para>The matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix), the weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector), the embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector), and nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector). </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="627" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="628" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a348dab976c5f0ad144f2fd6629de17ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a8dc5aba4ec80354591c5a1aedd8597d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::set_tableau</definition>
+        <definition>function Method::set_tableau</definition>
         <argsstring>(in this, in tbl)</argsstring>
         <name>set_tableau</name>
-        <qualifiedname>BaseRungeKutta::set_tableau</qualifiedname>
+        <qualifiedname>Method::set_tableau</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1519,7 +1422,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>A</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
+<para>Matrix <formula id="2">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1527,7 +1430,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>b</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector). </para>
+<para>Weights vector <formula id="4">$ \mathbf{b} $</formula> (row vector). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1535,7 +1438,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>b_e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>[optional] Embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
+<para>[optional] Embedded weights vector <formula id="7">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1543,7 +1446,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>c</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector). </para>
+<para>Nodes vector <formula id="12">$ \mathbf{c} $</formula> (column vector). </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1551,14 +1454,14 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="645" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="646" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a118baaa0116095eec04ee8acc53624c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a41f520380e485da0528f2de95eff11fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::project</definition>
+        <definition>function Method::project</definition>
         <argsstring>(in this, in x_tilde, in t)</argsstring>
         <name>project</name>
-        <qualifiedname>BaseRungeKutta::project</qualifiedname>
+        <qualifiedname>Method::project</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1574,8 +1477,8 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Project the ODEs system solution <formula id="7">$ \mathbf{x} $</formula> on the invariants <formula id="27">$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0} $</formula>. The constrained minimization problem to be solved is:</para>
-<para><formula id="28">\[
+<para>Project the ODEs system solution <formula id="56">$ \mathbf{x} $</formula> on the invariants <formula id="57">$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0} $</formula>. The constrained minimization problem to be solved is:</para>
+<para><formula id="58">\[
 \textrm{minimize} \quad
 \dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
 \textrm{subject to} \quad \mathbf{h}(\mathbf{x}, \mathbf{v}, t) =
@@ -1583,13 +1486,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 \]</formula></para>
 <para><bold>Solution Algorithm</bold></para>
 <para>Given the Lagrangian of the minimization problem of the form:</para>
-<para><formula id="29">\[
+<para><formula id="59">\[
 \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
 \frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
 \boldsymbol{\lambda} \cdot \mathbf{h}(\mathbf{x}, \mathbf{v}, t).
 \]</formula></para>
 <para>The solution of the problem is obtained by solving the following:</para>
-<para><formula id="30">\[
+<para><formula id="60">\[
 \left\{\begin{array}{l}
 \mathbf{x} + \mathbf{Jh}_\mathbf{x}^T \boldsymbol{\lambda} =
 \widetilde{\mathbf{x}} \\[0.5em]
@@ -1597,16 +1500,16 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 \end{array}\right.
 \]</formula></para>
 <para>Using the Taylor expansion of the Lagrangian:</para>
-<para><formula id="31">\[
+<para><formula id="61">\[
 \mathbf{h}(\mathbf{x}, \mathbf{v}, t) + \mathbf{Jh}_\mathbf{x} \delta\mathbf{x} +
 \mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
 \]</formula></para>
 <para>define the iterative method as:</para>
-<para><formula id="32">\[
+<para><formula id="62">\[
 \mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
 \]</formula></para>
-<para>Notice that <formula id="33">$ \delta\mathbf{x} $</formula> is the solution of the linear system:</para>
-<para><formula id="34">\[
+<para>Notice that <formula id="63">$ \delta\mathbf{x} $</formula> is the solution of the linear system:</para>
+<para><formula id="64">\[
 \begin{bmatrix}
 \mathbf{I}             &amp; \mathbf{Jh}_\mathbf{x}^T \\[0.5em]
 \mathbf{Jh}_\mathbf{x} &amp; \mathbf{0}
@@ -1621,13 +1524,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 -\mathbf{h}(\mathbf{x}, \mathbf{v}, t)
 \end{bmatrix}
 \]</formula></para>
-<para>where <formula id="35">$ \mathbf{Jh}_\mathbf{x} $</formula> is the Jacobian of the invariants/ with respect to the states <formula id="7">$ \mathbf{x} $</formula>.</para>
+<para>where <formula id="65">$ \mathbf{Jh}_\mathbf{x} $</formula> is the Jacobian of the invariants/ with respect to the states <formula id="56">$ \mathbf{x} $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_tilde</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The initial guess for the states <formula id="36">$ \widetilde{\mathbf{x}} $</formula>. </para>
+<para>The initial guess for the states <formula id="66">$ \widetilde{\mathbf{x}} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1635,24 +1538,24 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The time <formula id="37">$ t $</formula> at which the states are evaluated.</para>
+<para>The time <formula id="67">$ t $</formula> at which the states are evaluated.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The solution of the projection problem <formula id="7">$ \mathbf{x} $</formula>. </para>
+<simplesect kind="return"><para>The solution of the projection problem <formula id="56">$ \mathbf{x} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="740" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="741" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1adc93e2f6cf23b322f5cbf0bbe5bc8176" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a94c1bc48a0776dbc19455ed57ca59905" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::solve</definition>
+        <definition>function Method::solve</definition>
         <argsstring>(in this, in t, in x_0)</argsstring>
         <name>solve</name>
-        <qualifiedname>BaseRungeKutta::solve</qualifiedname>
+        <qualifiedname>Method::solve</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1674,7 +1577,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time mesh points <formula id="38">$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
+<para>Time mesh points <formula id="68">$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
            \right]^T $</formula>. </para>
 </parameterdescription>
 </parameteritem>
@@ -1683,25 +1586,25 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>x_0</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Initial states value <formula id="39">$ \mathbf{x}(t_0) $</formula>.</para>
+<para>Initial states value <formula id="69">$ \mathbf{x}(t_0) $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A matrix <formula id="40">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-        (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="41">$ \mathbf{x}(t) $</formula> and <formula id="42">$ \mathbf{x}^\prime(t) $</formula> of the system of ODEs/DAEs. </para>
+<simplesect kind="return"><para>A matrix <formula id="70">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+        (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="71">$ \mathbf{x}(t) $</formula> and <formula id="72">$ \mathbf{x}^\prime(t) $</formula> of the system of ODEs/DAEs. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="805" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="808" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1af79a9679fb76516bbb331236be183f80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a22eecc037be0a53ce2b56cf44e7f4ba9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::solve_adaptive_step</definition>
+        <definition>function Method::solve_adaptive_step</definition>
         <argsstring>(in this, in t, in x_0, in varargin)</argsstring>
         <name>solve_adaptive_step</name>
-        <qualifiedname>BaseRungeKutta::solve_adaptive_step</qualifiedname>
+        <qualifiedname>Method::solve_adaptive_step</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1727,7 +1630,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time mesh points <formula id="43">$ \mathbf{t} = \left[ t_0, t_1, \ldots,
+<para>Time mesh points <formula id="73">$ \mathbf{t} = \left[ t_0, t_1, \ldots,
              t_n \right]^T $</formula>. </para>
 </parameterdescription>
 </parameteritem>
@@ -1736,7 +1639,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>x_0</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Initial states value <formula id="39">$ \mathbf{x}(t_0) $</formula>. </para>
+<para>Initial states value <formula id="69">$ \mathbf{x}(t_0) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1744,7 +1647,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t_min</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>[optional] Minimum timestep <formula id="44">$ \Delta t_{\mathrm{min}} $</formula>. </para>
+<para>[optional] Minimum timestep <formula id="74">$ \Delta t_{\mathrm{min}} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1752,25 +1655,25 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t_max</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>[optional] Maximum timestep <formula id="45">$ \Delta t_{\mathrm{max}} $</formula>.</para>
+<para>[optional] Maximum timestep <formula id="75">$ \Delta t_{\mathrm{max}} $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A matrix <formula id="40">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-        (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="41">$ \mathbf{x}(t) $</formula> and <formula id="42">$ \mathbf{x}^\prime(t) $</formula> of the system of ODEs/DAEs. </para>
+<simplesect kind="return"><para>A matrix <formula id="70">$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
+        (\mathbf{t})\right] $</formula> containing the approximated solution <formula id="71">$ \mathbf{x}(t) $</formula> and <formula id="72">$ \mathbf{x}^\prime(t) $</formula> of the system of ODEs/DAEs. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="902" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="905" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a1a431e904c32e68eac24033160fa70fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ab8c3395e5d162ea184069e0d09f7c934" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::advance</definition>
+        <definition>function Method::advance</definition>
         <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
         <name>advance</name>
-        <qualifiedname>BaseRungeKutta::advance</qualifiedname>
+        <qualifiedname>Method::advance</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1794,19 +1697,19 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Advance using a generic integration method for a system of ODEs/DAEs of the form <formula id="46">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t) =
+<para>Advance using a generic integration method for a system of ODEs/DAEs of the form <formula id="76">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t) =
 \mathbf{0} $</formula>. The step is based on the following formula:</para>
-<para><formula id="47">\[
+<para><formula id="77">\[
 \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
 \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}&apos;_k(t_k), t_k, \Delta t)
 \]</formula></para>
-<para>where <formula id="48">$ \mathcal{S} $</formula> is the generic advancing step of the solver. In the advvancing step, the system of ODEs/DAEs is also projected on the manifold <formula id="49">$ \mathcal{h}(\mathbf{x}, \mathbf{v}, t) $</formula>. Substepping is also used to ensure that the solution is accurate.</para>
+<para>where <formula id="78">$ \mathcal{S} $</formula> is the generic advancing step of the solver. In the advvancing step, the system of ODEs/DAEs is also projected on the manifold <formula id="79">$ \mathcal{h}(\mathbf{x}, \mathbf{v}, t) $</formula>. Substepping is also used to ensure that the solution is accurate.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States value at <formula id="50">$ k $</formula>-th time step <formula id="51">$ \mathbf{x}(t_k) $</formula>. </para>
+<para>States value at <formula id="16">$ k $</formula>-th time step <formula id="17">$ \mathbf{x}(t_k) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1814,7 +1717,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>x_dot_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivative at <formula id="50">$ k $</formula>-th time step <formula id="52">$ \mathbf{x}&apos;
+<para>States derivative at <formula id="16">$ k $</formula>-th time step <formula id="41">$ \mathbf{x}&apos;
                (t_k) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
@@ -1823,7 +1726,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time step <formula id="53">$ t_k $</formula>. </para>
+<para>Time step <formula id="27">$ t_k $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1831,24 +1734,24 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>d_t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Advancing time step <formula id="54">$ \Delta t$</formula>.</para>
+<para>Advancing time step <formula id="19">$ \Delta t$</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The approximation of <formula id="55">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula>, <formula id="56">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula> and the suggested time step for the next advancing step <formula id="57">$ \Delta t_{k+1} $</formula>. </para>
+<simplesect kind="return"><para>The approximation of <formula id="80">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula>, <formula id="81">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula> and the suggested time step for the next advancing step <formula id="39">$ \Delta t_{k+1} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="1013" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1016" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a972faa9974fd7a9e285facfa5abb148c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a5e85431a99bef0bbf771def75389d8f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::adapt_step</definition>
+        <definition>function Method::adapt_step</definition>
         <argsstring>(in this, in x_h, in x_l, in d_t)</argsstring>
         <name>adapt_step</name>
-        <qualifiedname>BaseRungeKutta::adapt_step</qualifiedname>
+        <qualifiedname>Method::adapt_step</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1869,30 +1772,30 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </briefdescription>
         <detaileddescription>
 <para>Compute adaptive time step for the next advancing step according to the error control method. The error control method used is the local truncation error method, which is based on the following formula:</para>
-<para><formula id="58">\[
+<para><formula id="82">\[
 e = \sqrt{\dfrac{1}{n} \displaystyle\sum_{i=1}{n}\left(\dfrac
   {\mathbf{x} - \hat{\mathbf{x}}}
   {s c_i}
 \right)^2}
 \]</formula></para>
-<para>where <formula id="7">$ \mathbf{x} $</formula> is the approximation of the states at computed with higher order method of <formula id="18">$ p $</formula>, and <formula id="59">$ \hat{\mathbf{x}} $</formula> is the approximation of the states at computed with lower order method of <formula id="60">$
-\hat{p} $</formula>. To compute the suggested time step for the next advancing step <formula id="57">$ \Delta t_{k+1} $</formula>, The error is compared to <formula id="12">$ 1 $</formula> in order to find an optimal step size. From the error behaviour <formula id="61">$ e \approx Ch^{q+1} $</formula> and from <formula id="62">$ 1 \approx Ch_{opt}^{q+1} $</formula> (where <formula id="63">$ q = \min(p,\hat{p}) $</formula>) the optimal step size is obtained as:</para>
-<para><formula id="64">\[
+<para>where <formula id="56">$ \mathbf{x} $</formula> is the approximation of the states at computed with higher order method of <formula id="5">$ p $</formula>, and <formula id="83">$ \hat{\mathbf{x}} $</formula> is the approximation of the states at computed with lower order method of <formula id="84">$
+\hat{p} $</formula>. To compute the suggested time step for the next advancing step <formula id="39">$ \Delta t_{k+1} $</formula>, The error is compared to <formula id="85">$ 1 $</formula> in order to find an optimal step size. From the error behaviour <formula id="86">$ e \approx Ch^{q+1} $</formula> and from <formula id="87">$ 1 \approx Ch_{opt}^{q+1} $</formula> (where <formula id="88">$ q = \min(p,\hat{p}) $</formula>) the optimal step size is obtained as:</para>
+<para><formula id="89">\[
 h_{opt} = h \left( \dfrac{1}{e} \right)^{\frac{1}{q+1}}
 \]</formula></para>
-<para>We multiply the previous quation by a safety factor <formula id="65">$ f $</formula>, usually <formula id="66">$ f = 0.8 $</formula>, <formula id="67">$ 0.9 $</formula>, <formula id="68">$ (0.25)^{1/(q+1)} $</formula>, or <formula id="69">$ (0.38)^{1/(q+1)} $</formula>, so that the error will be acceptable the next time with high probability. Further, <formula id="70">$ h $</formula> is not allowed to increase nor to decrease too fast. So we put:</para>
-<para><formula id="71">\[
+<para>We multiply the previous quation by a safety factor <formula id="90">$ f $</formula>, usually <formula id="91">$ f = 0.8 $</formula>, <formula id="92">$ 0.9 $</formula>, <formula id="93">$ (0.25)^{1/(q+1)} $</formula>, or <formula id="94">$ (0.38)^{1/(q+1)} $</formula>, so that the error will be acceptable the next time with high probability. Further, <formula id="95">$ h $</formula> is not allowed to increase nor to decrease too fast. So we put:</para>
+<para><formula id="96">\[
 h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
   \dfrac{1}{e} \right)^{\frac{1}{q+1}}
 \right) \right)
 \]</formula></para>
-<para>for the new step size. Then, if <formula id="72">$ e \leq 1 $</formula>, the computed step is accepted and the solution is advanced to <formula id="7">$ \mathbf{x} $</formula> and a new step is tried with <formula id="73">$ h_{new} $</formula> as step size. Else, the step is rejected and the computations are repeated with the new step size <formula id="73">$ h_{new} $</formula>. Typially, <formula id="65">$ f $</formula> is set in the interval <formula id="74">$ [0.8, 0.9] $</formula>, <formula id="75">$ f_{max} $</formula> is set in the interval <formula id="76">$ [1.5, 5] $</formula>, and <formula id="77">$ f_{min} $</formula> is set in the interval <formula id="78">$ [0.1, 0.2] $</formula>.</para>
+<para>for the new step size. Then, if <formula id="97">$ e \leq 1 $</formula>, the computed step is accepted and the solution is advanced to <formula id="56">$ \mathbf{x} $</formula> and a new step is tried with <formula id="98">$ h_{new} $</formula> as step size. Else, the step is rejected and the computations are repeated with the new step size <formula id="98">$ h_{new} $</formula>. Typially, <formula id="90">$ f $</formula> is set in the interval <formula id="99">$ [0.8, 0.9] $</formula>, <formula id="100">$ f_{max} $</formula> is set in the interval <formula id="101">$ [1.5, 5] $</formula>, and <formula id="102">$ f_{min} $</formula> is set in the interval <formula id="103">$ [0.1, 0.2] $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x_h</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Approximation of the states at <formula id="79">$ k+1 $</formula>-th time step <formula id="80">$
+<para>Approximation of the states at <formula id="42">$ k+1 $</formula>-th time step <formula id="104">$
            \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> with higher order method. </para>
 </parameterdescription>
 </parameteritem>
@@ -1901,7 +1804,7 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
 <parametername>x_l</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Approximation of the states at <formula id="79">$ k+1 $</formula>-th time step <formula id="80">$
+<para>Approximation of the states at <formula id="42">$ k+1 $</formula>-th time step <formula id="104">$
            \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> with lower order method. </para>
 </parameterdescription>
 </parameteritem>
@@ -1910,25 +1813,25 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
 <parametername>d_t</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Actual advancing time step <formula id="54">$ \Delta t$</formula>.</para>
+<para>Actual advancing time step <formula id="19">$ \Delta t$</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The suggested time step for the next advancing step <formula id="81">$ \Delta
+<simplesect kind="return"><para>The suggested time step for the next advancing step <formula id="105">$ \Delta
         t_{k+1} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="1164" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1167" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a271dafb6759041ca4c92efabe46df659" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1a46b621cc024a7dbda7907c4bb56443f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
-        <definition>function BaseRungeKutta::info</definition>
+        <definition>function Method::info</definition>
         <argsstring>(in this)</argsstring>
         <name>info</name>
-        <qualifiedname>BaseRungeKutta::info</qualifiedname>
+        <qualifiedname>Method::info</qualifiedname>
         <param>
           <type>in</type>
           <declname>this</declname>
@@ -1939,17 +1842,92 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="1178" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1181" column="15"/>
       </memberdef>
-      </sectiondef>
-      <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="a00347_1ac5f571b6193a364d66f05cd6b54f8e7c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="a00215_1a22008e2131f1a3610e71d18aa59e57e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
-        <definition>static function ExplicitRungeKutta::check_tableau</definition>
+        <definition>virtual function Method::step</definition>
+        <argsstring>(in this, in x_k, in x_dot_k, in t_k, in d_t)</argsstring>
+        <name>step</name>
+        <qualifiedname>Method::step</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x_dot_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t_k</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>d_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute a step using a generic integration method for a system of ODEs/DAEs of the form <formula id="106">$ \mathbf{F}(\mathbf{x}, \mathbf{x}&apos;, \mathbf{v},
+t) = \mathbf{0} $</formula>. The step is based on the following formula:</para>
+<para><formula id="77">\[
+\mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
+\mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}&apos;_k(t_k), t_k, \Delta t)
+\]</formula></para>
+<para>where <formula id="78">$ \mathcal{S} $</formula> is the generic advancing step of the solver.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States value at <formula id="16">$ k $</formula>-th time step <formula id="17">$ \mathbf{x}(t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_dot_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States derivative at <formula id="16">$ k $</formula>-th time step <formula id="41">$ \mathbf{x}&apos;
+               (t_k) $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t_k</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step <formula id="27">$ t_k $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Advancing time step <formula id="19">$ \Delta t$</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The approximation of <formula id="80">$ \mathbf{x_{k+1}}(t_{k}+\Delta t) $</formula> and <formula id="81">$ \mathbf{x}&apos;_{k+1}(t_{k}+\Delta t) $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1219" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="a00215_1ad9dc63b3daf976e42434644dd3a2267d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function Method::check_tableau</definition>
         <argsstring>(in tbl)</argsstring>
         <name>check_tableau</name>
-        <qualifiedname>ExplicitRungeKutta::check_tableau</qualifiedname>
-        <reimplements refid="a00207_1a23094f1c55b43d9893425d0aaf71bedd">check_tableau</reimplements>
+        <qualifiedname>Method::check_tableau</qualifiedname>
         <param>
           <type>in</type>
           <declname>tbl</declname>
@@ -1963,7 +1941,7 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
 <parametername>tbl.A</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Matrix <formula id="15">$ \mathbf{A} $</formula>. </para>
+<para>Matrix <formula id="2">$ \mathbf{A} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1971,7 +1949,7 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
 <parametername>tbl.b</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Weights vector <formula id="17">$ \mathbf{b} $</formula>. </para>
+<para>Weights vector <formula id="4">$ \mathbf{b} $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1979,7 +1957,8 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
 <parametername>tbl.b_e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>[optional] Embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula>. </para>
+<para>[optional] Embedded weights vector <formula id="45">$ \hat{\mathbf{b}}
+               $</formula> (row vector). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1987,7 +1966,7 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
 <parametername>tbl.c</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Nodes vector <formula id="25">$ \mathbf{c} $</formula>.</para>
+<para>Nodes vector <formula id="12">$ \mathbf{c} $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1997,456 +1976,138 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="indigo/RungeKutta/ExplicitRungeKutta.m" line="363" column="23"/>
-      </memberdef>
-      </sectiondef>
-      <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="a00207_1a428f31dd8df0c373dd1969515f301730" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_name</definition>
-        <argsstring></argsstring>
-        <name>m_name</name>
-        <qualifiedname>BaseRungeKutta::m_name</qualifiedname>
-        <briefdescription>
-<para>Name of the solver. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="55" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="55" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1abbd8eccbe0ccdaf35f001e0f3e034491" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_order</definition>
-        <argsstring></argsstring>
-        <name>m_order</name>
-        <qualifiedname>BaseRungeKutta::m_order</qualifiedname>
-        <briefdescription>
-<para>Order of the solver. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="60" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="60" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a30522e535f19f0f5fd73ebc35b1303e4" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_A</definition>
-        <argsstring></argsstring>
-        <name>m_A</name>
-        <qualifiedname>BaseRungeKutta::m_A</qualifiedname>
-        <briefdescription>
-<para>Matrix <formula id="15">$ \mathbf{A} $</formula> (lower triangular matrix). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="65" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="65" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a00cd70ad45b7a0535008320de445afe6" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_b</definition>
-        <argsstring></argsstring>
-        <name>m_b</name>
-        <qualifiedname>BaseRungeKutta::m_b</qualifiedname>
-        <briefdescription>
-<para>Weights vector <formula id="17">$ \mathbf{b} $</formula> (row vector). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="70" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="70" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1ad0ae60201a3f511b68f37c30549a5b3b" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_b_e</definition>
-        <argsstring></argsstring>
-        <name>m_b_e</name>
-        <qualifiedname>BaseRungeKutta::m_b_e</qualifiedname>
-        <briefdescription>
-<para>Embedded weights vector <formula id="20">$ \hat{\mathbf{b}} $</formula> (row vector). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="75" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="75" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a883c99b0ec54ead87e4f68d730e0292a" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_c</definition>
-        <argsstring></argsstring>
-        <name>m_c</name>
-        <qualifiedname>BaseRungeKutta::m_c</qualifiedname>
-        <briefdescription>
-<para>Nodes vector <formula id="25">$ \mathbf{c} $</formula> (column vector). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="80" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="80" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a88340abefb7bc52729593202f8dfe708" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_is_explicit</definition>
-        <argsstring></argsstring>
-        <name>m_is_explicit</name>
-        <qualifiedname>BaseRungeKutta::m_is_explicit</qualifiedname>
-        <briefdescription>
-<para>Boolean to check if the method is explicit. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="85" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="85" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a0f4d12e699b628085eda0d323578013e" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_is_embedded</definition>
-        <argsstring></argsstring>
-        <name>m_is_embedded</name>
-        <qualifiedname>BaseRungeKutta::m_is_embedded</qualifiedname>
-        <briefdescription>
-<para>Boolean to check if the method is embedded. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="90" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="90" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a0791d2b8c3e80ca755e4df5838f95dc7" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_max_substeps</definition>
-        <argsstring></argsstring>
-        <name>m_max_substeps</name>
-        <qualifiedname>BaseRungeKutta::m_max_substeps</qualifiedname>
-        <briefdescription>
-<para>Maximum number of substeps. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="95" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="95" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1ada6ec50637355d0a42cac603712572ee" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_max_projection_iter</definition>
-        <argsstring></argsstring>
-        <name>m_max_projection_iter</name>
-        <qualifiedname>BaseRungeKutta::m_max_projection_iter</qualifiedname>
-        <briefdescription>
-<para>Maximum number of iterations in the projection process. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="100" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="100" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1abcc23dde08ec774b10d2dbaf6ead937d" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_ode</definition>
-        <argsstring></argsstring>
-        <name>m_ode</name>
-        <qualifiedname>BaseRungeKutta::m_ode</qualifiedname>
-        <briefdescription>
-<para>System of ODEs/DAEs to be object handle (fake pointer). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="105" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="105" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1aeee81e5f6759f87e64bf0ce7085ae62c" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_newton_solver</definition>
-        <argsstring></argsstring>
-        <name>m_newton_solver</name>
-        <qualifiedname>BaseRungeKutta::m_newton_solver</qualifiedname>
-        <briefdescription>
-<para>Non-linear system solver. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="110" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="110" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a8cea42859182114531530b6366685d6b" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_verbose</definition>
-        <argsstring></argsstring>
-        <name>m_verbose</name>
-        <qualifiedname>BaseRungeKutta::m_verbose</qualifiedname>
-        <briefdescription>
-<para>Verbose mode boolean. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="115" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="115" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1aff985c1d13730f4122103da729b81f09" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_progress_bar</definition>
-        <argsstring></argsstring>
-        <name>m_progress_bar</name>
-        <qualifiedname>BaseRungeKutta::m_progress_bar</qualifiedname>
-        <briefdescription>
-<para>Progress bar boolean. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="120" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="120" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a225f27e44a20d08a69da6c8f63680d52" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_projection</definition>
-        <argsstring></argsstring>
-        <name>m_projection</name>
-        <qualifiedname>BaseRungeKutta::m_projection</qualifiedname>
-        <briefdescription>
-<para>Projection mode boolean. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="125" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="125" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a375dfa8d64875905968175a6fa944d75" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_adaptive_step</definition>
-        <argsstring></argsstring>
-        <name>m_adaptive_step</name>
-        <qualifiedname>BaseRungeKutta::m_adaptive_step</qualifiedname>
-        <briefdescription>
-<para>Aadaptive step mode boolean. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="130" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="130" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a444e07d862c862526545da6f71dac2ef" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_A_tol</definition>
-        <argsstring></argsstring>
-        <name>m_A_tol</name>
-        <qualifiedname>BaseRungeKutta::m_A_tol</qualifiedname>
-        <briefdescription>
-<para>Absolute tolerance for adaptive step. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="135" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="135" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a515f2499769c542eab9dff86a4028f16" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_R_tol</definition>
-        <argsstring></argsstring>
-        <name>m_R_tol</name>
-        <qualifiedname>BaseRungeKutta::m_R_tol</qualifiedname>
-        <briefdescription>
-<para>Relative tolerance for adaptive step. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="140" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="140" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1ab9e1c131a158b153b731a3b7c087ed45" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_fac</definition>
-        <argsstring></argsstring>
-        <name>m_fac</name>
-        <qualifiedname>BaseRungeKutta::m_fac</qualifiedname>
-        <briefdescription>
-<para>Safety factor for adaptive step. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="145" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="145" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1ab85bea2a6c06f0e74308c9dfe2df849a" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_fac_min</definition>
-        <argsstring></argsstring>
-        <name>m_fac_min</name>
-        <qualifiedname>BaseRungeKutta::m_fac_min</qualifiedname>
-        <briefdescription>
-<para>Minimum safety factor for adaptive step. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="150" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="150" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="a00207_1a1e49992921411395721e50accb797158" prot="private" static="no" mutable="no">
-        <type>Property</type>
-        <definition>Property BaseRungeKutta::m_fac_max</definition>
-        <argsstring></argsstring>
-        <name>m_fac_max</name>
-        <qualifiedname>BaseRungeKutta::m_fac_max</qualifiedname>
-        <briefdescription>
-<para>Maximum safety factor for adaptive step. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="indigo/RungeKutta/BaseRungeKutta.m" line="155" column="10" bodyfile="indigo/RungeKutta/BaseRungeKutta.m" bodystart="155" bodyend="-1"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1234" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
-<para>Class container for Cash-Karp 4(5) method. </para>
     </briefdescription>
     <detaileddescription>
+<para>Class container for Runge-Kutta solvers of the system of Ordinary Differential Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs). The user must simply define the Butcher tableau of the solver, which defined as:</para>
+<para><formula id="1">\[
+\begin{array}{c|c}
+  \mathbf{c} &amp; \mathbf{A} \\ \hline
+             &amp; \mathbf{b} \\
+             &amp; \hat{\mathbf{b}}
+\end{array}
+\]</formula></para>
+<para>where <formula id="2">$ \mathbf{A} $</formula> is the Runge-Kutta matrix (lower triangular matrix):</para>
+<para><formula id="3">\[
+\mathbf{A} = \begin{bmatrix}
+  a_{11} &amp; a_{12} &amp; \dots  &amp; a_{1s} \\
+  a_{21} &amp; a_{22} &amp; \dots  &amp; a_{2s} \\
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  a_{s1} &amp; a_{s2} &amp; \dots  &amp; a_{ss}
+\end{bmatrix},
+\]</formula></para>
+<para><formula id="4">$ \mathbf{b} $</formula> is the Runge-Kutta weights vector relative to a method of order <formula id="5">$ p $</formula> (row vector):</para>
+<para><formula id="6">\[
+\mathbf{b} = \left[ b_1, b_2, \dots, b_s \right],
+\]</formula></para>
+<para><formula id="7">$ \hat{\mathbf{b}} $</formula> is the (optional) embedded Runge-Kutta weights vector relative to a method of order <formula id="8">$ \hat{p} $</formula> (usually <formula id="9">$ \hat{p} =
+p−1 $</formula> or <formula id="10">$ \hat{p} = p+1 $</formula>) (row vector):</para>
+<para><formula id="11">\[
+\hat{\mathbf{b}} = \left[ \hat{b}_1, \hat{b}_2, \dots, \hat{b}_s \right],
+\]</formula></para>
+<para>and <formula id="12">$ \mathbf{c} $</formula> is the Runge-Kutta nodes vector (column vector):</para>
+<para><formula id="13">\[
+\mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
+\]</formula> </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
-        <label>BaseRungeKutta</label>
-        <link refid="a00207"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="1">
-        <label>CashKarp45</label>
+        <label>Method</label>
         <link refid="a00215"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
-        <label>ExplicitRungeKutta</label>
-        <link refid="a00347"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
         <label>handle</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="3">
-        <label>BaseRungeKutta</label>
-        <link refid="a00207"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="1">
-        <label>CashKarp45</label>
+        <label>Method</label>
         <link refid="a00215"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
-        <label>ExplicitRungeKutta</label>
-        <link refid="a00347"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="indigo/RungeKutta/EmbeddedExplicitMethods/CashKarp45.m" line="4" column="1" bodyfile="indigo/RungeKutta/EmbeddedExplicitMethods/CashKarp45.m" bodystart="5" bodyend="50"/>
+    <location file="+Indigo/+RungeKutta/Method.m" line="46" column="1" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="47" bodyend="1240"/>
     <listofallmembers>
-      <member refid="a00207_1a972faa9974fd7a9e285facfa5abb148c" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>adapt_step</name></member>
-      <member refid="a00207_1a1a431e904c32e68eac24033160fa70fa" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>advance</name></member>
-      <member refid="a00207_1a4045e12215d52c3144698b57804d450c" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>BaseRungeKutta</name></member>
-      <member refid="a00215_1ad4c5f034ca49c65d980924e66e9db98f" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>CashKarp45</name></member>
-      <member refid="a00347_1ac5f571b6193a364d66f05cd6b54f8e7c" prot="public" virt="virtual"><scope>CashKarp45</scope><name>check_tableau</name></member>
-      <member refid="a00207_1ae70b21e627ffecc053cf1dda7c143bcd" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>disable_adaptive_step</name></member>
-      <member refid="a00207_1a8bf5832e21dca9abfb07003a76183099" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>disable_progress_bar</name></member>
-      <member refid="a00207_1a9a3e46a189b07fa91e2fe3cbb851226f" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>disable_projection</name></member>
-      <member refid="a00207_1a524bf726f57276bc4c1f828541730995" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>disable_verbose</name></member>
-      <member refid="a00207_1a1369a2d85248e9d1a0d2102d2593bf38" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>enable_adaptive_step</name></member>
-      <member refid="a00207_1a676349835f4ac9029726fba901d67b46" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>enable_progress_bar</name></member>
-      <member refid="a00207_1a61a459a24adc434e22765a97fd2ece6c" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>enable_projection</name></member>
-      <member refid="a00207_1a5e097d93469de52870eeb11d2d58c6f3" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>enable_verbose</name></member>
-      <member refid="a00347_1aed5f83828216e2fb1497a8fab37c223e" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>ExplicitRungeKutta</name></member>
-      <member refid="a00207_1adeb736ed6918d9da807c7a7843d8b77b" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_A</name></member>
-      <member refid="a00207_1a6e5449c0618ce832add333448d82cb32" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_A_tol</name></member>
-      <member refid="a00207_1a51fefb4d1d481ae3af840a421dd54898" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_b</name></member>
-      <member refid="a00207_1a333c795491dbe9402bc0724545b7f7f7" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_b_e</name></member>
-      <member refid="a00207_1a8c45e071550c7710e63a3ba98acbf261" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_c</name></member>
-      <member refid="a00207_1a38e9bac0aee9be9dfdda922c945c5ea0" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_fac</name></member>
-      <member refid="a00207_1a014bd0d0edfa1b02b734a2e7ab1f890a" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_max_fac</name></member>
-      <member refid="a00207_1a2fa5d768630ce369529a5c8b9e7322b9" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_max_projection_iter</name></member>
-      <member refid="a00207_1a5e66e0f28ab2ba4d3a8ce4f52df4bb8b" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_max_substeps</name></member>
-      <member refid="a00207_1adefc781221c1fdbbf69b242710230910" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_min_fac</name></member>
-      <member refid="a00207_1aeb3f8ba803ac9fecd776815b205cee28" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_name</name></member>
-      <member refid="a00207_1ae61b25757c0cd66d0797ab9b8aa03eee" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_order</name></member>
-      <member refid="a00207_1af96dcced73959829843c4bf05005f233" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_R_tol</name></member>
-      <member refid="a00207_1a7b139ff49c3fb811ce1dcf8088217b4b" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_steps</name></member>
-      <member refid="a00207_1a5d6dad170d0a6aa2a23954db92244f21" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_system</name></member>
-      <member refid="a00207_1a51a63e7657ff582958c89c3c67f72a86" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>get_tableau</name></member>
-      <member refid="a00207_1a271dafb6759041ca4c92efabe46df659" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>info</name></member>
-      <member refid="a00207_1ac2679cc2fd97c9e97c94a67b914f91a4" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>is_embedded</name></member>
-      <member refid="a00207_1a1a356de925c46acb99b6ec552f483d5f" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>is_explicit</name></member>
-      <member refid="a00207_1aa02ca9f1ac34b0ff1b055b66feec4957" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>is_implicit</name></member>
-      <member refid="a00207_1a30522e535f19f0f5fd73ebc35b1303e4" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_A</name></member>
-      <member refid="a00207_1a444e07d862c862526545da6f71dac2ef" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_A_tol</name></member>
-      <member refid="a00207_1a375dfa8d64875905968175a6fa944d75" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_adaptive_step</name></member>
-      <member refid="a00207_1a00cd70ad45b7a0535008320de445afe6" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_b</name></member>
-      <member refid="a00207_1ad0ae60201a3f511b68f37c30549a5b3b" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_b_e</name></member>
-      <member refid="a00207_1a883c99b0ec54ead87e4f68d730e0292a" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_c</name></member>
-      <member refid="a00207_1ab9e1c131a158b153b731a3b7c087ed45" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_fac</name></member>
-      <member refid="a00207_1a1e49992921411395721e50accb797158" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_fac_max</name></member>
-      <member refid="a00207_1ab85bea2a6c06f0e74308c9dfe2df849a" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_fac_min</name></member>
-      <member refid="a00207_1a0f4d12e699b628085eda0d323578013e" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_is_embedded</name></member>
-      <member refid="a00207_1a88340abefb7bc52729593202f8dfe708" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_is_explicit</name></member>
-      <member refid="a00207_1ada6ec50637355d0a42cac603712572ee" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_max_projection_iter</name></member>
-      <member refid="a00207_1a0791d2b8c3e80ca755e4df5838f95dc7" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_max_substeps</name></member>
-      <member refid="a00207_1a428f31dd8df0c373dd1969515f301730" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_name</name></member>
-      <member refid="a00207_1aeee81e5f6759f87e64bf0ce7085ae62c" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_newton_solver</name></member>
-      <member refid="a00207_1abcc23dde08ec774b10d2dbaf6ead937d" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_ode</name></member>
-      <member refid="a00207_1abbd8eccbe0ccdaf35f001e0f3e034491" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_order</name></member>
-      <member refid="a00207_1aff985c1d13730f4122103da729b81f09" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_progress_bar</name></member>
-      <member refid="a00207_1a225f27e44a20d08a69da6c8f63680d52" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_projection</name></member>
-      <member refid="a00207_1a515f2499769c542eab9dff86a4028f16" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_R_tol</name></member>
-      <member refid="a00207_1a8cea42859182114531530b6366685d6b" prot="private" virt="non-virtual"><scope>CashKarp45</scope><name>m_verbose</name></member>
-      <member refid="a00207_1a118baaa0116095eec04ee8acc53624c7" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>project</name></member>
-      <member refid="a00207_1afa8fb6ad9cb609c3475f87cafd0be62e" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_A</name></member>
-      <member refid="a00207_1afb9733d7a08c3730f9fdc86c91daa2af" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_A_tol</name></member>
-      <member refid="a00207_1a8c810c384e99e26ecee39323827f74d8" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_b</name></member>
-      <member refid="a00207_1a611293772e9f9f6afc5c22463d65c18b" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_b_e</name></member>
-      <member refid="a00207_1ad1266525a7dfd8bab120a2495b79d6fe" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_c</name></member>
-      <member refid="a00207_1ae86c3a4513d1475b0f60f0376eafed3e" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_fac</name></member>
-      <member refid="a00207_1a7e2c2eed88fd05cd05a0362657969c8a" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_max_fac</name></member>
-      <member refid="a00207_1adcea0bf28eecc195bb1d47272d122ed1" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_max_projection_iter</name></member>
-      <member refid="a00207_1a43f3a0945313fe798fd22599bead1b7f" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_max_substeps</name></member>
-      <member refid="a00207_1a628400f6195ad3a2f5b5a76ce7dbef82" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_min_fac</name></member>
-      <member refid="a00207_1a1c7bc2a3dc8c7749abb11876f33f31c5" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_name</name></member>
-      <member refid="a00207_1a0ee99fdd4b436d31d16f2ab7e6e919fc" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_R_tol</name></member>
-      <member refid="a00207_1afe67104e1c6be10f95204e3f3baeb807" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_system</name></member>
-      <member refid="a00207_1a348dab976c5f0ad144f2fd6629de17ca" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>set_tableau</name></member>
-      <member refid="a00207_1adc93e2f6cf23b322f5cbf0bbe5bc8176" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>solve</name></member>
-      <member refid="a00207_1af79a9679fb76516bbb331236be183f80" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>solve_adaptive_step</name></member>
-      <member refid="a00347_1ad4066163cd9af25c18711b9747abe46d" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>solve_step</name></member>
-      <member refid="a00347_1a6f77841f140bda8b5954798b9e69a35f" prot="public" virt="virtual"><scope>CashKarp45</scope><name>step</name></member>
-      <member refid="a00347_1a10af04b088531cff3f8384f5af946676" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>step_jacobian</name></member>
-      <member refid="a00347_1aa0086a86787a794ad5b3b4e74231b9c8" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>step_node</name></member>
-      <member refid="a00347_1af463df48c109519e7034c3dba0876fd1" prot="public" virt="non-virtual"><scope>CashKarp45</scope><name>step_residual</name></member>
+      <member refid="a00215_1a5e85431a99bef0bbf771def75389d8f9" prot="public" virt="non-virtual"><scope>Method</scope><name>adapt_step</name></member>
+      <member refid="a00215_1ab8c3395e5d162ea184069e0d09f7c934" prot="public" virt="non-virtual"><scope>Method</scope><name>advance</name></member>
+      <member refid="a00215_1ad9dc63b3daf976e42434644dd3a2267d" prot="public" virt="virtual"><scope>Method</scope><name>check_tableau</name></member>
+      <member refid="a00215_1ab52842d540497334173016095c77175b" prot="public" virt="non-virtual"><scope>Method</scope><name>disable_adaptive_step</name></member>
+      <member refid="a00215_1a830a0108174a978a0ac3c99815780fc2" prot="public" virt="non-virtual"><scope>Method</scope><name>disable_progress_bar</name></member>
+      <member refid="a00215_1ad4ae16d74b93dc8cc64b8237a2ab1f75" prot="public" virt="non-virtual"><scope>Method</scope><name>disable_projection</name></member>
+      <member refid="a00215_1ab62f1af87fc378efa1c1dde5d179399c" prot="public" virt="non-virtual"><scope>Method</scope><name>disable_verbose</name></member>
+      <member refid="a00215_1ad3c48272d740cc81709d4291ba03e84e" prot="public" virt="non-virtual"><scope>Method</scope><name>enable_adaptive_step</name></member>
+      <member refid="a00215_1afcaf3c6015e19d92f67cab09c4f57baa" prot="public" virt="non-virtual"><scope>Method</scope><name>enable_progress_bar</name></member>
+      <member refid="a00215_1afa1bac1a45254d64914202ed294321bf" prot="public" virt="non-virtual"><scope>Method</scope><name>enable_projection</name></member>
+      <member refid="a00215_1abfea4b11891ca90560f4974b1428ba28" prot="public" virt="non-virtual"><scope>Method</scope><name>enable_verbose</name></member>
+      <member refid="a00215_1a89eccb7c28e8b206921abfd6cb804dc3" prot="public" virt="non-virtual"><scope>Method</scope><name>get_A</name></member>
+      <member refid="a00215_1aaa5e36beec220ef9eb5b38ad5ec69b21" prot="public" virt="non-virtual"><scope>Method</scope><name>get_A_tol</name></member>
+      <member refid="a00215_1a43f9731d6a806fca0ddf051225efc103" prot="public" virt="non-virtual"><scope>Method</scope><name>get_b</name></member>
+      <member refid="a00215_1a1c66473a6c75f376439caac97566e6e6" prot="public" virt="non-virtual"><scope>Method</scope><name>get_b_e</name></member>
+      <member refid="a00215_1a12ec509b4afc6bb757a511415b3ab34b" prot="public" virt="non-virtual"><scope>Method</scope><name>get_c</name></member>
+      <member refid="a00215_1a2d2fe916b830c691914636131935b2e3" prot="public" virt="non-virtual"><scope>Method</scope><name>get_fac</name></member>
+      <member refid="a00215_1a44aa185f039bdac887f8c2ae3535e998" prot="public" virt="non-virtual"><scope>Method</scope><name>get_max_fac</name></member>
+      <member refid="a00215_1a1c56f6d1da5e2d218697380d920bc9a1" prot="public" virt="non-virtual"><scope>Method</scope><name>get_max_projection_iter</name></member>
+      <member refid="a00215_1acc90adf014230fd346a98d4dc978e49a" prot="public" virt="non-virtual"><scope>Method</scope><name>get_max_substeps</name></member>
+      <member refid="a00215_1a54cc50a90f789c3cd573d6dd7e32b972" prot="public" virt="non-virtual"><scope>Method</scope><name>get_min_fac</name></member>
+      <member refid="a00215_1ab7e49caeeb0ec95db8daeb777d8e34d1" prot="public" virt="non-virtual"><scope>Method</scope><name>get_name</name></member>
+      <member refid="a00215_1a14ecbd8193b3d24d4ccbac6670789d5b" prot="public" virt="non-virtual"><scope>Method</scope><name>get_order</name></member>
+      <member refid="a00215_1a313380b4d469c799a890c84619b72908" prot="public" virt="non-virtual"><scope>Method</scope><name>get_R_tol</name></member>
+      <member refid="a00215_1a5218dd05558135553f1e2913f1998ceb" prot="public" virt="non-virtual"><scope>Method</scope><name>get_stages</name></member>
+      <member refid="a00215_1ab70badfa1aa018b38728be78a8092959" prot="public" virt="non-virtual"><scope>Method</scope><name>get_system</name></member>
+      <member refid="a00215_1a150be38119366343fe34348c0bacf019" prot="public" virt="non-virtual"><scope>Method</scope><name>get_tableau</name></member>
+      <member refid="a00215_1a46b621cc024a7dbda7907c4bb56443f9" prot="public" virt="non-virtual"><scope>Method</scope><name>info</name></member>
+      <member refid="a00215_1aa629e131ba4e85af1104dc560ce1cda7" prot="public" virt="non-virtual"><scope>Method</scope><name>is_embedded</name></member>
+      <member refid="a00215_1a7fefab5d0f3a8e80aea0098c482a9c24" prot="public" virt="non-virtual"><scope>Method</scope><name>is_explicit</name></member>
+      <member refid="a00215_1a6482ca3668e186097e5cf5c5268847db" prot="public" virt="non-virtual"><scope>Method</scope><name>is_implicit</name></member>
+      <member refid="a00215_1a14b95940b3801f08b8a2071f9614e0ba" prot="private" virt="non-virtual"><scope>Method</scope><name>m_A</name></member>
+      <member refid="a00215_1a634d6bb5e36d67757d26f4348cc8618f" prot="private" virt="non-virtual"><scope>Method</scope><name>m_A_tol</name></member>
+      <member refid="a00215_1ac906f76058dfe3a507833082c573a418" prot="private" virt="non-virtual"><scope>Method</scope><name>m_adaptive_step</name></member>
+      <member refid="a00215_1a7f623511dd1ec91f70c6938f91f2174c" prot="private" virt="non-virtual"><scope>Method</scope><name>m_b</name></member>
+      <member refid="a00215_1a1ec2cac3e5dfc0f924764d52af46ca63" prot="private" virt="non-virtual"><scope>Method</scope><name>m_b_e</name></member>
+      <member refid="a00215_1ac5caf3091f9c8faad57f2c926d3a3532" prot="private" virt="non-virtual"><scope>Method</scope><name>m_c</name></member>
+      <member refid="a00215_1a0adc8253e2093a678e7ab635846e9d15" prot="private" virt="non-virtual"><scope>Method</scope><name>m_fac</name></member>
+      <member refid="a00215_1afff1c17a13ecc04d32aea7cfc57bde1e" prot="private" virt="non-virtual"><scope>Method</scope><name>m_fac_max</name></member>
+      <member refid="a00215_1a1448604bf5016f38531812f847377df6" prot="private" virt="non-virtual"><scope>Method</scope><name>m_fac_min</name></member>
+      <member refid="a00215_1ae2cc7433d8182d04e90ec4cadc3a02a5" prot="private" virt="non-virtual"><scope>Method</scope><name>m_is_embedded</name></member>
+      <member refid="a00215_1a99c84cc9e55df602b00d4edd232ca773" prot="private" virt="non-virtual"><scope>Method</scope><name>m_is_explicit</name></member>
+      <member refid="a00215_1abbf92d711050009460416e432f801850" prot="private" virt="non-virtual"><scope>Method</scope><name>m_max_projection_iter</name></member>
+      <member refid="a00215_1a9e761713aeb43f4798c35665d1887516" prot="private" virt="non-virtual"><scope>Method</scope><name>m_max_substeps</name></member>
+      <member refid="a00215_1a4cba1ac7e65c4492ead66b623772d8de" prot="private" virt="non-virtual"><scope>Method</scope><name>m_name</name></member>
+      <member refid="a00215_1a52e52bb3dd8ee855b0a49ffd91c89927" prot="private" virt="non-virtual"><scope>Method</scope><name>m_newton_solver</name></member>
+      <member refid="a00215_1a4cd0c736a608bea6c275940494977ec8" prot="private" virt="non-virtual"><scope>Method</scope><name>m_order</name></member>
+      <member refid="a00215_1af4496c91c48e7fc884fd6d845e934694" prot="private" virt="non-virtual"><scope>Method</scope><name>m_progress_bar</name></member>
+      <member refid="a00215_1a7048f3341a7200d3186cd2eee1bdcc5e" prot="private" virt="non-virtual"><scope>Method</scope><name>m_projection</name></member>
+      <member refid="a00215_1a10e58aa6081718a63829c95d33fd8725" prot="private" virt="non-virtual"><scope>Method</scope><name>m_R_tol</name></member>
+      <member refid="a00215_1a32507ebb9c9aa897931f9caeb732ea7f" prot="private" virt="non-virtual"><scope>Method</scope><name>m_sys</name></member>
+      <member refid="a00215_1aa7663b79ffd99aa6c7d8575c927d0d81" prot="private" virt="non-virtual"><scope>Method</scope><name>m_verbose</name></member>
+      <member refid="a00215_1a4b44d76b408f5c960f6b3d8e1eaf4d1c" prot="public" virt="non-virtual"><scope>Method</scope><name>Method</name></member>
+      <member refid="a00215_1a41f520380e485da0528f2de95eff11fc" prot="public" virt="non-virtual"><scope>Method</scope><name>project</name></member>
+      <member refid="a00215_1abda5167ad1b40f8a31a09d0b220fb9de" prot="public" virt="non-virtual"><scope>Method</scope><name>set_A</name></member>
+      <member refid="a00215_1aab77980e9e53160ccafd681c0368706b" prot="public" virt="non-virtual"><scope>Method</scope><name>set_A_tol</name></member>
+      <member refid="a00215_1a6379b34c8b01f736529b4304c0c3236d" prot="public" virt="non-virtual"><scope>Method</scope><name>set_b</name></member>
+      <member refid="a00215_1ab8846715dfec8ebc03e18de15321a4a9" prot="public" virt="non-virtual"><scope>Method</scope><name>set_b_e</name></member>
+      <member refid="a00215_1ac3e26c755421bb8491eb385339e975c4" prot="public" virt="non-virtual"><scope>Method</scope><name>set_c</name></member>
+      <member refid="a00215_1ac3eb90821d3b5213e29bf33b7f4714dd" prot="public" virt="non-virtual"><scope>Method</scope><name>set_fac</name></member>
+      <member refid="a00215_1a69fcbefb957510dce9947744c12a94b3" prot="public" virt="non-virtual"><scope>Method</scope><name>set_max_fac</name></member>
+      <member refid="a00215_1a561d0a11655c606bc22855857158a9b6" prot="public" virt="non-virtual"><scope>Method</scope><name>set_max_projection_iter</name></member>
+      <member refid="a00215_1aefd7629c76e713d3843de859ee3e8242" prot="public" virt="non-virtual"><scope>Method</scope><name>set_max_substeps</name></member>
+      <member refid="a00215_1a4c743ed45992ebb140b88990dd0facd4" prot="public" virt="non-virtual"><scope>Method</scope><name>set_min_fac</name></member>
+      <member refid="a00215_1ac3b95addb4b417635cdb3c795328e77b" prot="public" virt="non-virtual"><scope>Method</scope><name>set_name</name></member>
+      <member refid="a00215_1aa831237cd00923d2d42bbf77fdb4de56" prot="public" virt="non-virtual"><scope>Method</scope><name>set_R_tol</name></member>
+      <member refid="a00215_1a325315196a02b1af6d99160e23ca29ef" prot="public" virt="non-virtual"><scope>Method</scope><name>set_system</name></member>
+      <member refid="a00215_1a8dc5aba4ec80354591c5a1aedd8597d2" prot="public" virt="non-virtual"><scope>Method</scope><name>set_tableau</name></member>
+      <member refid="a00215_1a94c1bc48a0776dbc19455ed57ca59905" prot="public" virt="non-virtual"><scope>Method</scope><name>solve</name></member>
+      <member refid="a00215_1a22eecc037be0a53ce2b56cf44e7f4ba9" prot="public" virt="non-virtual"><scope>Method</scope><name>solve_adaptive_step</name></member>
+      <member refid="a00215_1a22008e2131f1a3610e71d18aa59e57e1" prot="public" virt="virtual"><scope>Method</scope><name>step</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -1,9 +1,9 @@
 .. _exhale_class_a00203:
 
-Class NewtonSolver
-==================
+Class BogackiShampine23
+=======================
 
-- Defined in :ref:`file_indigo_NewtonSolver.m`
+- Defined in :ref:`file_+Indigo_+RungeKutta_+Methods_+EmbeddedExplicit_BogackiShampine23.m`
 
 
 Inheritance Relationships
@@ -12,14 +12,14 @@ Inheritance Relationships
 Base Type
 *********
 
-- ``public handle``
+- ``public Indigo::RungeKutta::Explicit``
 
 
 Class Documentation
 -------------------
 
 
-.. doxygenclass:: NewtonSolver
+.. doxygenclass:: BogackiShampine23
    :project: doc_matlab
    :members:
    :protected-members:
