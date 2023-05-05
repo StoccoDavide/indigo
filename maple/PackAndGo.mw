@@ -415,13 +415,14 @@ module IndigoCodegen:
     ExplicitSystemToMatlab( name::string, 
                             vars::{Vector(algebraic), list(algebraic)}, 
                             eqns::{Vector(algebraic), list(algebraic)}, 
-                            invs::{Vector(algebraic), list(algebraic)} := [], 
-                            { algs::{list(algebraic = algebraic), 
-                                Vector(algebraic) = algebraic} := [], 
-                              data::list(symbol = algebraic) := [], 
+                            { data::list(symbol = algebraic) := [], 
                               indent::string := &quot;  &quot;, 
                               info::string := &quot;No class description 
-                                provided.&quot; }, 
+                                provided.&quot;, 
+                              invs::{Vector(algebraic), list(algebraic)} := 
+                                [], 
+                              veil::{list(algebraic = algebraic), 
+                                Vector(algebraic) = algebraic} := [] }, 
                             $ ) :: string
 
     # Generate a semi explicit system for the firt-order differential equations 
@@ -430,14 +431,14 @@ module IndigoCodegen:
     SemiExplicitSystemToMatlab( name::string, 
                                 vars::{Vector(algebraic), list(algebraic)}, 
                                 eqns::{Vector(algebraic), list(algebraic)}, 
-                                invs::{Vector(algebraic), list(algebraic)} := 
-                                  [], 
-                                { algs::{list(algebraic = algebraic), 
-                                    Vector(algebraic) = algebraic} := [], 
-                                  data::list(symbol = algebraic) := [], 
+                                { data::list(symbol = algebraic) := [], 
                                   indent::string := &quot;  &quot;, 
                                   info::string := &quot;No class description 
-                                    provided.&quot; }, 
+                                    provided.&quot;, 
+                                  invs::{Vector(algebraic), list(algebraic)} 
+                                    := [], 
+                                  veil::{list(algebraic = algebraic), 
+                                    Vector(algebraic) = algebraic} := [] }, 
                                 $ ) :: string
 
 </Text-field>

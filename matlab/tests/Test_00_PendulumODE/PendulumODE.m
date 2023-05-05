@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (ODE version)
-classdef PendulumODE < ImplicitSystem
+classdef PendulumODE < Indigo.Systems.Implicit
   %
   properties (SetAccess = protected, Hidden = true)
     m_m;   % Pendulum mass (kg)
@@ -19,9 +19,10 @@ classdef PendulumODE < ImplicitSystem
       % Set the number of equations and the number of invariants
       num_eqns = 2;
       num_invs = 1;
+      num_veil = 0;
 
       % Call the superclass constructor
-      this@ImplicitSystem('PendulumODE', num_eqns, num_invs);
+      this@Indigo.Systems.Implicit('PendulumODE', num_eqns, num_veil, num_invs);
 
       % Check the input arguments
       assert(m > 0, [CMD, 'pendulum mass must be positive.']);
@@ -66,7 +67,7 @@ classdef PendulumODE < ImplicitSystem
       out(1,2) = -1.0;
       out(2,1) = this.m_g / this.m_l * cos(x(1));
     end
-        %
+    %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function out = JF_x_dot( this, x, ~, ~, ~ )
@@ -78,20 +79,15 @@ classdef PendulumODE < ImplicitSystem
         [CMD, 'invalid x vector length.']);
 
       % Evaluate the system Jacobian
-      out  = eye(2);
+      out = eye(2);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = JF_v( this, x, ~, ~ )
-
-      CMD = 'PendulumODE::v(...): ';
-
-      % Check the input arguments
-      assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
+    function out = JF_v( this, ~, ~, ~, ~ )
 
       % Evaluate the system index-1 variables
-      out = NaN;
+      out = zeros(this.m_num_eqns, this.m_num_veil);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -116,51 +112,35 @@ classdef PendulumODE < ImplicitSystem
       CMD = 'PendulumODE::Jh_x(...): ';
 
       % Check the input arguments
-      assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
+      assert(length(x) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
 
       % Evaluate the system invariant Jacobian
-      out = [this.m_m.*this.m_g.*this.m_l.*sin(x(1,:)), ...
-             this.m_m.*this.m_l^2.*x(2,:)];
+      out = [this.m_m*this.m_g*this.m_l*sin(x(1)), ...
+             this.m_m*this.m_l^2*x(2)];
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = Jh_v( this, x, ~, ~ )
-
-      CMD = 'PendulumODE::Jh_v(...): ';
-
-      % Check the input arguments
-      assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
+    function out = Jh_v( this, ~, ~, ~ )
 
       % Evaluate the system invariant Jacobian
-      out = [this.m_m.*this.m_g.*this.m_l.*sin(x(1,:)), ...
-             this.m_m.*this.m_l^2.*x(2,:)];
+      out = zeros(this.m_num_invs, this.m_num_veil);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = v( this, x, ~ )
+    function out = v( this, ~, ~ )
 
-      CMD = 'PendulumODE::v(...): ';
-
-      % Check the input arguments
-      assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
-
-      % Evaluate the system index-1 variables
-      out = NaN;
+      % Evaluate the system veils
+      out = zeros(this.m_num_veil, 1);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = Jv_x( this, x, ~ )
+    function out = Jv_x( this, ~, ~ )
 
-      CMD = 'PendulumODE::Jv_x(...): ';
-
-      % Check the input arguments
-      assert(size(x,1) == this.m_num_eqns, [CMD, 'invalid x vector length.']);
-
-      % Evaluate the system index-1 variables Jacobian
-      out = NaN;
+      % Evaluate the system veils Jacobian
+      out = zeros(this.m_num_veil, this.m_num_eqns);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

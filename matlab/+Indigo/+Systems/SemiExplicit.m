@@ -70,6 +70,82 @@ classdef SemiExplicit < Indigo.Systems.System
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
+    %
+    function out = JF_x( this, x, x_dot, v, t )
+      out = -this.Jf_x(x, x_dot, v, t) - ...
+            this.Jf_v(x, x_dot, v, t) * this.Jv_x(x, t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the states derivative \f$ \mathbf{x}' \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{x}'
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}'} \f$.
+    %
+    function out = JF_x_dot( this, ~, ~, ~, ~ )
+      out = eye(this.m_num_eqns);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the veils \f$ \mathbf{v} \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{v}
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.
+    %
+    function out = JF_v( this, x, x_dot, v, t )
+      out = -this.Jf_v(x, x_dot, v, t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     %> Evaluate the system function \f$ \mathbf{f} \f$ as:
     %>
     %> \f[
@@ -108,18 +184,23 @@ classdef SemiExplicit < Indigo.Systems.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param v     IVeils \f$ \mathbf{v} \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$..
     %
     function out = Jf_x( this, x, x_dot, v, t )
       TA_x = this.TA_x(x, v, t);
-      out  = zeros(length(x));
-      for i = 1:size(TA, 3)
-        out(:,i) = TA_x(:,:,i) * x_dot;
+      TA_v = this.TA_v(x, v, t);
+      Jb_x = this.Jb_x(x, v, t);
+      Jb_v = this.Jb_v(x, v, t);
+      Jv_x = this.Jv_x(x, t);
+      out  = zeros(this.m_num_eqns);
+      rsh  = [size(TA_v, 1), size(TA_v, 3)];
+      for i = 1:size(TA_x, 3)
+        out(:,i) = (TA_x(:,:,i) + reshape(TA_v(:,i,:), rsh) * Jv_x) * x_dot;
       end
-      out = this.A(x, v, t) \ (this.Jb_x(x, v, t) - out);
+      out = this.A(x, v, t) \ (Jb_x + Jb_v * Jv_x - out);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -142,18 +223,19 @@ classdef SemiExplicit < Indigo.Systems.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param v     IVeils \f$ \mathbf{v} \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$..
     %
     function out = Jf_v( this, x, x_dot, v, t )
       TA_v = this.TA_v(x, v, t);
-      out  = zeros(length(x));
+      Jb_v = this.Jb_v(x, v, t);
+      out  = zeros(this.m_num_eqns, this.m_num_veil);
       for i = 1:size(TA_v, 3)
         out(:,i) = TA_v(:,:,i) * x_dot;
       end
-      out = this.A(x, v, t) \ (this.Jb_v(x, v, t) - out);
+      out = this.A(x, v, t) \ (Jb_v - out);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

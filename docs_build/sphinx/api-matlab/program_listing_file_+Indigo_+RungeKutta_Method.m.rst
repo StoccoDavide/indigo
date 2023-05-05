@@ -679,12 +679,12 @@ Program Listing for File Method.m
        %> where \f$ \mathbf{Jh}_\mathbf{x} \f$ is the Jacobian of the invariants/
        %> with respect to the states \f$ \mathbf{x} \f$.
        %>
-       %> \param x_tilde The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
-       %> \param t       The time \f$ t \f$ at which the states are evaluated.
+       %> \param x_t The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
+       %> \param t   The time \f$ t \f$ at which the states are evaluated.
        %>
        %> \return The solution of the projection problem \f$ \mathbf{x} \f$.
        %
-       function x = project( this, x_tilde, t )
+       function x = project( this, x_t, t )
    
          CMD = 'Indigo.RungeKutta.Method.project(...): ';
    
@@ -692,34 +692,36 @@ Program Listing for File Method.m
          num_eqns = this.m_sys.get_num_eqns();
          num_invs = this.m_sys.get_num_invs();
    
-         assert(length(x_tilde) == num_eqns, ...
+         assert(length(x_t) == num_eqns, ...
            [CMD, 'the number of states does not match the number of equations.']);
    
          % Check if there are any constraints
-         x = x_tilde;
+         x = x_t;
          if (num_invs > 0)
    
            % Calculate and scale the tolerance
-           tolerance = max(1, norm(x_tilde, inf)) * sqrt(eps);
+           tolerance = max(1, norm(x_t, inf)) * sqrt(eps);
    
            % Iterate until the projected solution is found
            for k = 1:this.m_max_projection_iter
    
              %     [A]         {x}    =        {b}
-             % / I  Jh^T \ /   dx   \   / x_tilde - x_k \
-             % |         | |        | = |               |
-             % \ Jh   0  / \ lambda /   \      -h       /
+             % / I  Jh^T \ /   dx   \   / x_t - x_k \
+             % |         | |        | = |           |
+             % \ Jh   0  / \ lambda /   \    -h     /
    
-             % Evaluate the invariants vector and its Jacobian
-             v  = this.m_sys.v(x, t);
-             h  = this.m_sys.h(x, v, t);
-             Jh = this.m_sys.Jh_x(x, v, t) + ...
-                  this.m_sys.JF_v(x, v, t) * this.m_sys.Jv_x(x, t);
-   
+             % Evaluate the veils, invariants vector and their Jacobian
+             v    = this.m_sys.v(x, t);
+             h    = this.m_sys.h(x, v, t);
+             Jh_x = this.m_sys.Jh_x(x, v, t);
+             Jh_v = this.m_sys.Jh_v(x, v, t);
+             Jv_x = this.m_sys.Jv_x(x, t);
+             
              % Compute the solution of the linear system
+             Jh  = Jh_x + Jh_v * Jv_x;
              A   = [eye(num_eqns), Jh.'; ...
                     Jh, zeros(num_invs, num_invs)];
-             b   = [x_tilde - x; -h];
+             b   = [x_t - x; -h];
              sol = A\b;
    
              % Update the solution

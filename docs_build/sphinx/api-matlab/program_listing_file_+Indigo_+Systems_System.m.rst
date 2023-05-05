@@ -69,12 +69,12 @@ Program Listing for File System.m
        %
        %> Class constructor for a system that requires the following inputs:
        %>
-       %> \param t_num_name The name of the system.
+       %> \param t_name     The name of the system.
        %> \param t_num_eqns The number of equations of the system.
        %> \param t_num_veil The number of (user-defined) veils of the system.
        %> \param t_num_invs The number of invariants of the system.
        %
-       function this = System( t_name, t_num_eqns, t_num_invs )
+       function this = System( t_name, t_num_eqns, t_num_veil, t_num_invs )
          this.m_name     = t_name;
          this.m_num_eqns = t_num_eqns;
          this.m_num_veil = t_num_veil;
@@ -243,6 +243,42 @@ Program Listing for File System.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
+       %> Evaluate the system veils \f$ \mathbf{v} \f$:
+       %>
+       %> \f[
+       %> \mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
+       %> \f]
+       %>
+       %> \param x States \f$ \mathbf{x} \f$.
+       %> \param t Independent variable \f$ t \f$.
+       %>
+       %> \return The system veils \f$ \mathbf{v} \f$..
+       %
+       v( this, x, t )
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Evaluate the Jacobian of the system veils \f$ \mathbf{v} \f$
+       %> with respect to the states \f$ \mathbf{x} \f$:
+       %>
+       %> \f[
+       %> \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
+       %> \dfrac{
+       %>   \partial \mathbf{h}( \mathbf{x}, t )
+       %> }{
+       %>   \partial \mathbf{x}
+       %> }.
+       %> \f]
+       %>
+       %> \param x States \f$ \mathbf{x} \f$.
+       %> \param t Independent variable \f$ t \f$.
+       %>
+       %> \return The Jacobian \f$ \mathbf{Jv}_{\mathbf{x}} \f$.
+       %
+       Jv_x( this, x, t )
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
        %> Evaluate the system invariants \f$ \mathbf{h} \f$:
        %>
        %> \f[
@@ -300,42 +336,6 @@ Program Listing for File System.m
        %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{v}} \f$.
        %
        Jh_v( this, x, v, t )
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Evaluate the system veils \f$ \mathbf{v} \f$:
-       %>
-       %> \f[
-       %> \mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
-       %> \f]
-       %>
-       %> \param x States \f$ \mathbf{x} \f$.
-       %> \param t Independent variable \f$ t \f$.
-       %>
-       %> \return The system veils \f$ \mathbf{v} \f$..
-       %
-       v( this, x, t )
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Evaluate the Jacobian of the system veils \f$ \mathbf{v} \f$
-       %> with respect to the states \f$ \mathbf{x} \f$:
-       %>
-       %> \f[
-       %> \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
-       %> \dfrac{
-       %>   \partial \mathbf{h}( \mathbf{x}, t )
-       %> }{
-       %>   \partial \mathbf{x}
-       %> }.
-       %> \f]
-       %>
-       %> \param x States \f$ \mathbf{x} \f$.
-       %> \param t Independent variable \f$ t \f$.
-       %>
-       %> \return The Jacobian \f$ \mathbf{Jv}_{\mathbf{x}} \f$.
-       %
-       Jv_x( this, x, t )
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %

@@ -58,13 +58,13 @@ Program Listing for File Implicit.m
        %
        %> Class constructor for a implicit system.
        %>
-       %> \param t_name Name of the system.
-       %> \param t_neqn Number of equations of the system.
-       %> \param t_veil Number of veils of the system.
-       %> \param t_ninv Number of invariants of the system.
+       %> \param t_name     The name of the system.
+       %> \param t_num_eqns The number of equations of the system.
+       %> \param t_num_veil The number of (user-defined) veils of the system.
+       %> \param t_num_invs The number of invariants of the system.
        %
-       function this = Implicit( t_name, t_neqn, t_veil, t_ninv )
-         this@Indigo.Systems.System(t_name, t_neqn, t_veil, t_ninv);
+       function this = Implicit( t_name, t_num_eqns, t_num_veil, t_num_invs )
+         this@Indigo.Systems.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

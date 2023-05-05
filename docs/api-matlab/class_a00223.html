@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Class System &#8212; indigo v0.3
+    <title>Class System &#8212; indigo v0.3-1-g9ac3232
 </title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
@@ -94,8 +94,8 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6System6SystemE2in2in2in">
-<span id="_CPPv3N6System6SystemE2in2in2in"></span><span id="_CPPv2N6System6SystemE2in2in2in"></span><span id="System::System__in.in.in"></span><span class="target" id="a00223_1a645e8a41feb5b9cf5b5fff18f0a34271"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">System</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">t_name</span></span>, </span><span class="n sig-param"><span class="pre">t_num_eqns</span></span>, </span><span class="n sig-param"><span class="pre">t_num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System6SystemE2in2in2in" title="Permalink to this definition">¶</a><br>
+<dt class="sig sig-object cpp" id="_CPPv4N6System6SystemE2in2in2in2in">
+<span id="_CPPv3N6System6SystemE2in2in2in2in"></span><span id="_CPPv2N6System6SystemE2in2in2in2in"></span><span id="System::System__in.in.in.in"></span><span class="target" id="a00223_1a3d72dd4cfbb44595a6a47e8362a09347"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">System</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">t_name</span></span>, </span><span class="n sig-param"><span class="pre">t_num_eqns</span></span>, </span><span class="n sig-param"><span class="pre">t_num_veil</span></span>, </span><span class="n sig-param"><span class="pre">t_num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System6SystemE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
 <dd>
 <p>Class constructor for a system that requires the following inputs:</p>
@@ -103,7 +103,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd">
 <ul class="simple">
-<li><p><strong>t_num_name</strong> – The name of the system. </p></li>
+<li><p><strong>t_name</strong> – The name of the system. </p></li>
 <li><p><strong>t_num_eqns</strong> – The number of equations of the system. </p></li>
 <li><p><strong>t_num_veil</strong> – The number of (user-defined) veils of the system. </p></li>
 <li><p><strong>t_num_invs</strong> – The number of invariants of the system. </p></li>
@@ -348,6 +348,67 @@
 </dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6System1vE2in2in2in">
+<span id="_CPPv3N6System1vE2in2in2in"></span><span id="_CPPv2N6System1vE2in2in2in"></span><span id="System::v__in.in.in"></span><span class="target" id="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System1vE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the system veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The system veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>.. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6System4Jv_xE2in2in2in">
+<span id="_CPPv3N6System4Jv_xE2in2in2in"></span><span id="_CPPv2N6System4Jv_xE2in2in2in"></span><span id="System::Jv_x__in.in.in"></span><span class="target" id="a00223_1a01a0080636b17600683225bb6a594a43"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jv_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System4Jv_xE2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
+\dfrac{
+  \partial \mathbf{h}( \mathbf{x}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jv}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6System1hE2in2in2in2in">
 <span id="_CPPv3N6System1hE2in2in2in2in"></span><span id="_CPPv2N6System1hE2in2in2in2in"></span><span id="System::h__in.in.in.in"></span><span class="target" id="a00223_1ab2c9825cbf0e71bddfa271a7876c1695"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">h</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System1hE2in2in2in2in" title="Permalink to this definition">¶</a><br>
 </dt>
@@ -439,67 +500,6 @@
 <dt class="field-even">Returns</dt>
 <dd class="field-even">
 <p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jh}_{\mathbf{v}} \)</span>. </p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6System1vE2in2in2in">
-<span id="_CPPv3N6System1vE2in2in2in"></span><span id="_CPPv2N6System1vE2in2in2in"></span><span id="System::v__in.in.in"></span><span class="target" id="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System1vE2in2in2in" title="Permalink to this definition">¶</a><br>
-</dt>
-<dd>
-<p>Evaluate the system veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
-<p></p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
-\]</div>
-
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd">
-<ul class="simple">
-<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
-<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even">
-<p>The system veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>.. </p>
-</dd>
-</dl>
-</dd>
-</dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6System4Jv_xE2in2in2in">
-<span id="_CPPv3N6System4Jv_xE2in2in2in"></span><span id="_CPPv2N6System4Jv_xE2in2in2in"></span><span id="System::Jv_x__in.in.in"></span><span class="target" id="a00223_1a01a0080636b17600683225bb6a594a43"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jv_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6System4Jv_xE2in2in2in" title="Permalink to this definition">¶</a><br>
-</dt>
-<dd>
-<p>Evaluate the Jacobian of the system veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
-<p></p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
-\dfrac{
-  \partial \mathbf{h}( \mathbf{x}, t )
-}{
-  \partial \mathbf{x}
-}.
-\]</div>
-
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd">
-<ul class="simple">
-<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
-<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even">
-<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jv}_{\mathbf{x}} \)</span>. </p>
 </dd>
 </dl>
 </dd>

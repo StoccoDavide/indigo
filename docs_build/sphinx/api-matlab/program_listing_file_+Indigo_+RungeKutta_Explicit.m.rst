@@ -131,7 +131,7 @@ Program Listing for File Explicit.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Compute the Jacobian of the ODEs system of equations:
+       %> Compute the system Jacobian with respect to the \f$ \mathbf{K} \f$:
        %>
        %> \f[
        %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
@@ -154,11 +154,9 @@ Program Listing for File Explicit.m
        %> \param v_i Veils \f$ \mathbf{v}_i \f$ at \f$ i \f$-th node.
        %> \param t_i Time step \f$ t_i \f$ at \f$ i \f$-th node.
        %>
-       %> \return The Jacobian of the ODEs system of equations to be solved.
+       %> \return The system Jacobian with respect to the \f$ \mathbf{K} \f$.
        %
        function out = step_jacobian( this, i, x_i, K, v_i, t_i )
-   
-         % Compute the Jacobians
          out = this.m_sys.JF_x_dot(x_i, K, v_i, t_i);
        end
        %

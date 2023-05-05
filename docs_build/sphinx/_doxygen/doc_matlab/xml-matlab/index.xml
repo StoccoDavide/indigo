@@ -10,8 +10,11 @@
     <member refid="a00207_1a11b884a252b19390aa6088bee9c98a3b" kind="function"><name>step_jacobian</name></member>
     <member refid="a00207_1a6c01209fafdb8886d0becee68e0f60d9" kind="function"><name>solve_step</name></member>
     <member refid="a00207_1a8d99d99728f6ba61f8370445c2cd7138" kind="function"><name>step</name></member>
-    <member refid="a00207_1a0f6d094260fafb853b8b294f35f98abc" kind="function"><name>Explicit</name></member>
-    <member refid="a00207_1a329132c0a047850193a1088b206dd225" kind="function"><name>F</name></member>
+    <member refid="a00207_1a1249fea00d94548efe998b63b8f0a4ba" kind="function"><name>Explicit</name></member>
+    <member refid="a00207_1ae0f6c1ab0a32ce241d48c034062cab0c" kind="function"><name>F</name></member>
+    <member refid="a00207_1a48d4714b2b2576863543823e6fb0595b" kind="function"><name>JF_x</name></member>
+    <member refid="a00207_1a0c2184eea8778da7cd8f13cad64e1d31" kind="function"><name>JF_x_dot</name></member>
+    <member refid="a00207_1a2eb167dd3fef7c53428497cd2c0e9040" kind="function"><name>JF_v</name></member>
     <member refid="a00207_1a1b16a45e8b129282cc33163df4264631" kind="function"><name>f</name></member>
     <member refid="a00207_1ac5bd2ae8bad394d227664c2182c8e3d8" kind="function"><name>Jf_x</name></member>
     <member refid="a00207_1a289f19fc4d041efb20b24bb143145426" kind="function"><name>Jf_v</name></member>
@@ -27,7 +30,7 @@
     <member refid="a00211_1ac05da69c8fb8351e0fd70bea4f16bce4" kind="function"><name>step_jacobian</name></member>
     <member refid="a00211_1a1f2e9e2f685c453dede6a1901ad49a74" kind="function"><name>solve_step</name></member>
     <member refid="a00211_1a724557cfdce23ba09a9eca1384561f3b" kind="function"><name>step</name></member>
-    <member refid="a00211_1af3cb0122a3609a628fc94964c12f5656" kind="function"><name>Implicit</name></member>
+    <member refid="a00211_1a39a68ad2734656477cee93d80aaf0ca3" kind="function"><name>Implicit</name></member>
     <member refid="a00211_1a6849139016e29020b9ba54e2b43e4560" kind="function"><name>check_tableau</name></member>
     <member refid="a00211_1a6ecff513ea8bb32ffe3dd69f3a06baf7" kind="function"><name>whattype</name></member>
     <member refid="a00211_1ada55f5d28eababa6728c3629cbd46688" kind="function"><name>is_explicit</name></member>
@@ -98,7 +101,7 @@
     <member refid="a00215_1aa629e131ba4e85af1104dc560ce1cda7" kind="function"><name>is_embedded</name></member>
     <member refid="a00215_1a150be38119366343fe34348c0bacf019" kind="function"><name>get_tableau</name></member>
     <member refid="a00215_1a8dc5aba4ec80354591c5a1aedd8597d2" kind="function"><name>set_tableau</name></member>
-    <member refid="a00215_1a41f520380e485da0528f2de95eff11fc" kind="function"><name>project</name></member>
+    <member refid="a00215_1ae29e3abf7fcced6bef2ca518e55b76ee" kind="function"><name>project</name></member>
     <member refid="a00215_1a94c1bc48a0776dbc19455ed57ca59905" kind="function"><name>solve</name></member>
     <member refid="a00215_1a22eecc037be0a53ce2b56cf44e7f4ba9" kind="function"><name>solve_adaptive_step</name></member>
     <member refid="a00215_1ab8c3395e5d162ea184069e0d09f7c934" kind="function"><name>advance</name></member>
@@ -151,8 +154,11 @@
     <member refid="a00227_1a4b7b23f8591840e5481be72f7466710c" kind="function"><name>solve</name></member>
   </compound>
   <compound refid="a00219" kind="class"><name>SemiExplicit</name>
-    <member refid="a00219_1a2db500e4b8c8d272b3cd29030dbad31b" kind="function"><name>SemiExplicit</name></member>
+    <member refid="a00219_1a3539789e0b7cb11868b8978648ab5d5c" kind="function"><name>SemiExplicit</name></member>
     <member refid="a00219_1ae02dad484c0ea2818a712b99106565af" kind="function"><name>F</name></member>
+    <member refid="a00219_1a905a4fe45573114401afb03abb70f462" kind="function"><name>JF_x</name></member>
+    <member refid="a00219_1aa8163886c747a8a2b0acc547fa4dc518" kind="function"><name>JF_x_dot</name></member>
+    <member refid="a00219_1a2ad06c02339b2d3d7fcbd4e0157a8cfc" kind="function"><name>JF_v</name></member>
     <member refid="a00219_1aa3bf653a210563d3482d93ed254aa80c" kind="function"><name>f</name></member>
     <member refid="a00219_1a90a8f76910ca4c20cfc168169ec3536c" kind="function"><name>Jf_x</name></member>
     <member refid="a00219_1a86843b9a3570f4b73e03f310b4e74a4b" kind="function"><name>Jf_v</name></member>
@@ -171,7 +177,7 @@
     <member refid="a00223_1a124e7cd17c22232bf0bc8b6b57bb145d" kind="variable"><name>m_num_eqns</name></member>
     <member refid="a00223_1af141872d009b3e1ddabb90611ea571a0" kind="variable"><name>m_num_veil</name></member>
     <member refid="a00223_1a235c6c432ee428bc5d8c9e97a416f1ee" kind="variable"><name>m_num_invs</name></member>
-    <member refid="a00223_1a645e8a41feb5b9cf5b5fff18f0a34271" kind="function"><name>System</name></member>
+    <member refid="a00223_1a3d72dd4cfbb44595a6a47e8362a09347" kind="function"><name>System</name></member>
     <member refid="a00223_1a70dc41bdf7069dcded5a3a25a65a83cc" kind="function"><name>get_name</name></member>
     <member refid="a00223_1ae0b9f4b8808a063436bcd3fb664e1525" kind="function"><name>get_num_eqns</name></member>
     <member refid="a00223_1a3f36d9e42ef257340ce5419b0a71fa18" kind="function"><name>set_num_eqns</name></member>
@@ -183,11 +189,11 @@
     <member refid="a00223_1aa6e9ceb61936e2c57f58459072e45b97" kind="function"><name>JF_x</name></member>
     <member refid="a00223_1a586d3e410ca18e5ec5ecdf75c5a3ba7d" kind="function"><name>JF_x_dot</name></member>
     <member refid="a00223_1a131c21249242acabda9c5b6436ce4f67" kind="function"><name>JF_v</name></member>
+    <member refid="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb" kind="function"><name>v</name></member>
+    <member refid="a00223_1a01a0080636b17600683225bb6a594a43" kind="function"><name>Jv_x</name></member>
     <member refid="a00223_1ab2c9825cbf0e71bddfa271a7876c1695" kind="function"><name>h</name></member>
     <member refid="a00223_1aa0e402ede1d8e88786b30fc009ca0197" kind="function"><name>Jh_x</name></member>
     <member refid="a00223_1a541408139df995b5296bd4f6eb9787dd" kind="function"><name>Jh_v</name></member>
-    <member refid="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb" kind="function"><name>v</name></member>
-    <member refid="a00223_1a01a0080636b17600683225bb6a594a43" kind="function"><name>Jv_x</name></member>
     <member refid="a00223_1a98e9b89c716cc18663ff8940776f19b1" kind="function"><name>whattype</name></member>
     <member refid="a00223_1a84c01f0809d4f7ee851298989adb475d" kind="function"><name>is_explicit</name></member>
     <member refid="a00223_1a2a41f8939baf531a8b1c712875a69215" kind="function"><name>is_semiexplicit</name></member>

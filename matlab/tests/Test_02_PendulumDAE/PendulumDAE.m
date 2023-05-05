@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (DAE version)
-classdef PendulumDAE < ImplicitSystem
+classdef PendulumDAE < Indigo.Systems.Implicit
   %
   properties (SetAccess = protected, Hidden = true)
     m_m;   % Pendulum mass (kg)
@@ -18,10 +18,11 @@ classdef PendulumDAE < ImplicitSystem
 
       % Set the number of equations and the number of invariants
       num_eqns = 5;
+      num_veil = 0;
       num_invs = 1;
 
       % Call the superclass constructor
-      this@ImplicitSystem('PendulumODE', num_eqns, num_invs);
+      this@Indigo.Systems.Implicit('PendulumODE', num_eqns, num_veil, num_invs);
 
       % Check the input arguments
       assert(m > 0, ...
@@ -53,23 +54,34 @@ classdef PendulumDAE < ImplicitSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function [JF_x, JF_x_dot] = JF( this, x, ~, ~ )
-      JF_x     = zeros(5,5);
-      JF_x_dot = zeros(5,5);
-
-      JF_x(1,3) = -1;
-      JF_x(2,4) = -1;
-      JF_x(3,1) = x(5);
-      JF_x(3,5) = x(1);
-      JF_x(4,2) = x(5);
-      JF_x(4,5) = x(2);
-      JF_x(5,1) = 2*x(1);
-      JF_x(5,2) = 2*x(2);
-
+    function out = JF_x( ~, x, ~, ~ )
+      out      = zeros(5, 5);
+      out(1,3) = -1;
+      out(2,4) = -1;
+      out(3,1) = x(5);
+      out(3,5) = x(1);
+      out(4,2) = x(5);
+      out(4,5) = x(2);
+      out(5,1) = 2*x(1);
+      out(5,2) = 2*x(2);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function JF_x_dot = JF_x_dot( this, ~, ~, ~ )
+      JF_x_dot      = zeros(5,5);
       JF_x_dot(1,1) = 1;
       JF_x_dot(2,2) = 1;
       JF_x_dot(3,3) = this.m_m;
       JF_x_dot(4,4) = this.m_m;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = JF_v( this, ~, ~, ~, ~ )
+
+      % Evaluate the system index-1 variables
+      out = zeros(this.m_num_eqns, this.m_num_veil);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -91,7 +103,7 @@ classdef PendulumDAE < ImplicitSystem
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out = Jh( this, x, ~ )
+    function out = Jh_x( this, x, ~ )
 
       CMD = 'PendulumODE::Jh(...): ';
 
@@ -105,6 +117,30 @@ classdef PendulumDAE < ImplicitSystem
              this.m_m.*this.m_l.*x(3,:), ...
              this.m_m.*this.m_l.*x(4,:), ...
              zeros(1,size(x,2))];
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = Jh_v( this, ~, ~, ~ )
+
+      % Evaluate the system invariant Jacobian
+      out = zeros(this.m_num_invs, this.m_num_veil);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = v( this, ~, ~ )
+
+      % Evaluate the system veils
+      out = zeros(this.m_num_veil, 1);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = Jv_x( this, ~, ~ )
+
+      % Evaluate the system veils Jacobian
+      out = zeros(this.m_num_veil, this.m_num_eqns);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

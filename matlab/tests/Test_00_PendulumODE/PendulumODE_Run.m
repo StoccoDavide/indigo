@@ -91,9 +91,9 @@ solver_name = { ...
   implicit_embedded_solver{1}, ...
 };
 
-solver = {};
-for k=1:4
-  solver{k} = eval(sprintf('%s()',solver_name{k}));
+solver = cell(length(solver_name),1);
+for k = 1:length(solver_name)
+  solver{k} = IndigoSolver(solver_name{k});
   solver{k}.set_system( ODE );
 end
 

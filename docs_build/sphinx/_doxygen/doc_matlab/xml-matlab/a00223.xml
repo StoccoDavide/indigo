@@ -66,10 +66,10 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="a00223_1a645e8a41feb5b9cf5b5fff18f0a34271" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00223_1a3d72dd4cfbb44595a6a47e8362a09347" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function System::System</definition>
-        <argsstring>(in t_name, in t_num_eqns, in t_num_invs)</argsstring>
+        <argsstring>(in t_name, in t_num_eqns, in t_num_veil, in t_num_invs)</argsstring>
         <name>System</name>
         <qualifiedname>System::System</qualifiedname>
         <param>
@@ -82,6 +82,10 @@
         </param>
         <param>
           <type>in</type>
+          <declname>t_num_veil</declname>
+        </param>
+        <param>
+          <type>in</type>
           <declname>t_num_invs</declname>
         </param>
         <briefdescription>
@@ -90,7 +94,7 @@
 <para>Class constructor for a system that requires the following inputs:</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>t_num_name</parametername>
+<parametername>t_name</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The name of the system. </para>
@@ -343,7 +347,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the system function <formula id="122">$ \mathbf{F} $</formula>.</para>
+<para>Evaluate the system function <formula id="112">$ \mathbf{F} $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>x</parametername>
@@ -357,7 +361,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="118">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -377,7 +381,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The system function <formula id="122">$ \mathbf{F} $</formula>. </para>
+<simplesect kind="return"><para>The system function <formula id="112">$ \mathbf{F} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -414,8 +418,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system function <formula id="122">$ \mathbf{F} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
-<para><formula id="132">\[
+<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{F} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
+<para><formula id="115">\[
 \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
@@ -436,7 +440,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="118">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -456,7 +460,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="133">$ \mathbf{JF}_{\mathbf{x}} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="116">$ \mathbf{JF}_{\mathbf{x}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -493,8 +497,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system function <formula id="122">$ \mathbf{F} $</formula> with respect to the states derivative <formula id="118">$ \mathbf{x}&apos; $</formula>:</para>
-<para><formula id="134">\[
+<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{F} $</formula> with respect to the states derivative <formula id="113">$ \mathbf{x}&apos; $</formula>:</para>
+<para><formula id="117">\[
 \mathbf{JF}_{\mathbf{x}&apos;}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
@@ -515,7 +519,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="118">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -535,7 +539,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="135">$ \mathbf{JF}_{\mathbf{x}&apos;} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="118">$ \mathbf{JF}_{\mathbf{x}&apos;} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -572,8 +576,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system function <formula id="122">$ \mathbf{F} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
-<para><formula id="136">\[
+<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{F} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
+<para><formula id="119">\[
 \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
@@ -594,7 +598,7 @@
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="118">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -614,13 +618,118 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="137">$ \mathbf{JF}_{\mathbf{v}} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="120">$ \mathbf{JF}_{\mathbf{v}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="+Indigo/+Systems/System.m" line="248" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function System::v</definition>
+        <argsstring>(in this, in x, in t)</argsstring>
+        <name>v</name>
+        <qualifiedname>System::v</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate the system veils <formula id="114">$ \mathbf{v} $</formula>:</para>
+<para><formula id="138">\[
+\mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Independent variable <formula id="67">$ t $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The system veils <formula id="114">$ \mathbf{v} $</formula>.. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+Systems/System.m" line="264" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="a00223_1a01a0080636b17600683225bb6a594a43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>function</type>
+        <definition>virtual function System::Jv_x</definition>
+        <argsstring>(in this, in x, in t)</argsstring>
+        <name>Jv_x</name>
+        <qualifiedname>System::Jv_x</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate the Jacobian of the system veils <formula id="114">$ \mathbf{v} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
+<para><formula id="139">\[
+\mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
+\dfrac{
+  \partial \mathbf{h}( \mathbf{x}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Independent variable <formula id="67">$ t $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian <formula id="140">$ \mathbf{Jv}_{\mathbf{x}} $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+Systems/System.m" line="286" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00223_1ab2c9825cbf0e71bddfa271a7876c1695" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -647,8 +756,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the system invariants <formula id="138">$ \mathbf{h} $</formula>:</para>
-<para><formula id="139">\[
+<para>Evaluate the system invariants <formula id="141">$ \mathbf{h} $</formula>:</para>
+<para><formula id="142">\[
 \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
 \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -676,13 +785,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The invariants <formula id="138">$ \mathbf{h} $</formula>.. </para>
+<simplesect kind="return"><para>The invariants <formula id="141">$ \mathbf{h} $</formula>.. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/System.m" line="265" column="24"/>
+        <location file="+Indigo/+Systems/System.m" line="303" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00223_1aa0e402ede1d8e88786b30fc009ca0197" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -709,8 +818,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system invariants <formula id="138">$ \mathbf{h} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
-<para><formula id="140">\[
+<para>Evaluate the Jacobian of the system invariants <formula id="141">$ \mathbf{h} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
+<para><formula id="143">\[
 \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{h}( \mathbf{x}, \mathbf{v}, t )
@@ -743,13 +852,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="141">$ \mathbf{Jh}_{\mathbf{x}} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="144">$ \mathbf{Jh}_{\mathbf{x}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/System.m" line="288" column="24"/>
+        <location file="+Indigo/+Systems/System.m" line="326" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00223_1a541408139df995b5296bd4f6eb9787dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -776,8 +885,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system invariants <formula id="138">$ \mathbf{h} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
-<para><formula id="142">\[
+<para>Evaluate the Jacobian of the system invariants <formula id="141">$ \mathbf{h} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
+<para><formula id="145">\[
 \mathbf{Jh}_{\mathbf{v}}( \mathbf{x}, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{h}
@@ -810,112 +919,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="143">$ \mathbf{Jh}_{\mathbf{v}} $</formula>. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="+Indigo/+Systems/System.m" line="311" column="24"/>
-      </memberdef>
-      <memberdef kind="function" id="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>function</type>
-        <definition>virtual function System::v</definition>
-        <argsstring>(in this, in x, in t)</argsstring>
-        <name>v</name>
-        <qualifiedname>System::v</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Evaluate the system veils <formula id="114">$ \mathbf{v} $</formula>:</para>
-<para><formula id="144">\[
-\mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
-\]</formula></para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>x</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>t</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Independent variable <formula id="67">$ t $</formula>.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The system veils <formula id="114">$ \mathbf{v} $</formula>.. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="+Indigo/+Systems/System.m" line="327" column="24"/>
-      </memberdef>
-      <memberdef kind="function" id="a00223_1a01a0080636b17600683225bb6a594a43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>function</type>
-        <definition>virtual function System::Jv_x</definition>
-        <argsstring>(in this, in x, in t)</argsstring>
-        <name>Jv_x</name>
-        <qualifiedname>System::Jv_x</qualifiedname>
-        <param>
-          <type>in</type>
-          <declname>this</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>x</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Evaluate the Jacobian of the system veils <formula id="114">$ \mathbf{v} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
-<para><formula id="145">\[
-\mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
-\dfrac{
-  \partial \mathbf{h}( \mathbf{x}, t )
-}{
-  \partial \mathbf{x}
-}.
-\]</formula></para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>x</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>t</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Independent variable <formula id="67">$ t $</formula>.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="146">$ \mathbf{Jv}_{\mathbf{x}} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="146">$ \mathbf{Jh}_{\mathbf{v}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -1000,7 +1004,7 @@
     </briefdescription>
     <detaileddescription>
 <para>Class container for the system of Ordinary Differential Equations (ODEs) or Differential Algebraic Equations (DAEs). This class is the base class for more specific systems, such as the explicit, semi-explicit and implicit systems. The system <emphasis>must</emphasis> define the abstract methods. The system is defined by the following equations:</para>
-<para><formula id="120">\[
+<para><formula id="127">\[
 \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) = \mathbf{0}
 \]</formula></para>
 <para>with <emphasis>optional</emphasis> veils <formula id="109">$ \mathbf{v}( \mathbf{x}, t ) $</formula> of the form:</para>
@@ -1065,7 +1069,7 @@
       <member refid="a00223_1a3f36d9e42ef257340ce5419b0a71fa18" prot="public" virt="non-virtual"><scope>System</scope><name>set_num_eqns</name></member>
       <member refid="a00223_1a7be8340e7dfc98527b41accca7a32702" prot="public" virt="non-virtual"><scope>System</scope><name>set_num_invs</name></member>
       <member refid="a00223_1afae36aec1f4e94205b328c360feb6372" prot="public" virt="non-virtual"><scope>System</scope><name>set_num_veil</name></member>
-      <member refid="a00223_1a645e8a41feb5b9cf5b5fff18f0a34271" prot="public" virt="non-virtual"><scope>System</scope><name>System</name></member>
+      <member refid="a00223_1a3d72dd4cfbb44595a6a47e8362a09347" prot="public" virt="non-virtual"><scope>System</scope><name>System</name></member>
       <member refid="a00223_1a6c0e3310c4c1256b0a6bd6fa8a15cedb" prot="public" virt="virtual"><scope>System</scope><name>v</name></member>
       <member refid="a00223_1a98e9b89c716cc18663ff8940776f19b1" prot="public" virt="virtual"><scope>System</scope><name>whattype</name></member>
     </listofallmembers>

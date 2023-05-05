@@ -677,12 +677,12 @@
 <codeline lineno="667"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{Jh}_\mathbf{x}<sp/>\f$<sp/>is<sp/>the<sp/>Jacobian<sp/>of<sp/>the<sp/>invariants/</highlight></codeline>
 <codeline lineno="668"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>with<sp/>respect<sp/>to<sp/>the<sp/>states<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
 <codeline lineno="669"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_tilde<sp/>The<sp/>initial<sp/>guess<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>states<sp/>\f$<sp/>\widetilde{\mathbf{x}}<sp/>\f$.</highlight></codeline>
-<codeline lineno="671"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>time<sp/>\f$<sp/>t<sp/>\f$<sp/>at<sp/>which<sp/>the<sp/>states<sp/>are<sp/>evaluated.</highlight></codeline>
+<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_t<sp/>The<sp/>initial<sp/>guess<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>states<sp/>\f$<sp/>\widetilde{\mathbf{x}}<sp/>\f$.</highlight></codeline>
+<codeline lineno="671"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/>The<sp/>time<sp/>\f$<sp/>t<sp/>\f$<sp/>at<sp/>which<sp/>the<sp/>states<sp/>are<sp/>evaluated.</highlight></codeline>
 <codeline lineno="672"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
 <codeline lineno="673"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>solution<sp/>of<sp/>the<sp/>projection<sp/>problem<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
 <codeline lineno="674"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>x<sp/>=<sp/>project(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x_tilde,<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/>x<sp/>=<sp/>project(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x_t,<sp/>t<sp/>)</highlight></codeline>
 <codeline lineno="676"><highlight class="normal"></highlight></codeline>
 <codeline lineno="677"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/></highlight><highlight class="stringliteral">&apos;Indigo.RungeKutta.Method.project(...):<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="678"><highlight class="normal"></highlight></codeline>
@@ -690,490 +690,492 @@
 <codeline lineno="680"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
 <codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>num_invs<sp/>=<sp/>this.m_sys.get_num_invs();</highlight></codeline>
 <codeline lineno="682"><highlight class="normal"></highlight></codeline>
-<codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(length(x_tilde)<sp/>==<sp/>num_eqns,<sp/>...</highlight></codeline>
+<codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>assert(length(x_t)<sp/>==<sp/>num_eqns,<sp/>...</highlight></codeline>
 <codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/></highlight><highlight class="stringliteral">&apos;the<sp/>number<sp/>of<sp/>states<sp/>does<sp/>not<sp/>match<sp/>the<sp/>number<sp/>of<sp/>equations.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
 <codeline lineno="685"><highlight class="normal"></highlight></codeline>
 <codeline lineno="686"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>there<sp/>are<sp/>any<sp/>constraints</highlight></codeline>
-<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/>=<sp/>x_tilde;</highlight></codeline>
+<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/>=<sp/>x_t;</highlight></codeline>
 <codeline lineno="688"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(num_invs<sp/>&gt;<sp/>0)</highlight></codeline>
 <codeline lineno="689"><highlight class="normal"></highlight></codeline>
 <codeline lineno="690"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Calculate<sp/>and<sp/>scale<sp/>the<sp/>tolerance</highlight></codeline>
-<codeline lineno="691"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tolerance<sp/>=<sp/>max(1,<sp/>norm(x_tilde,<sp/>inf))<sp/>*<sp/>sqrt(eps);</highlight></codeline>
+<codeline lineno="691"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tolerance<sp/>=<sp/>max(1,<sp/>norm(x_t,<sp/>inf))<sp/>*<sp/>sqrt(eps);</highlight></codeline>
 <codeline lineno="692"><highlight class="normal"></highlight></codeline>
 <codeline lineno="693"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Iterate<sp/>until<sp/>the<sp/>projected<sp/>solution<sp/>is<sp/>found</highlight></codeline>
 <codeline lineno="694"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>k<sp/>=<sp/>1:this.m_max_projection_iter</highlight></codeline>
 <codeline lineno="695"><highlight class="normal"></highlight></codeline>
 <codeline lineno="696"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/><sp/><sp/><sp/><sp/>[A]<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{x}<sp/><sp/><sp/><sp/>=<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{b}</highlight></codeline>
-<codeline lineno="697"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>/<sp/>I<sp/><sp/>Jh^T<sp/>\<sp/>/<sp/><sp/><sp/>dx<sp/><sp/><sp/>\<sp/><sp/><sp/>/<sp/>x_tilde<sp/>-<sp/>x_k<sp/>\</highlight></codeline>
-<codeline lineno="698"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>=<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
-<codeline lineno="699"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>\<sp/>Jh<sp/><sp/><sp/>0<sp/><sp/>/<sp/>\<sp/>lambda<sp/>/<sp/><sp/><sp/>\<sp/><sp/><sp/><sp/><sp/><sp/>-h<sp/><sp/><sp/><sp/><sp/><sp/><sp/>/</highlight></codeline>
+<codeline lineno="697"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>/<sp/>I<sp/><sp/>Jh^T<sp/>\<sp/>/<sp/><sp/><sp/>dx<sp/><sp/><sp/>\<sp/><sp/><sp/>/<sp/>x_t<sp/>-<sp/>x_k<sp/>\</highlight></codeline>
+<codeline lineno="698"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>=<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="699"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>\<sp/>Jh<sp/><sp/><sp/>0<sp/><sp/>/<sp/>\<sp/>lambda<sp/>/<sp/><sp/><sp/>\<sp/><sp/><sp/><sp/>-h<sp/><sp/><sp/><sp/><sp/>/</highlight></codeline>
 <codeline lineno="700"><highlight class="normal"></highlight></codeline>
-<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>the<sp/>invariants<sp/>vector<sp/>and<sp/>its<sp/>Jacobian</highlight></codeline>
-<codeline lineno="702"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v<sp/><sp/>=<sp/>this.m_sys.v(x,<sp/>t);</highlight></codeline>
-<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>h<sp/><sp/>=<sp/>this.m_sys.h(x,<sp/>v,<sp/>t);</highlight></codeline>
-<codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jh<sp/>=<sp/>this.m_sys.Jh_x(x,<sp/>v,<sp/>t)<sp/>+<sp/>...</highlight></codeline>
-<codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_sys.JF_v(x,<sp/>v,<sp/>t)<sp/>*<sp/>this.m_sys.Jv_x(x,<sp/>t);</highlight></codeline>
-<codeline lineno="706"><highlight class="normal"></highlight></codeline>
-<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>the<sp/>solution<sp/>of<sp/>the<sp/>linear<sp/>system</highlight></codeline>
-<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A<sp/><sp/><sp/>=<sp/>[eye(num_eqns),<sp/>Jh.</highlight><highlight class="stringliteral">&apos;;<sp/>...</highlight></codeline>
-<codeline lineno="709"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jh,<sp/>zeros(num_invs,<sp/>num_invs)];</highlight></codeline>
-<codeline lineno="710"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b<sp/><sp/><sp/>=<sp/>[x_tilde<sp/>-<sp/>x;<sp/>-h];</highlight></codeline>
-<codeline lineno="711"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sol<sp/>=<sp/>A\b;</highlight></codeline>
-<codeline lineno="712"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="713"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>the<sp/>solution</highlight></codeline>
-<codeline lineno="714"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dx<sp/>=<sp/>sol(1:num_eqns);</highlight></codeline>
-<codeline lineno="715"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/><sp/>=<sp/>x<sp/>+<sp/>dx;</highlight></codeline>
-<codeline lineno="716"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="717"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>if<sp/>the<sp/>solution<sp/>is<sp/>found</highlight></codeline>
-<codeline lineno="718"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(max(abs(dx))<sp/>&lt;<sp/>tolerance<sp/>||<sp/>max(abs(h))<sp/>&lt;<sp/>tolerance)</highlight></codeline>
-<codeline lineno="719"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
-<codeline lineno="720"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(k<sp/>==<sp/>this.m_max_projection_iter)</highlight></codeline>
-<codeline lineno="721"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">maximum<sp/>number<sp/>of<sp/>iterations<sp/>reached.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
-<codeline lineno="722"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="723"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="724"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="725"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="726"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="727"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>the<sp/>veils,<sp/>invariants<sp/>vector<sp/>and<sp/>their<sp/>Jacobian</highlight></codeline>
+<codeline lineno="702"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v<sp/><sp/><sp/><sp/>=<sp/>this.m_sys.v(x,<sp/>t);</highlight></codeline>
+<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>h<sp/><sp/><sp/><sp/>=<sp/>this.m_sys.h(x,<sp/>v,<sp/>t);</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jh_x<sp/>=<sp/>this.m_sys.Jh_x(x,<sp/>v,<sp/>t);</highlight></codeline>
+<codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jh_v<sp/>=<sp/>this.m_sys.Jh_v(x,<sp/>v,<sp/>t);</highlight></codeline>
+<codeline lineno="706"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jv_x<sp/>=<sp/>this.m_sys.Jv_x(x,<sp/>t);</highlight></codeline>
+<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>the<sp/>solution<sp/>of<sp/>the<sp/>linear<sp/>system</highlight></codeline>
+<codeline lineno="709"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jh<sp/><sp/>=<sp/>Jh_x<sp/>+<sp/>Jh_v<sp/>*<sp/>Jv_x;</highlight></codeline>
+<codeline lineno="710"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A<sp/><sp/><sp/>=<sp/>[eye(num_eqns),<sp/>Jh.</highlight><highlight class="stringliteral">&apos;;<sp/>...</highlight></codeline>
+<codeline lineno="711"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Jh,<sp/>zeros(num_invs,<sp/>num_invs)];</highlight></codeline>
+<codeline lineno="712"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b<sp/><sp/><sp/>=<sp/>[x_t<sp/>-<sp/>x;<sp/>-h];</highlight></codeline>
+<codeline lineno="713"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sol<sp/>=<sp/>A\b;</highlight></codeline>
+<codeline lineno="714"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="715"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>the<sp/>solution</highlight></codeline>
+<codeline lineno="716"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dx<sp/>=<sp/>sol(1:num_eqns);</highlight></codeline>
+<codeline lineno="717"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/><sp/>=<sp/>x<sp/>+<sp/>dx;</highlight></codeline>
+<codeline lineno="718"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="719"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>if<sp/>the<sp/>solution<sp/>is<sp/>found</highlight></codeline>
+<codeline lineno="720"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(max(abs(dx))<sp/>&lt;<sp/>tolerance<sp/>||<sp/>max(abs(h))<sp/>&lt;<sp/>tolerance)</highlight></codeline>
+<codeline lineno="721"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
+<codeline lineno="722"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(k<sp/>==<sp/>this.m_max_projection_iter)</highlight></codeline>
+<codeline lineno="723"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">maximum<sp/>number<sp/>of<sp/>iterations<sp/>reached.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
+<codeline lineno="724"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="725"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="726"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="727"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="728"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="729"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>and<sp/>calculate<sp/>the<sp/>approximate<sp/>solution<sp/>over</highlight></codeline>
-<codeline lineno="730"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>mesh<sp/>of<sp/>time<sp/>points.</highlight></codeline>
-<codeline lineno="731"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="732"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/>Time<sp/>mesh<sp/>points<sp/>\f$<sp/>\mathbf{t}<sp/>=<sp/>\left[<sp/>t_0,<sp/>t_1,<sp/>\ldots,<sp/>t_n</highlight></codeline>
-<codeline lineno="733"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\right]^T<sp/>\f$.</highlight></codeline>
-<codeline lineno="734"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_0<sp/>Initial<sp/>states<sp/>value<sp/>\f$<sp/>\mathbf{x}(t_0)<sp/>\f$.</highlight></codeline>
-<codeline lineno="735"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="736"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>A<sp/>matrix<sp/>\f$<sp/>\left[(\mathrm{size}(\mathbf{x})<sp/>\times<sp/>\mathrm{size}</highlight></codeline>
-<codeline lineno="737"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(\mathbf{t})\right]<sp/>\f$<sp/>containing<sp/>the<sp/>approximated<sp/>solution</highlight></codeline>
-<codeline lineno="738"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}(t)<sp/>\f$<sp/>and<sp/>\f$<sp/>\mathbf{x}^\prime(t)<sp/>\f$<sp/>of<sp/>the</highlight></codeline>
-<codeline lineno="739"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
-<codeline lineno="740"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="741" refid="a00215_1a41f520380e485da0528f2de95eff11fc" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x_out,<sp/>x_dot_out,<sp/>t]<sp/>=<sp/>solve(<sp/>this,<sp/>t,<sp/>x_0<sp/>)</highlight></codeline>
-<codeline lineno="742"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="743"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.RungeKutta.Method.solve(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="729"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="730"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="731"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>and<sp/>calculate<sp/>the<sp/>approximate<sp/>solution<sp/>over</highlight></codeline>
+<codeline lineno="732"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>mesh<sp/>of<sp/>time<sp/>points.</highlight></codeline>
+<codeline lineno="733"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="734"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/>Time<sp/>mesh<sp/>points<sp/>\f$<sp/>\mathbf{t}<sp/>=<sp/>\left[<sp/>t_0,<sp/>t_1,<sp/>\ldots,<sp/>t_n</highlight></codeline>
+<codeline lineno="735"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\right]^T<sp/>\f$.</highlight></codeline>
+<codeline lineno="736"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_0<sp/>Initial<sp/>states<sp/>value<sp/>\f$<sp/>\mathbf{x}(t_0)<sp/>\f$.</highlight></codeline>
+<codeline lineno="737"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="738"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>A<sp/>matrix<sp/>\f$<sp/>\left[(\mathrm{size}(\mathbf{x})<sp/>\times<sp/>\mathrm{size}</highlight></codeline>
+<codeline lineno="739"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(\mathbf{t})\right]<sp/>\f$<sp/>containing<sp/>the<sp/>approximated<sp/>solution</highlight></codeline>
+<codeline lineno="740"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}(t)<sp/>\f$<sp/>and<sp/>\f$<sp/>\mathbf{x}^\prime(t)<sp/>\f$<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="741" refid="a00215_1ae29e3abf7fcced6bef2ca518e55b76ee" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
+<codeline lineno="742"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="743"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x_out,<sp/>x_dot_out,<sp/>t]<sp/>=<sp/>solve(<sp/>this,<sp/>t,<sp/>x_0<sp/>)</highlight></codeline>
 <codeline lineno="744"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="745"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
-<codeline lineno="746"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
-<codeline lineno="747"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(num_eqns<sp/>==<sp/>length(x_0),<sp/>...</highlight></codeline>
-<codeline lineno="748"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="749"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_0),<sp/>num_eqns);</highlight></codeline>
-<codeline lineno="750"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="751"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>output</highlight></codeline>
-<codeline lineno="752"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
-<codeline lineno="753"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out<sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
-<codeline lineno="754"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="755"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>first<sp/>step</highlight></codeline>
-<codeline lineno="756"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,1)<sp/>=<sp/>x_0(:);</highlight></codeline>
-<codeline lineno="757"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="758"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>temporary<sp/>variables</highlight></codeline>
-<codeline lineno="759"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/><sp/><sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Current<sp/>step</highlight></codeline>
-<codeline lineno="760"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>tol<sp/>=<sp/>sqrt(eps);<sp/>%<sp/>Tolerance</highlight></codeline>
-<codeline lineno="761"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="762"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>the<sp/>current<sp/>step</highlight></codeline>
-<codeline lineno="763"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_s<sp/><sp/><sp/><sp/><sp/>=<sp/>x_out(:,1);</highlight></codeline>
-<codeline lineno="764"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_s<sp/>=<sp/>x_dot_out(:,1);</highlight></codeline>
-<codeline lineno="765"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_s<sp/><sp/><sp/><sp/><sp/>=<sp/>t(1);</highlight></codeline>
-<codeline lineno="766"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/><sp/><sp/>=<sp/>t(2)<sp/>-<sp/>t(1);</highlight></codeline>
-<codeline lineno="767"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>d_t_s;</highlight></codeline>
-<codeline lineno="768"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="769"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Start<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="770"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
-<codeline lineno="771"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(&apos;</highlight><highlight class="normal">_start</highlight><highlight class="stringliteral">&apos;);</highlight></codeline>
-<codeline lineno="772"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="773"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="774"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(true)</highlight></codeline>
-<codeline lineno="775"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Print<sp/>percentage<sp/>of<sp/>solution<sp/>completion</highlight></codeline>
-<codeline lineno="776"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
-<codeline lineno="777"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))</highlight></codeline>
-<codeline lineno="778"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="779"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="780"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
-<codeline lineno="781"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_s,<sp/>x_dot_s,<sp/>d_t_star]<sp/>=<sp/>this.advance(x_s,<sp/>x_dot_s,<sp/>t_s,<sp/>d_t_s);</highlight></codeline>
-<codeline lineno="782"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="783"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>the<sp/>current<sp/>step</highlight></codeline>
-<codeline lineno="784"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_s<sp/>=<sp/>t_s<sp/>+<sp/>d_t_s;</highlight></codeline>
-<codeline lineno="785"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="786"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Saturate<sp/>the<sp/>suggested<sp/>timestep</highlight></codeline>
-<codeline lineno="787"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mesh_point_bool<sp/>=<sp/>abs(t_s<sp/>-<sp/>t(s+1))<sp/>&lt;<sp/>tol;</highlight></codeline>
-<codeline lineno="788"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>saturation_bool<sp/>=<sp/>t_s<sp/>+<sp/>d_t_star<sp/>&gt;<sp/>t(s+1)<sp/>+<sp/>tol;</highlight></codeline>
-<codeline lineno="789"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_adaptive_step<sp/>&amp;&amp;<sp/>~mesh_point_bool<sp/>&amp;&amp;<sp/>saturation_bool)</highlight></codeline>
-<codeline lineno="790"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>d_t_star;</highlight></codeline>
-<codeline lineno="791"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/><sp/><sp/>=<sp/>t(s+1)<sp/>-<sp/>t_s;</highlight></codeline>
-<codeline lineno="792"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
-<codeline lineno="793"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/>=<sp/>d_t_star;</highlight></codeline>
-<codeline lineno="794"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="795"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="796"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>solution<sp/>if<sp/>the<sp/>step<sp/>is<sp/>a<sp/>mesh<sp/>point</highlight></codeline>
-<codeline lineno="797"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(~this.m_adaptive_step<sp/>||<sp/>mesh_point_bool)</highlight></codeline>
-<codeline lineno="798"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="799"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>temporaries</highlight></codeline>
-<codeline lineno="800"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/><sp/><sp/><sp/><sp/>=<sp/>s+1;</highlight></codeline>
-<codeline lineno="801"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/>=<sp/>d_t_tmp;</highlight></codeline>
-<codeline lineno="802"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="803"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>outputs</highlight></codeline>
-<codeline lineno="804"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,s)<sp/><sp/><sp/><sp/><sp/>=<sp/>x_s;</highlight></codeline>
-<codeline lineno="805"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out(:,s)<sp/>=<sp/>x_dot_s;</highlight></codeline>
-<codeline lineno="806"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="807"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>if<sp/>the<sp/>current<sp/>step<sp/>is<sp/>the<sp/>last<sp/>one</highlight></codeline>
-<codeline lineno="808" refid="a00215_1a94c1bc48a0776dbc19455ed57ca59905" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(abs(t_s<sp/>-<sp/>t(end))<sp/>&lt;<sp/>tol)</highlight></codeline>
-<codeline lineno="809"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
-<codeline lineno="810"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="811"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="812"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="813"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="814"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="815"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
-<codeline lineno="816"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(100);</highlight></codeline>
-<codeline lineno="817"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(strcat([this.m_name,<sp/>&apos;</highlight><highlight class="normal"><sp/>completed!</highlight><highlight class="stringliteral">&apos;]));</highlight></codeline>
-<codeline lineno="818"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="819"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="820"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="821"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="745"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.RungeKutta.Method.solve(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="746"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="747"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
+<codeline lineno="748"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
+<codeline lineno="749"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(num_eqns<sp/>==<sp/>length(x_0),<sp/>...</highlight></codeline>
+<codeline lineno="750"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="751"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_0),<sp/>num_eqns);</highlight></codeline>
+<codeline lineno="752"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="753"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>output</highlight></codeline>
+<codeline lineno="754"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
+<codeline lineno="755"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out<sp/><sp/>=<sp/>zeros(num_eqns,<sp/>length(t));</highlight></codeline>
+<codeline lineno="756"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="757"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>first<sp/>step</highlight></codeline>
+<codeline lineno="758"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,1)<sp/>=<sp/>x_0(:);</highlight></codeline>
+<codeline lineno="759"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="760"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>temporary<sp/>variables</highlight></codeline>
+<codeline lineno="761"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/><sp/><sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Current<sp/>step</highlight></codeline>
+<codeline lineno="762"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>tol<sp/>=<sp/>sqrt(eps);<sp/>%<sp/>Tolerance</highlight></codeline>
+<codeline lineno="763"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="764"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>the<sp/>current<sp/>step</highlight></codeline>
+<codeline lineno="765"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_s<sp/><sp/><sp/><sp/><sp/>=<sp/>x_out(:,1);</highlight></codeline>
+<codeline lineno="766"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_s<sp/>=<sp/>x_dot_out(:,1);</highlight></codeline>
+<codeline lineno="767"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_s<sp/><sp/><sp/><sp/><sp/>=<sp/>t(1);</highlight></codeline>
+<codeline lineno="768"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/><sp/><sp/>=<sp/>t(2)<sp/>-<sp/>t(1);</highlight></codeline>
+<codeline lineno="769"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>d_t_s;</highlight></codeline>
+<codeline lineno="770"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="771"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Start<sp/>progress<sp/>bar</highlight></codeline>
+<codeline lineno="772"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
+<codeline lineno="773"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(&apos;</highlight><highlight class="normal">_start</highlight><highlight class="stringliteral">&apos;);</highlight></codeline>
+<codeline lineno="774"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="775"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="776"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(true)</highlight></codeline>
+<codeline lineno="777"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Print<sp/>percentage<sp/>of<sp/>solution<sp/>completion</highlight></codeline>
+<codeline lineno="778"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
+<codeline lineno="779"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))</highlight></codeline>
+<codeline lineno="780"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="781"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="782"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
+<codeline lineno="783"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_s,<sp/>x_dot_s,<sp/>d_t_star]<sp/>=<sp/>this.advance(x_s,<sp/>x_dot_s,<sp/>t_s,<sp/>d_t_s);</highlight></codeline>
+<codeline lineno="784"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="785"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>the<sp/>current<sp/>step</highlight></codeline>
+<codeline lineno="786"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_s<sp/>=<sp/>t_s<sp/>+<sp/>d_t_s;</highlight></codeline>
+<codeline lineno="787"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="788"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Saturate<sp/>the<sp/>suggested<sp/>timestep</highlight></codeline>
+<codeline lineno="789"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mesh_point_bool<sp/>=<sp/>abs(t_s<sp/>-<sp/>t(s+1))<sp/>&lt;<sp/>tol;</highlight></codeline>
+<codeline lineno="790"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>saturation_bool<sp/>=<sp/>t_s<sp/>+<sp/>d_t_star<sp/>&gt;<sp/>t(s+1)<sp/>+<sp/>tol;</highlight></codeline>
+<codeline lineno="791"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_adaptive_step<sp/>&amp;&amp;<sp/>~mesh_point_bool<sp/>&amp;&amp;<sp/>saturation_bool)</highlight></codeline>
+<codeline lineno="792"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>d_t_star;</highlight></codeline>
+<codeline lineno="793"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/><sp/><sp/>=<sp/>t(s+1)<sp/>-<sp/>t_s;</highlight></codeline>
+<codeline lineno="794"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="795"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/>=<sp/>d_t_star;</highlight></codeline>
+<codeline lineno="796"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="797"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="798"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>solution<sp/>if<sp/>the<sp/>step<sp/>is<sp/>a<sp/>mesh<sp/>point</highlight></codeline>
+<codeline lineno="799"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(~this.m_adaptive_step<sp/>||<sp/>mesh_point_bool)</highlight></codeline>
+<codeline lineno="800"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="801"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>temporaries</highlight></codeline>
+<codeline lineno="802"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/><sp/><sp/><sp/><sp/>=<sp/>s+1;</highlight></codeline>
+<codeline lineno="803"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_s<sp/>=<sp/>d_t_tmp;</highlight></codeline>
+<codeline lineno="804"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="805"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>outputs</highlight></codeline>
+<codeline lineno="806"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,s)<sp/><sp/><sp/><sp/><sp/>=<sp/>x_s;</highlight></codeline>
+<codeline lineno="807"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out(:,s)<sp/>=<sp/>x_dot_s;</highlight></codeline>
+<codeline lineno="808"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="809"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>if<sp/>the<sp/>current<sp/>step<sp/>is<sp/>the<sp/>last<sp/>one</highlight></codeline>
+<codeline lineno="810" refid="a00215_1a94c1bc48a0776dbc19455ed57ca59905" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(abs(t_s<sp/>-<sp/>t(end))<sp/>&lt;<sp/>tol)</highlight></codeline>
+<codeline lineno="811"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
+<codeline lineno="812"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="813"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="814"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="815"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="816"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>progress<sp/>bar</highlight></codeline>
+<codeline lineno="817"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
+<codeline lineno="818"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(100);</highlight></codeline>
+<codeline lineno="819"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(strcat([this.m_name,<sp/>&apos;</highlight><highlight class="normal"><sp/>completed!</highlight><highlight class="stringliteral">&apos;]));</highlight></codeline>
+<codeline lineno="820"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="821"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="822"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="823"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>and<sp/>calculate<sp/>the<sp/>approximate<sp/>solution<sp/>over</highlight></codeline>
-<codeline lineno="824"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>suggested<sp/>mesh<sp/>of<sp/>time<sp/>points.</highlight></codeline>
-<codeline lineno="825"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="826"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Time<sp/>mesh<sp/>points<sp/>\f$<sp/>\mathbf{t}<sp/>=<sp/>\left[<sp/>t_0,<sp/>t_1,<sp/>\ldots,</highlight></codeline>
-<codeline lineno="827"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_n<sp/>\right]^T<sp/>\f$.</highlight></codeline>
-<codeline lineno="828"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_0<sp/><sp/><sp/>Initial<sp/>states<sp/>value<sp/>\f$<sp/>\mathbf{x}(t_0)<sp/>\f$.</highlight></codeline>
-<codeline lineno="829"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_min<sp/>[optional]<sp/>Minimum<sp/>timestep<sp/>\f$<sp/>\Delta<sp/>t_{\mathrm{min}}<sp/>\f$.</highlight></codeline>
-<codeline lineno="830"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_max<sp/>[optional]<sp/>Maximum<sp/>timestep<sp/>\f$<sp/>\Delta<sp/>t_{\mathrm{max}}<sp/>\f$.</highlight></codeline>
-<codeline lineno="831"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="832"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>A<sp/>matrix<sp/>\f$<sp/>\left[(\mathrm{size}(\mathbf{x})<sp/>\times<sp/>\mathrm{size}</highlight></codeline>
-<codeline lineno="833"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(\mathbf{t})\right]<sp/>\f$<sp/>containing<sp/>the<sp/>approximated<sp/>solution</highlight></codeline>
-<codeline lineno="834"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}(t)<sp/>\f$<sp/>and<sp/>\f$<sp/>\mathbf{x}^\prime(t)<sp/>\f$<sp/>of<sp/>the</highlight></codeline>
-<codeline lineno="835"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
-<codeline lineno="836"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="837"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x_out,<sp/>x_dot_out,<sp/>t_out]<sp/>=<sp/>solve_adaptive_step(<sp/>this,<sp/>t,<sp/>x_0,<sp/>varargin<sp/>)</highlight></codeline>
-<codeline lineno="838"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="839"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.RungeKutta.Method.solve_adaptive(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="823"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="824"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="825"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>and<sp/>calculate<sp/>the<sp/>approximate<sp/>solution<sp/>over</highlight></codeline>
+<codeline lineno="826"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>suggested<sp/>mesh<sp/>of<sp/>time<sp/>points.</highlight></codeline>
+<codeline lineno="827"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="828"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t<sp/><sp/><sp/><sp/><sp/>Time<sp/>mesh<sp/>points<sp/>\f$<sp/>\mathbf{t}<sp/>=<sp/>\left[<sp/>t_0,<sp/>t_1,<sp/>\ldots,</highlight></codeline>
+<codeline lineno="829"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_n<sp/>\right]^T<sp/>\f$.</highlight></codeline>
+<codeline lineno="830"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_0<sp/><sp/><sp/>Initial<sp/>states<sp/>value<sp/>\f$<sp/>\mathbf{x}(t_0)<sp/>\f$.</highlight></codeline>
+<codeline lineno="831"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_min<sp/>[optional]<sp/>Minimum<sp/>timestep<sp/>\f$<sp/>\Delta<sp/>t_{\mathrm{min}}<sp/>\f$.</highlight></codeline>
+<codeline lineno="832"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_max<sp/>[optional]<sp/>Maximum<sp/>timestep<sp/>\f$<sp/>\Delta<sp/>t_{\mathrm{max}}<sp/>\f$.</highlight></codeline>
+<codeline lineno="833"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="834"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>A<sp/>matrix<sp/>\f$<sp/>\left[(\mathrm{size}(\mathbf{x})<sp/>\times<sp/>\mathrm{size}</highlight></codeline>
+<codeline lineno="835"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(\mathbf{t})\right]<sp/>\f$<sp/>containing<sp/>the<sp/>approximated<sp/>solution</highlight></codeline>
+<codeline lineno="836"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}(t)<sp/>\f$<sp/>and<sp/>\f$<sp/>\mathbf{x}^\prime(t)<sp/>\f$<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="837"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>system<sp/>of<sp/>ODEs/DAEs.</highlight></codeline>
+<codeline lineno="838"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="839"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x_out,<sp/>x_dot_out,<sp/>t_out]<sp/>=<sp/>solve_adaptive_step(<sp/>this,<sp/>t,<sp/>x_0,<sp/>varargin<sp/>)</highlight></codeline>
 <codeline lineno="840"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="841"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Collect<sp/>optional<sp/>arguments</highlight></codeline>
-<codeline lineno="842"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t<sp/>=<sp/>t(2)<sp/>-<sp/>t(1);</highlight></codeline>
-<codeline lineno="843"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(nargin<sp/>==<sp/>4)</highlight></codeline>
-<codeline lineno="844"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_min<sp/>=<sp/>0.5*dt;</highlight></codeline>
-<codeline lineno="845"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_max<sp/>=<sp/>1.5*dt;</highlight></codeline>
-<codeline lineno="846"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(nargin<sp/>==<sp/>5)</highlight></codeline>
-<codeline lineno="847"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[t_min,<sp/>t_max]<sp/>=<sp/>varargin{1};</highlight></codeline>
-<codeline lineno="848"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(nargin<sp/>==<sp/>6)</highlight></codeline>
-<codeline lineno="849"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_min<sp/>=<sp/>varargin{1};</highlight></codeline>
-<codeline lineno="850"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_max<sp/>=<sp/>varargin{2};</highlight></codeline>
-<codeline lineno="851"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
-<codeline lineno="852"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error([CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>number<sp/>of<sp/>inputs<sp/>detected.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
-<codeline lineno="853"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="854"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(t_max<sp/>&gt;<sp/>t_min<sp/>&amp;&amp;<sp/>t_min<sp/>&gt;<sp/>0,<sp/>...</highlight></codeline>
-<codeline lineno="855"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>time<sp/>bounds<sp/>detected.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
-<codeline lineno="856"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t<sp/>=<sp/>max(min(d_t,<sp/>t_max),<sp/>t_min);</highlight></codeline>
-<codeline lineno="857"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="858"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
-<codeline lineno="859"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
-<codeline lineno="860"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(num_eqns<sp/>==<sp/>length(x_0),<sp/>...</highlight></codeline>
-<codeline lineno="861"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="862"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_0),<sp/>num_eqns);</highlight></codeline>
-<codeline lineno="863"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="864"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>output</highlight></codeline>
-<codeline lineno="865"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>safety_length<sp/><sp/>=<sp/>ceil(1.5/f_min)*length(t);</highlight></codeline>
-<codeline lineno="866"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_out<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(1,<sp/>safety_length);</highlight></codeline>
-<codeline lineno="867"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>safety_length);</highlight></codeline>
-<codeline lineno="868"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>safety_length);</highlight></codeline>
-<codeline lineno="869"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="870"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>first<sp/>step</highlight></codeline>
-<codeline lineno="871"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_out(1)<sp/><sp/><sp/>=<sp/>t(1);</highlight></codeline>
-<codeline lineno="872"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,1)<sp/>=<sp/>x_0(:);</highlight></codeline>
-<codeline lineno="873"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="874"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>temporary<sp/>variables</highlight></codeline>
-<codeline lineno="875"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/>=<sp/>1;<sp/>%<sp/>Current<sp/>step</highlight></codeline>
-<codeline lineno="876"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="877"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Start<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="878"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
-<codeline lineno="879"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(&apos;</highlight><highlight class="normal">_start</highlight><highlight class="stringliteral">&apos;);</highlight></codeline>
-<codeline lineno="880"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="881"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="882"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(true)</highlight></codeline>
-<codeline lineno="883"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Print<sp/>percentage<sp/>of<sp/>solution<sp/>completion</highlight></codeline>
-<codeline lineno="884"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
-<codeline lineno="885"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))</highlight></codeline>
-<codeline lineno="886"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="887"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="888"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
-<codeline lineno="889"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_new,<sp/>x_dot_new,<sp/>d_t_star]<sp/>=<sp/>...</highlight></codeline>
-<codeline lineno="890"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.advance(x_out(:,s),<sp/>x_dot_out(:,s),<sp/>t_out(s),<sp/>d_t);</highlight></codeline>
-<codeline lineno="891"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="892"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>solution</highlight></codeline>
-<codeline lineno="893"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_out(s+1)<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>t_out(s)<sp/>+<sp/>d_t;</highlight></codeline>
-<codeline lineno="894"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,s+1)<sp/><sp/><sp/><sp/><sp/>=<sp/>x_new;</highlight></codeline>
-<codeline lineno="895"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out(:,s+1)<sp/>=<sp/>x_dot_new;</highlight></codeline>
-<codeline lineno="896"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="897"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Saturate<sp/>the<sp/>suggested<sp/>timestep</highlight></codeline>
-<codeline lineno="898"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t<sp/>=<sp/>max(min(d_t_star,<sp/>t_max),<sp/>t_min);</highlight></codeline>
-<codeline lineno="899"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="900"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>if<sp/>the<sp/>current<sp/>step<sp/>is<sp/>the<sp/>last<sp/>one</highlight></codeline>
-<codeline lineno="901"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(t_out(s+1)<sp/>+<sp/>d_t<sp/>&gt;<sp/>t(end))</highlight></codeline>
-<codeline lineno="902"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
-<codeline lineno="903"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="904"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="905" refid="a00215_1a22eecc037be0a53ce2b56cf44e7f4ba9" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>steps<sp/>counter</highlight></codeline>
-<codeline lineno="906"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/>=<sp/>s+1;</highlight></codeline>
-<codeline lineno="907"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="908"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="909"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="910"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
-<codeline lineno="911"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(100);</highlight></codeline>
-<codeline lineno="912"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(strcat([this.m_name,<sp/>&apos;</highlight><highlight class="normal"><sp/>completed!</highlight><highlight class="stringliteral">&apos;]));</highlight></codeline>
-<codeline lineno="913"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="914"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="915"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Resize<sp/>the<sp/>output</highlight></codeline>
-<codeline lineno="916"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_out<sp/><sp/><sp/><sp/><sp/>=<sp/>t_out(:,1:s-1);</highlight></codeline>
-<codeline lineno="917"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out<sp/><sp/><sp/><sp/><sp/>=<sp/>x_out(:,1:s-1);</highlight></codeline>
-<codeline lineno="918"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out<sp/>=<sp/>x_dot_out(:,1:s-1);</highlight></codeline>
-<codeline lineno="919"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="920"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="921"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="841"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.RungeKutta.Method.solve_adaptive(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="842"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="843"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Collect<sp/>optional<sp/>arguments</highlight></codeline>
+<codeline lineno="844"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t<sp/>=<sp/>t(2)<sp/>-<sp/>t(1);</highlight></codeline>
+<codeline lineno="845"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(nargin<sp/>==<sp/>4)</highlight></codeline>
+<codeline lineno="846"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_min<sp/>=<sp/>0.5*dt;</highlight></codeline>
+<codeline lineno="847"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_max<sp/>=<sp/>1.5*dt;</highlight></codeline>
+<codeline lineno="848"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(nargin<sp/>==<sp/>5)</highlight></codeline>
+<codeline lineno="849"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[t_min,<sp/>t_max]<sp/>=<sp/>varargin{1};</highlight></codeline>
+<codeline lineno="850"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(nargin<sp/>==<sp/>6)</highlight></codeline>
+<codeline lineno="851"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_min<sp/>=<sp/>varargin{1};</highlight></codeline>
+<codeline lineno="852"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_max<sp/>=<sp/>varargin{2};</highlight></codeline>
+<codeline lineno="853"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="854"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error([CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>number<sp/>of<sp/>inputs<sp/>detected.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
+<codeline lineno="855"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="856"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(t_max<sp/>&gt;<sp/>t_min<sp/>&amp;&amp;<sp/>t_min<sp/>&gt;<sp/>0,<sp/>...</highlight></codeline>
+<codeline lineno="857"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>time<sp/>bounds<sp/>detected.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
+<codeline lineno="858"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>d_t<sp/>=<sp/>max(min(d_t,<sp/>t_max),<sp/>t_min);</highlight></codeline>
+<codeline lineno="859"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="860"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
+<codeline lineno="861"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
+<codeline lineno="862"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(num_eqns<sp/>==<sp/>length(x_0),<sp/>...</highlight></codeline>
+<codeline lineno="863"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="864"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_0),<sp/>num_eqns);</highlight></codeline>
+<codeline lineno="865"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="866"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>output</highlight></codeline>
+<codeline lineno="867"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>safety_length<sp/><sp/>=<sp/>ceil(1.5/f_min)*length(t);</highlight></codeline>
+<codeline lineno="868"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_out<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(1,<sp/>safety_length);</highlight></codeline>
+<codeline lineno="869"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>safety_length);</highlight></codeline>
+<codeline lineno="870"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>zeros(num_eqns,<sp/>safety_length);</highlight></codeline>
+<codeline lineno="871"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="872"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>first<sp/>step</highlight></codeline>
+<codeline lineno="873"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_out(1)<sp/><sp/><sp/>=<sp/>t(1);</highlight></codeline>
+<codeline lineno="874"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,1)<sp/>=<sp/>x_0(:);</highlight></codeline>
+<codeline lineno="875"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="876"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Instantiate<sp/>temporary<sp/>variables</highlight></codeline>
+<codeline lineno="877"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/>=<sp/>1;<sp/>%<sp/>Current<sp/>step</highlight></codeline>
+<codeline lineno="878"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="879"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Start<sp/>progress<sp/>bar</highlight></codeline>
+<codeline lineno="880"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
+<codeline lineno="881"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(&apos;</highlight><highlight class="normal">_start</highlight><highlight class="stringliteral">&apos;);</highlight></codeline>
+<codeline lineno="882"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="883"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="884"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(true)</highlight></codeline>
+<codeline lineno="885"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Print<sp/>percentage<sp/>of<sp/>solution<sp/>completion</highlight></codeline>
+<codeline lineno="886"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
+<codeline lineno="887"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))</highlight></codeline>
+<codeline lineno="888"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="889"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="890"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
+<codeline lineno="891"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_new,<sp/>x_dot_new,<sp/>d_t_star]<sp/>=<sp/>...</highlight></codeline>
+<codeline lineno="892"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.advance(x_out(:,s),<sp/>x_dot_out(:,s),<sp/>t_out(s),<sp/>d_t);</highlight></codeline>
+<codeline lineno="893"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="894"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>solution</highlight></codeline>
+<codeline lineno="895"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_out(s+1)<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>t_out(s)<sp/>+<sp/>d_t;</highlight></codeline>
+<codeline lineno="896"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_out(:,s+1)<sp/><sp/><sp/><sp/><sp/>=<sp/>x_new;</highlight></codeline>
+<codeline lineno="897"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out(:,s+1)<sp/>=<sp/>x_dot_new;</highlight></codeline>
+<codeline lineno="898"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="899"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Saturate<sp/>the<sp/>suggested<sp/>timestep</highlight></codeline>
+<codeline lineno="900"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t<sp/>=<sp/>max(min(d_t_star,<sp/>t_max),<sp/>t_min);</highlight></codeline>
+<codeline lineno="901"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="902"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>if<sp/>the<sp/>current<sp/>step<sp/>is<sp/>the<sp/>last<sp/>one</highlight></codeline>
+<codeline lineno="903"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(t_out(s+1)<sp/>+<sp/>d_t<sp/>&gt;<sp/>t(end))</highlight></codeline>
+<codeline lineno="904"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
+<codeline lineno="905"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="906"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="907" refid="a00215_1a22eecc037be0a53ce2b56cf44e7f4ba9" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>steps<sp/>counter</highlight></codeline>
+<codeline lineno="908"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/>=<sp/>s+1;</highlight></codeline>
+<codeline lineno="909"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="910"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="911"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>progress<sp/>bar</highlight></codeline>
+<codeline lineno="912"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_progress_bar)</highlight></codeline>
+<codeline lineno="913"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(100);</highlight></codeline>
+<codeline lineno="914"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indigo.Utils.progress_bar(strcat([this.m_name,<sp/>&apos;</highlight><highlight class="normal"><sp/>completed!</highlight><highlight class="stringliteral">&apos;]));</highlight></codeline>
+<codeline lineno="915"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="916"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="917"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Resize<sp/>the<sp/>output</highlight></codeline>
+<codeline lineno="918"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>t_out<sp/><sp/><sp/><sp/><sp/>=<sp/>t_out(:,1:s-1);</highlight></codeline>
+<codeline lineno="919"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_out<sp/><sp/><sp/><sp/><sp/>=<sp/>x_out(:,1:s-1);</highlight></codeline>
+<codeline lineno="920"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_out<sp/>=<sp/>x_dot_out(:,1:s-1);</highlight></codeline>
+<codeline lineno="921"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="922"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="923"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Advance<sp/>using<sp/>a<sp/>generic<sp/>integration<sp/>method<sp/>for<sp/>a<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>of</highlight></codeline>
-<codeline lineno="924"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t)<sp/>=</highlight></codeline>
-<codeline lineno="925"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{0}<sp/>\f$.<sp/>The<sp/>step<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
-<codeline lineno="926"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="927"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="928"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{x}_{k+1}(t_{k}+\Delta<sp/>t)<sp/>=<sp/>\mathbf{x}_k(t_{k})<sp/>+</highlight></codeline>
-<codeline lineno="929"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathcal{S}(\mathbf{x}_k(t_k),<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_k(t_k),<sp/>t_k,<sp/>\Delta<sp/>t)</highlight></codeline>
-<codeline lineno="930"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="931"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="932"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathcal{S}<sp/>\f$<sp/>is<sp/>the<sp/>generic<sp/>advancing<sp/>step<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
-<codeline lineno="933"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>In<sp/>the<sp/>advvancing<sp/>step,<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>is<sp/>also<sp/>projected<sp/>on<sp/>the</highlight></codeline>
-<codeline lineno="934"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>manifold<sp/>\f$<sp/>\mathcal{h}(\mathbf{x},<sp/>\mathbf{v},<sp/>t)<sp/>\f$.<sp/>Substepping<sp/>is</highlight></codeline>
-<codeline lineno="935"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>also<sp/>used<sp/>to<sp/>ensure<sp/>that<sp/>the<sp/>solution<sp/>is<sp/>accurate.</highlight></codeline>
-<codeline lineno="936"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="937"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_k<sp/><sp/><sp/><sp/><sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
-<codeline lineno="938"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot_k<sp/>States<sp/>derivative<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="939"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(t_k)<sp/>\f$.</highlight></codeline>
-<codeline lineno="940"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_k<sp/><sp/><sp/><sp/><sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
-<codeline lineno="941"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/><sp/><sp/><sp/><sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
-<codeline lineno="942"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="943"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>approximation<sp/>of<sp/>\f$<sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$,</highlight></codeline>
-<codeline lineno="944"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_{k+1}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>and<sp/>the<sp/>suggested<sp/>time</highlight></codeline>
-<codeline lineno="945"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$.</highlight></codeline>
-<codeline lineno="946"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="947"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x_new,<sp/>x_dot_new,<sp/>d_t_star]<sp/>=<sp/>advance(<sp/>this,<sp/>x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
-<codeline lineno="948"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="949"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.RungeKutta.Method.advance(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="923"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="924"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="925"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Advance<sp/>using<sp/>a<sp/>generic<sp/>integration<sp/>method<sp/>for<sp/>a<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>of</highlight></codeline>
+<codeline lineno="926"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},<sp/>t)<sp/>=</highlight></codeline>
+<codeline lineno="927"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{0}<sp/>\f$.<sp/>The<sp/>step<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
+<codeline lineno="928"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="929"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="930"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{x}_{k+1}(t_{k}+\Delta<sp/>t)<sp/>=<sp/>\mathbf{x}_k(t_{k})<sp/>+</highlight></codeline>
+<codeline lineno="931"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathcal{S}(\mathbf{x}_k(t_k),<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_k(t_k),<sp/>t_k,<sp/>\Delta<sp/>t)</highlight></codeline>
+<codeline lineno="932"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="933"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="934"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathcal{S}<sp/>\f$<sp/>is<sp/>the<sp/>generic<sp/>advancing<sp/>step<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
+<codeline lineno="935"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>In<sp/>the<sp/>advvancing<sp/>step,<sp/>the<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>is<sp/>also<sp/>projected<sp/>on<sp/>the</highlight></codeline>
+<codeline lineno="936"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>manifold<sp/>\f$<sp/>\mathcal{h}(\mathbf{x},<sp/>\mathbf{v},<sp/>t)<sp/>\f$.<sp/>Substepping<sp/>is</highlight></codeline>
+<codeline lineno="937"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>also<sp/>used<sp/>to<sp/>ensure<sp/>that<sp/>the<sp/>solution<sp/>is<sp/>accurate.</highlight></codeline>
+<codeline lineno="938"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="939"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_k<sp/><sp/><sp/><sp/><sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="940"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot_k<sp/>States<sp/>derivative<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="941"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="942"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_k<sp/><sp/><sp/><sp/><sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
+<codeline lineno="943"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/><sp/><sp/><sp/><sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="944"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="945"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>approximation<sp/>of<sp/>\f$<sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$,</highlight></codeline>
+<codeline lineno="946"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_{k+1}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>and<sp/>the<sp/>suggested<sp/>time</highlight></codeline>
+<codeline lineno="947"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$.</highlight></codeline>
+<codeline lineno="948"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="949"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x_new,<sp/>x_dot_new,<sp/>d_t_star]<sp/>=<sp/>advance(<sp/>this,<sp/>x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
 <codeline lineno="950"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="951"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
-<codeline lineno="952"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
-<codeline lineno="953"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(num_eqns<sp/>==<sp/>length(x_k),<sp/>...</highlight></codeline>
-<codeline lineno="954"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="955"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_k),<sp/>num_eqns);</highlight></codeline>
-<codeline lineno="956"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="957"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>step<sp/>size</highlight></codeline>
-<codeline lineno="958"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(d_t<sp/>&gt;<sp/>0,<sp/>...</highlight></codeline>
-<codeline lineno="959"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>d_t<sp/>is<sp/>%f,<sp/>expected<sp/>&gt;<sp/>0.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="960"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>d_t);</highlight></codeline>
-<codeline lineno="961"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="962"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
-<codeline lineno="963"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>[x_new,<sp/>x_dot_new,<sp/>d_t_star,<sp/>ierr]<sp/>=<sp/>this.step(x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t);</highlight></codeline>
-<codeline lineno="964"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="965"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>the<sp/>advance<sp/>failed,<sp/>try<sp/>again<sp/>with<sp/>substepping</highlight></codeline>
-<codeline lineno="966"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(ierr<sp/>~=<sp/>0)</highlight></codeline>
-<codeline lineno="967"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="968"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_tmp<sp/><sp/><sp/><sp/><sp/>=<sp/>x_k;</highlight></codeline>
-<codeline lineno="969"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_tmp<sp/>=<sp/>x_dot_k;</highlight></codeline>
-<codeline lineno="970"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_tmp<sp/><sp/><sp/><sp/><sp/>=<sp/>t_k;</highlight></codeline>
-<codeline lineno="971"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/><sp/><sp/>=<sp/>0.5<sp/>*<sp/>d_t;</highlight></codeline>
-<codeline lineno="972"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="973"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_k<sp/>=<sp/>this.m_max_substeps<sp/>*<sp/>this.m_max_substeps;</highlight></codeline>
-<codeline lineno="974"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k<sp/>=<sp/>2;</highlight></codeline>
-<codeline lineno="975"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(k<sp/>&gt;<sp/>0)</highlight></codeline>
-<codeline lineno="976"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
-<codeline lineno="977"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_tmp,<sp/>x_dot_tmp,<sp/>t_tmp,<sp/>d_t_star_tmp]<sp/>=<sp/>...</highlight></codeline>
-<codeline lineno="978"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.step(x_tmp,<sp/>x_dot_tmp,<sp/>t_tmp,<sp/>d_t_tmp);</highlight></codeline>
-<codeline lineno="979"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="980"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Calculate<sp/>the<sp/>next<sp/>time<sp/>step<sp/>with<sp/>substepping<sp/>logic</highlight></codeline>
-<codeline lineno="981"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(ierr<sp/>==<sp/>0)</highlight></codeline>
-<codeline lineno="982"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="983"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Accept<sp/>the<sp/>step</highlight></codeline>
-<codeline lineno="984"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>d_t_star_tmp;</highlight></codeline>
-<codeline lineno="985"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="986"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>substepping<sp/>is<sp/>enabled,<sp/>double<sp/>the<sp/>step<sp/>size</highlight></codeline>
-<codeline lineno="987"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(k<sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/>k<sp/>&lt;<sp/>max_k)</highlight></codeline>
-<codeline lineno="988"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k<sp/>=<sp/>k<sp/>-<sp/>1;</highlight></codeline>
-<codeline lineno="989"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>the<sp/>substepping<sp/>index<sp/>is<sp/>even,<sp/>double<sp/>the<sp/>step<sp/>size</highlight></codeline>
-<codeline lineno="990"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(rem(k,<sp/>2)<sp/>==<sp/>0)</highlight></codeline>
-<codeline lineno="991"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>2.0<sp/>*<sp/>d_t_tmp;</highlight></codeline>
-<codeline lineno="992"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_verbose)</highlight></codeline>
-<codeline lineno="993"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>integration<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="994"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">succedded<sp/>disable<sp/>one<sp/>substepping<sp/>layer.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="995"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp);</highlight></codeline>
-<codeline lineno="996"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="997"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="998"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="999"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1000"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>the<sp/>infinity<sp/>norm<sp/>of<sp/>the<sp/>solution</highlight></codeline>
-<codeline lineno="1001"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(isfinite(norm(x_tmp,<sp/>inf)),<sp/>...</highlight></codeline>
-<codeline lineno="1002"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>||x||_inf<sp/>=<sp/>inf,<sp/>computation<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="1003"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">interrupted.\n</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="1004"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp);</highlight></codeline>
-<codeline lineno="1005"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1006"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="951"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.RungeKutta.Method.advance(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="952"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="953"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>initial<sp/>conditions</highlight></codeline>
+<codeline lineno="954"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>num_eqns<sp/>=<sp/>this.m_sys.get_num_eqns();</highlight></codeline>
+<codeline lineno="955"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(num_eqns<sp/>==<sp/>length(x_k),<sp/>...</highlight></codeline>
+<codeline lineno="956"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>length(x_0)<sp/>is<sp/>%d,<sp/>expected<sp/>%d.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="957"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>length(x_k),<sp/>num_eqns);</highlight></codeline>
+<codeline lineno="958"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="959"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>step<sp/>size</highlight></codeline>
+<codeline lineno="960"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(d_t<sp/>&gt;<sp/>0,<sp/>...</highlight></codeline>
+<codeline lineno="961"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>d_t<sp/>is<sp/>%f,<sp/>expected<sp/>&gt;<sp/>0.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="962"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>d_t);</highlight></codeline>
+<codeline lineno="963"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="964"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
+<codeline lineno="965"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>[x_new,<sp/>x_dot_new,<sp/>d_t_star,<sp/>ierr]<sp/>=<sp/>this.step(x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t);</highlight></codeline>
+<codeline lineno="966"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="967"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>the<sp/>advance<sp/>failed,<sp/>try<sp/>again<sp/>with<sp/>substepping</highlight></codeline>
+<codeline lineno="968"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(ierr<sp/>~=<sp/>0)</highlight></codeline>
+<codeline lineno="969"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="970"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_tmp<sp/><sp/><sp/><sp/><sp/>=<sp/>x_k;</highlight></codeline>
+<codeline lineno="971"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_tmp<sp/>=<sp/>x_dot_k;</highlight></codeline>
+<codeline lineno="972"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_tmp<sp/><sp/><sp/><sp/><sp/>=<sp/>t_k;</highlight></codeline>
+<codeline lineno="973"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/><sp/><sp/>=<sp/>0.5<sp/>*<sp/>d_t;</highlight></codeline>
+<codeline lineno="974"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="975"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_k<sp/>=<sp/>this.m_max_substeps<sp/>*<sp/>this.m_max_substeps;</highlight></codeline>
+<codeline lineno="976"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="977"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(k<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="978"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Integrate<sp/>system<sp/>of<sp/>ODEs/DAEs</highlight></codeline>
+<codeline lineno="979"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[x_tmp,<sp/>x_dot_tmp,<sp/>t_tmp,<sp/>d_t_star_tmp]<sp/>=<sp/>...</highlight></codeline>
+<codeline lineno="980"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.step(x_tmp,<sp/>x_dot_tmp,<sp/>t_tmp,<sp/>d_t_tmp);</highlight></codeline>
+<codeline lineno="981"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="982"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Calculate<sp/>the<sp/>next<sp/>time<sp/>step<sp/>with<sp/>substepping<sp/>logic</highlight></codeline>
+<codeline lineno="983"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(ierr<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="984"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="985"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Accept<sp/>the<sp/>step</highlight></codeline>
+<codeline lineno="986"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>d_t_star_tmp;</highlight></codeline>
+<codeline lineno="987"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="988"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>substepping<sp/>is<sp/>enabled,<sp/>double<sp/>the<sp/>step<sp/>size</highlight></codeline>
+<codeline lineno="989"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(k<sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/>k<sp/>&lt;<sp/>max_k)</highlight></codeline>
+<codeline lineno="990"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k<sp/>=<sp/>k<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="991"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>the<sp/>substepping<sp/>index<sp/>is<sp/>even,<sp/>double<sp/>the<sp/>step<sp/>size</highlight></codeline>
+<codeline lineno="992"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(rem(k,<sp/>2)<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="993"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>2.0<sp/>*<sp/>d_t_tmp;</highlight></codeline>
+<codeline lineno="994"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_verbose)</highlight></codeline>
+<codeline lineno="995"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>integration<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="996"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">succedded<sp/>disable<sp/>one<sp/>substepping<sp/>layer.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="997"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp);</highlight></codeline>
+<codeline lineno="998"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="999"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1000"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1001"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1002"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>the<sp/>infinity<sp/>norm<sp/>of<sp/>the<sp/>solution</highlight></codeline>
+<codeline lineno="1003"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(isfinite(norm(x_tmp,<sp/>inf)),<sp/>...</highlight></codeline>
+<codeline lineno="1004"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>||x||_inf<sp/>=<sp/>inf,<sp/>computation<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="1005"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">interrupted.\n</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="1006"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp);</highlight></codeline>
 <codeline lineno="1007"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1008"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>the<sp/>substepping<sp/>index<sp/>is<sp/>too<sp/>high,<sp/>abort<sp/>the<sp/>integration</highlight></codeline>
-<codeline lineno="1009"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k<sp/>=<sp/>k<sp/>+<sp/>2;</highlight></codeline>
-<codeline lineno="1010"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(k<sp/>&lt;<sp/>max_k,<sp/>...</highlight></codeline>
-<codeline lineno="1011"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>integration<sp/>failed<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="1012"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">(error<sp/>code<sp/>%d)<sp/>with<sp/>d_t<sp/>=<sp/>%g,<sp/>aborting.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="1013"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp,<sp/>ierr,<sp/>d_t);</highlight></codeline>
-<codeline lineno="1014"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1015"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Otherwise,<sp/>try<sp/>again<sp/>with<sp/>a<sp/>smaller<sp/>step</highlight></codeline>
-<codeline lineno="1016" refid="a00215_1ab8c3395e5d162ea184069e0d09f7c934" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_verbose)</highlight></codeline>
-<codeline lineno="1017"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>integration<sp/>failed<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
-<codeline lineno="1018"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">(error<sp/>code<sp/>%d),<sp/>adding<sp/>substepping<sp/>layer.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
-<codeline lineno="1019"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp,<sp/>ierr);</highlight></codeline>
-<codeline lineno="1020"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1021"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>0.5<sp/>*<sp/>d_t_tmp;</highlight></codeline>
-<codeline lineno="1022"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>continue;</highlight></codeline>
-<codeline lineno="1023"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1024"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1008"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="1009"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1010"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>If<sp/>the<sp/>substepping<sp/>index<sp/>is<sp/>too<sp/>high,<sp/>abort<sp/>the<sp/>integration</highlight></codeline>
+<codeline lineno="1011"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>k<sp/>=<sp/>k<sp/>+<sp/>2;</highlight></codeline>
+<codeline lineno="1012"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(k<sp/>&lt;<sp/>max_k,<sp/>...</highlight></codeline>
+<codeline lineno="1013"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>integration<sp/>failed<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="1014"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">(error<sp/>code<sp/>%d)<sp/>with<sp/>d_t<sp/>=<sp/>%g,<sp/>aborting.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="1015"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp,<sp/>ierr,<sp/>d_t);</highlight></codeline>
+<codeline lineno="1016"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1017"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Otherwise,<sp/>try<sp/>again<sp/>with<sp/>a<sp/>smaller<sp/>step</highlight></codeline>
+<codeline lineno="1018" refid="a00215_1ab8c3395e5d162ea184069e0d09f7c934" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_verbose)</highlight></codeline>
+<codeline lineno="1019"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/>&apos;</highlight><highlight class="normal">in<sp/>%s<sp/>solver,<sp/>at<sp/>t<sp/>=<sp/>%g,<sp/>integration<sp/>failed<sp/></highlight><highlight class="stringliteral">&apos;,<sp/>...</highlight></codeline>
+<codeline lineno="1020"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&apos;</highlight><highlight class="normal">(error<sp/>code<sp/>%d),<sp/>adding<sp/>substepping<sp/>layer.</highlight><highlight class="stringliteral">&apos;],<sp/>...</highlight></codeline>
+<codeline lineno="1021"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_name,<sp/>t_tmp,<sp/>ierr);</highlight></codeline>
+<codeline lineno="1022"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1023"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_tmp<sp/>=<sp/>0.5<sp/>*<sp/>d_t_tmp;</highlight></codeline>
+<codeline lineno="1024"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>continue;</highlight></codeline>
 <codeline lineno="1025"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1026"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>time<sp/>solution</highlight></codeline>
-<codeline lineno="1027"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_tmp<sp/>=<sp/>t_tmp<sp/>+<sp/>d_t_tmp;</highlight></codeline>
-<codeline lineno="1028"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1029"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1030"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>output<sp/>states<sp/>substepping<sp/>solutions</highlight></codeline>
-<codeline lineno="1031"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/><sp/><sp/><sp/><sp/>=<sp/>x_tmp;</highlight></codeline>
-<codeline lineno="1032"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_new<sp/>=<sp/>x_dot_tmp;</highlight></codeline>
-<codeline lineno="1033"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_star<sp/><sp/>=<sp/>d_t_tmp;</highlight></codeline>
-<codeline lineno="1034"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1035"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1036"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Project<sp/>intermediate<sp/>solution<sp/>on<sp/>the<sp/>invariants</highlight></codeline>
-<codeline lineno="1037"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_projection)</highlight></codeline>
-<codeline lineno="1038"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/>=<sp/>this.project(x_new,<sp/>t_k+d_t);</highlight></codeline>
-<codeline lineno="1039"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1040"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1041"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1042"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1026"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1027"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1028"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>time<sp/>solution</highlight></codeline>
+<codeline lineno="1029"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_tmp<sp/>=<sp/>t_tmp<sp/>+<sp/>d_t_tmp;</highlight></codeline>
+<codeline lineno="1030"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1031"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1032"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Store<sp/>output<sp/>states<sp/>substepping<sp/>solutions</highlight></codeline>
+<codeline lineno="1033"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/><sp/><sp/><sp/><sp/>=<sp/>x_tmp;</highlight></codeline>
+<codeline lineno="1034"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_dot_new<sp/>=<sp/>x_dot_tmp;</highlight></codeline>
+<codeline lineno="1035"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_t_star<sp/><sp/>=<sp/>d_t_tmp;</highlight></codeline>
+<codeline lineno="1036"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1037"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1038"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Project<sp/>intermediate<sp/>solution<sp/>on<sp/>the<sp/>invariants</highlight></codeline>
+<codeline lineno="1039"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(this.m_projection)</highlight></codeline>
+<codeline lineno="1040"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x_new<sp/>=<sp/>this.project(x_new,<sp/>t_k+d_t);</highlight></codeline>
+<codeline lineno="1041"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1042"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="1043"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1044"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Compute<sp/>adaptive<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>according<sp/>to<sp/>the</highlight></codeline>
-<codeline lineno="1045"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>error<sp/>control<sp/>method.<sp/>The<sp/>error<sp/>control<sp/>method<sp/>used<sp/>is<sp/>the<sp/>local<sp/>truncation</highlight></codeline>
-<codeline lineno="1046"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>error<sp/>method,<sp/>which<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
-<codeline lineno="1047"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1048"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="1049"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>e<sp/>=<sp/>\sqrt{\dfrac{1}{n}<sp/>\displaystyle\sum_{i=1}{n}\left(\dfrac</highlight></codeline>
-<codeline lineno="1050"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>{\mathbf{x}<sp/>-<sp/>\hat{\mathbf{x}}}</highlight></codeline>
-<codeline lineno="1051"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>{s<sp/>c_i}</highlight></codeline>
-<codeline lineno="1052"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\right)^2}</highlight></codeline>
-<codeline lineno="1053"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="1054"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1055"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>is<sp/>the<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>computed</highlight></codeline>
-<codeline lineno="1056"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>with<sp/>higher<sp/>order<sp/>method<sp/>of<sp/>\f$<sp/>p<sp/>\f$,<sp/>and<sp/>\f$<sp/>\hat{\mathbf{x}}<sp/>\f$<sp/>is<sp/>the</highlight></codeline>
-<codeline lineno="1057"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>computed<sp/>with<sp/>lower<sp/>order<sp/>method<sp/>of<sp/>\f$</highlight></codeline>
-<codeline lineno="1058"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\hat{p}<sp/>\f$.<sp/>To<sp/>compute<sp/>the<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step</highlight></codeline>
-<codeline lineno="1059"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,<sp/>The<sp/>error<sp/>is<sp/>compared<sp/>to<sp/>\f$<sp/>1<sp/>\f$<sp/>in<sp/>order<sp/>to<sp/>find</highlight></codeline>
-<codeline lineno="1060"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>an<sp/>optimal<sp/>step<sp/>size.<sp/>From<sp/>the<sp/>error<sp/>behaviour<sp/>\f$<sp/>e<sp/>\approx<sp/>Ch^{q+1}<sp/>\f$</highlight></codeline>
-<codeline lineno="1061"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>and<sp/>from<sp/>\f$<sp/>1<sp/>\approx<sp/>Ch_{opt}^{q+1}<sp/>\f$<sp/>(where<sp/>\f$<sp/>q<sp/>=<sp/>\min(p,\hat{p})<sp/>\f$)</highlight></codeline>
-<codeline lineno="1062"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>optimal<sp/>step<sp/>size<sp/>is<sp/>obtained<sp/>as:</highlight></codeline>
-<codeline lineno="1063"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1064"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="1065"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>h_{opt}<sp/>=<sp/>h<sp/>\left(<sp/>\dfrac{1}{e}<sp/>\right)^{\frac{1}{q+1}}</highlight></codeline>
-<codeline lineno="1066"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="1067"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1068"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>We<sp/>multiply<sp/>the<sp/>previous<sp/>quation<sp/>by<sp/>a<sp/>safety<sp/>factor<sp/>\f$<sp/>f<sp/>\f$,<sp/>usually</highlight></codeline>
-<codeline lineno="1069"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>f<sp/>=<sp/>0.8<sp/>\f$,<sp/>\f$<sp/>0.9<sp/>\f$,<sp/>\f$<sp/>(0.25)^{1/(q+1)}<sp/>\f$,<sp/>or<sp/>\f$<sp/>(0.38)^{1/(q+1)}<sp/>\f$,</highlight></codeline>
-<codeline lineno="1070"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>so<sp/>that<sp/>the<sp/>error<sp/>will<sp/>be<sp/>acceptable<sp/>the<sp/>next<sp/>time<sp/>with<sp/>high<sp/>probability.</highlight></codeline>
-<codeline lineno="1071"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Further,<sp/>\f$<sp/>h<sp/>\f$<sp/>is<sp/>not<sp/>allowed<sp/>to<sp/>increase<sp/>nor<sp/>to<sp/>decrease<sp/>too<sp/>fast.</highlight></codeline>
-<codeline lineno="1072"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>So<sp/>we<sp/>put:</highlight></codeline>
-<codeline lineno="1073"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1074"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="1075"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>h_{new}<sp/>=<sp/>h<sp/>\min<sp/>\left(<sp/>f_{max},<sp/>\max<sp/>\left(<sp/>f_{max},<sp/>f<sp/>\left(</highlight></codeline>
-<codeline lineno="1076"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\dfrac{1}{e}<sp/>\right)^{\frac{1}{q+1}}</highlight></codeline>
-<codeline lineno="1077"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\right)<sp/>\right)</highlight></codeline>
-<codeline lineno="1078"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="1079"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1080"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>for<sp/>the<sp/>new<sp/>step<sp/>size.<sp/>Then,<sp/>if<sp/>\f$<sp/>e<sp/>\leq<sp/>1<sp/>\f$,<sp/>the<sp/>computed<sp/>step<sp/>is</highlight></codeline>
-<codeline lineno="1081"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>accepted<sp/>and<sp/>the<sp/>solution<sp/>is<sp/>advanced<sp/>to<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>a<sp/>new<sp/>step</highlight></codeline>
-<codeline lineno="1082"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>is<sp/>tried<sp/>with<sp/>\f$<sp/>h_{new}<sp/>\f$<sp/>as<sp/>step<sp/>size.<sp/>Else,<sp/>the<sp/>step<sp/>is<sp/>rejected</highlight></codeline>
-<codeline lineno="1083"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>and<sp/>the<sp/>computations<sp/>are<sp/>repeated<sp/>with<sp/>the<sp/>new<sp/>step<sp/>size<sp/>\f$<sp/>h_{new}<sp/>\f$.</highlight></codeline>
-<codeline lineno="1084"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Typially,<sp/>\f$<sp/>f<sp/>\f$<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[0.8,<sp/>0.9]<sp/>\f$,</highlight></codeline>
-<codeline lineno="1085"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>f_{max}<sp/>\f$<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[1.5,<sp/>5]<sp/>\f$,<sp/>and<sp/>\f$<sp/>f_{min}<sp/>\f$</highlight></codeline>
-<codeline lineno="1086"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[0.1,<sp/>0.2]<sp/>\f$.</highlight></codeline>
-<codeline lineno="1087"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1088"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_h<sp/>Approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
-<codeline lineno="1089"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>with<sp/>higher<sp/>order<sp/>method.</highlight></codeline>
-<codeline lineno="1090"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_l<sp/>Approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
-<codeline lineno="1091"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>with<sp/>lower<sp/>order<sp/>method.</highlight></codeline>
-<codeline lineno="1092"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/>Actual<sp/>advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
-<codeline lineno="1093"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1094"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta</highlight></codeline>
-<codeline lineno="1095"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_{k+1}<sp/>\f$.</highlight></codeline>
-<codeline lineno="1096"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1097"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>adapt_step(<sp/>this,<sp/>x_h,<sp/>x_l,<sp/>d_t<sp/>)</highlight></codeline>
-<codeline lineno="1098"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1099"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>the<sp/>error<sp/>with<sp/>2-norm</highlight></codeline>
-<codeline lineno="1100"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>r<sp/>=<sp/>(x_h<sp/>-<sp/>x_l)<sp/>./<sp/>(this.m_A_tol<sp/>+<sp/>0.5*this.m_R_tol*(abs(x_h)+abs(x_l)));</highlight></codeline>
-<codeline lineno="1101"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>e<sp/>=<sp/>norm(r,<sp/>2)/length(x_h);</highlight></codeline>
-<codeline lineno="1102"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="1103"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>the<sp/>suggested<sp/>time<sp/>step</highlight></codeline>
-<codeline lineno="1104"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>q<sp/><sp/><sp/>=<sp/>this.m_order<sp/>+<sp/>1;</highlight></codeline>
-<codeline lineno="1105"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>d_t<sp/>*<sp/>min(this.m_fac_max,<sp/>max(this.m_fac_min,<sp/>this.m_fac*(1/e)^(1/q)));</highlight></codeline>
-<codeline lineno="1106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1107"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1108"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1044"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1045"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1046"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Compute<sp/>adaptive<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>according<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="1047"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>error<sp/>control<sp/>method.<sp/>The<sp/>error<sp/>control<sp/>method<sp/>used<sp/>is<sp/>the<sp/>local<sp/>truncation</highlight></codeline>
+<codeline lineno="1048"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>error<sp/>method,<sp/>which<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
+<codeline lineno="1049"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1050"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="1051"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>e<sp/>=<sp/>\sqrt{\dfrac{1}{n}<sp/>\displaystyle\sum_{i=1}{n}\left(\dfrac</highlight></codeline>
+<codeline lineno="1052"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>{\mathbf{x}<sp/>-<sp/>\hat{\mathbf{x}}}</highlight></codeline>
+<codeline lineno="1053"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>{s<sp/>c_i}</highlight></codeline>
+<codeline lineno="1054"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\right)^2}</highlight></codeline>
+<codeline lineno="1055"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="1056"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1057"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>is<sp/>the<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>computed</highlight></codeline>
+<codeline lineno="1058"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>with<sp/>higher<sp/>order<sp/>method<sp/>of<sp/>\f$<sp/>p<sp/>\f$,<sp/>and<sp/>\f$<sp/>\hat{\mathbf{x}}<sp/>\f$<sp/>is<sp/>the</highlight></codeline>
+<codeline lineno="1059"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>computed<sp/>with<sp/>lower<sp/>order<sp/>method<sp/>of<sp/>\f$</highlight></codeline>
+<codeline lineno="1060"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\hat{p}<sp/>\f$.<sp/>To<sp/>compute<sp/>the<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step</highlight></codeline>
+<codeline lineno="1061"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,<sp/>The<sp/>error<sp/>is<sp/>compared<sp/>to<sp/>\f$<sp/>1<sp/>\f$<sp/>in<sp/>order<sp/>to<sp/>find</highlight></codeline>
+<codeline lineno="1062"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>an<sp/>optimal<sp/>step<sp/>size.<sp/>From<sp/>the<sp/>error<sp/>behaviour<sp/>\f$<sp/>e<sp/>\approx<sp/>Ch^{q+1}<sp/>\f$</highlight></codeline>
+<codeline lineno="1063"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>and<sp/>from<sp/>\f$<sp/>1<sp/>\approx<sp/>Ch_{opt}^{q+1}<sp/>\f$<sp/>(where<sp/>\f$<sp/>q<sp/>=<sp/>\min(p,\hat{p})<sp/>\f$)</highlight></codeline>
+<codeline lineno="1064"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>the<sp/>optimal<sp/>step<sp/>size<sp/>is<sp/>obtained<sp/>as:</highlight></codeline>
+<codeline lineno="1065"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1066"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="1067"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>h_{opt}<sp/>=<sp/>h<sp/>\left(<sp/>\dfrac{1}{e}<sp/>\right)^{\frac{1}{q+1}}</highlight></codeline>
+<codeline lineno="1068"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="1069"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1070"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>We<sp/>multiply<sp/>the<sp/>previous<sp/>quation<sp/>by<sp/>a<sp/>safety<sp/>factor<sp/>\f$<sp/>f<sp/>\f$,<sp/>usually</highlight></codeline>
+<codeline lineno="1071"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>f<sp/>=<sp/>0.8<sp/>\f$,<sp/>\f$<sp/>0.9<sp/>\f$,<sp/>\f$<sp/>(0.25)^{1/(q+1)}<sp/>\f$,<sp/>or<sp/>\f$<sp/>(0.38)^{1/(q+1)}<sp/>\f$,</highlight></codeline>
+<codeline lineno="1072"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>so<sp/>that<sp/>the<sp/>error<sp/>will<sp/>be<sp/>acceptable<sp/>the<sp/>next<sp/>time<sp/>with<sp/>high<sp/>probability.</highlight></codeline>
+<codeline lineno="1073"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Further,<sp/>\f$<sp/>h<sp/>\f$<sp/>is<sp/>not<sp/>allowed<sp/>to<sp/>increase<sp/>nor<sp/>to<sp/>decrease<sp/>too<sp/>fast.</highlight></codeline>
+<codeline lineno="1074"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>So<sp/>we<sp/>put:</highlight></codeline>
+<codeline lineno="1075"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1076"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="1077"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>h_{new}<sp/>=<sp/>h<sp/>\min<sp/>\left(<sp/>f_{max},<sp/>\max<sp/>\left(<sp/>f_{max},<sp/>f<sp/>\left(</highlight></codeline>
+<codeline lineno="1078"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\dfrac{1}{e}<sp/>\right)^{\frac{1}{q+1}}</highlight></codeline>
+<codeline lineno="1079"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\right)<sp/>\right)</highlight></codeline>
+<codeline lineno="1080"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="1081"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1082"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>for<sp/>the<sp/>new<sp/>step<sp/>size.<sp/>Then,<sp/>if<sp/>\f$<sp/>e<sp/>\leq<sp/>1<sp/>\f$,<sp/>the<sp/>computed<sp/>step<sp/>is</highlight></codeline>
+<codeline lineno="1083"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>accepted<sp/>and<sp/>the<sp/>solution<sp/>is<sp/>advanced<sp/>to<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>a<sp/>new<sp/>step</highlight></codeline>
+<codeline lineno="1084"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>is<sp/>tried<sp/>with<sp/>\f$<sp/>h_{new}<sp/>\f$<sp/>as<sp/>step<sp/>size.<sp/>Else,<sp/>the<sp/>step<sp/>is<sp/>rejected</highlight></codeline>
+<codeline lineno="1085"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>and<sp/>the<sp/>computations<sp/>are<sp/>repeated<sp/>with<sp/>the<sp/>new<sp/>step<sp/>size<sp/>\f$<sp/>h_{new}<sp/>\f$.</highlight></codeline>
+<codeline lineno="1086"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Typially,<sp/>\f$<sp/>f<sp/>\f$<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[0.8,<sp/>0.9]<sp/>\f$,</highlight></codeline>
+<codeline lineno="1087"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f$<sp/>f_{max}<sp/>\f$<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[1.5,<sp/>5]<sp/>\f$,<sp/>and<sp/>\f$<sp/>f_{min}<sp/>\f$</highlight></codeline>
+<codeline lineno="1088"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[0.1,<sp/>0.2]<sp/>\f$.</highlight></codeline>
+<codeline lineno="1089"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1090"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_h<sp/>Approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
+<codeline lineno="1091"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>with<sp/>higher<sp/>order<sp/>method.</highlight></codeline>
+<codeline lineno="1092"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_l<sp/>Approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
+<codeline lineno="1093"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>with<sp/>lower<sp/>order<sp/>method.</highlight></codeline>
+<codeline lineno="1094"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/>Actual<sp/>advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="1095"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1096"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta</highlight></codeline>
+<codeline lineno="1097"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_{k+1}<sp/>\f$.</highlight></codeline>
+<codeline lineno="1098"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1099"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>adapt_step(<sp/>this,<sp/>x_h,<sp/>x_l,<sp/>d_t<sp/>)</highlight></codeline>
+<codeline lineno="1100"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1101"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>the<sp/>error<sp/>with<sp/>2-norm</highlight></codeline>
+<codeline lineno="1102"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>r<sp/>=<sp/>(x_h<sp/>-<sp/>x_l)<sp/>./<sp/>(this.m_A_tol<sp/>+<sp/>0.5*this.m_R_tol*(abs(x_h)+abs(x_l)));</highlight></codeline>
+<codeline lineno="1103"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>e<sp/>=<sp/>norm(r,<sp/>2)/length(x_h);</highlight></codeline>
+<codeline lineno="1104"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="1105"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Compute<sp/>the<sp/>suggested<sp/>time<sp/>step</highlight></codeline>
+<codeline lineno="1106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>q<sp/><sp/><sp/>=<sp/>this.m_order<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="1107"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>d_t<sp/>*<sp/>min(this.m_fac_max,<sp/>max(this.m_fac_min,<sp/>this.m_fac*(1/e)^(1/q)));</highlight></codeline>
+<codeline lineno="1108"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="1109"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1110"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>info(<sp/>this<sp/>)</highlight></codeline>
-<codeline lineno="1111"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">Runge-Kutta<sp/>method:\t%s\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.m_name);</highlight></codeline>
-<codeline lineno="1112"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>order:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/><sp/><sp/><sp/>this.get_order());</highlight></codeline>
-<codeline lineno="1113"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>stages:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/><sp/><sp/>this.get_stages());</highlight></codeline>
-<codeline lineno="1114"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal">:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.is_explicit());</highlight></codeline>
-<codeline lineno="1115"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>implicit:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.is_implicit());</highlight></codeline>
-<codeline lineno="1116"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>embedded:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.is_embedded());</highlight></codeline>
-<codeline lineno="1117"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1118"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1119"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1110"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1111"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1112"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>info(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="1113"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">Runge-Kutta<sp/>method:\t%s\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.m_name);</highlight></codeline>
+<codeline lineno="1114"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>order:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/><sp/><sp/><sp/>this.get_order());</highlight></codeline>
+<codeline lineno="1115"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>stages:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/><sp/><sp/>this.get_stages());</highlight></codeline>
+<codeline lineno="1116"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal">:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.is_explicit());</highlight></codeline>
+<codeline lineno="1117"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>implicit:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.is_implicit());</highlight></codeline>
+<codeline lineno="1118"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(&apos;</highlight><highlight class="normal">\t-<sp/>embedded:\t%d\n</highlight><highlight class="stringliteral">&apos;,<sp/>this.is_embedded());</highlight></codeline>
+<codeline lineno="1119"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
 <codeline lineno="1120"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1121"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1122"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1123"><highlight class="stringliteral"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
-<codeline lineno="1124"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1125"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1121"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1122"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1123"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1124"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1125"><highlight class="stringliteral"><sp/><sp/>methods<sp/>(Abstract)</highlight></codeline>
 <codeline lineno="1126"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1127"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Compute<sp/>a<sp/>step<sp/>using<sp/>a<sp/>generic<sp/>integration<sp/>method<sp/>for<sp/>a<sp/>system<sp/>of</highlight></codeline>
-<codeline lineno="1128"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>ODEs/DAEs<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},</highlight></codeline>
-<codeline lineno="1129"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>t)<sp/>=<sp/>\mathbf{0}<sp/>\f$.<sp/>The<sp/>step<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
-<codeline lineno="1130"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1131"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="1132"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{x}_{k+1}(t_{k}+\Delta<sp/>t)<sp/>=<sp/>\mathbf{x}_k(t_{k})<sp/>+</highlight></codeline>
-<codeline lineno="1133"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathcal{S}(\mathbf{x}_k(t_k),<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_k(t_k),<sp/>t_k,<sp/>\Delta<sp/>t)</highlight></codeline>
-<codeline lineno="1134"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
-<codeline lineno="1135"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1136"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathcal{S}<sp/>\f$<sp/>is<sp/>the<sp/>generic<sp/>advancing<sp/>step<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
+<codeline lineno="1127"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1128"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1129"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Compute<sp/>a<sp/>step<sp/>using<sp/>a<sp/>generic<sp/>integration<sp/>method<sp/>for<sp/>a<sp/>system<sp/>of</highlight></codeline>
+<codeline lineno="1130"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>ODEs/DAEs<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}&apos;</highlight><highlight class="normal">,<sp/>\mathbf{v},</highlight></codeline>
+<codeline lineno="1131"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>t)<sp/>=<sp/>\mathbf{0}<sp/>\f$.<sp/>The<sp/>step<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
+<codeline lineno="1132"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1133"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="1134"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{x}_{k+1}(t_{k}+\Delta<sp/>t)<sp/>=<sp/>\mathbf{x}_k(t_{k})<sp/>+</highlight></codeline>
+<codeline lineno="1135"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathcal{S}(\mathbf{x}_k(t_k),<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_k(t_k),<sp/>t_k,<sp/>\Delta<sp/>t)</highlight></codeline>
+<codeline lineno="1136"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
 <codeline lineno="1137"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1138"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_k<sp/><sp/><sp/><sp/><sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
-<codeline lineno="1139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot_k<sp/>States<sp/>derivative<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="1140"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(t_k)<sp/>\f$.</highlight></codeline>
-<codeline lineno="1141"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_k<sp/><sp/><sp/><sp/><sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
-<codeline lineno="1142"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/><sp/><sp/><sp/><sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
-<codeline lineno="1143"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1144"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>approximation<sp/>of<sp/>\f$<sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>and</highlight></codeline>
-<codeline lineno="1145"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_{k+1}(t_{k}+\Delta<sp/>t)<sp/>\f$.</highlight></codeline>
-<codeline lineno="1146"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1147"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>step(<sp/>this,<sp/>x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
+<codeline lineno="1138"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>where<sp/>\f$<sp/>\mathcal{S}<sp/>\f$<sp/>is<sp/>the<sp/>generic<sp/>advancing<sp/>step<sp/>of<sp/>the<sp/>solver.</highlight></codeline>
+<codeline lineno="1139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1140"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_k<sp/><sp/><sp/><sp/><sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="1141"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_dot_k<sp/>States<sp/>derivative<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1142"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="1143"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_k<sp/><sp/><sp/><sp/><sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
+<codeline lineno="1144"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>d_t<sp/><sp/><sp/><sp/><sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="1145"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1146"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>approximation<sp/>of<sp/>\f$<sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>and</highlight></codeline>
+<codeline lineno="1147"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;_{k+1}(t_{k}+\Delta<sp/>t)<sp/>\f$.</highlight></codeline>
 <codeline lineno="1148"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1149"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1149"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>step(<sp/>this,<sp/>x_k,<sp/>x_dot_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
 <codeline lineno="1150"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1151"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>Butcher<sp/>tableau<sp/>consistency<sp/>for<sp/>an<sp/>explicit<sp/>Runge-Kutta<sp/>method.</highlight></codeline>
-<codeline lineno="1152"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1153"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.A<sp/><sp/><sp/>Matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$.</highlight></codeline>
-<codeline lineno="1154"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.b<sp/><sp/><sp/>Weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$.</highlight></codeline>
-<codeline lineno="1155"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.b_e<sp/>[optional]<sp/>Embedded<sp/>weights<sp/>vector<sp/>\f$<sp/>\hat{\mathbf{b}}</highlight></codeline>
-<codeline lineno="1156"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
-<codeline lineno="1157"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.c<sp/><sp/><sp/>Nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$.</highlight></codeline>
-<codeline lineno="1158"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="1159"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>Butcher<sp/>tableau<sp/>is<sp/>consistent,<sp/>false<sp/>otherwise.</highlight></codeline>
-<codeline lineno="1160"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1161"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>check_tableau(<sp/>tbl<sp/>)</highlight></codeline>
+<codeline lineno="1151"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1152"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1153"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>Butcher<sp/>tableau<sp/>consistency<sp/>for<sp/>an<sp/>explicit<sp/>Runge-Kutta<sp/>method.</highlight></codeline>
+<codeline lineno="1154"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1155"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.A<sp/><sp/><sp/>Matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$.</highlight></codeline>
+<codeline lineno="1156"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.b<sp/><sp/><sp/>Weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$.</highlight></codeline>
+<codeline lineno="1157"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.b_e<sp/>[optional]<sp/>Embedded<sp/>weights<sp/>vector<sp/>\f$<sp/>\hat{\mathbf{b}}</highlight></codeline>
+<codeline lineno="1158"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
+<codeline lineno="1159"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>tbl.c<sp/><sp/><sp/>Nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$.</highlight></codeline>
+<codeline lineno="1160"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="1161"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>Butcher<sp/>tableau<sp/>is<sp/>consistent,<sp/>false<sp/>otherwise.</highlight></codeline>
 <codeline lineno="1162"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1163"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1163"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>check_tableau(<sp/>tbl<sp/>)</highlight></codeline>
 <codeline lineno="1164"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="1165"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="1166"><highlight class="stringliteral">end</highlight></codeline>
+<codeline lineno="1165"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="1166"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="1167"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="1168"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
     <location file="+Indigo/+RungeKutta/Method.m"/>
   </compounddef>

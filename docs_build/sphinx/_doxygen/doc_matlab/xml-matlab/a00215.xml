@@ -1456,10 +1456,10 @@
         </inbodydescription>
         <location file="+Indigo/+RungeKutta/Method.m" line="646" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00215_1a41f520380e485da0528f2de95eff11fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00215_1ae29e3abf7fcced6bef2ca518e55b76ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Method::project</definition>
-        <argsstring>(in this, in x_tilde, in t)</argsstring>
+        <argsstring>(in this, in x_t, in t)</argsstring>
         <name>project</name>
         <qualifiedname>Method::project</qualifiedname>
         <param>
@@ -1468,7 +1468,7 @@
         </param>
         <param>
           <type>in</type>
-          <declname>x_tilde</declname>
+          <declname>x_t</declname>
         </param>
         <param>
           <type>in</type>
@@ -1527,7 +1527,7 @@
 <para>where <formula id="65">$ \mathbf{Jh}_\mathbf{x} $</formula> is the Jacobian of the invariants/ with respect to the states <formula id="56">$ \mathbf{x} $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>x_tilde</parametername>
+<parametername>x_t</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The initial guess for the states <formula id="66">$ \widetilde{\mathbf{x}} $</formula>. </para>
@@ -1597,7 +1597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="808" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="810" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00215_1a22eecc037be0a53ce2b56cf44e7f4ba9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -1666,7 +1666,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="905" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="907" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00215_1ab8c3395e5d162ea184069e0d09f7c934" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -1744,7 +1744,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="1016" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1018" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00215_1a5e85431a99bef0bbf771def75389d8f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -1824,7 +1824,7 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="1167" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1169" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00215_1a46b621cc024a7dbda7907c4bb56443f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -1842,7 +1842,7 @@ h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="1181" column="15"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1183" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00215_1a22008e2131f1a3610e71d18aa59e57e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -1920,7 +1920,7 @@ t) = \mathbf{0} $</formula>. The step is based on the following formula:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="1219" column="24"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1221" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00215_1ad9dc63b3daf976e42434644dd3a2267d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -1976,7 +1976,7 @@ t) = \mathbf{0} $</formula>. The step is based on the following formula:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Method.m" line="1234" column="24"/>
+        <location file="+Indigo/+RungeKutta/Method.m" line="1236" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -2035,7 +2035,7 @@ p−1 $</formula> or <formula id="10">$ \hat{p} = p+1 $</formula>) (row vector):
         <label>handle</label>
       </node>
     </collaborationgraph>
-    <location file="+Indigo/+RungeKutta/Method.m" line="46" column="1" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="47" bodyend="1240"/>
+    <location file="+Indigo/+RungeKutta/Method.m" line="46" column="1" bodyfile="+Indigo/+RungeKutta/Method.m" bodystart="47" bodyend="1242"/>
     <listofallmembers>
       <member refid="a00215_1a5e85431a99bef0bbf771def75389d8f9" prot="public" virt="non-virtual"><scope>Method</scope><name>adapt_step</name></member>
       <member refid="a00215_1ab8c3395e5d162ea184069e0d09f7c934" prot="public" virt="non-virtual"><scope>Method</scope><name>advance</name></member>
@@ -2090,7 +2090,7 @@ p−1 $</formula> or <formula id="10">$ \hat{p} = p+1 $</formula>) (row vector):
       <member refid="a00215_1a32507ebb9c9aa897931f9caeb732ea7f" prot="private" virt="non-virtual"><scope>Method</scope><name>m_sys</name></member>
       <member refid="a00215_1aa7663b79ffd99aa6c7d8575c927d0d81" prot="private" virt="non-virtual"><scope>Method</scope><name>m_verbose</name></member>
       <member refid="a00215_1a4b44d76b408f5c960f6b3d8e1eaf4d1c" prot="public" virt="non-virtual"><scope>Method</scope><name>Method</name></member>
-      <member refid="a00215_1a41f520380e485da0528f2de95eff11fc" prot="public" virt="non-virtual"><scope>Method</scope><name>project</name></member>
+      <member refid="a00215_1ae29e3abf7fcced6bef2ca518e55b76ee" prot="public" virt="non-virtual"><scope>Method</scope><name>project</name></member>
       <member refid="a00215_1abda5167ad1b40f8a31a09d0b220fb9de" prot="public" virt="non-virtual"><scope>Method</scope><name>set_A</name></member>
       <member refid="a00215_1aab77980e9e53160ccafd681c0368706b" prot="public" virt="non-virtual"><scope>Method</scope><name>set_A_tol</name></member>
       <member refid="a00215_1a6379b34c8b01f736529b4304c0c3236d" prot="public" virt="non-virtual"><scope>Method</scope><name>set_b</name></member>

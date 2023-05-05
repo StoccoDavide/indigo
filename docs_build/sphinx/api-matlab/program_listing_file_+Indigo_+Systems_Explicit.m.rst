@@ -67,28 +67,103 @@ Program Listing for File Explicit.m
        %
        %> Class constructor for a explicit system.
        %>
-       %> \param t_name Name of the system.
-       %> \param t_neqn Number of equations of the system.
-       %> \param t_veil Number of veils of the system.
-       %> \param t_ninv Number of invariants of the system.
+       %> \param t_name     The name of the system.
+       %> \param t_num_eqns The number of equations of the system.
+       %> \param t_num_veil The number of (user-defined) veils of the system.
+       %> \param t_num_invs The number of invariants of the system.
        %
-       function this = Explicit( t_name, t_neqn, t_veil, t_ninv )
-         this@Indigo.Systems.System(t_name, t_neqn, t_veil, t_ninv);
+       function this = Explicit( t_name, t_num_eqns, t_num_veil, t_num_invs )
+         this@Indigo.Systems.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       % Evaluate the system function \f$ \mathbf{F} \f$.
+       %> Evaluate the system function \f$ \mathbf{F} \f$.
+       %>
+       %> \param x     States \f$ \mathbf{x} \f$.
+       %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+       %> \param v     Veils \f$ \mathbf{v} \f$.
+       %> \param t     Independent variable \f$ t \f$.
+       %>
+       %> \return The system function \f$ \mathbf{F} \f$.
        %
-       % \param x     States \f$ \mathbf{x} \f$.
-       % \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-       % \param v     Veils \f$ \mathbf{v} \f$.
-       % \param t     Independent variable \f$ t \f$.
-       %
-       % \return The system function \f$ \mathbf{F} \f$.
-       %
-       function out = F( this, x, v, x_dot, t )
+       function out = F( this, x, x_dot, v, t )
          out = x_dot - this.f(x, v, t);
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+       %> respect to the states \f$ \mathbf{x} \f$:
+       %>
+       %> \f[
+       %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+       %> \dfrac{
+       %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+       %> }{
+       %>   \partial \mathbf{x}
+       %> }.
+       %> \f]
+       %>
+       %> \param x     States \f$ \mathbf{x} \f$.
+       %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+       %> \param v     Veils \f$ \mathbf{v} \f$.
+       %> \param t     Independent variable \f$ t \f$.
+       %>
+       %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
+       %
+       function out = JF_x( this, x, ~, v, t )
+         out = -(this.Jf_x(x, v, t) + this.Jf_v(x, v, t)*this.Jv_x(x, t));
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+       %> respect to the states derivative \f$ \mathbf{x}' \f$:
+       %>
+       %> \f[
+       %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+       %> \dfrac{
+       %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+       %> }{
+       %>   \partial \mathbf{x}'
+       %> }.
+       %> \f]
+       %>
+       %> \param x     States \f$ \mathbf{x} \f$.
+       %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+       %> \param v     Veils \f$ \mathbf{v} \f$.
+       %> \param t     Independent variable \f$ t \f$.
+       %>
+       %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}'} \f$.
+       %
+       function out = JF_x_dot( this, ~, ~, ~, ~ )
+         out = eye(this.m_num_eqns);
+       end
+       %
+       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       %
+       %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+       %> respect to the veils \f$ \mathbf{v} \f$:
+       %>
+       %> \f[
+       %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+       %> \dfrac{
+       %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+       %> }{
+       %>   \partial \mathbf{v}
+       %> }.
+       %> \f]
+       %>
+       %> \param x     States \f$ \mathbf{x} \f$.
+       %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+       %> \param v     Veils \f$ \mathbf{v} \f$.
+       %> \param t     Independent variable \f$ t \f$.
+       %>
+       %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.
+       %
+       function out = JF_v( this, x, ~, v, t )
+         out = -this.Jf_v(x, v, t);
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -328,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Implicit.m" line="217" column="15"/>
+        <location file="+Indigo/+RungeKutta/Implicit.m" line="222" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00211_1a724557cfdce23ba09a9eca1384561f3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -444,12 +444,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Implicit.m" line="310" column="15"/>
+        <location file="+Indigo/+RungeKutta/Implicit.m" line="315" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00211_1af3cb0122a3609a628fc94964c12f5656" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00211_1a39a68ad2734656477cee93d80aaf0ca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Implicit::Implicit</definition>
-        <argsstring>(in t_name, in t_neqn, in t_veil, in t_ninv)</argsstring>
+        <argsstring>(in t_name, in t_num_eqns, in t_num_veil, in t_num_invs)</argsstring>
         <name>Implicit</name>
         <qualifiedname>Implicit::Implicit</qualifiedname>
         <param>
@@ -458,15 +458,15 @@
         </param>
         <param>
           <type>in</type>
-          <declname>t_neqn</declname>
+          <declname>t_num_eqns</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>t_veil</declname>
+          <declname>t_num_veil</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>t_ninv</declname>
+          <declname>t_num_invs</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -477,31 +477,31 @@
 <parametername>t_name</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Name of the system. </para>
+<para>The name of the system. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>t_neqn</parametername>
+<parametername>t_num_eqns</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Number of equations of the system. </para>
+<para>The number of equations of the system. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>t_veil</parametername>
+<parametername>t_num_veil</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Number of veils of the system. </para>
+<para>The number of (user-defined) veils of the system. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>t_ninv</parametername>
+<parametername>t_num_invs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Number of invariants of the system. </para>
+<para>The number of invariants of the system. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -566,7 +566,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Implicit.m" line="364" column="23"/>
+        <location file="+Indigo/+RungeKutta/Implicit.m" line="369" column="23"/>
       </memberdef>
       <memberdef kind="function" id="a00211_1a6ecff513ea8bb32ffe3dd69f3a06baf7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -675,7 +675,7 @@ p−1 $</formula> or <formula id="10">$ \hat{p} = p+1 $</formula>) (row vector):
 \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
 \]</formula></para>
 <para>Class container for an implicit system of ODEs/DAEs of the form:</para>
-<para><formula id="120">\[
+<para><formula id="127">\[
 \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) = \mathbf{0}
 \]</formula></para>
 <para>with <emphasis>optional</emphasis> veils <formula id="109">$ \mathbf{v}( \mathbf{x}, t ) $</formula> of the form:</para>
@@ -736,11 +736,11 @@ p−1 $</formula> or <formula id="10">$ \hat{p} = p+1 $</formula>) (row vector):
         <label>Indigo::Systems::System</label>
       </node>
     </collaborationgraph>
-    <location file="+Indigo/+RungeKutta/Implicit.m" line="45" column="1" bodyfile="+Indigo/+RungeKutta/Implicit.m" bodystart="46" bodyend="453"/>
+    <location file="+Indigo/+RungeKutta/Implicit.m" line="45" column="1" bodyfile="+Indigo/+RungeKutta/Implicit.m" bodystart="46" bodyend="458"/>
     <listofallmembers>
       <member refid="a00211_1a6849139016e29020b9ba54e2b43e4560" prot="public" virt="non-virtual"><scope>Implicit</scope><name>check_tableau</name></member>
       <member refid="a00211_1a8557adab78b7e91c80b2144349d5bc79" prot="public" virt="non-virtual"><scope>Implicit</scope><name>Implicit</name></member>
-      <member refid="a00211_1af3cb0122a3609a628fc94964c12f5656" prot="public" virt="non-virtual"><scope>Implicit</scope><name>Implicit</name></member>
+      <member refid="a00211_1a39a68ad2734656477cee93d80aaf0ca3" prot="public" virt="non-virtual"><scope>Implicit</scope><name>Implicit</name></member>
       <member refid="a00211_1ada55f5d28eababa6728c3629cbd46688" prot="public" virt="non-virtual"><scope>Implicit</scope><name>is_explicit</name></member>
       <member refid="a00211_1a8a87e9435f511374ef53c9e3fa7cb421" prot="public" virt="non-virtual"><scope>Implicit</scope><name>is_implicit</name></member>
       <member refid="a00211_1af0878dddff00078abe7016c5b7383dd5" prot="public" virt="non-virtual"><scope>Implicit</scope><name>is_semiexplicit</name></member>

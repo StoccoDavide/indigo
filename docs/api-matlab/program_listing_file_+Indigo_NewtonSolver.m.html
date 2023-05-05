@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Program Listing for File NewtonSolver.m &#8212; indigo v0.3
+    <title>Program Listing for File NewtonSolver.m &#8212; indigo v0.3-1-g9ac3232
 </title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
@@ -97,7 +97,7 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">m_max_function_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Maximum allowed jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Maximum allowed Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="n">m_max_jacobian_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
@@ -238,9 +238,9 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set maximum allowed jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set maximum allowed Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_max_evaluations The maximum allowed jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_max_evaluations The maximum allowed Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_jacobian_evaluations</span><span class="p">(</span> this, t_max_jacobian_evaluations <span class="p">)</span><span class="w"></span>
 
@@ -257,9 +257,9 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Get maximum allowed jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get maximum allowed Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The maximum allowed jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The maximum allowed Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_jacobian_evaluations</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_jacobian_evaluations</span><span class="p">;</span><span class="w"></span>
@@ -362,9 +362,9 @@
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; Set jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian evaluations.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">out_jacobian_evaluations</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="p">;</span><span class="w"></span>
@@ -406,7 +406,7 @@
 <span class="w">    </span><span class="c">%&gt; \mathbf{0} \f$</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param t_function_handle The function handle.</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \param t_jacobian_handle The jacobian handle.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_jacobian_handle The Jacobian handle.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x_ini             The initial guess vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \return The solution vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
@@ -458,7 +458,7 @@
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt; \param x The input vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c">%&gt; \return The jacobian value \f$ \mathbf{JF}(\mathbf{x}) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian value \f$ \mathbf{JF}(\mathbf{x}) \f$.</span><span class="w"></span>
 <span class="w">    </span><span class="c">%</span><span class="w"></span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">eval_jacobian</span><span class="p">(</span> this, x <span class="p">)</span><span class="w"></span>
 
@@ -467,7 +467,7 @@
 <span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_jacobian_evaluations</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
-<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'maximum number of jacobian evaluations reached.'</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'maximum number of Jacobian evaluations reached.'</span><span class="p">]);</span><span class="w"></span>
 
 <span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_handle</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="k">end</span><span class="w"></span>

@@ -68,7 +68,7 @@ Program Listing for File NewtonSolver.m
        %
        m_max_function_evaluations = 50;
        %
-       %> Maximum allowed jacobian evaluations.
+       %> Maximum allowed Jacobian evaluations.
        %
        m_max_jacobian_evaluations = 25;
        %
@@ -209,9 +209,9 @@ Program Listing for File NewtonSolver.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Set maximum allowed jacobian evaluations.
+       %> Set maximum allowed Jacobian evaluations.
        %>
-       %> \param t_max_evaluations The maximum allowed jacobian evaluations.
+       %> \param t_max_evaluations The maximum allowed Jacobian evaluations.
        %
        function set_max_jacobian_evaluations( this, t_max_jacobian_evaluations )
    
@@ -228,9 +228,9 @@ Program Listing for File NewtonSolver.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Get maximum allowed jacobian evaluations.
+       %> Get maximum allowed Jacobian evaluations.
        %>
-       %> \return The maximum allowed jacobian evaluations.
+       %> \return The maximum allowed Jacobian evaluations.
        %
        function out = get_max_jacobian_evaluations( this )
          out = this.m_max_jacobian_evaluations;
@@ -333,9 +333,9 @@ Program Listing for File NewtonSolver.m
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        %
-       %> Set jacobian evaluations.
+       %> Set Jacobian evaluations.
        %>
-       %> \return The jacobian evaluations.
+       %> \return The Jacobian evaluations.
        %
        function out = out_jacobian_evaluations( this )
          out = this.m_jacobian_evaluations;
@@ -377,7 +377,7 @@ Program Listing for File NewtonSolver.m
        %> \mathbf{0} \f$
        %>
        %> \param t_function_handle The function handle.
-       %> \param t_jacobian_handle The jacobian handle.
+       %> \param t_jacobian_handle The Jacobian handle.
        %> \param x_ini             The initial guess vector \f$ \mathbf{x} \f$.
        %>
        %> \return The solution vector \f$ \mathbf{x} \f$.
@@ -429,7 +429,7 @@ Program Listing for File NewtonSolver.m
        %>
        %> \param x The input vector \f$ \mathbf{x} \f$.
        %>
-       %> \return The jacobian value \f$ \mathbf{JF}(\mathbf{x}) \f$.
+       %> \return The Jacobian value \f$ \mathbf{JF}(\mathbf{x}) \f$.
        %
        function out = eval_jacobian( this, x )
    
@@ -438,7 +438,7 @@ Program Listing for File NewtonSolver.m
          this.m_jacobian_evaluations = this.m_jacobian_evaluations + 1;
    
          assert( this.m_jacobian_evaluations <= this.m_max_jacobian_evaluations, ...
-           [CMD, 'maximum number of jacobian evaluations reached.']);
+           [CMD, 'maximum number of Jacobian evaluations reached.']);
    
          out = this.m_jacobian_handle(x);
        end

@@ -281,7 +281,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Compute the Jacobian of the ODEs system of equations:</para>
+<para>Compute the system Jacobian with respect to the <formula id="18">$ \mathbf{K} $</formula>:</para>
 <para><formula id="24">\[
 \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t
@@ -335,7 +335,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian of the ODEs system of equations to be solved. </para>
+<simplesect kind="return"><para>The system Jacobian with respect to the <formula id="18">$ \mathbf{K} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -418,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Explicit.m" line="181" column="15"/>
+        <location file="+Indigo/+RungeKutta/Explicit.m" line="179" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1a8d99d99728f6ba61f8370445c2cd7138" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -544,12 +544,12 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Explicit.m" line="318" column="15"/>
+        <location file="+Indigo/+RungeKutta/Explicit.m" line="316" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a0f6d094260fafb853b8b294f35f98abc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00207_1a1249fea00d94548efe998b63b8f0a4ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Explicit::Explicit</definition>
-        <argsstring>(in t_name, in t_neqn, in t_veil, in t_ninv)</argsstring>
+        <argsstring>(in t_name, in t_num_eqns, in t_num_veil, in t_num_invs)</argsstring>
         <name>Explicit</name>
         <qualifiedname>Explicit::Explicit</qualifiedname>
         <param>
@@ -558,15 +558,15 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </param>
         <param>
           <type>in</type>
-          <declname>t_neqn</declname>
+          <declname>t_num_eqns</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>t_veil</declname>
+          <declname>t_num_veil</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>t_ninv</declname>
+          <declname>t_num_invs</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -577,31 +577,31 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>t_name</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Name of the system. </para>
+<para>The name of the system. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>t_neqn</parametername>
+<parametername>t_num_eqns</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Number of equations of the system. </para>
+<para>The number of equations of the system. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>t_veil</parametername>
+<parametername>t_num_veil</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Number of veils of the system. </para>
+<para>The number of (user-defined) veils of the system. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>t_ninv</parametername>
+<parametername>t_num_invs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Number of invariants of the system. </para>
+<para>The number of invariants of the system. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -611,10 +611,10 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </inbodydescription>
         <location file="+Indigo/+Systems/Explicit.m" line="66" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="a00207_1a329132c0a047850193a1088b206dd225" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="a00207_1ae0f6c1ab0a32ce241d48c034062cab0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
         <definition>function Explicit::F</definition>
-        <argsstring>(in this, in x, in v, in x_dot, in t)</argsstring>
+        <argsstring>(in this, in x, in x_dot, in v, in t)</argsstring>
         <name>F</name>
         <qualifiedname>Explicit::F</qualifiedname>
         <param>
@@ -627,11 +627,11 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </param>
         <param>
           <type>in</type>
-          <declname>v</declname>
+          <declname>x_dot</declname>
         </param>
         <param>
           <type>in</type>
-          <declname>x_dot</declname>
+          <declname>v</declname>
         </param>
         <param>
           <type>in</type>
@@ -640,10 +640,284 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para>Evaluate the system function <formula id="112">$ \mathbf{F} $</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_dot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Veils <formula id="114">$ \mathbf{v} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Independent variable <formula id="67">$ t $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The system function <formula id="112">$ \mathbf{F} $</formula>. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="+Indigo/+Systems/Explicit.m" line="82" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00207_1a48d4714b2b2576863543823e6fb0595b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Explicit::JF_x</definition>
+        <argsstring>(in this, in x, in ignoredArg, in v, in t)</argsstring>
+        <name>JF_x</name>
+        <qualifiedname>Explicit::JF_x</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{F} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
+<para><formula id="115">\[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_dot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Veils <formula id="114">$ \mathbf{v} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Independent variable <formula id="67">$ t $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian <formula id="116">$ \mathbf{JF}_{\mathbf{x}} $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+Systems/Explicit.m" line="108" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00207_1a0c2184eea8778da7cd8f13cad64e1d31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Explicit::JF_x_dot</definition>
+        <argsstring>(in this, in ignoredArg, in ignoredArg, in ignoredArg, in ignoredArg)</argsstring>
+        <name>JF_x_dot</name>
+        <qualifiedname>Explicit::JF_x_dot</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{F} $</formula> with respect to the states derivative <formula id="113">$ \mathbf{x}&apos; $</formula>:</para>
+<para><formula id="117">\[
+\mathbf{JF}_{\mathbf{x}&apos;}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}&apos;
+}.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_dot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Veils <formula id="114">$ \mathbf{v} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Independent variable <formula id="67">$ t $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian <formula id="118">$ \mathbf{JF}_{\mathbf{x}&apos;} $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+Systems/Explicit.m" line="134" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="a00207_1a2eb167dd3fef7c53428497cd2c0e9040" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>function</type>
+        <definition>function Explicit::JF_v</definition>
+        <argsstring>(in this, in x, in ignoredArg, in v, in t)</argsstring>
+        <name>JF_v</name>
+        <qualifiedname>Explicit::JF_v</qualifiedname>
+        <param>
+          <type>in</type>
+          <declname>this</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>ignoredArg</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>in</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{F} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
+<para><formula id="119">\[
+\mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
+}{
+  \partial \mathbf{v}
+}.
+\]</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States <formula id="56">$ \mathbf{x} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x_dot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Veils <formula id="114">$ \mathbf{v} $</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Independent variable <formula id="67">$ t $</formula>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The Jacobian <formula id="120">$ \mathbf{JF}_{\mathbf{v}} $</formula>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="+Indigo/+Systems/Explicit.m" line="160" column="15"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1a1b16a45e8b129282cc33163df4264631" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -670,8 +944,8 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the system function <formula id="112">$ \mathbf{f} $</formula>:</para>
-<para><formula id="113">\[
+<para>Evaluate the system function <formula id="121">$ \mathbf{f} $</formula>:</para>
+<para><formula id="122">\[
 \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
 \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -699,13 +973,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The function <formula id="112">$ \mathbf{f} $</formula>. </para>
+<simplesect kind="return"><para>The function <formula id="121">$ \mathbf{f} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="107" column="24"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="185" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1ac5bd2ae8bad394d227664c2182c8e3d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -732,8 +1006,8 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{f} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
-<para><formula id="115">\[
+<para>Evaluate the Jacobian of the system function <formula id="121">$ \mathbf{f} $</formula> with respect to the states <formula id="56">$ \mathbf{x} $</formula>:</para>
+<para><formula id="123">\[
 \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
@@ -766,13 +1040,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="116">$ \mathbf{Jf}_{\mathbf{x}} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="124">$ \mathbf{Jf}_{\mathbf{x}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="130" column="24"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="208" column="24"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1a289f19fc4d041efb20b24bb143145426" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>function</type>
@@ -803,8 +1077,8 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Evaluate the Jacobian of the system function <formula id="112">$ \mathbf{f} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
-<para><formula id="117">\[
+<para>Evaluate the Jacobian of the system function <formula id="121">$ \mathbf{f} $</formula> with respect to the veils <formula id="114">$ \mathbf{v} $</formula>:</para>
+<para><formula id="125">\[
 \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t ) =
 \dfrac{
   \partial \mathbf{f}( \mathbf{x}, \mathbf{x}&apos;, \mathbf{v}, t )
@@ -825,7 +1099,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 <parametername>x_dot</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>States derivatives <formula id="118">$ \mathbf{x}&apos; $</formula>. </para>
+<para>States derivatives <formula id="113">$ \mathbf{x}&apos; $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -845,13 +1119,13 @@ $</formula>. Thus, the final system to be solved is the following:</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The Jacobian <formula id="119">$ \mathbf{Jf}_{\mathbf{v}} $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian <formula id="126">$ \mathbf{Jf}_{\mathbf{v}} $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="154" column="24"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="232" column="24"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -908,7 +1182,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+RungeKutta/Explicit.m" line="364" column="23"/>
+        <location file="+Indigo/+RungeKutta/Explicit.m" line="362" column="23"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1aad348e7d04cd08adb7848fb79d258611" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -926,7 +1200,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="167" column="23"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="245" column="23"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1ae94b237e0a7f4dcf2c8ddeeb61e146dc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -944,7 +1218,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="178" column="23"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="256" column="23"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1a380cf5c9f5dc0d676149e11511d28cfd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -962,7 +1236,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="189" column="23"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="267" column="23"/>
       </memberdef>
       <memberdef kind="function" id="a00207_1ac5815e0d6a38b1227f790936b1f7061a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>function</type>
@@ -980,7 +1254,7 @@ $</formula>. Thus, the final system to be solved is the following:</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="+Indigo/+Systems/Explicit.m" line="200" column="23"/>
+        <location file="+Indigo/+Systems/Explicit.m" line="278" column="23"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1085,18 +1359,21 @@ p−1 $</formula> or <formula id="10">$ \hat{p} = p+1 $</formula>) (row vector):
         <label>Indigo::Systems::System</label>
       </node>
     </collaborationgraph>
-    <location file="+Indigo/+RungeKutta/Explicit.m" line="46" column="1" bodyfile="+Indigo/+RungeKutta/Explicit.m" bodystart="47" bodyend="454"/>
+    <location file="+Indigo/+RungeKutta/Explicit.m" line="46" column="1" bodyfile="+Indigo/+RungeKutta/Explicit.m" bodystart="47" bodyend="452"/>
     <listofallmembers>
       <member refid="a00207_1a056ad98be4bff98c6e6530aa4e103173" prot="public" virt="non-virtual"><scope>Explicit</scope><name>check_tableau</name></member>
       <member refid="a00207_1a8689bdc390f929b3c94bc5f22ba8db1a" prot="public" virt="non-virtual"><scope>Explicit</scope><name>Explicit</name></member>
-      <member refid="a00207_1a0f6d094260fafb853b8b294f35f98abc" prot="public" virt="non-virtual"><scope>Explicit</scope><name>Explicit</name></member>
-      <member refid="a00207_1a329132c0a047850193a1088b206dd225" prot="public" virt="non-virtual"><scope>Explicit</scope><name>F</name></member>
+      <member refid="a00207_1a1249fea00d94548efe998b63b8f0a4ba" prot="public" virt="non-virtual"><scope>Explicit</scope><name>Explicit</name></member>
       <member refid="a00207_1a1b16a45e8b129282cc33163df4264631" prot="public" virt="virtual"><scope>Explicit</scope><name>f</name></member>
+      <member refid="a00207_1ae0f6c1ab0a32ce241d48c034062cab0c" prot="public" virt="non-virtual"><scope>Explicit</scope><name>F</name></member>
       <member refid="a00207_1ae94b237e0a7f4dcf2c8ddeeb61e146dc" prot="public" virt="non-virtual"><scope>Explicit</scope><name>is_explicit</name></member>
       <member refid="a00207_1ac5815e0d6a38b1227f790936b1f7061a" prot="public" virt="non-virtual"><scope>Explicit</scope><name>is_implicit</name></member>
       <member refid="a00207_1a380cf5c9f5dc0d676149e11511d28cfd" prot="public" virt="non-virtual"><scope>Explicit</scope><name>is_semiexplicit</name></member>
       <member refid="a00207_1a289f19fc4d041efb20b24bb143145426" prot="public" virt="virtual"><scope>Explicit</scope><name>Jf_v</name></member>
+      <member refid="a00207_1a2eb167dd3fef7c53428497cd2c0e9040" prot="public" virt="non-virtual"><scope>Explicit</scope><name>JF_v</name></member>
       <member refid="a00207_1ac5bd2ae8bad394d227664c2182c8e3d8" prot="public" virt="virtual"><scope>Explicit</scope><name>Jf_x</name></member>
+      <member refid="a00207_1a48d4714b2b2576863543823e6fb0595b" prot="public" virt="non-virtual"><scope>Explicit</scope><name>JF_x</name></member>
+      <member refid="a00207_1a0c2184eea8778da7cd8f13cad64e1d31" prot="public" virt="non-virtual"><scope>Explicit</scope><name>JF_x_dot</name></member>
       <member refid="a00207_1a6c01209fafdb8886d0becee68e0f60d9" prot="public" virt="non-virtual"><scope>Explicit</scope><name>solve_step</name></member>
       <member refid="a00207_1a8d99d99728f6ba61f8370445c2cd7138" prot="public" virt="non-virtual"><scope>Explicit</scope><name>step</name></member>
       <member refid="a00207_1a11b884a252b19390aa6088bee9c98a3b" prot="public" virt="non-virtual"><scope>Explicit</scope><name>step_jacobian</name></member>

@@ -12,8 +12,8 @@ l = 1.0;  % length (m)
 g = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-theta_0  = -0.1-pi/2;
-omega_0  = -0.1;
+theta_0  = -1-pi/2;
+omega_0  = -1;
 x_0      = l*cos(theta_0);
 y_0      = l*sin(theta_0);
 u_0      = -omega_0*sin(theta_0);
@@ -97,7 +97,7 @@ solver_name = [ ...
   ];
 
 for i = 1:length(solver_name)
-  eval(strcat(['solver', solver_name{i}, '=', solver_name{i}, '();']));
+  eval(strcat(['solver', solver_name{i}, '= IndigoSolver(', solver_name{i}, ');']));
   eval(strcat(['solver', solver_name{i}, '.set_system(ODE);']));
 end
 

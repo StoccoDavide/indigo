@@ -86,7 +86,7 @@
         <name>m_max_jacobian_evaluations</name>
         <qualifiedname>NewtonSolver::m_max_jacobian_evaluations</qualifiedname>
         <briefdescription>
-<para>Maximum allowed jacobian evaluations. </para>
+<para>Maximum allowed Jacobian evaluations. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -431,13 +431,13 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set maximum allowed jacobian evaluations.</para>
+<para>Set maximum allowed Jacobian evaluations.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>t_max_evaluations</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The maximum allowed jacobian evaluations. </para>
+<para>The maximum allowed Jacobian evaluations. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -460,8 +460,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Get maximum allowed jacobian evaluations.</para>
-<para><simplesect kind="return"><para>The maximum allowed jacobian evaluations. </para>
+<para>Get maximum allowed Jacobian evaluations.</para>
+<para><simplesect kind="return"><para>The maximum allowed Jacobian evaluations. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -694,8 +694,8 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Set jacobian evaluations.</para>
-<para><simplesect kind="return"><para>The jacobian evaluations. </para>
+<para>Set Jacobian evaluations.</para>
+<para><simplesect kind="return"><para>The Jacobian evaluations. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -809,7 +809,7 @@
 <parametername>t_jacobian_handle</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The jacobian handle. </para>
+<para>The Jacobian handle. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -920,7 +920,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The jacobian value <formula id="155">$ \mathbf{JF}(\mathbf{x}) $</formula>. </para>
+<simplesect kind="return"><para>The Jacobian value <formula id="155">$ \mathbf{JF}(\mathbf{x}) $</formula>. </para>
 </simplesect>
 </para>
         </detaileddescription>
