@@ -52,8 +52,8 @@ export SeparateMatrices::static := proc(
 
   return table([
     "Et"   = Et,
-    "Gt"   = GtA[1..r],
-    "A"    = GtA[r+1..-1],
+    "Gt"   = copy(GtA[1..r]),
+    "A"    = copy(GtA[r+1..-1]),
     "rank" = r
   ]);
 end proc: # SeparateMatrices
