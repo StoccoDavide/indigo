@@ -95,7 +95,7 @@ export ReduceIndex_MultiBody::static := proc(
 
   if not evalb(_self:-m_SystemType = 'MultiBody') then
     error(
-      "system must be of type 'MultiBody' but got '%s'.",
+      "system must be of type 'MultiBody' but got '%1'.",
       _self:-m_SystemType
     );
   end if;
@@ -105,8 +105,7 @@ export ReduceIndex_MultiBody::static := proc(
   if (n <> m) or (n <> nops(v_vars)) then
     error(
       "mass matrix must be square and of the same size of the length of velocity "
-      "variables.",
-      Mass, v_vars
+      "variables."
     );
   end if;
 

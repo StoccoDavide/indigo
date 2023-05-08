@@ -77,7 +77,7 @@ IndigoUtils := module()
       end if;
       if (i = 0) then
         error(
-          "failed for %s in %s.",
+          "failed for %1 in %2.",
           convert(var, string), convert(lst, string)
         );
       end if;
@@ -85,7 +85,7 @@ IndigoUtils := module()
       i;
     else
       error(
-        "failed for %s in %s.",
+        "failed for %1 in %2.",
         convert(var, string), convert(lst, string)
       );
     end if;
@@ -106,11 +106,11 @@ IndigoUtils := module()
 
     if not type(param, param_type) then
       printf(
-        "IndigoUtils::GetPosition(...): parameter `%s` = %a\n",
+        "IndigoUtils::GetPosition(...): parameter '%1' = %2\n",
         param_name, param
       );
       error(
-        "parameter `%s` is of type `%s`, expected of type `%s` in %s\n",
+        "parameter '%1' is of type '%2', expected of type '%3' in %4\n",
         param_name, convert(whattype(param), string), convert(tp, string), where
       );
     end if;
@@ -158,14 +158,14 @@ IndigoUtils := module()
     keywords := {indices(tab,'nolist')};
     if not (param_name in keywords) then
       error(
-        "missing keyword `%s` in %s.\nKeywords: %a.",
+        "missing keyword '%1' in '%2'.\nKeywords: %3.",
         convert(param_name, string), where, keywords
       );
     end if;
     if not type(tab[param_name], param_type) then
-      printf("Parameter `%s` = %a\n", param_name, tab[param_name]);
+      printf("Parameter '%s' = %a\n", param_name, tab[param_name]);
       error(
-        "parameter `%s` is of type `%s`, expected of type `%s` in %s.",
+        "parameter '%1' is of type '%2', expected of type '%3' in %4.",
         param_name, convert(whattype(tab[param_name]), string),
         convert(param_type, string), where
       );

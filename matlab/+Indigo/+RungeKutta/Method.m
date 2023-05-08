@@ -704,7 +704,7 @@ classdef Method < handle
           Jh_x = this.m_sys.Jh_x(x, v, t);
           Jh_v = this.m_sys.Jh_v(x, v, t);
           Jv_x = this.m_sys.Jv_x(x, t);
-          
+
           % Compute the solution of the linear system
           Jh  = Jh_x + Jh_v * Jv_x;
           A   = [eye(num_eqns), Jh.'; ...
@@ -738,14 +738,18 @@ classdef Method < handle
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
     %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
-    %>         system of ODEs/DAEs.
+    %>         system of ODEs/DAEs. Additionally, the veils \f$ \mathbf{v}(t) \f$
+    %>         and invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are
+    %>         also returned.
     %
-    function [x_out, x_dot_out, t] = solve( this, t, x_0 )
+    function [x_out, x_dot_out, t, v_out, h_out] = solve( this, t, x_0 )
 
       CMD = 'Indigo.RungeKutta.Method.solve(...): ';
 
       % Check initial conditions
       num_eqns = this.m_sys.get_num_eqns();
+      num_veil = this.m_sys.get_num_veil();
+      num_invs = this.m_sys.get_num_invs();
       assert(num_eqns == length(x_0), ...
         [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
         this.m_name, length(x_0), num_eqns);
@@ -753,9 +757,13 @@ classdef Method < handle
       % Instantiate output
       x_out      = zeros(num_eqns, length(t));
       x_dot_out  = zeros(num_eqns, length(t));
+      v_out      = zeros(num_veil, length(t));
+      h_out      = zeros(num_invs, length(t));
 
       % Store first step
       x_out(:,1) = x_0(:);
+      v_out(:,1) = this.m_sys.v(x_out(:,1), t(1));
+      h_out(:,1) = this.m_sys.h(x_out(:,1), v_out(:,1), t(1));
 
       % Instantiate temporary variables
       s   = 1;         % Current step
@@ -805,6 +813,8 @@ classdef Method < handle
           % Update outputs
           x_out(:,s)     = x_s;
           x_dot_out(:,s) = x_dot_s;
+          v_out(:,s)     = this.m_sys.v(x_out(:,s), t(s));
+          h_out(:,s)     = this.m_sys.h(x_out(:,s), v_out(:,s), t(s));
 
           % Check if the current step is the last one
           if (abs(t_s - t(end)) < tol)
@@ -816,7 +826,12 @@ classdef Method < handle
       % End progress bar
       if (this.m_progress_bar)
         Indigo.Utils.progress_bar(100);
-        Indigo.Utils.progress_bar(strcat([this.m_name, ' completed!']));
+        if (this.m_projection)
+          bar_str = strcat(['Projected-', this.m_name, ' completed!']);
+        else
+          bar_str = strcat([this.m_name, ' completed!']);
+        end
+        Indigo.Utils.progress_bar(bar_str);
       end
     end
     %
@@ -834,9 +849,11 @@ classdef Method < handle
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
     %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
-    %>         system of ODEs/DAEs.
+    %>         system of ODEs/DAEs. Additionally, the veils \f$ \mathbf{v}(t) \f$
+    %>         and invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are
+    %>         also returned.
     %
-    function [x_out, x_dot_out, t_out] = solve_adaptive_step( this, t, x_0, varargin )
+    function [x_out, x_dot_out, t_out, v_out, h_out] = solve_adaptive_step( this, t, x_0, varargin )
 
       CMD = 'Indigo.RungeKutta.Method.solve_adaptive(...): ';
 
@@ -859,6 +876,8 @@ classdef Method < handle
 
       % Check initial conditions
       num_eqns = this.m_sys.get_num_eqns();
+      num_veil = this.m_sys.get_num_veil();
+      num_invs = this.m_sys.get_num_invs();
       assert(num_eqns == length(x_0), ...
         [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
         this.m_name, length(x_0), num_eqns);
@@ -868,10 +887,14 @@ classdef Method < handle
       t_out          = zeros(1, safety_length);
       x_out          = zeros(num_eqns, safety_length);
       x_dot_out      = zeros(num_eqns, safety_length);
+      v_out          = zeros(num_veil, safety_length);
+      h_out          = zeros(num_invs, safety_length);
 
       % Store first step
       t_out(1)   = t(1);
       x_out(:,1) = x_0(:);
+      v_out(:,1) = this.m_sys.v(x_0, t(1));
+      h_out(:,1) = this.m_sys.h(x_0, v_out(:,1), t(1));
 
       % Instantiate temporary variables
       s = 1; % Current step
@@ -895,6 +918,8 @@ classdef Method < handle
         t_out(s+1)       = t_out(s) + d_t;
         x_out(:,s+1)     = x_new;
         x_dot_out(:,s+1) = x_dot_new;
+        v_out(:,s+1)     = this.m_sys.v(x_new, t_out(s+1));
+        h_out(:,s+1)     = this.m_sys.h(x_new, v_out(:,s+1), t_out(s+1));
 
         % Saturate the suggested timestep
         d_t = max(min(d_t_star, t_max), t_min);
@@ -911,13 +936,20 @@ classdef Method < handle
       % End progress bar
       if (this.m_progress_bar)
         Indigo.Utils.progress_bar(100);
-        Indigo.Utils.progress_bar(strcat([this.m_name, ' completed!']));
+        if (this.m_projection)
+          bar_str = strcat(['Projected-', this.m_name, ' completed!']);
+        else
+          bar_str = strcat([this.m_name, ' completed!']);
+        end
+        Indigo.Utils.progress_bar(bar_str);
       end
 
       % Resize the output
       t_out     = t_out(:,1:s-1);
       x_out     = x_out(:,1:s-1);
       x_dot_out = x_dot_out(:,1:s-1);
+      v_out     = v_out(:,1:s-1);
+      h_out     = h_out(:,1:s-1);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1037,7 +1069,7 @@ classdef Method < handle
 
       % Project intermediate solution on the invariants
       if (this.m_projection)
-        x_new = this.project(x_new, t_k+d_t);
+        %x_new = this.project(x_new, t_k+d_t);
       end
     end
     %

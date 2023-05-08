@@ -65,8 +65,8 @@ export LoadEquations_Linear::static := proc(
   # Check input dimensions
   if (nops(eqns) <> nops(vars)) then
     error(
-      "the number of equations (%d) must be the same of the number of variables "
-      "(%d).",
+      "the number of equations (%1) must be the same of the number of variables "
+      "(%2).",
       nops(eqns), nops(vars)
     );
   end if;
@@ -91,7 +91,7 @@ export ReduceIndexByOne_Linear::static := proc(
 
   if not evalb(_self:-m_SystemType = 'Linear') then
     error(
-      "system must be of type 'Linear' but got '%s'.",
+      "system must be of type 'Linear' but got '%1'.",
       _self:-m_SystemType
     );
   end if;

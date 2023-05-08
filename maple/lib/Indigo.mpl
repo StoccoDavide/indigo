@@ -471,6 +471,19 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export DiffOrder := proc(
+    _self::Indigo,
+    eqns::list,
+    vars::list,
+    $)::nonnegint;
+
+    description "Return the differential order of the system.";
+
+    return max(map(y -> op(map(x -> PDEtools:-difforder(x), eqns)), vars))
+  end proc: # SystemDegree
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export KernelBuild::static := proc(
     _self::Indigo,
     E::Matrix,
@@ -603,7 +616,7 @@ module Indigo()
     elif evalb(_self:-m_SystemType = 'MultiBody') then
       return _self:-ReduceIndex_MultiBody(_self);
     else
-      error("invalid system type '%s'.", _self:-m_SystemType);
+      error("invalid system type '%1'.", _self:-m_SystemType);
       return false;
     end if;
   end proc: # ReduceIndex
@@ -642,7 +655,7 @@ module Indigo()
     elif evalb(_self:-m_SystemType = 'MultiBody') then
       # TODO: implement
     else
-      error("invalid system type '%s'.", _self:-m_SystemType);
+      error("invalid system type '%1'.", _self:-m_SystemType);
     end if;
 
     # Generate class body string
@@ -671,7 +684,7 @@ module Indigo()
         parse("info") = info
       );
     else
-      error("unknown indigo class type '%s'.", type);
+      error("unknown indigo class type '%1'.", type);
     end if;
     return "";
   end proc: # TranslateToMatlab

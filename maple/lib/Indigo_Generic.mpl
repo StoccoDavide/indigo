@@ -26,13 +26,13 @@ export SeparateMatrices::static := proc(
   # Check input dimensions E
   n, m := LinearAlgebra:-Dimension(E);
   if (n <> m) then
-    error("input matrix E must be square (got E = %d x %d).", n, m);
+    error("input matrix E must be square (got E = %1 x %2).", n, m);
   end if;
 
   # Check input dimensions G
   r := LinearAlgebra:-Dimension(G);
   if (n <> r) then
-    error("input vector G is 1 x %d, expeced 1 x %d.", r, n);
+    error("input vector G is 1 x %1, expeced 1 x %2.", r, n);
   end if;
 
   # Decompose the matrix as P.E.Q = L.U
@@ -45,7 +45,7 @@ export SeparateMatrices::static := proc(
 
   # Compute Et = L^(-1).P.E (first 'r' rows) = U.Q^T
   Et := tbl["U"].LinearAlgebra:-Transpose(Q);
-  Et := Et[1..r,1..-1];
+  Et := Et[1..r, 1..-1];
 
   # Compute <Gt, A> = L^(-1).P.G
   GtA := LinearAlgebra:-LinearSolve(tbl["L"], P.G);
@@ -118,11 +118,19 @@ export LoadEquations_Generic::static := proc(
 
   local E, G;
 
+  # Check if the system differential order is 1
+  if not (_self:-DiffOrder(_self, eqns, vars) = 1) then
+    error(
+      "system differential order must be 1 but got %1.",
+      _self:-DiffOrder(_self, eqns, vars)
+    );
+  end if;
+
   # Check input dimensions
   if (nops(eqns) <> nops(vars)) then
     error(
-      "the number of equations (%d) must be the same of the number of variables "
-      "(%d).", nops(eqns), nops(vars)
+      "the number of equations (%1) must be the same of the number of variables "
+      "(%2).", nops(eqns), nops(vars)
     );
   end if;
 
@@ -147,7 +155,7 @@ export ReduceIndexByOne_Generic::static := proc(
 
   if not evalb(_self:-m_SystemType = 'Generic') then
     error(
-      "system must be of type 'Generic' but got '%s'.",
+      "system must be of type 'Generic' but got '%1'.",
       _self:-m_SystemType
     );
   end if;
@@ -162,8 +170,8 @@ export ReduceIndexByOne_Generic::static := proc(
   nA := LinearAlgebra:-Dimension(A);
   if (nA + nE <> mE) then
     error(
-      "number of row of E (%d x %d) plus the number of algebraic equations "
-      "(%d) must be equal to the column of E.",
+      "number of row of E (%1 x %2) plus the number of algebraic equations "
+      "(%3) must be equal to the column of E.",
       nE, mE, nA
     );
   end if;
@@ -179,7 +187,7 @@ export ReduceIndexByOne_Generic::static := proc(
   if  (nH + nE <> mE) or (mH <> mE) then
     error(
       "bad dimension of linear part of constraint derivative "
-      "A' = H vars' + F, size H = %d x %d, size E = %d x %d.",
+      "A' = H vars' + F, size H = %1 x %2, size E = %3 x %4.",
       nH, mH, nE, mE
     );
   end if;

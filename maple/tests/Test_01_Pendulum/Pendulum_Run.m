@@ -12,15 +12,13 @@ l = 1.0;  % length (m)
 g = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-%theta_0 = -1.0;
-%omega_0 = -1.0;
-theta_0  = 0.01-pi/2;
-omega_0  = 0.01;
+theta_0  = -0.1-pi/2;
+omega_0  = -0.0;
 x_0      = l*cos(theta_0);
 y_0      = l*sin(theta_0);
-u_0      = -omega_0*sin(theta_0);
-v_0      = omega_0*cos(theta_0);
-lambda_0 = (u_0^2+v_0^2-y_0*g)/(x_0^2+y_0^2);
+u_0      = -l*sin(theta_0)*omega_0;
+v_0      = l*cos(theta_0)*omega_0;
+lambda_0 = m*(u_0^2 + v_0^2 - y_0*g)/(x_0^2 + y_0^2);
 X_0      = [x_0; y_0; u_0; v_0; lambda_0];
 
 ODE = Pendulum(m, l, g);
@@ -92,22 +90,22 @@ implicit_embedded_solver = {
 };
 
 solver_name = { ...
-  explicit_solver{end}, ...
-  implicit_solver{1}, ...
-  explicit_embedded_solver{1}, ...
-  implicit_embedded_solver{1}, ...
+  explicit_solver{1}, ...
+  %implicit_solver{end}, ...
+  %explicit_embedded_solver{1}, ...
+  %implicit_embedded_solver{1}, ...
 };
 
 solver = cell(length(solver_name),1);
 for k = 1:length(solver_name)
   solver{k} = IndigoSolver(solver_name{k});
-  solver{k}.set_system( ODE );
+  solver{k}.set_system(ODE);
 end
 
 %% Integrate the system of ODE
 
 % Set integration interval
-d_t   = 0.05;
+d_t   = 0.001;
 t_ini = 0.0;
 t_end = 5.0;
 T_vec = t_ini:d_t:t_end;
@@ -121,10 +119,10 @@ for i = 1:length(solver_name)
 
   % Solve the system of ODEs
   solver{i}.disable_projection();
-  [X{i},~, T{i}] = solver{i}.solve( T_vec, X_0 );
+  [X{i}, ~, T{i}] = solver{i}.solve(T_vec, X_0);
 
   % Calculate energy of the solution
-  H{i} = ODE.h( X{i}, T{i} );
+  H{i} = ODE.h(X{i}, T{i});
 
 end
 
