@@ -544,6 +544,8 @@ IndigoCodegen := module()
     end if;
 
     # Compute transformations
+    rm_v_deps     := [];
+    rm_v_dot_deps := [];
     if (nops(v) > 0) then
 
       # Transform veil variables (v[i,j])(f) -> v_ij

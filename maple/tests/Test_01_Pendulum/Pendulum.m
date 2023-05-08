@@ -1,4 +1,4 @@
- % +--------------------------------------------------------------------------+
+% +--------------------------------------------------------------------------+
 % | 'Indigo' module version 1.0 - BSD 3-Clause License - Copyright (c) 2023  |
 % | Current version authors:                                                 |
 % |   Davide Stocco and Enrico Bertolazzi.                                   |
@@ -15,8 +15,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
   properties (SetAccess = protected, Hidden = true)
     % User data
     m_m = 1.0;
-    m_ell = 1.0;
     m_g = 9.81;
+    m_ell = 1.0;
   end
   %
   methods
@@ -37,8 +37,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
         % Keep default values
       elseif (nargin == 3)
         this.m_m = varargin{1};
-        this.m_ell = varargin{2};
-        this.m_g = varargin{3};
+        this.m_g = varargin{2};
+        this.m_ell = varargin{3};
       else
         error('wrong number of input arguments.');
       end
@@ -51,8 +51,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -94,8 +94,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -128,8 +128,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -154,8 +154,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -169,7 +169,7 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Evaluate function
       out_2 = v;
       out_3 = u;
-      out_4 = -m * g - lambda * y;
+      out_4 = -g * m - lambda * y;
       out_5 = -lambda * x;
 
       % Store outputs
@@ -187,8 +187,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -224,8 +224,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -250,8 +250,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -265,7 +265,7 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       t2 = y ^ 2;
       t4 = 0.1e1 / m;
       out_1 = t4 * (t1 + t2);
-      out_2 = t4 * (m * g + 2 * lambda * y);
+      out_2 = t4 * (g * m + 2 * lambda * y);
 
       % Store outputs
       out_v = zeros(2, 1);
@@ -280,8 +280,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -312,8 +312,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -332,7 +332,7 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       out_2 = 2 * u * x + 2 * v * y;
       t11 = u ^ 2;
       t13 = v ^ 2;
-      out_3 = -2 / m * (-g * m * y - lambda * t2 - lambda * t3 + m * t11 + m * t13);
+      out_3 = -2 / m * (-g * m * y - t2 * lambda - t3 * lambda + t11 * m + t13 * m);
 
       % Store outputs
       out_h = zeros(3, 1);
@@ -348,8 +348,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);
@@ -369,7 +369,7 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       t5 = 2 * y;
       out_1_2 = -t5;
       out_2_2 = 2 * v;
-      out_3_2 = -2 * t3 * (-m * g - 2 * lambda * y);
+      out_3_2 = -2 * t3 * (-g * m - 2 * lambda * y);
       out_2_3 = t1;
       out_3_3 = -4 * u;
       out_2_4 = t5;
@@ -400,8 +400,8 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Extract properties
       m = this.m_m;
-      ell = this.m_ell;
       g = this.m_g;
+      ell = this.m_ell;
 
       % Extract inputs
       x = in_1(1);

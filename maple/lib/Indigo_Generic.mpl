@@ -18,13 +18,10 @@ export SeparateMatrices::static := proc(
     "algebraic equations matrix <Et>, the algebraic variables matrix <Gt>, the "
     "differential equations matrix <A>, and the rank of <E>.";
 
-  local n, m, r, P, Q, G_tmp, tbl, Et, GtA;
+  local n, m, r, P, Q, tbl, Et, GtA;
 
   # Check if LAST and LEM are initialized
   _self:-CheckInit(_self);
-
-  # Apply veil to input vector G
-  G_tmp := _self:-m_LEM:-Veil~(_self:-m_LEM, G);
 
   # Check input dimensions E
   n, m := LinearAlgebra:-Dimension(E);
@@ -33,12 +30,10 @@ export SeparateMatrices::static := proc(
   end if;
 
   # Check input dimensions G
-  r := LinearAlgebra:-Dimension(G_tmp);
+  r := LinearAlgebra:-Dimension(G);
   if (n <> r) then
     error("input vector G is 1 x %d, expeced 1 x %d.", r, n);
   end if;
-
-  # Build the kernel of E
 
   # Decompose the matrix as P.E.Q = L.U
   _self:-m_LAST:-LU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
@@ -53,7 +48,7 @@ export SeparateMatrices::static := proc(
   Et := Et[1..r,1..-1];
 
   # Compute <Gt, A> = L^(-1).P.G
-  GtA := LinearAlgebra:-LinearSolve(tbl["L"], P.G_tmp);
+  GtA := LinearAlgebra:-LinearSolve(tbl["L"], P.G);
 
   return table([
     "Et"   = Et,
