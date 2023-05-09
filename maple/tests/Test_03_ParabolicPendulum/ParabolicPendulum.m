@@ -22,7 +22,7 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function this = ParabolicPendulum( varargin )
-      % Constructor for 'ParabolicPendulum' class.
+      % Class constructor.
 
       % Superclass constructor
       num_eqns = 5;
@@ -33,6 +33,8 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       % User data
       if (nargin == 0)
         % Keep default values
+      elseif (nargin == 1 && isstruct(varargin{1}))
+        this.m_g = varargin{1}.g;
       elseif (nargin == 1)
         this.m_g = varargin{1};
       else

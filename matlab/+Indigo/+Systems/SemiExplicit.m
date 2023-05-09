@@ -1,5 +1,5 @@
 %
-%> Class container for a semi explicit system of ODEs of the form:
+%> Class container for a semi explicit system of ODEs/DAEs of the form:
 %>
 %> \f[
 %> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
@@ -91,7 +91,7 @@ classdef SemiExplicit < Indigo.Systems.System
     %
     function out = JF_x( this, x, x_dot, v, t )
       out = -this.Jf_x(x, x_dot, v, t) - ...
-            this.Jf_v(x, x_dot, v, t) * this.Jv_x(x, t);
+            this.Jf_v(x, x_dot, v, t) * this.Jv_x(x, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -194,7 +194,7 @@ classdef SemiExplicit < Indigo.Systems.System
       TA_v = this.TA_v(x, v, t);
       Jb_x = this.Jb_x(x, v, t);
       Jb_v = this.Jb_v(x, v, t);
-      Jv_x = this.Jv_x(x, t);
+      Jv_x = this.Jv_x(x, v, t);
       out  = zeros(this.m_num_eqns);
       rsh  = [size(TA_v, 1), size(TA_v, 3)];
       for i = 1:size(TA_x, 3)

@@ -1,7 +1,7 @@
 %
 %> Class container for Runge-Kutta solvers of the system of Ordinary Differential
-%> Equations (ODEs) or index-0 Differential Algebraic Equations (DAEs). The user
-%> must simply define the Butcher tableau of the solver, which defined as:
+%> Equations (ODEs) or Differential Algebraic Equations (DAEs). The user must
+%> simply define the Butcher tableau of the solver, which defined as:
 %>
 %> \f[
 %> \begin{array}{c|c}
@@ -87,7 +87,11 @@ classdef Method < handle
     %
     m_max_projection_iter = 10;
     %
-    %> System of ODEs/DAEs to be object handle (fake pointer).
+    %> Boolean vector to project the corresponding invariants.
+    %
+    m_projected_invs = [];
+    %
+    %> System object handle (fake pointer).
     %
     m_sys;
     %
@@ -136,8 +140,8 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Class constructor for ODEsolver, which requires the name of the solver
-    %> used to integrate the system of ODEs/DAEs as input.
+    %> Class constructor that requires the name of the solver used to integrate
+    %> the system.
     %>
     %> \param t_name  The name of the solver.
     %> \param t_order Order of the RK method.
@@ -147,7 +151,7 @@ classdef Method < handle
     %>                vector).
     %> \param tbl.c   The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %>
-    %> \return An instance of the ODEsolver class.
+    %> \return An instance of the class.
     %
     function this = Method( t_name, t_order, tbl )
 
@@ -162,7 +166,7 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the name of the solver used to integrate the system of ODEs/DAEs.
+    %> Get the name of the solver used to integrate the system.
     %>
     %> \return The name of the solver.
     %
@@ -172,7 +176,7 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the name of the solver used to integrate the system of ODEs/DAEs.
+    %> Set the name of the solver used to integrate the system.
     %>
     %> \param t_name The name of the solver.
     %
@@ -182,7 +186,7 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the order of the solver used to integrate the system of ODEs/DAEs.
+    %> Get the order of the solver used to integrate the system.
     %>
     %> \return The order of the solver.
     %
@@ -192,9 +196,9 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the system of ODEs/DAEs to be solved.
+    %> Get the system to be solved.
     %>
-    %> \return The system of ODEs/DAEs to be solved.
+    %> \return The system to be solved.
     %
     function t_sys = get_system( this )
       t_sys = this.m_sys;
@@ -202,12 +206,13 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the system of ODEs/DAEs to be solved.
+    %> Set the system to be solved.
     %>
-    %> \param t_sys The system of ODEs/DAEs to be solved.
+    %> \param t_sys The system to be solved.
     %
     function set_system( this, t_sys )
       this.m_sys = t_sys;
+      this.m_projected_invs = true(this.m_sys.get_num_invs(), 1);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -228,7 +233,7 @@ classdef Method < handle
     %
     function set_max_substeps( this, t_max_substeps )
 
-      CMD = 'Indigo.RungeKutta.Method.set_max_substeps(...)';
+      CMD = 'Indigo.RungeKutta.Method.set_max_substeps(...): ';
 
       assert(t_max_substeps >= 0, ...
         [CMD, 'invalid maximum number of substeps.']);
@@ -254,12 +259,38 @@ classdef Method < handle
     %
     function set_max_projection_iter( this, t_max_projection_iter )
 
-      CMD = 'Indigo.RungeKutta.Method.set_max_projection_iter(...)';
+      CMD = 'Indigo.RungeKutta.Method.set_max_projection_iter(...): ';
 
       assert(t_max_projection_iter > 0, ...
         [CMD, 'invalid maximum number of iterations.']);
 
       this.m_max_projection_iter = t_max_projection_iter;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get projected invariants boolean vector.
+    %>
+    %> \return The projected invariants boolean vector.
+    %
+    function t_projected_invs = get_projected_invs( this )
+      t_projected_invs = this.m_projected_invs;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the projected invariants boolean vector.
+    %>
+    %> \param t_projected_invs The projected invariants boolean vector.
+    %
+    function set_projected_invs( this, t_projected_invs )
+
+      CMD = 'Indigo.RungeKutta.Method.set_projected_invs(...): ';
+
+      assert(t_projected_invs == this.m_sys.get_num_invs(), ...
+        [CMD, 'invalid input detected.']);
+
+      this.m_projected_invs = t_projected_invs;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -513,8 +544,7 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the stages number of the solver used to integrate the system of
-    %> ODEs/DAEs.
+    %> Get the stages number of the solver used to integrate the system.
     %>
     %> \return The stages number of the solver.
     %
@@ -602,7 +632,23 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Project the ODEs system solution \f$ \mathbf{x} \f$ on the invariants
+    %> Project the system initial condition \f$ \mathbf{x} \f$ at time \f$ t \f$
+    %> on the invariants \f$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0}
+    %> \f$. The constrained minimization is solved through the projection
+    %> algorithm described in the project method.
+    %>
+    %> \param x The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
+    %> \param t The time \f$ t \f$ at which the states are evaluated.
+    %>
+    %> \return The solution of the projection problem \f$ \mathbf{x} \f$.
+    %
+    function x = project_initial_conditions( this, x_t, t )
+      x = this.project(x_t, t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Project the system solution \f$ \mathbf{x} \f$ on the invariants
     %> \f$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0} \f$. The
     %> constrained minimization problem to be solved is:
     %>
@@ -703,12 +749,16 @@ classdef Method < handle
           h    = this.m_sys.h(x, v, t);
           Jh_x = this.m_sys.Jh_x(x, v, t);
           Jh_v = this.m_sys.Jh_v(x, v, t);
-          Jv_x = this.m_sys.Jv_x(x, t);
+          Jv_x = this.m_sys.Jv_x(x, v, t);
+          Jh   = Jh_x + Jh_v * Jv_x;
+
+          % Select only the projected invariants
+          h  = h(this.m_projected_invs);
+          Jh = Jh(this.m_projected_invs, :);
 
           % Compute the solution of the linear system
-          Jh  = Jh_x + Jh_v * Jv_x;
           A   = [eye(num_eqns), Jh.'; ...
-                 Jh, zeros(num_invs, num_invs)];
+                 Jh, zeros(sum(this.m_projected_invs))];
           b   = [x_t - x; -h];
           sol = A\b;
 
@@ -728,8 +778,8 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the system of ODEs/DAEs and calculate the approximate solution over
-    %> the mesh of time points.
+    %> Solve the system and calculate the approximate solution over the mesh of
+    %> time points.
     %>
     %> \param t   Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
     %>            \right]^T \f$.
@@ -738,8 +788,8 @@ classdef Method < handle
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
     %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
-    %>         system of ODEs/DAEs. Additionally, the veils \f$ \mathbf{v}(t) \f$
-    %>         and invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are
+    %>         system. Additionally, the veils \f$ \mathbf{v}(t) \f$ and
+    %>         invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are
     %>         also returned.
     %
     function [x_out, x_dot_out, t, v_out, h_out] = solve( this, t, x_0 )
@@ -787,7 +837,7 @@ classdef Method < handle
           Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))
         end
 
-        % Integrate system of ODEs/DAEs
+        % Integrate system
         [x_s, x_dot_s, d_t_star] = this.advance(x_s, x_dot_s, t_s, d_t_s);
 
         % Update the current step
@@ -837,8 +887,8 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the system of ODEs/DAEs and calculate the approximate solution over
-    %> the suggested mesh of time points.
+    %> Solve the system and calculate the approximate solution over the
+    %> suggested mesh of time points.
     %>
     %> \param t     Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots,
     %>              t_n \right]^T \f$.
@@ -849,9 +899,9 @@ classdef Method < handle
     %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
     %>         (\mathbf{t})\right] \f$ containing the approximated solution
     %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
-    %>         system of ODEs/DAEs. Additionally, the veils \f$ \mathbf{v}(t) \f$
-    %>         and invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are
-    %>         also returned.
+    %>         system. Additionally, the veils \f$ \mathbf{v}(t) \f$ and
+    %>         invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are also
+    %>         returned.
     %
     function [x_out, x_dot_out, t_out, v_out, h_out] = solve_adaptive_step( this, t, x_0, varargin )
 
@@ -910,7 +960,7 @@ classdef Method < handle
           Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))
         end
 
-        % Integrate system of ODEs/DAEs
+        % Integrate system
         [x_new, x_dot_new, d_t_star] = ...
           this.advance(x_out(:,s), x_dot_out(:,s), t_out(s), d_t);
 
@@ -954,9 +1004,9 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Advance using a generic integration method for a system of ODEs/DAEs of
-    %> the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) =
-    %> \mathbf{0} \f$. The step is based on the following formula:
+    %> Advance using a generic integration method for a system of the form
+    %> \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) = \mathbf{0} \f$.
+    %> The step is based on the following formula:
     %>
     %> \f[
     %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
@@ -964,7 +1014,7 @@ classdef Method < handle
     %> \f]
     %>
     %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
-    %> In the advvancing step, the system of ODEs/DAEs is also projected on the
+    %> In the advvancing step, the system solution is also projected on the
     %> manifold \f$ \mathcal{h}(\mathbf{x}, \mathbf{v}, t) \f$. Substepping is
     %> also used to ensure that the solution is accurate.
     %>
@@ -993,7 +1043,7 @@ classdef Method < handle
         [CMD, 'in %s solver, d_t is %f, expected > 0.'], ...
         this.m_name, d_t);
 
-      % Integrate system of ODEs/DAEs
+      % Integrate system
       [x_new, x_dot_new, d_t_star, ierr] = this.step(x_k, x_dot_k, t_k, d_t);
 
       % If the advance failed, try again with substepping
@@ -1007,7 +1057,7 @@ classdef Method < handle
         max_k = this.m_max_substeps * this.m_max_substeps;
         k = 2;
         while (k > 0)
-          % Integrate system of ODEs/DAEs
+          % Integrate system
           [x_tmp, x_dot_tmp, t_tmp, d_t_star_tmp] = ...
             this.step(x_tmp, x_dot_tmp, t_tmp, d_t_tmp);
 
@@ -1069,7 +1119,7 @@ classdef Method < handle
 
       % Project intermediate solution on the invariants
       if (this.m_projection)
-        %x_new = this.project(x_new, t_k+d_t);
+        x_new = this.project(x_new, t_k+d_t);
       end
     end
     %
@@ -1158,9 +1208,9 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute a step using a generic integration method for a system of
-    %> ODEs/DAEs of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v},
-    %> t) = \mathbf{0} \f$. The step is based on the following formula:
+    %> Compute a step using a generic integration method for a system of the
+    %> form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) = \mathbf{0}
+    %> \f$. The step is based on the following formula:
     %>
     %> \f[
     %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +

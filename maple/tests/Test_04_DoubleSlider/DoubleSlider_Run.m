@@ -8,20 +8,21 @@ close all;
 
 % Pendulum parameters
 data.m   = 1.0;  % mass (kg)
-data.ell = 1.0;  % length (m)
+data.ell = 0.1;  % length (m)
 data.g   = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-theta_0  = -0.1-pi/2;
-omega_0  = -0.1;
-x_0      = data.ell*cos(theta_0);
-y_0      = data.ell*sin(theta_0);
-u_0      = -data.ell*sin(theta_0)*omega_0;
-v_0      = +data.ell*cos(theta_0)*omega_0;
-lambda_0 = data.m/2*(u_0^2 + v_0^2 - y_0*data.g)/(x_0^2 + y_0^2);
-X_0      = [x_0; y_0; u_0; v_0; lambda_0];
+theta_0   = 0.1;
+x_0       = data.ell/2*cos(theta_0);
+y_0       = data.ell/2*sin(theta_0);
+omega_0   = 0.0;
+u_0       = -data.ell/2*sin(theta_0)*omega_0;
+v_0       = +data.ell/2*cos(theta_0)*omega_0;
+lambda1_0 = 0.0;
+lambda2_0 = 0.0;
+X_0 = [x_0; y_0; theta_0; u_0; v_0; omega_0; lambda1_0; lambda2_0];
 
-ODE = Pendulum(data);
+ODE = DoubleSlider(data);
 
 %% Initialize the solver and set the ODE
 
@@ -90,8 +91,8 @@ implicit_embedded_solver = {
 };
 
 solver_name = { ...
-  explicit_solver{end}, ...
-  implicit_solver{end}, ...
+  explicit_solver{1}, ...
+  implicit_solver{1}, ...
   explicit_embedded_solver{1}, ...
   implicit_embedded_solver{1}, ...
 };
@@ -105,7 +106,7 @@ end
 %% Integrate the system of ODE
 
 % Set integration interval
-d_t   = 0.1;
+d_t   = 0.01;
 t_ini = 0.0;
 t_end = 5.0;
 T_vec = t_ini:d_t:t_end;
@@ -163,7 +164,7 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$u$ (m/s)');
+  ylabel('$\theta$ (rad)');
   for i = 1:length(solver_name)
     plot(T{i}, X{i}(3,:), 'LineWidth', linewidth);
   end
@@ -176,9 +177,35 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$v$ (m/s)');
+  ylabel('$u$ (m/s)');
   for i = 1:length(solver_name)
     plot(T{i}, X{i}(4,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  % title(title_str);
+  xlabel('$t$ (s)');
+  ylabel('$v$ (m/s)');
+  for i = 1:length(solver_name)
+    plot(T{i}, X{i}(5,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  % title(title_str);
+  xlabel('$t$ (s)');
+  ylabel('$\omega$ (rad/s)');
+  for i = 1:length(solver_name)
+    plot(T{i}, X{i}(6,:), 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -261,7 +288,7 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$u$ (m/s)');
+  ylabel('$\theta$ (rad)');
   for i = 1:length(solver_name)
     plot(T{i}, X{i}(3,:), 'LineWidth', linewidth);
   end
@@ -274,9 +301,35 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$v$ (m/s)');
+  ylabel('$u$ (m/s)');
   for i = 1:length(solver_name)
     plot(T{i}, X{i}(4,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  % title(title_str);
+  xlabel('$t$ (s)');
+  ylabel('$v$ (m/s)');
+  for i = 1:length(solver_name)
+    plot(T{i}, X{i}(5,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  % title(title_str);
+  xlabel('$t$ (s)');
+  ylabel('$\omega$ (rad/s)');
+  for i = 1:length(solver_name)
+    plot(T{i}, X{i}(6,:), 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -306,5 +359,4 @@ figure();
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
-
 %% That's All Folks!

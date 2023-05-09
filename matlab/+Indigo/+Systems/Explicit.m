@@ -1,5 +1,5 @@
 %
-%> Class container for an explicit system of ODEs of the form:
+%> Class container for an explicit system of ODEs/DAEs of the form:
 %>
 %> \f[
 %> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
@@ -101,7 +101,7 @@ classdef Explicit < Indigo.Systems.System
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
     %
     function out = JF_x( this, x, ~, v, t )
-      out = -(this.Jf_x(x, v, t) + this.Jf_v(x, v, t)*this.Jv_x(x, t));
+      out = -(this.Jf_x(x, v, t) + this.Jf_v(x, v, t)*this.Jv_x(x, v, t));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -636,7 +636,7 @@ module Indigo()
       "indigo class <type>, output file './<fname>.m', optional internal class "
       "data <data>, and class information string <info>.";
 
-    local vars, eqns, veil, invs;
+    local vars, eqns, veil, invs, label;
 
     # Get system data
     if evalb(_self:-m_SystemType = 'Empty') then
@@ -659,29 +659,27 @@ module Indigo()
     end if;
 
     # Generate class body string
+    label := convert(_self:-m_LEM:-GetVeilingLabel(_self:-m_LEM), string);
     if (type = "Implicit") then
       return IndigoCodegen:-ImplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil") = veil,
-        parse("invs") = invs,
-        parse("data") = data,
-        parse("info") = info
+        parse("veil")  = veil, parse("invs")  = invs,
+        parse("data")  = data, parse("label") = label,
+        parse("info")  = info
       );
     elif (type = "Explicit") then
       return IndigoCodegen:-ExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil") = veil,
-        parse("invs") = invs,
-        parse("data") = data,
-        parse("info") = info
+        parse("veil")  = veil, parse("invs")  = invs,
+        parse("data")  = data, parse("label") = label,
+        parse("info")  = info
       );
     elif (type = "SemiExplicit") then
       return IndigoCodegen:-SemiExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil") = veil,
-        parse("invs") = invs,
-        parse("data") = data,
-        parse("info") = info
+        parse("veil")  = veil, parse("invs")  = invs,
+        parse("data")  = data, parse("label") = label,
+        parse("info")  = info
       );
     else
       error("unknown indigo class type '%1'.", type);
@@ -707,7 +705,9 @@ module Indigo()
     IndigoCodegen:-GenerateFile(
       cat("./", name, ".m"),
       _self:-TranslateToMatlab(
-        _self, name, type, parse("data") = data, parse("info") = info
+        _self, name, type,
+        parse("data")  = data,
+        parse("info")  = info
       )
     );
     return NULL;

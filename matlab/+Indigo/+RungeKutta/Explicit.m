@@ -81,7 +81,7 @@ classdef Explicit < Indigo.RungeKutta.Method
     %> \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.
     %> \param d_t Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The residual of the ODEs system to be solved.
+    %> \return The residual of the system to be solved.
     %
     function out = step_node( this, i, x_k, K, d_t )
 
@@ -95,7 +95,7 @@ classdef Explicit < Indigo.RungeKutta.Method
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute the left hand side of the ODEs system to be solved:
+    %> Compute the left hand side of the system to be solved:
     %>
     %> \f[
     %> \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{i-1}
@@ -109,7 +109,7 @@ classdef Explicit < Indigo.RungeKutta.Method
     %> \param v_i Veils \f$ \mathbf{v}_i \f$ at \f$ i \f$-th node.
     %> \param t_i Time step \f$ t_i \f$ at \f$ i \f$-th node.
     %>
-    %> \return The residual of the ODEs system to be solved.
+    %> \return The residual of the system to be solved.
     %
     function out = step_residual( this, i, x_i, K, v_i, t_i )
 
@@ -150,7 +150,7 @@ classdef Explicit < Indigo.RungeKutta.Method
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the \f$ i \f$-th explicit step of the ODEs system to find the
+    %> Solve the \f$ i \f$-th explicit step of the system and find the
     %> \f$ \mathbf{K}_i \f$ variable:
     %>
     %> \f[
@@ -166,8 +166,8 @@ classdef Explicit < Indigo.RungeKutta.Method
     %> \param t_k Time step \f$ t_k \f$.
     %> \param d_t Advancing time step \f$ \Delta t\f$.
     %>
-    %> \return The \f$ \mathbf{K} \f$ variables of the ODEs system to be solved
-    %>         and the error control flag.
+    %> \return The \f$ \mathbf{K} \f$ variables of the system to be solved and
+    %>         the error control flag.
     %
     function [out, ierr] = solve_step( this, x_k, K_0, t_k, d_t )
 
@@ -210,24 +210,24 @@ classdef Explicit < Indigo.RungeKutta.Method
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Compute an integration step using the explicit Runge-Kutta method for a
-    %> system of ODEs of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}',
-    %> \mathbf{v}, t) = \mathbf{0} \f$.
+    %> system of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t)
+    %> = \mathbf{0} \f$.
     %>
     %> **Solution Algorithm**
     %>
-    %> Consider a Runge-Kutta method, written for a system of ODEs of the
+    %> Consider a Runge-Kutta method, written for a system of the
     %> form \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, \mathbf{v}, t) \f$:
     %>
-    %>  \f[
-    %>  \begin{array}{l}
-    %>  \mathbf{K}_i = \mathbf{f} \left(
-    %>    \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
-    %>    \, t_k + c_i \Delta t
-    %>    \right), \qquad i = 1, 2, \ldots, s \\
-    %>  \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
-    %>  \mathbf{K}_j \, ,
-    %>  \end{array}
-    %>  \f]
+    %> \f[
+    %> \begin{array}{l}
+    %> \mathbf{K}_i = \mathbf{f} \left(
+    %>   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij} \mathbf{K}_j,
+    %>   \, t_k + c_i \Delta t
+    %>   \right), \qquad i = 1, 2, \ldots, s \\
+    %> \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j
+    %> \mathbf{K}_j \, ,
+    %> \end{array}
+    %> \f]
     %>
     %> Beacuse of the nature of the matrix \f$ \mathbf{A} \f$ (lower triangular)
     %> the \f$ s\f$ stages for a generic explicit Runge-Kutta method take the
@@ -240,9 +240,9 @@ classdef Explicit < Indigo.RungeKutta.Method
     %>   \right), \qquad i = 1, 2, \ldots, s.
     %> \f]
     %>
-    %> Then the explicit Runge-Kutta method for an implicit system of ODEs of
-    %> the form \f$\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$ can
-    %> be written as:
+    %> Then the explicit Runge-Kutta method for an implicit system of the form
+    %> \f$\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$ can be
+    %> written as:
     %>
     %> \f[
     %> \begin{array}{l}

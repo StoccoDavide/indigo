@@ -91,8 +91,8 @@ implicit_embedded_solver = {
 solver_name = { ...
   explicit_solver{end}, ...
   implicit_solver{end}, ...
-  %explicit_embedded_solver{1}, ...
-  %implicit_embedded_solver{1}, ...
+  explicit_embedded_solver{1}, ...
+  implicit_embedded_solver{1}, ...
 };
 
 solver = cell(length(solver_name),1);
@@ -104,31 +104,31 @@ end
 %% Integrate the system of ODE
 
 % Set integration interval
-d_t   = 0.0025;
+d_t   = 0.025;
 t_ini = 0.0;
-t_end = 10.0;
+t_end = 5.0;
 T_vec = t_ini:d_t:t_end;
 
-X = {};
-T = {};
-H = {};
+% Project the initial condition
+X_0 = solver{1}.project_initial_conditions(X_0, t_ini);
+
+% Allocate solution arrays
+X = cell(1, length(T_vec));
+D = cell(1, length(T_vec));
+T = cell(1, length(T_vec));
+H = cell(1, length(T_vec));
+V = cell(1, length(T_vec));
 
 % Solve the system of ODEs for each solver
 for i = 1:length(solver_name)
-
-  % Solve the system of ODEs
   solver{i}.disable_projection();
-  [X{i},~, T{i}] = solver{i}.solve( T_vec, X_0 );
-
-  % Calculate energy of the solution
-  H{i} = ODE.h( X{i}, T{i} );
-
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-title_str = 'Test 1 -- Pendulum ODE'; %#ok<NASGU>
+%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
@@ -136,9 +136,12 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$\theta$ (rad)');
+  ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    plot( T{i}, X{i}(1,:), 'LineWidth', linewidth );
+    t = T{i};
+    x = X{i}(1,:);
+    y = X{i}(2,:);
+    plot(t, x, t, y, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -149,9 +152,12 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$\omega$ (rad/s)');
+  ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    plot( T{i}, X{i}(2,:), 'LineWidth', linewidth );
+    t = T{i};
+    u = X{i}(3,:);
+    v = X{i}(4,:);
+    plot(t, u, t, v, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -162,34 +168,36 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$E$ (J)');
+  ylabel('$\mathbf{h}$ (-)');
   for i = 1:length(solver_name)
-    plot( T{i}, X{i}(1,:).^2+X{i}(2,:).^2, 'LineWidth', linewidth );
+    t  = T{i};
+    h1 = H{i}(1,:);
+    h2 = H{i}(2,:);
+    h3 = H{i}(3,:);
+    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
 %% Integrate the system of ODE (using projection)
 
-X = {};
-T = {};
-H = {};
+% Allocate solution arrays
+X = cell(1, length(T_vec));
+D = cell(1, length(T_vec));
+T = cell(1, length(T_vec));
+H = cell(1, length(T_vec));
+V = cell(1, length(T_vec));
 
 % Solve the system of ODEs for each solver
 for i = 1:length(solver_name)
-
-  % Solve the system of ODEs
   solver{i}.enable_projection();
-  [X{i},~,T{i}] = solver{i}.solve( T_vec, X_0 );
-
-  % Calculate energy of the solution
-  H{i} = ODE.h( X{i}, T{i} );
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-title_str = 'Test 1 -- Pendulum ODE';
+%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
@@ -197,9 +205,12 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$\theta$ (rad)');
+  ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    plot( T{i}, X{i}(1,:), 'LineWidth', linewidth );
+    t = T{i};
+    x = X{i}(1,:);
+    y = X{i}(2,:);
+    plot(t, x, t, y, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -210,9 +221,12 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$\omega$ (rad/s)');
+  ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    plot( T{i}, X{i}(2,:), 'LineWidth', linewidth );
+    t = T{i};
+    u = X{i}(3,:);
+    v = X{i}(4,:);
+    plot(t, u, t, v, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -223,9 +237,13 @@ figure();
   grid minor;
   % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$E$ (J)');
+  ylabel('$\mathbf{h}$ (-)');
   for i = 1:length(solver_name)
-    plot( T{i}, X{i}(1,:).^2+X{i}(2,:).^2, 'LineWidth', linewidth );
+    t  = T{i};
+    h1 = H{i}(1,:);
+    h2 = H{i}(2,:);
+    h3 = H{i}(3,:);
+    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

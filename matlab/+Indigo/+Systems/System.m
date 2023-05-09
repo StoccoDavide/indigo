@@ -252,18 +252,19 @@ classdef System < handle
     %> \f[
     %> \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{h}( \mathbf{x}, t )
+    %>   \partial \mathbf{v}( \mathbf{x}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jv}_{\mathbf{x}} \f$.
     %
-    Jv_x( this, x, t )
+    Jv_x( this, x, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

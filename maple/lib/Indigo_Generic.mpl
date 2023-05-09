@@ -38,6 +38,7 @@ export SeparateMatrices::static := proc(
   # Decompose the matrix as P.E.Q = L.U
   _self:-m_LAST:-LU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
 
+
   # Retrieve the results of the LU decomposition
   tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
   P, Q := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);

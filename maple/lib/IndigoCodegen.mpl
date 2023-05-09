@@ -144,7 +144,7 @@ IndigoCodegen := module()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  local TranslateToMatlab := proc(
+  export TranslateToMatlab := proc(
     expr_list::list,
     $)
 
@@ -253,6 +253,7 @@ IndigoCodegen := module()
     func::{list, Vector, Matrix, Array},
     dims::list(nonnegint),
     {
+    label::string  := "out",
     indent::string := "  "
     }, $)::list, string;
 
@@ -267,11 +268,11 @@ IndigoCodegen := module()
       cur := [];
       idx := i-1;
       for j from 1 to nops(dims) do
-        cur := [op(cur), irem(idx, dims[j],'idx')+1 ];
+        cur := [op(cur), irem(idx, dims[j], 'idx')+1];
       end;
       tmp := func[op(cur)];
       if evalb(tmp <> 0) then
-        map(x -> (x, "_"), cur); str1 := cat("out_", op(%))[1..-2];
+        map(x -> (x, "_"), cur); str1 := cat(label, "_", op(%))[1..-2];
         lst := [op(lst), convert(str1, symbol) = tmp];
         map(x -> (x, ", "), cur); str2 := cat("", op(%))[1..-3];
         out := cat(out, indent, "out_", name, "(", str2, ") = ", str1, ";\n");
@@ -317,7 +318,7 @@ IndigoCodegen := module()
 
     IndigoCodegen:-TranslateToMatlab(func);
     return IndigoCodegen:-ApplyIndent(indent,
-      `if`(% = "", "% No elements\n", %)
+      `if`(% = "", "% No body\n", %)
     );
   end proc: # GenerateElements
 
@@ -369,6 +370,7 @@ IndigoCodegen := module()
     {
     data::list(symbol) := [],
     info::string       := "No info",
+    label::string      := "out",
     indent::string     := "  "
     }, $)::string;
 
@@ -392,7 +394,7 @@ IndigoCodegen := module()
     # Extract the function elements
     dims := [LinearAlgebra:-Dimension(vec)];
     lst, outputs := IndigoCodegen:-ExtractElements(
-      name, vec, dims, parse("indent") = indent
+      name, vec, dims, parse("indent") = indent, parse("label") = label
     );
 
     # Generate the method header
@@ -421,6 +423,7 @@ IndigoCodegen := module()
     {
     data::list(symbol) := [],
     info::string       := "No info",
+    label::string      := "out",
     indent::string     := "  "
     }, $)::string;
 
@@ -444,7 +447,7 @@ IndigoCodegen := module()
     # Extract the function elements
     dims := [LinearAlgebra:-Dimensions(mat)];
     lst, outputs := IndigoCodegen:-ExtractElements(
-      name, mat, dims, parse("indent") = indent
+      name, mat, dims, parse("indent") = indent, parse("label") = label
     );
 
     # Generate the method header
@@ -473,6 +476,7 @@ IndigoCodegen := module()
     {
     data::list(symbol) := [],
     info::string       := "No info",
+    label::string      := "out",
     indent::string     := "  "
     }, $)::string;
 
@@ -496,7 +500,7 @@ IndigoCodegen := module()
     # Extract the function elements
     dims := op~(2, [ArrayDims(ten)]);
     lst, outputs := IndigoCodegen:-ExtractElements(
-      name, ten, dims, parse("indent") = indent
+      name, ten, dims, parse("indent") = indent, parse("label") = label
     );
 
     # Generate the method header
@@ -524,10 +528,11 @@ IndigoCodegen := module()
     $)
 
     description "Get the substitutions to transform veils <vars> from "
-      "(v[j])(f) to v_j and from D[i](v[j])(f) to D_i_v_j. The function also "
+      "(v[j])(f) to v_j and from D[i](v[j])(f) to D_v_j_i. The function also "
       "requires the system states <vars>.";
 
-    local v, v_dot, x, rm_v_deps, rm_v_dot_deps, i, v_tmp, v_dot_tmp, tmp_l, tmp_r;
+    local v, v_dot, x, rm_v_deps, rm_v_dot_deps, i, v_tmp, v_dot_tmp, tmp_l,
+      tmp_r, tmp_i, tmp_j;
 
     # Store veiling variables
     if not type(veil, list) then
@@ -548,14 +553,14 @@ IndigoCodegen := module()
     rm_v_dot_deps := [];
     if (nops(v) > 0) then
 
-      # Transform veil variables (v[i,j])(f) -> v_ij
+      # Transform veil variables (v[i])(f) -> v_i
       v_tmp := v;
       for i from 1 to nops(v_tmp) do
-        # (v[i,j])(f) -> v[i,j]
+        # (v[i])(f) -> v[i]
         if type(v_tmp[i], function) then
           v_tmp[i] := op(0, v_tmp[i]);
         end if;
-        # v[i,j] -> v_ij
+        # v[i] -> v_i
         if type(v_tmp[i], indexed) then
           v_tmp[i] := convert(
             cat(op(0, v_tmp[i]), "_", op(1..-1, v_tmp[i])), symbol
@@ -567,35 +572,100 @@ IndigoCodegen := module()
       # Calculate veils derivatives
       # from   [..., v, ...] -> [..., grad(v), ...]
       # remove [..., 0, ...] -> [..., ...]
-      v_dot := map(k -> op(convert(
-          remove[flatten](j -> j = 0, IndigoUtils:-DoGradient(k, x)),
-        list)), v
+      convert(op~(0, v)(op(convert(x, list))) =~ v, Vector);
+      v_dot := remove[flatten](j -> rhs(j) = 0,
+        convert(IndigoUtils:-DoJacobian(%, x), list)
       );
 
-      # Transform veils derivatives from D[i](v[j])(f) to D_i_v_j
-      v_dot_tmp := v_dot;
+      # Transform veils derivatives from D[i](v[j])(f) to D_v_j_i
+      v_dot_tmp := lhs~(v_dot);
       for i from 1 to nops(v_dot_tmp) do
         # D[i](var[j])(f) -> D_i
         tmp_l := op(0, op(0, v_dot_tmp[i]));
         # D[i](var[j])(f) -> D_i
         if type(tmp_l, indexed) then
-          tmp_l := convert(cat(op(0, tmp_l), "_", op(1..-1, tmp_l)), symbol);
+          tmp_i := op(1..-1, tmp_l);
+          tmp_l := op(0, tmp_l);
+        end if;
+        if (nops([tmp_i]) <> 1) then
+          error("invalid variable derivative detected.");
         end if;
         # D[i](var[j])(f) -> D_i
         tmp_r := op(1, op(0, v_dot_tmp[i]));
         # D[i](var[j])(f) -> var_j
         if type(tmp_r, indexed) then
-          tmp_r := convert(cat(op(0, tmp_r), "_", op(1..-1, tmp_r)), symbol);
+          tmp_j := op(1..-1, tmp_r);
+          tmp_r := op(0, tmp_r);
         end if;
-        v_dot_tmp[i] := convert(cat(tmp_l, "_", tmp_r), symbol);
+        if (nops([tmp_j]) <> 1) then
+          error("invalid component derivative detected.");
+        end if;
+        v_dot_tmp[i] := convert(
+          cat(tmp_l, "_", tmp_r, "_", tmp_j, "_", tmp_i), symbol
+        );
       end do;
-      rm_v_dot_deps := v_dot =~ v_dot_tmp;
+      rm_v_dot_deps := rhs~(v_dot) =~ v_dot_tmp;
 
     end if;
 
     # Return output
     return rm_v_deps, rm_v_dot_deps;
   end proc: # GetVeilSubs
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  local GenerateConstructor := proc(
+    name::string,
+    sys_type::string,
+    {
+    num_fncs::nonnegint := 0,
+    num_veil::nonnegint := 0,
+    num_invs::nonnegint := 0,
+    data::list(symbol)  := [],
+    info::string        := "Class constructor.",
+    indent::string      := "  "
+    }, $)::string;
+
+    description "Generate a constructor for a system named <name> with "
+      "system type <sys_type>, number of functions <num_fncs>, number of "
+      "veils <num_veil>, number of invariants <num_invs>, system data "
+      "<data> and description <info>.";
+
+    return cat("function this = ", name, "( varargin )\n",
+      IndigoCodegen:-ApplyIndent(
+        indent, cat(
+        "% ", info, "\n",
+        "\n",
+        "% Superclass constructor\n",
+        "num_eqns = ", num_fncs, ";\n",
+        "num_veil = ", num_veil, ";\n",
+        "num_invs = ", num_invs, ";\n",
+        "this = this@Indigo.Systems.", sys_type, "('", name, "', num_eqns, num_veil, num_invs);\n",
+        `if`(nops(data) > 0, cat(
+        "\n",
+        "% User data\n",
+        # No input arguments
+        "if (nargin == 0)\n",
+        indent, "% Keep default values\n",
+        # Struct input argument
+        "elseif (nargin == 1 && isstruct(varargin{1}))\n",
+        cat~(op(cat~(indent, "this.m_", convert~(data, string), " = varargin{1}.",
+          convert~(data, string), ";\n"))
+        ),
+        # Many input arguments
+        "elseif (nargin == ", nops(data), ")\n",
+        cat~(op(cat~(indent, "this.m_", convert~(data, string), " = varargin{",
+          convert~([seq(1..nops(data))], string), "};\n"))
+        ),
+        # Wrong number of input arguments
+        "else\n",
+        indent, "error('wrong number of input arguments.');\n",
+        "end\n"
+        ), "")
+      )),
+      "end % ", name, "\n");
+
+  end proc: # GenerateConstructor
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   #   ___                 _ _      _ _
@@ -616,6 +686,7 @@ IndigoCodegen := module()
            list(algebraic = algebraic)} := [],
     data::list(symbol = algebraic)      := [],
     info::string                        := "No class description provided.",
+    label::string                       := "out",
     indent::string                      := "  "
     }, $)::string;
 
@@ -678,7 +749,7 @@ IndigoCodegen := module()
 
     # Compose substitutions
     rm_deps := [
-      op(rm_v_dot_deps), # D[i](v[j])(f) -> D_i_v_j
+      op(rm_v_dot_deps), # D[i](v[j])(f) -> D_v_j_i
       op(rm_v_deps),     # (v[j])(f) -> v_j
       op(rm_x_deps),     # x(t) -> x
       op(rm_x_dot_deps)  # x_dot(t) -> x_dot
@@ -736,27 +807,17 @@ IndigoCodegen := module()
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
-      i, i, "function this = ", name, "( varargin )\n",
-      i, i, i, "% Constructor for '", name, "' class.\n",
-      "\n",
-      i, i, i, "% Superclass constructor\n",
-      i, i, i, "num_eqns = ", LinearAlgebra:-Dimension(F), ";\n",
-      i, i, i, "num_veil = ", LinearAlgebra:-Dimension(v_fncs), ";\n",
-      i, i, i, "num_invs = ", LinearAlgebra:-Dimension(h), ";\n",
-      i, i, i, "this = this@Indigo.Systems.Implicit('", name, "', num_eqns, num_veil, num_invs);\n",
-      `if`(nops(data) > 0, cat(
-      "\n",
-      i, i, i, "% User data\n",
-      i, i, i, "if (nargin == 0)\n",
-      i, i, i, i, "% Keep default values\n",
-      i, i, i, "elseif (nargin == ", nops(properties), ")\n",
-      cat~(op(cat~("        this.m_", convert~(properties, string), " = varargin{",
-        convert~([seq(1..nops(properties))], string), "};\n"))),
-      i, i, i, "else\n",
-      i, i, i, i, "error('wrong number of input arguments.');\n",
-      i, i, i, "end\n"
-      ), ""),
-      i, i, "end % ", name, "\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        GenerateConstructor(
+          name, "Implicit",
+          parse("num_fncs") = LinearAlgebra:-Dimension(F),
+          parse("num_veil") = LinearAlgebra:-Dimension(v_fncs),
+          parse("num_invs") = LinearAlgebra:-Dimension(h),
+          parse("data")     = properties,
+          parse("info")     = "Class constructor.",
+          parse("indent")   = i
+      )),
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
@@ -804,8 +865,9 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "v", [x], v_fncs,
-          parse("data") = properties,
-          parse("info") = "Evaluate the the veils v."
+          parse("data")  = properties,
+          parse("label") = label,
+          parse("info")  = "Evaluate the the veils v."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -813,9 +875,10 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
-          "Jv_x", [x], Jv_x,
-          parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of v with respect to x."
+          "Jv_x", [x, v], Jv_x,
+          parse("data")  = properties,
+          parse("label") = cat("D_", label),
+          parse("info")  = "Evaluate the Jacobian of v with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -824,8 +887,8 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "h", [x, v], h,
-          parse("data") = properties,
-          parse("info") = "Calculate the residual of the invariants h."
+          parse("data")  = properties,
+          parse("info")  = "Calculate the residual of the invariants h."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -876,6 +939,7 @@ IndigoCodegen := module()
            list(algebraic = algebraic)} := [],
     data::list(symbol = algebraic)      := [],
     info::string                        := "No class description provided.",
+    label::string                       := "out",
     indent::string                      := "  "
     }, $)::string;
 
@@ -949,7 +1013,7 @@ IndigoCodegen := module()
 
     # Compose substitutions
     rm_deps := [
-      op(rm_v_dot_deps), # D[i](v[j])(f) -> D_i_v_j
+      op(rm_v_dot_deps), # D[i](v[j])(f) -> D_v_j_i
       op(rm_v_deps),     # (v[j])(f) -> v_j
       op(rm_x_deps),     # x(t) -> x
       op(rm_x_dot_deps)  # x_dot(t) -> x_dot
@@ -1006,27 +1070,17 @@ IndigoCodegen := module()
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
-      i, i, "function this = ", name, "( varargin )\n",
-      i, i, i, "% Constructor for '", name, "' class.\n",
-      "\n",
-      i, i, i, "% Superclass constructor\n",
-      i, i, i, "num_eqns = ", LinearAlgebra:-Dimension(f), ";\n",
-      i, i, i, "num_veil = ", LinearAlgebra:-Dimension(v_fncs), ";\n",
-      i, i, i, "num_invs = ", LinearAlgebra:-Dimension(h), ";\n",
-      i, i, i, "this = this@Indigo.Systems.Explicit('", name, "', num_eqns, num_veil, num_invs);\n",
-      `if`(nops(data) > 0, cat(
-      "\n",
-      i, i, i, "% User data\n",
-      i, i, i, "if (nargin == 0)\n",
-      i, i, i, i, "% Keep default values\n",
-      i, i, i, "elseif (nargin == ", nops(properties), ")\n",
-      cat~(op(cat~("        this.m_", convert~(properties, string), " = varargin{",
-        convert~([seq(1..nops(properties))], string), "};\n"))),
-      i, i, i, "else\n",
-      i, i, i, i, "error('wrong number of input arguments.');\n",
-      i, i, i, "end\n"
-      ), ""),
-      i, i, "end % ", name, "\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        GenerateConstructor(
+          name, "Explicit",
+          parse("num_fncs") = LinearAlgebra:-Dimension(f),
+          parse("num_veil") = LinearAlgebra:-Dimension(v_fncs),
+          parse("num_invs") = LinearAlgebra:-Dimension(h),
+          parse("data")     = properties,
+          parse("info")     = "Class constructor.",
+          parse("indent")   = i
+      )),
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
@@ -1064,8 +1118,9 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "v", [x], v_fncs,
-          parse("data") = properties,
-          parse("info") = "Evaluate the the veils v."
+          parse("data")  = properties,
+          parse("label") = label,
+          parse("info")  = "Evaluate the the veils v."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1073,9 +1128,10 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
-          "Jv_x", [x], Jv_x,
-          parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of v with respect to x."
+          "Jv_x", [x, v], Jv_x,
+          parse("data")  = properties,
+          parse("label") = cat("D_", label),
+          parse("info")  = "Evaluate the Jacobian of v with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1136,6 +1192,7 @@ IndigoCodegen := module()
            list(algebraic = algebraic)} := [],
     data::list(symbol = algebraic)      := [],
     info::string                        := "No class description provided.",
+    label::string                       := "out",
     indent::string                      := "  "
     }, $)::string;
 
@@ -1210,7 +1267,7 @@ IndigoCodegen := module()
 
     # Compose substitutions
     rm_deps := [
-      op(rm_v_dot_deps), # D[i](v[j])(f) -> D_i_v_j
+      op(rm_v_dot_deps), # D[i](v[j])(f) -> D_v_j_i
       op(rm_v_deps),     # (v[j])(f) -> v_j
       op(rm_x_deps),     # x(t) -> x
       op(rm_x_dot_deps)  # x_dot(t) -> x_dot
@@ -1270,27 +1327,17 @@ IndigoCodegen := module()
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
-      i, i, "function this = ", name, "( varargin )\n",
-      i, i, i, "% Constructor for '", name, "' class.\n",
-      "\n",
-      i, i, i, "% Superclass constructor\n",
-      i, i, i, "num_eqns = ", LinearAlgebra:-Dimension(F), ";\n",
-      i, i, i, "num_veil = ", LinearAlgebra:-Dimension(v_fncs), ";\n",
-      i, i, i, "num_invs = ", LinearAlgebra:-Dimension(h), ";\n",
-      i, i, i, "this = this@Indigo.Systems.SemiExplicit('", name, "', num_eqns, num_veil, num_invs);\n",
-      `if`(nops(data) > 0, cat(
-      "\n",
-      i, i, i, "% User data\n",
-      i, i, i, "if (nargin == 0)\n",
-      i, i, i, i, "% Keep default values\n",
-      i, i, i, "elseif (nargin == ", nops(properties), ")\n",
-      cat~(op(cat~("        this.m_", convert~(properties, string), " = varargin{",
-        convert~([seq(1..nops(properties))], string), "};\n"))),
-      i, i, i, "else\n",
-      i, i, i, i, "error('wrong number of input arguments.');\n",
-      i, i, i, "end\n"
-      ), ""),
-      i, i, "end % ", name, "\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        GenerateConstructor(
+          name, "SemiExplicit",
+          parse("num_fncs") = LinearAlgebra:-Dimension(F),
+          parse("num_veil") = LinearAlgebra:-Dimension(v_fncs),
+          parse("num_invs") = LinearAlgebra:-Dimension(h),
+          parse("data")     = properties,
+          parse("info")     = "Class constructor.",
+          parse("indent")   = i
+      )),
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
@@ -1358,8 +1405,9 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
           "v", [x], v_fncs,
-          parse("data") = properties,
-          parse("info") = "Evaluate the the veils v."
+          parse("data")  = properties,
+          parse("label") = label,
+          parse("info")  = "Evaluate the the veils v."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1367,9 +1415,10 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
-          "Jv_x", [x], Jv_x,
-          parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of v with respect to x."
+          "Jv_x", [x, v], Jv_x,
+          parse("data")  = properties,
+          parse("label") = cat("D_", label),
+          parse("info")  = "Evaluate the Jacobian of v with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
