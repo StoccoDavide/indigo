@@ -15,6 +15,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
   properties (SetAccess = protected, Hidden = true)
     % User data
     m_m = 1.0;
+    m_J = 1.0;
     m_g = 9.81;
     m_ell = 1.0;
   end
@@ -37,12 +38,14 @@ classdef DoubleSlider < Indigo.Systems.Implicit
         % Keep default values
       elseif (nargin == 1 && isstruct(varargin{1}))
         this.m_m = varargin{1}.m;
+        this.m_J = varargin{1}.J;
         this.m_g = varargin{1}.g;
         this.m_ell = varargin{1}.ell;
-      elseif (nargin == 3)
+      elseif (nargin == 4)
         this.m_m = varargin{1};
-        this.m_g = varargin{2};
-        this.m_ell = varargin{3};
+        this.m_J = varargin{2};
+        this.m_g = varargin{3};
+        this.m_ell = varargin{4};
       else
         error('wrong number of input arguments.');
       end
@@ -55,6 +58,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -77,29 +81,32 @@ classdef DoubleSlider < Indigo.Systems.Implicit
       lambda__2_dot = in_2(8);
 
       % Evaluate function
-      out_1 = x_dot - u;
-      out_2 = y_dot - v;
-      out_3 = u_dot * m - 2 * lambda__2;
-      t3 = g * m;
-      out_4 = v_dot * m + t3 - 2 * lambda__1;
-      t6 = cos(theta);
-      t9 = sin(theta);
-      t10 = ell * t9;
-      t11 = omega ^ 2;
-      t17 = 0.1e1 / m;
-      out_5 = -omega_dot * ell * t6 + t17 * (m * t11 * t10 - 2 * t3 + 4 * lambda__1);
-      out_6 = theta_dot - omega;
-      t19 = 0.1e1 / t6;
-      t26 = t6 ^ 2;
-      t27 = t26 * t11;
-      t30 = t9 ^ 2;
-      t31 = t30 * t9;
-      t33 = ell * m;
-      t41 = t26 * lambda__1;
-      t46 = 0.1e1 / t26;
-      out_7 = 4 * lambda__1_dot * t17 * t9 * t19 - 4 * t17 * lambda__2_dot + 3 * omega * t17 * t46 * (-2 * m * g * t26 - 2 * m * g * t30 + m * t10 * t27 + t33 * t31 * t11 + 4 * t30 * lambda__1 + 4 * t41);
-      t60 = t30 ^ 2;
-      out_8 = -lambda__1_dot * t19 * (t26 + t30) * ell - t46 * (3 * m * ell * t30 * t27 - 6 * m * g * t31 + 3 * t33 * t60 * t11 - 6 * t3 * t9 * t26 + 4 * t26 * t6 * lambda__2 + 12 * t31 * lambda__1 + 8 * t9 * t41) * ell * omega / 4;
+      out_1 = -u + x_dot;
+      out_2 = -v + y_dot;
+      out_3 = m * u_dot + lambda__1;
+      out_4 = m * g + m * v_dot + lambda__2;
+      out_5 = -theta_dot + omega;
+      t7 = cos(theta);
+      t10 = sin(theta);
+      out_6 = t10 * ell * lambda__1 - t7 * ell * lambda__2 - 2 * J * omega_dot;
+      t12 = t10 ^ 2;
+      t13 = ell ^ 2;
+      t15 = m * t13 * t12;
+      t19 = t7 * t10;
+      t20 = m * t13;
+      t23 = omega ^ 2;
+      t24 = t23 * omega;
+      t30 = omega * lambda__1;
+      t36 = lambda__2 * omega;
+      t38 = t7 ^ 2;
+      t40 = m * t13 * t38;
+      out_7 = lambda__1_dot * (-t15 - 4 * J) + lambda__2_dot * t20 * t19 + 2 * m * ell * t10 * t24 * J - 4 * m * t13 * t7 * t10 * t30 - t15 * t36 + 3 * t40 * t36;
+      t49 = J ^ 2;
+      t53 = t12 ^ 2;
+      t54 = t13 ^ 2;
+      t56 = m ^ 2;
+      t83 = J * lambda__1 * omega;
+      out_8 = lambda__2_dot * (-4 * t20 * t12 * J - 4 * t20 * t38 * J - 16 * t49) - 3 * t56 * t54 * t53 * t30 - 3 * t56 * t54 * t38 * t12 * t30 + 3 * t56 * t54 * t7 * t12 * t10 * t36 + 3 * t56 * t54 * t38 * t7 * t10 * t36 - 8 * m * ell * t7 * t24 * t49 - 12 * t15 * t83 + 4 * t40 * t83 + 16 * t20 * t19 * J * lambda__2 * omega;
 
       % Store outputs
       out_F = zeros(8, 1);
@@ -120,6 +127,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -142,67 +150,77 @@ classdef DoubleSlider < Indigo.Systems.Implicit
       lambda__2_dot = in_2(8);
 
       % Evaluate function
-      t1 = sin(theta);
-      t2 = ell * t1;
-      t4 = cos(theta);
-      t5 = ell * t4;
-      t6 = omega ^ 2;
-      out_5_3 = t2 * omega_dot + t5 * t6;
-      t8 = t4 ^ 2;
-      t9 = 0.1e1 / t8;
-      t10 = t1 ^ 2;
-      t12 = 0.1e1 / m;
-      t13 = lambda__1_dot * t12;
-      t17 = t4 * t6;
-      t19 = m * ell * t10;
-      t21 = t8 * t4;
-      t22 = t21 * t6;
-      t23 = ell * m;
-      t27 = omega * t12;
-      t30 = t8 * t6;
-      t31 = m * t2;
-      t33 = t10 * t1;
-      t42 = t8 * lambda__1;
-      t46 = -2 * g * m * t10 - 2 * g * m * t8 + t23 * t33 * t6 + 4 * t10 * lambda__1 + t30 * t31 + 4 * t42;
-      t47 = 0.1e1 / t21;
-      out_7_3 = 4 * t13 * t10 * t9 + 4 * t13 + 3 * t27 * t9 * (t17 * t19 + t22 * t23) + 6 * t1 * t27 * t47 * t46;
-      t52 = t8 + t10;
-      t57 = ell * omega;
-      t65 = g * m;
-      t85 = t10 ^ 2;
-      t89 = t1 * t8;
-      t101 = -6 * g * m * t33 + 3 * t23 * t6 * t85 + 8 * t1 * t42 + 3 * t19 * t30 + 4 * t21 * lambda__2 + 12 * t33 * lambda__1 - 6 * t65 * t89;
-      out_8_3 = -t1 * lambda__1_dot * t9 * t52 * ell - t9 * (6 * ell * m * t17 * t33 - 6 * g * m * t21 - 12 * t1 * t8 * lambda__2 - 6 * t10 * t4 * t65 + 20 * t10 * t4 * lambda__1 + 8 * t21 * lambda__1 + 6 * t22 * t31) * t57 / 4 - t1 * t47 * t101 * t57 / 2;
+      t2 = sin(theta);
+      t5 = cos(theta);
+      out_6_3 = t2 * ell * lambda__2 + t5 * ell * lambda__1;
+      t7 = ell ^ 2;
+      t8 = t7 * t2;
+      t9 = t5 * m;
+      t13 = t5 ^ 2;
+      t14 = t7 * t13;
+      t15 = m * lambda__2_dot;
+      t17 = t2 ^ 2;
+      t18 = t7 * t17;
+      t20 = omega ^ 2;
+      t21 = t20 * omega;
+      t23 = ell * t5;
+      t24 = m * t23;
+      t27 = omega * lambda__1;
+      t28 = m * t14;
+      t31 = m * t18;
+      t34 = lambda__2 * omega;
+      t36 = m * t7;
+      t37 = t5 * t36;
+      out_7_3 = 2 * t24 * t21 * J - 8 * t37 * t2 * t34 - 2 * lambda__1_dot * t9 * t8 + t15 * t14 - t15 * t18 - 4 * t28 * t27 + 4 * t31 * t27;
+      t40 = t17 * t2;
+      t42 = t7 ^ 2;
+      t43 = m ^ 2;
+      t44 = t43 * t42;
+      t45 = t5 * t44;
+      t51 = t43 * t42 * t13 * t5;
+      t54 = t17 ^ 2;
+      t59 = t13 ^ 2;
+      t64 = J ^ 2;
+      t67 = m * ell * t2;
+      t70 = J * lambda__1;
+      t75 = J * lambda__2;
+      t76 = omega * t75;
+      out_8_3 = -32 * t9 * t8 * omega * t70 - 3 * t43 * t42 * t54 * t34 + 3 * t43 * t42 * t59 * t34 - 6 * t51 * t2 * t27 + 8 * t67 * t21 * t64 - 6 * t45 * t40 * t27 + 16 * t28 * t76 - 16 * t31 * t76;
       out_1_4 = -1;
       out_2_5 = -1;
-      out_5_6 = 2 * omega * t2;
-      out_6_6 = -1;
-      t107 = t8 * omega;
-      out_7_6 = 3 * t27 * t9 * (2 * omega * t23 * t33 + 2 * t107 * t31) + 3 * t12 * t9 * t46;
-      out_8_6 = -t9 * t101 * ell / 4 - t9 * (6 * omega * t23 * t85 + 6 * t107 * t19) * t57 / 4;
-      out_4_7 = -2;
-      out_5_7 = 4 * t12;
-      out_7_7 = 12 * t27 * t9 * t52;
-      out_8_7 = -t9 * (8 * t89 + 12 * t33) * t57 / 4;
-      out_3_8 = -2;
-      out_8_8 = -omega * t5;
+      out_5_6 = 1;
+      out_7_6 = 6 * t67 * t20 * J + 3 * t36 * t13 * lambda__2 - t36 * t17 * lambda__2 - 4 * t37 * t2 * lambda__1;
+      t97 = t43 * t42 * t13;
+      out_8_6 = -3 * t97 * t17 * lambda__1 + 16 * t37 * t2 * t75 + 3 * t51 * t2 * lambda__2 - 24 * t24 * t20 * t64 + 3 * t45 * t40 * lambda__2 - 3 * t44 * t54 * lambda__1 + 4 * t28 * t70 - 12 * t31 * t70;
+      out_3_7 = 1;
+      out_6_7 = ell * t2;
+      t116 = t2 * omega;
+      out_7_7 = -4 * t37 * t116;
+      t122 = t17 * omega;
+      t125 = J * omega;
+      out_8_7 = -3 * t44 * t54 * omega - 3 * t97 * t122 + 4 * t28 * t125 - 12 * t31 * t125;
+      out_4_8 = 1;
+      out_6_8 = -t23;
+      out_7_8 = 3 * t36 * t13 * omega - t36 * t122;
+      out_8_8 = 3 * t45 * t40 * omega + 16 * t37 * t2 * t125 + 3 * t51 * t116;
 
       % Store outputs
       out_JF_x = zeros(8, 8);
-      out_JF_x(5, 3) = out_5_3;
+      out_JF_x(6, 3) = out_6_3;
       out_JF_x(7, 3) = out_7_3;
       out_JF_x(8, 3) = out_8_3;
       out_JF_x(1, 4) = out_1_4;
       out_JF_x(2, 5) = out_2_5;
       out_JF_x(5, 6) = out_5_6;
-      out_JF_x(6, 6) = out_6_6;
       out_JF_x(7, 6) = out_7_6;
       out_JF_x(8, 6) = out_8_6;
-      out_JF_x(4, 7) = out_4_7;
-      out_JF_x(5, 7) = out_5_7;
+      out_JF_x(3, 7) = out_3_7;
+      out_JF_x(6, 7) = out_6_7;
       out_JF_x(7, 7) = out_7_7;
       out_JF_x(8, 7) = out_8_7;
-      out_JF_x(3, 8) = out_3_8;
+      out_JF_x(4, 8) = out_4_8;
+      out_JF_x(6, 8) = out_6_8;
+      out_JF_x(7, 8) = out_7_8;
       out_JF_x(8, 8) = out_8_8;
     end % JF_x
     %
@@ -213,6 +231,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -237,31 +256,32 @@ classdef DoubleSlider < Indigo.Systems.Implicit
       % Evaluate function
       out_1_1 = 1;
       out_2_2 = 1;
-      out_6_3 = 1;
+      out_5_3 = -1;
       out_3_4 = m;
       out_4_5 = m;
-      t1 = cos(theta);
-      out_5_6 = -ell * t1;
-      t3 = 0.1e1 / t1;
-      t4 = sin(theta);
-      t6 = 0.1e1 / m;
-      out_7_7 = 4 * t6 * t4 * t3;
-      t8 = t1 ^ 2;
-      t9 = t4 ^ 2;
-      out_8_7 = -t3 * (t8 + t9) * ell;
-      out_7_8 = -4 * t6;
+      out_6_6 = -2 * J;
+      t2 = sin(theta);
+      t3 = t2 ^ 2;
+      t4 = ell ^ 2;
+      out_7_7 = -m * t4 * t3 - 4 * J;
+      t8 = cos(theta);
+      t10 = m * t4;
+      out_7_8 = t10 * t8 * t2;
+      t14 = t8 ^ 2;
+      t18 = J ^ 2;
+      out_8_8 = -4 * t10 * t14 * J - 4 * t10 * t3 * J - 16 * t18;
 
       % Store outputs
       out_JF_x_dot = zeros(8, 8);
       out_JF_x_dot(1, 1) = out_1_1;
       out_JF_x_dot(2, 2) = out_2_2;
-      out_JF_x_dot(6, 3) = out_6_3;
+      out_JF_x_dot(5, 3) = out_5_3;
       out_JF_x_dot(3, 4) = out_3_4;
       out_JF_x_dot(4, 5) = out_4_5;
-      out_JF_x_dot(5, 6) = out_5_6;
+      out_JF_x_dot(6, 6) = out_6_6;
       out_JF_x_dot(7, 7) = out_7_7;
-      out_JF_x_dot(8, 7) = out_8_7;
       out_JF_x_dot(7, 8) = out_7_8;
+      out_JF_x_dot(8, 8) = out_8_8;
     end % JF_x_dot
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -271,6 +291,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -306,6 +327,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -333,6 +355,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -360,6 +383,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -375,18 +399,23 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Evaluate function
       t1 = cos(theta);
-      t2 = ell * t1;
+      t2 = t1 * ell;
+      out_1 = t2 + 2 * x;
       t4 = sin(theta);
-      t5 = ell * t4;
-      out_1 = -lambda__1 * t2 - lambda__2 * t5;
-      out_2 = -2 * y + t5;
-      out_3 = -2 * x - t2;
-      out_4 = -omega * t2 + 2 * v;
-      out_5 = -omega * t5 + 2 * u;
-      t13 = t1 ^ 2;
-      t15 = omega ^ 2;
-      t18 = t4 ^ 2;
-      out_6 = 0.1e1 / m / t1 * (m * t15 * ell * t13 + ell * m * t18 * t15 - 2 * m * g * t4 - 4 * t1 * lambda__2 + 4 * t4 * lambda__1);
+      t5 = t4 * ell;
+      out_2 = t5 + 2 * y;
+      t7 = ell * omega;
+      out_3 = t4 * t7 - 2 * u;
+      out_4 = -t1 * t7 - 2 * v;
+      t12 = omega ^ 2;
+      t13 = t12 * J;
+      t17 = t4 ^ 2;
+      t19 = ell ^ 2;
+      t20 = m * t19;
+      t24 = m * t19 * t1;
+      out_5 = -2 * m * t2 * t13 - t20 * t17 * lambda__1 + t24 * t4 * lambda__2 - 4 * J * lambda__1;
+      t33 = t1 ^ 2;
+      out_6 = -4 * J * g * m - 2 * m * t5 * t13 - t20 * t33 * lambda__2 + t24 * t4 * lambda__1 - 4 * J * lambda__2;
 
       % Store outputs
       out_h = zeros(6, 1);
@@ -405,6 +434,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 
@@ -419,38 +449,43 @@ classdef DoubleSlider < Indigo.Systems.Implicit
       lambda__2 = in_1(8);
 
       % Evaluate function
-      out_3_1 = -2;
-      out_2_2 = -2;
-      t1 = cos(theta);
-      t2 = t1 * lambda__2;
-      t4 = sin(theta);
-      t5 = t4 * lambda__1;
-      out_1_3 = -ell * t2 + ell * t5;
-      out_2_3 = ell * t1;
-      out_3_3 = ell * t4;
-      out_4_3 = omega * ell * t4;
-      out_5_3 = -omega * ell * t1;
-      t18 = 0.1e1 / t1;
-      t20 = 0.1e1 / m;
-      t22 = t1 ^ 2;
-      t23 = ell * t22;
-      t24 = omega ^ 2;
-      t27 = t4 ^ 2;
-      t29 = ell * m;
-      out_6_3 = t20 * t18 * (-2 * m * g * t1 + 4 * t1 * lambda__1 + 4 * t4 * lambda__2) + t4 * t20 / t22 * (-2 * m * g * t4 + m * t24 * t23 + t29 * t27 * t24 - 4 * t2 + 4 * t5);
-      out_5_4 = 2;
-      out_4_5 = 2;
+      out_1_1 = 2;
+      out_2_2 = 2;
+      t1 = sin(theta);
+      t2 = t1 * ell;
+      out_1_3 = -t2;
+      t3 = cos(theta);
+      out_2_3 = t3 * ell;
+      t4 = ell * omega;
+      out_3_3 = t3 * t4;
+      out_4_3 = t1 * t4;
+      t5 = omega ^ 2;
+      t6 = t5 * J;
+      t7 = m * t2;
+      t11 = ell ^ 2;
+      t13 = m * t11 * t3;
+      t16 = t1 ^ 2;
+      t18 = m * t11;
+      t20 = t3 ^ 2;
+      out_5_3 = -2 * t13 * t1 * lambda__1 - t18 * t16 * lambda__2 + t18 * t20 * lambda__2 + 2 * t7 * t6;
+      t24 = m * t3 * ell;
+      out_6_3 = 2 * t13 * t1 * lambda__2 - t18 * t16 * lambda__1 + t18 * t20 * lambda__1 - 2 * t24 * t6;
+      out_3_4 = -2;
+      out_4_5 = -2;
+      out_3_6 = t2;
       out_4_6 = -out_2_3;
-      out_5_6 = -out_3_3;
-      out_6_6 = t20 * t18 * (2 * omega * m * t23 + 2 * t29 * t27 * omega);
-      out_1_7 = out_4_6;
-      out_6_7 = 4 * t20 * t4 * t18;
-      out_1_8 = out_5_6;
-      out_6_8 = -4 * t20;
+      t34 = J * omega;
+      out_5_6 = -4 * t24 * t34;
+      out_6_6 = -4 * t7 * t34;
+      t41 = 4 * J;
+      out_5_7 = -m * t11 * t16 - t41;
+      out_6_7 = t18 * t3 * t1;
+      out_5_8 = out_6_7;
+      out_6_8 = -m * t11 * t20 - t41;
 
       % Store outputs
       out_Jh_x = zeros(6, 8);
-      out_Jh_x(3, 1) = out_3_1;
+      out_Jh_x(1, 1) = out_1_1;
       out_Jh_x(2, 2) = out_2_2;
       out_Jh_x(1, 3) = out_1_3;
       out_Jh_x(2, 3) = out_2_3;
@@ -458,14 +493,15 @@ classdef DoubleSlider < Indigo.Systems.Implicit
       out_Jh_x(4, 3) = out_4_3;
       out_Jh_x(5, 3) = out_5_3;
       out_Jh_x(6, 3) = out_6_3;
-      out_Jh_x(5, 4) = out_5_4;
+      out_Jh_x(3, 4) = out_3_4;
       out_Jh_x(4, 5) = out_4_5;
+      out_Jh_x(3, 6) = out_3_6;
       out_Jh_x(4, 6) = out_4_6;
       out_Jh_x(5, 6) = out_5_6;
       out_Jh_x(6, 6) = out_6_6;
-      out_Jh_x(1, 7) = out_1_7;
+      out_Jh_x(5, 7) = out_5_7;
       out_Jh_x(6, 7) = out_6_7;
-      out_Jh_x(1, 8) = out_1_8;
+      out_Jh_x(5, 8) = out_5_8;
       out_Jh_x(6, 8) = out_6_8;
     end % Jh_x
     %
@@ -476,6 +512,7 @@ classdef DoubleSlider < Indigo.Systems.Implicit
 
       % Extract properties
       m = this.m_m;
+      J = this.m_J;
       g = this.m_g;
       ell = this.m_ell;
 

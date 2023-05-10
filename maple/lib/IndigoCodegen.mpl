@@ -258,7 +258,8 @@ IndigoCodegen := module()
     }, $)::list, string;
 
     description "Extract elements for a n-dimensional function <func> with "
-      "name <name>, dimensions <dims> and optional indentation <indent>.";
+      "name <name>, dimensions <dims>, and optional veilig label <label> and "
+      "indentation <indent>.";
 
     local i, j, idx, lst, out, cur, tmp, str1, str2;
 
@@ -376,8 +377,8 @@ IndigoCodegen := module()
 
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and return it as a string. The optional "
-      "arguments areclass properties <data>, function description <info>, and "
-      "indentation string <indent>.";
+      "arguments areclass properties <data>, function description <info>, "
+      "veilig label <label>, and indentation string <indent>.";
 
     local header, properties, inputs, veils, elements, outputs, dims, lst;
 
@@ -429,8 +430,8 @@ IndigoCodegen := module()
 
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and return it as a string. The optional "
-      "arguments areclass properties <data>, function description <info>, and "
-      "indentation string <indent>.";
+      "arguments areclass properties <data>, function description <info>, "
+      "veilig label <label>, and indentation string <indent>.";
 
     local header, properties, inputs, veils, elements, outputs, dims, lst;
 
@@ -482,8 +483,8 @@ IndigoCodegen := module()
 
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and return it as a string. The optional "
-      "arguments areclass properties <data>, function description <info>, and "
-      "indentation string <indent>.";
+      "arguments areclass properties <data>, function description <info>, "
+      "veilig label <label>, and indentation string <indent>.";
 
     local header, properties, inputs, veils, elements, outputs, dims, lst;
 
@@ -692,7 +693,8 @@ IndigoCodegen := module()
 
     description "Generate an implicit system for the firt-order differential "
       "equations <eqns>, invariants <invs> with states variables <vars> and "
-      "states variables, system data <data> and description <info>.";
+      "states variables, system data <data>, veilig label <label>, and "
+      "description <info>.";
 
     local x, x_dot, F, JF_x, JF_x_dot, v, v_fncs, Jv_x, JF_v, h, Jh_x, Jh_v,
       rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
@@ -945,7 +947,8 @@ IndigoCodegen := module()
 
     description "Generate an explicit system for the firt-order differential "
       "equations <eqns>, invariants <invs> with states variables <vars> and "
-      "states variables, system data <data> and description <info>.";
+      "states variables, system data <data>, veilig label <label> and "
+      "description <info>.";
 
     local x, x_dot, F, A, b, f, Jf_x, v, v_fncs, Jv_x, Jf_v, h, Jh_x, Jh_v,
       rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
@@ -1198,7 +1201,8 @@ IndigoCodegen := module()
 
     description "Generate a semi explicit system for the firt-order differential "
       "equations <eqns>, invariants <invs> with states variables <vars> and "
-      "states variables, system data <data> and description <info>.";
+      "states variables, system data <data>, veilig label <label> and "
+      "description <info>.";
 
     local x, x_dot, F, A, b, TA_x, TA_v, Jb_x, Jb_v, v, v_fncs, Jv_x, h, Jh_x,
       Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps,

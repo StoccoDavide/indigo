@@ -8,23 +8,25 @@ close all;
 
 % Pendulum parameters
 data.m   = 1.0;  % mass (kg)
+data.J   = 1.0;  % mass (kg*m^2)
 data.ell = 0.1;  % length (m)
 data.g   = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-theta_0   = 0.1;
-x_0       = data.ell/2*cos(theta_0);
-y_0       = data.ell/2*sin(theta_0);
-omega_0   = 0.0;
-u_0       = -data.ell/2*sin(theta_0)*omega_0;
-v_0       = +data.ell/2*cos(theta_0)*omega_0;
-lambda1_0 = 0.0;
-lambda2_0 = 0.0;
-X_0 = [x_0; y_0; theta_0; u_0; v_0; omega_0; lambda1_0; lambda2_0];
+theta   = 0.1;
+x       = data.ell/2*cos(theta);
+y       = data.ell/2*sin(theta);
+omega   = 0.0;
+u       = -data.ell/2*sin(theta)*omega;
+v       = +data.ell/2*cos(theta)*omega;
+lambda_1 = 0.0;
+lambda_2 = 0.0;
+
+IC = [x; y; theta; u; v; omega; lambda_1; lambda_2];
 
 ODE = DoubleSlider(data);
 
-%% Initialize the solver and set the ODE
+%% Initialize the solver and set the system
 
 explicit_solver = {
   'ExplicitEuler',    ...
@@ -102,17 +104,18 @@ for k = 1:length(solver_name)
   solver{k} = IndigoSolver(solver_name{k});
   solver{k}.set_system(ODE);
 end
+color = colormap(lines(length(solver_name)));
 
-%% Integrate the system of ODE
+%% Integrate the system
 
 % Set integration interval
-d_t   = 0.01;
+d_t   = 0.02;
 t_ini = 0.0;
-t_end = 5.0;
+t_end = 10.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
-X_0 = solver{1}.project_initial_conditions(X_0, t_ini);
+IC = solver{1}.project_initial_conditions(IC, t_ini);
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
@@ -121,26 +124,27 @@ T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
 
-% Solve the system of ODEs for each solver
+% Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.disable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$x$ (m)');
+  ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    plot(T{i}, X{i}(1,:), 'LineWidth', linewidth);
+    t = T{i};
+    x = X{i}(1,:);
+    y = X{i}(2,:);
+    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -149,11 +153,13 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$y$ (m)');
+  ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    plot(T{i}, X{i}(2,:), 'LineWidth', linewidth);
+    t = T{i};
+    u = X{i}(3,:);
+    v = X{i}(4,:);
+    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -162,81 +168,19 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$\theta$ (rad)');
+  ylabel('$\mathbf{h}$ (-)');
   for i = 1:length(solver_name)
-    plot(T{i}, X{i}(3,:), 'LineWidth', linewidth);
+    t  = T{i};
+    h1 = H{i}(1,:);
+    h2 = H{i}(2,:);
+    h3 = H{i}(3,:);
+    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$u$ (m/s)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(4,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$v$ (m/s)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(5,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$\omega$ (rad/s)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(6,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$h_1$ (m$^2$)');
-  for i = 1:length(solver_name)
-    plot(T{i}, H{i}(1,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$h_2$ (m$^2$/s$^2$)');
-  for i = 1:length(solver_name)
-    plot(T{i}, H{i}(2,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-%% Integrate the system of ODE (using projection)
+%% Integrate the system (using projection)
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
@@ -245,26 +189,43 @@ T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
 
-% Solve the system of ODEs for each solver
+% Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$x$ (m)');
+  ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    plot(T{i}, X{i}(1,:), 'LineWidth', linewidth);
+    t = T{i};
+    x = X{i}(1,:);
+    y = X{i}(2,:);
+    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+  return
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  xlabel('$t$ (s)');
+  ylabel('$\mathbf{x}_v$ (-)');
+  for i = 1:length(solver_name)
+    t = T{i};
+    u = X{i}(3,:);
+    v = X{i}(4,:);
+    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -273,90 +234,16 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
-  ylabel('$y$ (m)');
+  ylabel('$\mathbf{h}$ (-)');
   for i = 1:length(solver_name)
-    plot(T{i}, X{i}(2,:), 'LineWidth', linewidth);
+    t  = T{i};
+    h1 = H{i}(1,:);
+    h2 = H{i}(2,:);
+    h3 = H{i}(3,:);
+    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$\theta$ (rad)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(3,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$u$ (m/s)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(4,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$v$ (m/s)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(5,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$\omega$ (rad/s)');
-  for i = 1:length(solver_name)
-    plot(T{i}, X{i}(6,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$h_1$ (m$^2$)');
-  for i = 1:length(solver_name)
-    plot(T{i}, H{i}(1,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  % title(title_str);
-  xlabel('$t$ (s)');
-  ylabel('$h_2$ (m$^2$/s$^2$)');
-  for i = 1:length(solver_name)
-    plot(T{i}, H{i}(2,:), 'LineWidth', linewidth);
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
 %% That's All Folks!

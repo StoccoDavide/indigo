@@ -26,6 +26,7 @@ module Indigo()
 
   local m_LAST           := NULL;
   local m_LEM            := NULL;
+  local m_Factorization  := "FFLU";
   local m_VerboseMode    := false;
   local m_WarningMode    := true;
   local m_SystemType     := 'Empty';
@@ -198,6 +199,30 @@ module Indigo()
 
     return _self:-m_LEM;
   end proc: # GetLEM
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export EnableLU::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Enable the LU factorization.";
+
+    _self:-m_Factorization := "LU";
+    return NULL;
+  end proc: # EnableLU
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export EnableFFLU::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Enable the FFLU factorization.";
+
+    _self:-m_Factorization := "FFLU";
+    return NULL;
+  end proc: # EnableFFLU
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -387,12 +412,39 @@ module Indigo()
     _self::Indigo,
     $)::list;
 
-    description "Get the list of differential equations of the implicit system "
-      "of the type F(x,x',t) = 0.";
+    description "Get the latest differential equations of the system as "
+      "F(x,x',t) = 0.";
 
     return convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
-      _self:-m_ReductionSteps[-1]["G"], list);
+      _self:-m_ReductionSteps[-1]["G"], list);;
   end proc: # GetDifferentialEquations
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export GetAlgebraicEquations::static := proc(
+    _self::Indigo,
+    $)::list;
+
+    description "Get the latest algebraic equations of the system as "
+      "F(x,x',t) = 0.";
+
+    return convert(_self:-m_ReductionSteps[-1]["A"], list);
+  end proc: # GetAlgebraicEquations
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export GetDifferentialAlgebraicEquations::static := proc(
+    _self::Indigo,
+    $)::list;
+
+    description "Get the latest differential-algebraic equations of the "
+      "current system as F(x,x',t) = 0.";
+
+    return [
+      op(_self:-GetDifferentialEquations(_self)),
+      op(_self:-GetAlgebraicEquations(_self))
+    ];
+  end proc: # GetAlgebraicEquations
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -583,14 +635,14 @@ module Indigo()
         "where type must be choosen between: 'Linear', 'Generic' or 'MultiBody'."
       );
       error("no system to load.");
-    elif (type = 'Linear') and (_npassed = 4) then
+    elif (type = 'Linear') then
       _self:-LoadEquations_Linear(_self, _passed[3..-1]);
-    elif (type = 'Generic') and (_npassed = 4) then
+    elif (type = 'Generic') then
       _self:-LoadEquations_Generic(_self, _passed[3..-1]);
-    elif (type = 'MultiBody') and (_npassed = 6) then
+    elif (type = 'MultiBody') then
       _self:-LoadEquations_MultiBody(_self, _passed[3..-1]);
     else
-      error("invalid input arguments.");
+      error("invalid system type '%1'.", type);
     end if;
     return NULL;
   end proc: # LoadEquations
@@ -647,7 +699,7 @@ module Indigo()
       # TODO: implement
     elif evalb(_self:-m_SystemType = 'Generic') then
       vars := _self:-m_SystemVars;
-      eqns := _self:-GetDifferentialEquations(_self);
+      eqns := _self:-GetDifferentialAlgebraicEquations(_self);
       veil := _self:-GetVeils(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))

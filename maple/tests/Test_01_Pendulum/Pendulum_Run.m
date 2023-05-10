@@ -12,18 +12,19 @@ data.ell = 1.0;  % length (m)
 data.g   = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-theta_0  = -0.1-pi/2;
-omega_0  = -0.1;
-x_0      = data.ell*cos(theta_0);
-y_0      = data.ell*sin(theta_0);
-u_0      = -data.ell*sin(theta_0)*omega_0;
-v_0      = +data.ell*cos(theta_0)*omega_0;
-lambda_0 = data.m/2*(u_0^2 + v_0^2 - y_0*data.g)/(x_0^2 + y_0^2);
-X_0      = [x_0; y_0; u_0; v_0; lambda_0];
+theta  = -0.1-pi/2;
+omega  = -0.1;
+x      = data.ell*cos(theta);
+y      = data.ell*sin(theta);
+u      = -data.ell*sin(theta)*omega;
+v      = +data.ell*cos(theta)*omega;
+lambda = data.m/2*(u^2 + v^2 - y*data.g)/(x^2 + y^2);
+
+IC = [x; y; u; v; lambda];
 
 ODE = Pendulum(data);
 
-%% Initialize the solver and set the ODE
+%% Initialize the solver and set the system
 
 explicit_solver = {
   'ExplicitEuler',    ...
@@ -102,7 +103,7 @@ for k = 1:length(solver_name)
   solver{k}.set_system(ODE);
 end
 
-%% Integrate the system of ODE
+%% Integrate the system
 
 % Set integration interval
 d_t   = 0.1;
@@ -111,7 +112,7 @@ t_end = 5.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
-X_0 = solver{1}.project_initial_conditions(X_0, t_ini);
+IC = solver{1}.project_initial_conditions(IC, t_ini);
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
@@ -120,22 +121,20 @@ T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
 
-% Solve the system of ODEs for each solver
+% Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.disable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$x$ (m)');
   for i = 1:length(solver_name)
@@ -148,7 +147,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$y$ (m)');
   for i = 1:length(solver_name)
@@ -161,7 +159,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$u$ (m/s)');
   for i = 1:length(solver_name)
@@ -174,7 +171,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$v$ (m/s)');
   for i = 1:length(solver_name)
@@ -187,7 +183,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$h_1$ (m$^2$)');
   for i = 1:length(solver_name)
@@ -200,7 +195,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$h_2$ (m$^2$/s$^2$)');
   for i = 1:length(solver_name)
@@ -209,7 +203,7 @@ figure();
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-%% Integrate the system of ODE (using projection)
+%% Integrate the system (using projection)
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
@@ -218,22 +212,20 @@ T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
 
-% Solve the system of ODEs for each solver
+% Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$x$ (m)');
   for i = 1:length(solver_name)
@@ -246,7 +238,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$y$ (m)');
   for i = 1:length(solver_name)
@@ -259,7 +250,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$u$ (m/s)');
   for i = 1:length(solver_name)
@@ -272,7 +262,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$v$ (m/s)');
   for i = 1:length(solver_name)
@@ -285,7 +274,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$h_1$ (m$^2$)');
   for i = 1:length(solver_name)
@@ -298,7 +286,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$h_2$ (m$^2$/s$^2$)');
   for i = 1:length(solver_name)

@@ -7,22 +7,21 @@ close all;
 %% Instantiate system object
 
 % Pendulum parameters
+m = 1.0;  % mass (kg)
 g = 9.81; % gravity (m/s^2)
 
 % Initial conditions
-x_0      = 1.0;
-y_0      = x_0^2;
-u_0      = 0.0;
-v_0      = 0.0;
-lambda_0 = (64*u_0^2*x_0^4 - 64*u_0^2*y_0*x_0^2 + 32*u_0^2*x_0^2 + x_0^2*g - ...
-  8*v_0*u_0*x_0 - 8*u_0^2*y_0 + 2*u_0^2 - y_0*g + 2*v_0^2)/ ...
-  (4*(16*x_0^6 - 32*y_0*x_0^4 + 9*x_0^4 + 16*y_0^2*x_0^2 - 10*y_0*x_0^2 + ...
-  x_0^2 + y_0^2));
-X_0 = [x_0; y_0; u_0; v_0; lambda_0];
+x      = 1.0;
+y      = x^2;
+u      = 1.0;
+v      = 2*u;
+lambda = -m*(2*u^2+g)/(1+4*x^2);
 
-ODE = ParabolicPendulum(g);
+IC = [x; y; u; v; lambda];
 
-%% Initialize the solver and set the ODE
+ODE = ParabolicPendulum(m, g);
+
+%% Initialize the solver and set the system
 
 explicit_solver = {
   'ExplicitEuler',    ...
@@ -98,10 +97,10 @@ solver_name = { ...
 solver = cell(length(solver_name),1);
 for k = 1:length(solver_name)
   solver{k} = IndigoSolver(solver_name{k});
-  solver{k}.set_system( ODE );
+  solver{k}.set_system(ODE);
 end
 
-%% Integrate the system of ODE
+%% Integrate the system
 
 % Set integration interval
 d_t   = 0.025;
@@ -110,7 +109,7 @@ t_end = 5.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
-X_0 = solver{1}.project_initial_conditions(X_0, t_ini);
+IC = solver{1}.project_initial_conditions(IC, t_ini);
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
@@ -119,22 +118,20 @@ T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
 
-% Solve the system of ODEs for each solver
+% Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.disable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
@@ -150,7 +147,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
@@ -166,7 +162,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$\mathbf{h}$ (-)');
   for i = 1:length(solver_name)
@@ -179,7 +174,7 @@ figure();
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-%% Integrate the system of ODE (using projection)
+%% Integrate the system (using projection)
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
@@ -188,22 +183,20 @@ T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
 
-% Solve the system of ODEs for each solver
+% Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, X_0);
+  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
 
 linewidth = 1.1;
-%title_str = 'Test 1 -- Pendulum ODE';
 
 figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
@@ -219,7 +212,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
@@ -235,7 +227,6 @@ figure();
   hold on;
   grid on;
   grid minor;
-  % title(title_str);
   xlabel('$t$ (s)');
   ylabel('$\mathbf{h}$ (-)');
   for i = 1:length(solver_name)

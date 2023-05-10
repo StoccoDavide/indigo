@@ -30,7 +30,7 @@ classdef DoublePendulum < Indigo.Systems.Implicit
 
       % Superclass constructor
       num_eqns = 10;
-      num_veil = 4;
+      num_veil = 0;
       num_invs = 6;
       this = this@Indigo.Systems.Implicit('DoublePendulum', num_eqns, num_veil, num_invs);
 
@@ -87,31 +87,22 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2_dot = in_2(8);
       lambda__1_dot = in_2(9);
       lambda__2_dot = in_2(10);
-      V_y58KN_1 = in_3(1);
-      V_y58KN_2 = in_3(2);
-      V_y58KN_3 = in_3(3);
-      V_y58KN_4 = in_3(4);
 
       % Evaluate function
-      out_1 = x__2_dot - u__2;
-      out_2 = y__2_dot - v__2;
-      t6 = lambda__1 * x__1;
-      t9 = 0.1e1 / m__2;
-      out_3 = -m__1 * u__2_dot + 2 * t9 * (-x__1 * lambda__2 * m__1 - x__2 * lambda__2 * m__1 + m__2 * t6);
-      t17 = y__1 * lambda__1;
-      out_4 = -m__1 * v__2_dot + 2 * t9 * (-lambda__2 * y__1 * m__1 - lambda__2 * y__2 * m__1 + m__2 * t17);
-      out_5 = x__1_dot - u__1;
-      out_6 = y__1_dot - v__1;
-      t23 = 0.1e1 / m__1;
-      out_7 = 2 * t23 * m__2 * t6 + m__2 * u__1_dot;
-      t29 = x__1 ^ 2;
-      t30 = y__1 ^ 2;
-      out_8 = -4 * v__1 * v__1_dot + 4 * lambda__1_dot * t23 * (t29 + t30) + 2 * t23 * (V_y58KN_1 * v__1 * m__1 + 8 * u__1 * t6);
-      out_9 = m__2 * v__1_dot + t23 * (g * m__1 + 2 * t17) * m__2;
-      t60 = u__1 * lambda__2;
-      t65 = u__2 * lambda__2;
-      t82 = 2 * v__1 * g * m__2 + 2 * v__2 * g * m__2 + v__1 * V_y58KN_2 * m__2 + v__2 * V_y58KN_3 * m__2 + 4 * y__1 * v__1 * lambda__2 + 4 * y__2 * v__1 * lambda__2 + 4 * y__1 * v__2 * lambda__2 + 4 * y__2 * v__2 * lambda__2 + 8 * x__1 * t60 + 8 * x__2 * t60 + 8 * x__1 * t65 + 8 * x__2 * t65;
-      out_10 = 2 * t9 * t82 + 4 * V_y58KN_4 * lambda__2_dot;
+      out_1 = -u__1 + x__1_dot;
+      out_2 = -v__1 + y__1_dot;
+      out_3 = -u__2 + x__2_dot;
+      out_4 = -v__2 + y__2_dot;
+      out_5 = -m__1 * u__1_dot - 2 * lambda__1 * x__1;
+      out_6 = -m__1 * g - m__1 * v__1_dot - 2 * lambda__1 * y__1;
+      t8 = x__1 ^ 2;
+      t9 = y__1 ^ 2;
+      out_7 = lambda__1_dot * (-4 * t8 - 4 * t9) - 16 * y__1 * v__1 * lambda__1 - 6 * v__1 * g * m__1 - 16 * u__1 * lambda__1 * x__1;
+      out_8 = -m__2 * g - m__2 * v__2_dot - 2 * lambda__2 * y__2;
+      out_9 = -m__2 * u__2_dot - 2 * lambda__2 * x__2;
+      t29 = x__2 ^ 2;
+      t30 = y__2 ^ 2;
+      out_10 = lambda__2_dot * (-4 * t29 - 4 * t30) - 16 * u__2 * lambda__2 * x__2 - 16 * y__2 * v__2 * lambda__2 - 6 * v__2 * g * m__2;
 
       % Store outputs
       out_F = zeros(10, 1);
@@ -160,82 +151,54 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2_dot = in_2(8);
       lambda__1_dot = in_2(9);
       lambda__2_dot = in_2(10);
-      V_y58KN_1 = in_3(1);
-      V_y58KN_2 = in_3(2);
-      V_y58KN_3 = in_3(3);
-      V_y58KN_4 = in_3(4);
 
       % Evaluate function
-      t1 = lambda__2 * m__1;
-      t2 = lambda__1 * m__2;
-      t4 = 0.1e1 / m__2;
-      out_3_1 = 2 * t4 * (-t1 + t2);
-      t6 = 0.1e1 / m__1;
-      out_7_1 = 2 * t6 * t2;
-      out_8_1 = 16 * t6 * u__1 * lambda__1 + 8 * lambda__1_dot * t6 * x__1;
-      out_10_1 = 2 * t4 * (8 * u__1 * lambda__2 + 8 * u__2 * lambda__2);
-      out_4_2 = out_3_1;
-      out_8_2 = 8 * lambda__1_dot * t6 * y__1;
-      out_9_2 = out_7_1;
-      out_10_2 = 2 * t4 * (4 * v__1 * lambda__2 + 4 * v__2 * lambda__2);
-      out_3_3 = -2 * t4 * t1;
-      out_10_3 = out_10_1;
-      out_4_4 = out_3_3;
-      out_10_4 = out_10_2;
-      out_5_5 = -1;
-      out_8_5 = 16 * t6 * lambda__1 * x__1;
-      out_10_5 = 2 * t4 * (8 * x__1 * lambda__2 + 8 * x__2 * lambda__2);
-      out_6_6 = -1;
-      out_8_6 = -4 * v__1_dot + 2 * V_y58KN_1;
-      t38 = 2 * g * m__2;
-      t41 = 4 * y__1 * lambda__2;
-      t43 = 4 * y__2 * lambda__2;
-      out_10_6 = 2 * t4 * (V_y58KN_2 * m__2 + t38 + t41 + t43);
-      out_1_7 = -1;
-      out_10_7 = out_10_5;
-      out_2_8 = -1;
-      out_10_8 = 2 * t4 * (V_y58KN_3 * m__2 + t38 + t41 + t43);
-      out_3_9 = 2 * x__1;
-      out_4_9 = 2 * y__1;
-      out_7_9 = 2 * t6 * m__2 * x__1;
-      t51 = u__1 * x__1;
-      out_8_9 = 16 * t6 * t51;
-      out_9_9 = 2 * t6 * y__1 * m__2;
-      out_3_10 = 2 * t4 * (-x__1 * m__1 - x__2 * m__1);
-      out_4_10 = 2 * t4 * (-y__1 * m__1 - y__2 * m__1);
-      out_10_10 = 2 * t4 * (8 * u__1 * x__2 + 8 * u__2 * x__1 + 8 * u__2 * x__2 + 4 * v__1 * y__1 + 4 * v__1 * y__2 + 4 * v__2 * y__1 + 4 * v__2 * y__2 + 8 * t51);
+      out_5_1 = -2 * lambda__1;
+      out_7_1 = -16 * u__1 * lambda__1 - 8 * x__1 * lambda__1_dot;
+      out_6_2 = out_5_1;
+      out_7_2 = -16 * v__1 * lambda__1 - 8 * y__1 * lambda__1_dot;
+      out_9_3 = -2 * lambda__2;
+      out_10_3 = -16 * u__2 * lambda__2 - 8 * x__2 * lambda__2_dot;
+      out_8_4 = out_9_3;
+      out_10_4 = -16 * v__2 * lambda__2 - 8 * y__2 * lambda__2_dot;
+      out_1_5 = -1;
+      out_7_5 = -16 * lambda__1 * x__1;
+      out_2_6 = -1;
+      out_7_6 = -6 * m__1 * g - 16 * lambda__1 * y__1;
+      out_3_7 = -1;
+      out_10_7 = -16 * lambda__2 * x__2;
+      out_4_8 = -1;
+      out_10_8 = -6 * m__2 * g - 16 * lambda__2 * y__2;
+      out_5_9 = -2 * x__1;
+      out_6_9 = -2 * y__1;
+      out_7_9 = -16 * u__1 * x__1 - 16 * v__1 * y__1;
+      out_8_10 = -2 * y__2;
+      out_9_10 = -2 * x__2;
+      out_10_10 = -16 * u__2 * x__2 - 16 * v__2 * y__2;
 
       % Store outputs
       out_JF_x = zeros(10, 10);
-      out_JF_x(3, 1) = out_3_1;
+      out_JF_x(5, 1) = out_5_1;
       out_JF_x(7, 1) = out_7_1;
-      out_JF_x(8, 1) = out_8_1;
-      out_JF_x(10, 1) = out_10_1;
-      out_JF_x(4, 2) = out_4_2;
-      out_JF_x(8, 2) = out_8_2;
-      out_JF_x(9, 2) = out_9_2;
-      out_JF_x(10, 2) = out_10_2;
-      out_JF_x(3, 3) = out_3_3;
+      out_JF_x(6, 2) = out_6_2;
+      out_JF_x(7, 2) = out_7_2;
+      out_JF_x(9, 3) = out_9_3;
       out_JF_x(10, 3) = out_10_3;
-      out_JF_x(4, 4) = out_4_4;
+      out_JF_x(8, 4) = out_8_4;
       out_JF_x(10, 4) = out_10_4;
-      out_JF_x(5, 5) = out_5_5;
-      out_JF_x(8, 5) = out_8_5;
-      out_JF_x(10, 5) = out_10_5;
-      out_JF_x(6, 6) = out_6_6;
-      out_JF_x(8, 6) = out_8_6;
-      out_JF_x(10, 6) = out_10_6;
-      out_JF_x(1, 7) = out_1_7;
+      out_JF_x(1, 5) = out_1_5;
+      out_JF_x(7, 5) = out_7_5;
+      out_JF_x(2, 6) = out_2_6;
+      out_JF_x(7, 6) = out_7_6;
+      out_JF_x(3, 7) = out_3_7;
       out_JF_x(10, 7) = out_10_7;
-      out_JF_x(2, 8) = out_2_8;
+      out_JF_x(4, 8) = out_4_8;
       out_JF_x(10, 8) = out_10_8;
-      out_JF_x(3, 9) = out_3_9;
-      out_JF_x(4, 9) = out_4_9;
+      out_JF_x(5, 9) = out_5_9;
+      out_JF_x(6, 9) = out_6_9;
       out_JF_x(7, 9) = out_7_9;
-      out_JF_x(8, 9) = out_8_9;
-      out_JF_x(9, 9) = out_9_9;
-      out_JF_x(3, 10) = out_3_10;
-      out_JF_x(4, 10) = out_4_10;
+      out_JF_x(8, 10) = out_8_10;
+      out_JF_x(9, 10) = out_9_10;
       out_JF_x(10, 10) = out_10_10;
     end % JF_x
     %
@@ -272,38 +235,34 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2_dot = in_2(8);
       lambda__1_dot = in_2(9);
       lambda__2_dot = in_2(10);
-      V_y58KN_1 = in_3(1);
-      V_y58KN_2 = in_3(2);
-      V_y58KN_3 = in_3(3);
-      V_y58KN_4 = in_3(4);
 
       % Evaluate function
-      out_5_1 = 1;
-      out_6_2 = 1;
-      out_1_3 = 1;
-      out_2_4 = 1;
-      out_7_5 = m__2;
-      out_8_6 = -4 * v__1;
-      out_9_6 = m__2;
-      out_3_7 = -m__1;
-      out_4_8 = out_3_7;
-      t2 = x__1 ^ 2;
-      t3 = y__1 ^ 2;
-      out_8_9 = 4 / m__1 * (t2 + t3);
-      out_10_10 = 4 * V_y58KN_4;
+      out_1_1 = 1;
+      out_2_2 = 1;
+      out_3_3 = 1;
+      out_4_4 = 1;
+      out_5_5 = -m__1;
+      out_6_6 = out_5_5;
+      out_9_7 = -m__2;
+      out_8_8 = out_9_7;
+      t1 = x__1 ^ 2;
+      t2 = y__1 ^ 2;
+      out_7_9 = -4 * t1 - 4 * t2;
+      t4 = x__2 ^ 2;
+      t5 = y__2 ^ 2;
+      out_10_10 = -4 * t4 - 4 * t5;
 
       % Store outputs
       out_JF_x_dot = zeros(10, 10);
-      out_JF_x_dot(5, 1) = out_5_1;
-      out_JF_x_dot(6, 2) = out_6_2;
-      out_JF_x_dot(1, 3) = out_1_3;
-      out_JF_x_dot(2, 4) = out_2_4;
-      out_JF_x_dot(7, 5) = out_7_5;
-      out_JF_x_dot(8, 6) = out_8_6;
-      out_JF_x_dot(9, 6) = out_9_6;
-      out_JF_x_dot(3, 7) = out_3_7;
-      out_JF_x_dot(4, 8) = out_4_8;
-      out_JF_x_dot(8, 9) = out_8_9;
+      out_JF_x_dot(1, 1) = out_1_1;
+      out_JF_x_dot(2, 2) = out_2_2;
+      out_JF_x_dot(3, 3) = out_3_3;
+      out_JF_x_dot(4, 4) = out_4_4;
+      out_JF_x_dot(5, 5) = out_5_5;
+      out_JF_x_dot(6, 6) = out_6_6;
+      out_JF_x_dot(9, 7) = out_9_7;
+      out_JF_x_dot(8, 8) = out_8_8;
+      out_JF_x_dot(7, 9) = out_7_9;
       out_JF_x_dot(10, 10) = out_10_10;
     end % JF_x_dot
     %
@@ -340,16 +299,12 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2_dot = in_2(8);
       lambda__1_dot = in_2(9);
       lambda__2_dot = in_2(10);
-      V_y58KN_1 = in_3(1);
-      V_y58KN_2 = in_3(2);
-      V_y58KN_3 = in_3(3);
-      V_y58KN_4 = in_3(4);
 
       % Evaluate function
-      % No elements
+      % No body
 
       % Store outputs
-      out_JF_v = zeros(10, 4);
+      out_JF_v = zeros(10, 0);
     end % JF_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -377,27 +332,15 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       lambda__2 = in_1(10);
 
       % Evaluate function
-      out_1 = (g * m__1 + 4 * y__1 * lambda__1) / m__1;
-      t12 = 0.1e1 / m__2;
-      out_2 = t12 * (g * m__2 + 4 * y__1 * lambda__2 + 4 * y__2 * lambda__2);
-      out_3 = out_2;
-      t13 = x__1 ^ 2;
-      t16 = x__2 ^ 2;
-      t17 = y__1 ^ 2;
-      t20 = y__2 ^ 2;
-      out_4 = t12 * (2 * x__1 * x__2 + 2 * y__1 * y__2 + t13 + t16 + t17 + t20);
+      % No body
 
       % Store outputs
-      out_v = zeros(4, 1);
-      out_v(1) = out_1;
-      out_v(2) = out_2;
-      out_v(3) = out_3;
-      out_v(4) = out_4;
+      out_v = zeros(0, 1);
     end % v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_Jv_x = Jv_x( this, in_1, t )
+    function out_Jv_x = Jv_x( this, in_1, in_2, t )
       % Evaluate the Jacobian of v with respect to x.
 
       % Extract properties
@@ -420,36 +363,10 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       lambda__2 = in_1(10);
 
       % Evaluate function
-      t3 = 0.1e1 / m__2;
-      out_4_1 = t3 * (2 * x__2 + 2 * x__1);
-      t4 = 0.1e1 / m__1;
-      out_1_2 = 4 * t4 * lambda__1;
-      out_2_2 = 4 * t3 * lambda__2;
-      out_3_2 = out_2_2;
-      t7 = y__2 + y__1;
-      out_4_2 = 2 * t3 * t7;
-      out_4_3 = out_4_1;
-      out_2_4 = out_3_2;
-      out_3_4 = out_2_4;
-      out_4_4 = out_4_2;
-      out_1_9 = 4 * t4 * y__1;
-      out_2_10 = 4 * t3 * t7;
-      out_3_10 = out_2_10;
+      % No body
 
       % Store outputs
-      out_Jv_x = zeros(4, 10);
-      out_Jv_x(4, 1) = out_4_1;
-      out_Jv_x(1, 2) = out_1_2;
-      out_Jv_x(2, 2) = out_2_2;
-      out_Jv_x(3, 2) = out_3_2;
-      out_Jv_x(4, 2) = out_4_2;
-      out_Jv_x(4, 3) = out_4_3;
-      out_Jv_x(2, 4) = out_2_4;
-      out_Jv_x(3, 4) = out_3_4;
-      out_Jv_x(4, 4) = out_4_4;
-      out_Jv_x(1, 9) = out_1_9;
-      out_Jv_x(2, 10) = out_2_10;
-      out_Jv_x(3, 10) = out_3_10;
+      out_Jv_x = zeros(0, 10);
     end % Jv_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -475,34 +392,24 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2 = in_1(8);
       lambda__1 = in_1(9);
       lambda__2 = in_1(10);
-      V_y58KN_1 = in_2(1);
-      V_y58KN_2 = in_2(2);
-      V_y58KN_3 = in_2(3);
-      V_y58KN_4 = in_2(4);
 
       % Evaluate function
       t1 = ell__1 ^ 2;
       t2 = x__1 ^ 2;
       t3 = y__1 ^ 2;
-      out_1 = t1 - t2 - t3;
+      out_1 = -t1 + t2 + t3;
       t4 = ell__2 ^ 2;
-      t5 = x__1 * x__2;
-      t7 = x__2 ^ 2;
-      t8 = y__1 * y__2;
-      t10 = y__2 ^ 2;
-      out_2 = t4 - t2 - 2 * t5 - t7 - t3 - 2 * t8 - t10;
-      t11 = u__1 * x__1;
-      t12 = v__1 * y__1;
-      out_3 = 2 * t11 + 2 * t12;
-      out_4 = 2 * u__1 * x__2 + 2 * u__2 * x__1 + 2 * u__2 * x__2 + 2 * v__1 * y__2 + 2 * v__2 * y__1 + 2 * v__2 * y__2 + 2 * t11 + 2 * t12;
-      t23 = u__1 ^ 2;
-      t25 = v__1 ^ 2;
-      out_5 = 2 / m__1 * (g * m__1 * y__1 - t23 * m__1 - t25 * m__1 + 2 * lambda__1 * t2 + 2 * lambda__1 * t3);
-      t34 = g * m__2;
-      t41 = u__2 ^ 2;
-      t47 = v__2 ^ 2;
-      t61 = -2 * m__2 * u__1 * u__2 - 2 * m__2 * v__1 * v__2 - t23 * m__2 - t25 * m__2 - t41 * m__2 - t47 * m__2 + 2 * lambda__2 * t10 + 2 * lambda__2 * t2 + 2 * t3 * lambda__2 + y__1 * t34 + y__2 * t34 + 4 * lambda__2 * t5 + 2 * lambda__2 * t7 + 4 * lambda__2 * t8;
-      out_6 = 2 / m__2 * t61;
+      t5 = x__2 ^ 2;
+      t6 = y__2 ^ 2;
+      out_2 = -t4 + t5 + t6;
+      out_3 = -2 * u__1 * x__1 - 2 * v__1 * y__1;
+      out_4 = -2 * u__2 * x__2 - 2 * v__2 * y__2;
+      t16 = u__1 ^ 2;
+      t19 = v__1 ^ 2;
+      out_5 = -2 * g * m__1 * y__1 + 2 * t16 * m__1 + 2 * t19 * m__1 - 4 * lambda__1 * t2 - 4 * lambda__1 * t3;
+      t29 = u__2 ^ 2;
+      t32 = v__2 ^ 2;
+      out_6 = -2 * g * m__2 * y__2 + 2 * t29 * m__2 + 2 * t32 * m__2 - 4 * lambda__2 * t5 - 4 * lambda__2 * t6;
 
       % Store outputs
       out_h = zeros(6, 1);
@@ -537,67 +444,43 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2 = in_1(8);
       lambda__1 = in_1(9);
       lambda__2 = in_1(10);
-      V_y58KN_1 = in_2(1);
-      V_y58KN_2 = in_2(2);
-      V_y58KN_3 = in_2(3);
-      V_y58KN_4 = in_2(4);
 
       % Evaluate function
-      t1 = 2 * x__1;
-      out_1_1 = -t1;
-      out_2_1 = -2 * x__1 - 2 * x__2;
-      out_3_1 = 2 * u__1;
-      out_4_1 = 2 * u__1 + 2 * u__2;
-      t5 = 0.1e1 / m__1;
-      out_5_1 = 8 * t5 * lambda__1 * x__1;
-      t11 = 0.1e1 / m__2;
-      out_6_1 = 2 * t11 * (4 * x__1 * lambda__2 + 4 * x__2 * lambda__2);
-      t13 = 2 * y__1;
-      out_1_2 = -t13;
-      out_2_2 = -2 * y__1 - 2 * y__2;
-      out_3_2 = 2 * v__1;
-      out_4_2 = 2 * v__1 + 2 * v__2;
-      out_5_2 = 2 * t5 * (g * m__1 + 4 * y__1 * lambda__1);
-      out_6_2 = 2 * t11 * (g * m__2 + 4 * y__1 * lambda__2 + 4 * y__2 * lambda__2);
-      out_2_3 = out_2_1;
-      out_4_3 = out_4_1;
-      out_6_3 = out_6_1;
-      out_2_4 = out_2_2;
-      out_4_4 = out_4_2;
-      out_6_4 = out_6_2;
-      out_3_5 = t1;
-      out_4_5 = -out_2_3;
-      out_5_5 = -4 * u__1;
-      out_6_5 = 2 * t11 * (-2 * m__2 * u__1 - 2 * m__2 * u__2);
-      out_3_6 = t13;
-      out_4_6 = -out_2_4;
-      out_5_6 = -4 * v__1;
-      out_6_6 = 2 * t11 * (-2 * m__2 * v__1 - 2 * m__2 * v__2);
-      out_4_7 = out_4_5;
-      out_6_7 = out_6_5;
-      out_4_8 = out_4_6;
-      out_6_8 = out_6_6;
-      t40 = x__1 ^ 2;
-      t41 = y__1 ^ 2;
-      out_5_9 = 2 * t5 * (2 * t40 + 2 * t41);
-      t48 = x__2 ^ 2;
-      t53 = y__2 ^ 2;
-      out_6_10 = 2 * t11 * (4 * x__1 * x__2 + 4 * y__1 * y__2 + 2 * t40 + 2 * t41 + 2 * t48 + 2 * t53);
+      out_1_1 = 2 * x__1;
+      out_3_1 = -2 * u__1;
+      out_5_1 = -8 * lambda__1 * x__1;
+      out_1_2 = 2 * y__1;
+      out_3_2 = -2 * v__1;
+      out_5_2 = -2 * m__1 * g - 8 * y__1 * lambda__1;
+      out_2_3 = 2 * x__2;
+      out_4_3 = -2 * u__2;
+      out_6_3 = -8 * lambda__2 * x__2;
+      out_2_4 = 2 * y__2;
+      out_4_4 = -2 * v__2;
+      out_6_4 = -2 * m__2 * g - 8 * y__2 * lambda__2;
+      out_3_5 = -out_1_1;
+      out_5_5 = 4 * u__1 * m__1;
+      out_3_6 = -out_1_2;
+      out_5_6 = 4 * v__1 * m__1;
+      out_4_7 = -out_2_3;
+      out_6_7 = 4 * u__2 * m__2;
+      out_4_8 = -out_2_4;
+      out_6_8 = 4 * v__2 * m__2;
+      t21 = x__1 ^ 2;
+      t22 = y__1 ^ 2;
+      out_5_9 = -4 * t21 - 4 * t22;
+      t24 = x__2 ^ 2;
+      t25 = y__2 ^ 2;
+      out_6_10 = -4 * t24 - 4 * t25;
 
       % Store outputs
       out_Jh_x = zeros(6, 10);
       out_Jh_x(1, 1) = out_1_1;
-      out_Jh_x(2, 1) = out_2_1;
       out_Jh_x(3, 1) = out_3_1;
-      out_Jh_x(4, 1) = out_4_1;
       out_Jh_x(5, 1) = out_5_1;
-      out_Jh_x(6, 1) = out_6_1;
       out_Jh_x(1, 2) = out_1_2;
-      out_Jh_x(2, 2) = out_2_2;
       out_Jh_x(3, 2) = out_3_2;
-      out_Jh_x(4, 2) = out_4_2;
       out_Jh_x(5, 2) = out_5_2;
-      out_Jh_x(6, 2) = out_6_2;
       out_Jh_x(2, 3) = out_2_3;
       out_Jh_x(4, 3) = out_4_3;
       out_Jh_x(6, 3) = out_6_3;
@@ -605,13 +488,9 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       out_Jh_x(4, 4) = out_4_4;
       out_Jh_x(6, 4) = out_6_4;
       out_Jh_x(3, 5) = out_3_5;
-      out_Jh_x(4, 5) = out_4_5;
       out_Jh_x(5, 5) = out_5_5;
-      out_Jh_x(6, 5) = out_6_5;
       out_Jh_x(3, 6) = out_3_6;
-      out_Jh_x(4, 6) = out_4_6;
       out_Jh_x(5, 6) = out_5_6;
-      out_Jh_x(6, 6) = out_6_6;
       out_Jh_x(4, 7) = out_4_7;
       out_Jh_x(6, 7) = out_6_7;
       out_Jh_x(4, 8) = out_4_8;
@@ -643,16 +522,12 @@ classdef DoublePendulum < Indigo.Systems.Implicit
       v__2 = in_1(8);
       lambda__1 = in_1(9);
       lambda__2 = in_1(10);
-      V_y58KN_1 = in_2(1);
-      V_y58KN_2 = in_2(2);
-      V_y58KN_3 = in_2(3);
-      V_y58KN_4 = in_2(4);
 
       % Evaluate function
-      % No elements
+      % No body
 
       % Store outputs
-      out_Jh_v = zeros(6, 4);
+      out_Jh_v = zeros(6, 0);
     end % Jh_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

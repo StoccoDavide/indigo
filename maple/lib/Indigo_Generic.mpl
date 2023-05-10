@@ -36,20 +36,24 @@ export SeparateMatrices::static := proc(
   end if;
 
   # Decompose the matrix as P.E.Q = L.U
-  _self:-m_LAST:-LU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
-
+  if (_self:-m_Factorization = "LU") then
+    _self:-m_LAST:-LU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
+  elif (_self:-m_Factorization = "FFLU") then
+    _self:-m_LAST:-FFLU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
+  else
+    error("factorization method '%1' not supported.", _self:-m_Factorization);
+  end if;
 
   # Retrieve the results of the LU decomposition
-  tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
-  P, Q := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
-  r    := tbl["rank"];
+  tbl := _self:-m_LAST:-GetResults(_self:-m_LAST);
+  r   := tbl["rank"];
 
   # Compute Et = L^(-1).P.E (first 'r' rows) = U.Q^T
-  Et := tbl["U"].LinearAlgebra:-Transpose(Q);
+  Et := _self:-m_LAST:-GetUQT(_self:-m_LAST);
   Et := Et[1..r, 1..-1];
 
   # Compute <Gt, A> = L^(-1).P.G
-  GtA := LinearAlgebra:-LinearSolve(tbl["L"], P.G);
+  GtA :=_self:-m_LAST:-ApplyLP(_self:-m_LAST, G);
 
   return table([
     "Et"   = Et,
@@ -66,6 +70,7 @@ export LoadMatrices_Generic::static := proc(
   E::Matrix,
   G::Vector,
   vars::list,
+  first_order::list := [],
   $)
 
   description "Load a 'Generic' type system of equations as matrices <E> and "
@@ -111,6 +116,7 @@ export LoadEquations_Generic::static := proc(
   _self::Indigo,
   eqns::list,
   vars::list,
+  first_order::list := [],
   $)
 
   description "Load a 'Generic' type system of equations <eqns>. The list of "
@@ -138,7 +144,7 @@ export LoadEquations_Generic::static := proc(
   # Build the matrices and load them
   E, G := LinearAlgebra:-GenerateMatrix(eqns, diff(vars, t)):
 
-  _self:-LoadMatrices_Generic(_self, E, G, vars);
+  _self:-LoadMatrices_Generic(_self, E, G, vars, first_order);
   return NULL;
 end proc: # LoadEquations_Generic
 
@@ -206,13 +212,11 @@ export ReduceIndexByOne_Generic::static := proc(
     ])
   ];
 
-  # Check if we have reached index-0 DAE
+  # Check if we have reached maximum reduction
   if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
     if _self:-m_VerboseMode then
-      printf(
-        "Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) system has "
-        "been reached."
-      );
+      printf("Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) or "
+        "index-1 DAE system has been reached.");
     end if;
     return false;
   else
