@@ -72,7 +72,7 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       out_4_4 = m;
       t1 = x ^ 2;
       t2 = y ^ 2;
-      out_5_5 = -4 * t1 - 4 * t2;
+      out_5_5 = 4 / m * (t1 + t2);
 
       % Store outputs
       out_A = zeros(5, 5);
@@ -101,8 +101,9 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       lambda = in_1(5);
 
       % Evaluate function
-      out_5_5_1 = -8 * x;
-      out_5_5_2 = -8 * y;
+      t1 = 0.1e1 / m;
+      out_5_5_1 = 8 * x * t1;
+      out_5_5_2 = 8 * y * t1;
 
       % Store outputs
       out_TA_x = zeros(5, 5, 5);
@@ -155,8 +156,9 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       out_1 = u;
       out_2 = v;
       out_3 = -2 * x * lambda;
-      out_4 = -g * m - 2 * y * lambda;
-      out_5 = 6 * v * g * m + 16 * u * x * lambda + 16 * y * v * lambda;
+      t3 = g * m;
+      out_4 = -2 * lambda * y - t3;
+      out_5 = -2 / m * (8 * lambda * u * x + 8 * lambda * v * y + 3 * v * t3);
 
       % Store outputs
       out_b = zeros(5, 1);
@@ -186,16 +188,17 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
 
       % Evaluate function
       out_3_1 = -2 * lambda;
-      out_5_1 = 16 * u * lambda;
+      t3 = 0.1e1 / m;
+      out_5_1 = -16 * t3 * u * lambda;
       out_4_2 = out_3_1;
-      out_5_2 = 16 * v * lambda;
+      out_5_2 = -16 * t3 * lambda * v;
       out_1_3 = 1;
-      out_5_3 = 16 * x * lambda;
+      out_5_3 = -16 * t3 * lambda * x;
       out_2_4 = 1;
-      out_5_4 = 6 * g * m + 16 * lambda * y;
+      out_5_4 = -2 * t3 * (3 * g * m + 8 * lambda * y);
       out_3_5 = -2 * x;
       out_4_5 = -2 * y;
-      out_5_5 = 16 * u * x + 16 * v * y;
+      out_5_5 = -2 * t3 * (8 * u * x + 8 * v * y);
 
       % Store outputs
       out_Jb_x = zeros(5, 5);
@@ -305,11 +308,11 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       t1 = ell ^ 2;
       t2 = x ^ 2;
       t3 = y ^ 2;
-      out_1 = -t1 + t2 + t3;
-      out_2 = -2 * u * x - 2 * v * y;
-      t14 = u ^ 2;
-      t17 = v ^ 2;
-      out_3 = -2 * g * m * y - 4 * t2 * lambda - 4 * t3 * lambda + 2 * t14 * m + 2 * t17 * m;
+      out_1 = t1 - t2 - t3;
+      out_2 = 2 * u * x + 2 * v * y;
+      t13 = u ^ 2;
+      t15 = v ^ 2;
+      out_3 = -2 / m * (-g * m * y - 2 * t2 * lambda - 2 * t3 * lambda + t13 * m + t15 * m);
 
       % Store outputs
       out_h = zeros(3, 1);
@@ -336,19 +339,22 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       lambda = in_1(5);
 
       % Evaluate function
-      out_1_1 = 2 * x;
-      out_2_1 = -2 * u;
-      out_3_1 = -8 * x * lambda;
-      out_1_2 = 2 * y;
-      out_2_2 = -2 * v;
-      out_3_2 = -2 * g * m - 8 * lambda * y;
-      out_2_3 = -out_1_1;
-      out_3_3 = 4 * u * m;
-      out_2_4 = -out_1_2;
-      out_3_4 = 4 * v * m;
-      t11 = x ^ 2;
-      t12 = y ^ 2;
-      out_3_5 = -4 * t11 - 4 * t12;
+      t1 = 2 * x;
+      out_1_1 = -t1;
+      out_2_1 = 2 * u;
+      t3 = 0.1e1 / m;
+      out_3_1 = 8 * t3 * lambda * x;
+      t5 = 2 * y;
+      out_1_2 = -t5;
+      out_2_2 = 2 * v;
+      out_3_2 = -2 * t3 * (-g * m - 4 * lambda * y);
+      out_2_3 = t1;
+      out_3_3 = -4 * u;
+      out_2_4 = t5;
+      out_3_4 = -4 * v;
+      t14 = x ^ 2;
+      t15 = y ^ 2;
+      out_3_5 = -2 * t3 * (-2 * t14 - 2 * t15);
 
       % Store outputs
       out_Jh_x = zeros(3, 5);

@@ -68,11 +68,13 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
 
       % Evaluate function
       out_1 = -v + y_dot;
-      out_2 = m * g + m * v_dot + lambda;
-      out_3 = -x_dot + u;
-      out_4 = -2 * lambda * x + m * u_dot;
-      t6 = x ^ 2;
-      out_5 = lambda_dot * (4 * t6 + 1) + 16 * u * lambda * x;
+      t1 = x ^ 2;
+      t4 = u ^ 2;
+      out_2 = v_dot - 2 / m * (2 * lambda * t1 + m * t4);
+      out_3 = -u + x_dot;
+      t10 = lambda * x;
+      out_4 = m * u_dot - 2 * t10;
+      out_5 = lambda_dot * (-4 * t1 - 1) - 16 * u * t10;
 
       % Store outputs
       out_F = zeros(5, 1);
@@ -105,19 +107,26 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       lambda_dot = in_2(5);
 
       % Evaluate function
+      t1 = lambda * x;
+      t2 = 0.1e1 / m;
+      out_2_1 = -8 * t2 * t1;
       out_4_1 = -2 * lambda;
-      out_5_1 = 16 * u * lambda + 8 * x * lambda_dot;
-      out_3_3 = 1;
-      out_5_3 = 16 * lambda * x;
+      out_5_1 = -16 * lambda * u - 8 * x * lambda_dot;
+      out_2_3 = -4 * u;
+      out_3_3 = -1;
+      out_5_3 = -16 * t1;
       out_1_4 = -1;
-      out_2_5 = 1;
+      t12 = x ^ 2;
+      out_2_5 = -4 * t2 * t12;
       out_4_5 = -2 * x;
-      out_5_5 = 16 * u * x;
+      out_5_5 = -16 * x * u;
 
       % Store outputs
       out_JF_x = zeros(5, 5);
+      out_JF_x(2, 1) = out_2_1;
       out_JF_x(4, 1) = out_4_1;
       out_JF_x(5, 1) = out_5_1;
+      out_JF_x(2, 3) = out_2_3;
       out_JF_x(3, 3) = out_3_3;
       out_JF_x(5, 3) = out_5_3;
       out_JF_x(1, 4) = out_1_4;
@@ -148,12 +157,12 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       lambda_dot = in_2(5);
 
       % Evaluate function
-      out_3_1 = -1;
+      out_3_1 = 1;
       out_1_2 = 1;
       out_4_3 = m;
-      out_2_4 = m;
+      out_2_4 = 1;
       t1 = x ^ 2;
-      out_5_5 = 4 * t1 + 1;
+      out_5_5 = -4 * t1 - 1;
 
       % Store outputs
       out_JF_x_dot = zeros(5, 5);
@@ -256,10 +265,10 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
 
       % Evaluate function
       t1 = x ^ 2;
-      out_1 = -t1 + y;
-      out_2 = 2 * u * x - v;
+      out_1 = t1 - y;
+      out_2 = -2 * x * u + v;
       t6 = u ^ 2;
-      out_3 = -m * g - 4 * t1 * lambda - 2 * t6 * m - lambda;
+      out_3 = -m * g - 4 * lambda * t1 - 2 * t6 * m - lambda;
 
       % Store outputs
       out_h = zeros(3, 1);
@@ -285,14 +294,13 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       lambda = in_1(5);
 
       % Evaluate function
-      t1 = 2 * x;
-      out_1_1 = -t1;
-      out_2_1 = 2 * u;
+      out_1_1 = 2 * x;
+      out_2_1 = -2 * u;
       out_3_1 = -8 * lambda * x;
-      out_1_2 = 1;
-      out_2_3 = t1;
-      out_3_3 = -4 * m * u;
-      out_2_4 = -1;
+      out_1_2 = -1;
+      out_2_3 = -out_1_1;
+      out_3_3 = -4 * u * m;
+      out_2_4 = 1;
       t6 = x ^ 2;
       out_3_5 = -4 * t6 - 1;
 

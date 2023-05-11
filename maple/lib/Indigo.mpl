@@ -410,7 +410,10 @@ module Indigo()
 
   export GetDifferentialEquations::static := proc(
     _self::Indigo,
-    $)::list;
+    {
+    diff_eqns := true,
+    alg_eqns  := false
+    }, $)::list;
 
     description "Get the latest differential equations of the system as "
       "F(x,x',t) = 0.";
@@ -433,7 +436,7 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export GetDifferentialAlgebraicEquations::static := proc(
+  export GetDAEquations::static := proc(
     _self::Indigo,
     $)::list;
 
@@ -699,7 +702,7 @@ module Indigo()
       # TODO: implement
     elif evalb(_self:-m_SystemType = 'Generic') then
       vars := _self:-m_SystemVars;
-      eqns := _self:-GetDifferentialAlgebraicEquations(_self);
+      eqns := _self:-GetDAEquations(_self);
       veil := _self:-GetVeils(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
