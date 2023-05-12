@@ -29,6 +29,7 @@ module Indigo()
   local m_Factorization  := "FFLU";
   local m_VerboseMode    := false;
   local m_WarningMode    := true;
+  local m_TimeLimit      := 0.1;
   local m_SystemType     := 'Empty';
   local m_ReductionSteps := [];
   local m_SystemVars     := [];
@@ -92,8 +93,10 @@ module Indigo()
 
     _self:-m_LAST           := proto:-m_LAST;
     _self:-m_LEM            := proto:-m_LEM;
+    _self:-m_Factorization  := proto:-m_Factorization;
     _self:-m_VerboseMode    := proto:-m_VerboseMode;
     _self:-m_WarningMode    := proto:-m_WarningMode;
+    _self:-m_TimeLimit      := proto:-m_TimeLimit;
     _self:-m_SystemType     := proto:-m_SystemType;
     _self:-m_ReductionSteps := proto:-m_ReductionSteps;
     _self:-m_SystemVars     := proto:-m_SystemVars;
@@ -312,6 +315,34 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export SetTimeLimit::static := proc(
+    _self::Indigo,
+    x::numeric,
+    $)
+
+    description "Set the time limit of the module to <x>.";
+
+    if (x < 0) then
+      error("time limit must be a non-negative number.");
+    end if;
+
+    _self:-m_TimeLimit := x;
+    return NULL;
+  end proc: # SetTimeLimit
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  export GetTimeLimit::static := proc(
+    _self::Indigo,
+    $)::numeric;
+
+    description "Get the time limit of the module.";
+
+    return _self:-m_TimeLimit;
+  end proc: # GetTimeLimit
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export SetVeilingSymbol::static := proc(
     _self::Indigo,
     sym::string,
@@ -418,8 +449,21 @@ module Indigo()
     description "Get the latest differential equations of the system as "
       "F(x,x',t) = 0.";
 
-    return convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
-      _self:-m_ReductionSteps[-1]["G"], list);;
+    local out;
+
+    # Store the differential equations
+    out := convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
+      _self:-m_ReductionSteps[-1]["G"], list);
+
+    # Try to simplify
+    try
+      out := timelimit(_self:-m_TimeLimit, simplify(out));
+    catch "time expired":
+      WARNING("time expired, simplify interrupted.");
+    end try;
+
+    # Return the results
+    return out;
   end proc: # GetDifferentialEquations
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -431,7 +475,20 @@ module Indigo()
     description "Get the latest algebraic equations of the system as "
       "F(x,x',t) = 0.";
 
-    return convert(_self:-m_ReductionSteps[-1]["A"], list);
+    local out;
+
+    # Store the algebraic equations
+    out := convert(_self:-m_ReductionSteps[-1]["A"], list);
+
+    # Try to simplify
+    try
+      out := timelimit(_self:-m_TimeLimit, simplify(out));
+    catch "time expired":
+      WARNING("time expired, simplify interrupted.");
+    end try;
+
+    # Return the results
+    return out;
   end proc: # GetAlgebraicEquations
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -457,7 +514,20 @@ module Indigo()
 
     description "Get the invariants of the system.";
 
-    return map(x -> op(convert(x["A"], list)), _self:-m_ReductionSteps);
+    local out;
+
+    # Store the invariants
+    out := map(x -> op(convert(x["A"], list)), _self:-m_ReductionSteps);
+
+    # Try to simplify
+    try
+      out := timelimit(_self:-m_TimeLimit, simplify(out));
+    catch "time expired":
+      WARNING("time expired, simplify interrupted.");
+    end try;
+
+    # Return the results
+    return out;
   end proc: # GetInvariants
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -468,7 +538,20 @@ module Indigo()
 
     description "Get the veils of the system.";
 
-    return _self:-m_LEM:-VeilList(_self:-m_LEM, parse("dependency") = true);
+    local out;
+
+    # Store the veils
+    out := _self:-m_LEM:-VeilList(_self:-m_LEM, parse("dependency") = true);
+
+    # Try to simplify
+    try
+      out := timelimit(_self:-m_TimeLimit, simplify(out));
+    catch "time expired":
+      WARNING("time expired, simplify interrupted.");
+    end try;
+
+    # Return the results
+    return out;
   end proc: # GetVeils
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

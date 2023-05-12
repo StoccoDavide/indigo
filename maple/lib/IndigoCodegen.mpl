@@ -253,8 +253,9 @@ IndigoCodegen := module()
     func::{list, Vector, Matrix, Array},
     dims::list(nonnegint),
     {
-    label::string  := "out",
-    indent::string := "  "
+    skipnull::boolean := true,
+    label::string     := "out",
+    indent::string    := "  "
     }, $)::list, string;
 
     description "Extract elements for a n-dimensional function <func> with "
@@ -272,7 +273,7 @@ IndigoCodegen := module()
         cur := [op(cur), irem(idx, dims[j], 'idx')+1];
       end;
       tmp := func[op(cur)];
-      if evalb(tmp <> 0) then
+      if skipnull and evalb(tmp <> 0) then
         map(x -> (x, "_"), cur); str1 := cat(label, "_", op(%))[1..-2];
         lst := [op(lst), convert(str1, symbol) = tmp];
         map(x -> (x, ", "), cur); str2 := cat("", op(%))[1..-3];
@@ -280,7 +281,7 @@ IndigoCodegen := module()
       end if;
     end do;
     return lst, out;
-  end proc: # GenerateInputs
+  end proc: # ExtractElements
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -319,7 +320,7 @@ IndigoCodegen := module()
 
     IndigoCodegen:-TranslateToMatlab(func);
     return IndigoCodegen:-ApplyIndent(indent,
-      `if`(% = "", "% No body\n", %)
+      `if`(% = "", "% No body\n", cat(%%, %))
     );
   end proc: # GenerateElements
 
@@ -369,6 +370,7 @@ IndigoCodegen := module()
     vars::list(list(symbol)),
     vec::{list, Vector},
     {
+    skipnull::boolean  := true,
     data::list(symbol) := [],
     info::string       := "No info",
     label::string      := "out",
@@ -395,8 +397,9 @@ IndigoCodegen := module()
     # Extract the function elements
     dims := [LinearAlgebra:-Dimension(vec)];
     lst, outputs := IndigoCodegen:-ExtractElements(
-      name, vec, dims, parse("indent") = indent, parse("label") = label
-    );
+      name, vec, dims, parse("skipnull") = skipnull, parse("indent") = indent,
+      parse("label") = label
+      );
 
     # Generate the method header
     header := IndigoCodegen:-GenerateHeader(
@@ -422,6 +425,7 @@ IndigoCodegen := module()
     vars::list(list(symbol)),
     mat::Matrix,
     {
+    skipnull::boolean  := true,
     data::list(symbol) := [],
     info::string       := "No info",
     label::string      := "out",
@@ -448,7 +452,8 @@ IndigoCodegen := module()
     # Extract the function elements
     dims := [LinearAlgebra:-Dimensions(mat)];
     lst, outputs := IndigoCodegen:-ExtractElements(
-      name, mat, dims, parse("indent") = indent, parse("label") = label
+      name, mat, dims, parse("skipnull") = skipnull, parse("indent") = indent,
+      parse("label") = label
     );
 
     # Generate the method header
@@ -501,7 +506,8 @@ IndigoCodegen := module()
     # Extract the function elements
     dims := op~(2, [ArrayDims(ten)]);
     lst, outputs := IndigoCodegen:-ExtractElements(
-      name, ten, dims, parse("indent") = indent, parse("label") = label
+      name, ten, dims, parse("skipnull") = skipnull, parse("indent") = indent,
+      parse("label") = label
     );
 
     # Generate the method header
@@ -555,8 +561,9 @@ IndigoCodegen := module()
     if (nops(v) > 0) then
 
       # Transform veil variables (v[i])(f) -> v_i
-      v_tmp := v;
-      for i from 1 to nops(v_tmp) do
+      v_tmp := Array(v);
+      #for i from 1 to nops(v_tmp) do
+      for i from 1 to op(2, ArrayDims(v_tmp)) do
         # (v[i])(f) -> v[i]
         if type(v_tmp[i], function) then
           v_tmp[i] := op(0, v_tmp[i]);
@@ -568,19 +575,19 @@ IndigoCodegen := module()
           );
         end if;
       end do;
-      rm_v_deps := v =~ v_tmp;
+      rm_v_deps := v =~ convert(v_tmp, list);
 
       # Calculate veils derivatives
       # from   [..., v, ...] -> [..., grad(v), ...]
       # remove [..., 0, ...] -> [..., ...]
-      convert(op~(0, v)(op(convert(x, list))) =~ v, Vector);
-      v_dot := remove[flatten](j -> rhs(j) = 0,
-        convert(IndigoUtils:-DoJacobian(%, x), list)
+      v_dot := remove[flatten](j -> evalb(j = 0),
+        convert(IndigoUtils:-DoJacobian(convert(v, Vector), x), list)
       );
 
       # Transform veils derivatives from D[i](v[j])(f) to D_v_j_i
-      v_dot_tmp := lhs~(v_dot);
-      for i from 1 to nops(v_dot_tmp) do
+      v_dot_tmp := Array(v_dot);
+      #for i from 1 to nops(v_dot_tmp) do
+      for i from 1 to op(2, ArrayDims(v_dot_tmp)) do
         # D[i](var[j])(f) -> D_i
         tmp_l := op(0, op(0, v_dot_tmp[i]));
         # D[i](var[j])(f) -> D_i
@@ -605,7 +612,7 @@ IndigoCodegen := module()
           cat(tmp_l, "_", tmp_r, "_", tmp_j, "_", tmp_i), symbol
         );
       end do;
-      rm_v_dot_deps := rhs~(v_dot) =~ v_dot_tmp;
+      rm_v_dot_deps := v_dot =~ convert(v_dot_tmp, list);
 
     end if;
 
@@ -878,9 +885,10 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jv_x", [x, v], Jv_x,
-          parse("data")  = properties,
-          parse("label") = cat("D_", label),
-          parse("info")  = "Evaluate the Jacobian of v with respect to x."
+          parse("skipnull") = false,
+          parse("data")     = properties,
+          parse("label")    = cat("D_", label),
+          parse("info")     = "Evaluate the Jacobian of v with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,

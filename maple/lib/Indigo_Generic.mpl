@@ -7,6 +7,50 @@
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+local SimplifyReductionStep_Generic := proc(
+  _self::Indigo,
+  E::Matrix,
+  G::Vector,
+  A::Vector,
+  $)::Matrix, Vector, Vector;
+
+  local E_tmp, G_tmp, A_tmp;
+
+  E_tmp := copy(E);
+  G_tmp := copy(G);
+  A_tmp := copy(A);
+
+  # Try to simplify the output matrices
+  if (_self:-m_TimeLimit > 0) then
+
+    # Simplify the matrix E
+    try
+      E_tmp := timelimit(_self:-m_TimeLimit, simplify(E_tmp));
+    catch "time expired":
+      WARNING("time expired, simplify(E) interrupted.");
+    end try;
+
+    # Simplify the matrix G
+    try
+      G_tmp := timelimit(_self:-m_TimeLimit, simplify(G_tmp));
+    catch "time expired":
+      WARNING("time expired, simplify(G) interrupted.");
+    end try;
+
+    # Simplify the matrix A
+    try
+      A_tmp := timelimit(_self:-m_TimeLimit, simplify(A_tmp));
+    catch "time expired":
+      WARNING("time expired, simplify(A) interrupted.");
+    end try;
+
+  end if;
+
+  return E_tmp, G_tmp, A_tmp;
+end proc: # SimplifyMatrices
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 export SeparateMatrices::static := proc(
   _self::Indigo,
   E::Matrix,
@@ -92,13 +136,18 @@ export LoadMatrices_Generic::static := proc(
 
   # Store system variables
   _self:-m_SystemVars := vars;
-  _self:-m_LEM:-SetVeilingDependency(_self:-m_LEM, convert(vars, set));
+  _self:-m_LEM:-SetVeilingDependency(_self:-m_LEM, vars);
 
   # Set system type
   _self:-m_SystemType := 'Generic';
 
   # Separate algebraic and differential equations
   tbl := _self:-SeparateMatrices(_self, E, G);
+
+  # Try to simplify the reduction step
+  tbl["Et"], tbl["Gt"], tbl["A"] := SimplifyReductionStep_Generic(_self,
+    tbl["Et"], tbl["Gt"], tbl["A"]
+  );
 
   # Update reduction steps
   _self:-m_ReductionSteps := [table([
@@ -201,6 +250,11 @@ export ReduceIndexByOne_Generic::static := proc(
 
   # Split matrices to be stored
   tbl := _self:-SeparateMatrices(_self, <E, H>, convert(<G, F>, Vector));
+
+  # Try to simplify the reduction step
+  tbl["Et"], tbl["Gt"], tbl["A"] := SimplifyReductionStep_Generic(_self,
+    tbl["Et"], tbl["Gt"], tbl["A"]
+  );
 
   # Update reduction steps
   _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
