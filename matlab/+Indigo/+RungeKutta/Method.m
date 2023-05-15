@@ -760,7 +760,8 @@ classdef Method < handle
           A   = [eye(num_eqns), Jh.'; ...
                  Jh, zeros(sum(this.m_projected_invs))];
           b   = [x_t - x; -h];
-          sol = A\b;
+          %sol = A\b;
+          [sol,flag] = lsqr(A,b,tolerance,50);
 
           % Update the solution
           dx = sol(1:num_eqns);
