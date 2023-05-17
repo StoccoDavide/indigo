@@ -1,7 +1,7 @@
 # File containing the equations of motion for the Jumping Leg system
 
 # Variables
-vars_JumpingLeg := [
+VARS := [
   y1(t),
   theta1(t),
   theta2(t),
@@ -17,7 +17,7 @@ vars_JumpingLeg := [
 ];
 
 # Equations
-eqns_JumpingLeg := [
+DAES := [
   -Rp__x(t) + R__x1(t),
   m*diff(y1__dot(t), t) + m*g + R__y1(t),
   -(theta1(t) - theta1__ref)*K__M1 - theta1__dot(t)*C__M1 - Tp__z(t),

@@ -6,36 +6,49 @@ close all;
 
 %% Instantiate system object
 
+% Parameters
+m_1   = 1.0;  % mass (kg)
+J_1   = 1.0;  % mass (kg*m^2)
+ell_1 = 0.1;  % length (m)
+m_2   = 1.0;  % mass (kg)
+J_2   = 1.0;  % mass (kg*m^2)
+ell_2 = 0.1;  % length (m)
+g     = 9.81; % gravity (m/s^2)
+
+data.m__1   = m_1;
+data.J__1   = J_1;
+data.ell__1 = ell_1;
+data.m__2   = m_2;
+data.J__2   = J_2;
+data.ell__2 = ell_2;
+data.g     = g;
+
 % Initial conditions
-y1          =  0.35;
-theta1      =  30*pi/180;
-theta2      = -30*pi/180;
-y1__dot     =  0.0;
-theta1__dot =  0.0;
-theta2__dot =  0.0;
-Rp__x       = -0.5458892175*10^(-7);
-Tp__z       = -0.0;
-R__x1       = -0.5458892175*10^(-7);
-R__y1       =  0.6987277244*10^(-7);
-R__x2       = -0.2899740115*10^(-7);
-R__y2       =  0.8604549936*10^(-7);
+theta_1  = 0.0;
+x_1      = ell_1*cos(theta_1);
+y_1      = ell_1*sin(theta_1);
+theta_2  = 0.0;
+x_2      = x_1 + ell_2*cos(theta_2);
+y_2      = y_1 + ell_2*sin(theta_2);
+omega_1  = 0.0;
+u_1      = 0.0;
+v_1      = 0.0;
+omega_2  = 0.0;
+u_2      = 0.0;
+v_2      = 0.0;
+lambda_1 = 0.0;
+lambda_2 = 0.0;
+lambda_3 = 0.0;
 
 IC = [ ...
-  y1
-  theta1
-  theta2
-  y1__dot
-  theta1__dot
-  theta2__dot
-  Rp__x
-  Tp__z
-  R__x1
-  R__y1
-  R__x2
-  R__y2
+  x_1; y_1; theta_1; ...
+  x_2; y_2; theta_2; ...
+  u_1; v_1; omega_1; ...
+  u_2; v_2; omega_2; ...
+  lambda_1; lambda_2; lambda_3 ...
 ];
 
-ODE = JumpingLeg();
+ODE = SliderCrank(data);
 
 %% Initialize the solver and set the system
 
@@ -105,7 +118,8 @@ implicit_embedded_solver = {
 
 solver_name = { ...
   explicit_solver{1}, ...
-  %implicit_solver{end-1}, ...
+  explicit_solver{2}, ...
+  implicit_solver{end-1}, ...
   %explicit_embedded_solver{1}, ...
   %implicit_embedded_solver{1}, ...
 };
@@ -120,9 +134,9 @@ color = colormap(lines(length(solver_name)));
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.005;
+d_t   = 0.1;
 t_ini = 0.0;
-t_end = 2.0;
+t_end = 10.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
@@ -225,7 +239,6 @@ figure();
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-  return
 figure();
   hold on;
   grid on;
@@ -252,7 +265,9 @@ figure();
     h1 = H{i}(1,:);
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h1, '-', 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h2, '--', 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h3, '.-', 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

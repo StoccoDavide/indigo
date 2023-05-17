@@ -6,7 +6,7 @@ close all;
 
 %% Instantiate system object
 
-% Pendulum parameters
+% Parameters
 m = 1.0;  % mass (kg)
 g = 9.81; % gravity (m/s^2)
 

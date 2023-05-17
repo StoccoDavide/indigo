@@ -199,7 +199,7 @@ classdef Explicit < Indigo.RungeKutta.Method
           [K(:,i), ierr] = this.m_newton_solver.solve_handle(fun, jac, K(:,i));
 
           if (ierr > 0)
-            out = NaN*K;
+            out = K;
             return;
           end
         end
@@ -315,8 +315,8 @@ classdef Explicit < Indigo.RungeKutta.Method
 
       % Error code check
       if (ierr > 0)
-        x_out     = NaN * x_k;
-        x_dot_out = NaN * x_dot_k;
+        x_out     = x_k;
+        x_dot_out = x_dot_k;
         return;
       end
 

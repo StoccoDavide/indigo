@@ -4,40 +4,87 @@ clc;
 clear all; %#ok<CLALL>
 close all;
 
+% Plot settings
+set(0,     'DefaultFigurePosition', [5000, 5000, 560, 420]);
+set(0,     'DefaultFigureWindowStyle',        'normal');
+set(0,     'defaultTextInterpreter',          'latex' );
+set(groot, 'defaultAxesTickLabelInterpreter', 'latex' );
+set(groot, 'defaulttextinterpreter',          'latex' );
+set(groot, 'defaultLegendInterpreter',        'latex' );
+set(0,     'defaultAxesFontSize',             18      );
+
 %% Instantiate system object
 
-% Initial conditions
-y1          =  0.35;
-theta1      =  30*pi/180;
-theta2      = -30*pi/180;
-y1__dot     =  0.0;
-theta1__dot =  0.0;
-theta2__dot =  0.0;
-Rp__x       = -0.5458892175*10^(-7);
-Tp__z       = -0.0;
-R__x1       = -0.5458892175*10^(-7);
-R__y1       =  0.6987277244*10^(-7);
-R__x2       = -0.2899740115*10^(-7);
-R__y2       =  0.8604549936*10^(-7);
+% parameters
+l = 1.0;
+m = 1.0;
+g = 9.81;
 
-IC = [ ...
-  y1
-  theta1
-  theta2
-  y1__dot
-  theta1__dot
-  theta2__dot
-  Rp__x
-  Tp__z
-  R__x1
-  R__y1
-  R__x2
-  R__y2
+% Initial conditions
+x__AC      = -2.0*l;
+y__AC      = 0.0;
+theta__AC  = 1.230959417;
+x__BD      = 2.0*l;
+y__BD      = 0.0;
+theta__BD  = 1.910633237;
+x__fg      = -1.0*l;
+y__fg      = 2.828427124*l;
+theta__fg  = 0.0;
+x__CE      = -0.6666666667*l;
+y__CE      = 3.771236166*l;
+theta__CE  = 1.230959417;
+x__ED      = 0.6666666667*l;
+y__ED      = 3.771236166*l;
+theta__ED  = 1.910633237;
+u__AC      = 0.0;
+v__AC      = 0.0;
+omega__AC  = 0.0;
+u__BD      = 0.0;
+v__BD      = 0.0;
+omega__BD  = 0.0;
+u__fg      = 0.0;
+v__fg      = 0.0;
+omega__fg  = 0.0;
+u__CE      = 0.0;
+v__CE      = 0.0;
+omega__CE  = 0.0;
+u__ED      = 0.0;
+v__ED      = 0.0;
+omega__ED  = 0.0;
+lambda__1  = -1.384750780*g*m;
+lambda__2  = -7.250000000*g*m;
+lambda__3  = 1.384750780*g*m;
+lambda__4  = -6.750000000*g*m;
+lambda__5  = 0.2651650429*g*m;
+lambda__6  = -1.250000000*g*m;
+lambda__7  = -0.2651650429*g*m;
+lambda__8  = -2.750000000*g*m;
+lambda__9  = -1.649915823*g*m;
+lambda__10 = -2.0*g*m;
+lambda__11 = -1.649915823*g*m;
+lambda__12 = 0.0;
+lambda__13 = 0.2651650429*g*m;
+lambda__14 = 0.7500000000*g*m;
+
+IC  = [
+  x__AC; y__AC; theta__AC;
+  x__BD; y__BD; theta__BD; ...
+  x__fg; y__fg; theta__fg; ...
+  x__CE; y__CE; theta__CE; ...
+  x__ED; y__ED; theta__ED; ...
+  u__AC; v__AC; omega__AC; ...
+  u__AC; v__AC; omega__BD; ...
+  u__fg; v__fg; omega__fg; ...
+  u__CE; v__CE; omega__CE; ...
+  u__ED; v__ED; omega__ED; ...
+  lambda__1;  lambda__2;  lambda__3;  lambda__4;  lambda__5; ...
+  lambda__6;  lambda__7;  lambda__8;  lambda__9;  lambda__10; ...
+  lambda__11; lambda__12; lambda__13; lambda__14; ... 
 ];
 
-ODE = JumpingLeg();
+ODE = HartSecond();
 
-%% Initialize the solver and set the system
+%% Initialize the solver and set the ODE
 
 explicit_solver = {
   'ExplicitEuler',    ...
@@ -104,25 +151,23 @@ implicit_embedded_solver = {
 };
 
 solver_name = { ...
-  explicit_solver{1}, ...
-  %implicit_solver{end-1}, ...
-  %explicit_embedded_solver{1}, ...
-  %implicit_embedded_solver{1}, ...
+  %explicit_solver{1}, ...
+  implicit_solver{end-1}, ...
+  %implicit_embedded_solver{2}, ...
 };
 
-solver = cell(length(solver_name), 1);
+solver = cell(length(solver_name),1);
 for k = 1:length(solver_name)
   solver{k} = IndigoSolver(solver_name{k});
-  solver{k}.set_system(ODE);
+  solver{k}.set_system( ODE );
 end
-color = colormap(lines(length(solver_name)));
 
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.005;
+d_t   = 0.01;
 t_ini = 0.0;
-t_end = 2.0;
+t_end = 1.9;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
@@ -152,10 +197,12 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    x1 = X{i}(1,:);
+    y1 = X{i}(2,:);
+    x2 = X{i}(3,:);
+    y2 = X{i}(4,:);
+    plot(t, x1, t, y1, t, x2, t, y2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -167,10 +214,12 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    u1 = X{i}(5,:);
+    v1 = X{i}(6,:);
+    u2 = X{i}(7,:);
+    v2 = X{i}(8,:);
+    plot(t, u1, t, v1, t, u2, t, v2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -186,7 +235,10 @@ figure();
     h1 = H{i}(1,:);
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
+    h4 = H{i}(4,:);
+    h5 = H{i}(5,:);
+    h6 = H{i}(6,:);
+    plot(t, h1, t, h2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -217,15 +269,16 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    x1 = X{i}(1,:);
+    y1 = X{i}(2,:);
+    x2 = X{i}(3,:);
+    y2 = X{i}(4,:);
+    plot(t, x1, t, y1, t, x2, t, y2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-  return
 figure();
   hold on;
   grid on;
@@ -233,10 +286,12 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    u1 = X{i}(5,:);
+    v1 = X{i}(6,:);
+    u2 = X{i}(7,:);
+    v2 = X{i}(8,:);
+    plot(t, u1, t, v1, t, u2, t, v2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -252,7 +307,10 @@ figure();
     h1 = H{i}(1,:);
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
+    h4 = H{i}(4,:);
+    h5 = H{i}(5,:);
+    h6 = H{i}(6,:);
+    plot(t, h1, t, h2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

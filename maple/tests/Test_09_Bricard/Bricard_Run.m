@@ -6,36 +6,33 @@ close all;
 
 %% Instantiate system object
 
+% Parameters
+m = 1.0;  % mass (kg)
+g = 9.81; % gravity (m/s^2)
+l = 1.0;  % length (m)
+
 % Initial conditions
-y1          =  0.35;
-theta1      =  30*pi/180;
-theta2      = -30*pi/180;
-y1__dot     =  0.0;
-theta1__dot =  0.0;
-theta2__dot =  0.0;
-Rp__x       = -0.5458892175*10^(-7);
-Tp__z       = -0.0;
-R__x1       = -0.5458892175*10^(-7);
-R__y1       =  0.6987277244*10^(-7);
-R__x2       = -0.2899740115*10^(-7);
-R__y2       =  0.8604549936*10^(-7);
+theta__0 = 0.0;
+theta__1 = 0.0;
+theta__2 = 0.0;
+theta__3 = 0.0;
+theta__4 = 0.0 + 1e-10;
+omega__0 = 0.0;
+omega__1 = 0.0;
+omega__2 = 0.0;
+omega__3 = 0.0;
+omega__4 = 0.0;
+lambda__1 = 0.0;
+lambda__2 = 2.0*g*m;
+lambda__3 = 0.0;
 
 IC = [ ...
-  y1
-  theta1
-  theta2
-  y1__dot
-  theta1__dot
-  theta2__dot
-  Rp__x
-  Tp__z
-  R__x1
-  R__y1
-  R__x2
-  R__y2
+  theta__0; theta__1; theta__2; theta__3; theta__4; ...
+  omega__0; omega__1; omega__2; omega__3; omega__4; ...
+  lambda__1; lambda__2; lambda__3;
 ];
 
-ODE = JumpingLeg();
+ODE = Bricard();
 
 %% Initialize the solver and set the system
 
@@ -104,23 +101,22 @@ implicit_embedded_solver = {
 };
 
 solver_name = { ...
-  explicit_solver{1}, ...
-  %implicit_solver{end-1}, ...
+  %explicit_solver{end}, ...
+  implicit_solver{end-1}, ...
   %explicit_embedded_solver{1}, ...
   %implicit_embedded_solver{1}, ...
 };
 
-solver = cell(length(solver_name), 1);
+solver = cell(length(solver_name),1);
 for k = 1:length(solver_name)
   solver{k} = IndigoSolver(solver_name{k});
   solver{k}.set_system(ODE);
 end
-color = colormap(lines(length(solver_name)));
 
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.005;
+d_t   = 0.01;
 t_ini = 0.0;
 t_end = 2.0;
 T_vec = t_ini:d_t:t_end;
@@ -152,10 +148,12 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    x1 = X{i}(1,:);
+    y1 = X{i}(2,:);
+    x2 = X{i}(3,:);
+    y2 = X{i}(4,:);
+    plot(t, x1, t, y1, t, x2, t, y2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -167,10 +165,12 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    u1 = X{i}(5,:);
+    v1 = X{i}(6,:);
+    u2 = X{i}(7,:);
+    v2 = X{i}(8,:);
+    plot(t, u1, t, v1, t, u2, t, v2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -186,7 +186,7 @@ figure();
     h1 = H{i}(1,:);
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h1, t, h2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -217,15 +217,16 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_p$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    x1 = X{i}(1,:);
+    y1 = X{i}(2,:);
+    x2 = X{i}(3,:);
+    y2 = X{i}(4,:);
+    plot(t, x1, t, y1, t, x2, t, y2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-  return
 figure();
   hold on;
   grid on;
@@ -233,10 +234,12 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_v$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
+    t  = T{i};
+    u1 = X{i}(5,:);
+    v1 = X{i}(6,:);
+    u2 = X{i}(7,:);
+    v2 = X{i}(8,:);
+    plot(t, u1, t, v1, t, u2, t, v2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -252,7 +255,7 @@ figure();
     h1 = H{i}(1,:);
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h1, t, h2, 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

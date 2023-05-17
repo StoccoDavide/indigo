@@ -6,7 +6,7 @@ close all;
 
 %% Instantiate system object
 
-% Pendulum parameters
+% Parameters
 data.m   = 1.0;  % mass (kg)
 data.ell = 1.0;  % length (m)
 data.g   = 9.81; % gravity (m/s^2)

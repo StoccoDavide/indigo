@@ -468,7 +468,8 @@ classdef NewtonSolver < handle
         % Evaluate advancing direction
         F = this.eval_function(x);
         J = this.eval_jacobian(x);
-        D = -J\F;
+        %D = -J\F;
+        [D, ~] = lsqr(J, -F, 1e-8, 50);
 
         % Check convergence
         if (norm(F, inf) < this.m_tolerance)
@@ -485,7 +486,8 @@ classdef NewtonSolver < handle
           % Update point
           x_dump = x + tau * D;
           F_dump = this.eval_function(x_dump);
-          D_dump = -J\F_dump;
+          %D_dump = -J\F_dump;
+          [D_dump, ~] = lsqr(J, -F_dump, 1e-8, 50);
 
           % Check relaxation convergence
           if (norm(D_dump, 2) < (1.0-tau/2.0) * norm(D, 2))

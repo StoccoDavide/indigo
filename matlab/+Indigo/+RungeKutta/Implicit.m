@@ -322,8 +322,8 @@ classdef Implicit < Indigo.RungeKutta.Method
 
       % Error code check
       if (ierr > 0)
-        x_out     = NaN * x_k;
-        x_dot_out = NaN * x_dot_k;
+        x_out     = x_k;
+        x_dot_out = x_dot_k;
         return;
       end
 

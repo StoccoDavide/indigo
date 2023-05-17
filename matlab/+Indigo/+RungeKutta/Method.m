@@ -739,6 +739,7 @@ classdef Method < handle
         % Iterate until the projected solution is found
         for k = 1:this.m_max_projection_iter
 
+          % Standard projection method
           %     [A]         {x}    =        {b}
           % / I  Jh^T \ /   dx   \   / x_t - x_k \
           % |         | |        | = |           |
@@ -761,7 +762,7 @@ classdef Method < handle
                  Jh, zeros(sum(this.m_projected_invs))];
           b   = [x_t - x; -h];
           %sol = A\b;
-          [sol,flag] = lsqr(A,b,tolerance,50);
+          [sol, ~] = lsqr(A, b, 1e-6, 500);
 
           % Update the solution
           dx = sol(1:num_eqns);

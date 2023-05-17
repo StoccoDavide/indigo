@@ -207,7 +207,8 @@ export ReduceIndexByOne_Generic::static := proc(
     "by one. Return true if the system of equations has been reduced to "
     "index-0 DAE (ODE) or index-1 DAE, false otherwise.";
 
-  local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, nH, mH, tbl;
+  local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, EH, GF, dtr, nH, mH,
+    tbl;
 
   if not evalb(_self:-m_SystemType = 'Generic') then
     error(
@@ -248,8 +249,39 @@ export ReduceIndexByOne_Generic::static := proc(
     );
   end if;
 
+  EH := <E, H>;
+  GF := convert(<G, F>, Vector);
+
+  # Check if determinant of <E, H> is NOT zero
+  dtr := LinearAlgebra:-Determinant(EH);
+  try
+    dtr := timelimit(_self:-m_TimeLimit, simplify(dtr));
+  catch "time expired":
+    WARNING("time expired, simplify(det(E, H)) interrupted.");
+  end try;
+
+  if (dtr <> 0) then
+
+    # Update reduction steps
+    _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
+      table([
+        "E"    = EH,
+        "G"    = GF,
+        "A"    = Vector([]),
+        "rank" = mE
+      ])
+    ];
+
+    # Return false, we have reached maximum reduction
+    if _self:-m_VerboseMode then
+      printf("Indigo::ReduceIndexByOne_Generic(...): index-0 DAEs (ODEs) system "
+        "has been reached.");
+    end if;
+    return false;
+  end if;
+
   # Split matrices to be stored
-  tbl := _self:-SeparateMatrices(_self, <E, H>, convert(<G, F>, Vector));
+  tbl := _self:-SeparateMatrices(_self, EH, GF);
 
   # Try to simplify the reduction step
   tbl["Et"], tbl["Gt"], tbl["A"] := SimplifyReductionStep_Generic(_self,
@@ -269,8 +301,8 @@ export ReduceIndexByOne_Generic::static := proc(
   # Check if we have reached maximum reduction
   if (LinearAlgebra:-Dimension(tbl["A"]) = 0) then
     if _self:-m_VerboseMode then
-      printf("Indigo::ReduceIndexByOne_Generic(...): index-0 DAE (ODE) or "
-        "index-1 DAE system has been reached.");
+      printf("Indigo::ReduceIndexByOne_Generic(...): index-0 DAEs (ODEs) system "
+        "has been reached.");
     end if;
     return false;
   else
@@ -287,8 +319,8 @@ export ReduceIndex_Generic::static := proc(
 
   description "Reduce the index of the 'Generic' type DAE system of equations. "
     "A maximum of <max_iter> reduction steps is performed. Return true if the "
-    "system of equations has been reduced to index-0 DAE (ODE) or index-1 DAE "
-    "(if veiling variables are used), false otherwise.";
+    "system of equations has been reduced to index-0 DAEs (ODEs) system, "
+    "false otherwise.";
 
   local out, i;
 

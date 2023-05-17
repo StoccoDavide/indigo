@@ -7,35 +7,17 @@ close all;
 %% Instantiate system object
 
 % Initial conditions
-y1          =  0.35;
-theta1      =  30*pi/180;
-theta2      = -30*pi/180;
-y1__dot     =  0.0;
-theta1__dot =  0.0;
-theta2__dot =  0.0;
-Rp__x       = -0.5458892175*10^(-7);
-Tp__z       = -0.0;
-R__x1       = -0.5458892175*10^(-7);
-R__y1       =  0.6987277244*10^(-7);
-R__x2       = -0.2899740115*10^(-7);
-R__y2       =  0.8604549936*10^(-7);
+theta_1 = 0.0;
+theta_2 = 0.0;
+omega_1 = 1.0;
+omega_2 = 0.5;
+lambda  = 2.5*9.8;
 
 IC = [ ...
-  y1
-  theta1
-  theta2
-  y1__dot
-  theta1__dot
-  theta2__dot
-  Rp__x
-  Tp__z
-  R__x1
-  R__y1
-  R__x2
-  R__y2
+  theta_1; theta_2; omega_1; omega_2; lambda ...
 ];
 
-ODE = JumpingLeg();
+ODE = SliderCrankZhou();
 
 %% Initialize the solver and set the system
 
@@ -105,6 +87,7 @@ implicit_embedded_solver = {
 
 solver_name = { ...
   explicit_solver{1}, ...
+  %explicit_solver{2}, ...
   %implicit_solver{end-1}, ...
   %explicit_embedded_solver{1}, ...
   %implicit_embedded_solver{1}, ...
@@ -120,9 +103,9 @@ color = colormap(lines(length(solver_name)));
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.005;
+d_t   = 0.01;
 t_ini = 0.0;
-t_end = 2.0;
+t_end = 3.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
@@ -225,7 +208,6 @@ figure();
   legend(solver_name, 'Location', 'northwest');
   hold off;
 
-  return
 figure();
   hold on;
   grid on;
@@ -252,7 +234,9 @@ figure();
     h1 = H{i}(1,:);
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h1, '-', 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h2, '--', 'LineWidth', linewidth, 'Color', color(i,:));
+    plot(t, h3, '.-', 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

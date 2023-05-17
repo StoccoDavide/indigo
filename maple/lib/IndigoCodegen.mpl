@@ -271,7 +271,7 @@ IndigoCodegen := module()
       idx := i-1;
       for j from 1 to nops(dims) do
         cur := [op(cur), irem(idx, dims[j], 'idx')+1];
-      end;
+      end do;
       tmp := func[op(cur)];
       if skipnull and evalb(tmp <> 0) then
         map(x -> (x, "_"), cur); str1 := cat(label, "_", op(%))[1..-2];
@@ -480,6 +480,7 @@ IndigoCodegen := module()
     vars::list(list(symbol)),
     ten::Array,
     {
+    skipnull::boolean  := true,
     data::list(symbol) := [],
     info::string       := "No info",
     label::string      := "out",
