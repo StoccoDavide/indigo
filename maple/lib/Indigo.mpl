@@ -427,6 +427,19 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export AddUserInvariant::static := proc(
+    _self::Indigo,
+    invs::algebraic,
+    $)
+
+    description "Add a user-defined system invariant.";
+
+    _self:-m_SystemInvs := [op(_self:-m_SystemInvs), invs];
+    return NULL;
+  end proc: # SetUserInvariants
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export ClearUserInvariants::static := proc(
     _self::Indigo,
     $)

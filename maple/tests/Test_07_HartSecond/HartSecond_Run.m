@@ -167,11 +167,11 @@ end
 % Set integration interval
 d_t   = 0.01;
 t_ini = 0.0;
-t_end = 1.9;
+t_end = 2.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
-IC = solver{1}.project_initial_conditions(IC, t_ini);
+IC = solver{1}.project_initial_conditions(IC, t_ini, [false(30, 1); true(14, 1)]);
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));

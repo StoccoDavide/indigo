@@ -14,6 +14,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
   %
   properties (SetAccess = protected, Hidden = true)
     % User data
+    m_x__0 = 0;
+    m_y__0 = 0;
+    m_u__0 = 0;
+    m_v__0 = 0;
     m_m = 1.0;
     m_g = 9.81;
     m_ell = 1.0;
@@ -29,20 +33,28 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Superclass constructor
       num_eqns = 5;
       num_veil = 0;
-      num_invs = 3;
+      num_invs = 4;
       this = this@Indigo.Systems.SemiExplicit('Pendulum', num_eqns, num_veil, num_invs);
 
       % User data
       if (nargin == 0)
         % Keep default values
       elseif (nargin == 1 && isstruct(varargin{1}))
+        this.m_x__0 = varargin{1}.x__0;
+        this.m_y__0 = varargin{1}.y__0;
+        this.m_u__0 = varargin{1}.u__0;
+        this.m_v__0 = varargin{1}.v__0;
         this.m_m = varargin{1}.m;
         this.m_g = varargin{1}.g;
         this.m_ell = varargin{1}.ell;
-      elseif (nargin == 3)
-        this.m_m = varargin{1};
-        this.m_g = varargin{2};
-        this.m_ell = varargin{3};
+      elseif (nargin == 7)
+        this.m_x__0 = varargin{1};
+        this.m_y__0 = varargin{2};
+        this.m_u__0 = varargin{3};
+        this.m_v__0 = varargin{4};
+        this.m_m = varargin{5};
+        this.m_g = varargin{6};
+        this.m_ell = varargin{7};
       else
         error('wrong number of input arguments.');
       end
@@ -54,6 +66,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Evaluate the matrix A.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -98,6 +114,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Evaluate the tensor of A with respect to x.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -138,6 +158,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Evaluate the tensor of A with respect to v.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -162,6 +186,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Calculate the vector b of the explicit system.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -194,6 +222,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Calculate the Jacobian of b with respect to x.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -230,6 +262,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Calculate the Jacobian of b with respect to v.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -254,6 +290,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Evaluate the the veils v.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -278,6 +318,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Evaluate the Jacobian of v with respect to x.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -302,6 +346,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Calculate the residual of the invariants h.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -314,20 +362,24 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       lambda = in_1(5);
 
       % Evaluate function
-      t1 = ell ^ 2;
-      t2 = x ^ 2;
-      t3 = y ^ 2;
-      out_1 = t1 - t2 - t3;
-      out_2 = u * x + v * y;
-      t10 = u ^ 2;
-      t11 = v ^ 2;
-      out_3 = 0.1e1 / m * (lambda * (2 * t2 + 2 * t3) + (g * y - t10 - t11) * m);
+      t1 = u ^ 2;
+      t2 = u__0 ^ 2;
+      t3 = v ^ 2;
+      t4 = v__0 ^ 2;
+      out_1 = (t1 - t2 + t3 - t4) * m / 2 + m * g * (y - y__0);
+      t11 = ell ^ 2;
+      t12 = x ^ 2;
+      t13 = y ^ 2;
+      out_2 = t11 - t12 - t13;
+      out_3 = u * x + v * y;
+      out_4 = 0.1e1 / m * (lambda * (2 * t12 + 2 * t13) + (g * y - t1 - t3) * m);
 
       % Store outputs
-      out_h = zeros(3, 1);
+      out_h = zeros(4, 1);
       out_h(1) = out_1;
       out_h(2) = out_2;
       out_h(3) = out_3;
+      out_h(4) = out_4;
     end % h
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -336,6 +388,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Calculate the Jacobian of h with respect to x.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -348,34 +404,40 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       lambda = in_1(5);
 
       % Evaluate function
-      out_1_1 = -2 * x;
-      out_2_1 = u;
+      out_2_1 = -2 * x;
+      out_3_1 = u;
       t3 = 0.1e1 / m;
-      out_3_1 = 4 * t3 * lambda * x;
-      out_1_2 = -2 * y;
-      out_2_2 = v;
-      out_3_2 = t3 * (g * m + 4 * lambda * y);
-      out_2_3 = x;
-      out_3_3 = -2 * u;
-      out_2_4 = y;
-      out_3_4 = -2 * v;
-      t12 = x ^ 2;
-      t13 = y ^ 2;
-      out_3_5 = t3 * (2 * t12 + 2 * t13);
+      out_4_1 = 4 * t3 * lambda * x;
+      out_1_2 = g * m;
+      out_2_2 = -2 * y;
+      out_3_2 = v;
+      out_4_2 = t3 * (4 * lambda * y + out_1_2);
+      out_1_3 = m * u;
+      out_3_3 = x;
+      out_4_3 = -2 * u;
+      out_1_4 = m * v;
+      out_3_4 = y;
+      out_4_4 = -2 * v;
+      t11 = x ^ 2;
+      t12 = y ^ 2;
+      out_4_5 = t3 * (2 * t11 + 2 * t12);
 
       % Store outputs
-      out_Jh_x = zeros(3, 5);
-      out_Jh_x(1, 1) = out_1_1;
+      out_Jh_x = zeros(4, 5);
       out_Jh_x(2, 1) = out_2_1;
       out_Jh_x(3, 1) = out_3_1;
+      out_Jh_x(4, 1) = out_4_1;
       out_Jh_x(1, 2) = out_1_2;
       out_Jh_x(2, 2) = out_2_2;
       out_Jh_x(3, 2) = out_3_2;
-      out_Jh_x(2, 3) = out_2_3;
+      out_Jh_x(4, 2) = out_4_2;
+      out_Jh_x(1, 3) = out_1_3;
       out_Jh_x(3, 3) = out_3_3;
-      out_Jh_x(2, 4) = out_2_4;
+      out_Jh_x(4, 3) = out_4_3;
+      out_Jh_x(1, 4) = out_1_4;
       out_Jh_x(3, 4) = out_3_4;
-      out_Jh_x(3, 5) = out_3_5;
+      out_Jh_x(4, 4) = out_4_4;
+      out_Jh_x(4, 5) = out_4_5;
     end % Jh_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -384,6 +446,10 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % Calculate the Jacobian of h with respect to v.
 
       % Extract properties
+      x__0 = this.m_x__0;
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -399,7 +465,7 @@ classdef Pendulum < Indigo.Systems.SemiExplicit
       % No body
 
       % Store outputs
-      out_Jh_v = zeros(3, 0);
+      out_Jh_v = zeros(4, 0);
     end % Jh_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

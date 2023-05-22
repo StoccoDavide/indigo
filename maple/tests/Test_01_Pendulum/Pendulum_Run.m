@@ -22,6 +22,11 @@ lambda = data.m/2*(u^2 + v^2 - y*data.g)/(x^2 + y^2);
 
 IC = [x; y; u; v; lambda];
 
+data.x__0 = x;
+data.y__0 = y;
+data.u__0 = u;
+data.v__0 = v;
+
 ODE = Pendulum(data);
 
 %% Initialize the solver and set the system
@@ -184,7 +189,7 @@ figure();
   grid on;
   grid minor;
   xlabel('$t$ (s)');
-  ylabel('$h_1$ (m$^2$)');
+  ylabel('$E$ (J)');
   for i = 1:length(solver_name)
     plot(T{i}, H{i}(1,:), 'LineWidth', linewidth);
   end
@@ -196,9 +201,33 @@ figure();
   grid on;
   grid minor;
   xlabel('$t$ (s)');
-  ylabel('$h_2$ (m$^2$/s$^2$)');
+  ylabel('$h_1$ (m$^2$)');
   for i = 1:length(solver_name)
     plot(T{i}, H{i}(2,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  xlabel('$t$ (s)');
+  ylabel('$h_2$ (m$^2$/s$^2$)');
+  for i = 1:length(solver_name)
+    plot(T{i}, H{i}(3,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+  figure();
+  hold on;
+  grid on;
+  grid minor;
+  xlabel('$t$ (s)');
+  ylabel('$h_3$ (m$^2$/s$^2$)');
+  for i = 1:length(solver_name)
+    plot(T{i}, H{i}(4,:), 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
@@ -215,6 +244,10 @@ V = cell(1, length(T_vec));
 % Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
+  %olver{i}.set_projected_invs([false; true; false(2,1)]); % Project only position hidden constraints
+  %solver{i}.set_projected_invs([true; false(3,1)]); % Project only energy
+  solver{i}.set_projected_invs([false; true(3,1)]); % Project only hidden constraints
+  %solver{i}.set_projected_invs([true; true(3,1)]); % Project all invariants
   [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
@@ -275,7 +308,7 @@ figure();
   grid on;
   grid minor;
   xlabel('$t$ (s)');
-  ylabel('$h_1$ (m$^2$)');
+  ylabel('$E$ (J)');
   for i = 1:length(solver_name)
     plot(T{i}, H{i}(1,:), 'LineWidth', linewidth);
   end
@@ -287,9 +320,33 @@ figure();
   grid on;
   grid minor;
   xlabel('$t$ (s)');
-  ylabel('$h_2$ (m$^2$/s$^2$)');
+  ylabel('$h_1$ (m$^2$)');
   for i = 1:length(solver_name)
     plot(T{i}, H{i}(2,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  xlabel('$t$ (s)');
+  ylabel('$h_2$ (m$^2$/s$^2$)');
+  for i = 1:length(solver_name)
+    plot(T{i}, H{i}(3,:), 'LineWidth', linewidth);
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
+
+  figure();
+  hold on;
+  grid on;
+  grid minor;
+  xlabel('$t$ (s)');
+  ylabel('$h_3$ (m$^2$/s$^2$)');
+  for i = 1:length(solver_name)
+    plot(T{i}, H{i}(4,:), 'LineWidth', linewidth);
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

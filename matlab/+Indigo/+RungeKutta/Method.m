@@ -287,7 +287,7 @@ classdef Method < handle
 
       CMD = 'Indigo.RungeKutta.Method.set_projected_invs(...): ';
 
-      assert(t_projected_invs == this.m_sys.get_num_invs(), ...
+      assert(length(t_projected_invs) == this.m_sys.get_num_invs(), ...
         [CMD, 'invalid input detected.']);
 
       this.m_projected_invs = t_projected_invs;
@@ -637,13 +637,24 @@ classdef Method < handle
     %> \f$. The constrained minimization is solved through the projection
     %> algorithm described in the project method.
     %>
-    %> \param x The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
-    %> \param t The time \f$ t \f$ at which the states are evaluated.
+    %> \param x   The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
+    %> \param t   The time \f$ t \f$ at which the states are evaluated.
+    %> \param x_b [optional] Boolean vector to project the corresponding states
+    %>            to be projected (default: all states are projected).
     %>
     %> \return The solution of the projection problem \f$ \mathbf{x} \f$.
     %
-    function x = project_initial_conditions( this, x_t, t )
-      x = this.project(x_t, t);
+    function x = project_initial_conditions( this, x_t, t, varargin )
+      
+      CMD = 'Indigo.RungeKutta.Method.project(...): ';
+      
+      if (nargin == 3)
+        x = this.project(x_t, t);
+      elseif (nargin == 4)
+        x = this.project(x_t, t, varargin);
+      else
+        error([CMD, 'invalid number of input arguments.']);
+      end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -715,10 +726,12 @@ classdef Method < handle
     %>
     %> \param x_t The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
     %> \param t   The time \f$ t \f$ at which the states are evaluated.
+    %> \param x_b [optional] Boolean vector to project the corresponding states
+    %>            to be projected (default: all states are projected).
     %>
     %> \return The solution of the projection problem \f$ \mathbf{x} \f$.
     %
-    function x = project( this, x_t, t )
+    function x = project( this, x_t, t, varargin )
 
       CMD = 'Indigo.RungeKutta.Method.project(...): ';
 
@@ -728,6 +741,20 @@ classdef Method < handle
 
       assert(length(x_t) == num_eqns, ...
         [CMD, 'the number of states does not match the number of equations.']);
+
+      % Check the input
+      if (nargin == 3)
+        projected_x = true(num_eqns, 1);
+      elseif (nargin == 4)
+        projected_x = varargin{1}{1};
+        assert(length(projected_x) == num_eqns, ...
+          [CMD, 'the number of the projectes states does not match the ', ...
+          'number of equations.']);
+      else
+        error([CMD, 'invalid number of input arguments.']);
+      end
+      num_projected_x = sum(projected_x);
+
 
       % Check if there are any constraints
       x = x_t;
@@ -754,19 +781,19 @@ classdef Method < handle
           Jh   = Jh_x + Jh_v * Jv_x;
 
           % Select only the projected invariants
-          h  = h(this.m_projected_invs);
-          Jh = Jh(this.m_projected_invs, :);
+          h   = h(this.m_projected_invs);
+          Jh  = Jh(this.m_projected_invs, projected_x);
 
           % Compute the solution of the linear system
-          A   = [eye(num_eqns), Jh.'; ...
+          A   = [eye(num_projected_x), Jh.'; ...
                  Jh, zeros(sum(this.m_projected_invs))];
-          b   = [x_t - x; -h];
+          b   = [x_t(projected_x) - x(projected_x); -h];
           %sol = A\b;
           [sol, ~] = lsqr(A, b, 1e-6, 500);
 
           % Update the solution
-          dx = sol(1:num_eqns);
-          x  = x + dx;
+          dx = sol(1:num_projected_x);
+          x(projected_x) = x(projected_x) + dx;
 
           % Check if the solution is found
           if (max(abs(dx)) < tolerance || max(abs(h)) < tolerance)
