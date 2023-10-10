@@ -67,14 +67,14 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       lambda_dot = in_2(5);
 
       % Evaluate function
-      out_1 = -u + x_dot;
-      out_2 = -v + y_dot;
+      out_1 = -v + y_dot;
+      out_2 = -u + x_dot;
       t1 = lambda * x;
       t2 = 0.1e1 / m;
       out_3 = -2 * t2 * t1 + u_dot;
       out_4 = v_dot + t2 * (g * m + lambda);
-      t8 = x ^ 2;
-      out_5 = lambda_dot * t2 * (4 * t8 + 1) + 16 * u * t2 * t1;
+      t13 = x ^ 2;
+      out_5 = 8 * x_dot * t2 * t1 + 4 * u * u_dot + lambda_dot * t2 * (4 * t13 + 1);
 
       % Store outputs
       out_F = zeros(5, 1);
@@ -110,22 +110,22 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       t1 = 0.1e1 / m;
       t2 = t1 * lambda;
       out_3_1 = -2 * t2;
-      t4 = t1 * x;
-      out_5_1 = 16 * u * t2 + 8 * lambda_dot * t4;
-      out_1_3 = -1;
-      out_5_3 = 16 * t1 * lambda * x;
-      out_2_4 = -1;
-      out_3_5 = -2 * t4;
+      t5 = t1 * x;
+      out_5_1 = 8 * x_dot * t2 + 8 * lambda_dot * t5;
+      out_2_3 = -1;
+      out_5_3 = 4 * u_dot;
+      out_1_4 = -1;
+      out_3_5 = -2 * t5;
       out_4_5 = t1;
-      out_5_5 = 16 * u * out_4_5 * x;
+      out_5_5 = 8 * x_dot * out_4_5 * x;
 
       % Store outputs
       out_JF_x = zeros(5, 5);
       out_JF_x(3, 1) = out_3_1;
       out_JF_x(5, 1) = out_5_1;
-      out_JF_x(1, 3) = out_1_3;
+      out_JF_x(2, 3) = out_2_3;
       out_JF_x(5, 3) = out_5_3;
-      out_JF_x(2, 4) = out_2_4;
+      out_JF_x(1, 4) = out_1_4;
       out_JF_x(3, 5) = out_3_5;
       out_JF_x(4, 5) = out_4_5;
       out_JF_x(5, 5) = out_5_5;
@@ -153,18 +153,23 @@ classdef ParabolicPendulum < Indigo.Systems.Implicit
       lambda_dot = in_2(5);
 
       % Evaluate function
-      out_1_1 = 1;
-      out_2_2 = 1;
+      out_2_1 = 1;
+      t2 = 0.1e1 / m;
+      out_5_1 = 8 * t2 * lambda * x;
+      out_1_2 = 1;
       out_3_3 = 1;
+      out_5_3 = 4 * u;
       out_4_4 = 1;
-      t1 = x ^ 2;
-      out_5_5 = 0.1e1 / m * (4 * t1 + 1);
+      t4 = x ^ 2;
+      out_5_5 = t2 * (4 * t4 + 1);
 
       % Store outputs
       out_JF_x_dot = zeros(5, 5);
-      out_JF_x_dot(1, 1) = out_1_1;
-      out_JF_x_dot(2, 2) = out_2_2;
+      out_JF_x_dot(2, 1) = out_2_1;
+      out_JF_x_dot(5, 1) = out_5_1;
+      out_JF_x_dot(1, 2) = out_1_2;
       out_JF_x_dot(3, 3) = out_3_3;
+      out_JF_x_dot(5, 3) = out_5_3;
       out_JF_x_dot(4, 4) = out_4_4;
       out_JF_x_dot(5, 5) = out_5_5;
     end % JF_x_dot
