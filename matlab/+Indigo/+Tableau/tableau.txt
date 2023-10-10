@@ -1,0 +1,9 @@
+Where to find tableau:
+
+https://www.sfu.ca/~jverner/
+https://www.mcs.anl.gov/petsc/petsc-3.5/src/ts/impls/explicit/rk/rk.c.html
+https://www.gnu.org/software/gsl/doc/html/
+https://www.boost.org/doc/libs/1_55_0/libs/numeric/odeint/doc/html/index.html
+https://www.uni-muenster.de/imperia/md/content/physik_tp/lectures/ss2016/num_methods_ii/rkm.pdf
+https://github.com/SciML/DiffEqDevTools.jl/blob/master/src/ode_tableaus.jl
+
