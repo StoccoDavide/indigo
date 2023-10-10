@@ -619,7 +619,7 @@ classdef Method < handle
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    check_tableau( this, tbl )
+    [out,order,e_order] = check_tableau( this, tbl )
 
     [order,msg] = tableau_order( this, A, b, c )
     %
@@ -1224,12 +1224,6 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-  end
-  %
-  methods (Abstract)
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
     %> Compute a step using a generic integration method for a system of the
     %> form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) = \mathbf{0}
     %> \f$. The step is based on the following formula:
@@ -1254,5 +1248,10 @@ classdef Method < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    K = explicit_K( this, x_k, t_k, d_t )
+    [x_out, d_t_star] = explicit_step( this, x_k, t_k, d_t )
+    out = implicit_jacobian( this, x_k, K, t_k, d_t )
+    out = implicit_residual( this, x_k, K, t_k, d_t )
+    [x_out, x_dot_out, d_t_star, ierr] = implicit_step( this, x_k, x_dot_k, t_k, d_t )
   end
 end

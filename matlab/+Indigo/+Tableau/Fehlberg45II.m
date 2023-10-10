@@ -1,7 +1,7 @@
 %
 %> Class container the Fehlberg 4(5) (Table II) method.
 %
-classdef Fehlberg45II < Lime.RungeKutta
+classdef Fehlberg45II < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -33,7 +33,7 @@ classdef Fehlberg45II < Lime.RungeKutta
       tbl.b   = [16/135, 0, 6656/12825, 28561/56430, -9/50, 2/55];
       tbl.b_e = [25/216, 0, 1408/2565, 2197/4104, -1/5, 0];
       tbl.c   = [0, 1/4, 3/8, 12/13, 1, 1/2]';
-      this@Lime.RungeKutta( 'Fehlberg45II', 5, tbl );
+      this@Indigo.RungeKutta.Method( 'Fehlberg45II', 5, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

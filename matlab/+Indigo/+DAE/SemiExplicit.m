@@ -36,7 +36,7 @@
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
 %> independent variable \f$ t \f$.
 %
-classdef SemiExplicit < Indigo.Systems.System
+classdef SemiExplicit < Indigo.DAE.System
   %
   methods
     %
@@ -50,7 +50,7 @@ classdef SemiExplicit < Indigo.Systems.System
     %> \param t_num_invs The number of invariants of the system.
     %
     function this = SemiExplicit( t_name, t_num_eqns, t_num_veil, t_num_invs )
-      this@Indigo.Systems.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
+      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

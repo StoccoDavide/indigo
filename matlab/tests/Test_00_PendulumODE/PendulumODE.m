@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (ODE version)
-classdef PendulumODE < Indigo.Systems.Implicit
+classdef PendulumODE < Indigo.DAE.Implicit
   %
   properties (SetAccess = protected, Hidden = true)
     m_m;   % Pendulum mass (kg)
@@ -22,7 +22,7 @@ classdef PendulumODE < Indigo.Systems.Implicit
       num_veil = 0;
 
       % Call the superclass constructor
-      this@Indigo.Systems.Implicit('PendulumODE', num_eqns, num_veil, num_invs);
+      this@Indigo.DAE.Implicit('PendulumODE', num_eqns, num_veil, num_invs);
 
       % Check the input arguments
       assert(m > 0, [CMD, 'pendulum mass must be positive.']);

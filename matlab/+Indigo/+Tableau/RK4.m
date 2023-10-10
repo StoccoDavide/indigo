@@ -1,7 +1,7 @@
 %
 %> Class container for Runge-Kutta 4 method.
 %
-classdef RK4 < Lime.RungeKutta
+classdef RK4 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -28,7 +28,7 @@ classdef RK4 < Lime.RungeKutta
       tbl.b   = [1/6, 1/3, 1/3, 1/6];
       tbl.b_e = [];
       tbl.c   = [0, 1/2, 1/2, 1]';
-      this@Lime.RungeKutta( 'RK4', 4, tbl );
+      this@Indigo.RungeKutta.Method( 'RK4', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

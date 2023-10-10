@@ -1,7 +1,7 @@
 %
 %> Class container for Merson's 4(5) method.
 %
-classdef Crouzeix3 < Lime.RungeKutta
+classdef Crouzeix3 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -18,7 +18,7 @@ classdef Crouzeix3 < Lime.RungeKutta
       tbl.b   = [1/2, 1/2];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(2,1);
-      this@Lime.RungeKutta( 'Crouzeix3', 3, tbl );
+      this@Indigo.RungeKutta.Method( 'Crouzeix3', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

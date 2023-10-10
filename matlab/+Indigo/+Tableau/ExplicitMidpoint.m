@@ -1,7 +1,7 @@
 %
 %> Class container for Explicit midpoint method.
 %
-classdef ExplicitMidpoint < Lime.RungeKutta
+classdef ExplicitMidpoint < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -23,7 +23,7 @@ classdef ExplicitMidpoint < Lime.RungeKutta
       tbl.b   = [0, 1];
       tbl.b_e = [];
       tbl.c   = [0, 1/2]';
-      this@Lime.RungeKutta( 'ExplicitMidpoint', 2, tbl );
+      this@Indigo.RungeKutta.Method( 'ExplicitMidpoint', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

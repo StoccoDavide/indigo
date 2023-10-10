@@ -1,7 +1,7 @@
 %
 %> Class container for Sun Geng's method.
 %
-classdef SunGeng5 < Lime.RungeKutta
+classdef SunGeng5 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -38,7 +38,7 @@ classdef SunGeng5 < Lime.RungeKutta
       tbl.b   = [(16-s6)/36, (16+s6)/36, 1/9];
       tbl.b_e = [];
       tbl.c   = [(4-s6)/10, (4+s6)/10, 1]';
-      this@Lime.RungeKutta( 'SunGeng5', 5, tbl );
+      this@Indigo.RungeKutta.Method( 'SunGeng5', 5, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

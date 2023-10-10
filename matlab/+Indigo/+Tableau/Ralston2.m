@@ -1,7 +1,7 @@
 %
 %> Class container for Ralston's method.
 %
-classdef Ralston2 < Lime.RungeKutta
+classdef Ralston2 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -23,7 +23,7 @@ classdef Ralston2 < Lime.RungeKutta
       tbl.b   = [1/4, 3/4];
       tbl.b_e = [];
       tbl.c   = [0, 2/3]';
-      this@Lime.RungeKutta( 'Ralston2', 2, tbl );
+      this@Indigo.RungeKutta.Method( 'Ralston2', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

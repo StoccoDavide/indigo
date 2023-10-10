@@ -1,7 +1,7 @@
 %
 %> Class container for Lobatto IIIC method.
 %
-classdef LobattoIIIC6 < Lime.RungeKutta
+classdef LobattoIIIC6 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -25,7 +25,7 @@ classdef LobattoIIIC6 < Lime.RungeKutta
       tbl.b   = [1/12,  5/12,         5/12,        1/12];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(4,1);
-      this@Lime.RungeKutta( 'LobattoIIIC6', 6, tbl );
+      this@Indigo.RungeKutta.Method( 'LobattoIIIC6', 6, tbl );
     end
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   end

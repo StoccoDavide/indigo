@@ -1,7 +1,7 @@
 %
 %> Class container for Merson's 4(5) method.
 %
-classdef QinZhang < Lime.RungeKutta
+classdef QinZhang < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -34,7 +34,7 @@ classdef QinZhang < Lime.RungeKutta
       tbl.b   = [b1, b2, lambda];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(3,1);
-      this@Lime.RungeKutta( 'QinZhang', 3, tbl );
+      this@Indigo.RungeKutta.Method( 'QinZhang', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

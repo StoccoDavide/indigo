@@ -1,7 +1,7 @@
 %
 %> Class container for Runge-Kutta 3/8-rule method.
 %
-classdef RK38 < Lime.RungeKutta
+classdef RK38 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -28,7 +28,7 @@ classdef RK38 < Lime.RungeKutta
       tbl.b   = [1/8, 3/8, 3/8, 1/8];
       tbl.b_e = [];
       tbl.c   = [0, 1/3, 2/3, 1]';
-      this@Lime.RungeKutta( 'RK38', 4, tbl );
+      this@Indigo.RungeKutta.Method( 'RK38', 4, tbl );
     end
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   end

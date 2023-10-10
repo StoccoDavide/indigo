@@ -1,7 +1,7 @@
 %
 %> Class container for Verner's 6(5) method.
 %
-classdef Verner65 < Lime.RungeKutta
+classdef Verner65 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -82,7 +82,7 @@ classdef Verner65 < Lime.RungeKutta
       tbl.c(7) =  4/5;
       tbl.c(8) =  1;
       tbl.c(9) =  1;
-      this@Lime.RungeKutta( 'Verner65', 6, tbl );
+      this@Indigo.RungeKutta.Method( 'Verner65', 6, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

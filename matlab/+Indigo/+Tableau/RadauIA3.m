@@ -1,7 +1,7 @@
 %
 %> Class container for Radau IA method.
 %
-classdef RadauIA3 < Lime.RungeKutta
+classdef RadauIA3 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -24,7 +24,7 @@ classdef RadauIA3 < Lime.RungeKutta
       tbl.b   = [1/4, 3/4];
       tbl.b_e = [];
       tbl.c   = [0, 2/3]';
-      this@Lime.RungeKutta( 'RadauIA3', 3, tbl );
+      this@Indigo.RungeKutta.Method( 'RadauIA3', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

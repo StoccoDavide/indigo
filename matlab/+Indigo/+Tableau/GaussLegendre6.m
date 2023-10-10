@@ -1,7 +1,7 @@
 %
 %> Class container for Gauss-Legendre method.
 %
-classdef GaussLegendre6 < Lime.RungeKutta
+classdef GaussLegendre6 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -43,7 +43,7 @@ classdef GaussLegendre6 < Lime.RungeKutta
       tbl.b   = [5/18, 4/9, 5/18];
       tbl.b_e = [];
       tbl.c   = [1/2-t_1, 1/2, 1/2+t_1]';
-      this@Lime.RungeKutta( 'GaussLegendre6', 6, tbl );
+      this@Indigo.RungeKutta.Method( 'GaussLegendre6', 6, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -1,7 +1,7 @@
 %
 %> Class container for Cash-Karp 4(5) method.
 %
-classdef CashKarp45 < Lime.RungeKutta
+classdef CashKarp45 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -33,7 +33,7 @@ classdef CashKarp45 < Lime.RungeKutta
       tbl.b   = [37/378, 0, 250/621, 125/594, 0, 512/1771];
       tbl.b_e = [2825/27648, 0, 18575/48384, 13525/55296, 277/14336, 1/4];
       tbl.c   = [0, 1/5, 3/10, 3/5, 1, 7/8].';
-      this@Lime.RungeKutta('CashKarp45', 5, tbl);
+      this@Indigo.RungeKutta.Method('CashKarp45', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

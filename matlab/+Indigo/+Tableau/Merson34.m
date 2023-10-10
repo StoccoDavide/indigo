@@ -1,7 +1,7 @@
 %
 %> Class container for Merson's 4(5) method.
 %
-classdef Merson34 < Lime.RungeKutta
+classdef Merson34 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -34,7 +34,7 @@ classdef Merson34 < Lime.RungeKutta
       tbl.b   = [1/6, 0, 0, 2/3, 1/6];
       tbl.b_e = [1/2, 0, -3/2, 2, 0];
       tbl.c   = [0, 1/3, 1/3, 1/2, 1]';
-      this@Lime.RungeKutta( 'Merson34', 4, tbl );
+      this@Indigo.RungeKutta.Method( 'Merson34', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

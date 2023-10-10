@@ -1,7 +1,7 @@
 %
 %> Class container for Dormand-Prince 5(4) method.
 %
-classdef DormandPrince54 < Lime.RungeKutta
+classdef DormandPrince54 < Indigo.RungeKutta.Method
   %
   methods
     %
@@ -35,7 +35,7 @@ classdef DormandPrince54 < Lime.RungeKutta
       tbl.b   = [35/384, 0, 500/1113, 125/192, -2187/6784, 11/84, 0];
       tbl.b_e = [5179/57600, 0, 7571/16695, 393/640, -92097/339200, 187/2100, 1/40];
       tbl.c   = [0, 1/5, 3/10, 4/5, 8/9, 1, 1]';
-      this@Lime.RungeKutta('DormandPrince54', 5, tbl);
+      this@Indigo.RungeKutta.Method('DormandPrince54', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
