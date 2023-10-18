@@ -6,11 +6,11 @@
 %> \return An instance of the requested Runge-Kutta method class.
 %
 function out = IndigoSolver( name )
-
   str = IndigoSolversList();
-  k   = find(strcmpi(cellfun(@(x) x{1}, str, 'UniformOutput', false), name));
+  k   = find(strcmpi(str,name));
   if isempty(k)
-    error(['IndigoSolver(...): invalid class ''', name, '''.']);
+    %str
+    error(['IndigoSolver(...): cant find solver ''', name, '''.']);
   end
-  out = Indigo.RungeKutta.Methods.(str{k}{2}).(name)();
+  out = Indigo.Tableau.(name)();
 end

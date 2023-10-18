@@ -1,5 +1,5 @@
 % Class container for the non-linear pendulum (DAE version)
-classdef PendulumDAE < Indigo.Systems.Implicit
+classdef PendulumDAE < Indigo.DAE.Implicit
   %
   properties (SetAccess = protected, Hidden = true)
     m_m;   % Pendulum mass (kg)
@@ -22,7 +22,7 @@ classdef PendulumDAE < Indigo.Systems.Implicit
       num_invs = 1;
 
       % Call the superclass constructor
-      this@Indigo.Systems.Implicit('PendulumODE', num_eqns, num_veil, num_invs);
+      this@Indigo.DAE.Implicit('PendulumODE', num_eqns, num_veil, num_invs);
 
       % Check the input arguments
       assert(m > 0, ...
