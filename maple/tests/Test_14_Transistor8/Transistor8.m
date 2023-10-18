@@ -166,7 +166,7 @@ classdef Transistor8 < Indigo.Systems.Implicit
       out_6 = 0.1e1 / R__2 / R__1 * t33 * t31 * t5 * (t7 * (y__2_dot * t60 * (alpha - 0.1e1) * beta * R__0 + y__3_dot * t60 * (-0.1e1 * alpha + 0.1e1) * beta * R__0) - 0.6283185308e2 * t60 * U__f * t71 + (-0.1e1 * R__0 * R__1 * U__f - 0.1e1 * R__0 * R__2 * U__f) * y__2_dot - 0.1e1 * t60 * y__1_dot * U__f);
       t94 = R__4 * R__5 * R__6;
       t97 = y__5_dot - y__6_dot;
-      out_7 = 0.1e1 / R__6 / R__5 * t45 * t43 * t5 * (t16 * t97 * beta * (alpha - 1) * t94 - t7 * (y__2_dot - y__3_dot) * t34 * t94 - U__f * (R__4 * (R__6 + R__5) * y__5_dot + R__5 * y__4_dot * R__6));
+      out_7 = 0.1e1 / R__6 / R__5 * t45 * t43 * t5 * (t16 * t97 * beta * (alpha - 1) * t94 - t7 * (y__2_dot - y__3_dot) * t34 * t94 - (R__4 * (R__6 + R__5) * y__5_dot + y__4_dot * R__6 * R__5) * U__f);
       out_8 = 0.1e1 / R__9 * t54 * t56 * t5 * (-t16 * t97 * alpha * R__8 * R__9 * beta - (y__7_dot * R__9 + t50) * U__f);
 
       % Store outputs
@@ -572,7 +572,7 @@ classdef Transistor8 < Indigo.Systems.Implicit
       t14 = sin(200 * pi * t);
       out_1 = 0.1e1 / C__1 / R__1 / R__2 / R__0 * (t8 * t4 * (alpha - 0.1e1) * beta * R__2 - 0.1e0 * t14 * t11 + y__2 * (-0.1e1 * t4 - 0.1e1 * R__0 * R__2) - 0.1e1 * y__1 * t11 + ((-0.1e1 * alpha + 0.1e1) * beta * R__2 + U__b) * R__0 * R__1);
       t45 = exp(t6 * (y__5 - y__6));
-      out_2 = 0.1e1 / C__3 / R__5 / R__6 / R__4 * (t45 * (alpha - 1) * beta * R__4 * R__5 * R__6 - R__6 * alpha * beta * R__5 * R__4 * t8 - R__4 * (R__6 + R__5) * y__5 - R__5 * (y__4 * R__6 + (-R__6 * beta - U__b) * R__4 - R__6 * U__b));
+      out_2 = 0.1e1 / C__3 / R__5 / R__6 / R__4 * (t45 * (alpha - 1) * beta * R__4 * R__5 * R__6 - R__6 * alpha * beta * R__5 * R__4 * t8 - R__4 * (R__6 + R__5) * y__5 - (y__4 * R__6 + (-R__6 * beta - U__b) * R__4 - R__6 * U__b) * R__5);
       out_3 = 0.1e1 / C__5 / R__9 / R__8 * (-R__9 * alpha * beta * R__8 * t45 - y__7 * R__9 - y__8 * R__8 + R__9 * (alpha * beta * R__8 + U__b));
 
       % Store outputs
