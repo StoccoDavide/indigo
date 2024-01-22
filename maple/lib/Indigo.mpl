@@ -26,7 +26,7 @@ module Indigo()
 
   local m_LAST           := NULL;
   local m_LEM            := NULL;
-  local m_Factorization  := "FFLU";
+  local m_Factorization  := "LU";
   local m_VerboseMode    := false;
   local m_WarningMode    := true;
   local m_TimeLimit      := 0.1;
@@ -454,10 +454,7 @@ module Indigo()
 
   export GetDifferentialEquations::static := proc(
     _self::Indigo,
-    {
-    diff_eqns := true,
-    alg_eqns  := false
-    }, $)::list;
+    $)::list;
 
     description "Get the latest differential equations of the system as "
       "F(x,x',t) = 0.";

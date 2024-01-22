@@ -153,7 +153,7 @@ IndigoCodegen := module()
     local i, lang_fncs;
 
     # Define language functions
-    lang_fncs := ["floor", "ceil", "round", "trunc", "erf"];
+    lang_fncs := ["floor", "ceil", "round", "trunc", "erf", "sin", "cos", "tan"];
 
     # Define new language
     CodeGeneration:-LanguageDefinition:-Define(

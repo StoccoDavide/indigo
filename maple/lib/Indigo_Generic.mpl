@@ -201,14 +201,18 @@ end proc: # LoadEquations_Generic
 
 export ReduceIndexByOne_Generic::static := proc(
   _self::Indigo,
-  $)::boolean;
+  {
+  laststep::boolean := false
+  }, $)::boolean;
 
   description "Reduce the index of the 'Generic' type DAE system of equations "
     "by one. Return true if the system of equations has been reduced to "
-    "index-0 DAE (ODE) or index-1 DAE, false otherwise.";
+    "index-0 DAE (ODE) or index-1 DAE, false otherwise. If <laststep> is true "
+    "the reduction is performed without checking the determinant of the "
+    "coefficient matrix E(x,t).";
 
-  local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, dA, H, F, EH, GF, dtr, nH, mH,
-    tbl;
+  local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, Jv, dA, H, F, EH, GF, dtr, nH,
+    mH, tbl, veil_list;
 
   if not evalb(_self:-m_SystemType = 'Generic') then
     error(
@@ -233,11 +237,38 @@ export ReduceIndexByOne_Generic::static := proc(
     );
   end if;
 
+  if _self:-m_VerboseMode then
+    printf("Indigo::ReduceIndexByOne_Generic(...): differentiation of "
+      "algebraic equations... ");
+  end if;
+
   # Separate algebraic and differential part
-  dA := diff(A, t);
+  veil_list := _self:-m_LEM:-VeilList(
+    _self:-m_LEM, parse("reverse") = true, parse("dependency") = true
+  );
+  if (nops(veil_list) <> 0) then
+    Jv := IndigoUtils:-DoJacobian(convert(veil_list, Vector), vars);
+    Jv := select[flatten](j -> evalb(lhs(j) <> 0), convert(Jv, list));
+    dA := subs(op(Jv), diff(A, t));
+  else
+    dA := diff(A, t); print("ii", dA);
+  end if;
+
+  if has(dA, D) then
+    error("partial derivatives in the differential part of the system.");
+  end if;
+
+  if _self:-m_VerboseMode then
+    printf("DONE\n");
+    printf("Indigo::ReduceIndexByOne_Generic(...): generating linear system... ");
+  end if;
 
   # E * diff_vars - G = dA
   H, F := LinearAlgebra:-GenerateMatrix(convert(dA, list), diff(vars, t));
+
+  if _self:-m_VerboseMode then
+    printf("DONE\n");
+  end if;
 
   # Check dimensions
   nH, mH := LinearAlgebra:-Dimension(H);
@@ -253,14 +284,20 @@ export ReduceIndexByOne_Generic::static := proc(
   GF := convert(<G, F>, Vector);
 
   # Check if determinant of <E, H> is NOT zero
-  dtr := LinearAlgebra:-Determinant(EH);
-  try
-    dtr := timelimit(_self:-m_TimeLimit, simplify(dtr));
-  catch "time expired":
-    WARNING("time expired, simplify(det(E, H)) interrupted.");
-  end try;
+  if not laststep then
+    #dtr := LinearAlgebra:-Determinant(EH);
+    dtr := _self:-m_LAST:-Rank(_self:-m_LAST, EH);
+    try
+      dtr := timelimit(_self:-m_TimeLimit, simplify(dtr));
+    catch "time expired":
+      WARNING("time expired, simplify(det(E, H)) interrupted.");
+    end try;
+  else
+    dtr := 1;
+  end if;
 
-  if (dtr <> 0) then
+  #if (dtr <> 0) then
+  if (dtr = nops(_self:-m_SystemVars)) then
 
     # Update reduction steps
     _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),

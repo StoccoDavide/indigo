@@ -65,14 +65,34 @@ export LoadEquations_MultiBody::static := proc(
     "variables <q_vars>, the velocity variables <v_vars> and the Lagrange "
     "multipliers <l_vars>.";
 
-  local tmp, Mass, Phi, f;
+  local tmp, i, perm, Dif, Phi, Mass, r, f;
 
-  # Build the matrices
-  tmp, f    := LinearAlgebra:-GenerateMatrix(eqns, [op(v_vars), op(l_vars)]);
-  Mass, Phi := LinearAlgebra:-GenerateMatrix(tmp, v_vars);
+  # Calculate permutation
+  tmp := [seq(0, i = 1..nops(eqns))];
+  for i from 1 to nops(eqns) do
+    if has(eqns[i], diff(q_vars, t)) then
+      tmp[i] := 2;
+    elif has(eqns[i], diff(v_vars, t)) then
+      tmp[i] := 1;
+    elif not has(eqns[i], diff) then
+      tmp[i] := 0;
+    else
+      error("%1-th equation is neither algebraic nor differential.", i);
+    end if;
+  end do;
+  perm := sort(tmp, `>`, output='permutation');
+
+  # Separate algebraic and differential equations
+  Dif := eqns[perm][nops(q_vars)+1..nops(q_vars)+nops(v_vars)];
+  Phi := convert(eqns[perm][nops(q_vars)+nops(v_vars)+1..-1], Vector);
+  Phi := lhs~(Phi) - rhs~(Phi);
+
+  # Separate mass matrix and external forces
+  Mass, r := LinearAlgebra:-GenerateMatrix(Dif, diff(v_vars, t));
+  tmp,  f := LinearAlgebra:-GenerateMatrix(convert(r, list), l_vars);
 
   # Load matrices
-  _self:-LoadMultiBodyMatrices(_self, Mass, Phi, f, q_vars, v_vars, l_vars);
+  _self:-LoadMatrices_MultiBody(_self, Mass, Phi, f, q_vars, v_vars, l_vars);
   return NULL;
 end proc: # LoadEquations_MultiBody
 
@@ -81,7 +101,6 @@ end proc: # LoadEquations_MultiBody
 export ReduceIndex_MultiBody::static := proc(
   _self::Indigo,
   {
-  jacobians::boolean := false,
   baumgarte::boolean := false
   }, $)::boolean;
 
@@ -89,9 +108,9 @@ export ReduceIndex_MultiBody::static := proc(
     "Return true if  the system of equations has been reduced to index-0 "
     "DAE, false otherwise.";
 
-  local i, n, m, q_vars_t, v_vars_t, v_vars_dot, ODE_pos, ODE_vel, tmp, A, Phi_P,
-    Phi_t, A_rhs, g, Mass_tot, f_tot, vars_tot, eta_tot, Jeta_tot, Jf_tot, h,
-    f_stab, Jf_stab;
+  local Mass, Phi, f, q_vars, v_vars, l_vars, i, n, m, q_vars_t, v_vars_t,
+    v_vars_dot, ODE_pos, ODE_vel, tmp, A, Phi_P, Phi_t, A_rhs, g, A_tot, f_tot,
+    x_tot, h_tot, h_stab, f_stab;
 
   if not evalb(_self:-m_SystemType = 'MultiBody') then
     error(
@@ -100,27 +119,28 @@ export ReduceIndex_MultiBody::static := proc(
     );
   end if;
 
+  # Retrieve matrices
+  Mass   := _self:-m_ReductionSteps[-1]["Mass"];
+  Phi    := _self:-m_ReductionSteps[-1]["Phi"];
+  f      := _self:-m_ReductionSteps[-1]["f"];
+  q_vars := _self:-m_ReductionSteps[-1]["q_vars"];
+  v_vars := _self:-m_ReductionSteps[-1]["v_vars"];
+  l_vars := _self:-m_ReductionSteps[-1]["l_vars"];
+
   # Check dimensions of inputs
   n, m := LinearAlgebra:-Dimension(Mass);
   if (n <> m) or (n <> nops(v_vars)) then
-    error(
-      "mass matrix must be square and of the same size of the length of velocity "
-      "variables."
-    );
+    error("mass matrix must be square and of the same size of the length of "
+      "velocity variables.");
   end if;
 
-  n := nops(q_vars);
-  if (n <> nops(v_vars)) then
-    error(
-      "velocity variables and position variables must have the same size."
-    );
+  if (nops(q_vars) <> nops(v_vars)) then
+    error("velocity variables and position variables must have the same size.");
   end if;
 
   m := LinearAlgebra:-Dimension(Phi);
   if (m <> nops(l_vars)) then
-    error(
-      "lambda variables must have the same length of the number of constraints."
-    );
+    error("lambda variables and constraints must have the same size.");
   end if;
 
   # Differential variables
@@ -128,80 +148,59 @@ export ReduceIndex_MultiBody::static := proc(
   v_vars_t := diff(v_vars, t);
 
   # Definition of variable "derivative of velocities"
-  v_vars_dot := map(map(cat, map2(op, 0, v_vars), __d), (t));
+  v_vars_dot := map(map(cat, map2(op, 0, v_vars), "__d"), (t));
 
-  # ODDE position part q' = v
+  # ODE position part q' = v
   ODE_pos := zip((x, y) -> x = y, q_vars_t, v_vars);
 
-  # ODE velocity part v' = v__d
+  # ODE velocity part v' = v_d
   ODE_vel := zip((x, y) -> x = y, v_vars_t, v_vars_dot);
 
-  # Hidden contraint/invariant A(q, v, t)
+  # Second hidden contraint/invariant A(q,v,t)
   A := subs(ODE_pos, diff(Phi, t));
   Phi_P, A_rhs := LinearAlgebra:-GenerateMatrix(convert(A, list), v_vars);
 
-  # Hidden invariant Phi_P v__d - g(q, v, t)
+  # Third hidden invariant Phi_P*v_d - g(q,v,t)
   tmp, g := LinearAlgebra:-GenerateMatrix(diff(convert(A, list), t), v_vars_t);
 
-  # Big linear system
-  Mass_tot := <<Mass, Phi_P>|<LinearAlgebra:-Transpose(Phi_P), Matrix(m, m)>>;
-  f_tot    := convert(<f, subs(ODE_pos, g)>, Vector);
-  vars_tot := [op(v_vars_dot), op(l_vars)];
-
-  # Jacobians of the big linear system
-  if jacobians then
-    eta_tot  := convert(Mass_tot.<seq(mu||i, i = 1..n+m)>, Vector);;
-    Jeta_tot := IndigoUtils:-DoJacobian(eta_tot, [op(q_vars), op(v_vars)]);
-    Jf_tot   := IndigoUtils:-DoJacobian(f_tot, [op(q_vars), op(v_vars)]);
-  else
-    eta_tot  := NULL;
-    Jeta_tot := NULL;
-    Jf_tot   := NULL;
-  end if;
+  # Big ODE system
+  A_tot := <<Mass, Phi_P>|<LinearAlgebra:-Transpose(Phi_P), Matrix(m, m)>>;
+  f_tot := convert(<f, subs(ODE_pos, g)>, Vector);
+  x_tot := [op(v_vars_dot), op(l_vars)];
+  h_tot := subs(ODE_pos, ODE_vel, <Phi, A, Phi_P.<op(v_vars_dot)> - g>);
 
   # Baumgarte stabilization
   if baumgarte then
-    h       := g - 2*eta*omega*A - omega^2*Phi;
-    f_stab  := convert(<f, h>, Vector);
-    Jf_stab := IndigoUtils:-DoJacobian(f_stab, [op(q_vars), op(v_vars)]);
+    h_stab := g - 2*eta*omega*A - omega^2*Phi;
+    f_stab := convert(<f, h_stab>, Vector);
   else
-    h       := NULL;
-    f_stab  := NULL;
-    Jf_stab := NULL;
+    h_stab := NULL;
+    f_stab := NULL;
   end if;
 
   # Return the computed blocks
-  _self:-m_ReductionSteps := [
+  _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
     table([
-      # Inputs
-      op(op(eval(_self:-m_ReductionSteps))),
       # Variables
       "v_vars_dot" = v_vars_dot,
-      # Dimensions
-      "m"          = m,
-      "n"          = n,
       # Differential part
-      "ODE_pos"    = ODE_pos,
-      "ODE_vel"    = ODE_vel,
-      "ODE_f"      = [op(rhs~(ODE_pos)), op(rhs~(ODE_vel))],
+      "ODE_pos" = ODE_pos,
+      "ODE_vel" = ODE_vel,
+      "ODE_f"   = [op(rhs~(ODE_pos)), op(rhs~(ODE_vel))],
       # Invariants
-      "A"          = A,
-      "Phi_P"      = Phi_P,
-      "Phi_t"      = diff(Phi, t),
-      "A_rhs"      = A_rhs,
-      "g"          = subs(ODE_pos, g),
+      "A"       = A,
+      "Phi_P"   = Phi_P,
+      "Phi_t"   = diff(Phi, t),
+      "A_rhs"   = A_rhs,
+      "g"       = subs(ODE_pos, g),
       # Overall system
-      "Mass_tot"   = Mass_tot,
-      "f_tot"      = f_tot,
-      "vars_tot"   = vars_tot,
-      # Jacobians
-      "eta_tot"    = eta_tot,
-      "Jeta_tot"   = Jeta_tot,
-      "Jf_tot"     = Jf_tot,
+      "A_tot"   = A_tot,
+      "f_tot"   = f_tot,
+      "x_tot"   = x_tot,
+      "h_tot"   = h_tot,
       # Baumgarte stabilization
-      "h"          = h,
-      "f_stab"     = f_stab,
-      "Jf_stab"    = Jf_stab
+      "h_stab"  = h_stab,
+      "f_stab"  = f_stab
     ])
   ];
   return true;
