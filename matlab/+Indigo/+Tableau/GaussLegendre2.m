@@ -1,7 +1,7 @@
 %
 %> Class container for Gauss-Legendre method.
 %
-classdef GaussLegendre2 < Indigo.RungeKutta.Method
+classdef GaussLegendre2 < Indigo.RungeKutta
   %
   methods
     %
@@ -22,7 +22,7 @@ classdef GaussLegendre2 < Indigo.RungeKutta.Method
       tbl.b   = 1;
       tbl.b_e = [];
       tbl.c   = 1/2;
-      this@Indigo.RungeKutta.Method( 'GaussLegendre2', 2, tbl );
+      this@Indigo.RungeKutta( 'GaussLegendre2', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

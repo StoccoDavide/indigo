@@ -1,7 +1,7 @@
 %
 %> Class container for Bogacki-Shampine 2(3) method.
 %
-classdef BogackiShampine23 < Indigo.RungeKutta.Method
+classdef BogackiShampine23 < Indigo.RungeKutta
   %
   methods
   %
@@ -29,7 +29,7 @@ classdef BogackiShampine23 < Indigo.RungeKutta.Method
     tbl.b   = [2/9, 1/3, 4/9, 0];
     tbl.b_e = [7/24, 1/4, 1/3, 1/8];
     tbl.c   = [0, 1/2, 3/4, 1]';
-    this@Indigo.RungeKutta.Method('BogackiShampine23', 3, tbl);
+    this@Indigo.RungeKutta('BogackiShampine23', 3, tbl);
   end
   %
   % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

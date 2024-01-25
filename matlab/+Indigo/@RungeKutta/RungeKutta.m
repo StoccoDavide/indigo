@@ -43,7 +43,7 @@
 %> \mathbf{c} = \left[ c_1, c_2, \dots, c_s \right]^T.
 %> \f]
 %
-classdef Method < handle
+classdef RungeKutta < handle
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -153,7 +153,7 @@ classdef Method < handle
     %>
     %> \return An instance of the class.
     %
-    function this = Method( t_name, t_order, tbl )
+    function this = RungeKutta( t_name, t_order, tbl )
 
       % Collect input arguments
       this.m_name          = t_name;
@@ -233,7 +233,7 @@ classdef Method < handle
     %
     function set_max_substeps( this, t_max_substeps )
 
-      CMD = 'Indigo.RungeKutta.Method.set_max_substeps(...): ';
+      CMD = 'Indigo.RungeKutta.set_max_substeps(...): ';
 
       assert(t_max_substeps >= 0, ...
         [CMD, 'invalid maximum number of substeps.']);
@@ -259,7 +259,7 @@ classdef Method < handle
     %
     function set_max_projection_iter( this, t_max_projection_iter )
 
-      CMD = 'Indigo.RungeKutta.Method.set_max_projection_iter(...): ';
+      CMD = 'Indigo.RungeKutta.set_max_projection_iter(...): ';
 
       assert(t_max_projection_iter > 0, ...
         [CMD, 'invalid maximum number of iterations.']);
@@ -285,7 +285,7 @@ classdef Method < handle
     %
     function set_projected_invs( this, t_projected_invs )
 
-      CMD = 'Indigo.RungeKutta.Method.set_projected_invs(...): ';
+      CMD = 'Indigo.RungeKutta.set_projected_invs(...): ';
 
       assert(length(t_projected_invs) == this.m_sys.get_num_invs(), ...
         [CMD, 'invalid input detected.']);
@@ -609,6 +609,9 @@ classdef Method < handle
     %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
     %
     set_tableau( this, tbl )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
     %>
     %> \param tbl.A   Matrix \f$ \mathbf{A} \f$.
@@ -619,8 +622,10 @@ classdef Method < handle
     %>
     %> \return True if the Butcher tableau is consistent, false otherwise.
     %
-    [out,order,e_order] = check_tableau( this, tbl )
-
+    [out, order, e_order] = check_tableau( this, tbl )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     [order,msg] = tableau_order( this, A, b, c )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -639,7 +644,7 @@ classdef Method < handle
     %
     function x = project_initial_conditions( this, x_t, t, varargin )
 
-      CMD = 'Indigo.RungeKutta.Method.project(...): ';
+      CMD = 'Indigo.RungeKutta.project(...): ';
 
       if (nargin == 3)
         x = this.project(x_t, t);
@@ -726,7 +731,7 @@ classdef Method < handle
     %
     function x = project( this, x_t, t, varargin )
 
-      CMD = 'Indigo.RungeKutta.Method.project(...): ';
+      CMD = 'Indigo.RungeKutta.project(...): ';
 
       % Get the number of states, equations and invariants
       num_eqns = this.m_sys.get_num_eqns();
@@ -816,7 +821,7 @@ classdef Method < handle
     %
     function [x_out, x_dot_out, t, v_out, h_out] = solve( this, t, x_0 )
 
-      CMD = 'Indigo.RungeKutta.Method.solve(...): ';
+      CMD = 'Indigo.RungeKutta.solve(...): ';
 
       % Check initial conditions
       num_eqns = this.m_sys.get_num_eqns();
@@ -927,7 +932,7 @@ classdef Method < handle
     %
     function [x_out, x_dot_out, t_out, v_out, h_out] = solve_adaptive_step( this, t, x_0, varargin )
 
-      CMD = 'Indigo.RungeKutta.Method.solve_adaptive(...): ';
+      CMD = 'Indigo.RungeKutta.solve_adaptive(...): ';
 
       % Collect optional arguments
       d_t = t(2) - t(1);
@@ -1052,7 +1057,7 @@ classdef Method < handle
     %
     function [x_new, x_dot_new, d_t_star] = advance( this, x_k, x_dot_k, t_k, d_t )
 
-      CMD = 'Indigo.RungeKutta.Method.advance(...): ';
+      CMD = 'Indigo.RungeKutta.advance(...): ';
 
       % Check initial conditions
       num_eqns = this.m_sys.get_num_eqns();
@@ -1244,7 +1249,9 @@ classdef Method < handle
     %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
     %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
     %
-    step( this, x_k, x_dot_k, t_k, d_t )
+    function [x_out, x_dot_out, d_t_star, ierr] = step( this, x_k, x_dot_k, t_k, d_t )
+      [x_out, x_dot_out, d_t_star, ierr] = this.implicit_step(x_k, x_dot_k, t_k, d_t);
+    end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

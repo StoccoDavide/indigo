@@ -1,7 +1,7 @@
 %
 %> Class container for Implicit Euler method.
 %
-classdef ImplicitEuler < Indigo.RungeKutta.Method
+classdef ImplicitEuler < Indigo.RungeKutta
   %
   methods
     %
@@ -22,7 +22,7 @@ classdef ImplicitEuler < Indigo.RungeKutta.Method
       tbl.b   = 1;
       tbl.b_e = [];
       tbl.c   = 1;
-      this@Indigo.RungeKutta.Method( 'ImplicitEuler', 1, tbl );
+      this@Indigo.RungeKutta( 'ImplicitEuler', 1, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

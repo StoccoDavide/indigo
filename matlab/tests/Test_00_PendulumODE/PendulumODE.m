@@ -145,6 +145,12 @@ classdef PendulumODE < Indigo.DAE.Implicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    function out = in_domain( ~, ~, ~ )
+      out = true;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
   end
   %
 end

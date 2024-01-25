@@ -1,7 +1,7 @@
 %
 %> Class container for Wray's method.
 %
-classdef Wray3 < Indigo.RungeKutta.Method
+classdef Wray3 < Indigo.RungeKutta
   %
   methods
     %
@@ -26,7 +26,7 @@ classdef Wray3 < Indigo.RungeKutta.Method
       tbl.b   = [1/4, 0, 3/4];
       tbl.b_e = [];
       tbl.c   = [0, 8/15, 2/3]';
-      this@Indigo.RungeKutta.Method( 'Wray3', 3, tbl );
+      this@Indigo.RungeKutta( 'Wray3', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -358,6 +358,12 @@ classdef System < handle
     %
     is_implicit()
     %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Return true if (x,t) is in the domain of the DAE system
+    %
+    in_domain( this, x, t )
+    %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
   end

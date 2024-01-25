@@ -1,7 +1,7 @@
 %
 %> Class container for Radau IIA method.
 %
-classdef RadauIIA5 < Indigo.RungeKutta.Method
+classdef RadauIIA5 < Indigo.RungeKutta
   %
   methods
     %
@@ -39,7 +39,7 @@ classdef RadauIIA5 < Indigo.RungeKutta.Method
       tbl.b   = [4/9-s6/36, 4/9+s6/36, 1/9];
       tbl.b_e = []; % [-1, 1-(7/12)*s6, 1+(7/12)*s6];
       tbl.c   = [2/5-sqrt(6)/10, 2/5+sqrt(6)/10, 1]';
-      this@Indigo.RungeKutta.Method( 'RadauIIA5', 5, tbl );
+      this@Indigo.RungeKutta( 'RadauIIA5', 5, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

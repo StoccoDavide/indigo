@@ -2,7 +2,7 @@
 %> Class container for third-order strong stability preserving Runge-Kutta
 %> method.
 %
-classdef SSPRK3 < Indigo.RungeKutta.Method
+classdef SSPRK3 < Indigo.RungeKutta
   %
   methods
     %
@@ -27,7 +27,7 @@ classdef SSPRK3 < Indigo.RungeKutta.Method
       tbl.b   = [1/6, 1/6, 2/3];
       tbl.b_e = [];
       tbl.c   = [0, 1, 1/2]';
-      this@Indigo.RungeKutta.Method( 'SSPRK3', 3, tbl );
+      this@Indigo.RungeKutta( 'SSPRK3', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -32,7 +32,7 @@
 %> For more details on the Newton's method with affine invariant step refer to:
 %> https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.
 %
-classdef NewtonSolver < handle
+classdef NewtonFixed < handle
   %
   properties (Access = private)
     %
@@ -46,15 +46,11 @@ classdef NewtonSolver < handle
     %
     %> Algorithm tolerance.
     %
-    m_tolerance = 1.0e-10;
+    m_tolerance = 1e-10;
     %
     %> Maximum allowed algorithm iterations.
     %
-    m_max_iterations = 100;
-    %
-    %> Maximum allowed algorithm relaxations.
-    %
-    m_max_relaxations = 50;
+    m_max_iterations = 50;
     %
     %> Verbose mode boolean.
     %
@@ -72,10 +68,6 @@ classdef NewtonSolver < handle
     %
     m_jacobian_evaluations = 0;
     %
-    %> Algorithm relaxations.
-    %
-    m_relaxations = 0;
-    %
     %> Function residuals.
     %
     m_residuals = 0.0;
@@ -83,10 +75,6 @@ classdef NewtonSolver < handle
     %> Convergence boolean.
     %
     m_converged = false;
-    %
-    %> Relaxation factor.
-    %
-    m_alpha = 0.8;
     %
   end
   %
@@ -98,7 +86,7 @@ classdef NewtonSolver < handle
     %>
     %> \return The Newton's solver object.
     %
-    function this = NewtonSolver()
+    function this = NewtonFixed()
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -109,7 +97,7 @@ classdef NewtonSolver < handle
     %
     function set_tolerance( this, t_tolerance )
 
-      CMD = 'Indigo.NewtonSolver.set_tolerance(...): ';
+      CMD = 'Indigo.NewtonFixed.set_tolerance(...): ';
 
       assert( ...
         ~isnan(t_tolerance) && ...
@@ -138,7 +126,7 @@ classdef NewtonSolver < handle
     %
     function set_max_iterations( this, t_max_iterations )
 
-      CMD = 'Indigo.NewtonSolver.set_max_iterations(...): ';
+      CMD = 'Indigo.NewtonFixed.set_max_iterations(...): ';
 
       assert( ...
         ~isnan(t_max_iterations) && ...
@@ -157,61 +145,6 @@ classdef NewtonSolver < handle
     %
     function out = get_max_iterations( this )
       out = this.m_max_iterations;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Set maximum allowed algorithm relaxations.
-    %>
-    %> \param t_max_relaxations The maximum allowed algorithm relaxations.
-    %
-    function set_max_relaxations( this, t_max_relaxations )
-
-      CMD = 'Indigo.NewtonSolver.set_max_relaxations(...): ';
-
-      assert( ...
-        ~isnan(t_max_relaxations) && ...
-        isfinite(t_max_relaxations) && ...
-        t_max_relaxations > 0, ...
-        [CMD, 'invalid input detected.']);
-
-      this.m_max_evaluations = t_max_relaxations;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Get maximum allowed algorithm relaxations.
-    %>
-    %> \return The maximum allowed algorithm relaxations.
-    %
-    function out = get_max_relaxations( this )
-      out = this.m_max_relaxations;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Set relaxation factor.
-    %>
-    %> \param t_alpha The relaxation factor.
-    %
-    function set_alpha( this, t_alpha )
-
-      CMD = 'Indigo.NewtonSolver.set_alpha(...): ';
-
-      assert(~isnan(t_alpha) && isfinite(t_alpha) && 0.0 < t_alpha && t_alpha < 1.0, ...
-        [CMD, 'invalid input detected.']);
-
-      this.m_alpha = t_alpha;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Get relaxation factor.
-    %>
-    %> \return The relaxation factor.
-    %
-    function out = get_alpha( this )
-      out = this.m_alpha;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -266,16 +199,6 @@ classdef NewtonSolver < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get algorithm relaxations.
-    %>
-    %> \return The algorithm relaxations.
-    %
-    function out = out_relaxations( this )
-      out = this.m_relaxations;
-    end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
     %> Get function evaluations.
     %>
     %> \return The function evaluations.
@@ -321,7 +244,6 @@ classdef NewtonSolver < handle
       this.m_iterations           = 0;
       this.m_function_evaluations = 0;
       this.m_jacobian_evaluations = 0;
-      this.m_relaxations          = 0;
       this.m_residuals            = 0.0;
       this.m_converged            = false;
     end
@@ -366,17 +288,15 @@ classdef NewtonSolver < handle
     %
     function [x, ierr] = solve( this, x_ini )
 
-      CMD = 'Indigo.NewtonSolver.solve(...): ';
+      CMD = 'Indigo.NewtonFixed.solve(...): ';
 
       % Setup internal variables
       this.reset();
 
-      % Set initial iteration
-      ierr = 1;
-      x    = x_ini;
-
       % Algorithm iterations
       this.m_converged = false;
+      ierr = 1;
+      x    = x_ini;
       for i=1:this.m_max_iterations
         this.m_iterations = i;
 
@@ -402,47 +322,14 @@ classdef NewtonSolver < handle
         %[D, ~] = lsqr(J, -F, 1e-8, 50);
         if ~all( isfinite(D) ); break; end
 
-        % Relax the iteration process
-        tau    = 1/this.m_alpha;
-        dumped = false;
-        for j = 1:this.m_max_relaxations
-          this.m_relaxations = j;
-
-          tau = tau * this.m_alpha;
-
-          % Update point
-          x_dump = x + tau * D;
-          F_dump = this.eval_function(x_dump);
-
-          if ~all( isfinite(F_dump) ); continue; end
-
-          D_dump = -J\F_dump;
-          %[D_dump, ~] = lsqr(J, -F_dump, 1e-8, 50);
-          if ~all( isfinite(D_dump) ); continue; end
-
-          % Check relaxation convergence
-          if (norm(D_dump, 2) <= eps + (1-tau/2) * norm(D, 2))
-            dumped = true;
-            break;
-          end
-        end
-
-        % Check if dumping failed
-        if ~dumped
-          if this.m_verbose
-            fprintf(1, [CMD, 'tau = %d, failed dumping iteration.\n'], tau);
-          end
-          break;
-        end
-
         % Update solution
-        x = x_dump;
+        x = x+D;
         if this.m_verbose
           fprintf(1, '%s iter %d: ||F||_inf = %f, tau = %1.4f.\n', CMD, i, norm(F, inf), tau);
         end
 
         % Check convergence
-        %if i > 2 && norm(D, inf) < this.m_tolerance
+        %if norm(D,inf) < this.m_tolerance
         %  this.m_converged = true;
         %  break;
         %end

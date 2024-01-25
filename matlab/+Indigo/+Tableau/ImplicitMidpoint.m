@@ -1,7 +1,7 @@
 %
 %> Class container for Implicit midpoint method.
 %
-classdef ImplicitMidpoint < Indigo.RungeKutta.Method
+classdef ImplicitMidpoint < Indigo.RungeKutta
   %
   methods
     %
@@ -22,7 +22,7 @@ classdef ImplicitMidpoint < Indigo.RungeKutta.Method
       tbl.b   = 1;
       tbl.b_e = [];
       tbl.c   = 1/2;
-      this@Indigo.RungeKutta.Method( 'ImplicitMidpoint', 2, tbl );
+      this@Indigo.RungeKutta( 'ImplicitMidpoint', 2, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

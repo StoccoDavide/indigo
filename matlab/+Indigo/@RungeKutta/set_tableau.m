@@ -1,15 +1,15 @@
 function set_tableau( this, tbl )
 
   arguments
-    this Indigo.RungeKutta.Method
+    this Indigo.RungeKutta
     tbl  struct
   end
 
-  CMD = 'Indigo.RungeKutta.Method.set_tableau(...): ';
+  CMD = 'Indigo.RungeKutta.set_tableau(...): ';
 
   % Check the Butcher tableau
-  [ok,~,~] = this.check_tableau( tbl );
-  assert( ok, [CMD, 'invalid tableau detected.'] );
+  [ok, ~, ~] = this.check_tableau(tbl);
+  assert(ok, [CMD, 'invalid tableau detected.']);
 
   % Set the tableau
   this.m_A   = tbl.A;
@@ -20,13 +20,13 @@ function set_tableau( this, tbl )
   % Set boolean flags
   if istril(this.m_A)
     if all(diag(this.m_A)==0)
-      % explicit tableau
+      % Explicit tableau
       this.m_RK_type = 'ERK';
-    elseif length(this.m_c) > 1
-      % diagonally implicit tableau
+    elseif (length(this.m_c) > 1)
+      % Diagonally implicit tableau
       this.m_RK_type = 'DIRK';
     else
-      % mixed case, threat as implicit
+      % Mixed case, threat it as implicit
       this.m_RK_type = 'IRK';
     end
   else

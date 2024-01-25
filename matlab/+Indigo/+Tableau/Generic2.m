@@ -1,7 +1,7 @@
 %
 %> Class container for Generic method.
 %
-classdef Generic2 < Indigo.RungeKutta.Method
+classdef Generic2 < Indigo.RungeKutta
   %
   methods
     %
@@ -29,7 +29,7 @@ classdef Generic2 < Indigo.RungeKutta.Method
       tbl.b   = [1-alpha/2, alpha/2];
       tbl.b_e = [];
       tbl.c   = [0, alpha].';
-      this@Indigo.RungeKutta.Method('Generic2', 2, tbl);
+      this@Indigo.RungeKutta('Generic2', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -74,7 +74,7 @@
 %>
 %> \endrst
 %
-classdef ThreeBodyProblem < ImplicitSystem
+classdef ThreeBodyProblem < Indigo.DAE.Implicit
   %
   properties (SetAccess = protected, Hidden = true)
     %
@@ -109,7 +109,7 @@ classdef ThreeBodyProblem < ImplicitSystem
       num_invs = 0;
 
       % Call the superclass constructor
-      this@ImplicitSystem('ThreeBodyProblem2D', num_eqns, num_invs);
+      this@Indigo.DAE.Implicit('ThreeBodyProblem2D', num_eqns, num_invs);
 
       % Check the input arguments
       assert(G > 0, ...
@@ -216,6 +216,12 @@ classdef ThreeBodyProblem < ImplicitSystem
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function Jh( ~, ~, ~ )
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out = in_domain( this, x, t )
+      out = true;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

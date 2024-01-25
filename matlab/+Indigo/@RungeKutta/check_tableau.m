@@ -1,11 +1,11 @@
-function [out,order,e_order] = check_tableau( this, tbl )
+function [out, order, e_order] = check_tableau( this, tbl )
 
   arguments
-    this Indigo.RungeKutta.Method
+    this Indigo.RungeKutta
     tbl  struct
   end
 
-  CMD = 'Indigo.RungeKutta.Method.check_tableau(...): ';
+  CMD = 'Indigo.RungeKutta.check_tableau(...): ';
 
   % Collect input data
   A   = tbl.A;
@@ -86,20 +86,20 @@ function [out,order,e_order] = check_tableau( this, tbl )
     out = false;
   end
 
-  % check consistency
-  [order,msg] = this.tableau_order( A, b, c );
+  % Check consistency
+  [order, msg] = this.tableau_order(A, b, c);
 
-  if order ~= this.m_order
-    warning( sprintf( '%s\norder %d not what expected %d.\n%s', CMD, order, this.m_order, msg ) );
+  if (order ~= this.m_order)
+    %warning(sprintf([CMD, 'order %d, expected %d.\n', msg], order, this.m_order));
     out = false;
   end
 
   if ~isempty(b_e)
-    [e_order,msg] = this.tableau_order( A, b_e, c );
-    %fprintf( '%s\norder = %d, embedded order = %d\n', CMD, order, e_order );
+    [e_order, msg] = this.tableau_order(A, b_e, c);
+    %fprintf([CMD, '\norder = %d, embedded order = %d.\n'], order, e_order);
   else
     e_order = 0;
-    %fprintf( '%s\norder = %d\n', CMD, order );
+    %fprintf([CMD, '\norder = %d.\n'], order);
   end
 
 end

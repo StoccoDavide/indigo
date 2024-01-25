@@ -1,7 +1,7 @@
 %
 %> Class container for Ralston's method.
 %
-classdef Ralston4 < Indigo.RungeKutta.Method
+classdef Ralston4 < Indigo.RungeKutta
   %
   methods
     %
@@ -51,7 +51,7 @@ classdef Ralston4 < Indigo.RungeKutta.Method
       tbl.b   = [B1, B2, B3, B4];
       tbl.b_e = [];
       tbl.c   = [0, C2, C3, 1]';
-      this@Indigo.RungeKutta.Method( 'Ralston4', 4, tbl );
+      this@Indigo.RungeKutta( 'Ralston4', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

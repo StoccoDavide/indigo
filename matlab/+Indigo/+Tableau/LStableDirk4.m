@@ -1,7 +1,7 @@
 %
 %> Class container for Merson's 4(5) method.
 %
-classdef LStableDirk4 < Indigo.RungeKutta.Method
+classdef LStableDirk4 < Indigo.RungeKutta
   %
   methods
     %
@@ -28,7 +28,7 @@ classdef LStableDirk4 < Indigo.RungeKutta.Method
       tbl.b   = [25/24 ,   -49/48,    125/16, -85/12, 1/4];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(5,1);
-      this@Indigo.RungeKutta.Method( 'LStableDirk4', 4, tbl );
+      this@Indigo.RungeKutta( 'LStableDirk4', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -1,7 +1,7 @@
 %
 %> Class container for Radau IB method.
 %
-classdef RadauIB3 < Indigo.RungeKutta.Method
+classdef RadauIB3 < Indigo.RungeKutta
   %
   methods
     %
@@ -30,7 +30,7 @@ classdef RadauIB3 < Indigo.RungeKutta.Method
       tbl.b   = [1/4, 3/4];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(2,1);
-      this@Indigo.RungeKutta.Method( 'RadauIB3', 3, tbl );
+      this@Indigo.RungeKutta( 'RadauIB3', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

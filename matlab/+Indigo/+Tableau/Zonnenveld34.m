@@ -1,7 +1,7 @@
 %
 %> Class container for Zonneveld's 4(5) method.
 %
-classdef Zonnenveld34 < Indigo.RungeKutta.Method
+classdef Zonnenveld34 < Indigo.RungeKutta
   %
   methods
     %
@@ -31,7 +31,7 @@ classdef Zonnenveld34 < Indigo.RungeKutta.Method
       tbl.b   = [1/6, 1/3, 1/3, 1/6, 0];
       tbl.b_e = [-1/2, 7/3, 7/3, 13/6, -16/3];
       tbl.c   = [0, 1/2, 1/2, 1, 3/4]';
-      this@Indigo.RungeKutta.Method( 'Zonneveld34', 4, tbl );
+      this@Indigo.RungeKutta( 'Zonneveld34', 4, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

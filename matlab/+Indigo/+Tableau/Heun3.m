@@ -1,7 +1,7 @@
 %
 %> Class container for Heun's method.
 %
-classdef Heun3 < Indigo.RungeKutta.Method
+classdef Heun3 < Indigo.RungeKutta
   %
   methods
     %
@@ -26,7 +26,7 @@ classdef Heun3 < Indigo.RungeKutta.Method
       tbl.b   = [1/4, 0, 3/4];
       tbl.b_e = [];
       tbl.c   = [0, 1/3, 2/3]';
-      this@Indigo.RungeKutta.Method( 'Heun3', 3, tbl );
+      this@Indigo.RungeKutta( 'Heun3', 3, tbl );
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
