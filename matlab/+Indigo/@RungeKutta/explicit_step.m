@@ -97,20 +97,25 @@
 %>         (t_{k}+\Delta t) \f$, the suggested time step for the next
 %>         advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.
 %
-function [x_out, d_t_star] = explicit_step( this, x_k, t_k, d_t )
+function [ x_out, d_t_star, ierr ] = explicit_step( this, x_k, t_k, d_t )
+
+  % No error and default x_out and suggested time step for the next advancing step
+  ierr     = 0;
+  d_t_star = d_t;
+  x_out    = x_k;
 
   % Solve the system to obtain K
-  K = this.explicit_K(x_k, t_k, d_t);
+  K = this.explicit_K( x_k, t_k, d_t );
 
-  % Suggested time step for the next advancing step
-  d_t_star = d_t;
+  % check for errors
+  if ~all(isfinite(K)); ierr = 1; return; end
 
   % Perform the step and obtain x_k+1
-  x_out = x_k + d_t * K * this.m_b';
+  x_out = x_k + K * this.m_b';
 
   % Adapt next time step
-  if (this.m_adaptive_step)
-    x_e      = x_k + d_t * K * this.m_b_e';
-    d_t_star = this.adapt_step(x_out, x_e, d_t_star);
+  if this.m_adaptive_step && this.m_is_embedded
+    x_e      = x_k + K * this.m_b_e';
+    d_t_star = this.estimate_step( x_out, x_e, d_t );
   end
 end

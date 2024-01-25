@@ -63,10 +63,7 @@
 %> \f$ \Delta t \f$ since in the implicit Runge-Kutta method the time step
 %> is not modified through any error control method.
 %>
-%> \param x_k     States value at \f$ k \f$-th time step
-%>                \f$ \mathbf{x}(t_k) \f$.
-%> \param x_dot_k States derivative at \f$ k \f$-th time step
-%>                \f$ \mathbf{x}' (t_k) \f$.
+%> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
 %> \param t_k     Time step \f$ t_k \f$.
 %> \param d_t     Advancing time step \f$ \Delta t\f$.
 %>
@@ -77,14 +74,14 @@
 %>         step for the next advancing step \f$ \Delta t_{k+1} \f$, and the
 %>         error control flag.
 %
-function [x_out, x_dot_out, d_t_star, ierr] = implicit_step( this, x_k, x_dot_k, t_k, d_t )
+function [ x_out, d_t_star, ierr ] = implicit_step( this, x_k, t_k, d_t )
 
   % Extract lengths
   nc = length(this.m_c);
   nx = length(x_k);
 
   % Create the intial guess for K
-  K0 = repmat(x_dot_k, nc, 1);
+  K0 = zeros( nc * nx, 1);
 
   % Define the function handles
   fun = @(K) this.implicit_residual(x_k, K, t_k, d_t);
@@ -97,21 +94,14 @@ function [x_out, x_dot_out, d_t_star, ierr] = implicit_step( this, x_k, x_dot_k,
   d_t_star = d_t;
 
   % Error code check
-  if (ierr > 0)
-    x_out     = x_k;
-    x_dot_out = x_dot_k;
-    return;
-  end
+  if ierr ~= 0; x_out = x_k; return; end
 
   % Perform the step and obtain x_k+1
   x_out = x_k + d_t * reshape(K, nx, nc) * this.m_b';
 
-  % Extract x_dot_k+1 from K (i.e., its last value)
-  x_dot_out = K(end + 1 - nx:end);
-
   % Adapt next time step
   if (this.m_adaptive_step)
     x_e = x_k + d_t * reshape(K, nx, nc) * this.m_b_e';
-    d_t_star = this.adapt_step(x_out, x_e, d_t_star);
+    d_t_star = this.estimate_step( x_out, x_e, d_t_star );
   end
 end

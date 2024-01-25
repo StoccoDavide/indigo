@@ -6,23 +6,17 @@ close all;
 
 %% Instantiate system object
 
-% Parameters
-% Class default
+ICS = [ ...
+   15.0, ...
+   0.0, ...
+   0.0, ...
+   0.0, ...
+   15.0, ...
+  -5.0, ...
+   0.0 ...
+];
 
-% Initial conditions
-U__b = 6.0;
-R__1 = 9e3;
-R__2 = 9e3;
-
-IC = [ ...
-  0.0, ...
-  U__b/(R__2/R__1 + 1), ...
-  U__b/(R__2/R__1 + 1), ...
-  U__b, ...
-  0.0 ...
-]';
-
-ODE = Transistor5();
+ODES = Torus();
 
 %% Initialize the solver and set the system
 
@@ -58,7 +52,7 @@ implicit_solver = {
 explicit_embedded_solver = {
   'BogackiShampine23', ...
   'CashKarp45',        ...
-  'DormandPrince45',   ...
+  'DormandPrince54',   ...
   'Fehlberg12',        ...
   'Fehlberg45I',       ...
   'Fehlberg45II',      ...
@@ -83,42 +77,38 @@ implicit_embedded_solver = {
 
 solver_name = { ...
   explicit_solver{end}, ...
-  implicit_solver{end}, ...
-  %explicit_embedded_solver{1}, ...
-  %implicit_embedded_solver{1}, ...
+  %implicit_solver{end}, ...
+  %explicit_embedded_solver{end-1}, ...
+  %implicit_embedded_solver{end}, ...
 };
 
-solver     = cell(length(solver_name), 1);
-solver_SemiExplicit = cell(length(solver_name), 1);
+solver = cell(length(solver_name), 1);
 for k = 1:length(solver_name)
-  solver{k} = LimeRickeySolver(solver_name{k});
-  solver{k}.set_ODE(Transistor5);
+  solver{k} = IndigoSolver(solver_name{k});
+  solver{k}.set_system(ODES);
 end
-color = colormap(lines(length(solver_name)));
 
 %% Integrate the system
 
 % Set integration interval
-d_t   = 1e-5;
+d_t   = 1e-2;
 t_ini = 0.0;
-t_end = 0.2;
+t_end = 10*pi;
 T_vec = t_ini:d_t:t_end;
-
-% Project the initial condition
-%IC = solver{1}.project_initial_conditions(IC, t_ini);
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
-D = cell(1, length(T_vec));
 T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
-V = cell(1, length(T_vec));
 
 % Solve the system for each solver
 for i = 1:length(solver_name)
-  %solver{i}.disable_projection();
-  %[X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
-  [X{i}, T{i}] = solver{i}.solve(T_vec, IC);
+  %solver{i}.set_max_projection_iteration(10);
+  %solver{i}.set_max_newton_iteration(10);
+  [X{i}, T{i}] = solver{i}.solve(T_vec, ICS);
+  for j = 1:length(T{i})
+    H{i}(:,j) = ODES.h(X{i}(:,j), [], T{i}(j));
+  end
 end
 
 %% Plot results
@@ -126,6 +116,7 @@ end
 linewidth = 1.1;
 
 figure();
+  color = colormap(lines(length(solver_name)));
   hold on;
   grid on;
   grid minor;
@@ -133,56 +124,29 @@ figure();
   ylabel('$\mathbf{x}_l$ (-)');
   for i = 1:length(solver_name)
     t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+    x1 = X{i}(1,:);
+    x2 = X{i}(2,:);
+    x3 = X{i}(2,:);
+    plot(t, x1, t, x2, t, x3, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
+
 
 figure();
   hold on;
   grid on;
   grid minor;
   xlabel('$t$ (s)');
-  ylabel('$\mathbf{y}_l$ (-)');
+  ylabel('$\mathbf{u}_l$ (-)');
   for i = 1:length(solver_name)
     t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
+    u1 = X{i}(1,:);
+    u2 = X{i}(2,:);
+    u3 = X{i}(2,:);
+    plot(t, u1, t, u2, t, u3, 'LineWidth', linewidth, 'Color', color(i,:));
   end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-  figure();
-  hold on;
-  grid on;
-  grid minor;
-  xlabel('$t$ (s)');
-  ylabel('$\mathbf{x}_r$ (-)');
-  for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  xlabel('$t$ (s)');
-  ylabel('$\mathbf{y}_r$ (-)');
-  for i = 1:length(solver_name)
-    t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
-  end
-  legend(solver_name, 'Location', 'northwest');
+  %legend(solver_name, 'Location', 'northwest');
   hold off;
 
 figure();
@@ -198,73 +162,7 @@ figure();
     h3 = H{i}(3,:);
     plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
   end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-%% Integrate the system (using projection)
-
-% Allocate solution arrays
-X = cell(1, length(T_vec));
-D = cell(1, length(T_vec));
-T = cell(1, length(T_vec));
-H = cell(1, length(T_vec));
-V = cell(1, length(T_vec));
-
-% Solve the system for each solver
-for i = 1:length(solver_name)
-  solver{i}.enable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
-end
-
-%% Plot results
-
-linewidth = 1.1;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  xlabel('$t$ (s)');
-  ylabel('$\mathbf{x}_p$ (-)');
-  for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
-    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-  return
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  xlabel('$t$ (s)');
-  ylabel('$\mathbf{x}_v$ (-)');
-  for i = 1:length(solver_name)
-    t = T{i};
-    u = X{i}(3,:);
-    v = X{i}(4,:);
-    plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  xlabel('$t$ (s)');
-  ylabel('$\mathbf{h}$ (-)');
-  for i = 1:length(solver_name)
-    t  = T{i};
-    h1 = H{i}(1,:);
-    h2 = H{i}(2,:);
-    h3 = H{i}(3,:);
-    plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
-  end
-  legend(solver_name, 'Location', 'northwest');
+  %legend(solver_name, 'Location', 'northwest');
   hold off;
 
 %% That's All Folks!

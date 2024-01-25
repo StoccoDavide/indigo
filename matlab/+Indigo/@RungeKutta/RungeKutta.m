@@ -125,7 +125,7 @@ classdef RungeKutta < handle
     %
     %> Safety factor for adaptive step.
     %
-    m_fac = 0.9;
+    m_safety_factor = 0.9;
     %
     %> Minimum safety factor for adaptive step.
     %
@@ -134,6 +134,10 @@ classdef RungeKutta < handle
     %> Maximum safety factor for adaptive step.
     %
     m_fac_max = 1.5;
+    %
+    %> Minimum step for advancing
+    %
+    m_dt_min = 1e-50;
   end
   %
   methods
@@ -414,63 +418,63 @@ classdef RungeKutta < handle
       this.m_R_tol = t_R_tol;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the safety factor for adaptive step.
     %>
     %> \return The safety factor for adaptive step.
     %
-    function t_fac = get_fac( this )
-      t_fac = this.m_fac;
+    function t_fac = get_safety_factor( this )
+      t_fac = this.m_safety_factor;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set safety factor for adaptive step.
     %>
     %> \param t_fac The safety factor for adaptive step.
     %
-    function set_fac( this, t_fac )
-      this.m_fac = t_fac;
+    function set_safety_factor( this, t_fac )
+      this.m_safety_factor = t_fac;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the minimum safety factor for adaptive step.
     %>
     %> \return The minimum safety factor for adaptive step.
     %
-    function t_min_fac = get_min_fac( this )
+    function t_min_fac = get_min_factor( this )
       t_min_fac = this.m_min_fac;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the minimum safety factor for adaptive step.
     %>
     %> \param t_min_fac The minimum safety factor for adaptive step.
     %
-    function set_min_fac( this, t_min_fac )
+    function set_min_factor( this, t_min_fac )
       this.m_min_fac = t_min_fac;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the maximum safety factor for adaptive step.
     %>
     %> \return The maximum safety factor for adaptive step.
     %
-    function t_max_fac = get_max_fac( this )
+    function t_max_fac = get_max_factor( this )
       t_max_fac = this.m_max_fac;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the maximum safety factor for adaptive step.
     %>
     %> \param t_max_fac The maximum safety factor for adaptive step.
     %
-    function set_max_fac( this, t_max_fac )
+    function set_max_factor( this, t_max_fac )
       this.m_max_fac = t_max_fac;
     end
     %
@@ -559,7 +563,7 @@ classdef RungeKutta < handle
     %> \return True if the solver is explicit, false otherwise.
     %
     function out = is_explicit( this )
-      out = this.m_is_explicit;
+      out = strcmp(this.m_RK_type,'ERK');
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -569,7 +573,7 @@ classdef RungeKutta < handle
     %> \return True if the solver is implicit, false otherwise.
     %
     function out = is_implicit( this )
-      out = ~this.m_is_explicit;
+      out = ~strcmp(this.m_RK_type,'ERK');
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -644,12 +648,12 @@ classdef RungeKutta < handle
     %
     function x = project_initial_conditions( this, x_t, t, varargin )
 
-      CMD = 'Indigo.RungeKutta.project(...): ';
+      CMD = 'Indigo.RungeKutta.project_initial_conditions(...): ';
 
       if (nargin == 3)
-        x = this.project(x_t, t);
+        x = this.do_projection(x_t, t);
       elseif (nargin == 4)
-        x = this.project(x_t, t, varargin);
+        x = this.do_projection(x_t, t, varargin);
       else
         error([CMD, 'invalid number of input arguments.']);
       end
@@ -657,260 +661,11 @@ classdef RungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Project the system solution \f$ \mathbf{x} \f$ on the invariants
-    %> \f$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0} \f$. The
-    %> constrained minimization problem to be solved is:
-    %>
-    %> \f[
-    %> \textrm{minimize} \quad
-    %> \dfrac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 \quad
-    %> \textrm{subject to} \quad \mathbf{h}(\mathbf{x}, \mathbf{v}, t) =
-    %> \mathbf{0}.
-    %> \f]
-    %>
-    %> **Solution Algorithm**
-    %>
-    %> Given the Lagrangian of the minimization problem of the form:
-    %>
-    %> \f[
-    %> \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}) =
-    %> \frac{1}{2}\left(\mathbf{x} - \widetilde{\mathbf{x}}\right)^2 +
-    %> \boldsymbol{\lambda} \cdot \mathbf{h}(\mathbf{x}, \mathbf{v}, t).
-    %> \f]
-    %>
-    %> The solution of the problem is obtained by solving the following:
-    %>
-    %> \f[
-    %> \left\{\begin{array}{l}
-    %> \mathbf{x} + \mathbf{Jh}_\mathbf{x}^T \boldsymbol{\lambda} =
-    %> \widetilde{\mathbf{x}} \\[0.5em]
-    %> \mathbf{h}(\mathbf{x}, \mathbf{v}, t) = \mathbf{0}
-    %> \end{array}\right.
-    %> \f]
-    %>
-    %> Using the Taylor expansion of the Lagrangian:
-    %>
-    %> \f[
-    %> \mathbf{h}(\mathbf{x}, \mathbf{v}, t) + \mathbf{Jh}_\mathbf{x} \delta\mathbf{x} +
-    %> \mathcal{O}\left(\left\| \delta\mathbf{x} \right\|^2\right) = \mathbf{0}
-    %> \f]
-    %>
-    %> define the iterative method as:
-    %>
-    %> \f[
-    %> \mathbf{x} = \widetilde{\mathbf{x}} + \delta\mathbf{x}.
-    %> \f]
-    %>
-    %> Notice that \f$ \delta\mathbf{x} \f$ is the solution of the linear system:
-    %>
-    %> \f[
-    %> \begin{bmatrix}
-    %> \mathbf{I}             & \mathbf{Jh}_\mathbf{x}^T \\[0.5em]
-    %> \mathbf{Jh}_\mathbf{x} & \mathbf{0}
-    %> \end{bmatrix}
-    %> \begin{bmatrix}
-    %> \delta\mathbf{x} \\[0.5em]
-    %> \boldsymbol{\lambda}
-    %> \end{bmatrix}
-    %> =
-    %> \begin{bmatrix}
-    %> \widetilde{\mathbf{x}} - \mathbf{x} \\[0.5em]
-    %> -\mathbf{h}(\mathbf{x}, \mathbf{v}, t)
-    %> \end{bmatrix}
-    %> \f]
-    %>
-    %> where \f$ \mathbf{Jh}_\mathbf{x} \f$ is the Jacobian of the invariants/
-    %> with respect to the states \f$ \mathbf{x} \f$.
-    %>
-    %> \param x_t The initial guess for the states \f$ \widetilde{\mathbf{x}} \f$.
-    %> \param t   The time \f$ t \f$ at which the states are evaluated.
-    %> \param x_b [optional] Boolean vector to project the corresponding states
-    %>            to be projected (default: all states are projected).
-    %>
-    %> \return The solution of the projection problem \f$ \mathbf{x} \f$.
-    %
-    function x = project( this, x_t, t, varargin )
-
-      CMD = 'Indigo.RungeKutta.project(...): ';
-
-      % Get the number of states, equations and invariants
-      num_eqns = this.m_sys.get_num_eqns();
-      num_invs = this.m_sys.get_num_invs();
-
-      assert(length(x_t) == num_eqns, ...
-        [CMD, 'the number of states does not match the number of equations.']);
-
-      % Check the input
-      if (nargin == 3)
-        projected_x = true(num_eqns, 1);
-      elseif (nargin == 4)
-        projected_x = varargin{1}{1};
-        assert(length(projected_x) == num_eqns, ...
-          [CMD, 'the number of the projectes states does not match the ', ...
-          'number of equations.']);
-      else
-        error([CMD, 'invalid number of input arguments.']);
-      end
-      num_projected_x = sum(projected_x);
-
-
-      % Check if there are any constraints
-      x = x_t;
-      if (num_invs > 0)
-
-        % Calculate and scale the tolerance
-        tolerance = max(1, norm(x_t, inf)) * sqrt(eps);
-
-        % Iterate until the projected solution is found
-        for k = 1:this.m_max_projection_iter
-
-          % Standard projection method
-          %     [A]         {x}    =        {b}
-          % / I  Jh^T \ /   dx   \   / x_t - x_k \
-          % |         | |        | = |           |
-          % \ Jh   0  / \ lambda /   \    -h     /
-
-          % Evaluate the veils, invariants vector and their Jacobian
-          v    = this.m_sys.v(x, t);
-          h    = this.m_sys.h(x, v, t);
-          Jh_x = this.m_sys.Jh_x(x, v, t);
-          Jh_v = this.m_sys.Jh_v(x, v, t);
-          Jv_x = this.m_sys.Jv_x(x, v, t);
-          Jh   = Jh_x + Jh_v * Jv_x;
-
-          % Select only the projected invariants
-          h   = h(this.m_projected_invs);
-          Jh  = Jh(this.m_projected_invs, projected_x);
-
-          % Compute the solution of the linear system
-          A   = [eye(num_projected_x), Jh.'; ...
-                 Jh, zeros(sum(this.m_projected_invs))];
-          b   = [x_t(projected_x) - x(projected_x); -h];
-          %sol = A\b;
-          [sol, ~] = lsqr(A, b, 1e-6, 500);
-
-          % Update the solution
-          dx = sol(1:num_projected_x);
-          x(projected_x) = x(projected_x) + dx;
-
-          % Check if the solution is found
-          if (max(abs(dx)) < tolerance || max(abs(h)) < tolerance)
-            break;
-          elseif (k == this.m_max_projection_iter)
-            warning([CMD, 'maximum number of iterations reached.']);
-          end
-        end
-      end
-    end
+    x = do_projection( this, x_t, t, varargin )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Solve the system and calculate the approximate solution over the mesh of
-    %> time points.
-    %>
-    %> \param t   Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots, t_n
-    %>            \right]^T \f$.
-    %> \param x_0 Initial states value \f$ \mathbf{x}(t_0) \f$.
-    %>
-    %> \return A matrix \f$ \left[(\mathrm{size}(\mathbf{x}) \times \mathrm{size}
-    %>         (\mathbf{t})\right] \f$ containing the approximated solution
-    %>         \f$ \mathbf{x}(t) \f$ and \f$ \mathbf{x}^\prime(t) \f$ of the
-    %>         system. Additionally, the veils \f$ \mathbf{v}(t) \f$ and
-    %>         invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are
-    %>         also returned.
-    %
-    function [x_out, x_dot_out, t, v_out, h_out] = solve( this, t, x_0 )
-
-      CMD = 'Indigo.RungeKutta.solve(...): ';
-
-      % Check initial conditions
-      num_eqns = this.m_sys.get_num_eqns();
-      num_veil = this.m_sys.get_num_veil();
-      num_invs = this.m_sys.get_num_invs();
-      assert(num_eqns == length(x_0), ...
-        [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
-        this.m_name, length(x_0), num_eqns);
-
-      % Instantiate output
-      x_out      = zeros(num_eqns, length(t));
-      x_dot_out  = zeros(num_eqns, length(t));
-      v_out      = zeros(num_veil, length(t));
-      h_out      = zeros(num_invs, length(t));
-
-      % Store first step
-      x_out(:,1) = x_0(:);
-      v_out(:,1) = this.m_sys.v(x_out(:,1), t(1));
-      h_out(:,1) = this.m_sys.h(x_out(:,1), v_out(:,1), t(1));
-
-      % Instantiate temporary variables
-      s   = 1;         % Current step
-      tol = sqrt(eps); % Tolerance
-
-      % Update the current step
-      x_s     = x_out(:,1);
-      x_dot_s = x_dot_out(:,1);
-      t_s     = t(1);
-      d_t_s   = t(2) - t(1);
-      d_t_tmp = d_t_s;
-
-      % Start progress bar
-      if (this.m_progress_bar)
-        Indigo.Utils.progress_bar('_start');
-      end
-
-      while (true)
-        % Print percentage of solution completion
-        if (this.m_progress_bar)
-          Indigo.Utils.progress_bar(ceil(100*t_s/t(end)))
-        end
-
-        % Integrate system
-        [x_s, x_dot_s, d_t_star] = this.advance(x_s, x_dot_s, t_s, d_t_s);
-
-        % Update the current step
-        t_s = t_s + d_t_s;
-
-        % Saturate the suggested timestep
-        mesh_point_bool = abs(t_s - t(s+1)) < tol;
-        saturation_bool = t_s + d_t_star > t(s+1) + tol;
-        if (this.m_adaptive_step && ~mesh_point_bool && saturation_bool)
-          d_t_tmp = d_t_star;
-          d_t_s   = t(s+1) - t_s;
-        else
-          d_t_s = d_t_star;
-        end
-
-        % Store solution if the step is a mesh point
-        if (~this.m_adaptive_step || mesh_point_bool)
-
-          % Update temporaries
-          s     = s+1;
-          d_t_s = d_t_tmp;
-
-          % Update outputs
-          x_out(:,s)     = x_s;
-          x_dot_out(:,s) = x_dot_s;
-          v_out(:,s)     = this.m_sys.v(x_out(:,s), t(s));
-          h_out(:,s)     = this.m_sys.h(x_out(:,s), v_out(:,s), t(s));
-
-          % Check if the current step is the last one
-          if (abs(t_s - t(end)) < tol)
-            break;
-          end
-        end
-      end
-
-      % End progress bar
-      if (this.m_progress_bar)
-        Indigo.Utils.progress_bar(100);
-        if (this.m_projection)
-          bar_str = strcat(['Projected-', this.m_name, ' completed!']);
-        else
-          bar_str = strcat([this.m_name, ' completed!']);
-        end
-        Indigo.Utils.progress_bar(bar_str);
-      end
-    end
+    [x_out, x_dot_out, t, v_out, h_out] = solve( this, t, x_0 )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -989,7 +744,7 @@ classdef RungeKutta < handle
 
         % Integrate system
         [x_new, x_dot_new, d_t_star] = ...
-          this.advance(x_out(:,s), x_dot_out(:,s), t_out(s), d_t);
+          this.do_step(x_out(:,s), x_dot_out(:,s), t_out(s), d_t);
 
         % Store solution
         t_out(s+1)       = t_out(s) + d_t;
@@ -1031,190 +786,11 @@ classdef RungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Advance using a generic integration method for a system of the form
-    %> \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) = \mathbf{0} \f$.
-    %> The step is based on the following formula:
-    %>
-    %> \f[
-    %> \mathbf{x}_{k+1}(t_{k}+\Delta t) = \mathbf{x}_k(t_{k}) +
-    %> \mathcal{S}(\mathbf{x}_k(t_k), \mathbf{x}'_k(t_k), t_k, \Delta t)
-    %> \f]
-    %>
-    %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
-    %> In the advvancing step, the system solution is also projected on the
-    %> manifold \f$ \mathcal{h}(\mathbf{x}, \mathbf{v}, t) \f$. Substepping is
-    %> also used to ensure that the solution is accurate.
-    %>
-    %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
-    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
-    %>                (t_k) \f$.
-    %> \param t_k     Time step \f$ t_k \f$.
-    %> \param d_t     Advancing time step \f$ \Delta t\f$.
-    %>
-    %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$,
-    %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$ and the suggested time
-    %>         step for the next advancing step \f$ \Delta t_{k+1} \f$.
-    %
-    function [x_new, x_dot_new, d_t_star] = advance( this, x_k, x_dot_k, t_k, d_t )
-
-      CMD = 'Indigo.RungeKutta.advance(...): ';
-
-      % Check initial conditions
-      num_eqns = this.m_sys.get_num_eqns();
-      assert(num_eqns == length(x_k), ...
-        [CMD, 'in %s solver, length(x_0) is %d, expected %d.'], ...
-        this.m_name, length(x_k), num_eqns);
-
-      % Check step size
-      assert(d_t > 0, ...
-        [CMD, 'in %s solver, d_t is %f, expected > 0.'], ...
-        this.m_name, d_t);
-
-      % Integrate system
-      [x_new, x_dot_new, d_t_star, ierr] = this.step(x_k, x_dot_k, t_k, d_t);
-
-      % If the advance failed, try again with substepping
-      if (ierr ~= 0)
-
-        x_tmp     = x_k;
-        x_dot_tmp = x_dot_k;
-        t_tmp     = t_k;
-        d_t_tmp   = 0.5 * d_t;
-
-        max_k = this.m_max_substeps * this.m_max_substeps;
-        k = 2;
-        while (k > 0)
-          % Integrate system
-          [x_tmp, x_dot_tmp, t_tmp, d_t_star_tmp] = ...
-            this.step(x_tmp, x_dot_tmp, t_tmp, d_t_tmp);
-
-          % Calculate the next time step with substepping logic
-          if (ierr == 0)
-
-            % Accept the step
-            d_t_tmp = d_t_star_tmp;
-
-            % If substepping is enabled, double the step size
-            if (k > 0 && k < max_k)
-              k = k - 1;
-              % If the substepping index is even, double the step size
-              if (rem(k, 2) == 0)
-                d_t_tmp = 2.0 * d_t_tmp;
-                if (this.m_verbose)
-                  warning([CMD, 'in %s solver, at t = %g, integration ', ...
-                    'succedded disable one substepping layer.'], ...
-                    this.m_name, t_tmp);
-                end
-              end
-            end
-
-            % Check the infinity norm of the solution
-            assert(isfinite(norm(x_tmp, inf)), ...
-              [CMD, 'in %s solver, at t = %g, ||x||_inf = inf, computation ', ...
-              'interrupted.\n'], ...
-              this.m_name, t_tmp);
-
-          else
-
-            % If the substepping index is too high, abort the integration
-            k = k + 2;
-            assert(k < max_k, ...
-              [CMD, 'in %s solver, at t = %g, integration failed ', ...
-              '(error code %d) with d_t = %g, aborting.'], ...
-              this.m_name, t_tmp, ierr, d_t);
-
-            % Otherwise, try again with a smaller step
-            if (this.m_verbose)
-              warning([CMD, 'in %s solver, at t = %g, integration failed ', ...
-                '(error code %d), adding substepping layer.'], ...
-                this.m_name, t_tmp, ierr);
-            end
-            d_t_tmp = 0.5 * d_t_tmp;
-            continue;
-
-          end
-
-          % Store time solution
-          t_tmp = t_tmp + d_t_tmp;
-        end
-
-        % Store output states substepping solutions
-        x_new     = x_tmp;
-        x_dot_new = x_dot_tmp;
-        d_t_star  = d_t_tmp;
-      end
-
-      % Project intermediate solution on the invariants
-      if (this.m_projection)
-        x_new = this.project(x_new, t_k+d_t);
-      end
-    end
+    [x_new, x_dot_new, d_t_star] = do_step( this, x_k, x_dot_k, t_k, d_t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Compute adaptive time step for the next advancing step according to the
-    %> error control method. The error control method used is the local truncation
-    %> error method, which is based on the following formula:
-    %>
-    %> \f[
-    %> e = \sqrt{\dfrac{1}{n} \displaystyle\sum_{i=1}{n}\left(\dfrac
-    %>   {\mathbf{x} - \hat{\mathbf{x}}}
-    %>   {s c_i}
-    %> \right)^2}
-    %> \f]
-    %>
-    %> where \f$ \mathbf{x} \f$ is the approximation of the states at computed
-    %> with higher order method of \f$ p \f$, and \f$ \hat{\mathbf{x}} \f$ is the
-    %> approximation of the states at computed with lower order method of \f$
-    %> \hat{p} \f$. To compute the suggested time step for the next advancing step
-    %> \f$ \Delta t_{k+1} \f$, The error is compared to \f$ 1 \f$ in order to find
-    %> an optimal step size. From the error behaviour \f$ e \approx Ch^{q+1} \f$
-    %> and from \f$ 1 \approx Ch_{opt}^{q+1} \f$ (where \f$ q = \min(p,\hat{p}) \f$)
-    %> the optimal step size is obtained as:
-    %>
-    %> \f[
-    %> h_{opt} = h \left( \dfrac{1}{e} \right)^{\frac{1}{q+1}}
-    %> \f]
-    %>
-    %> We multiply the previous quation by a safety factor \f$ f \f$, usually
-    %> \f$ f = 0.8 \f$, \f$ 0.9 \f$, \f$ (0.25)^{1/(q+1)} \f$, or \f$ (0.38)^{1/(q+1)} \f$,
-    %> so that the error will be acceptable the next time with high probability.
-    %> Further, \f$ h \f$ is not allowed to increase nor to decrease too fast.
-    %> So we put:
-    %>
-    %> \f[
-    %> h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(
-    %>   \dfrac{1}{e} \right)^{\frac{1}{q+1}}
-    %> \right) \right)
-    %> \f]
-    %>
-    %> for the new step size. Then, if \f$ e \leq 1 \f$, the computed step is
-    %> accepted and the solution is advanced to \f$ \mathbf{x} \f$ and a new step
-    %> is tried with \f$ h_{new} \f$ as step size. Else, the step is rejected
-    %> and the computations are repeated with the new step size \f$ h_{new} \f$.
-    %> Typially, \f$ f \f$ is set in the interval \f$ [0.8, 0.9] \f$,
-    %> \f$ f_{max} \f$ is set in the interval \f$ [1.5, 5] \f$, and \f$ f_{min} \f$
-    %> is set in the interval \f$ [0.1, 0.2] \f$.
-    %>
-    %> \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$
-    %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.
-    %> \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$
-    %>            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.
-    %> \param d_t Actual advancing time step \f$ \Delta t\f$.
-    %>
-    %> \return The suggested time step for the next advancing step \f$ \Delta
-    %>         t_{k+1} \f$.
-    %
-    function out = adapt_step( this, x_h, x_l, d_t )
-
-      % Compute the error with 2-norm
-      r = (x_h - x_l) ./ (this.m_A_tol + 0.5*this.m_R_tol*(abs(x_h)+abs(x_l)));
-      e = norm(r, 2)/length(x_h);
-
-      % Compute the suggested time step
-      q   = this.m_order + 1;
-      out = d_t * min(this.m_fac_max, max(this.m_fac_min, this.m_fac*(1/e)^(1/q)));
-    end
+    out = estimate_step( this, x_h, x_l, d_t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -1241,24 +817,26 @@ classdef RungeKutta < handle
     %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
     %>
     %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
-    %> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
-    %>                (t_k) \f$.
     %> \param t_k     Time step \f$ t_k \f$.
     %> \param d_t     Advancing time step \f$ \Delta t\f$.
     %>
     %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
     %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
     %
-    function [x_out, x_dot_out, d_t_star, ierr] = step( this, x_k, x_dot_k, t_k, d_t )
-      [x_out, x_dot_out, d_t_star, ierr] = this.implicit_step(x_k, x_dot_k, t_k, d_t);
+    function [ x_out, d_t_star, ierr ] = step( this, x_k, t_k, d_t )
+      if this.is_explicit() && this.m_sys.is_explicit()
+        [x_out, d_t_star, ierr] = this.explicit_step(x_k, t_k, d_t);
+      else
+        [x_out, d_t_star, ierr] = this.implicit_step(x_k, t_k, d_t);
+      end
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     K = explicit_K( this, x_k, t_k, d_t )
-    [x_out, d_t_star] = explicit_step( this, x_k, t_k, d_t )
     out = implicit_jacobian( this, x_k, K, t_k, d_t )
     out = implicit_residual( this, x_k, K, t_k, d_t )
-    [x_out, x_dot_out, d_t_star, ierr] = implicit_step( this, x_k, x_dot_k, t_k, d_t )
+    [ x_out, d_t_star, ierr ] = explicit_step( this, x_k, t_k, d_t )
+    [ x_out, d_t_star, ierr ] = implicit_step( this, x_k, t_k, d_t )
   end
 end
