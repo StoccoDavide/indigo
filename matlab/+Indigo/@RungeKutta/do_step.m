@@ -52,7 +52,7 @@ function [ x_new, d_t_star, ierr ] = do_step( this, x_k, t_k, d_t )
     k = 2;
     while (k > 0)
       % Integrate system
-      [ x_tmp, t_tmp, d_t_star_tmp, ierr ] = this.step( x_tmp, t_tmp, d_t_tmp );
+      [ x_tmp, d_t_star_tmp, ierr ] = this.step( x_tmp, t_tmp, d_t_tmp );
 
       % Calculate the next time step with substepping logic
       if (ierr == 0)

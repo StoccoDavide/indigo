@@ -75,7 +75,7 @@ implicit_embedded_solver = {
   'RadauIIA5',        ...
 };
 
-solver_name = {'Fehlberg45I'};
+solver_name = {'Verner65','DormandPrince54','BogackiShampine23','HeunEuler21','Fehlberg45I','Zonnenveld34','CashKarp45'};
 
 solver = cell(length(solver_name), 1);
 for k = 1:length(solver_name)
@@ -86,7 +86,7 @@ end
 %% Integrate the system
 
 % Set integration interval
-d_t   = 1e-2;
+d_t   = 0.1;
 t_ini = 0.0;
 t_end = 10*pi;
 T_vec = t_ini:d_t:t_end;

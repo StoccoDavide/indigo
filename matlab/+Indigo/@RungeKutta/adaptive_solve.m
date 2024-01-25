@@ -21,8 +21,8 @@ function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin
   % Collect optional arguments
   d_t = t(2) - t(1);
   if (nargin == 3)
-    t_min = 0.5*d_t;
-    t_max = 1.5*d_t;
+    t_min = 0.01*d_t;
+    t_max = 10*d_t;
   elseif (nargin == 4)
     [t_min, t_max] = varargin{1};
   elseif (nargin == 5)
