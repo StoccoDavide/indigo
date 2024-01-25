@@ -80,6 +80,10 @@ function [ x_out, d_t_star, ierr ] = implicit_step( this, x_k, t_k, d_t )
   nc = length(this.m_c);
   nx = length(x_k);
 
+  % default suggested time step for the next advancing step
+  d_t_star = d_t;
+  x_out    = x_k;
+
   % Create the intial guess for K
   K0 = zeros( nc * nx, 1);
 
@@ -90,18 +94,15 @@ function [ x_out, d_t_star, ierr ] = implicit_step( this, x_k, t_k, d_t )
   % Solve using Newton's method
   [K, ierr] = this.m_newton_solver.solve_handle(fun, jac, K0);
 
-  % Suggested time step for the next advancing step
-  d_t_star = d_t;
-
   % Error code check
-  if ierr ~= 0; x_out = x_k; return; end
+  if ierr ~= 0; return; end
 
   % Perform the step and obtain x_k+1
-  x_out = x_k + d_t * reshape(K, nx, nc) * this.m_b';
+  x_out = x_k + reshape(K, nx, nc) * this.m_b';
 
   % Adapt next time step
-  if (this.m_adaptive_step)
-    x_e = x_k + d_t * reshape(K, nx, nc) * this.m_b_e';
-    d_t_star = this.estimate_step( x_out, x_e, d_t_star );
+  if this.m_adaptive_step && this.m_is_embedded
+    x_e      = x_k + reshape(K, nx, nc) * this.m_b_e';
+    d_t_star = this.estimate_step( x_out, x_e, d_t );
   end
 end

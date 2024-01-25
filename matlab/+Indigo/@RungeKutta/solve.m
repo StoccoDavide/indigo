@@ -97,9 +97,9 @@ function [x_out, t, v_out, h_out] = solve( this, t, x_0 )
   if (this.m_progress_bar)
     Indigo.Utils.progress_bar(100);
     if (this.m_projection)
-      bar_str = strcat(['Projected-', this.m_name, ' completed!']);
+      bar_str = sprintf( 'Projected-%s completed! [nstep=%d]', this.m_name, s );
     else
-      bar_str = strcat([this.m_name, ' completed!']);
+      bar_str = sprintf( '%s completed! [nstep=%d]', this.m_name, s );
     end
     Indigo.Utils.progress_bar(bar_str);
   end

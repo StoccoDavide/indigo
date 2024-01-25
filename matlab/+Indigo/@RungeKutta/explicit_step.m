@@ -86,8 +86,6 @@
 %> method.
 %>
 %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
-%> \param x_dot_k States derivative at \f$ k \f$-th time step \f$ \mathbf{x}'
-%>                (t_k) \f$.
 %> \param t_k     Time step \f$ t_k \f$.
 %> \param d_t     Advancing time step \f$ \Delta t\f$.
 %>

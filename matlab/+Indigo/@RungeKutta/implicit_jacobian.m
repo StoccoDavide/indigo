@@ -26,14 +26,15 @@
 %>
 %> \return The Jacobian of the system of equations to be solved.
 %
-function out = implicit_jacobian( this, x_k, K, t_k, d_t )
-
-  % Get the number of veils
-  num_veil = this.m_sys.get_num_veil();
+function out = implicit_jacobian( this, x_k, K_in, t_k, d_t )
 
   % Extract lengths
   nc = length(this.m_c);
   nx = length(x_k);
+  K  = reshape(K_in, nx, nc);
+
+  % Get the number of veils
+  num_veil = this.m_sys.get_num_veil();
 
   % The Jacobian is a square nc*nx (i.e., length(K)) matrix
   out = eye(nc*nx);
@@ -41,36 +42,31 @@ function out = implicit_jacobian( this, x_k, K, t_k, d_t )
   % Loop through each equation of the system
   idx = 1:nx;
   for i = 1:nc
-    % Compute x_k + sum(a_ij*Kj, j)
-    x_tmp = x_k;
-    jdx = 1:nx;
-    for j = 1:nc
-      x_tmp = x_tmp + d_t * this.m_A(i,j) * K(jdx);
-      jdx = jdx + nx;
+    t_i = t_k + this.m_c(i) * d_t;
+    x_i = x_k + K * this.m_A(i,:).';
+    v_i = this.m_sys.v(x_i,t_i);
+
+    % Compute the Jacobians with respect to x and x_dot
+    x_dot_i = K(:,i)./d_t;
+    JF_x     = this.m_sys.JF_x     ( x_i, x_dot_i, v_i, t_i );
+    JF_x_dot = this.m_sys.JF_x_dot ( x_i, x_dot_i, v_i, t_i );
+
+    % Add the contribution of veils to the Jacobian
+    if num_veil > 0
+      JF_x = JF_x + this.m_sys.JF_v( x_i, x_dot_i, v_i, t_i ) * ...
+                    this.m_sys.Jv_x( x_i,          v_i, t_i );
     end
+
+    % derivative of F( x_i, K(:,i)/d_t, t_i)
     jdx = 1:nx;
     for j = 1:nc
-      % Mask for the Jacobian with respect to x_dot
-      mask = 0;
-      if (i == j)
-        mask = 1;
-      end
-
-      % Compute the Jacobians with respect to x and x_dot
-      t_tmp    = t_k + d_t * this.m_c(i);
-      v_tmp    = this.m_sys.v(x_tmp, t_tmp);
-      JF_x     = this.m_sys.JF_x(x_tmp, K(idx), v_tmp, t_tmp);%
-      JF_x_dot = this.m_sys.JF_x_dot(x_tmp, K(idx), v_tmp, t_tmp);
-
-      % Add the contribution of veils to the Jacobian
-      if (num_veil > 0)
-        JF_x = JF_x + this.m_sys.JF_v(x_tmp, K(idx), v_tmp, t_tmp) * ...
-                      this.m_sys.Jv_x(x_tmp, v_tmp, t_tmp);
-      end
-
       % Combine the Jacobians with respect to x and x_dot to obtain the
       % Jacobian with respect to K
-      out(idx, jdx) = d_t * this.m_A(i,j) * JF_x  + JF_x_dot * mask;
+      if i == j
+        out(idx, jdx) = this.m_A(i,j) * JF_x + JF_x_dot./d_t;
+      else
+        out(idx, jdx) = this.m_A(i,j) * JF_x;
+      end
 
       jdx = jdx + nx;
     end

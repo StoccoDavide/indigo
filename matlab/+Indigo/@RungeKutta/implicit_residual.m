@@ -13,30 +13,20 @@
 %>
 %> \return The residual of system to be solved.
 %
-function out = implicit_residual( this, x_k, K, t_k, d_t )
+function out = implicit_residual( this, x_k, K_in, t_k, d_t )
 
   % Extract lengths
   nc = length(this.m_c);
   nx = length(x_k);
-
-  % There are as many residuals as equations in the system
-  out = zeros(nc*nx, 1);
+  K  = reshape(K_in, nx, nc);
 
   % Loop through each equation of the system
-  idx = 1:nx;
+  res = zeros(nx, nc);
   for i = 1:nc
-    % Compute x_k + sum(a_ij*Kj, j)
-    x_i = x_k;
-    jdx = 1:nx;
-    for j = 1:nc
-      x_i = x_i + d_t * this.m_A(i,j) * K(jdx);
-      jdx = jdx + nx;
-    end
-
-    % Compute the residuals
     t_i = t_k + this.m_c(i) * d_t;
-    v_i = this.m_sys.v(x_i, t_i);
-    out(idx) = this.m_sys.F(x_i, K(idx), v_i, t_i);
-    idx = idx + nx;
+    x_i = x_k + K * this.m_A(i,:).';
+    v_i = this.m_sys.v(x_i,t_i);
+    res(:,i) = this.m_sys.F(x_i, K(:,i)./d_t, v_i, t_i);
   end
+  out = reshape( res, nc*nx, 1);
 end

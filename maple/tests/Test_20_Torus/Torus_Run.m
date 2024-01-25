@@ -75,12 +75,7 @@ implicit_embedded_solver = {
   'RadauIIA5',        ...
 };
 
-solver_name = { ...
-  explicit_solver{end}, ...
-  %implicit_solver{end}, ...
-  %explicit_embedded_solver{end-1}, ...
-  %implicit_embedded_solver{end}, ...
-};
+solver_name = {'Fehlberg45I'};
 
 solver = cell(length(solver_name), 1);
 for k = 1:length(solver_name)
@@ -105,7 +100,8 @@ H = cell(1, length(T_vec));
 for i = 1:length(solver_name)
   %solver{i}.set_max_projection_iteration(10);
   %solver{i}.set_max_newton_iteration(10);
-  [X{i}, T{i}] = solver{i}.solve(T_vec, ICS);
+  %[X{i}, T{i}] = solver{i}.solve( T_vec, ICS );
+  [X{i}, T{i}] = solver{i}.adaptive_solve( T_vec, ICS );
   for j = 1:length(T{i})
     H{i}(:,j) = ODES.h(X{i}(:,j), [], T{i}(j));
   end
