@@ -774,8 +774,8 @@ module Indigo()
   export TranslateToMatlab::static := proc(
     _self::Indigo,
     name::string,
-    type::string,
     {
+    type::string                   := "Implicit",
     data::list(symbol = algebraic) := [],
     info::string                   := "No class description provided."
     }, $)::string;
@@ -840,8 +840,9 @@ module Indigo()
   export GenerateMatlabCode::static := proc(
     _self::Indigo,
     name::string,
-    type::string,
     {
+    type::string                   := "Implicit",
+    path::string                   := "./",
     data::list(symbol = algebraic) := [],
     info::string                   := "No class description provided."
     }, $)
@@ -851,11 +852,12 @@ module Indigo()
       "data <data>, and class information string <info>.";
 
     IndigoCodegen:-GenerateFile(
-      cat("./", name, ".m"),
+      cat(path, "/", name, ".m"),
       _self:-TranslateToMatlab(
-        _self, name, type,
-        parse("data")  = data,
-        parse("info")  = info
+        _self, name,
+        parse("type") = type,
+        parse("data") = data,
+        parse("info") = info
       )
     );
     return NULL;

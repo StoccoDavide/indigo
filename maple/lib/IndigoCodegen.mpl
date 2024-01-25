@@ -226,8 +226,9 @@ IndigoCodegen := module()
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   local GenerateInputs := proc(
-    vars::list(list(symbol)),
+    vars::list(list({symbol, string})),
     {
+    skipnull::boolean := true,
     indent::string := "  "
     }, $)::string;
 
@@ -239,8 +240,10 @@ IndigoCodegen := module()
     out := "";
     for j from 1 to nops(vars) do
       for i from 1 to nops(vars[j]) do
-        convert(vars[j][i], string);
-        out := cat(out, indent, %, " = in_", j, "(", i, ");\n");
+        if not (skipnull and type(vars[j][i], string)) then
+          convert(vars[j][i], string);
+          out := cat(out, indent, %, " = in_", j, "(", i, ");\n");
+        end if;
       end do;
     end do;
     return out;
@@ -273,7 +276,7 @@ IndigoCodegen := module()
         cur := [op(cur), irem(idx, dims[j], 'idx')+1];
       end do;
       tmp := func[op(cur)];
-      if skipnull and evalb(tmp <> 0) then
+      if not (skipnull and evalb(tmp = 0)) then
         map(x -> (x, "_"), cur); str1 := cat(label, "_", op(%))[1..-2];
         lst := [op(lst), convert(str1, symbol) = tmp];
         map(x -> (x, ", "), cur); str2 := cat("", op(%))[1..-3];
@@ -289,22 +292,39 @@ IndigoCodegen := module()
     name::string,
     vars::list(list(symbol)),
     {
-    info::string   := "No description provided.",
-    indent::string := "  "
+    skipthis::boolean := false,
+    skiptime::boolean := false,
+    info::string      := "No description provided.",
+    indent::string    := "  "
     }, $)::string;
 
     description "Generate a function header for a function <name> with "
-      "variables <vars>, optional description <info> and indentation "
-      "<indent>.";
+    "variables <vars>, optional description <info>, indentation <indent>, and "
+    "skip class object input <skipthis> and time input <skiptime>.";
 
     local i, out;
 
-    out := cat("function out_", name, " = ", name, "( this");
+    out := cat("function out_", name, " = ", name, "( ");
+    if skipthis then #and evalb(add(map(nops, vars)) = 0) then
+      out := cat(out, "~");
+    else
+      out := cat(out, "this");
+    end if;
+
     for i from 1 to nops(vars) do
-      out := cat(out, ", ", "in_", i);
+      if evalb(nops(vars[i]) > 0) then
+        out := cat(out, ", ", "in_", i);
+      else
+        out := cat(out, ", ", "~");
+      end if;
     end do;
-    return cat(out, ", t )\n", indent, "% ", info, "\n\n");
-    return out;
+
+    if skiptime then
+      out := cat(out, ", ", "~");
+    else
+      out := cat(out, ", ", "t");
+    end if;
+    return cat(out, " )\n", indent, "% ", info, "\n\n");
   end proc: # GenerateHeader
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -344,7 +364,7 @@ IndigoCodegen := module()
       "inputs <inputs>, veils <veils>, elements <elements> and "
       "indentation <indent>.";
 
-    local tmp;
+    local tmp, i;
 
     tmp := cat(seq(cat(dims[i], ", "), i = 1..nops(dims)-1), dims[-1]);
     if (nops(dims) <= 1) then
@@ -374,24 +394,28 @@ IndigoCodegen := module()
     data::list(symbol) := [],
     info::string       := "No info",
     label::string      := "out",
-    indent::string     := "  "
+    indent::string     := "  ",
+    verbose::boolean   := false
     }, $)::string;
 
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and return it as a string. The optional "
       "arguments areclass properties <data>, function description <info>, "
-      "veilig label <label>, and indentation string <indent>.";
+      "veilig label <label>, and indentation string <indent>. If <verbose> "
+      "is true, the function prints the progress on the screen.";
 
-    local header, properties, inputs, veils, elements, outputs, dims, lst;
+    local header, properties, inputs, veils, elements, outputs, dims, lst,
+      tmp_data, vec_inds, tmp_vars, tmp_vars_rm, tmp_vars_nl;
+
+    if verbose then
+      printf("Generating vector function '%s'... ", name);
+    end if;
 
     # Extract the function properties
+    tmp_data := convert(data, set) intersect indets(vec, symbol);
+    tmp_data := remove[flatten](j -> not evalb(j in tmp_data), data);
     properties := IndigoCodegen:-GenerateProperties(
-      data, parse("indent") = indent
-    );
-
-    # Extract the function inputs
-    inputs := IndigoCodegen:-GenerateInputs(
-      vars, parse("indent") = indent
+      tmp_data, parse("indent") = indent
     );
 
     # Extract the function elements
@@ -399,15 +423,30 @@ IndigoCodegen := module()
     lst, outputs := IndigoCodegen:-ExtractElements(
       name, vec, dims, parse("skipnull") = skipnull, parse("indent") = indent,
       parse("label") = label
-      );
+    );
+
+    # Extract the function inputs
+    vec_inds    := indets(vec, symbol);
+    tmp_vars    := map(i -> i intersect vec_inds, map(convert, vars, set));
+    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not evalb(k in j), i), vars, tmp_vars);
+    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not evalb(k in j), "", k), i), vars, tmp_vars);
+    inputs := IndigoCodegen:-GenerateInputs(
+      tmp_vars_nl, parse("indent") = indent, parse("skipnull") = true
+    );
 
     # Generate the method header
     header := IndigoCodegen:-GenerateHeader(
-      name, vars, parse("info") = info, parse("indent") = indent
+      name, tmp_vars_rm, parse("info") = info, parse("indent") = indent,
+      parse("skipthis") = evalb(nops(tmp_data) = 0),
+      parse("skiptime") = not has(indets(vec, symbol), 't')
     );
 
     # Generate the elements
     elements := IndigoCodegen:-GenerateElements(lst);
+
+    if verbose then
+      printf("DONE\n");
+    end if;
 
     # Generate the generated code
     return IndigoCodegen:-GenerateBody(
@@ -429,24 +468,28 @@ IndigoCodegen := module()
     data::list(symbol) := [],
     info::string       := "No info",
     label::string      := "out",
-    indent::string     := "  "
+    indent::string     := "  ",
+    verbose::boolean   := false
     }, $)::string;
 
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and return it as a string. The optional "
       "arguments areclass properties <data>, function description <info>, "
-      "veilig label <label>, and indentation string <indent>.";
+      "veilig label <label>, and indentation string <indent>. If <verbose> "
+      "is true, the function prints the progress on the screen.";
 
-    local header, properties, inputs, veils, elements, outputs, dims, lst;
+    local header, properties, inputs, veils, elements, outputs, dims, lst,
+      tmp_data, mat_inds, tmp_vars, tmp_vars_rm, tmp_vars_nl;
+
+    if verbose then
+      printf("Generating matrix function '%s'... ", name);
+    end if;
 
     # Extract the function properties
+    tmp_data := convert(data, set) intersect indets(mat, symbol);
+    tmp_data := remove[flatten](j -> not evalb(j in tmp_data), data);
     properties := IndigoCodegen:-GenerateProperties(
-      data, parse("indent") = indent
-    );
-
-    # Extract the function inputs
-    inputs := IndigoCodegen:-GenerateInputs(
-      vars, parse("indent") = indent
+      tmp_data, parse("indent") = indent
     );
 
     # Extract the function elements
@@ -456,13 +499,28 @@ IndigoCodegen := module()
       parse("label") = label
     );
 
+    # Extract the function inputs
+    mat_inds    := indets(mat, symbol);
+    tmp_vars    := map(i -> i intersect mat_inds, map(convert, vars, set));
+    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not evalb(k in j), i), vars, tmp_vars);
+    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not evalb(k in j), "", k), i), vars, tmp_vars);
+    inputs := IndigoCodegen:-GenerateInputs(
+      tmp_vars_nl, parse("indent") = indent, parse("skipnull") = true
+    );
+
     # Generate the method header
     header := IndigoCodegen:-GenerateHeader(
-      name, vars, parse("info") = info, parse("indent") = indent
+      name, tmp_vars_rm, parse("info") = info, parse("indent") = indent,
+      parse("skipthis") = evalb(nops(tmp_data) = 0),
+      parse("skiptime") = not has(indets(mat, symbol), 't')
     );
 
     # Generate the elements
     elements := IndigoCodegen:-GenerateElements(lst);
+
+    if verbose then
+      printf("DONE\n");
+    end if;
 
     # Store the results
     return IndigoCodegen:-GenerateBody(
@@ -484,24 +542,28 @@ IndigoCodegen := module()
     data::list(symbol) := [],
     info::string       := "No info",
     label::string      := "out",
-    indent::string     := "  "
+    indent::string     := "  ",
+    verbose::boolean   := false
     }, $)::string;
 
     description "Translate the vector <vec> with variables <vars> into a "
       "Matlab function named <name> and return it as a string. The optional "
       "arguments areclass properties <data>, function description <info>, "
-      "veilig label <label>, and indentation string <indent>.";
+      "veilig label <label>, and indentation string <indent>. If <verbose> "
+      "is true, the function prints the progress on the screen.";
 
-    local header, properties, inputs, veils, elements, outputs, dims, lst;
+    local header, properties, inputs, veils, elements, outputs, dims, lst,
+      tmp_data, ten_inds, tmp_vars, tmp_vars_rm, tmp_vars_nl;
+
+    if verbose then
+      printf("Generating tensor function '%s'... ", name);
+    end if;
 
     # Extract the function properties
+    tmp_data := convert(data, set) intersect indets(ten, symbol);
+    tmp_data := remove[flatten](j -> not evalb(j in tmp_data), data);
     properties := IndigoCodegen:-GenerateProperties(
-      data, parse("indent") = indent
-    );
-
-    # Extract the function inputs
-    inputs := IndigoCodegen:-GenerateInputs(
-      vars, parse("indent") = indent
+      tmp_data, parse("indent") = indent
     );
 
     # Extract the function elements
@@ -511,13 +573,28 @@ IndigoCodegen := module()
       parse("label") = label
     );
 
+    # Extract the function inputs
+    ten_inds    := indets(ten, symbol);
+    tmp_vars    := map(i -> i intersect ten_inds, map(convert, vars, set));
+    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not evalb(k in j), i), vars, tmp_vars);
+    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not evalb(k in j), "", k), i), vars, tmp_vars);
+    inputs := IndigoCodegen:-GenerateInputs(
+      tmp_vars_nl, parse("indent") = indent, parse("skipnull") = true
+    );
+
     # Generate the method header
     header := IndigoCodegen:-GenerateHeader(
-      name, vars, parse("info") = info, parse("indent") = indent
+      name, tmp_vars_rm, parse("info") = info, parse("indent") = indent,
+      parse("skipthis") = evalb(nops(tmp_data) = 0),
+      parse("skiptime") = not has(indets(ten, symbol), 't')
     );
 
     # Generate the elements
     elements := IndigoCodegen:-GenerateElements(lst);
+
+    if verbose then
+      printf("DONE\n");
+    end if;
 
     # Generate the generated code
     return IndigoCodegen:-GenerateBody(
@@ -649,7 +726,7 @@ IndigoCodegen := module()
         "num_eqns = ", num_fncs, ";\n",
         "num_veil = ", num_veil, ";\n",
         "num_invs = ", num_invs, ";\n",
-        "this = this@Indigo.Systems.", sys_type, "('", name, "', num_eqns, num_veil, num_invs);\n",
+        "this = this@Indigo.DAE.", sys_type, "('", name, "', num_eqns, num_veil, num_invs);\n",
         `if`(nops(data) > 0, cat(
         "\n",
         "% User data\n",
@@ -804,7 +881,7 @@ IndigoCodegen := module()
       "% This file has been automatically generated by Indigo.\n",
       "% DISCLAIMER: If you need to edit it, do it wisely!\n",
       "\n",
-      "classdef ", name, " < Indigo.Systems.Implicit\n",
+      "classdef ", name, " < Indigo.DAE.Implicit\n",
       i, "%\n",
       i, "% ", info, "\n",
       i, "%\n",
@@ -921,6 +998,12 @@ IndigoCodegen := module()
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to v."
       )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      i, i, "function out = in_domain( ~, ~, ~ )\n",
+      i, i, i, "out = true;\n",
+      i, i, "end % in_domain\n",
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
@@ -1069,7 +1152,7 @@ IndigoCodegen := module()
       "% This file has been automatically generated by Indigo.\n",
       "% DISCLAIMER: If you need to edit it, do it wisely!\n",
       "\n",
-      "classdef ", name, " < Indigo.Systems.Explicit\n",
+      "classdef ", name, " < Indigo.DAE.Explicit\n",
       i, "%\n",
       i, "% ", info, "\n",
       i, "%\n",
@@ -1141,9 +1224,10 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jv_x", [x, v], Jv_x,
-          parse("data")  = properties,
-          parse("label") = cat("D_", label),
-          parse("info")  = "Evaluate the Jacobian of v with respect to x."
+          parse("skipnull") = false,
+          parse("data")     = properties,
+          parse("label")    = cat("D_", label),
+          parse("info")     = "Evaluate the Jacobian of v with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1175,6 +1259,12 @@ IndigoCodegen := module()
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to v."
       )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      i, i, "function out = in_domain( ~, ~, ~ )\n",
+      i, i, i, "out = true;\n",
+      i, i, "end % in_domain\n",
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
@@ -1327,7 +1417,7 @@ IndigoCodegen := module()
       "% This file has been automatically generated by Indigo.\n",
       "% DISCLAIMER: If you need to edit it, do it wisely!\n",
       "\n",
-      "classdef ", name, " < Indigo.Systems.SemiExplicit\n",
+      "classdef ", name, " < Indigo.DAE.SemiExplicit\n",
       i, "%\n",
       i, "% ", info, "\n",
       i, "%\n",
@@ -1429,9 +1519,10 @@ IndigoCodegen := module()
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
           "Jv_x", [x, v], Jv_x,
-          parse("data")  = properties,
-          parse("label") = cat("D_", label),
-          parse("info")  = "Evaluate the Jacobian of v with respect to x."
+          parse("skipnull") = false,
+          parse("data")     = properties,
+          parse("label")    = cat("D_", label),
+          parse("info")     = "Evaluate the Jacobian of v with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1463,6 +1554,12 @@ IndigoCodegen := module()
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to v."
       )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      i, i, "function out = in_domain( ~, ~, ~ )\n",
+      i, i, i, "out = true;\n",
+      i, i, "end % in_domain\n",
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
