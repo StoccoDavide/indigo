@@ -300,11 +300,11 @@ classdef NewtonFixed < handle
       for i=1:this.m_max_iterations
         this.m_iterations = i;
 
-        if ~all( isfinite(x) ); break; end
+        if ~all(isfinite(x)); break; end
 
         % Evaluate F
         F = this.eval_function(x);
-        if ~all( isfinite(F) ); break; end
+        if ~all(isfinite(F)); break; end
 
         % Check convergence
         if norm(F, inf) < this.m_tolerance
@@ -315,12 +315,12 @@ classdef NewtonFixed < handle
 
         % Evaluate JF
         J = this.eval_jacobian(x);
-        if ~all( isfinite(J) ); break; end
+        if ~all(isfinite(J)); break; end
 
         % Evaluate advancing direction
         D = -J\F;
         %[D, ~] = lsqr(J, -F, 1e-8, 50);
-        if ~all( isfinite(D) ); break; end
+        if ~all(isfinite(D)); break; end
 
         % Update solution
         x = x+D;

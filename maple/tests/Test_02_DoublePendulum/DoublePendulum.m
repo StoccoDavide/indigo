@@ -30,7 +30,7 @@ classdef DoublePendulum < Indigo.DAE.Implicit
 
       % Superclass constructor
       num_eqns = 10;
-      num_veil = 0;
+      num_veil = 19;
       num_invs = 6;
       this = this@Indigo.DAE.Implicit('DoublePendulum', num_eqns, num_veil, num_invs);
 
@@ -56,13 +56,12 @@ classdef DoublePendulum < Indigo.DAE.Implicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_F = F( this, in_1, in_2, ~, ~ )
+    function out_F = F( this, in_1, in_2, in_3, ~ )
       % Evaluate the function F.
 
       % Extract properties
       m__1 = this.m_m__1;
       m__2 = this.m_m__2;
-      g = this.m_g;
 
       % Extract inputs
       x__1 = in_1(1);
@@ -85,28 +84,28 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       v__2_dot = in_2(8);
       lambda__1_dot = in_2(9);
       lambda__2_dot = in_2(10);
+      V_y58KN_1 = in_3(1);
+      V_y58KN_2 = in_3(2);
+      V_y58KN_3 = in_3(3);
+      V_y58KN_4 = in_3(4);
 
       % Evaluate function
       out_1 = -u__1 + x__1_dot;
       out_2 = -v__1 + y__1_dot;
       out_3 = -u__2 + x__2_dot;
       out_4 = -v__2 + y__2_dot;
-      t2 = x__1 * lambda__1;
-      out_5 = u__1_dot * m__1 + 2 * t2;
-      t4 = g * m__1;
-      t6 = y__1 * lambda__1;
-      out_6 = v__1_dot * m__1 + t4 + 2 * t6;
-      t9 = x__2 * lambda__2;
-      out_7 = u__2_dot * m__2 + 2 * t9;
-      t11 = g * m__2;
-      t13 = y__2 * lambda__2;
-      out_8 = v__2_dot * m__2 + t11 + 2 * t13;
-      t28 = x__1 ^ 2;
-      t29 = y__1 ^ 2;
-      out_9 = (8 * x__1_dot * t2 + y__1_dot * (2 * t4 + 8 * t6) - 4 * u__1 * u__1_dot * m__1 - 4 * m__1 * v__1 * v__1_dot + lambda__1_dot * (4 * t28 + 4 * t29)) / m__1;
-      t47 = x__2 ^ 2;
-      t48 = y__2 ^ 2;
-      out_10 = (8 * x__2_dot * t9 + y__2_dot * (2 * t11 + 8 * t13) - 4 * u__2 * u__2_dot * m__2 - 4 * m__2 * v__2 * v__2_dot + lambda__2_dot * (4 * t47 + 4 * t48)) / m__2;
+      out_5 = u__1_dot + 2 * V_y58KN_1;
+      out_6 = v__1_dot + V_y58KN_2;
+      out_7 = u__2_dot + 2 * V_y58KN_3;
+      out_8 = v__2_dot + V_y58KN_4;
+      t7 = 0.1e1 / m__1;
+      t19 = x__1 ^ 2;
+      t20 = y__1 ^ 2;
+      out_9 = 2 * t7 * x__1_dot * (V_y58KN_1 * m__1 + x__1 * lambda__1) + y__1_dot * (2 * y__1 * t7 * lambda__1 + V_y58KN_2) - 2 * u__1 * u__1_dot - 2 * v__1 * v__1_dot + 2 * t7 * lambda__1_dot * (t19 + t20);
+      t29 = 0.1e1 / m__2;
+      t41 = x__2 ^ 2;
+      t42 = y__2 ^ 2;
+      out_10 = 2 * t29 * x__2_dot * (V_y58KN_3 * m__2 + x__2 * lambda__2) + y__2_dot * (2 * y__2 * t29 * lambda__2 + V_y58KN_4) - 2 * u__2 * u__2_dot - 2 * v__2 * v__2_dot + 2 * t29 * lambda__2_dot * (t41 + t42);
 
       % Store outputs
       out_F = zeros(10, 1);
@@ -150,40 +149,28 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       lambda__2_dot = in_2(10);
 
       % Evaluate function
-      out_5_1 = 2 * lambda__1;
-      t1 = 0.1e1 / m__1;
-      out_9_1 = (8 * x__1 * lambda__1_dot + 8 * lambda__1 * x__1_dot) * t1;
-      out_6_2 = out_5_1;
-      out_9_2 = (8 * y__1 * lambda__1_dot + 8 * lambda__1 * y__1_dot) * t1;
-      out_7_3 = 2 * lambda__2;
-      t10 = 0.1e1 / m__2;
-      out_10_3 = (8 * x__2 * lambda__2_dot + 8 * lambda__2 * x__2_dot) * t10;
-      out_8_4 = out_7_3;
-      out_10_4 = (8 * y__2 * lambda__2_dot + 8 * lambda__2 * y__2_dot) * t10;
+      t2 = 0.1e1 / m__1;
+      out_9_1 = 4 * t2 * lambda__1_dot * x__1 + 2 * t2 * x__1_dot * lambda__1;
+      out_9_2 = 4 * t2 * lambda__1_dot * y__1 + 2 * y__1_dot * t2 * lambda__1;
+      t15 = 0.1e1 / m__2;
+      out_10_3 = 4 * t15 * lambda__2_dot * x__2 + 2 * t15 * x__2_dot * lambda__2;
+      out_10_4 = 4 * t15 * lambda__2_dot * y__2 + 2 * y__2_dot * t15 * lambda__2;
       out_1_5 = -1;
-      out_9_5 = -4 * u__1_dot;
+      out_9_5 = -2 * u__1_dot;
       out_2_6 = -1;
-      out_9_6 = -4 * v__1_dot;
+      out_9_6 = -2 * v__1_dot;
       out_3_7 = -1;
-      out_10_7 = -4 * u__2_dot;
+      out_10_7 = -2 * u__2_dot;
       out_4_8 = -1;
-      out_10_8 = -4 * v__2_dot;
-      out_5_9 = 2 * x__1;
-      out_6_9 = 2 * y__1;
-      out_9_9 = (8 * x__1 * x__1_dot + 8 * y__1 * y__1_dot) * t1;
-      out_7_10 = 2 * x__2;
-      out_8_10 = 2 * y__2;
-      out_10_10 = (8 * x__2 * x__2_dot + 8 * y__2 * y__2_dot) * t10;
+      out_10_8 = -2 * v__2_dot;
+      out_9_9 = 2 * t2 * x__1_dot * x__1 + 2 * y__1_dot * t2 * y__1;
+      out_10_10 = 2 * t15 * x__2_dot * x__2 + 2 * y__2_dot * t15 * y__2;
 
       % Store outputs
       out_JF_x = zeros(10, 10);
-      out_JF_x(5, 1) = out_5_1;
       out_JF_x(9, 1) = out_9_1;
-      out_JF_x(6, 2) = out_6_2;
       out_JF_x(9, 2) = out_9_2;
-      out_JF_x(7, 3) = out_7_3;
       out_JF_x(10, 3) = out_10_3;
-      out_JF_x(8, 4) = out_8_4;
       out_JF_x(10, 4) = out_10_4;
       out_JF_x(1, 5) = out_1_5;
       out_JF_x(9, 5) = out_9_5;
@@ -193,23 +180,18 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       out_JF_x(10, 7) = out_10_7;
       out_JF_x(4, 8) = out_4_8;
       out_JF_x(10, 8) = out_10_8;
-      out_JF_x(5, 9) = out_5_9;
-      out_JF_x(6, 9) = out_6_9;
       out_JF_x(9, 9) = out_9_9;
-      out_JF_x(7, 10) = out_7_10;
-      out_JF_x(8, 10) = out_8_10;
       out_JF_x(10, 10) = out_10_10;
     end % JF_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_JF_x_dot = JF_x_dot( this, in_1, ~, ~, ~ )
+    function out_JF_x_dot = JF_x_dot( this, in_1, ~, in_3, ~ )
       % Evaluate the Jacobian of F with respect to x_dot.
 
       % Extract properties
       m__1 = this.m_m__1;
       m__2 = this.m_m__2;
-      g = this.m_g;
 
       % Extract inputs
       x__1 = in_1(1);
@@ -222,32 +204,36 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       v__2 = in_1(8);
       lambda__1 = in_1(9);
       lambda__2 = in_1(10);
+      V_y58KN_1 = in_3(1);
+      V_y58KN_2 = in_3(2);
+      V_y58KN_3 = in_3(3);
+      V_y58KN_4 = in_3(4);
 
       % Evaluate function
       out_1_1 = 1;
-      t2 = 0.1e1 / m__1;
-      out_9_1 = 8 * t2 * lambda__1 * x__1;
+      t4 = 0.1e1 / m__1;
+      out_9_1 = 2 * t4 * (V_y58KN_1 * m__1 + x__1 * lambda__1);
       out_2_2 = 1;
-      out_9_2 = t2 * (2 * g * m__1 + 8 * y__1 * lambda__1);
+      out_9_2 = 2 * y__1 * t4 * lambda__1 + V_y58KN_2;
       out_3_3 = 1;
-      t10 = 0.1e1 / m__2;
-      out_10_3 = 8 * t10 * lambda__2 * x__2;
+      t12 = 0.1e1 / m__2;
+      out_10_3 = 2 * t12 * (V_y58KN_3 * m__2 + x__2 * lambda__2);
       out_4_4 = 1;
-      out_10_4 = t10 * (2 * g * m__2 + 8 * y__2 * lambda__2);
-      out_5_5 = m__1;
-      out_9_5 = -4 * u__1;
-      out_6_6 = m__1;
-      out_9_6 = -4 * v__1;
-      out_7_7 = m__2;
-      out_10_7 = -4 * u__2;
-      out_8_8 = m__2;
-      out_10_8 = -4 * v__2;
+      out_10_4 = 2 * y__2 * t12 * lambda__2 + V_y58KN_4;
+      out_5_5 = 1;
+      out_9_5 = -2 * u__1;
+      out_6_6 = 1;
+      out_9_6 = -2 * v__1;
+      out_7_7 = 1;
+      out_10_7 = -2 * u__2;
+      out_8_8 = 1;
+      out_10_8 = -2 * v__2;
       t21 = x__1 ^ 2;
       t22 = y__1 ^ 2;
-      out_9_9 = t2 * (4 * t21 + 4 * t22);
+      out_9_9 = 2 * t4 * (t21 + t22);
       t25 = x__2 ^ 2;
       t26 = y__2 ^ 2;
-      out_10_10 = t10 * (4 * t25 + 4 * t26);
+      out_10_10 = 2 * t12 * (t25 + t26);
 
       % Store outputs
       out_JF_x_dot = zeros(10, 10);
@@ -285,47 +271,13 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       % No body
 
       % Store outputs
-      out_JF_v = zeros(10, 0);
+      out_JF_v = zeros(10, 19);
     end % JF_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_v = v( ~, ~, ~ )
+    function out_v = v( this, in_1, ~ )
       % Evaluate the the veils v.
-
-      % Extract properties
-      % No properties
-
-      % Extract inputs
-
-      % Evaluate function
-      % No body
-
-      % Store outputs
-      out_v = zeros(0, 1);
-    end % v
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_Jv_x = Jv_x( ~, ~, ~, ~ )
-      % Evaluate the Jacobian of v with respect to x.
-
-      % Extract properties
-      % No properties
-
-      % Extract inputs
-
-      % Evaluate function
-      % No body
-
-      % Store outputs
-      out_Jv_x = zeros(0, 10);
-    end % Jv_x
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_h = h( this, in_1, ~, ~ )
-      % Calculate the residual of the invariants h.
 
       % Extract properties
       m__1 = this.m_m__1;
@@ -347,22 +299,503 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       lambda__2 = in_1(10);
 
       % Evaluate function
-      t1 = ell__1 ^ 2;
-      t2 = x__1 ^ 2;
-      t3 = y__1 ^ 2;
-      out_1 = t1 - t2 - t3;
-      t4 = ell__2 ^ 2;
-      t5 = x__2 ^ 2;
-      t6 = y__2 ^ 2;
-      out_2 = t4 - t5 - t6;
-      out_3 = 2 * u__1 * x__1 + 2 * v__1 * y__1;
-      out_4 = 2 * u__2 * x__2 + 2 * v__2 * y__2;
-      t17 = u__1 ^ 2;
-      t18 = v__1 ^ 2;
-      out_5 = 0.1e1 / m__1 * (lambda__1 * (4 * t2 + 4 * t3) + 2 * (g * y__1 - t17 - t18) * m__1);
+      t2 = 0.1e1 / m__1;
+      V_y58KN_1 = t2 * lambda__1 * x__1;
+      t5 = 2 * y__1 * lambda__1;
+      V_y58KN_2 = t2 * (g * m__1 + t5);
+      t7 = x__2 * lambda__2;
+      t8 = 0.1e1 / m__2;
+      V_y58KN_3 = t8 * t7;
+      t11 = 2 * y__2 * lambda__2;
+      V_y58KN_4 = t8 * (g * m__2 + t11);
+      t13 = ell__1 ^ 2;
+      t14 = x__1 ^ 2;
+      t15 = y__1 ^ 2;
+      V_y58KN_5 = t13 - t14 - t15;
+      t16 = ell__2 ^ 2;
+      t17 = x__2 ^ 2;
+      t18 = y__2 ^ 2;
+      V_y58KN_6 = t16 - t17 - t18;
+      V_y58KN_7 = u__1 * x__1 + v__1 * y__1;
+      V_y58KN_8 = u__2 * x__2 + v__2 * y__2;
+      t23 = u__1 ^ 2;
+      t24 = v__1 ^ 2;
+      V_y58KN_9 = -2 * x__1 * V_y58KN_1 + t23 + t24;
+      V_y58KN_10 = y__1 * V_y58KN_2 - V_y58KN_9;
+      V_y58KN_11 = V_y58KN_10;
       t28 = u__2 ^ 2;
       t29 = v__2 ^ 2;
-      out_6 = 0.1e1 / m__2 * (lambda__2 * (4 * t5 + 4 * t6) + 2 * (g * y__2 - t28 - t29) * m__2);
+      V_y58KN_12 = -2 * x__2 * V_y58KN_3 + t28 + t29;
+      V_y58KN_13 = V_y58KN_10;
+      V_y58KN_14 = y__2 * V_y58KN_4 - V_y58KN_12;
+      V_y58KN_15 = t2 * (m__1 * V_y58KN_2 + t5);
+      V_y58KN_16 = t2 * (t14 + t15);
+      V_y58KN_17 = t8 * (m__2 * V_y58KN_3 + t7);
+      V_y58KN_18 = t8 * (m__2 * V_y58KN_4 + t11);
+      V_y58KN_19 = t8 * (t17 + t18);
+
+      % Store outputs
+      out_v = zeros(19, 1);
+      out_v(1) = V_y58KN_1;
+      out_v(2) = V_y58KN_2;
+      out_v(3) = V_y58KN_3;
+      out_v(4) = V_y58KN_4;
+      out_v(5) = V_y58KN_5;
+      out_v(6) = V_y58KN_6;
+      out_v(7) = V_y58KN_7;
+      out_v(8) = V_y58KN_8;
+      out_v(9) = V_y58KN_9;
+      out_v(10) = V_y58KN_10;
+      out_v(11) = V_y58KN_11;
+      out_v(12) = V_y58KN_12;
+      out_v(13) = V_y58KN_13;
+      out_v(14) = V_y58KN_14;
+      out_v(15) = V_y58KN_15;
+      out_v(16) = V_y58KN_16;
+      out_v(17) = V_y58KN_17;
+      out_v(18) = V_y58KN_18;
+      out_v(19) = V_y58KN_19;
+    end % v
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_Jv_x = Jv_x( this, in_1, in_2, ~ )
+      % Evaluate the Jacobian of v with respect to x.
+
+      % Extract properties
+      m__1 = this.m_m__1;
+      m__2 = this.m_m__2;
+
+      % Extract inputs
+      x__1 = in_1(1);
+      y__1 = in_1(2);
+      x__2 = in_1(3);
+      y__2 = in_1(4);
+      u__1 = in_1(5);
+      v__1 = in_1(6);
+      u__2 = in_1(7);
+      v__2 = in_1(8);
+      lambda__1 = in_1(9);
+      lambda__2 = in_1(10);
+      V_y58KN_1 = in_2(1);
+      V_y58KN_2 = in_2(2);
+      V_y58KN_3 = in_2(3);
+      V_y58KN_4 = in_2(4);
+
+      % Evaluate function
+      t1 = 0.1e1 / m__1;
+      D_V_y58KN_1_1 = t1 * lambda__1;
+      D_V_y58KN_2_1 = 0;
+      D_V_y58KN_3_1 = 0;
+      D_V_y58KN_4_1 = 0;
+      D_V_y58KN_5_1 = -2 * x__1;
+      D_V_y58KN_6_1 = 0;
+      D_V_y58KN_7_1 = u__1;
+      D_V_y58KN_8_1 = 0;
+      D_V_y58KN_9_1 = -2 * x__1 * D_V_y58KN_1_1 - 2 * V_y58KN_1;
+      D_V_y58KN_10_1 = -D_V_y58KN_9_1;
+      D_V_y58KN_11_1 = D_V_y58KN_10_1;
+      D_V_y58KN_12_1 = 0;
+      D_V_y58KN_13_1 = D_V_y58KN_10_1;
+      D_V_y58KN_14_1 = 0;
+      D_V_y58KN_15_1 = 0;
+      t5 = t1 * x__1;
+      D_V_y58KN_16_1 = 2 * t5;
+      D_V_y58KN_17_1 = 0;
+      D_V_y58KN_18_1 = 0;
+      D_V_y58KN_19_1 = 0;
+      D_V_y58KN_1_2 = 0;
+      D_V_y58KN_2_2 = 2 * D_V_y58KN_1_1;
+      D_V_y58KN_3_2 = 0;
+      D_V_y58KN_4_2 = 0;
+      t6 = 2 * y__1;
+      D_V_y58KN_5_2 = -t6;
+      D_V_y58KN_6_2 = 0;
+      D_V_y58KN_7_2 = v__1;
+      D_V_y58KN_8_2 = 0;
+      D_V_y58KN_9_2 = 0;
+      D_V_y58KN_10_2 = V_y58KN_2;
+      D_V_y58KN_11_2 = V_y58KN_2;
+      D_V_y58KN_12_2 = 0;
+      D_V_y58KN_13_2 = V_y58KN_2;
+      D_V_y58KN_14_2 = 0;
+      D_V_y58KN_15_2 = D_V_y58KN_2_2;
+      D_V_y58KN_16_2 = 2 * t1 * y__1;
+      D_V_y58KN_17_2 = 0;
+      D_V_y58KN_18_2 = 0;
+      D_V_y58KN_19_2 = 0;
+      D_V_y58KN_1_3 = 0;
+      D_V_y58KN_2_3 = 0;
+      t8 = 0.1e1 / m__2;
+      D_V_y58KN_3_3 = t8 * lambda__2;
+      D_V_y58KN_4_3 = 0;
+      D_V_y58KN_5_3 = 0;
+      D_V_y58KN_6_3 = -2 * x__2;
+      D_V_y58KN_7_3 = 0;
+      D_V_y58KN_8_3 = u__2;
+      D_V_y58KN_9_3 = 0;
+      D_V_y58KN_10_3 = 0;
+      D_V_y58KN_11_3 = 0;
+      D_V_y58KN_12_3 = -2 * V_y58KN_3;
+      D_V_y58KN_13_3 = 0;
+      D_V_y58KN_14_3 = 0;
+      D_V_y58KN_15_3 = 0;
+      D_V_y58KN_16_3 = 0;
+      D_V_y58KN_17_3 = D_V_y58KN_3_3;
+      D_V_y58KN_18_3 = 0;
+      t11 = t8 * x__2;
+      D_V_y58KN_19_3 = 2 * t11;
+      D_V_y58KN_1_4 = 0;
+      D_V_y58KN_2_4 = 0;
+      D_V_y58KN_3_4 = 0;
+      D_V_y58KN_4_4 = 2 * D_V_y58KN_17_3;
+      D_V_y58KN_5_4 = 0;
+      D_V_y58KN_6_4 = -2 * y__2;
+      D_V_y58KN_7_4 = 0;
+      D_V_y58KN_8_4 = v__2;
+      D_V_y58KN_9_4 = 0;
+      D_V_y58KN_10_4 = 0;
+      D_V_y58KN_11_4 = 0;
+      D_V_y58KN_12_4 = 0;
+      D_V_y58KN_13_4 = 0;
+      D_V_y58KN_14_4 = V_y58KN_4;
+      D_V_y58KN_15_4 = 0;
+      D_V_y58KN_16_4 = 0;
+      D_V_y58KN_17_4 = 0;
+      D_V_y58KN_18_4 = D_V_y58KN_4_4;
+      D_V_y58KN_19_4 = 2 * t8 * y__2;
+      D_V_y58KN_1_5 = 0;
+      D_V_y58KN_2_5 = 0;
+      D_V_y58KN_3_5 = 0;
+      D_V_y58KN_4_5 = 0;
+      D_V_y58KN_5_5 = 0;
+      D_V_y58KN_6_5 = 0;
+      D_V_y58KN_7_5 = x__1;
+      D_V_y58KN_8_5 = 0;
+      D_V_y58KN_9_5 = 2 * u__1;
+      D_V_y58KN_10_5 = 0;
+      D_V_y58KN_11_5 = 0;
+      D_V_y58KN_12_5 = 0;
+      D_V_y58KN_13_5 = 0;
+      D_V_y58KN_14_5 = 0;
+      D_V_y58KN_15_5 = 0;
+      D_V_y58KN_16_5 = 0;
+      D_V_y58KN_17_5 = 0;
+      D_V_y58KN_18_5 = 0;
+      D_V_y58KN_19_5 = 0;
+      D_V_y58KN_1_6 = 0;
+      D_V_y58KN_2_6 = 0;
+      D_V_y58KN_3_6 = 0;
+      D_V_y58KN_4_6 = 0;
+      D_V_y58KN_5_6 = 0;
+      D_V_y58KN_6_6 = 0;
+      D_V_y58KN_7_6 = y__1;
+      D_V_y58KN_8_6 = 0;
+      D_V_y58KN_9_6 = 2 * v__1;
+      D_V_y58KN_10_6 = 0;
+      D_V_y58KN_11_6 = 0;
+      D_V_y58KN_12_6 = 0;
+      D_V_y58KN_13_6 = 0;
+      D_V_y58KN_14_6 = 0;
+      D_V_y58KN_15_6 = 0;
+      D_V_y58KN_16_6 = 0;
+      D_V_y58KN_17_6 = 0;
+      D_V_y58KN_18_6 = 0;
+      D_V_y58KN_19_6 = 0;
+      D_V_y58KN_1_7 = 0;
+      D_V_y58KN_2_7 = 0;
+      D_V_y58KN_3_7 = 0;
+      D_V_y58KN_4_7 = 0;
+      D_V_y58KN_5_7 = 0;
+      D_V_y58KN_6_7 = 0;
+      D_V_y58KN_7_7 = 0;
+      D_V_y58KN_8_7 = x__2;
+      D_V_y58KN_9_7 = 0;
+      D_V_y58KN_10_7 = 0;
+      D_V_y58KN_11_7 = 0;
+      D_V_y58KN_12_7 = 2 * u__2;
+      D_V_y58KN_13_7 = 0;
+      D_V_y58KN_14_7 = 0;
+      D_V_y58KN_15_7 = 0;
+      D_V_y58KN_16_7 = 0;
+      D_V_y58KN_17_7 = 0;
+      D_V_y58KN_18_7 = 0;
+      D_V_y58KN_19_7 = 0;
+      D_V_y58KN_1_8 = 0;
+      D_V_y58KN_2_8 = 0;
+      D_V_y58KN_3_8 = 0;
+      D_V_y58KN_4_8 = 0;
+      D_V_y58KN_5_8 = 0;
+      D_V_y58KN_6_8 = 0;
+      D_V_y58KN_7_8 = 0;
+      D_V_y58KN_8_8 = y__2;
+      D_V_y58KN_9_8 = 0;
+      D_V_y58KN_10_8 = 0;
+      D_V_y58KN_11_8 = 0;
+      D_V_y58KN_12_8 = 2 * v__2;
+      D_V_y58KN_13_8 = 0;
+      D_V_y58KN_14_8 = -D_V_y58KN_12_3;
+      D_V_y58KN_15_8 = 0;
+      D_V_y58KN_16_8 = 0;
+      D_V_y58KN_17_8 = 0;
+      D_V_y58KN_18_8 = 0;
+      D_V_y58KN_19_8 = 0;
+      D_V_y58KN_1_9 = t5;
+      D_V_y58KN_2_9 = D_V_y58KN_16_2;
+      D_V_y58KN_3_9 = 0;
+      D_V_y58KN_4_9 = 0;
+      D_V_y58KN_5_9 = 0;
+      D_V_y58KN_6_9 = 0;
+      D_V_y58KN_7_9 = 0;
+      D_V_y58KN_8_9 = 0;
+      D_V_y58KN_9_9 = 0;
+      D_V_y58KN_10_9 = y__1 * D_V_y58KN_2_2;
+      D_V_y58KN_11_9 = 0;
+      D_V_y58KN_12_9 = 0;
+      D_V_y58KN_13_9 = 0;
+      D_V_y58KN_14_9 = 0;
+      D_V_y58KN_15_9 = t1 * (m__1 * D_V_y58KN_2_2 + t6);
+      D_V_y58KN_16_9 = 0;
+      D_V_y58KN_17_9 = 0;
+      D_V_y58KN_18_9 = 0;
+      D_V_y58KN_19_9 = 0;
+      D_V_y58KN_1_10 = 0;
+      D_V_y58KN_2_10 = 0;
+      D_V_y58KN_3_10 = t11;
+      D_V_y58KN_4_10 = D_V_y58KN_19_4;
+      D_V_y58KN_5_10 = 0;
+      D_V_y58KN_6_10 = 0;
+      D_V_y58KN_7_10 = 0;
+      D_V_y58KN_8_10 = 0;
+      D_V_y58KN_9_10 = 0;
+      D_V_y58KN_10_10 = 0;
+      D_V_y58KN_11_10 = 0;
+      D_V_y58KN_12_10 = 0;
+      D_V_y58KN_13_10 = 0;
+      D_V_y58KN_14_10 = 0;
+      D_V_y58KN_15_10 = 0;
+      D_V_y58KN_16_10 = 0;
+      D_V_y58KN_17_10 = D_V_y58KN_3_10;
+      D_V_y58KN_18_10 = D_V_y58KN_4_10;
+      D_V_y58KN_19_10 = 0;
+
+      % Store outputs
+      out_Jv_x = zeros(19, 10);
+      out_Jv_x(1, 1) = D_V_y58KN_1_1;
+      out_Jv_x(2, 1) = D_V_y58KN_2_1;
+      out_Jv_x(3, 1) = D_V_y58KN_3_1;
+      out_Jv_x(4, 1) = D_V_y58KN_4_1;
+      out_Jv_x(5, 1) = D_V_y58KN_5_1;
+      out_Jv_x(6, 1) = D_V_y58KN_6_1;
+      out_Jv_x(7, 1) = D_V_y58KN_7_1;
+      out_Jv_x(8, 1) = D_V_y58KN_8_1;
+      out_Jv_x(9, 1) = D_V_y58KN_9_1;
+      out_Jv_x(10, 1) = D_V_y58KN_10_1;
+      out_Jv_x(11, 1) = D_V_y58KN_11_1;
+      out_Jv_x(12, 1) = D_V_y58KN_12_1;
+      out_Jv_x(13, 1) = D_V_y58KN_13_1;
+      out_Jv_x(14, 1) = D_V_y58KN_14_1;
+      out_Jv_x(15, 1) = D_V_y58KN_15_1;
+      out_Jv_x(16, 1) = D_V_y58KN_16_1;
+      out_Jv_x(17, 1) = D_V_y58KN_17_1;
+      out_Jv_x(18, 1) = D_V_y58KN_18_1;
+      out_Jv_x(19, 1) = D_V_y58KN_19_1;
+      out_Jv_x(1, 2) = D_V_y58KN_1_2;
+      out_Jv_x(2, 2) = D_V_y58KN_2_2;
+      out_Jv_x(3, 2) = D_V_y58KN_3_2;
+      out_Jv_x(4, 2) = D_V_y58KN_4_2;
+      out_Jv_x(5, 2) = D_V_y58KN_5_2;
+      out_Jv_x(6, 2) = D_V_y58KN_6_2;
+      out_Jv_x(7, 2) = D_V_y58KN_7_2;
+      out_Jv_x(8, 2) = D_V_y58KN_8_2;
+      out_Jv_x(9, 2) = D_V_y58KN_9_2;
+      out_Jv_x(10, 2) = D_V_y58KN_10_2;
+      out_Jv_x(11, 2) = D_V_y58KN_11_2;
+      out_Jv_x(12, 2) = D_V_y58KN_12_2;
+      out_Jv_x(13, 2) = D_V_y58KN_13_2;
+      out_Jv_x(14, 2) = D_V_y58KN_14_2;
+      out_Jv_x(15, 2) = D_V_y58KN_15_2;
+      out_Jv_x(16, 2) = D_V_y58KN_16_2;
+      out_Jv_x(17, 2) = D_V_y58KN_17_2;
+      out_Jv_x(18, 2) = D_V_y58KN_18_2;
+      out_Jv_x(19, 2) = D_V_y58KN_19_2;
+      out_Jv_x(1, 3) = D_V_y58KN_1_3;
+      out_Jv_x(2, 3) = D_V_y58KN_2_3;
+      out_Jv_x(3, 3) = D_V_y58KN_3_3;
+      out_Jv_x(4, 3) = D_V_y58KN_4_3;
+      out_Jv_x(5, 3) = D_V_y58KN_5_3;
+      out_Jv_x(6, 3) = D_V_y58KN_6_3;
+      out_Jv_x(7, 3) = D_V_y58KN_7_3;
+      out_Jv_x(8, 3) = D_V_y58KN_8_3;
+      out_Jv_x(9, 3) = D_V_y58KN_9_3;
+      out_Jv_x(10, 3) = D_V_y58KN_10_3;
+      out_Jv_x(11, 3) = D_V_y58KN_11_3;
+      out_Jv_x(12, 3) = D_V_y58KN_12_3;
+      out_Jv_x(13, 3) = D_V_y58KN_13_3;
+      out_Jv_x(14, 3) = D_V_y58KN_14_3;
+      out_Jv_x(15, 3) = D_V_y58KN_15_3;
+      out_Jv_x(16, 3) = D_V_y58KN_16_3;
+      out_Jv_x(17, 3) = D_V_y58KN_17_3;
+      out_Jv_x(18, 3) = D_V_y58KN_18_3;
+      out_Jv_x(19, 3) = D_V_y58KN_19_3;
+      out_Jv_x(1, 4) = D_V_y58KN_1_4;
+      out_Jv_x(2, 4) = D_V_y58KN_2_4;
+      out_Jv_x(3, 4) = D_V_y58KN_3_4;
+      out_Jv_x(4, 4) = D_V_y58KN_4_4;
+      out_Jv_x(5, 4) = D_V_y58KN_5_4;
+      out_Jv_x(6, 4) = D_V_y58KN_6_4;
+      out_Jv_x(7, 4) = D_V_y58KN_7_4;
+      out_Jv_x(8, 4) = D_V_y58KN_8_4;
+      out_Jv_x(9, 4) = D_V_y58KN_9_4;
+      out_Jv_x(10, 4) = D_V_y58KN_10_4;
+      out_Jv_x(11, 4) = D_V_y58KN_11_4;
+      out_Jv_x(12, 4) = D_V_y58KN_12_4;
+      out_Jv_x(13, 4) = D_V_y58KN_13_4;
+      out_Jv_x(14, 4) = D_V_y58KN_14_4;
+      out_Jv_x(15, 4) = D_V_y58KN_15_4;
+      out_Jv_x(16, 4) = D_V_y58KN_16_4;
+      out_Jv_x(17, 4) = D_V_y58KN_17_4;
+      out_Jv_x(18, 4) = D_V_y58KN_18_4;
+      out_Jv_x(19, 4) = D_V_y58KN_19_4;
+      out_Jv_x(1, 5) = D_V_y58KN_1_5;
+      out_Jv_x(2, 5) = D_V_y58KN_2_5;
+      out_Jv_x(3, 5) = D_V_y58KN_3_5;
+      out_Jv_x(4, 5) = D_V_y58KN_4_5;
+      out_Jv_x(5, 5) = D_V_y58KN_5_5;
+      out_Jv_x(6, 5) = D_V_y58KN_6_5;
+      out_Jv_x(7, 5) = D_V_y58KN_7_5;
+      out_Jv_x(8, 5) = D_V_y58KN_8_5;
+      out_Jv_x(9, 5) = D_V_y58KN_9_5;
+      out_Jv_x(10, 5) = D_V_y58KN_10_5;
+      out_Jv_x(11, 5) = D_V_y58KN_11_5;
+      out_Jv_x(12, 5) = D_V_y58KN_12_5;
+      out_Jv_x(13, 5) = D_V_y58KN_13_5;
+      out_Jv_x(14, 5) = D_V_y58KN_14_5;
+      out_Jv_x(15, 5) = D_V_y58KN_15_5;
+      out_Jv_x(16, 5) = D_V_y58KN_16_5;
+      out_Jv_x(17, 5) = D_V_y58KN_17_5;
+      out_Jv_x(18, 5) = D_V_y58KN_18_5;
+      out_Jv_x(19, 5) = D_V_y58KN_19_5;
+      out_Jv_x(1, 6) = D_V_y58KN_1_6;
+      out_Jv_x(2, 6) = D_V_y58KN_2_6;
+      out_Jv_x(3, 6) = D_V_y58KN_3_6;
+      out_Jv_x(4, 6) = D_V_y58KN_4_6;
+      out_Jv_x(5, 6) = D_V_y58KN_5_6;
+      out_Jv_x(6, 6) = D_V_y58KN_6_6;
+      out_Jv_x(7, 6) = D_V_y58KN_7_6;
+      out_Jv_x(8, 6) = D_V_y58KN_8_6;
+      out_Jv_x(9, 6) = D_V_y58KN_9_6;
+      out_Jv_x(10, 6) = D_V_y58KN_10_6;
+      out_Jv_x(11, 6) = D_V_y58KN_11_6;
+      out_Jv_x(12, 6) = D_V_y58KN_12_6;
+      out_Jv_x(13, 6) = D_V_y58KN_13_6;
+      out_Jv_x(14, 6) = D_V_y58KN_14_6;
+      out_Jv_x(15, 6) = D_V_y58KN_15_6;
+      out_Jv_x(16, 6) = D_V_y58KN_16_6;
+      out_Jv_x(17, 6) = D_V_y58KN_17_6;
+      out_Jv_x(18, 6) = D_V_y58KN_18_6;
+      out_Jv_x(19, 6) = D_V_y58KN_19_6;
+      out_Jv_x(1, 7) = D_V_y58KN_1_7;
+      out_Jv_x(2, 7) = D_V_y58KN_2_7;
+      out_Jv_x(3, 7) = D_V_y58KN_3_7;
+      out_Jv_x(4, 7) = D_V_y58KN_4_7;
+      out_Jv_x(5, 7) = D_V_y58KN_5_7;
+      out_Jv_x(6, 7) = D_V_y58KN_6_7;
+      out_Jv_x(7, 7) = D_V_y58KN_7_7;
+      out_Jv_x(8, 7) = D_V_y58KN_8_7;
+      out_Jv_x(9, 7) = D_V_y58KN_9_7;
+      out_Jv_x(10, 7) = D_V_y58KN_10_7;
+      out_Jv_x(11, 7) = D_V_y58KN_11_7;
+      out_Jv_x(12, 7) = D_V_y58KN_12_7;
+      out_Jv_x(13, 7) = D_V_y58KN_13_7;
+      out_Jv_x(14, 7) = D_V_y58KN_14_7;
+      out_Jv_x(15, 7) = D_V_y58KN_15_7;
+      out_Jv_x(16, 7) = D_V_y58KN_16_7;
+      out_Jv_x(17, 7) = D_V_y58KN_17_7;
+      out_Jv_x(18, 7) = D_V_y58KN_18_7;
+      out_Jv_x(19, 7) = D_V_y58KN_19_7;
+      out_Jv_x(1, 8) = D_V_y58KN_1_8;
+      out_Jv_x(2, 8) = D_V_y58KN_2_8;
+      out_Jv_x(3, 8) = D_V_y58KN_3_8;
+      out_Jv_x(4, 8) = D_V_y58KN_4_8;
+      out_Jv_x(5, 8) = D_V_y58KN_5_8;
+      out_Jv_x(6, 8) = D_V_y58KN_6_8;
+      out_Jv_x(7, 8) = D_V_y58KN_7_8;
+      out_Jv_x(8, 8) = D_V_y58KN_8_8;
+      out_Jv_x(9, 8) = D_V_y58KN_9_8;
+      out_Jv_x(10, 8) = D_V_y58KN_10_8;
+      out_Jv_x(11, 8) = D_V_y58KN_11_8;
+      out_Jv_x(12, 8) = D_V_y58KN_12_8;
+      out_Jv_x(13, 8) = D_V_y58KN_13_8;
+      out_Jv_x(14, 8) = D_V_y58KN_14_8;
+      out_Jv_x(15, 8) = D_V_y58KN_15_8;
+      out_Jv_x(16, 8) = D_V_y58KN_16_8;
+      out_Jv_x(17, 8) = D_V_y58KN_17_8;
+      out_Jv_x(18, 8) = D_V_y58KN_18_8;
+      out_Jv_x(19, 8) = D_V_y58KN_19_8;
+      out_Jv_x(1, 9) = D_V_y58KN_1_9;
+      out_Jv_x(2, 9) = D_V_y58KN_2_9;
+      out_Jv_x(3, 9) = D_V_y58KN_3_9;
+      out_Jv_x(4, 9) = D_V_y58KN_4_9;
+      out_Jv_x(5, 9) = D_V_y58KN_5_9;
+      out_Jv_x(6, 9) = D_V_y58KN_6_9;
+      out_Jv_x(7, 9) = D_V_y58KN_7_9;
+      out_Jv_x(8, 9) = D_V_y58KN_8_9;
+      out_Jv_x(9, 9) = D_V_y58KN_9_9;
+      out_Jv_x(10, 9) = D_V_y58KN_10_9;
+      out_Jv_x(11, 9) = D_V_y58KN_11_9;
+      out_Jv_x(12, 9) = D_V_y58KN_12_9;
+      out_Jv_x(13, 9) = D_V_y58KN_13_9;
+      out_Jv_x(14, 9) = D_V_y58KN_14_9;
+      out_Jv_x(15, 9) = D_V_y58KN_15_9;
+      out_Jv_x(16, 9) = D_V_y58KN_16_9;
+      out_Jv_x(17, 9) = D_V_y58KN_17_9;
+      out_Jv_x(18, 9) = D_V_y58KN_18_9;
+      out_Jv_x(19, 9) = D_V_y58KN_19_9;
+      out_Jv_x(1, 10) = D_V_y58KN_1_10;
+      out_Jv_x(2, 10) = D_V_y58KN_2_10;
+      out_Jv_x(3, 10) = D_V_y58KN_3_10;
+      out_Jv_x(4, 10) = D_V_y58KN_4_10;
+      out_Jv_x(5, 10) = D_V_y58KN_5_10;
+      out_Jv_x(6, 10) = D_V_y58KN_6_10;
+      out_Jv_x(7, 10) = D_V_y58KN_7_10;
+      out_Jv_x(8, 10) = D_V_y58KN_8_10;
+      out_Jv_x(9, 10) = D_V_y58KN_9_10;
+      out_Jv_x(10, 10) = D_V_y58KN_10_10;
+      out_Jv_x(11, 10) = D_V_y58KN_11_10;
+      out_Jv_x(12, 10) = D_V_y58KN_12_10;
+      out_Jv_x(13, 10) = D_V_y58KN_13_10;
+      out_Jv_x(14, 10) = D_V_y58KN_14_10;
+      out_Jv_x(15, 10) = D_V_y58KN_15_10;
+      out_Jv_x(16, 10) = D_V_y58KN_16_10;
+      out_Jv_x(17, 10) = D_V_y58KN_17_10;
+      out_Jv_x(18, 10) = D_V_y58KN_18_10;
+      out_Jv_x(19, 10) = D_V_y58KN_19_10;
+    end % Jv_x
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_h = h( ~, ~, in_2, ~ )
+      % Calculate the residual of the invariants h.
+
+      % Extract properties
+      % No properties
+
+      % Extract inputs
+      V_y58KN_5 = in_2(5);
+      V_y58KN_6 = in_2(6);
+      V_y58KN_7 = in_2(7);
+      V_y58KN_8 = in_2(8);
+      V_y58KN_13 = in_2(13);
+      V_y58KN_14 = in_2(14);
+
+      % Evaluate function
+      out_1 = V_y58KN_5;
+      out_2 = V_y58KN_6;
+      out_3 = V_y58KN_7;
+      out_4 = V_y58KN_8;
+      out_5 = V_y58KN_13;
+      out_6 = V_y58KN_14;
 
       % Store outputs
       out_h = zeros(6, 1);
@@ -376,84 +809,19 @@ classdef DoublePendulum < Indigo.DAE.Implicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_Jh_x = Jh_x( this, in_1, ~, ~ )
+    function out_Jh_x = Jh_x( ~, ~, ~, ~ )
       % Calculate the Jacobian of h with respect to x.
 
       % Extract properties
-      m__1 = this.m_m__1;
-      m__2 = this.m_m__2;
-      g = this.m_g;
+      % No properties
 
       % Extract inputs
-      x__1 = in_1(1);
-      y__1 = in_1(2);
-      x__2 = in_1(3);
-      y__2 = in_1(4);
-      u__1 = in_1(5);
-      v__1 = in_1(6);
-      u__2 = in_1(7);
-      v__2 = in_1(8);
-      lambda__1 = in_1(9);
-      lambda__2 = in_1(10);
 
       % Evaluate function
-      t1 = 2 * x__1;
-      out_1_1 = -t1;
-      out_3_1 = 2 * u__1;
-      t3 = 0.1e1 / m__1;
-      out_5_1 = 8 * t3 * lambda__1 * x__1;
-      t5 = 2 * y__1;
-      out_1_2 = -t5;
-      out_3_2 = 2 * v__1;
-      out_5_2 = t3 * (2 * g * m__1 + 8 * y__1 * lambda__1);
-      t11 = 2 * x__2;
-      out_2_3 = -t11;
-      out_4_3 = 2 * u__2;
-      t13 = 0.1e1 / m__2;
-      out_6_3 = 8 * t13 * lambda__2 * x__2;
-      t15 = 2 * y__2;
-      out_2_4 = -t15;
-      out_4_4 = 2 * v__2;
-      out_6_4 = t13 * (2 * g * m__2 + 8 * y__2 * lambda__2);
-      out_3_5 = t1;
-      out_5_5 = -4 * u__1;
-      out_3_6 = t5;
-      out_5_6 = -4 * v__1;
-      out_4_7 = t11;
-      out_6_7 = -4 * u__2;
-      out_4_8 = t15;
-      out_6_8 = -4 * v__2;
-      t25 = x__1 ^ 2;
-      t26 = y__1 ^ 2;
-      out_5_9 = t3 * (4 * t25 + 4 * t26);
-      t29 = x__2 ^ 2;
-      t30 = y__2 ^ 2;
-      out_6_10 = t13 * (4 * t29 + 4 * t30);
+      % No body
 
       % Store outputs
       out_Jh_x = zeros(6, 10);
-      out_Jh_x(1, 1) = out_1_1;
-      out_Jh_x(3, 1) = out_3_1;
-      out_Jh_x(5, 1) = out_5_1;
-      out_Jh_x(1, 2) = out_1_2;
-      out_Jh_x(3, 2) = out_3_2;
-      out_Jh_x(5, 2) = out_5_2;
-      out_Jh_x(2, 3) = out_2_3;
-      out_Jh_x(4, 3) = out_4_3;
-      out_Jh_x(6, 3) = out_6_3;
-      out_Jh_x(2, 4) = out_2_4;
-      out_Jh_x(4, 4) = out_4_4;
-      out_Jh_x(6, 4) = out_6_4;
-      out_Jh_x(3, 5) = out_3_5;
-      out_Jh_x(5, 5) = out_5_5;
-      out_Jh_x(3, 6) = out_3_6;
-      out_Jh_x(5, 6) = out_5_6;
-      out_Jh_x(4, 7) = out_4_7;
-      out_Jh_x(6, 7) = out_6_7;
-      out_Jh_x(4, 8) = out_4_8;
-      out_Jh_x(6, 8) = out_6_8;
-      out_Jh_x(5, 9) = out_5_9;
-      out_Jh_x(6, 10) = out_6_10;
     end % Jh_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -470,7 +838,7 @@ classdef DoublePendulum < Indigo.DAE.Implicit
       % No body
 
       % Store outputs
-      out_Jh_v = zeros(6, 0);
+      out_Jh_v = zeros(6, 19);
     end % Jh_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

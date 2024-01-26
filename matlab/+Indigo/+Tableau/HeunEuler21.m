@@ -25,7 +25,7 @@ classdef HeunEuler21 < Indigo.RungeKutta
       tbl.b   = [1/2, 1/2];
       tbl.b_e = [1, 0];
       tbl.c   = [0, 1].';
-      this@Indigo.RungeKutta( 'HeunEuler21', 2, tbl );
+      this@Indigo.RungeKutta('HeunEuler21', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

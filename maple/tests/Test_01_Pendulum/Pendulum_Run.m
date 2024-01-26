@@ -121,7 +121,6 @@ IC = solver{1}.project_initial_conditions(IC, t_ini);
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
-D = cell(1, length(T_vec));
 T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
@@ -129,7 +128,7 @@ V = cell(1, length(T_vec));
 % Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.disable_projection();
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
+  [X{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
@@ -236,7 +235,6 @@ figure();
 
 % Allocate solution arrays
 X = cell(1, length(T_vec));
-D = cell(1, length(T_vec));
 T = cell(1, length(T_vec));
 H = cell(1, length(T_vec));
 V = cell(1, length(T_vec));
@@ -246,9 +244,9 @@ for i = 1:length(solver_name)
   solver{i}.enable_projection();
   %olver{i}.set_projected_invs([false; true; false(2,1)]); % Project only position hidden constraints
   %solver{i}.set_projected_invs([true; false(3,1)]); % Project only energy
-  solver{i}.set_projected_invs([false; true(3,1)]); % Project only hidden constraints
+  %solver{i}.set_projected_invs([false; true(3,1)]); % Project only hidden constraints
   %solver{i}.set_projected_invs([true; true(3,1)]); % Project all invariants
-  [X{i}, D{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
+  [X{i}, T{i}, V{i}, H{i}] = solver{i}.adaptive_solve(T_vec, IC);
 end
 
 %% Plot results

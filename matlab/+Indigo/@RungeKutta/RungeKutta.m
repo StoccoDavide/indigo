@@ -85,7 +85,15 @@ classdef RungeKutta < handle
     %
     %> Maximum number of iterations in the projection process.
     %
-    m_max_projection_iter = 10;
+    m_max_projection_iter = 3;
+    %
+    %> Tolerance for projection step
+    %
+    m_projection_tolerance = 1e-10;
+    %
+    %> Low tolerance for projection step
+    %
+    m_projection_low_tolerance = 1e-5;
     %
     %> Boolean vector to project the corresponding invariants.
     %
@@ -129,11 +137,11 @@ classdef RungeKutta < handle
     %
     %> Minimum safety factor for adaptive step.
     %
-    m_fac_min = 0.2;
+    m_factor_min = 0.2;
     %
     %> Maximum safety factor for adaptive step.
     %
-    m_fac_max = 1.5;
+    m_factor_max = 1.5;
     %
     %> Minimum step for advancing
     %
@@ -269,6 +277,37 @@ classdef RungeKutta < handle
         [CMD, 'invalid maximum number of iterations.']);
 
       this.m_max_projection_iter = t_max_projection_iter;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the tolerance for projection step.
+    %>
+    %> \param The tolerance for projection step.
+    %
+    function set_projection_tolerance( this, epsi )
+
+      CMD = 'Indigo.RungeKutta.set_max_projection_iteration(...): ';
+
+      assert(epsi(1) > 0 && epsi(1) < 1, ...
+        [CMD, 'tolerance must be in the range [0,1].']);
+      this.m_projection_tolerance = epsi(1);
+      if (length(epsi) > 1)
+        this.m_projection_low_tolerance = epsi(2);
+      else
+        this.m_projection_low_tolerance = sqrt(epsi);
+      end
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the tolerance for projection step.
+    %>
+    %> \return The tolerance for projection step and the low tolerance.
+    %
+    function [tol, tol_low] = get_projection_tolerance( this )
+      tol     = this.m_projection_tolerance;
+      tol_low = this.m_projection_low_tolerance;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -34,7 +34,7 @@ classdef Merson34 < Indigo.RungeKutta
       tbl.b   = [1/6, 0, 0, 2/3, 1/6];
       tbl.b_e = [1/2, 0, -3/2, 2, 0];
       tbl.c   = [0, 1/3, 1/3, 1/2, 1]';
-      this@Indigo.RungeKutta( 'Merson34', 4, tbl );
+      this@Indigo.RungeKutta('Merson34', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

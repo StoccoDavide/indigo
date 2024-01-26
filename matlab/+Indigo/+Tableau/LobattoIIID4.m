@@ -26,7 +26,7 @@ classdef LobattoIIID4 < Indigo.RungeKutta
       tbl.b   = [1/6, 2/3, 1/6];
       tbl.b_e = [];
       tbl.c   = [0, 1/2, 1]';
-      this@Indigo.RungeKutta( 'LobattoIIID4', 4, tbl );
+      this@Indigo.RungeKutta('LobattoIIID4', 4, tbl);
     end
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   end

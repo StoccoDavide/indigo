@@ -22,7 +22,7 @@ classdef ImplicitMidpoint < Indigo.RungeKutta
       tbl.b   = 1;
       tbl.b_e = [];
       tbl.c   = 1/2;
-      this@Indigo.RungeKutta( 'ImplicitMidpoint', 2, tbl );
+      this@Indigo.RungeKutta('ImplicitMidpoint', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

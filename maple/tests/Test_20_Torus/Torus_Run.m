@@ -98,8 +98,8 @@ H = cell(1, length(T_vec));
 
 % Solve the system for each solver
 for i = 1:length(solver_name)
-  %solver{i}.set_max_projection_iteration(10);
-  %solver{i}.set_max_newton_iteration(10);
+  solver{i}.set_max_projection_iteration(10);
+  solver{i}.set_max_newton_iteration(10);
   %[X{i}, T{i}] = solver{i}.solve( T_vec, ICS );
   [X{i}, T{i}] = solver{i}.adaptive_solve( T_vec, ICS );
   for j = 1:length(T{i})

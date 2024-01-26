@@ -22,7 +22,7 @@ classdef GaussLegendre2 < Indigo.RungeKutta
       tbl.b   = 1;
       tbl.b_e = [];
       tbl.c   = 1/2;
-      this@Indigo.RungeKutta( 'GaussLegendre2', 2, tbl );
+      this@Indigo.RungeKutta('GaussLegendre2', 2, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

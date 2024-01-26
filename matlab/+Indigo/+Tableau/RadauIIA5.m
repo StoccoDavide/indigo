@@ -1,5 +1,5 @@
 %
-%> Class container for Radau IIA method.
+%> Class container for Radau IIA5 method.
 %
 classdef RadauIIA5 < Indigo.RungeKutta
   %
@@ -7,8 +7,9 @@ classdef RadauIIA5 < Indigo.RungeKutta
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Radau IIA method.
-    %> See https://www.math.auckland.ac.nz/~butcher/ODE-book-2008/Tutorials/IRK.pdf
+    %> Radau IIA5 method.
+    %>
+    % https://www.math.auckland.ac.nz/~butcher/ODE-book-2008/Tutorials/IRK.pdf
     %>
     %> \f[
     %> \begin{array}{c|ccc}
@@ -37,9 +38,9 @@ classdef RadauIIA5 < Indigo.RungeKutta
                  37/225+169*s6/1800, 11/45+7*s6/360,     -2/225-s6/75; ...
                  4/9-s6/36,          4/9+s6/36,          1/9];
       tbl.b   = [4/9-s6/36, 4/9+s6/36, 1/9];
-      tbl.b_e = []; % [-1, 1-(7/12)*s6, 1+(7/12)*s6];
+      tbl.b_e = [];
       tbl.c   = [2/5-sqrt(6)/10, 2/5+sqrt(6)/10, 1]';
-      this@Indigo.RungeKutta( 'RadauIIA5', 5, tbl );
+      this@Indigo.RungeKutta('RadauIIA5', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

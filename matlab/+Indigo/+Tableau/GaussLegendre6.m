@@ -1,5 +1,5 @@
 %
-%> Class container for Gauss-Legendre method.
+%> Class container for Gauss-Legendre 6 method.
 %
 classdef GaussLegendre6 < Indigo.RungeKutta
   %
@@ -7,12 +7,12 @@ classdef GaussLegendre6 < Indigo.RungeKutta
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Gauss-Legendre method.
+    %> Gauss-Legendre 6 method.
     %>
     % http://www.jaac-online.com/data/article/jaac/preview/pdf/20170325.pdf
-    % Journal of Applied Analysis and Computation
-    % Volume 7, Number 3, August 2017, 1185-1199
-    % SYMPLECTIC RUNGE-KUTTA METHODS OF HIGH ORDER BASED ON W-TRANSFORMATION
+    % Symplectic Runge-Kutta Methods of High Order Based on W-Transformation,
+    % Kaifeng Xia, Yuhao Cong1 and Geng Sun. Journal of Applied Analysis and
+    % Computation, Volume 7, Number 3, August 2017, 1185-1199
     %>
     %> \f[
     %> \begin{array}{c|ccc}
@@ -43,7 +43,7 @@ classdef GaussLegendre6 < Indigo.RungeKutta
       tbl.b   = [5/18, 4/9, 5/18];
       tbl.b_e = [];
       tbl.c   = [1/2-t_1, 1/2, 1/2+t_1]';
-      this@Indigo.RungeKutta( 'GaussLegendre6', 6, tbl );
+      this@Indigo.RungeKutta('GaussLegendre6', 6, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

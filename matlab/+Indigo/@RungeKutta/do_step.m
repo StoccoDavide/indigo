@@ -1,6 +1,3 @@
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %> Advance using a generic integration method for a system of the form
 %> \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', \mathbf{v}, t) = \mathbf{0} \f$.
 %> The step is based on the following formula:
@@ -39,7 +36,7 @@ function [ x_new, d_t_star, ierr ] = do_step( this, x_k, t_k, d_t )
     this.m_name, d_t);
 
   % Integrate system
-  [x_new, d_t_star, ierr] = this.step( x_k, t_k, d_t );
+  [x_new, d_t_star, ierr] = this.step(x_k, t_k, d_t);
 
   % If the advance failed, try again with substepping
   if (ierr ~= 0)
@@ -52,7 +49,7 @@ function [ x_new, d_t_star, ierr ] = do_step( this, x_k, t_k, d_t )
     k = 2;
     while (k > 0)
       % Integrate system
-      [ x_tmp, t_tmp, d_t_star_tmp, ierr ] = this.step( x_tmp, t_tmp, d_t_tmp );
+      [x_tmp, d_t_star_tmp, ierr] = this.step(x_tmp, t_tmp, d_t_tmp);
 
       % Calculate the next time step with substepping logic
       if (ierr == 0)

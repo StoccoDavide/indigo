@@ -7,12 +7,12 @@ classdef RadauIIB5 < Indigo.RungeKutta
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Radau IIB method.
+    %> Radau IIB5 method.
     %>
     % http://www.jaac-online.com/data/article/jaac/preview/pdf/20170325.pdf
-    % Journal of Applied Analysis and Computation
-    % Volume 7, Number 3, August 2017, 1185-1199
-    % SYMPLECTIC RUNGE-KUTTA METHODS OF HIGH ORDER BASED ON W-TRANSFORMATION
+    % Symplectic Runge-Kutta Methods of High Order Based on W-Transformation,
+    % Kaifeng Xia, Yuhao Cong1 and Geng Sun. Journal of Applied Analysis and
+    % Computation, Volume 7, Number 3, August 2017, 1185-1199
     %>
     %
     function this = RadauIIB5()
@@ -23,7 +23,7 @@ classdef RadauIIB5 < Indigo.RungeKutta
       tbl.b   = [(16-s6)/36, (16+s6)/36, 1/9];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(3,1);
-      this@Indigo.RungeKutta( 'RadauIIB5', 5, tbl );
+      this@Indigo.RungeKutta('RadauIIB5', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

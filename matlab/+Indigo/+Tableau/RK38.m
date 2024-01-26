@@ -28,8 +28,8 @@ classdef RK38 < Indigo.RungeKutta
       tbl.b   = [1/8, 3/8, 3/8, 1/8];
       tbl.b_e = [];
       tbl.c   = [0, 1/3, 2/3, 1]';
-      this@Indigo.RungeKutta( 'RK38', 4, tbl );
+      this@Indigo.RungeKutta('RK38', 4, tbl);
     end
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   end
 end

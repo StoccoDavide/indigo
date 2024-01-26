@@ -32,7 +32,7 @@ classdef Pendulum < Indigo.DAE.Explicit
 
       % Superclass constructor
       num_eqns = 5;
-      num_veil = 0;
+      num_veil = 6;
       num_invs = 4;
       this = this@Indigo.DAE.Explicit('Pendulum', num_eqns, num_veil, num_invs);
 
@@ -62,12 +62,11 @@ classdef Pendulum < Indigo.DAE.Explicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_f = f( this, in_1, ~, ~ )
+    function out_f = f( this, in_1, in_2, ~ )
       % Evaluate the function f.
 
       % Extract properties
       m = this.m_m;
-      g = this.m_g;
 
       % Extract inputs
       x = in_1(1);
@@ -75,6 +74,7 @@ classdef Pendulum < Indigo.DAE.Explicit
       u = in_1(3);
       v = in_1(4);
       lambda = in_1(5);
+      V_y58KN_1 = in_2(1);
 
       % Evaluate function
       out_1 = u;
@@ -82,12 +82,10 @@ classdef Pendulum < Indigo.DAE.Explicit
       t1 = lambda * x;
       t2 = 0.1e1 / m;
       out_3 = -2 * t2 * t1;
-      t5 = g * m;
-      t6 = y * lambda;
-      out_4 = -(t5 + 2 * t6) * t2;
-      t17 = x ^ 2;
-      t18 = y ^ 2;
-      out_5 = -0.1e1 / (t17 + t18) * (8 * u * t1 + 3 * v * t5 + 8 * v * t6) / 2;
+      out_4 = -V_y58KN_1 * t2;
+      t14 = x ^ 2;
+      t15 = y ^ 2;
+      out_5 = -0.1e1 / (t14 + t15) * (2 * lambda * y * v + 8 * u * t1 + 3 * V_y58KN_1 * v) / 2;
 
       % Store outputs
       out_f = zeros(5, 1);
@@ -100,12 +98,11 @@ classdef Pendulum < Indigo.DAE.Explicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_Jf_x = Jf_x( this, in_1, ~, ~ )
+    function out_Jf_x = Jf_x( this, in_1, in_2, ~ )
       % Evaluate the Jacobian of f with respect to x.
 
       % Extract properties
       m = this.m_m;
-      g = this.m_g;
 
       % Extract inputs
       x = in_1(1);
@@ -113,6 +110,7 @@ classdef Pendulum < Indigo.DAE.Explicit
       u = in_1(3);
       v = in_1(4);
       lambda = in_1(5);
+      V_y58KN_1 = in_2(1);
 
       % Evaluate function
       t1 = 0.1e1 / m;
@@ -121,34 +119,29 @@ classdef Pendulum < Indigo.DAE.Explicit
       t6 = y ^ 2;
       t7 = t5 + t6;
       t8 = 0.1e1 / t7;
-      t11 = g * m;
-      t14 = lambda * x;
-      t17 = y * lambda;
-      t21 = t7 ^ 2;
-      t23 = 0.1e1 / t21 * (3 * v * t11 + 8 * u * t14 + 8 * v * t17);
-      out_5_1 = -4 * t8 * u * lambda + x * t23;
-      out_4_2 = out_3_1;
-      out_5_2 = -4 * t8 * v * lambda + y * t23;
+      t11 = lambda * x;
+      t14 = y * lambda;
+      t20 = t7 ^ 2;
+      t22 = 0.1e1 / t20 * (8 * u * t11 + 2 * v * t14 + 3 * V_y58KN_1 * v);
+      out_5_1 = -4 * t8 * u * lambda + x * t22;
+      out_5_2 = -t8 * v * lambda + y * t22;
       out_1_3 = 1;
-      out_5_3 = -4 * t8 * t14;
+      out_5_3 = -4 * t8 * t11;
       out_2_4 = 1;
-      out_5_4 = -t8 * (3 * t11 + 8 * t17) / 2;
+      out_5_4 = -t8 * (2 * t14 + 3 * V_y58KN_1) / 2;
       out_3_5 = -2 * t1 * x;
-      out_4_5 = -2 * t1 * y;
-      out_5_5 = -t8 * (8 * x * u + 8 * y * v) / 2;
+      out_5_5 = -t8 * (8 * x * u + 2 * y * v) / 2;
 
       % Store outputs
       out_Jf_x = zeros(5, 5);
       out_Jf_x(3, 1) = out_3_1;
       out_Jf_x(5, 1) = out_5_1;
-      out_Jf_x(4, 2) = out_4_2;
       out_Jf_x(5, 2) = out_5_2;
       out_Jf_x(1, 3) = out_1_3;
       out_Jf_x(5, 3) = out_5_3;
       out_Jf_x(2, 4) = out_2_4;
       out_Jf_x(5, 4) = out_5_4;
       out_Jf_x(3, 5) = out_3_5;
-      out_Jf_x(4, 5) = out_4_5;
       out_Jf_x(5, 5) = out_5_5;
     end % Jf_x
     %
@@ -166,52 +159,15 @@ classdef Pendulum < Indigo.DAE.Explicit
       % No body
 
       % Store outputs
-      out_Jf_v = zeros(5, 0);
+      out_Jf_v = zeros(5, 6);
     end % Jf_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_v = v( ~, ~, ~ )
+    function out_v = v( this, in_1, ~ )
       % Evaluate the the veils v.
 
       % Extract properties
-      % No properties
-
-      % Extract inputs
-
-      % Evaluate function
-      % No body
-
-      % Store outputs
-      out_v = zeros(0, 1);
-    end % v
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_Jv_x = Jv_x( ~, ~, ~, ~ )
-      % Evaluate the Jacobian of v with respect to x.
-
-      % Extract properties
-      % No properties
-
-      % Extract inputs
-
-      % Evaluate function
-      % No body
-
-      % Store outputs
-      out_Jv_x = zeros(0, 5);
-    end % Jv_x
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_h = h( this, in_1, ~, ~ )
-      % Calculate the residual of the invariants h.
-
-      % Extract properties
-      y__0 = this.m_y__0;
-      u__0 = this.m_u__0;
-      v__0 = this.m_v__0;
       m = this.m_m;
       g = this.m_g;
       ell = this.m_ell;
@@ -224,17 +180,144 @@ classdef Pendulum < Indigo.DAE.Explicit
       lambda = in_1(5);
 
       % Evaluate function
+      t3 = 2 * y * lambda;
+      V_y58KN_1 = g * m + t3;
+      t4 = ell ^ 2;
+      t5 = x ^ 2;
+      t6 = y ^ 2;
+      V_y58KN_2 = t4 - t5 - t6;
+      V_y58KN_3 = x * u + y * v;
+      t12 = u ^ 2;
+      t13 = v ^ 2;
+      t17 = 0.1e1 / m;
+      V_y58KN_4 = t17 * (-y * V_y58KN_1 - 2 * lambda * t5 + (t12 + t13) * m);
+      V_y58KN_5 = t17 * (t3 + V_y58KN_1);
+      V_y58KN_6 = t17 * (t5 + t6);
+
+      % Store outputs
+      out_v = zeros(6, 1);
+      out_v(1) = V_y58KN_1;
+      out_v(2) = V_y58KN_2;
+      out_v(3) = V_y58KN_3;
+      out_v(4) = V_y58KN_4;
+      out_v(5) = V_y58KN_5;
+      out_v(6) = V_y58KN_6;
+    end % v
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_Jv_x = Jv_x( this, in_1, in_2, ~ )
+      % Evaluate the Jacobian of v with respect to x.
+
+      % Extract properties
+      m = this.m_m;
+
+      % Extract inputs
+      x = in_1(1);
+      y = in_1(2);
+      u = in_1(3);
+      v = in_1(4);
+      lambda = in_1(5);
+      V_y58KN_1 = in_2(1);
+
+      % Evaluate function
+      D_V_y58KN_1_1 = 0;
+      D_V_y58KN_2_1 = -2 * x;
+      D_V_y58KN_3_1 = u;
+      t3 = 0.1e1 / m;
+      D_V_y58KN_4_1 = -4 * t3 * lambda * x;
+      D_V_y58KN_5_1 = 0;
+      D_V_y58KN_6_1 = 2 * t3 * x;
+      D_V_y58KN_1_2 = 2 * lambda;
+      t7 = 2 * y;
+      D_V_y58KN_2_2 = -t7;
+      D_V_y58KN_3_2 = v;
+      D_V_y58KN_4_2 = -t3 * V_y58KN_1;
+      D_V_y58KN_5_2 = 2 * t3 * lambda;
+      D_V_y58KN_6_2 = 2 * t3 * y;
+      D_V_y58KN_1_3 = 0;
+      D_V_y58KN_2_3 = 0;
+      D_V_y58KN_3_3 = x;
+      D_V_y58KN_4_3 = 2 * u;
+      D_V_y58KN_5_3 = 0;
+      D_V_y58KN_6_3 = 0;
+      D_V_y58KN_1_4 = 0;
+      D_V_y58KN_2_4 = 0;
+      D_V_y58KN_3_4 = y;
+      D_V_y58KN_4_4 = 2 * v;
+      D_V_y58KN_5_4 = 0;
+      D_V_y58KN_6_4 = 0;
+      D_V_y58KN_1_5 = t7;
+      D_V_y58KN_2_5 = 0;
+      D_V_y58KN_3_5 = 0;
+      t11 = x ^ 2;
+      D_V_y58KN_4_5 = t3 * (-y * D_V_y58KN_1_2 - 2 * t11);
+      D_V_y58KN_5_5 = t3 * (D_V_y58KN_1_2 + D_V_y58KN_1_5);
+      D_V_y58KN_6_5 = 0;
+
+      % Store outputs
+      out_Jv_x = zeros(6, 5);
+      out_Jv_x(1, 1) = D_V_y58KN_1_1;
+      out_Jv_x(2, 1) = D_V_y58KN_2_1;
+      out_Jv_x(3, 1) = D_V_y58KN_3_1;
+      out_Jv_x(4, 1) = D_V_y58KN_4_1;
+      out_Jv_x(5, 1) = D_V_y58KN_5_1;
+      out_Jv_x(6, 1) = D_V_y58KN_6_1;
+      out_Jv_x(1, 2) = D_V_y58KN_1_2;
+      out_Jv_x(2, 2) = D_V_y58KN_2_2;
+      out_Jv_x(3, 2) = D_V_y58KN_3_2;
+      out_Jv_x(4, 2) = D_V_y58KN_4_2;
+      out_Jv_x(5, 2) = D_V_y58KN_5_2;
+      out_Jv_x(6, 2) = D_V_y58KN_6_2;
+      out_Jv_x(1, 3) = D_V_y58KN_1_3;
+      out_Jv_x(2, 3) = D_V_y58KN_2_3;
+      out_Jv_x(3, 3) = D_V_y58KN_3_3;
+      out_Jv_x(4, 3) = D_V_y58KN_4_3;
+      out_Jv_x(5, 3) = D_V_y58KN_5_3;
+      out_Jv_x(6, 3) = D_V_y58KN_6_3;
+      out_Jv_x(1, 4) = D_V_y58KN_1_4;
+      out_Jv_x(2, 4) = D_V_y58KN_2_4;
+      out_Jv_x(3, 4) = D_V_y58KN_3_4;
+      out_Jv_x(4, 4) = D_V_y58KN_4_4;
+      out_Jv_x(5, 4) = D_V_y58KN_5_4;
+      out_Jv_x(6, 4) = D_V_y58KN_6_4;
+      out_Jv_x(1, 5) = D_V_y58KN_1_5;
+      out_Jv_x(2, 5) = D_V_y58KN_2_5;
+      out_Jv_x(3, 5) = D_V_y58KN_3_5;
+      out_Jv_x(4, 5) = D_V_y58KN_4_5;
+      out_Jv_x(5, 5) = D_V_y58KN_5_5;
+      out_Jv_x(6, 5) = D_V_y58KN_6_5;
+    end % Jv_x
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_h = h( this, in_1, in_2, ~ )
+      % Calculate the residual of the invariants h.
+
+      % Extract properties
+      y__0 = this.m_y__0;
+      u__0 = this.m_u__0;
+      v__0 = this.m_v__0;
+      m = this.m_m;
+      g = this.m_g;
+
+      % Extract inputs
+      y = in_1(2);
+      u = in_1(3);
+      v = in_1(4);
+      V_y58KN_2 = in_2(2);
+      V_y58KN_3 = in_2(3);
+      V_y58KN_4 = in_2(4);
+
+      % Evaluate function
       t1 = u ^ 2;
       t2 = u__0 ^ 2;
       t3 = v ^ 2;
       t4 = v__0 ^ 2;
       out_1 = (t1 - t2 + t3 - t4) * m / 2 + m * g * (y - y__0);
-      t11 = ell ^ 2;
-      t12 = x ^ 2;
-      t13 = y ^ 2;
-      out_2 = t11 - t12 - t13;
-      out_3 = 2 * x * u + 2 * y * v;
-      out_4 = 0.1e1 / m * (lambda * (4 * t12 + 4 * t13) + 2 * (g * y - t1 - t3) * m);
+      out_2 = V_y58KN_2;
+      out_3 = 2 * V_y58KN_3;
+      out_4 = -2 * V_y58KN_4;
 
       % Store outputs
       out_h = zeros(4, 1);
@@ -254,49 +337,19 @@ classdef Pendulum < Indigo.DAE.Explicit
       g = this.m_g;
 
       % Extract inputs
-      x = in_1(1);
-      y = in_1(2);
       u = in_1(3);
       v = in_1(4);
-      lambda = in_1(5);
 
       % Evaluate function
-      t1 = 2 * x;
-      out_2_1 = -t1;
-      out_3_1 = 2 * u;
-      t3 = 0.1e1 / m;
-      out_4_1 = 8 * t3 * lambda * x;
       out_1_2 = g * m;
-      t5 = 2 * y;
-      out_2_2 = -t5;
-      out_3_2 = 2 * v;
-      out_4_2 = t3 * (8 * y * lambda + 2 * out_1_2);
       out_1_3 = u * m;
-      out_3_3 = t1;
-      out_4_3 = -4 * u;
-      out_1_4 = m * v;
-      out_3_4 = t5;
-      out_4_4 = -4 * v;
-      t12 = x ^ 2;
-      t13 = y ^ 2;
-      out_4_5 = t3 * (4 * t12 + 4 * t13);
+      out_1_4 = v * m;
 
       % Store outputs
       out_Jh_x = zeros(4, 5);
-      out_Jh_x(2, 1) = out_2_1;
-      out_Jh_x(3, 1) = out_3_1;
-      out_Jh_x(4, 1) = out_4_1;
       out_Jh_x(1, 2) = out_1_2;
-      out_Jh_x(2, 2) = out_2_2;
-      out_Jh_x(3, 2) = out_3_2;
-      out_Jh_x(4, 2) = out_4_2;
       out_Jh_x(1, 3) = out_1_3;
-      out_Jh_x(3, 3) = out_3_3;
-      out_Jh_x(4, 3) = out_4_3;
       out_Jh_x(1, 4) = out_1_4;
-      out_Jh_x(3, 4) = out_3_4;
-      out_Jh_x(4, 4) = out_4_4;
-      out_Jh_x(4, 5) = out_4_5;
     end % Jh_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -313,7 +366,7 @@ classdef Pendulum < Indigo.DAE.Explicit
       % No body
 
       % Store outputs
-      out_Jh_v = zeros(4, 0);
+      out_Jh_v = zeros(4, 6);
     end % Jh_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

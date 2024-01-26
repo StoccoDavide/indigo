@@ -24,7 +24,7 @@ classdef RadauIIA3 < Indigo.RungeKutta
       tbl.b   = [3/4, 1/4];
       tbl.b_e = [];
       tbl.c   = [1/3, 1]';
-      this@Indigo.RungeKutta( 'RadauIIA3', 3, tbl );
+      this@Indigo.RungeKutta('RadauIIA3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

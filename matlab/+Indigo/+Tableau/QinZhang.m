@@ -34,7 +34,7 @@ classdef QinZhang < Indigo.RungeKutta
       tbl.b   = [b1, b2, lambda];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(3,1);
-      this@Indigo.RungeKutta( 'QinZhang', 3, tbl );
+      this@Indigo.RungeKutta('QinZhang', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

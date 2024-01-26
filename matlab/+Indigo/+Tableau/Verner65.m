@@ -8,6 +8,7 @@ classdef Verner65 < Indigo.RungeKutta
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Verner's 6(5) method.
+    %>
     % https://www.sfu.ca/~jverner/
     %>
     %> \f[
@@ -82,7 +83,7 @@ classdef Verner65 < Indigo.RungeKutta
       tbl.c(7) =  4/5;
       tbl.c(8) =  1;
       tbl.c(9) =  1;
-      this@Indigo.RungeKutta( 'Verner65', 6, tbl );
+      this@Indigo.RungeKutta('Verner65', 6, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -31,7 +31,7 @@ classdef Zonnenveld34 < Indigo.RungeKutta
       tbl.b   = [1/6, 1/3, 1/3, 1/6, 0];
       tbl.b_e = [-1/2, 7/3, 7/3, 13/6, -16/3];
       tbl.c   = [0, 1/2, 1/2, 1, 3/4]';
-      this@Indigo.RungeKutta( 'Zonneveld34', 4, tbl );
+      this@Indigo.RungeKutta('Zonneveld34', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

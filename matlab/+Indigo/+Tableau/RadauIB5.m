@@ -1,5 +1,5 @@
 %
-%> Class container for Radau IB method.
+%> Class container for Radau IB5 method.
 %
 classdef RadauIB5 < Indigo.RungeKutta
   %
@@ -7,12 +7,12 @@ classdef RadauIB5 < Indigo.RungeKutta
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Radau IB method.
+    %> Radau IB5 method.
     %>
     % http://www.jaac-online.com/data/article/jaac/preview/pdf/20170325.pdf
-    % Journal of Applied Analysis and Computation
-    % Volume 7, Number 3, August 2017, 1185-1199
-    % SYMPLECTIC RUNGE-KUTTA METHODS OF HIGH ORDER BASED ON W-TRANSFORMATION
+    % Symplectic Runge-Kutta Methods of High Order Based on W-Transformation,
+    % Kaifeng Xia, Yuhao Cong1 and Geng Sun. Journal of Applied Analysis and
+    % Computation, Volume 7, Number 3, August 2017, 1185-1199
     %>
     %
     function this = RadauIB5()
@@ -23,7 +23,7 @@ classdef RadauIB5 < Indigo.RungeKutta
       tbl.b   = [1/9, (16+s6)/36, (16-s6)/36];
       tbl.b_e = [];
       tbl.c   = tbl.A*ones(3,1);
-      this@Indigo.RungeKutta( 'RadauIB5', 5, tbl );
+      this@Indigo.RungeKutta('RadauIB5', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

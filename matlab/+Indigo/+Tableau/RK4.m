@@ -28,7 +28,7 @@ classdef RK4 < Indigo.RungeKutta
       tbl.b   = [1/6, 1/3, 1/3, 1/6];
       tbl.b_e = [];
       tbl.c   = [0, 1/2, 1/2, 1]';
-      this@Indigo.RungeKutta( 'RK4', 4, tbl );
+      this@Indigo.RungeKutta('RK4', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

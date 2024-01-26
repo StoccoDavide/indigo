@@ -33,7 +33,7 @@ classdef Fehlberg45I < Indigo.RungeKutta
       tbl.b   = [47/450, 0, 12/25, 32/225, 1/30, 6/25];
       tbl.b_e = [1/9, 0, 9/20, 16/45, 1/12, 0];
       tbl.c   = [0, 2/9, 1/3, 3/4, 1, 5/6]';
-      this@Indigo.RungeKutta( 'Fehlberg45I', 5, tbl );
+      this@Indigo.RungeKutta('Fehlberg45I', 5, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

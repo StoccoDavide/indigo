@@ -22,7 +22,7 @@ classdef ImplicitEuler < Indigo.RungeKutta
       tbl.b   = 1;
       tbl.b_e = [];
       tbl.c   = 1;
-      this@Indigo.RungeKutta( 'ImplicitEuler', 1, tbl );
+      this@Indigo.RungeKutta('ImplicitEuler', 1, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -51,7 +51,7 @@ classdef Ralston4 < Indigo.RungeKutta
       tbl.b   = [B1, B2, B3, B4];
       tbl.b_e = [];
       tbl.c   = [0, C2, C3, 1]';
-      this@Indigo.RungeKutta( 'Ralston4', 4, tbl );
+      this@Indigo.RungeKutta('Ralston4', 4, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

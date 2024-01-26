@@ -26,7 +26,7 @@ classdef Heun3 < Indigo.RungeKutta
       tbl.b   = [1/4, 0, 3/4];
       tbl.b_e = [];
       tbl.c   = [0, 1/3, 2/3]';
-      this@Indigo.RungeKutta( 'Heun3', 3, tbl );
+      this@Indigo.RungeKutta('Heun3', 3, tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

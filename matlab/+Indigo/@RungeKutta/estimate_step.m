@@ -51,20 +51,22 @@
 %> \return The suggested time step for the next advancing step \f$ \Delta
 %>         t_{k+1} \f$.
 %
-function out = estimate_step( this, x_h, x_l, dt )
+function out = estimate_step( this, x_h, x_l, d_t )
 
   arguments
     this       Indigo.RungeKutta
     x_h  (:,1) double
     x_l  (:,1) double
-    dt   (1,1) double
+    d_t  (1,1) double
   end
 
   % Compute the error with 2-norm
-  r = (x_h - x_l) ./ (this.m_A_tol + this.m_R_tol*max(abs(x_h),abs(x_l)));
+  r = (x_h - x_l) ./ (this.m_A_tol + this.m_R_tol*max(abs(x_h), abs(x_l)));
   e = max(abs(r));
 
   % Compute the suggested time step
   q   = this.m_order + 1;
-  out = dt * min(this.m_fac_max, max(this.m_fac_min, this.m_safety_factor*(1/e)^(1/q)));
+  out = d_t * min(this.m_factor_max, max( ...
+    this.m_factor_min, this.m_safety_factor*(1/e)^(1/q) ... 
+  ));
 end

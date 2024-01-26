@@ -1,6 +1,3 @@
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %> Solve the \f$ i \f$-th explicit step of the system and find the
 %> \f$ \mathbf{K}_i \f$ variable:
 %>
@@ -21,15 +18,21 @@
 %>         the error control flag.
 %
 function K = explicit_K( this, x_k, t_k, d_t )
+
+  % Number of stages
   nc = length(this.m_c);
+
+  % Initialize the K vector
   K  = zeros(length(x_k),nc);
+
   for i = 1:nc
-    % Compute x_k + sum( Aij * Kj )
+    % Compute the time and state values for the i-th stage
     t_i = t_k + this.m_c(i) * d_t;
     x_i = x_k + K(:,1:i-1) * this.m_A(i,1:i-1).';
     v_i = this.m_sys.v(x_i,t_i);
-    % If the Runge-Kutta method  and the system are both explicit then
-    % calculate the K values directly
+
+    % If the Runge-Kutta method and the system are both explicit then calculate
+    % the K values directly
     K(:,i) = d_t * this.m_sys.f( x_i, v_i, t_i );
   end
 end
