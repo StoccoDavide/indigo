@@ -74,7 +74,7 @@
 %>         step for the next advancing step \f$ \Delta t_{k+1} \f$, and the
 %>         error control flag.
 %
-function [ x_out, d_t_star, ierr ] = implicit_step( this, x_k, t_k, d_t )
+function [x_out, d_t_star, ierr] = implicit_step( this, x_k, t_k, d_t )
 
   % Extract lengths
   nc = length(this.m_c);

@@ -251,7 +251,7 @@ export ReduceIndexByOne_Generic::static := proc(
     Jv := select[flatten](j -> evalb(lhs(j) <> 0), convert(Jv, list));
     dA := subs(op(Jv), diff(A, t));
   else
-    dA := diff(A, t); print("ii", dA);
+    dA := diff(A, t);
   end if;
 
   if has(dA, D) then

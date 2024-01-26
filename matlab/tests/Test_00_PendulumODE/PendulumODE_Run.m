@@ -100,7 +100,7 @@ end
 %% Integrate the system of ODE
 
 % Set integration interval
-d_t   = 0.05;
+d_t   = 0.1;
 t_ini = 0.0;
 t_end = 5.0;
 T_vec = t_ini:d_t:t_end;

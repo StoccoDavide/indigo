@@ -95,7 +95,7 @@
 %>         (t_{k}+\Delta t) \f$, the suggested time step for the next
 %>         advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.
 %
-function [ x_out, d_t_star, ierr ] = explicit_step( this, x_k, t_k, d_t )
+function [x_out, d_t_star, ierr] = explicit_step( this, x_k, t_k, d_t )
 
   % No error and default x_out and suggested time step for the next advancing step
   ierr     = 0;

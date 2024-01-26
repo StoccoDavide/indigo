@@ -1,3 +1,13 @@
+%> Check Butcher tableau consistency for an explicit Runge-Kutta method.
+%>
+%> \param tbl.A   Matrix \f$ \mathbf{A} \f$.
+%> \param tbl.b   Weights vector \f$ \mathbf{b} \f$.
+%> \param tbl.b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}}
+%>                \f$ (row vector).
+%> \param tbl.c   Nodes vector \f$ \mathbf{c} \f$.
+%>
+%> \return True if the Butcher tableau is consistent, false otherwise.
+%
 function [out, order, e_order] = check_tableau( this, tbl )
 
   arguments

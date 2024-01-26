@@ -416,8 +416,11 @@ classdef NewtonSolver < handle
 
           if ~all(isfinite(F_dump)); continue; end
 
-          D_dump = -J\F_dump;
-          %[D_dump, ~] = lsqr(J, -F_dump, 1e-8, 50);
+          if (rcond(J) > 1e-8)
+            D_dump = -J\F_dump;
+          else
+            [D_dump, ~] = lsqr(J, -F_dump, 1e-8, 50);
+          end
           if ~all(isfinite(D_dump)); continue; end
 
           % Check relaxation convergence

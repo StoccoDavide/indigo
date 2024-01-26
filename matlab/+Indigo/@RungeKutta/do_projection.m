@@ -1,6 +1,3 @@
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %> Project the system solution \f$ \mathbf{x} \f$ on the invariants
 %> \f$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0} \f$. The
 %> constrained minimization problem to be solved is:
@@ -97,15 +94,9 @@ function x = do_projection( this, x_t, t, varargin )
   end
   num_projected_x = sum(projected_x);
 
-
   % Check if there are any constraints
   x = x_t;
   if (num_invs > 0)
-
-    % Calculate and scale the tolerance
-    tolerance = max(1, norm(x_t, inf)) * sqrt(eps);
-
-    % Iterate until the projected solution is found
     for k = 1:this.m_max_projection_iter
 
       % Standard projection method
@@ -126,26 +117,29 @@ function x = do_projection( this, x_t, t, varargin )
       h   = h(this.m_projected_invs);
       Jh  = Jh(this.m_projected_invs, projected_x);
 
+      % Check if the solution is found
+      if (norm(h, inf) < this.m_projection_low_tolerance)
+        break;
+      end
+
       % Compute the solution of the linear system
-      A   = [eye(num_projected_x), Jh.'; ...
-             Jh, zeros(sum(this.m_projected_invs))];
-      b   = [x_t(projected_x) - x(projected_x); -h];
-      %sol = A\b;
-      [sol, ~] = lsqr(A, b, 1e-6, 500);
+      A = [eye(num_projected_x), Jh.'; ...
+           Jh, zeros(sum(this.m_projected_invs))];
+      b = [x_t(projected_x) - x(projected_x); -h];
+      if (rcond(A) > this.m_projection_rcond_tolerance)
+        sol = A\b;
+      else
+        [sol, ~] = lsqr(A, b, this.m_projection_low_tolerance, 500);
+      end
 
       % Update the solution
       dx = sol(1:num_projected_x);
       x(projected_x) = x(projected_x) + dx;
 
       % Check if the solution is found
-      if (max(abs(dx)) < tolerance || max(abs(h)) < tolerance)
-        break;
-      elseif (k == this.m_max_projection_iter)
+      if (k == this.m_max_projection_iter)
         warning([CMD, 'maximum number of iterations reached.']);
       end
     end
   end
 end
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%

@@ -616,8 +616,8 @@ IndigoCodegen := module()
       "(v[j])(f) to v_j and from D[i](v[j])(f) to D_v_j_i. The function also "
       "requires the system states <vars>.";
 
-    local v, v_dot, x, rm_v_deps, rm_v_dot_deps, i, v_tmp, v_dot_tmp, tmp_l,
-      tmp_r, tmp_i, tmp_j;
+    local v, v_dot, x, x_lst, rm_v_deps, rm_v_dot_deps, i, v_tmp, v_dot_tmp,
+      tmp_l, tmp_r, tmp_i, tmp_j;
 
     # Store veiling variables
     if not type(veil, list) then
@@ -632,6 +632,11 @@ IndigoCodegen := module()
     else
       x := vars;
     end if;
+    if not type(vars, list) then
+      x_lst :=  convert(vars, list);
+    else
+      x_lst := vars;
+    end if;
 
     # Compute transformations
     rm_v_deps     := [];
@@ -640,7 +645,6 @@ IndigoCodegen := module()
 
       # Transform veil variables (v[i])(f) -> v_i
       v_tmp := Array(v);
-      #for i from 1 to nops(v_tmp) do
       for i from 1 to op(2, ArrayDims(v_tmp)) do
         # (v[i])(f) -> v[i]
         if type(v_tmp[i], function) then
@@ -664,7 +668,6 @@ IndigoCodegen := module()
 
       # Transform veils derivatives from D[i](v[j])(f) to D_v_j_i
       v_dot_tmp := Array(v_dot);
-      #for i from 1 to nops(v_dot_tmp) do
       for i from 1 to op(2, ArrayDims(v_dot_tmp)) do
         # D[i](var[j])(f) -> D_i
         tmp_l := op(0, op(0, v_dot_tmp[i]));
@@ -687,7 +690,10 @@ IndigoCodegen := module()
           error("invalid component derivative detected.");
         end if;
         v_dot_tmp[i] := convert(
-          cat(tmp_l, "_", tmp_r, "_", tmp_j, "_", tmp_i), symbol
+          #cat(tmp_l, "_", tmp_r, "_", tmp_j, "_", tmp_i), symbol
+          cat(tmp_l, "_", tmp_r, "_", tmp_j, "_", ListTools:-Search(
+            op(tmp_i, v_dot_tmp[i]), x_lst
+          )), symbol
         );
       end do;
       rm_v_dot_deps := v_dot =~ convert(v_dot_tmp, list);
@@ -830,9 +836,9 @@ IndigoCodegen := module()
     else
       h := invs;
     end if;
+    Jh_v := IndigoUtils:-DoJacobian(h, v);
     h    := subs(op(rm_v_deps), h);
     Jh_x := IndigoUtils:-DoJacobian(h, x);
-    Jh_v := IndigoUtils:-DoJacobian(h, v);
 
     # Compose substitutions
     rm_deps := [
@@ -1102,9 +1108,9 @@ IndigoCodegen := module()
     else
       h := invs;
     end if;
+    Jh_v := IndigoUtils:-DoJacobian(h, v);
     h    := subs(op(rm_v_deps), h);
     Jh_x := IndigoUtils:-DoJacobian(h, x);
-    Jh_v := IndigoUtils:-DoJacobian(h, v);
 
     # Compose substitutions
     rm_deps := [
@@ -1364,9 +1370,9 @@ IndigoCodegen := module()
     else
       h := invs;
     end if;
+    Jh_v := IndigoUtils:-DoJacobian(h, v);
     h    := subs(op(rm_v_deps), h);
     Jh_x := IndigoUtils:-DoJacobian(h, x);
-    Jh_v := IndigoUtils:-DoJacobian(h, v);
 
     # Compose substitutions
     rm_deps := [

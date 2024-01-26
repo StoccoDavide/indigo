@@ -73,7 +73,7 @@ classdef RungeKutta < handle
     %
     %> string with the RK type 'ERK', 'DIRK', 'IRK'
     %
-    m_RK_type;
+    m_rk_type;
     %
     %> Boolean to check if the method is embedded.
     %
@@ -85,7 +85,7 @@ classdef RungeKutta < handle
     %
     %> Maximum number of iterations in the projection process.
     %
-    m_max_projection_iter = 3;
+    m_max_projection_iter = 20;
     %
     %> Tolerance for projection step
     %
@@ -94,6 +94,10 @@ classdef RungeKutta < handle
     %> Low tolerance for projection step
     %
     m_projection_low_tolerance = 1e-5;
+    %
+    %> Matrix conditioning tolerance for projection step
+    %
+    m_projection_rcond_tolerance = 1e-8;
     %
     %> Boolean vector to project the corresponding invariants.
     %
@@ -145,7 +149,8 @@ classdef RungeKutta < handle
     %
     %> Minimum step for advancing
     %
-    m_dt_min = 1e-50;
+    m_d_t_min = 1e-50;
+    %
   end
   %
   methods
@@ -279,35 +284,38 @@ classdef RungeKutta < handle
       this.m_max_projection_iter = t_max_projection_iter;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the tolerance for projection step.
     %>
     %> \param The tolerance for projection step.
+    %> \param The low tolerance for projection step.
+    %> \param The matrix conditioning tolerance for projection step.
     %
-    function set_projection_tolerance( this, epsi )
+    function set_projection_tolerance( this, tol, low_tol, rcond_tol )
 
       CMD = 'Indigo.RungeKutta.set_max_projection_iteration(...): ';
 
-      assert(epsi(1) > 0 && epsi(1) < 1, ...
-        [CMD, 'tolerance must be in the range [0,1].']);
-      this.m_projection_tolerance = epsi(1);
-      if (length(epsi) > 1)
-        this.m_projection_low_tolerance = epsi(2);
-      else
-        this.m_projection_low_tolerance = sqrt(epsi);
-      end
+      assert(tol       > 0, [CMD, 'tolerance must be positive.']);
+      assert(low_tol   > 0, [CMD, 'tolerance must be positive.']);
+      assert(rcond_tol > 0, [CMD, 'tolerance must be positive.']);
+
+      this.m_projection_tolerance       = tol;
+      this.m_projection_low_tolerance   = low_tol;
+      this.m_projection_rcond_tolerance = rcond_tol;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the tolerance for projection step.
     %>
-    %> \return The tolerance for projection step and the low tolerance.
+    %> \return The tolerance for projection step, the low tolerance and the
+    %>         matrix conditioning tolerance.
     %
-    function [tol, tol_low] = get_projection_tolerance( this )
-      tol     = this.m_projection_tolerance;
-      tol_low = this.m_projection_low_tolerance;
+    function [tol, low_tol, rcond_tol] = get_projection_tolerance( this )
+      tol       = this.m_projection_tolerance;
+      low_tol   = this.m_projection_low_tolerance;
+      rcond_tol = this.m_projection_rcond_tolerance;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -457,7 +465,7 @@ classdef RungeKutta < handle
       this.m_R_tol = t_R_tol;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the safety factor for adaptive step.
     %>
@@ -467,7 +475,7 @@ classdef RungeKutta < handle
       t_fac = this.m_safety_factor;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set safety factor for adaptive step.
     %>
@@ -477,44 +485,64 @@ classdef RungeKutta < handle
       this.m_safety_factor = t_fac;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the minimum safety factor for adaptive step.
     %>
     %> \return The minimum safety factor for adaptive step.
     %
-    function t_min_fac = get_min_factor( this )
-      t_min_fac = this.m_min_fac;
+    function t_factor_min = get_factor_min( this )
+      t_factor_min = this.m_factor_min;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the minimum safety factor for adaptive step.
     %>
-    %> \param t_min_fac The minimum safety factor for adaptive step.
+    %> \param t_factor_min The minimum safety factor for adaptive step.
     %
-    function set_min_factor( this, t_min_fac )
-      this.m_min_fac = t_min_fac;
+    function set_factor_min( this, t_factor_min )
+      this.m_factor_min = t_factor_min;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Get the maximum safety factor for adaptive step.
     %>
     %> \return The maximum safety factor for adaptive step.
     %
-    function t_max_fac = get_max_factor( this )
-      t_max_fac = this.m_max_fac;
+    function t_factor_max = get_factor_max( this )
+      t_factor_max = this.m_factor_max;
     end
     %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Set the maximum safety factor for adaptive step.
     %>
-    %> \param t_max_fac The maximum safety factor for adaptive step.
+    %> \param t_factor_max The maximum safety factor for adaptive step.
     %
-    function set_max_factor( this, t_max_fac )
-      this.m_max_fac = t_max_fac;
+    function set_factor_max( this, t_factor_max )
+      this.m_factor_max = t_factor_max;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Set the minimum step for advancing.
+    %>
+    %> \param t_d_t_min The minimum step for advancing.
+    %
+    function set_d_t_min( this, t_d_t_min )
+      this.m_d_t_min = t_d_t_min;
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Get the minimum step for advancing.
+    %>
+    %> \return The minimum step for advancing.
+    %
+    function t_d_t_min = get_d_t_min( this )
+      t_d_t_min = this.m_d_t_min;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -602,7 +630,7 @@ classdef RungeKutta < handle
     %> \return True if the solver is explicit, false otherwise.
     %
     function out = is_explicit( this )
-      out = strcmp(this.m_RK_type,'ERK');
+      out = strcmp(this.m_rk_type,'ERK');
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -612,7 +640,7 @@ classdef RungeKutta < handle
     %> \return True if the solver is implicit, false otherwise.
     %
     function out = is_implicit( this )
-      out = ~strcmp(this.m_RK_type,'ERK');
+      out = ~strcmp(this.m_rk_type,'ERK');
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -643,36 +671,6 @@ classdef RungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the Butcher tableau.
-    %>
-    %> \param A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-    %> \param b   Weights vector \f$ \mathbf{b} \f$ (row vector).
-    %> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
-    %>            (row vector).
-    %> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
-    %
-    set_tableau( this, tbl )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Check Butcher tableau consistency for an explicit Runge-Kutta method.
-    %>
-    %> \param tbl.A   Matrix \f$ \mathbf{A} \f$.
-    %> \param tbl.b   Weights vector \f$ \mathbf{b} \f$.
-    %> \param tbl.b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}}
-    %>                \f$ (row vector).
-    %> \param tbl.c   Nodes vector \f$ \mathbf{c} \f$.
-    %>
-    %> \return True if the Butcher tableau is consistent, false otherwise.
-    %
-    [out, order, e_order] = check_tableau( this, tbl )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    [order,msg] = tableau_order( this, A, b, c )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
     %> Project the system initial condition \f$ \mathbf{x} \f$ at time \f$ t \f$
     %> on the invariants \f$ \mathbf{h} (\mathbf{x}, \mathbf{v}, t) = \mathbf{0}
     %> \f$. The constrained minimization is solved through the projection
@@ -697,26 +695,6 @@ classdef RungeKutta < handle
         error([CMD, 'invalid number of input arguments.']);
       end
     end
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    x = do_projection( this, x_t, t, varargin )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    [x_out, t_out, v_out, h_out] = solve( this, t, x_0 )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    [x_out, t_out, v_out, h_out] = adptive_solve( this, t, x_0, varargin )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    [x_new, d_t_star, ierr] = do_step( this, x_k, t_k, d_t )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    out = estimate_step( this, x_h, x_l, d_t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -749,8 +727,8 @@ classdef RungeKutta < handle
     %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
     %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
     %
-    function [ x_out, d_t_star, ierr ] = step( this, x_k, t_k, d_t )
-      if this.is_explicit() && this.m_sys.is_explicit()
+    function [x_out, d_t_star, ierr] = step( this, x_k, t_k, d_t )
+      if (this.is_explicit() && this.m_sys.is_explicit())
         [x_out, d_t_star, ierr] = this.explicit_step(x_k, t_k, d_t);
       else
         [x_out, d_t_star, ierr] = this.implicit_step(x_k, t_k, d_t);
@@ -759,10 +737,18 @@ classdef RungeKutta < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    K = explicit_K( this, x_k, t_k, d_t )
+    set_tableau( this, tbl )
+    [out, order, e_order] = check_tableau( this, tbl )
+    [order,msg] = tableau_order( this, A, b, c )
+    x = do_projection( this, x_t, t, varargin )
+    [x_out, t_out, v_out, h_out] = solve( this, t, x_0 )
+    [x_out, t_out, v_out, h_out] = adptive_solve( this, t, x_0, varargin )
+    [x_new, d_t_star, ierr] = do_step( this, x_k, t_k, d_t )
+    out = estimate_step( this, x_h, x_l, d_t )
     out = implicit_jacobian( this, x_k, K, t_k, d_t )
     out = implicit_residual( this, x_k, K, t_k, d_t )
-    [ x_out, d_t_star, ierr ] = explicit_step( this, x_k, t_k, d_t )
-    [ x_out, d_t_star, ierr ] = implicit_step( this, x_k, t_k, d_t )
+    K = explicit_K( this, x_k, t_k, d_t )
+    [x_out, d_t_star, ierr] = explicit_step( this, x_k, t_k, d_t )
+    [x_out, d_t_star, ierr] = implicit_step( this, x_k, t_k, d_t )
   end
 end

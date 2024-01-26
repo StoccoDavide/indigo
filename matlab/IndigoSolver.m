@@ -7,7 +7,7 @@
 %
 function out = IndigoSolver( name )
   str = IndigoSolversList();
-  k   = find(strcmpi(str,name));
+  k   = find(strcmpi(str, name));
   if isempty(k)
     %str
     error(['IndigoSolver(...): cant find solver ''', name, '''.']);

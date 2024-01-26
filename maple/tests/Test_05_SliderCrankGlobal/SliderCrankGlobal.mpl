@@ -13,10 +13,10 @@ t)+diff(theta__1(t),t) = 0, -u__2(t)+diff(x__2(t),t) = 0, -v__2(t)+diff(y__2(t)
 l__1*m__1-diff(omega__1(t),t)*sin(theta__1(t))*l__1*m__1+2*diff(u__1(t),t)*m__1
 -2*lambda__1(t)-2*lambda__4(t) = 0, -omega__1(t)^2*sin(theta__1(t))*l__1*m__1+
 diff(omega__1(t),t)*cos(theta__1(t))*l__1*m__1+2*diff(v__1(t),t)*m__1+2*g*m__1-\
-2*lambda__2(t)-2*lambda__5(t) = 0, -2*sin(theta__1(t))*diff(u__1(t),t)*l__1*
-m__1+2*cos(theta__1(t))*diff(v__1(t),t)*l__1*m__1+2*cos(theta__1(t))*l__1*g*
-m__1+diff(omega__1(t),t)*l__1^2*m__1-4*cos(theta__1(t))*l__1*lambda__5(t)+4*sin
-(theta__1(t))*l__1*lambda__4(t)+4*J__1*diff(omega__1(t),t) = 0, -omega__2(t)^2*
+2*lambda__2(t)-2*lambda__5(t) = 0, diff(omega__1(t),t)*l__1^2*m__1-2*diff(u__1(
+t),t)*sin(theta__1(t))*l__1*m__1+2*diff(v__1(t),t)*cos(theta__1(t))*l__1*m__1+2
+*cos(theta__1(t))*l__1*g*m__1-4*cos(theta__1(t))*l__1*lambda__5(t)+4*sin(
+theta__1(t))*l__1*lambda__4(t)+4*J__1*diff(omega__1(t),t) = 0, -omega__2(t)^2*
 cos(theta__2(t))*l__2*m__2-2*omega__2(t)^2*cos(theta__2(t))*l__2*m__3-sin(
 theta__2(t))*l__2*diff(omega__2(t),t)*m__2-2*sin(theta__2(t))*l__2*diff(
 omega__2(t),t)*m__3+2*diff(u__2(t),t)*m__2+2*diff(u__2(t),t)*m__3+2*lambda__4(t

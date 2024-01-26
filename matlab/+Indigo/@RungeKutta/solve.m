@@ -59,7 +59,7 @@ function [x_out, t, v_out, h_out] = solve( this, t, x_0 )
     end
 
     % Integrate system
-    [x_s, d_t_star, ierr ] = this.do_step( x_s, t_s, d_t_s);
+    [x_s, d_t_star, ierr] = this.do_step(x_s, t_s, d_t_s);
 
     % Update the current step
     t_s = t_s + d_t_s;
@@ -97,9 +97,9 @@ function [x_out, t, v_out, h_out] = solve( this, t, x_0 )
   if (this.m_progress_bar)
     Indigo.Utils.progress_bar(100);
     if (this.m_projection)
-      bar_str = sprintf('Projected-%s completed! [nstep=%d]', this.m_name, s);
+      bar_str = sprintf('Projected-%s completed! (%d steps)', this.m_name, s);
     else
-      bar_str = sprintf('%s completed! [nstep=%d]', this.m_name, s);
+      bar_str = sprintf('%s completed! (%d steps)', this.m_name, s);
     end
     Indigo.Utils.progress_bar(bar_str);
   end

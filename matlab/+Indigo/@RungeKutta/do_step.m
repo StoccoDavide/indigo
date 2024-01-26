@@ -20,7 +20,7 @@
 %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$ and the suggested time
 %>         step for the next advancing step \f$ \Delta t_{k+1} \f$.
 %
-function [ x_new, d_t_star, ierr ] = do_step( this, x_k, t_k, d_t )
+function [x_new, d_t_star, ierr] = do_step( this, x_k, t_k, d_t )
 
   CMD = 'Indigo.RungeKutta.do_step(...): ';
 
@@ -36,7 +36,7 @@ function [ x_new, d_t_star, ierr ] = do_step( this, x_k, t_k, d_t )
     this.m_name, d_t);
 
   % Integrate system
-  [x_new, d_t_star, ierr] = this.step(x_k, t_k, d_t);
+  [x_new, d_t_star, ierr] = this.step( x_k, t_k, d_t );
 
   % If the advance failed, try again with substepping
   if (ierr ~= 0)

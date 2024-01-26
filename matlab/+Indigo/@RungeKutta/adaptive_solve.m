@@ -21,8 +21,8 @@ function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin
   % Collect optional arguments
   d_t = t(2) - t(1);
   if (nargin == 3)
-    t_min = 0.5*d_t;
-    t_max = 1.5*d_t;
+    t_min = 0.01*d_t;
+    t_max = 10*d_t;
   elseif (nargin == 4)
     [t_min, t_max] = varargin{1};
   elseif (nargin == 5)
@@ -43,7 +43,7 @@ function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin
     this.m_name, length(x_0), num_eqns);
 
   % Instantiate output
-  safety_length = ceil(1.5/this.m_fac_min)*length(t);
+  safety_length = ceil(1.5/this.m_factor_min)*length(t);
   t_out = zeros(1, safety_length);
   x_out = zeros(num_eqns, safety_length);
   v_out = zeros(num_veil, safety_length);
@@ -70,13 +70,13 @@ function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin
     end
 
     % Integrate system
-    [ x_new, d_t_star, ierr ] = this.do_step( x_out(:,s), t_out(s), d_t );
+    [x_new, d_t_star, ierr] = this.do_step(x_out(:,s), t_out(s), d_t);
 
     % Store solution
     t_out(s+1)   = t_out(s) + d_t;
     x_out(:,s+1) = x_new;
-    v_out(:,s+1) = this.m_sys.v( x_new,               t_out(s+1) );
-    h_out(:,s+1) = this.m_sys.h( x_new, v_out(:,s+1), t_out(s+1) );
+    v_out(:,s+1) = this.m_sys.v(x_new,               t_out(s+1));
+    h_out(:,s+1) = this.m_sys.h(x_new, v_out(:,s+1), t_out(s+1));
 
     % Saturate the suggested timestep
     d_t = max(min(d_t_star, t_max), t_min);
@@ -94,9 +94,9 @@ function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin
   if (this.m_progress_bar)
     Indigo.Utils.progress_bar(100);
     if (this.m_projection)
-      bar_str = sprintf( 'Projected-%s completed! [nstep=%d]', this.m_name, s );
+      bar_str = sprintf('Projected-%s completed! (%d steps)', this.m_name, s);
     else
-      bar_str = sprintf( '%s completed! [nstep=%d]', this.m_name, s );
+      bar_str = sprintf('%s completed! (%d steps)', this.m_name, s);
     end
     Indigo.Utils.progress_bar(bar_str);
   end
