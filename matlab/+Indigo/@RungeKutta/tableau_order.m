@@ -1,17 +1,15 @@
-%
-% Check routine taken from reference:
-%
-% A family of embedded Runge-Kutta formulae, J. R. Dormand and P. J. Prince,
-% Journal of Computational and Applied Mathematics, volume 6(1), 1980.
+%> Check the order of a Runge-Kutta tableau according to the routine taken from
+%> thereference: *A family of embedded Runge-Kutta formulae*, J. R. Dormand and
+%> Journal of Computational and Applied Mathematics, volume 6(1), 1980.
+%>
+%> \param A Matrix \f$ \mathbf{A} \f$.
+%> \param b Weights vector \f$ \mathbf{b} \f$ (row vector).
+%> \param c Nodes vector \f$ \mathbf{c} \f$ (column vector).
+%>
+%> \return The order of the Runge-Kutta tableau and an error message if the
+%>         order is not correct.
 %
 function [order, msg] = tableau_order( this, A, b, c )
-
-  arguments
-    this    Indigo.RungeKutta
-    A (:,:) double
-    b (1,:) double
-    c (:,1) double
-  end
 
   CMD = 'Indigo.RungeKutta.tableau_order(...): ';
 

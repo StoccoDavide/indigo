@@ -120,7 +120,7 @@ figure();
   for i = 1:length(solver_name)
     t = T{i};
     u = X{i}(3,:);
-    v = X{i}(4,:);
+    v = X{i}(1,:);
     plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
@@ -184,7 +184,7 @@ figure();
   for i = 1:length(solver_name)
     t = T{i};
     u = X{i}(3,:);
-    v = X{i}(4,:);
+    v = X{i}(1,:);
     plot(t, u, t, v, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');

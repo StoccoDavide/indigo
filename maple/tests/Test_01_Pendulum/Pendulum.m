@@ -316,6 +316,60 @@ classdef Pendulum < Indigo.DAE.Explicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    function out_pivots = pivots( this, in_1, ~, ~ )
+      % Calculate the pivoting values
+
+      % Extract properties
+      m = this.m_m;
+
+      % Extract inputs
+      x = in_1(1);
+      y = in_1(2);
+
+      % Evaluate function
+      out_1_1 = 1;
+      out_2_1 = 1;
+      out_3_1 = m;
+      out_4_1 = m;
+      out_1_2 = m;
+      out_2_2 = m;
+      out_3_2 = 1;
+      out_4_2 = 1;
+      out_1_3 = 1;
+      out_2_3 = 1;
+      out_3_3 = m;
+      out_4_3 = m;
+      out_1_4 = 1;
+      out_2_4 = 1;
+      out_3_4 = m;
+      out_4_4 = m;
+      t1 = x ^ 2;
+      t2 = y ^ 2;
+      out_5_4 = 0.1e1 / m * (4 * t1 + 4 * t2);
+
+      % Store outputs
+      out_pivots = zeros(5, 4);
+      out_pivots(1, 1) = out_1_1;
+      out_pivots(2, 1) = out_2_1;
+      out_pivots(3, 1) = out_3_1;
+      out_pivots(4, 1) = out_4_1;
+      out_pivots(1, 2) = out_1_2;
+      out_pivots(2, 2) = out_2_2;
+      out_pivots(3, 2) = out_3_2;
+      out_pivots(4, 2) = out_4_2;
+      out_pivots(1, 3) = out_1_3;
+      out_pivots(2, 3) = out_2_3;
+      out_pivots(3, 3) = out_3_3;
+      out_pivots(4, 3) = out_4_3;
+      out_pivots(1, 4) = out_1_4;
+      out_pivots(2, 4) = out_2_4;
+      out_pivots(3, 4) = out_3_4;
+      out_pivots(4, 4) = out_4_4;
+      out_pivots(5, 4) = out_5_4;
+    end % pivots
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
     function out = in_domain( ~, ~, ~ )
       out = true;
     end % in_domain

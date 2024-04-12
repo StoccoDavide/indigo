@@ -1,6 +1,3 @@
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %> Compute an integration step using the implicit Runge-Kutta method for a
 %> system of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =
 %> \mathbf{0} \f$.
@@ -63,16 +60,13 @@
 %> \f$ \Delta t \f$ since in the implicit Runge-Kutta method the time step
 %> is not modified through any error control method.
 %>
-%> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
-%> \param t_k     Time step \f$ t_k \f$.
-%> \param d_t     Advancing time step \f$ \Delta t\f$.
+%> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+%> \param t_k Time step \f$ t_k \f$.
+%> \param d_t Advancing time step \f$ \Delta t\f$.
 %>
 %> \return The approximation of the states at \f$ k+1 \f$-th time step \f$
-%>         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the approximation of the
-%>         states derivatives at \f$ k+1 \f$-th time step
-%>         \f$ \mathbf{x}'_{k+1} (t_{k}+\Delta t) \f$, the suggested time
-%>         step for the next advancing step \f$ \Delta t_{k+1} \f$, and the
-%>         error control flag.
+%>         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the suggested time step for the
+%>         next advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.
 %
 function [x_out, d_t_star, ierr] = implicit_step( this, x_k, t_k, d_t )
 
@@ -95,7 +89,9 @@ function [x_out, d_t_star, ierr] = implicit_step( this, x_k, t_k, d_t )
   [K, ierr] = this.m_newton_solver.solve_handle(fun, jac, K0);
 
   % Error code check
-  if ierr ~= 0; return; end
+  if (ierr ~= 0)
+    return;
+  end
 
   % Perform the step and obtain x_k+1
   x_out = x_k + reshape(K, nx, nc) * this.m_b';

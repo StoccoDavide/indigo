@@ -53,12 +53,10 @@
 %
 function out = estimate_step( this, x_h, x_l, d_t )
 
-  arguments
-    this       Indigo.RungeKutta
-    x_h  (:,1) double
-    x_l  (:,1) double
-    d_t  (1,1) double
-  end
+  CMD = "Indigo.RungeKutta.estimate_step(...): ";
+
+  assert(length(x_h) == length(x_l), ...
+    [CMD, "x_h and x_l must have the same length"]);
 
   % Compute the error with 2-norm
   r = (x_h - x_l) ./ (this.m_A_tol + this.m_R_tol*max(abs(x_h), abs(x_l)));
@@ -67,6 +65,6 @@ function out = estimate_step( this, x_h, x_l, d_t )
   % Compute the suggested time step
   q   = this.m_order + 1;
   out = d_t * min(this.m_factor_max, max( ...
-    this.m_factor_min, this.m_safety_factor*(1/e)^(1/q) ... 
+    this.m_factor_min, this.m_safety_factor*(1/e)^(1/q) ...
   ));
 end

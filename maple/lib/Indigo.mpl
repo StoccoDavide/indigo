@@ -784,7 +784,7 @@ module Indigo()
       "indigo class <type>, output file './<fname>.m', optional internal class "
       "data <data>, and class information string <info>.";
 
-    local vars, eqns, veil, invs, label;
+    local vars, eqns, veil, invs, pvts, label;
 
     # Get system data
     if evalb(_self:-m_SystemType = 'Empty') then
@@ -797,6 +797,7 @@ module Indigo()
       vars := _self:-m_SystemVars;
       eqns := _self:-GetDAEquations(_self);
       veil := _self:-GetVeils(_self);
+      pvts := _self:-GetPivots(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
       ];
@@ -811,23 +812,20 @@ module Indigo()
     if (type = "Implicit") then
       return IndigoCodegen:-ImplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil")  = veil, parse("invs")  = invs,
-        parse("data")  = data, parse("label") = label,
-        parse("info")  = info
+        parse("veil")  = veil, parse("invs")  = invs,  parse("pvts") = pvts,
+        parse("data")  = data, parse("label") = label, parse("info") = info
       );
     elif (type = "Explicit") then
       return IndigoCodegen:-ExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil")  = veil, parse("invs")  = invs,
-        parse("data")  = data, parse("label") = label,
-        parse("info")  = info
+        parse("veil")  = veil, parse("invs")  = invs,  parse("pvts") = pvts,
+        parse("data")  = data, parse("label") = label, parse("info") = info
       );
     elif (type = "SemiExplicit") then
       return IndigoCodegen:-SemiExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil")  = veil, parse("invs")  = invs,
-        parse("data")  = data, parse("label") = label,
-        parse("info")  = info
+        parse("veil")  = veil, parse("invs")  = invs,  parse("pvts") = pvts,
+        parse("data")  = data, parse("label") = label, parse("info") = info
       );
     else
       error("unknown indigo class type '%1'.", type);

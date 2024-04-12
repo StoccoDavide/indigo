@@ -1,5 +1,5 @@
 %> Solve the system and calculate the approximate solution over the
-%> suggested mesh of time points.
+%> suggested mesh of time points with adaptive step size control.
 %>
 %> \param t     Time mesh points \f$ \mathbf{t} = \left[ t_0, t_1, \ldots,
 %>              t_n \right]^T \f$.
@@ -14,15 +14,16 @@
 %>         invariants \f$ \mathbf{h}(\mathbf{x}, \mathbf{v}, t) \f$ are also
 %>         returned.
 %
-function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin )
+function [x_out, t_out, v_out, h_out] = adaptive_solve( this, t, x_0, varargin )
 
   CMD = 'Indigo.RungeKutta.adaptive_solve(...): ';
 
   % Collect optional arguments
   d_t = t(2) - t(1);
   if (nargin == 3)
-    t_min = 0.01*d_t;
-    t_max = 10*d_t;
+    scale = 100.0;
+    t_min = max(this.m_d_t_min, d_t/scale);
+    t_max = scale*d_t;
   elseif (nargin == 4)
     [t_min, t_max] = varargin{1};
   elseif (nargin == 5)
@@ -70,7 +71,7 @@ function [ x_out, t_out, v_out, h_out ] = adaptive_solve( this, t, x_0, varargin
     end
 
     % Integrate system
-    [x_new, d_t_star, ierr] = this.do_step(x_out(:,s), t_out(s), d_t);
+    [x_new, d_t_star, ierr] = this.advance(x_out(:,s), t_out(s), d_t);
 
     % Store solution
     t_out(s+1)   = t_out(s) + d_t;

@@ -20,3 +20,18 @@ ICS := [x__l(0) = 0, y__l(0) = 1/2, x__r(0) = 1, y__r(0) = 1/2, u__l(0) = -1/2,
 v__l(0) = 0, u__r(0) = -1/2, v__r(0) = 0, lambda__1(0) = 0, lambda__2(0) = 0];
 DATA := [L = 1.0, L__0 = .5, varepsilon = .1e-1, M = 10.0, h = .1, tau = .62831\
 85308, omega = 10.0];
+Mass := Matrix(4, 4, [[1/2*varepsilon^2*M,0,0,0],[0,1/2*varepsilon^2*M,0,0],[0,
+0,1/2*varepsilon^2*M,0],[0,0,0,1/2*varepsilon^2*M]]);
+f := Vector(4, [(L__0-(x__l(t)^2+y__l(t)^2)^(1/2))*x__l(t)/(x__l(t)^2+y__l(t)^2
+)^(1/2)+lambda__1(t)*(L^2-h^2*sin(omega*t)^2)^(1/2)+2*lambda__2(t)*(x__l(t)-
+x__r(t)),(L__0-(x__l(t)^2+y__l(t)^2)^(1/2))*y__l(t)/(x__l(t)^2+y__l(t)^2)^(1/2)
++lambda__1(t)*h*sin(omega*t)+2*lambda__2(t)*(y__l(t)-y__r(t))-1/2*varepsilon^2*
+M,(L__0-((x__r(t)-(L^2-h^2*sin(omega*t)^2)^(1/2))^2+(y__r(t)-h*sin(omega*t))^2)
+^(1/2))*(x__r(t)-(L^2-h^2*sin(omega*t)^2)^(1/2))/((x__r(t)-(L^2-h^2*sin(omega*t
+)^2)^(1/2))^2+(y__r(t)-h*sin(omega*t))^2)^(1/2)-2*lambda__2(t)*(x__l(t)-x__r(t)
+),(L__0-((x__r(t)-(L^2-h^2*sin(omega*t)^2)^(1/2))^2+(y__r(t)-h*sin(omega*t))^2)
+^(1/2))*(y__r(t)-h*sin(omega*t))/((x__r(t)-(L^2-h^2*sin(omega*t)^2)^(1/2))^2+(
+y__r(t)-h*sin(omega*t))^2)^(1/2)-2*lambda__2(t)*(y__l(t)-y__r(t))-1/2*
+varepsilon^2*M]);
+Phi := Matrix(2, 1, [[x__l(t)*(L^2-h^2*sin(omega*t)^2)^(1/2)+y__l(t)*h*sin(
+omega*t) = 0],[(x__l(t)-x__r(t))^2+(y__l(t)-y__r(t))^2-L^2 = 0]]);

@@ -26,9 +26,7 @@ r   = 10.0;
 % IndigoSolversList()'
 
 solver_name = { ...
-  'ImplicitEuler', ...
-  'RadauIIA3', ...
-  'RadauIIA5', ...
+  'Fehlberg45I', ...
 };
 
 solver = cell(length(solver_name), 1);
@@ -42,7 +40,7 @@ end
 % Set integration interval
 d_t   = 0.025;
 t_ini = 0.0;
-t_end = 5.0*2.0*pi;
+t_end = 200.0*pi;
 T_vec = t_ini:d_t:t_end;
 
 % Allocate solution arrays

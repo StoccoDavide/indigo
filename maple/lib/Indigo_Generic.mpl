@@ -100,10 +100,11 @@ export SeparateMatrices::static := proc(
   GtA :=_self:-m_LAST:-ApplyLP(_self:-m_LAST, G);
 
   return table([
-    "Et"   = Et,
-    "Gt"   = copy(GtA[1..r]),
-    "A"    = copy(GtA[r+1..-1]),
-    "rank" = r
+    "Et"     = Et,
+    "Gt"     = copy(GtA[1..r]),
+    "A"      = copy(GtA[r+1..-1]),
+    "rank"   = r,
+    "pivots" = tbl["pivots"]
   ]);
 end proc: # SeparateMatrices
 
@@ -151,10 +152,11 @@ export LoadMatrices_Generic::static := proc(
 
   # Update reduction steps
   _self:-m_ReductionSteps := [table([
-    "E"    = tbl["Et"],
-    "G"    = tbl["Gt"],
-    "A"    = tbl["A"],
-    "rank" = tbl["rank"]
+    "E"      = tbl["Et"],
+    "G"      = tbl["Gt"],
+    "A"      = tbl["A"],
+    "rank"   = tbl["rank"],
+    "pivots" = tbl["pivots"]
   ])];
   return NULL;
 end proc: # LoadMatrices_Generic
@@ -201,18 +203,14 @@ end proc: # LoadEquations_Generic
 
 export ReduceIndexByOne_Generic::static := proc(
   _self::Indigo,
-  {
-  laststep::boolean := false
-  }, $)::boolean;
+  $)::boolean;
 
   description "Reduce the index of the 'Generic' type DAE system of equations "
     "by one. Return true if the system of equations has been reduced to "
-    "index-0 DAE (ODE) or index-1 DAE, false otherwise. If <laststep> is true "
-    "the reduction is performed without checking the determinant of the "
-    "coefficient matrix E(x,t).";
+    "index-0 DAE (ODE) or index-1 DAE, false otherwise.";
 
-  local vars, E, G, E_tmp, G_tmp, A, nE, mE, nA, Jv, dA, H, F, EH, GF, dtr, nH,
-    mH, tbl, veil_list;
+  local vars, E, G, pvts, E_tmp, G_tmp, A, nE, mE, nA, Jv, dA, H, F, EH, GF,
+    dtr, nH, mH, tbl, veil_list;
 
   if not evalb(_self:-m_SystemType = 'Generic') then
     error(
@@ -225,6 +223,7 @@ export ReduceIndexByOne_Generic::static := proc(
   E    := _self:-m_ReductionSteps[-1]["E"];
   G    := _self:-m_ReductionSteps[-1]["G"];
   A    := _self:-m_ReductionSteps[-1]["A"];
+  pvts := _self:-m_ReductionSteps[-1]["pivots"];
 
   # Check dimensions
   nE, mE := LinearAlgebra:-Dimension(E);
@@ -255,7 +254,11 @@ export ReduceIndexByOne_Generic::static := proc(
   end if;
 
   if has(dA, D) then
-    error("partial derivatives in the differential part of the system.");
+    dA := convert(dA, diff);
+    if has(dA, D) then
+      print(indets(dA));
+      error("partial derivatives in the differential part of the system.");
+    end if;
   end if;
 
   if _self:-m_VerboseMode then
@@ -284,17 +287,12 @@ export ReduceIndexByOne_Generic::static := proc(
   GF := convert(<G, F>, Vector);
 
   # Check if determinant of <E, H> is NOT zero
-  if not laststep then
-    #dtr := LinearAlgebra:-Determinant(EH);
-    dtr := _self:-m_LAST:-Rank(_self:-m_LAST, EH);
-    try
-      dtr := timelimit(_self:-m_TimeLimit, simplify(dtr));
-    catch "time expired":
-      WARNING("time expired, simplify(det(E, H)) interrupted.");
-    end try;
-  else
-    dtr := 1;
-  end if;
+  dtr := _self:-m_LAST:-Rank(_self:-m_LAST, EH); #dtr := LinearAlgebra:-Determinant(EH);
+  try
+    dtr := timelimit(_self:-m_TimeLimit, simplify(dtr));
+  catch "time expired":
+    WARNING("time expired, simplify(det(E, H)) interrupted.");
+  end try;
 
   #if (dtr <> 0) then
   if (dtr = nops(_self:-m_SystemVars)) then
@@ -302,10 +300,11 @@ export ReduceIndexByOne_Generic::static := proc(
     # Update reduction steps
     _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
       table([
-        "E"    = EH,
-        "G"    = GF,
-        "A"    = Vector([]),
-        "rank" = mE
+        "E"      = EH,
+        "G"      = GF,
+        "A"      = Vector([]),
+        "rank"   = mE,
+        "pivots" = _self:-m_LAST:-GetResults(_self:-m_LAST, "pivots")
       ])
     ];
 
@@ -328,10 +327,11 @@ export ReduceIndexByOne_Generic::static := proc(
   # Update reduction steps
   _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
     table([
-      "E"    = tbl["Et"],
-      "G"    = tbl["Gt"],
-      "A"    = tbl["A"],
-      "rank" = tbl["rank"]
+      "E"      = tbl["Et"],
+      "G"      = tbl["Gt"],
+      "A"      = tbl["A"],
+      "rank"   = tbl["rank"],
+      "pivots" = tbl["pivots"]
     ])
   ];
 
@@ -367,6 +367,34 @@ export ReduceIndex_Generic::static := proc(
   end do;
   return out;
 end proc: # ReduceIndex_Generic
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+export GetPivots::static := proc(
+  _self::Indigo,
+  $)::Matrix(algebraic);
+
+  description "Get the pivots of the system.";
+
+  local out, i;
+
+  # Store the pivots in a matrix
+  out := Matrix(nops(_self:-m_SystemVars), nops(_self:-m_ReductionSteps));
+  for i to nops(_self:-m_ReductionSteps) do
+    out[1..nops(_self:-m_ReductionSteps[i]["pivots"]), i] :=
+      convert(_self:-m_ReductionSteps[i]["pivots"], Vector);
+  end do;
+
+  # Try to simplify
+  try
+    out := timelimit(_self:-m_TimeLimit, simplify(out));
+  catch "time expired":
+    WARNING("time expired, simplify interrupted.");
+  end try;
+
+  # Return the results
+  return out;
+end proc: # GetPivots
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

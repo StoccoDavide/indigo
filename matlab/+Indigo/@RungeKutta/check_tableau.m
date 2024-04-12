@@ -10,11 +10,6 @@
 %
 function [out, order, e_order] = check_tableau( this, tbl )
 
-  arguments
-    this Indigo.RungeKutta
-    tbl  struct
-  end
-
   CMD = 'Indigo.RungeKutta.check_tableau(...): ';
 
   % Collect input data
@@ -49,7 +44,7 @@ function [out, order, e_order] = check_tableau( this, tbl )
     warning([CMD, 'matrix b found with NaN or Inf values.']);
     out = false;
   end
-  if (~isrow(b))
+  if ~isrow(b)
     warning([CMD, 'vector b is not a row vector.']);
     out = false;
   end
@@ -60,7 +55,7 @@ function [out, order, e_order] = check_tableau( this, tbl )
 
   % Check vector b_e
   if ~isempty(b_e)
-    if (~isnumeric(b_e))
+    if ~isnumeric(b_e)
       warning([CMD, 'b_e must be a numeric vector.']);
       out = false;
     end
@@ -68,7 +63,7 @@ function [out, order, e_order] = check_tableau( this, tbl )
       warning([CMD, 'vector b_e found with NaN or Inf values.']);
       out = false;
     end
-    if (~isrow(b_e))
+    if ~isrow(b_e)
       warning([CMD, 'vector b_e is not a row vector.']);
       out = false;
     end
@@ -87,7 +82,7 @@ function [out, order, e_order] = check_tableau( this, tbl )
     warning([CMD, 'vector c found with NaN or Inf values.']);
     out = false;
   end
-  if (~iscolumn(c))
+  if ~iscolumn(c)
     warning([CMD, 'vector c is not a column vector.']);
     out = false;
   end

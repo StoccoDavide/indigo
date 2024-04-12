@@ -1,6 +1,3 @@
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %> Compute the Jacobian of the system of equations:
 %>
 %> \f[
@@ -48,21 +45,21 @@ function out = implicit_jacobian( this, x_k, K_in, t_k, d_t )
 
     % Compute the Jacobians with respect to x and x_dot
     x_dot_i = K(:,i)./d_t;
-    JF_x     = this.m_sys.JF_x     ( x_i, x_dot_i, v_i, t_i );
-    JF_x_dot = this.m_sys.JF_x_dot ( x_i, x_dot_i, v_i, t_i );
+    JF_x     = this.m_sys.JF_x     (x_i, x_dot_i, v_i, t_i);
+    JF_x_dot = this.m_sys.JF_x_dot (x_i, x_dot_i, v_i, t_i);
 
     % Add the contribution of veils to the Jacobian
-    if num_veil > 0
-      JF_x = JF_x + this.m_sys.JF_v( x_i, x_dot_i, v_i, t_i ) * ...
-                    this.m_sys.Jv_x( x_i,          v_i, t_i );
+    if (num_veil > 0)
+      JF_x = JF_x + this.m_sys.JF_v(x_i, x_dot_i, v_i, t_i) * ...
+                    this.m_sys.Jv_x(x_i,          v_i, t_i);
     end
 
-    % derivative of F( x_i, K(:,i)/d_t, t_i)
+    % Derivative of F(x_i, K(:,i)/d_t, t_i)
     jdx = 1:nx;
     for j = 1:nc
       % Combine the Jacobians with respect to x and x_dot to obtain the
       % Jacobian with respect to K
-      if i == j
+      if (i == j)
         out(idx, jdx) = this.m_A(i,j) * JF_x + JF_x_dot./d_t;
       else
         out(idx, jdx) = this.m_A(i,j) * JF_x;

@@ -776,6 +776,7 @@ IndigoCodegen := module()
     invs::{Vector(algebraic), list(algebraic)} := [],
     veil::{Vector(algebraic) = algebraic,
            list(algebraic = algebraic)} := [],
+    pvts::Matrix(algebraic)             := Matrix([]),
     data::list(symbol = algebraic)      := [],
     info::string                        := "No class description provided.",
     label::string                       := "out",
@@ -783,12 +784,12 @@ IndigoCodegen := module()
     }, $)::string;
 
     description "Generate an implicit system for the firt-order differential "
-      "equations <eqns>, invariants <invs> with states variables <vars> and "
-      "states variables, system data <data>, veilig label <label>, and "
+      "equations <eqns>, pivots <pvts>, invariants <invs> with states variables "
+      "<vars> and states variables, system data <data>, veilig label <label>, and "
       "description <info>.";
 
-    local x, x_dot, F, JF_x, JF_x_dot, v, v_fncs, Jv_x, JF_v, h, Jh_x, Jh_v,
-      rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
+    local x, x_dot, F, pvts_tmp, JF_x, JF_x_dot, v, v_fncs, Jv_x, JF_v, h, Jh_x,
+      Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
       i, bar, data_str, properties;
 
     # Store system states and derivatives
@@ -861,6 +862,7 @@ IndigoCodegen := module()
     h        := subs(op(rm_deps), h);
     Jh_x     := subs(op(rm_deps), Jh_x);
     Jh_v     := subs(op(rm_deps), Jh_v);
+    pvts_tmp := subs(op(rm_deps), pvts);
 
     # Function utilities strings
     i   := indent;
@@ -1000,6 +1002,16 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
+          "pivots", [x, v], pvts_tmp,
+          parse("data") = properties,
+          parse("info") = "Calculate the pivoting values"
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
           "Jh_v", [x, v], Jh_v,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to v."
@@ -1037,6 +1049,7 @@ IndigoCodegen := module()
     invs::{Vector(algebraic), list(algebraic)} := [],
     veil::{Vector(algebraic) = algebraic,
            list(algebraic = algebraic)} := [],
+    pvts::Matrix(algebraic)             := Matrix([]),
     data::list(symbol = algebraic)      := [],
     info::string                        := "No class description provided.",
     label::string                       := "out",
@@ -1044,12 +1057,12 @@ IndigoCodegen := module()
     }, $)::string;
 
     description "Generate an explicit system for the firt-order differential "
-      "equations <eqns>, invariants <invs> with states variables <vars> and "
-      "states variables, system data <data>, veilig label <label> and "
+      "equations <eqns>, pivots <pvts>, invariants <invs> with states variables "
+      "<vars> and states variables, system data <data>, veilig label <label> and "
       "description <info>.";
 
-    local x, x_dot, F, A, b, f, Jf_x, v, v_fncs, Jv_x, Jf_v, h, Jh_x, Jh_v,
-      rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
+    local x, x_dot, F, A, b, f, pvts_tmp, Jf_x, v, v_fncs, Jv_x, Jf_v, h, Jh_x,
+      Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
       i, bar, data_str, properties;
 
     # Store system states and derivatives
@@ -1132,6 +1145,8 @@ IndigoCodegen := module()
     h        := subs(op(rm_deps), h);
     Jh_x     := subs(op(rm_deps), Jh_x);
     Jh_v     := subs(op(rm_deps), Jh_v);
+    pvts_tmp := subs(op(rm_deps), pvts);
+
 
     # Function utilities strings
     i   := indent;
@@ -1268,6 +1283,16 @@ IndigoCodegen := module()
       i, i, "%\n",
       i, i, bar,
       i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "pivots", [x, v], pvts_tmp,
+          parse("data") = properties,
+          parse("info") = "Calculate the pivoting values"
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
       i, i, "function out = in_domain( ~, ~, ~ )\n",
       i, i, i, "out = true;\n",
       i, i, "end % in_domain\n",
@@ -1298,6 +1323,7 @@ IndigoCodegen := module()
     invs::{Vector(algebraic), list(algebraic)} := [],
     veil::{Vector(algebraic) = algebraic,
            list(algebraic = algebraic)} := [],
+    pvts::Matrix(algebraic)             := Matrix([]),
     data::list(symbol = algebraic)      := [],
     info::string                        := "No class description provided.",
     label::string                       := "out",
@@ -1305,12 +1331,12 @@ IndigoCodegen := module()
     }, $)::string;
 
     description "Generate a semi explicit system for the firt-order differential "
-      "equations <eqns>, invariants <invs> with states variables <vars> and "
-      "states variables, system data <data>, veilig label <label> and "
+      "equations <eqns>, pivots <pvts>, invariants <invs> with states variables "
+      "<vars> and states variables, system data <data>, veilig label <label> and "
       "description <info>.";
 
-    local x, x_dot, F, A, b, TA_x, TA_v, Jb_x, Jb_v, v, v_fncs, Jv_x, h, Jh_x,
-      Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps,
+    local x, x_dot, F, A, b, pvts_tmp, TA_x, TA_v, Jb_x, Jb_v, v, v_fncs, Jv_x,
+      h, Jh_x, Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps,
       mk_x_dot, i, bar, data_str, properties;
 
     # Store system states and derivatives
@@ -1383,20 +1409,21 @@ IndigoCodegen := module()
     ];
 
     # Generate expressions with proper variables dependencices
-    x      := convert(subs(op(rm_deps), x), list);
-    x_dot  := convert(subs(op(rm_deps), x_dot), list);
-    A      := subs(op(rm_deps), A);
-    TA_x   := subs(op(rm_deps), TA_x);
-    TA_v   := subs(op(rm_deps), TA_v);
-    b      := subs(op(rm_deps), b);
-    Jb_x   := subs(op(rm_deps), Jb_x);
-    Jb_v   := subs(op(rm_deps), Jb_v);
-    v      := convert(subs(op(rm_deps), v), list);
-    v_fncs := subs(op(rm_deps), v_fncs);
-    Jv_x   := subs(op(rm_deps), Jv_x);
-    h      := subs(op(rm_deps), h);
-    Jh_x   := subs(op(rm_deps), Jh_x);
-    Jh_v   := subs(op(rm_deps), Jh_v);
+    x        := convert(subs(op(rm_deps), x), list);
+    x_dot    := convert(subs(op(rm_deps), x_dot), list);
+    A        := subs(op(rm_deps), A);
+    TA_x     := subs(op(rm_deps), TA_x);
+    TA_v     := subs(op(rm_deps), TA_v);
+    b        := subs(op(rm_deps), b);
+    Jb_x     := subs(op(rm_deps), Jb_x);
+    Jb_v     := subs(op(rm_deps), Jb_v);
+    v        := convert(subs(op(rm_deps), v), list);
+    v_fncs   := subs(op(rm_deps), v_fncs);
+    Jv_x     := subs(op(rm_deps), Jv_x);
+    h        := subs(op(rm_deps), h);
+    Jh_x     := subs(op(rm_deps), Jh_x);
+    Jh_v     := subs(op(rm_deps), Jh_v);
+    pvts_tmp := subs(op(rm_deps), pvts);
 
     # Function utilities strings
     i   := indent;
@@ -1559,6 +1586,16 @@ IndigoCodegen := module()
           "Jh_v", [x, v], Jh_v,
           parse("data") = properties,
           parse("info") = "Calculate the Jacobian of h with respect to v."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "pivots", [x, v], pvts_tmp,
+          parse("data") = properties,
+          parse("info") = "Calculate the pivoting values"
       )),
       i, i, "%\n",
       i, i, bar,

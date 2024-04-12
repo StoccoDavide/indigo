@@ -1,4 +1,3 @@
-%
 %> Class container for Runge-Kutta solvers of the system of Ordinary Differential
 %> Equations (ODEs) or Differential Algebraic Equations (DAEs). The user must
 %> simply define the Butcher tableau of the solver, which defined as:
@@ -81,7 +80,7 @@ classdef RungeKutta < handle
     %
     %> Maximum number of substeps.
     %
-    m_max_substeps = 5;
+    m_max_substeps = 50;
     %
     %> Maximum number of iterations in the projection process.
     %
@@ -97,7 +96,7 @@ classdef RungeKutta < handle
     %
     %> Matrix conditioning tolerance for projection step
     %
-    m_projection_rcond_tolerance = 1e-8;
+    m_projection_rcond_tolerance = 1e-10;
     %
     %> Boolean vector to project the corresponding invariants.
     %
@@ -121,7 +120,7 @@ classdef RungeKutta < handle
     %
     %> Projection mode boolean.
     %
-    m_projection = false;
+    m_projection = true;
     %
     %> Aadaptive step mode boolean.
     %
@@ -129,11 +128,11 @@ classdef RungeKutta < handle
     %
     %> Absolute tolerance for adaptive step.
     %
-    m_A_tol = 1e-6;
+    m_A_tol = 1e-7;
     %
     %> Relative tolerance for adaptive step.
     %
-    m_R_tol = 1e-4;
+    m_R_tol = 1e-6;
     %
     %> Safety factor for adaptive step.
     %
@@ -175,7 +174,7 @@ classdef RungeKutta < handle
       % Collect input arguments
       this.m_name          = t_name;
       this.m_order         = t_order;
-      this.m_newton_solver = Indigo.NewtonSolver();
+      this.m_newton_solver = Indigo.NewtonFixed();
 
       % Set the Butcher tableau
       this.set_tableau(tbl);
@@ -288,21 +287,26 @@ classdef RungeKutta < handle
     %
     %> Set the tolerance for projection step.
     %>
-    %> \param The tolerance for projection step.
-    %> \param The low tolerance for projection step.
-    %> \param The matrix conditioning tolerance for projection step.
+    %> \param t_projection_tolerance       The tolerance for projection step.
+    %> \param t_projection_low_tolerance   The low tolerance for projection step.
+    %> \param t_projection_rcond_tolerance The matrix conditioning tolerance for
+    %>                                     projection step.
     %
-    function set_projection_tolerance( this, tol, low_tol, rcond_tol )
+    function set_projection_tolerance( this, ...
+      t_projection_tolerance, t_projection_low_tolerance, t_projection_rcond_tolerance )
 
       CMD = 'Indigo.RungeKutta.set_max_projection_iteration(...): ';
 
-      assert(tol       > 0, [CMD, 'tolerance must be positive.']);
-      assert(low_tol   > 0, [CMD, 'tolerance must be positive.']);
-      assert(rcond_tol > 0, [CMD, 'tolerance must be positive.']);
+      assert(t_projection_tolerance > 0, ...
+        [CMD, 'tolerance must be positive.']);
+      assert(t_projection_low_tolerance > 0, ...
+        [CMD, 'low tolerance must be positive.']);
+      assert(t_projection_rcond_tolerance > 0, ...
+        [CMD, 'conditioning tolerance must be positive.']);
 
-      this.m_projection_tolerance       = tol;
-      this.m_projection_low_tolerance   = low_tol;
-      this.m_projection_rcond_tolerance = rcond_tol;
+      this.m_projection_tolerance       = t_projection_tolerance;
+      this.m_projection_low_tolerance   = t_projection_low_tolerance;
+      this.m_projection_rcond_tolerance = t_projection_rcond_tolerance;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -312,10 +316,11 @@ classdef RungeKutta < handle
     %> \return The tolerance for projection step, the low tolerance and the
     %>         matrix conditioning tolerance.
     %
-    function [tol, low_tol, rcond_tol] = get_projection_tolerance( this )
-      tol       = this.m_projection_tolerance;
-      low_tol   = this.m_projection_low_tolerance;
-      rcond_tol = this.m_projection_rcond_tolerance;
+    function [t_projection_tolerance, t_projection_low_tolerance, t_projection_rcond_tolerance] = ...
+      get_projection_tolerance( this )
+      t_projection_tolerance       = this.m_projection_tolerance;
+      t_projection_low_tolerance   = this.m_projection_low_tolerance;
+      t_projection_rcond_tolerance = this.m_projection_rcond_tolerance;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -361,7 +366,9 @@ classdef RungeKutta < handle
     %> \param t_A The matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
     %
     function set_A( this, t_A )
-      this.m_A = t_A;
+      tmp_tbl   = this.get_tableau();
+      tmp_tbl.A = t_A;
+      this.set_tableau(tmp_tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -381,7 +388,9 @@ classdef RungeKutta < handle
     %> \param t_b The weights vector \f$ \mathbf{b} \f$ (row vector).
     %
     function set_b( this, t_b )
-      this.m_b = t_b;
+      tmp_tbl   = this.get_tableau();
+      tmp_tbl.b = t_b;
+      this.set_tableau(tmp_tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -402,7 +411,9 @@ classdef RungeKutta < handle
     %>        vector).
     %
     function set_b_e( this, t_b_e )
-      this.m_b_e = t_b_e;
+      tmp_tbl     = this.get_tableau();
+      tmp_tbl.b_e = t_b_e;
+      this.set_tableau(tmp_tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -422,7 +433,9 @@ classdef RungeKutta < handle
     %> \param t_c The nodes vector \f$ \mathbf{c} \f$ (column vector).
     %
     function set_c( this, t_c )
-      this.m_c = t_c;
+      tmp_tbl   = this.get_tableau();
+      tmp_tbl.c = t_c;
+      this.set_tableau(tmp_tbl);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -442,6 +455,12 @@ classdef RungeKutta < handle
     %> \param t_A_tol The absolute tolerance for adaptive step.
     %
     function set_A_tol( this, t_A_tol )
+
+      CMD = 'Indigo.RungeKutta.set_A_tol(...): ';
+
+      assert(t_A_tol > 0.0, ...
+        [CMD, 'tolerance must be positive.']);
+
       this.m_A_tol = t_A_tol;
     end
     %
@@ -462,6 +481,12 @@ classdef RungeKutta < handle
     %> \param t_R_tol The relative tolerance for adaptive step.
     %
     function set_R_tol( this, t_R_tol )
+
+      CMD = 'Indigo.RungeKutta.set_R_tol(...): ';
+
+      assert(t_R_tol > 0.0, ...
+        [CMD, 'tolerance must be positive.']);
+
       this.m_R_tol = t_R_tol;
     end
     %
@@ -481,8 +506,14 @@ classdef RungeKutta < handle
     %>
     %> \param t_fac The safety factor for adaptive step.
     %
-    function set_safety_factor( this, t_fac )
-      this.m_safety_factor = t_fac;
+    function set_safety_factor( this, t_safety_factor )
+
+      CMD = 'Indigo.RungeKutta.set_safety_factor(...): ';
+
+      assert(t_safety_factor > 0.0, ...
+        [CMD, 'safety factor must be positive.']);
+
+      this.m_safety_factor = t_safety_factor;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -502,6 +533,12 @@ classdef RungeKutta < handle
     %> \param t_factor_min The minimum safety factor for adaptive step.
     %
     function set_factor_min( this, t_factor_min )
+
+      CMD = 'Indigo.RungeKutta.set_factor_min(...): ';
+
+      assert(t_factor_min > 0.0, ...
+        [CMD, 'safety factor must be positive.']);
+
       this.m_factor_min = t_factor_min;
     end
     %
@@ -522,6 +559,12 @@ classdef RungeKutta < handle
     %> \param t_factor_max The maximum safety factor for adaptive step.
     %
     function set_factor_max( this, t_factor_max )
+
+      CMD = 'Indigo.RungeKutta.set_factor_max(...): ';
+
+      assert(t_factor_max > 0.0, ...
+        [CMD, 'safety factor must be positive.']);
+
       this.m_factor_max = t_factor_max;
     end
     %
@@ -532,6 +575,12 @@ classdef RungeKutta < handle
     %> \param t_d_t_min The minimum step for advancing.
     %
     function set_d_t_min( this, t_d_t_min )
+
+      CMD = 'Indigo.RungeKutta.set_d_t_min(...): ';
+
+      assert(t_d_t_min > 0.0, ...
+        [CMD, 'minimum step for advancing must be positive.']);
+
       this.m_d_t_min = t_d_t_min;
     end
     %
@@ -688,9 +737,9 @@ classdef RungeKutta < handle
       CMD = 'Indigo.RungeKutta.project_initial_conditions(...): ';
 
       if (nargin == 3)
-        x = this.do_projection(x_t, t);
+        x = this.project(x_t, t);
       elseif (nargin == 4)
-        x = this.do_projection(x_t, t, varargin);
+        x = this.project(x_t, t, varargin);
       else
         error([CMD, 'invalid number of input arguments.']);
       end
@@ -720,9 +769,9 @@ classdef RungeKutta < handle
     %>
     %> where \f$ \mathcal{S} \f$ is the generic advancing step of the solver.
     %>
-    %> \param x_k     States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
-    %> \param t_k     Time step \f$ t_k \f$.
-    %> \param d_t     Advancing time step \f$ \Delta t\f$.
+    %> \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.
+    %> \param t_k Time step \f$ t_k \f$.
+    %> \param d_t Advancing time step \f$ \Delta t\f$.
     %>
     %> \return The approximation of \f$ \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ and
     %>         \f$ \mathbf{x}'_{k+1}(t_{k}+\Delta t) \f$.
@@ -740,10 +789,10 @@ classdef RungeKutta < handle
     set_tableau( this, tbl )
     [out, order, e_order] = check_tableau( this, tbl )
     [order,msg] = tableau_order( this, A, b, c )
-    x = do_projection( this, x_t, t, varargin )
+    x = project( this, x_t, t, varargin )
     [x_out, t_out, v_out, h_out] = solve( this, t, x_0 )
     [x_out, t_out, v_out, h_out] = adptive_solve( this, t, x_0, varargin )
-    [x_new, d_t_star, ierr] = do_step( this, x_k, t_k, d_t )
+    [x_new, d_t_star, ierr] = advance( this, x_k, t_k, d_t )
     out = estimate_step( this, x_h, x_l, d_t )
     out = implicit_jacobian( this, x_k, K, t_k, d_t )
     out = implicit_residual( this, x_k, K, t_k, d_t )

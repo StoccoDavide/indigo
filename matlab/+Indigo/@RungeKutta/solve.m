@@ -1,6 +1,3 @@
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%
 %> Solve the system and calculate the approximate solution over the mesh of
 %> time points.
 %>
@@ -59,7 +56,7 @@ function [x_out, t, v_out, h_out] = solve( this, t, x_0 )
     end
 
     % Integrate system
-    [x_s, d_t_star, ierr] = this.do_step(x_s, t_s, d_t_s);
+    [x_s, d_t_star, ~] = this.advance(x_s, t_s, d_t_s);
 
     % Update the current step
     t_s = t_s + d_t_s;
@@ -104,6 +101,3 @@ function [x_out, t, v_out, h_out] = solve( this, t, x_0 )
     Indigo.Utils.progress_bar(bar_str);
   end
 end
-%
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-%

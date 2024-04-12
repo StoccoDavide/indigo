@@ -156,14 +156,14 @@ export ReduceIndex_MultiBody::static := proc(
   # ODE velocity part v' = v_d
   ODE_vel := zip((x, y) -> x = y, v_vars_t, v_vars_dot);
 
-  # Second hidden contraint/invariant A(q,v,t)
+  # Second hidden contraint A(q,v,t)
   A := subs(ODE_pos, diff(Phi, t));
   Phi_P, A_rhs := LinearAlgebra:-GenerateMatrix(convert(A, list), v_vars);
 
   # Third hidden invariant Phi_P*v_d - g(q,v,t)
   tmp, g := LinearAlgebra:-GenerateMatrix(diff(convert(A, list), t), v_vars_t);
 
-  # Big ODE system
+  # Reduced ODE system
   A_tot := <<Mass, Phi_P>|<LinearAlgebra:-Transpose(Phi_P), Matrix(m, m)>>;
   f_tot := convert(<f, subs(ODE_pos, g)>, Vector);
   x_tot := [op(v_vars_dot), op(l_vars)];
@@ -193,7 +193,7 @@ export ReduceIndex_MultiBody::static := proc(
       "Phi_t"   = diff(Phi, t),
       "A_rhs"   = A_rhs,
       "g"       = subs(ODE_pos, g),
-      # Overall system
+      # Reduced ODE system
       "A_tot"   = A_tot,
       "f_tot"   = f_tot,
       "x_tot"   = x_tot,

@@ -1,17 +1,12 @@
 %> Set the Butcher tableau.
 %>
-%> \param A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
-%> \param b   Weights vector \f$ \mathbf{b} \f$ (row vector).
-%> \param b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
-%>            (row vector).
-%> \param c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
-% 
+%> \param tbl.A   Matrix \f$ \mathbf{A} \f$ (lower triangular matrix).
+%> \param tbl.b   Weights vector \f$ \mathbf{b} \f$ (row vector).
+%> \param tbl.b_e [optional] Embedded weights vector \f$ \hat{\mathbf{b}} \f$
+%>                (row vector).
+%> \param tbl.c   Nodes vector \f$ \mathbf{c} \f$ (column vector).
+%
 function set_tableau( this, tbl )
-
-  arguments
-    this Indigo.RungeKutta
-    tbl  struct
-  end
 
   CMD = 'Indigo.RungeKutta.set_tableau(...): ';
 

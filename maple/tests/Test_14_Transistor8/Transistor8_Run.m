@@ -28,10 +28,7 @@ ODE = Transistor8();
 % IndigoSolversList()'
 
 solver_name = { ...
-  %'SSPRK3', ...
-  %'GaussLegendre4', ...
   'Fehlberg45I', ...
-  'CashKarp45', ...
 };
 
 solver = cell(length(solver_name), 1);
@@ -44,7 +41,7 @@ color = colormap(lines(length(solver_name)));
 %% Integrate the system
 
 % Set integration interval
-d_t   = 1e-4;
+d_t   = 1e-3;
 t_ini = 0.0;
 t_end = 0.2;
 T_vec = t_ini:d_t:t_end;
@@ -61,7 +58,7 @@ V = cell(1, length(T_vec));
 % Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
-  [X{i},  T{i}, V{i}, H{i}] = solver{i}.adaptive_solve(T_vec, IC);
+  [X{i}, T{i}, V{i}, H{i}] = solver{i}.adaptive_solve(T_vec, IC);
 end
 
 %% Plot results
@@ -75,13 +72,15 @@ figure();
   xlabel('$t$ (s)');
   ylabel('$\mathbf{x}_l$ (-)');
   for i = 1:length(solver_name)
-    t = T{i};
-    x = X{i}(1,:);
-    y = X{i}(2,:);
+    t = decimate(T{i},2);
+    x = decimate(X{i}(1,:),2);
+    y = decimate(X{i}(8,:),2); %0.1*sin(200*pi*t);
     plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;
+
+  return
 
 figure();
   hold on;

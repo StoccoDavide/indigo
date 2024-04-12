@@ -398,8 +398,11 @@ classdef NewtonSolver < handle
         if ~all(isfinite(J)); break; end
 
         % Evaluate advancing direction
-        D = -J\F;
-        %[D, ~] = lsqr(J, -F, 1e-8, 50);
+        if (rcond(J) > 1e-8)
+          D = -J\F;
+        else
+          [D, ~] = lsqr(J, -F, 1e-8, 50);
+        end
         if ~all(isfinite(D)); break; end
 
         % Relax the iteration process

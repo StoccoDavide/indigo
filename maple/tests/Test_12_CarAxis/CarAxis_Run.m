@@ -30,7 +30,7 @@ ODE = CarAxis();
 % IndigoSolversList()'
 
 solver_name = { ...
-  'RadauIIA5', ...
+  'Fehlberg45I', ...
 };
 
 solver = cell(length(solver_name),1);
@@ -45,7 +45,7 @@ color = colormap(lines(length(solver_name)));
 % Set integration interval
 d_t   = 0.001;
 t_ini = 0.0;
-t_end = 10.0;
+t_end = 3.0;
 T_vec = t_ini:d_t:t_end;
 
 % Project the initial condition
@@ -66,6 +66,23 @@ end
 %% Plot results
 
 linewidth = 1.1;
+
+figure();
+  hold on;
+  grid on;
+  grid minor;
+  xlabel('$t$ (s)');
+  ylabel('$\mathbf{x}_l$ (-)');
+  for i = 1:length(solver_name)
+    t = T{i};
+    x = sqrt(X{i}(1,:).^2 + X{i}(2,:).^2);
+    y_b = 0.1*sin(10*T{i});
+    x_b = sqrt(1^2 - y_b.^2);
+    y = sqrt((X{i}(3,:) - x_b).^2 + (X{i}(4,:) - y_b).^2);
+    plot(t, x, t, y, 'LineWidth', linewidth, 'Color', color(i,:));
+  end
+  legend(solver_name, 'Location', 'northwest');
+  hold off;
 
 figure();
   hold on;
