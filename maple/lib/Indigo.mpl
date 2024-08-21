@@ -26,11 +26,10 @@ module Indigo()
 
   local m_LAST           := NULL;
   local m_LEM            := NULL;
-  local m_Factorization  := "LU";
   local m_VerboseMode    := false;
   local m_WarningMode    := true;
+  local m_SystemLoaded   := false;
   local m_TimeLimit      := 0.1;
-  local m_SystemType     := 'Empty';
   local m_ReductionSteps := [];
   local m_SystemVars     := [];
   local m_SystemInvs     := [];
@@ -68,7 +67,6 @@ module Indigo()
     if (lib_base_path = NULL) then
       error "cannot find 'Indigo' module.";
     end if;
-    protect('Empty', 'Linear', 'Generic', 'MultiBody');
     return NULL;
   end proc: # ModuleLoad
 
@@ -78,7 +76,6 @@ module Indigo()
 
     description "'Indigo' module unload procedure.";
 
-    unprotect('Empty', 'Linear', 'Generic', 'MultiBody');
     return NULL;
   end proc: # ModuleUnload
 
@@ -93,11 +90,10 @@ module Indigo()
 
     _self:-m_LAST           := proto:-m_LAST;
     _self:-m_LEM            := proto:-m_LEM;
-    _self:-m_Factorization  := proto:-m_Factorization;
     _self:-m_VerboseMode    := proto:-m_VerboseMode;
     _self:-m_WarningMode    := proto:-m_WarningMode;
     _self:-m_TimeLimit      := proto:-m_TimeLimit;
-    _self:-m_SystemType     := proto:-m_SystemType;
+    _self:-m_SystemLoaded   := proto:-m_SystemLoaded;
     _self:-m_ReductionSteps := proto:-m_ReductionSteps;
     _self:-m_SystemVars     := proto:-m_SystemVars;
     _self:-m_SystemInvs     := proto:-m_SystemInvs;
@@ -202,30 +198,6 @@ module Indigo()
 
     return _self:-m_LEM;
   end proc: # GetLEM
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export EnableLU::static := proc(
-    _self::Indigo,
-    $)
-
-    description "Enable the LU factorization.";
-
-    _self:-m_Factorization := "LU";
-    return NULL;
-  end proc: # EnableLU
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export EnableFFLU::static := proc(
-    _self::Indigo,
-    $)
-
-    description "Enable the FFLU factorization.";
-
-    _self:-m_Factorization := "FFLU";
-    return NULL;
-  end proc: # EnableFFLU
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -367,7 +339,7 @@ module Indigo()
       _self:-InitLAST(_self, label);
     end if;
 
-    _self:-m_SystemType     := 'Empty';
+    _self:-m_SystemLoaded   := false;
     _self:-m_ReductionSteps := [];
     _self:-m_SystemVars     := [];
     _self:-m_SystemInvs     := [];
@@ -463,7 +435,7 @@ module Indigo()
 
     # Store the differential equations
     out := convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
-      _self:-m_ReductionSteps[-1]["G"], list);
+      _self:-m_ReductionSteps[-1]["g"], list);
 
     # Try to simplify
     try
@@ -488,7 +460,7 @@ module Indigo()
     local out;
 
     # Store the algebraic equations
-    out := convert(_self:-m_ReductionSteps[-1]["A"], list);
+    out := convert(_self:-m_ReductionSteps[-1]["a"], list);
 
     # Try to simplify
     try
@@ -527,7 +499,7 @@ module Indigo()
     local out;
 
     # Store the invariants
-    out := map(x -> op(convert(x["A"], list)), _self:-m_ReductionSteps);
+    out := map(x -> op(convert(x["a"], list)), _self:-m_ReductionSteps);
 
     # Try to simplify
     try
@@ -608,14 +580,14 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export GetSystemType::static := proc(
+  export GetSystemLoaded::static := proc(
     _self::Indigo,
     $)::symbol;
 
     description "Return the type of the system.";
 
-    return _self:-m_SystemType;
-  end proc: # GetSystemType
+    return _self:-m_SystemLoaded;
+  end proc: # GetSystemLoaded
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -693,84 +665,6 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export LoadMatrices::static := proc(
-    _self::Indigo,
-    type::symbol
-    # _passed
-    )
-
-    description "Load the matrices from the input system of type <type>.";
-
-    if (_npassed < 3) then
-      error("no system to load.");
-    elif (type = 'Linear') and (_npassed = 6) then
-      _self:-LoadMatrices_Linear(_self, _passed[3..-1]);
-    elif (type = 'Generic') and (_npassed = 5) then
-      _self:-LoadMatrices_Generic(_self, _passed[3..-1]);
-    elif (type = 'MultiBody') and (_npassed = 8) then
-      _self:-LoadMatrices_MultiBody(_self, _passed[3..-1]);
-    else
-      error("invalid input arguments.");
-    end if;
-    return NULL;
-  end proc: # LoadMatrices
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export LoadEquations::static := proc(
-    _self::Indigo,
-    type::symbol
-    # _passed
-    )
-
-    description "Load the matrices from the input system of type <type>.";
-
-    if (_npassed < 3) then
-      WARNING(
-        "BAD USAGE: call the function as Indigo:-LoadEquations('type', ...), "
-        "where type must be choosen between: 'Linear', 'Generic' or 'MultiBody'."
-      );
-      error("no system to load.");
-    elif (type = 'Linear') then
-      _self:-LoadEquations_Linear(_self, _passed[3..-1]);
-    elif (type = 'Generic') then
-      _self:-LoadEquations_Generic(_self, _passed[3..-1]);
-    elif (type = 'MultiBody') then
-      _self:-LoadEquations_MultiBody(_self, _passed[3..-1]);
-    else
-      error("invalid system type '%1'.", type);
-    end if;
-    return NULL;
-  end proc: # LoadEquations
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  export ReduceIndex::static := proc(
-    _self::Indigo,
-    {max_iter::integer := 10},
-    $)::boolean;
-
-    description "Reduce the index of the loaded system.";
-
-    if evalb(_self:-m_SystemType = 'Empty') then
-      if _self:-m_WarningMode then
-        WARNING("Indigo::ReduceIndex(...): no system loaded yet.");
-      end if;
-      return false;
-    elif evalb(_self:-m_SystemType = 'Linear') then
-      return _self:-ReduceIndex_Linear(_self);
-    elif evalb(_self:-m_SystemType = 'Generic') then
-      return _self:-ReduceIndex_Generic(_self);
-    elif evalb(_self:-m_SystemType = 'MultiBody') then
-      return _self:-ReduceIndex_MultiBody(_self);
-    else
-      error("invalid system type '%1'.", _self:-m_SystemType);
-      return false;
-    end if;
-  end proc: # ReduceIndex
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   export TranslateToMatlab::static := proc(
     _self::Indigo,
     name::string,
@@ -787,13 +681,7 @@ module Indigo()
     local vars, eqns, veil, invs, pvts, label;
 
     # Get system data
-    if evalb(_self:-m_SystemType = 'Empty') then
-      if _self:-m_WarningMode then
-        WARNING("Indigo::ReduceIndex(...): no system loaded yet.");
-      end if;
-    elif evalb(_self:-m_SystemType = 'Linear') then
-      # TODO: implement
-    elif evalb(_self:-m_SystemType = 'Generic') then
+    if _self:-m_SystemLoaded then
       vars := _self:-m_SystemVars;
       eqns := _self:-GetDAEquations(_self);
       veil := _self:-GetVeils(_self);
@@ -801,10 +689,10 @@ module Indigo()
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
       ];
-    elif evalb(_self:-m_SystemType = 'MultiBody') then
-      # TODO: implement
     else
-      error("invalid system type '%1'.", _self:-m_SystemType);
+      if _self:-m_WarningMode then
+        WARNING("Indigo:-ReduceIndex(...): no system loaded yet.");
+      end if;
     end if;
 
     # Generate class body string
@@ -863,9 +751,7 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-$include "./lib/Indigo_Linear.mpl"
-$include "./lib/Indigo_Generic.mpl"
-$include "./lib/Indigo_MultiBody.mpl"
+$include "./lib/IndigoReduction.mpl"
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

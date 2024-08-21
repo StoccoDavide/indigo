@@ -276,7 +276,7 @@ IndigoCodegen := module()
         cur := [op(cur), irem(idx, dims[j], 'idx')+1];
       end do;
       tmp := func[op(cur)];
-      if not (skipnull and evalb(tmp = 0)) then
+      if not (skipnull and (tmp = 0)) then
         map(x -> (x, "_"), cur); str1 := cat(label, "_", op(%))[1..-2];
         lst := [op(lst), convert(str1, symbol) = tmp];
         map(x -> (x, ", "), cur); str2 := cat("", op(%))[1..-3];
@@ -305,14 +305,14 @@ IndigoCodegen := module()
     local i, out;
 
     out := cat("function out_", name, " = ", name, "( ");
-    if skipthis then #and evalb(add(map(nops, vars)) = 0) then
+    if skipthis then #and (add(map(nops, vars)) = 0) then
       out := cat(out, "~");
     else
       out := cat(out, "this");
     end if;
 
     for i from 1 to nops(vars) do
-      if evalb(nops(vars[i]) > 0) then
+      if (nops(vars[i]) > 0) then
         out := cat(out, ", ", "in_", i);
       else
         out := cat(out, ", ", "~");
@@ -413,7 +413,7 @@ IndigoCodegen := module()
 
     # Extract the function properties
     tmp_data := convert(data, set) intersect indets(vec, symbol);
-    tmp_data := remove[flatten](j -> not evalb(j in tmp_data), data);
+    tmp_data := remove[flatten](j -> not (j in tmp_data), data);
     properties := IndigoCodegen:-GenerateProperties(
       tmp_data, parse("indent") = indent
     );
@@ -428,8 +428,8 @@ IndigoCodegen := module()
     # Extract the function inputs
     vec_inds    := indets(vec, symbol);
     tmp_vars    := map(i -> i intersect vec_inds, map(convert, vars, set));
-    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not evalb(k in j), i), vars, tmp_vars);
-    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not evalb(k in j), "", k), i), vars, tmp_vars);
+    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not (k in j), i), vars, tmp_vars);
+    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not (k in j), "", k), i), vars, tmp_vars);
     inputs := IndigoCodegen:-GenerateInputs(
       tmp_vars_nl, parse("indent") = indent, parse("skipnull") = true
     );
@@ -487,7 +487,7 @@ IndigoCodegen := module()
 
     # Extract the function properties
     tmp_data := convert(data, set) intersect indets(mat, symbol);
-    tmp_data := remove[flatten](j -> not evalb(j in tmp_data), data);
+    tmp_data := remove[flatten](j -> not (j in tmp_data), data);
     properties := IndigoCodegen:-GenerateProperties(
       tmp_data, parse("indent") = indent
     );
@@ -502,8 +502,8 @@ IndigoCodegen := module()
     # Extract the function inputs
     mat_inds    := indets(mat, symbol);
     tmp_vars    := map(i -> i intersect mat_inds, map(convert, vars, set));
-    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not evalb(k in j), i), vars, tmp_vars);
-    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not evalb(k in j), "", k), i), vars, tmp_vars);
+    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not (k in j), i), vars, tmp_vars);
+    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not (k in j), "", k), i), vars, tmp_vars);
     inputs := IndigoCodegen:-GenerateInputs(
       tmp_vars_nl, parse("indent") = indent, parse("skipnull") = true
     );
@@ -561,7 +561,7 @@ IndigoCodegen := module()
 
     # Extract the function properties
     tmp_data := convert(data, set) intersect indets(ten, symbol);
-    tmp_data := remove[flatten](j -> not evalb(j in tmp_data), data);
+    tmp_data := remove[flatten](j -> not (j in tmp_data), data);
     properties := IndigoCodegen:-GenerateProperties(
       tmp_data, parse("indent") = indent
     );
@@ -576,8 +576,8 @@ IndigoCodegen := module()
     # Extract the function inputs
     ten_inds    := indets(ten, symbol);
     tmp_vars    := map(i -> i intersect ten_inds, map(convert, vars, set));
-    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not evalb(k in j), i), vars, tmp_vars);
-    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not evalb(k in j), "", k), i), vars, tmp_vars);
+    tmp_vars_rm := zip((i, j) -> remove[flatten](k -> not (k in j), i), vars, tmp_vars);
+    tmp_vars_nl := zip((i, j) -> map(k -> `if`(not (k in j), "", k), i), vars, tmp_vars);
     inputs := IndigoCodegen:-GenerateInputs(
       tmp_vars_nl, parse("indent") = indent, parse("skipnull") = true
     );
@@ -662,7 +662,7 @@ IndigoCodegen := module()
       # Calculate veils derivatives
       # from   [..., v, ...] -> [..., grad(v), ...]
       # remove [..., 0, ...] -> [..., ...]
-      v_dot := remove[flatten](j -> evalb(j = 0),
+      v_dot := remove[flatten](j -> (j = 0),
         convert(IndigoUtils:-DoJacobian(convert(v, Vector), x), list)
       );
 

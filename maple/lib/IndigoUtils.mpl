@@ -106,7 +106,7 @@ IndigoUtils := module()
 
     if not type(param, param_type) then
       printf(
-        "IndigoUtils::GetPosition(...): parameter '%1' = %2\n",
+        "IndigoUtils:-CheckParam(...): parameter '%1' = %2\n",
         param_name, param
       );
       error(
