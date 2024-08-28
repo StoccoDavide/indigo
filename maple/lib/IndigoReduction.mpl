@@ -61,7 +61,7 @@ export SeparateMatrices::static := proc(
     "algebraic equations matrix <E>, the algebraic variables matrix <f>, the "
     "differential equations matrix <a>, and the rank of <M>.";
 
-  local n, m, r, P, Q, tbl, E, ga;
+  local n, m, r, Q, tbl, E, ga;
 
   # Check if LAST and LEM are initialized
   _self:-CheckInit(_self);
@@ -79,7 +79,9 @@ export SeparateMatrices::static := proc(
   end if;
 
   # Decompose the matrix as P.M.Q = L.U
-  _self:-m_LAST:-LU(_self:-m_LAST, M, parse("veil_sanity_check") = false);
+  _self:-m_LAST:-LU(
+    _self:-m_LAST, M, parse("indigo_warm_start") = evalb(nops(_self:-m_ReductionSteps) > 0)
+  );
 
   # Retrieve the results of the LU decomposition
   tbl := _self:-m_LAST:-GetResults(_self:-m_LAST);
@@ -107,12 +109,16 @@ export LoadMatrices::static := proc(
   M::Matrix,
   f::Vector,
   vars::list,
-  $)
+  {
+  check_rank::boolean := true
+  }, $)
 
   description "Load a DAE system of equations <M>x'=<f>. The list of variables "
-    "<vars> must be the same of the variables used in the system of equations.";
+    "<vars> must be the same of the variables used in the system of equations. "
+    "The optional parameter <check_rank> can be set to true to check if the "
+    "system of equations is already reduced to index-0 DAE (ODE) system.";
 
-  local tbl;
+  local rnk, tbl;
 
   # Check if the system is already loaded
   if _self:-m_SystemLoaded then
@@ -132,6 +138,30 @@ export LoadMatrices::static := proc(
   _self:-m_SystemVars := vars;
   _self:-m_LEM:-SetVeilingDependency(_self:-m_LEM, vars);
 
+  # Compute the rank of M
+  if check_rank then
+    rnk := _self:-m_LAST:-Rank(_self:-m_LAST, M); #rnk := LinearAlgebra:-Rank(M);
+    if (rnk = nops(_self:-m_SystemVars)) then
+
+      # Update reduction steps
+      _self:-m_ReductionSteps := [table([
+          "E"      = M,
+          "g"      = f,
+          "a"      = Vector([]),
+          "rank"   = rnk,
+          "pivots" = _self:-m_LAST:-GetResults(_self:-m_LAST, "pivots")
+        ])
+      ];
+
+      # Return false, we have reached maximum reduction
+      if _self:-m_VerboseMode then
+        printf("Indigo:-ReduceIndexByOne(...): index-0 DAE (ODE) system has been "
+          "reached, with an initial index-%d DAE system.", nops(_self:-m_ReductionSteps)-1);
+      end if;
+      return false;
+    end if;
+  end if;
+
   # Separate algebraic and differential equations
   tbl := _self:-SeparateMatrices(_self, M, f);
 
@@ -148,7 +178,7 @@ export LoadMatrices::static := proc(
     "rank"   = tbl["rank"],
     "pivots" = tbl["pivots"]
   ])];
-  return NULL;
+  return true;
 end proc: # LoadMatrices
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -191,13 +221,17 @@ end proc: # LoadEquations
 
 export ReduceIndexByOne::static := proc(
   _self::Indigo,
-  $)::boolean;
+  {
+  check_rank::boolean := false
+  }, $)::boolean;
 
   description "Reduce the index of the DAE system of equations by one. Return "
     "true if the system of equations has been reduced to index-0 DAE (ODE) or "
-    "index-1 DAE, false otherwise.";
+    "index-1 DAE, false otherwise. The optional parameter <check_rank> can be "
+    "set to true to check if the system of equations is already reduced to "
+    "index-0 DAE (ODE) system.";
 
-  local vars, E, g, E_tmp, a, nE, mE, na, Jv, da, Ea, ga, M, f, dtr, nEa, mEa,
+  local vars, E, g, E_tmp, a, nE, mE, na, Jv, da, Ea, ga, M, f, rnk, nEa, mEa,
     tbl, veil_list;
 
   if not _self:-m_SystemLoaded then
@@ -269,33 +303,29 @@ export ReduceIndexByOne::static := proc(
   M := <E, Ea>;
   f := convert(<g, ga>, Vector);
 
-  # Compute the determinant of <E, Ea>
-  dtr := _self:-m_LAST:-Rank(_self:-m_LAST, M); #dtr := LinearAlgebra:-Determinant(M);
-  try
-    dtr := timelimit(_self:-m_TimeLimit, simplify(dtr));
-  catch "time expired":
-    WARNING("time expired, simplify(det(E, Ea)) interrupted.");
-  end try;
+  # Compute the rank of M
+  if check_rank then
+    rnk := _self:-m_LAST:-Rank(_self:-m_LAST, M); #rnk := LinearAlgebra:-Rank(M);
+    if (rnk = nops(_self:-m_SystemVars)) then
 
-  if (dtr = nops(_self:-m_SystemVars)) then
+      # Update reduction steps
+      _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
+        table([
+          "E"      = M,
+          "g"      = f,
+          "a"      = Vector([]),
+          "rank"   = rnk,
+          "pivots" = _self:-m_LAST:-GetResults(_self:-m_LAST, "pivots")
+        ])
+      ];
 
-    # Update reduction steps
-    _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
-      table([
-        "E"      = M,
-        "g"      = f,
-        "a"      = Vector([]),
-        "rank"   = mE,
-        "pivots" = _self:-m_LAST:-GetResults(_self:-m_LAST, "pivots")
-      ])
-    ];
-
-    # Return false, we have reached maximum reduction
-    if _self:-m_VerboseMode then
-      printf("Indigo:-ReduceIndexByOne(...): index-0 DAEs (ODEs) system has "
-        "been reached.");
+      # Return false, we have reached maximum reduction
+      if _self:-m_VerboseMode then
+        printf("Indigo:-ReduceIndexByOne(...): index-0 DAE (ODE) system has been "
+          "reached, with an initial index-%d DAE system.", nops(_self:-m_ReductionSteps)-1);
+      end if;
+      return false;
     end if;
-    return false;
   end if;
 
   # Split matrices to be stored
@@ -320,8 +350,8 @@ export ReduceIndexByOne::static := proc(
   # Check if we have reached maximum reduction
   if (LinearAlgebra:-Dimension(tbl["a"]) = 0) then
     if _self:-m_VerboseMode then
-      printf("Indigo:-ReduceIndexByOne(...): index-0 DAEs (ODEs) system has "
-      "been reached.");
+      printf("Indigo:-ReduceIndexByOne(...): index-0 DAE (ODE) system has been "
+        "reached, with an initial index-%d DAE system.", nops(_self:-m_ReductionSteps)-1);
     end if;
     return false;
   else

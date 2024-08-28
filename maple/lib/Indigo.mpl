@@ -604,67 +604,6 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  export KernelBuild::static := proc(
-    _self::Indigo,
-    E::Matrix,
-    $)::table;
-
-    description "Build the kernel of a matrix <E>, and return the matrix N such "
-      "that E*N = 0 and the rank of E.";
-
-    local n, m, tbl, r, P, Q, M, K, N;
-
-    # Check if LAST and LEM are initialized
-    _self:-CheckInit(_self);
-
-    # Get row and column dimensions
-    n, m := LinearAlgebra:-Dimension(E);
-
-    # Decompose the matrix as P.E.Q = L.U
-    _self:-m_LAST:-LU(_self:-m_LAST, E, parse("veil_sanity_check") = false);
-
-    # Retrieve the results of the LU decomposition
-    tbl  := _self:-m_LAST:-GetResults(_self:-m_LAST);
-    P, Q := _self:-m_LAST:-PermutationMatrices(_self:-m_LAST, tbl["r"], tbl["c"]);
-
-    # Compute M = L^(-1).P
-    M := LinearAlgebra:-LinearSolve(tbl["L"], P);
-
-    # Build the N matrix
-    r := tbl["rank"];
-    if (r > 0) then
-      N := M[1..r, 1..-1];
-    else
-      N := Matrix(0, m);
-    end if;
-
-    # Build the K matrix
-    if (r < n) then
-      K := M[r+1..-1, 1..-1];
-    else
-      K := Matrix(0, m);
-    end if;
-
-    # Apply the veil to input matrices
-    K := _self:-m_LEM:-Veil~(_self:-m_LEM, K);
-    N := _self:-m_LEM:-Veil~(_self:-m_LEM, N);
-
-    # Return the results
-    return table([
-      "L"    = tbl["L"],
-      "U"    = tbl["U"],
-      "r"    = tbl["r"],
-      "c"    = tbl["c"],
-      "P"    = P,
-      "Q"    = Q,
-      "K"    = K,
-      "N"    = N,
-      "rank" = r
-      ]);
-  end proc: # KernelBuild
-
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   export TranslateToMatlab::static := proc(
     _self::Indigo,
     name::string,
