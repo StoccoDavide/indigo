@@ -24,15 +24,16 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  local m_LAST           := NULL;
-  local m_LEM            := NULL;
-  local m_VerboseMode    := false;
-  local m_WarningMode    := true;
-  local m_SystemLoaded   := false;
-  local m_TimeLimit      := 0.1;
-  local m_ReductionSteps := [];
-  local m_SystemVars     := [];
-  local m_SystemInvs     := [];
+  local m_LAST            := NULL;
+  local m_LEM             := NULL;
+  local m_VerboseMode     := false;
+  local m_WarningMode     := true;
+  local m_SystemLoaded    := false;
+  local m_TimeLimit       := 0.1;
+  local m_ReductionSteps  := [];
+  local m_SystemVars      := [];
+  local m_SystemDummyVars := [];
+  local m_SystemInvs      := [];
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -108,16 +109,13 @@ module Indigo()
     description "Check if the 'LAST' object is initialized.";
 
     if (_self:-m_LAST = NULL) then
-      error(
-        "the 'LAST' object is not initialized, use 'Indigo:-InitLAST(...)'' or "
-        "other appropriate initialization methods first."
+      error("the 'LAST' object is not initialized, use 'Indigo:-InitLAST(...)'' "
+        "or other appropriate initialization methods first."
       );
     end if;
     if (_self:-m_LEM = NULL) then
-      error(
-        "the 'LEM' object is not initialized, use 'Indigo:-InitLAST(...)'' or "
-        "other appropriate initialization methods first."
-      );
+      error("the 'LEM' object is not initialized, use 'Indigo:-InitLAST(...)'' "
+        "or other appropriate initialization methods first.");
     end if;
     return NULL;
   end proc: # CheckInit
@@ -358,10 +356,8 @@ module Indigo()
 
     # Check if the reduction steps are available
     if (_self:-m_ReductionSteps = []) then
-      error(
-        "reduction steps are not yet available, please load the system "
-        "matrices/equations and perform the system index reduction first."
-      );
+      error("reduction steps are not yet available, please load the system "
+        "matrices/equations and perform the system index reduction first.");
       return NULL;
     end if;
 

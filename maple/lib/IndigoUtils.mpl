@@ -76,18 +76,12 @@ IndigoUtils := module()
         i := ListTools:-Search(var, lst);
       end if;
       if (i = 0) then
-        error(
-          "failed for %1 in %2.",
-          convert(var, string), convert(lst, string)
-        );
+        error("failed for %1 in %2.", convert(var, string), convert(lst, string));
       end if;
     elif type(var, integer) then
       i;
     else
-      error(
-        "failed for %1 in %2.",
-        convert(var, string), convert(lst, string)
-      );
+      error("failed for %1 in %2.", convert(var, string), convert(lst, string));
     end if;
     return i;
   end proc: # GetPosition
@@ -105,14 +99,10 @@ IndigoUtils := module()
       "type <param_type>.";
 
     if not type(param, param_type) then
-      printf(
-        "IndigoUtils:-CheckParam(...): parameter '%1' = %2\n",
-        param_name, param
-      );
-      error(
-        "parameter '%1' is of type '%2', expected of type '%3' in %4\n",
-        param_name, convert(whattype(param), string), convert(tp, string), where
-      );
+      printf("IndigoUtils:-CheckParam(...): parameter '%1' = %2\n",
+        param_name, param);
+      error("parameter '%1' is of type '%2', expected of type '%3' in %4\n",
+        param_name, convert(whattype(param), string), convert(tp, string), where);
     end if;
     return NULL;
   end proc: # CheckParam
@@ -157,18 +147,14 @@ IndigoUtils := module()
 
     keywords := {indices(tab,'nolist')};
     if not (param_name in keywords) then
-      error(
-        "missing keyword '%1' in '%2'.\nKeywords: %3.",
-        convert(param_name, string), where, keywords
-      );
+      error("missing keyword '%1' in '%2'.\nKeywords: %3.",
+        convert(param_name, string), where, keywords);
     end if;
     if not type(tab[param_name], param_type) then
       printf("Parameter '%s' = %a\n", param_name, tab[param_name]);
-      error(
-        "parameter '%1' is of type '%2', expected of type '%3' in %4.",
+      error("parameter '%1' is of type '%2', expected of type '%3' in %4.",
         param_name, convert(whattype(tab[param_name]), string),
-        convert(param_type, string), where
-      );
+        convert(param_type, string), where);
     end if;
     return NULL;
   end proc: # CheckTableName
