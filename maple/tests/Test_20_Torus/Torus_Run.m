@@ -26,7 +26,8 @@ r   = 10.0;
 % IndigoSolversList()'
 
 solver_name = { ...
-  'Fehlberg45I', ...
+  %'Fehlberg45I', ...
+  'RadauIIA3', ...
 };
 
 solver = cell(length(solver_name), 1);
@@ -38,9 +39,9 @@ end
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.025;
+d_t   = 0.1;
 t_ini = 0.0;
-t_end = 200.0*pi;
+t_end = 100.0*pi;
 T_vec = t_ini:d_t:t_end;
 
 % Allocate solution arrays
@@ -52,7 +53,7 @@ H = cell(1, length(T_vec));
 % Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
-  [X{i}, T{i}, V{i}, H{i}] = solver{i}.adaptive_solve(T_vec, IC);
+  [X{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Plot results
@@ -64,12 +65,14 @@ dark_blue  = [53, 77, 85]/100;
 
 Phi = @(x_1, x_2, x_3) x_1.^2 + x_2.^2 + x_3.^2 - 2*r*(x_1.^2 + x_2.^2).^(1/2) + r^2 - rho^2;
 
-figure();
+hf = figure();
+hf = colordef(hf,'white'); %Set color scheme
+hf.Color='w';
 subplot(2,1,1);
   color = colormap(lines(length(solver_name)+1));
   hold on;
-  grid on;
-  grid minor;
+  %grid on;
+  %5grid minor;
   xlabel('$x_1$');
   ylabel('$x_2$');
   zlabel('$x_3$');
@@ -94,12 +97,17 @@ subplot(2,1,1);
   end
   axis equal; xlim([-15, 15]); ylim([-15, 15]);
   hold off;
+  Ax = gca;
+  Ax.Color = 'white';
+  Ax.XColor = 'none';
+  Ax.YColor = 'none';
+  Ax.ZColor = 'none';
 
 subplot(2,1,2);
   color = colormap(lines(length(solver_name)+1));
   hold on;
-  grid on;
-  grid minor;
+  %grid on;
+  %grid minor;
   xlabel('$x_1$');
   ylabel('$x_3$');
   y_0 = 0.0;
@@ -127,19 +135,69 @@ subplot(2,1,2);
     x3 = decimate(X{i}(3,:), max(1.0, floor(length(X{i}(3,:))/desired)));
     plot(x2, x3, 'LineWidth', linewidth, 'Color', color(i+1,:));
   end
+  Ax = gca;
+  Ax.Color = 'white';
+  Ax.XColor = 'none';
+  Ax.YColor = 'none';
+  Ax.ZColor = 'none';
   axis equal; xlim([-15, 15]); ylim([-5, 5]);
   hold off;
 
-return
+%%
 
-figure();
+hf = figure();
+hf = colordef(hf,'white'); %Set color scheme
+hf.Color='w';
   color = colormap(lines(length(solver_name)+1));
   hold on;
-  grid on;
-  grid minor;
+  %grid on;
+  %grid minor;
   xlabel('$x_1$');
   ylabel('$x_2$');
   zlabel('$x_3$');
+  for i = 1:length(solver_name)
+    desired = 10000;
+    x1 = decimate(X{i}(1,:), max(1.0, floor(length(X{i}(1,:))/desired)));
+    x2 = decimate(X{i}(2,:), max(1.0, floor(length(X{i}(2,:))/desired)));
+    x3 = decimate(X{i}(3,:), max(1.0, floor(length(X{i}(3,:))/desired)));
+    plot3(x1, x2, x3, 'LineWidth', linewidth, 'Color', color(i+1,:));
+  end
+  [x, y, z] = meshgrid( ...
+    -15.0:0.5:15.0, ...
+    -15.0:0.5:15.0, ...
+    -5.0:0.5:5.0 ...
+   );
+  v = Phi(x,y,z);
+  fs = patch(isosurface(x, y, z, v, 0));
+  %fs = fimplicit3(Phi, 'MeshDensity', 30);
+  fs.EdgeColor = color(1,:);
+  fs.EdgeAlpha = 0.05;
+  fs.FaceAlpha = 0.2;
+  fs.FaceColor = color(1,:);
+  %legend({solver_name{1:end}, 'Torus'}, 'Location', 'northwest');
+  axis equal; xlim([-15, 15]); ylim([-15, 15]); zlim([-5, 5]);
+  Ax = gca;
+  Ax.Color = 'white';
+  Ax.XColor = 'none';
+  Ax.YColor = 'none';
+  Ax.ZColor = 'none';
+  hold off;
+
+  %%
+return
+
+figure();
+  color = colormap(lines(2));
+  hold on;
+  %grid on;
+  %grid minor;
+  xlabel('$x_1$');
+  ylabel('$x_2$');
+  zlabel('$x_3$');
+  %t  = linspace(0.0, 10.0, 100);
+  %x1 = (rho*cos(2*pi-t)+r).*cos(t);
+  %x2 = (rho*cos(2*pi-t)+r).*sin(t);
+  %x3 =  rho*sin(2*pi-t);
   for i = 1:length(solver_name)
     desired = 10000;
     x1 = decimate(X{i}(1,:), max(1.0, floor(length(X{i}(1,:))/desired)));
@@ -159,32 +217,6 @@ figure();
   fs = patch(isosurface(x, y, z, v, 0));
   %fs = fimplicit3(Phi, 'MeshDensity', 30);
   fs.EdgeColor = color(1,:) + 0.1*[1.0, 1.0, 1.0];
-  fs.FaceAlpha = 0.2;
-  fs.FaceColor = color(1,:);
-  legend({solver_name{1:end}, 'Torus'}, 'Location', 'northwest');
-  axis equal; xlim([-15, 15]); ylim([-15, 15]); zlim([-5, 5]);
-  hold off;
-
-return
-
-figure();
-  color = colormap(lines(2));
-  hold on;
-  %grid on;
-  %grid minor;
-  xlabel('$x_1$');
-  ylabel('$x_2$');
-  zlabel('$x_3$');
-  %t  = linspace(0.0, 10.0, 100);
-  %x1 = (rho*cos(2*pi-t)+r).*cos(t);
-  %x2 = (rho*cos(2*pi-t)+r).*sin(t);
-  %x3 =  rho*sin(2*pi-t);
-  x1 = X{1}(1,:);
-  x2 = X{1}(2,:);
-  x3 = X{1}(3,:);
-  plot3(x1, x2, x3, 'LineWidth', linewidth, 'Color', color(2,:));
-  fs = fimplicit3(Phi, 'MeshDensity', 20);
-  fs.EdgeColor = color(1,:)+[0.1, 0.1, 0.1];
   fs.FaceAlpha = 0.2;
   fs.FaceColor = color(1,:);
   legend('Exact solution', 'Location', 'northwest');

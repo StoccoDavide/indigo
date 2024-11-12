@@ -25,8 +25,8 @@ ODES = ShuttleTrajectory_Index2();
 % IndigoSolversList()'
 
 solver_name = { ...
-  %'RadauIIA5', ...
-  'Fehlberg45I', ...
+  'RadauIIA5', ...
+  %'Fehlberg45I', ...
 };
 
 solver = cell(length(solver_name), 1);
@@ -39,7 +39,7 @@ color = colormap(lines(length(solver_name)+5));
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.01;
+d_t   = 0.5;
 t_ini = 0.0;
 t_end = 305.5;
 T_vec = t_ini:d_t:t_end;

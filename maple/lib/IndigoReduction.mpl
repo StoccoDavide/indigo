@@ -9,43 +9,57 @@
 
 local SimplifyReductionStep := proc(
   _self::Indigo,
-  E::Matrix,
-  g::Vector,
-  a::Vector,
-  $)::Matrix, Vector, Vector;
+  tbl::table,
+  $)
 
-  local E_tmp, g_tmp, a_tmp;
+  local E, g, a, A, b;
 
   # Try to simplify the output matrices
   if (_self:-m_TimeLimit > 0) then
 
     # Simplify the matrix E
     try
-      E_tmp := timelimit(_self:-m_TimeLimit, simplify(E));
+      tbl["E"] := timelimit(_self:-m_TimeLimit, simplify(tbl["E"]));
     catch "time expired":
-      E_tmp := E;
+      tbl["E"] := tbl["E"];
       WARNING("time expired, simplify(E) interrupted.");
     end try;
 
-    # Simplify the matrix g
+    # Simplify the vector g
     try
-      g_tmp := timelimit(_self:-m_TimeLimit, simplify(g));
+      tbl["g"] := timelimit(_self:-m_TimeLimit, simplify(tbl["g"]));
     catch "time expired":
-      g_tmp := g;
+      tbl["g"] := tbl["g"];
       WARNING("time expired, simplify(g) interrupted.");
     end try;
 
     # Simplify the matrix a
     try
-      a_tmp := timelimit(_self:-m_TimeLimit, simplify(a));
+      tbl["a"] := timelimit(_self:-m_TimeLimit, simplify(tbl["a"]));
     catch "time expired":
-      a_tmp := a;
+      tbl["a"] := tbl["a"];
       WARNING("time expired, simplify(a) interrupted.");
+    end try;
+
+    # Simplify the matrix A
+    try
+      tbl["A"] := timelimit(_self:-m_TimeLimit, simplify(tbl["A"]));
+    catch "time expired":
+      tbl["A"] := tbl["A"];
+      WARNING("time expired, simplify(A) interrupted.");
+    end try;
+
+    # Simplify the vector b
+    try
+      tbl["b"] := timelimit(_self:-m_TimeLimit, simplify(tbl["b"]));
+    catch "time expired":
+      tbl["b"] := tbl["b"];
+      WARNING("time expired, simplify(b) interrupted.");
     end try;
 
   end if;
 
-  return E_tmp, g_tmp, a_tmp;
+  return NULL;
 end proc: # SimplifyReductionStep
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -54,16 +68,14 @@ export SeparateMatrices::static := proc(
   _self::Indigo,
   M::Matrix,
   f::Vector,
-  {
-  repivot::boolean := false
-  }, $)
+  $)
 
   description "Separate algebraic and differential equations from DAE system "
     "equations matrix <M> and differential variables vector <f>. Return the "
     "algebraic equations matrix <E>, the algebraic variables matrix <f>, the "
     "differential equations matrix <a>, and the rank of <M>.";
 
-  local m, n, r, pvt, M_tmp, f_tmp, tbl, i, j, E, ga;
+  local n, m, r, Q, tbl, E, ga, pvt;
 
   # Check if LAST and LEM are initialized
   _self:-CheckInit(_self);
@@ -83,65 +95,26 @@ export SeparateMatrices::static := proc(
   # Decompose the matrix as P.M.Q = L.U
   pvt := _self:-m_LAST:-LU(
     _self:-m_LAST, M,
-    parse("indigo_restart") = evalb(nops(_self:-m_ReductionSteps) > 0),  #FIXME:false,
-    parse("indigo_repivot") = repivot
+    parse("indigo_restart") = evalb(nops(_self:-m_ReductionSteps) > 0)
   );
 
-  # Check if complicated symbolic pivot detected
-  if repivot and type(pvt, table) then
-      if _self:-m_VerboseMode then
-        printf("Indigo:-SeparateMatrices(...): symbolic pivot detected, "
-          "additional dummy variables should be introduced to '%a.'", [op(_self:-m_SystemVars), op(_self:-m_SystemDummyVars)][pvt["j"]]);
-      end if;
+  # Retrieve the results of the LU decomposition
+  tbl := _self:-m_LAST:-GetResults(_self:-m_LAST);
+  r   := tbl["rank"];
 
-      # Add a dummy variable - TODO: V1(t) = diff(x_n(t), t), where n is the column of the pivot
-      _self:-m_SystemDummyVars := [
-        op(_self:-m_SystemDummyVars),
-        parse(cat("V", nops(_self:-m_SystemDummyVars)+1, "(t)")) # TODO: change dummy variable name
-      ];
+  # Compute E = L^(-1).P.M (first 'r' rows) = U.Q^T
+  E := _self:-m_LAST:-GetUQT(_self:-m_LAST);
 
-      # Add the equation to the system
-      M_tmp := Matrix(m+1, m+1, 0);
-      M_tmp[1..pvt["i"]-1, 1..pvt["j"]-1]   := copy(M[1..pvt["i"]-1, 1..pvt["j"]-1]);
-      M_tmp[1..pvt["i"]-1, pvt["j"]+1..-2]  := copy(M[1..pvt["i"]-1, pvt["j"]+1..-1]);
-      M_tmp[pvt["i"], pvt["j"]]             := 1;
-      M_tmp[pvt["i"]+1..-2, 1..pvt["j"]-1]  := copy(M[pvt["i"]+1..-1, 1..pvt["j"]-1]);
-      M_tmp[pvt["i"]+1..-2, pvt["j"]+1..-2] := copy(M[pvt["i"]+1..-1, pvt["j"]+1..-1]);
-      M_tmp[-1, 1..pvt["j"]-1]              := copy(M[pvt["i"], 1..pvt["j"]-1]);
-      M_tmp[-1, pvt["j"]+1..-2]             := copy(M[pvt["i"], pvt["j"]+1..-1]);
+  # Compute <g, a> = L^(-1).P.f
+  ga :=_self:-m_LAST:-ApplyLP(_self:-m_LAST, f);
 
-      f_tmp := Vector(m+1, 0);
-      f_tmp[1..pvt["i"]-1]  := copy(f[1..pvt["i"]-1]);
-      f_tmp[pvt["i"]]       := _self:-m_SystemDummyVars[-1];
-      f_tmp[pvt["i"]+1..-2] := copy(f[pvt["i"]+1..-1]);
-      f_tmp[-1]             := copy(f[pvt["i"]]) - _self:-m_SystemDummyVars[-1]*pvt["value"];
-
-      print("M", M, "x_tmp", [pvt["i"], pvt["j"], pvt["value"]], "M_tmp", M_tmp);
-      print("f", f, "x_tmp", "f_tmp", f_tmp);
-
-      # Call again the function
-      return _self:-SeparateMatrices(_self, M_tmp, f_tmp, parse("repivot") = repivot);
-    else
-
-    # Retrieve the results of the LU decomposition
-    tbl := _self:-m_LAST:-GetResults(_self:-m_LAST);
-    r   := tbl["rank"];
-
-
-    # Compute E = L^(-1).P.M (first 'r' rows) = U.Q^T
-    E := _self:-m_LAST:-GetUQT(_self:-m_LAST);
-
-    # Compute <g, a> = L^(-1).P.f
-    ga :=_self:-m_LAST:-ApplyLP(_self:-m_LAST, f);
-
-    return table([
-      "E"      = E[1..r, 1..-1],
-      "g"      = ga[1..r],
-      "a"      = ga[r+1..-1],
-      "rank"   = r,
-      "pivots" = tbl["pivots"]
-    ]);
-  end if;
+  return table([
+    "E"      = E[1..r, 1..-1],
+    "g"      = ga[1..r],
+    "a"      = ga[r+1..-1],
+    "rank"   = r,
+    "pivots" = tbl["pivots"]
+  ]);
 end proc: # SeparateMatrices
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -152,14 +125,12 @@ export LoadMatrices::static := proc(
   f::Vector,
   vars::list,
   {
-  check_rank::boolean := true,
-  repivot::boolean    := false
+  check_rank::boolean := true
   }, $)
 
-  description "Load a DAE system of equations <M>x'=<f>. The list of variables "
-    "<vars> must be the same of the variables used in the system of equations. "
-    "The optional parameter <check_rank> can be set to true to check if the "
-    "system of equations is already reduced to index-0 DAE (ODE) system.";
+  description "Load a DAE system of equations <M>.<vars>'=<f>. The optional "
+    "parameter <check_rank> can be set to true to check if the system of "
+    "equations is already reduced to index-0 DAE (ODE) system.";
 
   local rnk, tbl;
 
@@ -177,20 +148,24 @@ export LoadMatrices::static := proc(
 
   # Store system variables
   _self:-m_SystemVars := vars;
-  _self:-m_LEM:-SetVeilingDependency(_self:-m_LEM, vars);
+  _self:-m_LEM:-SetVeilingDeps(_self:-m_LEM, vars);
 
-  # Compute the rank of M
+  # Compute the rank of M: if rank is full, the system is index-0 DAE system
   if check_rank then
-    rnk := _self:-m_LAST:-Rank(_self:-m_LAST, M); #rnk := LinearAlgebra:-Rank(M);
-    if (rnk = nops(_self:-m_SystemVars) + nops(_self:-m_SystemDummyVars)) then #rnk = nops(_self:-m_SystemVars)
+    rnk := _self:-m_LAST:-Rank(_self:-m_LAST, M);
+    if (rnk = nops(_self:-m_SystemVars)) then
 
       # Update reduction steps
       _self:-m_ReductionSteps := [table([
           "index-0" = true,
           "index-1" = false,
+          "vars_d"  = vars,
+          "vars_l"  = [],
           "E"       = M,
           "g"       = f,
           "a"       = Vector([]),
+          "A"       = Matrix([]),
+          "b"       = Vector([]),
           "rank"    = rnk,
           "pivots"  = _self:-m_LAST:-GetResults(_self:-m_LAST, "pivots")
         ])
@@ -206,21 +181,25 @@ export LoadMatrices::static := proc(
   end if;
 
   # Separate algebraic and differential equations
-  tbl := _self:-SeparateMatrices(_self, M, f, parse("repivot") = repivot);
-
-  # Try to simplify the reduction step
-  tbl["E"], tbl["g"], tbl["a"] := SimplifyReductionStep(_self, tbl["E"], tbl["g"], tbl["a"]);
+  tbl := _self:-SeparateMatrices(_self, M, f);
 
   # Update reduction steps
   _self:-m_ReductionSteps := [table([
     "index-0" = false,
     "index-1" = false,
+    "vars_d"  = vars,
+    "vars_l"  = [],
     "E"       = tbl["E"],
     "g"       = tbl["g"],
     "a"       = tbl["a"],
+    "A"       = Matrix([]),
+    "b"       = Vector([]),
     "rank"    = tbl["rank"],
     "pivots"  = tbl["pivots"]
   ])];
+
+  # Try to simplify the reduction step
+  _self:-SimplifyReductionStep(_self, _self:-m_ReductionSteps[-1]);
   return true;
 end proc: # LoadMatrices
 
@@ -249,10 +228,10 @@ export LoadEquations::static := proc(
     "variables (%2).", nops(eqns), nops(vars));
   end if;
 
-  # Build the matrices and load them (Mx' = f)
-  M, f := LinearAlgebra:-GenerateMatrix(eqns, diff(vars, t)): # TODO: can be directly used in LoadMatrices?
-
+  # Build the DAE system matrices and load them (M.x' = f)
+  M, f := LinearAlgebra:-GenerateMatrix(eqns, diff(vars, t)): # CONSIDER: can be directly used in LoadMatrices?
   _self:-LoadMatrices(_self, M, f, vars);
+
   return NULL;
 end proc: # LoadEquations
 
@@ -262,18 +241,17 @@ export ReduceIndexByOne::static := proc(
   _self::Indigo,
   {
   check_index::boolean := true,
-  check_rank::boolean  := false,
-  repivot::boolean     := false
+  check_rank::boolean  := false
   }, $)::boolean;
 
   description "Reduce the index of the DAE system of equations by one. Return "
     "true if the system of equations has been reduced to index-0 DAE (ODE) or "
     "index-1 DAE, false otherwise. The optional parameter <check_rank> can be "
     "set to true to check if the system of equations is already reduced to "
-    "index-0 DAE (ODE) system.";
+    "index-0 DAE (ODE) system prior to the reduction step.";
 
-  local vars, vars_a, E, g, E_tmp, a, nE, mE, na, Jv, da, Ea, ga, M, f, rnk,
-    nEa, mEa, tbl, veil_list;
+  local vars_d, vars_l, E, g, a, A, b, a_l, nE, mE, na, Jv_x, da_t, da_i, E_a,
+    g_a, M, f, rnk, nE_a, mE_a, tbl, veil_list;
 
   if not _self:-m_SystemLoaded then
     error("system must be loaded before calling Indigo:-ReduceIndexByOne(...).");
@@ -294,10 +272,10 @@ export ReduceIndexByOne::static := proc(
     return false;
   end if;
 
-  vars := [op(_self:-m_SystemVars), op(_self:-m_SystemDummyVars)]; # FIXME: _self:-m_SystemVars;
-  E    := _self:-m_ReductionSteps[-1]["E"];
-  g    := _self:-m_ReductionSteps[-1]["g"];
-  a    := _self:-m_ReductionSteps[-1]["a"];
+  vars_d := _self:-m_ReductionSteps[-1]["vars_d"];
+  E := _self:-m_ReductionSteps[-1]["E"];
+  g := _self:-m_ReductionSteps[-1]["g"];
+  a := _self:-m_ReductionSteps[-1]["a"];
 
   # Check dimensions
   nE, mE := LinearAlgebra:-Dimension(E);
@@ -307,30 +285,59 @@ export ReduceIndexByOne::static := proc(
       "equal to the E columns (found %1 + %2 ≠ %3).", nE, na, mE);
   end if;
 
-  # Check if the system is an index-1 DAE
   if check_index then
-    vars_a := map(j -> `if`(
+    # Extract the variables that are still algebraic
+    vars_l := map(j -> `if`(
       rtable_scanblock(E, [rtable_dims(E)[1], j], ArrayTools:-HasNonZero),
-      NULL, vars[j]), [seq(i, i=1..nops(vars))]);
-    if not has(type~(a, linear(vars_a)), false) then
+      NULL, vars_d[j]), [seq(i, i=1..nops(vars_d))]);
+
+    # Check if the system is an index-1 DAE: all algebraic equations are linear
+    if not has(type~(a, linear(vars_l)), false) then
 
       # Update reduction steps
       _self:-m_ReductionSteps[-1]["index-1"] := true;
-      _self:-m_ReductionSteps[-1]["vars_d"] := remove(member, vars, vars_a);
-      _self:-m_ReductionSteps[-1]["E_d"] :=
-        E[1..-1, remove(j-> ArrayTools:-IsZero(E[1..-1,j]), [seq(i, i=1..op([1,2], E))])];
-      _self:-m_ReductionSteps[-1]["g_d"] := g;
-      _self:-m_ReductionSteps[-1]["vars_a"] := vars_a;
-      _self:-m_ReductionSteps[-1]["E_a"], _self:-m_ReductionSteps[-1]["g_a"] :=
-        LinearAlgebra:-GenerateMatrix(convert(a, list), vars_a);
+      _self:-m_ReductionSteps[-1]["vars_l"] := vars_l;
+      _self:-m_ReductionSteps[-1]["vars_d"] := remove(member, vars_d, vars_l);
+      _self:-m_ReductionSteps[-1]["E"] :=
+        E[1..-1, remove(j -> ArrayTools:-IsZero(E[1..-1,j]), [seq(i, i=rtable_dims(E)[2])])];
+      _self:-m_ReductionSteps[-1]["g"] := g;
+      _self:-m_ReductionSteps[-1]["a"] := [];
+      _self:-m_ReductionSteps[-1]["A"], _self:-m_ReductionSteps[-1]["b"] :=
+        LinearAlgebra:-GenerateMatrix(convert(a, list), vars_l);
 
       if _self:-m_VerboseMode then
         printf("Indigo:-ReduceIndexByOne(...): index-1 DAE system has been "
           "reached, with an initial index-%d DAE system.", nops(_self:-m_ReductionSteps));
       end if;
 
-      # Return false, we have reached index-1 DAE
       return false;
+
+    # Find the biggest subset of linear algebraic equations
+    elif has(type~(a, linear(vars_l)), true) then
+
+      # Separate linear algebraic variables and equations
+      vars_l := remove(i -> has(type~(a, linear(i)), false), vars_d);
+      vars_d := remove(member, vars_d, vars_l);
+      a_l    := remove(i -> has(type~(i, linear(vars_l)), false), a);
+      a      := remove(member, a, a_l);
+
+      # Generate the matrix A and the vector b
+      A, b := LinearAlgebra:-GenerateMatrix(convert(a_l, list), vars_l);
+
+      if _self:-m_VerboseMode then
+        printf("Indigo:-ReduceIndexByOne(...): found %d linear algebraic equations "
+          "in the system.", nops(a_tmp));
+      end if;
+
+    else
+      # No linear algebraic equations found: continue with the reduction
+      vars_l := [];
+      A := Matrix([]);
+      b := Vector([]);
+      if _self:-m_VerboseMode then
+        printf("Indigo:-ReduceIndexByOne(...): no linear algebraic equations found, "
+          "continuing with the reduction.\n");
+      end if;
     end if;
   end if;
 
@@ -344,17 +351,20 @@ export ReduceIndexByOne::static := proc(
     _self:-m_LEM, parse("reverse") = true, parse("dependency") = true
   );
   if (nops(veil_list) <> 0) then
-    Jv := IndigoUtils:-DoJacobian(convert(veil_list, Vector), vars);
-    Jv := select[flatten](j -> (lhs(j) <> 0), convert(Jv, list));
-    da := subs(op(Jv), diff(a, t));
+    da_t := diff(a, t);
+    da_i := indets(da_t); # TODO: check if this is correct
+    Jv_x := IndigoUtils:-DoJacobian(convert(veil_list, Vector), _self:-m_SystemVars);
+    Jv_x := select[flatten](j -> (lhs(j) <> 0) and member(lhs(j), da_i), convert(Jv_x, list)); # TODO: check if this is correct
+    Jv_x := lhs~(Jv_x) =~ _self:-m_LEM:-Veil~(_self:-m_LEM, rhs~(Jv_x));  # TODO: check if this is correct
+    da_t := subs(op(Jv_x), da_t);
   else
-    da := diff(a, t);
+    da_t := diff(a, t);
   end if;
 
-  if has(da, D) then
-    da := convert(da, diff);
-    if has(da, D) then
-      print(indets(da));
+  if has(da_t, D) then
+    da_t := convert(da_t, diff);
+    if has(da_t, D) then
+      print(indets(da_t));
       error("partial derivatives in the differential part of the system.");
     end if;
   end if;
@@ -364,36 +374,40 @@ export ReduceIndexByOne::static := proc(
     printf("Indigo:-ReduceIndexByOne(...): generating linear system... ");
   end if;
 
-  # da/dt = E_ax' - ga
-  Ea, ga := LinearAlgebra:-GenerateMatrix(convert(da, list), diff(vars, t));
+  # da/dt = E_a.x' - g_a
+  E_a, g_a := LinearAlgebra:-GenerateMatrix(convert(da_t, list), diff(vars_d, t));
 
   if _self:-m_VerboseMode then
     printf("DONE\n");
   end if;
 
   # Check dimensions
-  nEa, mEa := LinearAlgebra:-Dimension(Ea);
-  if  (nEa + nE <> mE) or (mEa <> mE) then
-    error("bad dimension of linear part of constraint derivative a' = Ea vars' "
-    "+ ga, size Ea = %1 x %2, size E = %3 x %4.", nEa, mEa, nE, mE);
+  nE_a, mE_a := LinearAlgebra:-Dimension(E_a);
+  if  (nE_a + nE <> mE) or (mE_a <> mE) then
+    error("bad dimension of linear part of constraint derivative a' = E_a.vars' "
+    "+ g_a, size E_a = %1 x %2, size E = %3 x %4.", nE_a, mE_a, nE, mE);
   end if;
 
-  M := <E, Ea>;
-  f := convert(<g, ga>, Vector);
+  M := <E, E_a>;
+  f := convert(<g, g_a>, Vector);
 
-  # Compute the rank of M
+  # Compute the rank of M: if rank is full, the system is index-0 DAE system
   if check_rank then
-    rnk := _self:-m_LAST:-Rank(_self:-m_LAST, M); #rnk := LinearAlgebra:-Rank(M);
-    if (rnk = nops(vars)) then #rnk = nops(_self:-m_SystemVars)
+    rnk := _self:-m_LAST:-Rank(_self:-m_LAST, M);
+    if (rnk = nops(vars_d)) then
 
       # Update reduction steps
       _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
         table([
           "index-0" = true,
           "index-1" = false,
+          "vars_d"  = vars_d,
+          "vars_l"  = vars_l,
           "E"       = M,
           "g"       = f,
           "a"       = Vector([]),
+          "A"       = A,
+          "b"       = b,
           "rank"    = rnk,
           "pivots"  = _self:-m_LAST:-GetResults(_self:-m_LAST, "pivots")
         ])
@@ -409,23 +423,27 @@ export ReduceIndexByOne::static := proc(
   end if;
 
   # Separate algebraic and differential equations
-  tbl := _self:-SeparateMatrices(_self, M, f, parse("repivot") = repivot);
-
-  # Try to simplify the reduction step
-  tbl["E"], tbl["g"], tbl["a"] := SimplifyReductionStep(_self, tbl["E"], tbl["g"], tbl["a"]);
+  tbl := _self:-SeparateMatrices(_self, M, f);
 
   # Update reduction steps
   _self:-m_ReductionSteps := [op(_self:-m_ReductionSteps),
     table([
       "index-0" = evalb(LinearAlgebra:-Dimension(tbl["a"]) = 0),
       "index-1" = false,
+      "vars_d"  = vars_d,
+      "vars_l"  = vars_l,
       "E"       = tbl["E"],
       "g"       = tbl["g"],
       "a"       = tbl["a"],
+      "A"       = tbl["A"],
+      "b"       = tbl["b"],
       "rank"    = tbl["rank"],
       "pivots"  = tbl["pivots"]
     ])
   ];
+
+  # Try to simplify the reduction step
+  _self:-SimplifyReductionStep(_self, _self:-m_ReductionSteps[-1]);
 
   # Check if we have reached maximum reduction
   if _self:-m_ReductionSteps[-1]["index-0"] then
@@ -443,8 +461,9 @@ end proc: # ReduceIndexByOne
 
 export ReduceIndex::static := proc(
   _self::Indigo,
-  {max_iter::integer := 10},
-  $)::boolean;
+  {
+  max_iter::integer := 10
+  }, $)::boolean;
 
   description "Reduce the index of the DAE system of equations. A maximum of "
     "<max_iter> reduction steps is performed. Return true if the system of "

@@ -1101,7 +1101,7 @@ IndigoCodegen := module()
     end if;
     F := subs(op(mk_x_dot), op(rm_v_deps), F);
 
-    # Extract f from: F(x,x',v,t) = A(x,v,t) * x' - b(x,v,t)
+    # Extract f from: F(x,x',v,t) = A(x,v,t).x' - b(x,v,t)
     A, b := LinearAlgebra:-GenerateMatrix(convert(F, list), convert(x_dot, list));
 
     if (LinearAlgebra:-RowDimension(A) <> LinearAlgebra:-ColumnDimension(A) ) or
@@ -1375,7 +1375,7 @@ IndigoCodegen := module()
     end if;
     F := subs(op(mk_x_dot), op(rm_v_deps), F);
 
-    # Extract f from: F(x,x',v,t) = A(x,v,t) * x' - b(x,v,t)
+    # Extract f from: F(x,x',v,t) = A(x,v,t).x' - b(x,v,t)
     A, b := LinearAlgebra:-GenerateMatrix(convert(F, list), convert(x_dot, list));
 
     if (LinearAlgebra:-RowDimension(A) <> LinearAlgebra:-ColumnDimension(A)) or

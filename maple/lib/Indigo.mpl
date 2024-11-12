@@ -32,7 +32,6 @@ module Indigo()
   local m_TimeLimit       := 0.1;
   local m_ReductionSteps  := [];
   local m_SystemVars      := [];
-  local m_SystemDummyVars := [];
   local m_SystemInvs      := [];
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -430,7 +429,7 @@ module Indigo()
     local out;
 
     # Store the differential equations
-    out := convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_SystemVars, t)> -
+    out := convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_ReductionSteps[-1]["vars_d"], t)> -
       _self:-m_ReductionSteps[-1]["g"], list);
 
     # Try to simplify

@@ -81,27 +81,26 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       % Evaluate function
       out_1 = -u + x_dot;
       out_2 = -v + y_dot;
-      t1 = 0.1e1 / m;
-      out_3 = t1 * lambda__1 + u_dot;
-      out_4 = v_dot + t1 * (g * m + lambda__2);
+      out_3 = u_dot * m + lambda__1;
+      out_4 = g * m + v_dot * m + lambda__2;
       out_5 = -omega + theta_dot;
-      t6 = sin(theta);
-      t7 = ell * t6;
-      t9 = cos(theta);
-      t12 = omega_dot * J;
-      t15 = 0.1e1 / J;
-      out_6 = t15 * (lambda__2 * ell * t9 - lambda__1 * t7 + 2 * t12) / 2;
-      t17 = ell * m;
-      t18 = omega ^ 2;
-      t19 = t18 * J;
-      t23 = t9 ^ 2;
-      t32 = ell ^ 2;
-      t34 = m * t32 * t23;
-      t36 = 4 * J;
-      t39 = omega * t12;
-      t50 = 0.1e1 / ell * t1;
-      out_7 = t50 * t15 * (-2 * theta_dot * (t6 * t19 - t7 * t9 * lambda__1 + ell * lambda__2 * t23 - ell * lambda__2 / 2) * t17 + lambda__1_dot * (m * t32 - t34 + t36) + 4 * (t39 - ell * lambda__2_dot * t6 / 4) * t9 * t17) / 2;
-      out_8 = t50 * t15 * (2 * m * theta_dot * (-ell * t23 * lambda__1 + t9 * (-lambda__2 * t7 + t19) + ell * lambda__1 / 2) * ell + lambda__2_dot * (t34 + t36) + 4 * m * (t39 - t9 * ell * lambda__1_dot / 4) * t7) / 2;
+      t4 = sin(theta);
+      t5 = ell * t4;
+      t7 = cos(theta);
+      t10 = omega_dot * J;
+      out_6 = lambda__2 * ell * t7 - lambda__1 * t5 + 2 * t10;
+      t13 = omega ^ 2;
+      t16 = ell * lambda__1;
+      t18 = t7 ^ 2;
+      t25 = ell * theta_dot;
+      t28 = ell ^ 2;
+      t30 = m * t28 * t18;
+      t32 = 4 * J;
+      t36 = omega * t10;
+      t45 = 0.1e1 / m;
+      t47 = 0.1e1 / J;
+      out_7 = t47 * t45 * (-2 * t25 * m * (t13 * t4 * J - t16 * t7 * t4 + ell * lambda__2 * t18 - ell * lambda__2 / 2) + lambda__1_dot * (m * t28 - t30 + t32) + 4 * ell * (t36 - ell * lambda__2_dot * t4 / 4) * m * t7) / 2;
+      out_8 = t47 * t45 * (2 * t25 * m * (-ell * lambda__1 * t18 + t7 * (t13 * J - lambda__2 * t5) + t16 / 2) + lambda__2_dot * (t30 + t32) + 4 * t5 * m * (t36 - t7 * ell * lambda__1_dot / 4)) / 2;
 
       % Store outputs
       out_F = zeros(8, 1);
@@ -141,35 +140,37 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       t4 = sin(theta);
       t5 = ell * t4;
       t6 = lambda__2 * t5;
-      t8 = 0.1e1 / J;
-      out_6_3 = t8 * (-lambda__1 * t2 - t6) / 2;
-      t10 = ell * m;
-      t11 = omega ^ 2;
-      t12 = t11 * J;
-      t14 = t4 ^ 2;
-      t17 = t1 ^ 2;
-      t27 = ell ^ 2;
-      t28 = t27 * t1;
-      t29 = t4 * m;
-      t33 = omega_dot * J;
-      t34 = omega * t33;
-      t47 = 0.1e1 / m;
-      t49 = 0.1e1 / ell * t47;
-      out_7_3 = t49 * t8 * (-2 * theta_dot * (ell * t14 * lambda__1 - ell * t17 * lambda__1 - 2 * t5 * lambda__2 * t1 + t1 * t12) * t10 + 2 * lambda__1_dot * t29 * t28 - 4 * (t34 - ell * lambda__2_dot * t4 / 4) * t4 * t10 - lambda__2_dot * t17 * m * t27) / 2;
-      out_8_3 = t49 * t8 * (2 * m * theta_dot * (2 * t5 * t1 * lambda__1 - ell * lambda__2 * t17 - t4 * (t12 - t6)) * ell - 2 * lambda__2_dot * t29 * t28 + 4 * m * (t34 - t1 * ell * lambda__1_dot / 4) * t2 + lambda__1_dot * m * t14 * t27) / 2;
+      out_6_3 = -lambda__1 * t2 - t6;
+      t7 = omega ^ 2;
+      t8 = t7 * J;
+      t10 = t1 ^ 2;
+      t13 = t4 ^ 2;
+      t16 = t1 * t4;
+      t22 = ell * theta_dot;
+      t25 = ell ^ 2;
+      t26 = t25 * t1;
+      t27 = t4 * m;
+      t31 = omega_dot * J;
+      t32 = omega * t31;
+      t44 = 0.1e1 / m;
+      t46 = 0.1e1 / J;
+      out_7_3 = t46 * t44 * (-2 * t22 * m * (-ell * lambda__1 * t10 + ell * lambda__1 * t13 - 2 * lambda__2 * ell * t16 + t1 * t8) + 2 * lambda__1_dot * t27 * t26 - 4 * ell * (t32 - ell * lambda__2_dot * t4 / 4) * t27 - t25 * lambda__2_dot * m * t10) / 2;
+      out_8_3 = t46 * t44 * (2 * t22 * m * (2 * lambda__1 * ell * t16 - ell * lambda__2 * t10 - t4 * (t8 - t6)) - 2 * lambda__2_dot * t27 * t26 + m * t13 * t25 * lambda__1_dot + 4 * t2 * m * (t32 - t1 * ell * lambda__1_dot / 4)) / 2;
       out_1_4 = -1;
       out_2_5 = -1;
       out_5_6 = -1;
-      out_7_6 = t49 * t8 * (-4 * theta_dot * t4 * omega * J * t10 + 4 * J * omega_dot * t1 * t10) / 2;
-      out_8_6 = t49 * t8 * (4 * theta_dot * m * t1 * ell * J * omega + 4 * m * t33 * t5) / 2;
-      out_3_7 = t47;
-      out_6_7 = -t8 * t5 / 2;
-      out_7_7 = t8 * theta_dot * t4 * t2;
-      t107 = -ell * t17 + ell / 2;
-      out_8_7 = t8 * theta_dot * t107;
-      out_4_8 = out_3_7;
-      out_6_8 = t8 * t2 / 2;
-      out_7_8 = t8 * theta_dot * t107;
+      t78 = m * ell * theta_dot;
+      out_7_6 = t46 * t44 * (-4 * t78 * omega * t4 * J + 4 * ell * t31 * m * t1) / 2;
+      out_8_6 = t46 * t44 * (4 * t78 * t1 * omega * J + 4 * ell * t27 * t31) / 2;
+      out_3_7 = 1;
+      out_6_7 = -t5;
+      out_7_7 = t46 * theta_dot * t25 * t16;
+      t100 = -ell * t10 + ell / 2;
+      t102 = t46 * theta_dot;
+      out_8_7 = t102 * ell * t100;
+      out_4_8 = 1;
+      out_6_8 = t2;
+      out_7_8 = t102 * ell * t100;
       out_8_8 = -out_7_7;
 
       % Store outputs
@@ -212,28 +213,29 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       out_1_1 = 1;
       out_2_2 = 1;
       out_5_3 = 1;
-      t1 = omega ^ 2;
-      t2 = t1 * J;
-      t3 = sin(theta);
+      t1 = sin(theta);
+      t3 = omega ^ 2;
       t5 = cos(theta);
-      t7 = ell * t3;
+      t6 = t5 * t1;
+      t7 = ell * lambda__1;
       t9 = t5 ^ 2;
-      t15 = 0.1e1 / J;
-      out_7_3 = -t15 * (t3 * t2 - t7 * t5 * lambda__1 + lambda__2 * ell * t9 - ell * lambda__2 / 2);
-      out_8_3 = t15 * (-ell * t9 * lambda__1 + t5 * (-lambda__2 * t7 + t2) + ell * lambda__1 / 2);
-      out_3_4 = 1;
-      out_4_5 = 1;
-      out_6_6 = 1;
-      out_7_6 = 2 * t5 * omega;
-      out_8_6 = 2 * omega * t3;
-      t27 = ell ^ 2;
-      t29 = m * t27 * t9;
-      t31 = 4 * J;
-      t36 = 0.1e1 / m / ell;
-      out_7_7 = t36 * t15 * (m * t27 - t29 + t31) / 2;
-      out_8_7 = -t15 * ell * t3 * t5 / 2;
+      t16 = 0.1e1 / J;
+      out_7_3 = -t16 * ell * (t3 * t1 * J - t7 * t6 + ell * lambda__2 * t9 - ell * lambda__2 / 2);
+      t21 = ell * t1;
+      out_8_3 = t16 * ell * (-ell * lambda__1 * t9 + t5 * (t3 * J - lambda__2 * t21) + t7 / 2);
+      out_3_4 = m;
+      out_4_5 = m;
+      out_6_6 = 2 * J;
+      out_7_6 = 2 * omega * ell * t5;
+      out_8_6 = 2 * omega * t21;
+      t31 = ell ^ 2;
+      t33 = m * t31 * t9;
+      t35 = 4 * J;
+      t37 = 0.1e1 / m;
+      out_7_7 = t16 * t37 * (m * t31 - t33 + t35) / 2;
+      out_8_7 = -t16 * t31 * t6 / 2;
       out_7_8 = out_8_7;
-      out_8_8 = t36 * t15 * (t29 + t31) / 2;
+      out_8_8 = t16 * t37 * (t33 + t35) / 2;
 
       % Store outputs
       out_JF_x_dot = zeros(8, 8);
@@ -286,10 +288,10 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       % Evaluate function
       t1 = ell ^ 2;
       t6 = m ^ 2;
-      t8 = t1 * ell * t6;
-      t9 = cos(theta);
-      t10 = t9 ^ 2;
-      V_y58KN_1 = 0.1e1 / (4 * J * m * ell - t10 * t8 + t8) * (4 * m * t1 + 16 * J);
+      t7 = t1 * t6;
+      t8 = cos(theta);
+      t9 = t8 ^ 2;
+      V_y58KN_1 = 0.1e1 / (4 * m * J - t9 * t7 + t7) * (4 * m * t1 + 16 * J);
 
       % Store outputs
       out_v = zeros(1, 1);
@@ -314,13 +316,12 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       D_V_y58KN_1_2 = 0;
       t1 = ell ^ 2;
       t6 = m ^ 2;
-      t7 = t1 * ell;
-      t8 = t7 * t6;
-      t9 = cos(theta);
-      t10 = t9 ^ 2;
-      t16 = (4 * J * m * ell - t10 * t8 + t8) ^ 2;
-      t21 = sin(theta);
-      D_V_y58KN_1_3 = -2 * t21 * t9 * t7 * t6 / t16 * (4 * m * t1 + 16 * J);
+      t7 = t1 * t6;
+      t8 = cos(theta);
+      t9 = t8 ^ 2;
+      t14 = (4 * m * J - t9 * t7 + t7) ^ 2;
+      t19 = sin(theta);
+      D_V_y58KN_1_3 = -2 * t19 * t8 * t1 * t6 / t14 * (4 * m * t1 + 16 * J);
       D_V_y58KN_1_4 = 0;
       D_V_y58KN_1_5 = 0;
       D_V_y58KN_1_6 = 0;
@@ -362,21 +363,23 @@ classdef DoubleSlider < Indigo.DAE.Implicit
 
       % Evaluate function
       t1 = cos(theta);
-      t2 = t1 * ell;
+      t2 = ell * t1;
       out_1 = -t2 - 2 * x;
       t4 = sin(theta);
-      out_2 = -ell * t4 - 2 * y;
-      t11 = 0.1e1 / ell;
-      out_3 = t11 * (-ell * t4 * omega + 2 * u);
-      out_4 = t11 * (ell * t1 * omega + 2 * v);
-      t16 = omega ^ 2;
+      t5 = ell * t4;
+      out_2 = -t5 - 2 * y;
+      out_3 = -omega * t5 + 2 * u;
+      out_4 = omega * t2 + 2 * v;
+      t11 = omega ^ 2;
+      t16 = t1 * t4;
+      t17 = ell ^ 2;
       t21 = t1 ^ 2;
-      t23 = ell ^ 2;
-      t24 = m * t23;
-      t35 = 0.1e1 / J;
-      t38 = t11 / m;
-      out_5 = t38 * t35 * (-m * t23 * lambda__2 * t4 * t1 + 2 * m * t2 * t16 * J + m * t23 * lambda__1 - t24 * t21 * lambda__1 + 4 * J * lambda__1) / 2;
-      out_6 = t38 * t35 * (t24 * lambda__2 * t21 - m * t23 * t4 * t1 * lambda__1 + 2 * (m * ell * t4 * t16 + 2 * g * m + 2 * lambda__2) * J) / 2;
+      t23 = m * t17;
+      t26 = m * t17 * lambda__1;
+      t30 = 0.1e1 / m;
+      t32 = 0.1e1 / J;
+      out_5 = t32 * t30 * (2 * J * m * t11 * t2 - m * t17 * lambda__2 * t16 - t23 * lambda__1 * t21 + 4 * lambda__1 * J + t26) / 2;
+      out_6 = t32 * t30 * (t23 * lambda__2 * t21 - t26 * t16 + 2 * (t11 * ell * m * t4 + 2 * g * m + 2 * lambda__2) * J) / 2;
 
       % Store outputs
       out_h = zeros(6, 1);
@@ -408,38 +411,37 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       out_1_1 = -2;
       out_2_2 = -2;
       t1 = sin(theta);
-      out_1_3 = t1 * ell;
+      out_1_3 = ell * t1;
       t2 = cos(theta);
       t3 = ell * t2;
       out_2_3 = -t3;
-      t4 = t2 * omega;
+      t4 = omega * t3;
       out_3_3 = -t4;
-      t5 = omega * t1;
-      out_4_3 = -t5;
-      t6 = omega ^ 2;
-      t7 = t6 * J;
-      t13 = ell ^ 2;
-      t18 = t2 ^ 2;
-      t20 = m * t13;
+      t6 = omega * ell * t1;
+      out_4_3 = -t6;
+      t7 = omega ^ 2;
+      t9 = J * m * t7;
+      t12 = t2 ^ 2;
+      t14 = ell ^ 2;
+      t15 = m * t14;
+      t17 = t2 * t1;
       t22 = t1 ^ 2;
-      t26 = 0.1e1 / J;
-      t29 = 0.1e1 / ell;
-      t30 = t29 / m;
-      out_5_3 = t30 * t26 * (2 * m * t13 * t1 * t2 * lambda__1 - 2 * m * ell * t1 * t7 - t20 * lambda__2 * t18 + t20 * lambda__2 * t22) / 2;
-      t39 = t1 * t2;
-      out_6_3 = t30 * t26 * (-2 * m * t13 * lambda__2 * t39 + 2 * m * t3 * t7 - t20 * t18 * lambda__1 + t20 * t22 * lambda__1) / 2;
-      out_3_4 = 2 * t29;
-      out_4_5 = out_3_4;
-      out_3_6 = -t1;
-      out_4_6 = t2;
+      t26 = 0.1e1 / m;
+      t28 = 0.1e1 / J;
+      out_5_3 = t28 * t26 * (2 * m * t14 * lambda__1 * t17 - t15 * lambda__2 * t12 + t15 * lambda__2 * t22 - 2 * t9 * out_1_3) / 2;
+      out_6_3 = t28 * t26 * (-2 * m * t14 * lambda__2 * t17 - t15 * lambda__1 * t12 + t15 * lambda__1 * t22 + 2 * t9 * t3) / 2;
+      out_3_4 = 2;
+      out_4_5 = 2;
+      out_3_6 = -out_1_3;
+      out_4_6 = t3;
       out_5_6 = 2 * t4;
-      out_6_6 = 2 * t5;
-      t48 = m * t13 * t18;
-      t49 = 4 * J;
-      out_5_7 = t30 * t26 * (-t48 + t20 + t49) / 2;
-      out_6_7 = -t26 * ell * t39 / 2;
+      out_6_6 = 2 * t6;
+      t44 = m * t14 * t12;
+      t45 = 4 * J;
+      out_5_7 = t28 * t26 * (-t44 + t15 + t45) / 2;
+      out_6_7 = -t28 * t14 * t17 / 2;
       out_5_8 = out_6_7;
-      out_6_8 = t30 * t26 * (t48 + t49) / 2;
+      out_6_8 = t28 * t26 * (t44 + t45) / 2;
 
       % Store outputs
       out_Jh_x = zeros(6, 8);
@@ -462,6 +464,93 @@ classdef DoubleSlider < Indigo.DAE.Implicit
       out_Jh_x(5, 8) = out_5_8;
       out_Jh_x(6, 8) = out_6_8;
     end % Jh_x
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_pivots = pivots( this, in_1, in_2, ~ )
+      % Calculate the pivoting values
+
+      % Extract properties
+      m = this.m_m;
+      J = this.m_J;
+      ell = this.m_ell;
+
+      % Extract inputs
+      theta = in_1(3);
+      V_y58KN_1 = in_2(1);
+
+      % Evaluate function
+      out_1_1 = 1;
+      out_2_1 = 1;
+      out_3_1 = 1;
+      out_4_1 = m;
+      out_5_1 = m;
+      out_6_1 = 2 * J;
+      out_7_1 = -1;
+      out_8_1 = -1;
+      out_1_2 = m;
+      out_2_2 = m;
+      out_3_2 = out_6_1;
+      out_4_2 = 1;
+      out_5_2 = 1;
+      out_6_2 = 1;
+      out_7_2 = -1;
+      out_8_2 = -1;
+      out_1_3 = 1;
+      out_2_3 = 1;
+      out_3_3 = m;
+      out_4_3 = m;
+      out_5_3 = 1;
+      out_6_3 = out_3_2;
+      out_7_3 = -1;
+      out_8_3 = -1;
+      out_1_4 = 1;
+      out_2_4 = 1;
+      out_3_4 = m;
+      out_4_4 = m;
+      out_5_4 = 1;
+      out_6_4 = out_6_3;
+      t1 = cos(theta);
+      t2 = t1 ^ 2;
+      t3 = ell ^ 2;
+      out_7_4 = 0.1e1 / J / m * (-m * t2 * t3 + m * t3 + 4 * J) / 2;
+      out_8_4 = V_y58KN_1 / 2;
+
+      % Store outputs
+      out_pivots = zeros(8, 4);
+      out_pivots(1, 1) = out_1_1;
+      out_pivots(2, 1) = out_2_1;
+      out_pivots(3, 1) = out_3_1;
+      out_pivots(4, 1) = out_4_1;
+      out_pivots(5, 1) = out_5_1;
+      out_pivots(6, 1) = out_6_1;
+      out_pivots(7, 1) = out_7_1;
+      out_pivots(8, 1) = out_8_1;
+      out_pivots(1, 2) = out_1_2;
+      out_pivots(2, 2) = out_2_2;
+      out_pivots(3, 2) = out_3_2;
+      out_pivots(4, 2) = out_4_2;
+      out_pivots(5, 2) = out_5_2;
+      out_pivots(6, 2) = out_6_2;
+      out_pivots(7, 2) = out_7_2;
+      out_pivots(8, 2) = out_8_2;
+      out_pivots(1, 3) = out_1_3;
+      out_pivots(2, 3) = out_2_3;
+      out_pivots(3, 3) = out_3_3;
+      out_pivots(4, 3) = out_4_3;
+      out_pivots(5, 3) = out_5_3;
+      out_pivots(6, 3) = out_6_3;
+      out_pivots(7, 3) = out_7_3;
+      out_pivots(8, 3) = out_8_3;
+      out_pivots(1, 4) = out_1_4;
+      out_pivots(2, 4) = out_2_4;
+      out_pivots(3, 4) = out_3_4;
+      out_pivots(4, 4) = out_4_4;
+      out_pivots(5, 4) = out_5_4;
+      out_pivots(6, 4) = out_6_4;
+      out_pivots(7, 4) = out_7_4;
+      out_pivots(8, 4) = out_8_4;
+    end % pivots
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

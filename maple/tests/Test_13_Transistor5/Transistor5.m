@@ -39,7 +39,7 @@ classdef Transistor5 < Indigo.DAE.Implicit
 
       % Superclass constructor
       num_eqns = 5;
-      num_veil = 1;
+      num_veil = 0;
       num_invs = 2;
       this = this@Indigo.DAE.Implicit('Transistor5', num_eqns, num_veil, num_invs);
 
@@ -83,7 +83,7 @@ classdef Transistor5 < Indigo.DAE.Implicit
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    function out_F = F( this, in_1, in_2, ~, ~ )
+    function out_F = F( this, in_1, in_2, ~, t )
       % Evaluate the function F.
 
       % Extract properties
@@ -113,25 +113,34 @@ classdef Transistor5 < Indigo.DAE.Implicit
 
       % Evaluate function
       t3 = beta * R__3;
+      t4 = y__2 - y__3;
       t5 = 0.1e1 / U__f;
-      t7 = exp(t5 * (y__2 - y__3));
-      out_1 = 0.1e1 / R__3 * (-C__2 * y__3_dot * R__3 + t7 * t3 - t3 - y__3);
+      t7 = exp(t5 * t4);
+      t10 = 0.1e1 / R__3;
+      out_1 = t10 * (-C__2 * y__3_dot * R__3 + t7 * t3 - t3 - y__3);
       t12 = alpha - 1;
-      t16 = y__1_dot * R__1;
-      t17 = R__2 * C__1;
-      t21 = R__2 + R__1;
-      t23 = t12 * beta;
+      t17 = R__1 * R__2;
+      t21 = -R__1 - R__2;
       t28 = 0.1e1 / R__1;
-      t32 = 0.1e1 / R__2 / C__1;
-      out_2 = t32 * t28 * (-t7 * t12 * R__2 * beta * R__1 - t17 * t16 + t17 * y__2_dot * R__1 + y__2 * t21 + R__1 * (R__2 * t23 - U__b));
-      t33 = alpha * beta;
-      t38 = y__5_dot * R__4;
-      t42 = 0.1e1 / R__4;
-      t44 = 0.1e1 / C__3;
-      out_3 = t44 * t42 * (y__4_dot * R__4 * C__3 + t7 * R__4 * t33 - C__3 * t38 - R__4 * t33 - U__b + y__4);
-      t47 = y__2_dot - y__3_dot;
-      out_4 = 0.1e1 / R__0 * t32 * t28 * t5 * (t7 * t47 * t23 * R__0 * R__1 * R__2 - U__f * (y__2_dot * t21 * R__0 + R__2 * t16));
-      out_5 = 0.1e1 / R__5 * t42 * t44 * t5 * (-t7 * t47 * alpha * R__4 * R__5 * beta - (y__4_dot * R__5 + t38) * U__f);
+      t30 = 0.1e1 / R__2;
+      out_2 = t30 * t28 * (t7 * t12 * R__2 * beta * R__1 + t17 * C__1 * y__1_dot - t17 * C__1 * y__2_dot + y__2 * t21 - R__1 * (R__2 * t12 * beta - U__b));
+      t31 = alpha * beta;
+      t38 = R__4 * t31;
+      t40 = 0.1e1 / R__4;
+      out_3 = t40 * (-C__3 * y__4_dot * R__4 + C__3 * y__5_dot * R__4 - t7 * R__4 * t31 + U__b + t38 - y__4);
+      t43 = exp(2 * t5 * t4);
+      t47 = beta ^ 2;
+      t59 = C__2 * U__f;
+      t75 = 0.1e1 / C__2;
+      out_4 = t40 / R__5 / C__3 * t10 * t5 * t75 * (-t47 * alpha * R__4 * R__5 * R__3 * t43 * C__3 + t7 * alpha * R__4 * beta * (C__2 * C__3 * R__3 * R__5 * y__2_dot + y__3 * C__3 * R__5 + (C__3 * R__5 * beta + t59) * R__3) - U__f * R__3 * C__2 * (-C__3 * (R__5 + R__4) * y__4_dot + t38 - y__4 + U__b));
+      t83 = alpha - 0.1e1;
+      t85 = t47 * C__1;
+      t92 = -0.1e1 * alpha + 0.1e1;
+      t93 = R__0 * t92;
+      t97 = R__3 * R__1;
+      t107 = C__2 * beta;
+      t117 = cos(200 * pi * t);
+      out_5 = t30 * t28 / C__1 * t10 * t5 * t75 / R__0 * (t43 * R__1 * R__2 * R__3 * t85 * R__0 * t83 + t7 * (y__2_dot * t97 * C__2 * R__2 * beta * C__1 * t93 + C__1 * R__2 * R__1 * y__3 * beta * t93 + t97 * R__2 * (t107 * U__f * t92 + t85 * t93)) + 0.2513274123e3 * t17 * R__3 * C__1 * U__f * C__2 * t117 + y__2_dot * t59 * C__1 * ((R__0 + R__2) * R__1 + R__0 * R__2) * R__3 - y__2 * t21 * U__f * C__2 * R__3 + R__1 * R__3 * (R__2 * t107 * U__f * t83 - 0.1e1 * C__2 * U__b * U__f));
 
       % Store outputs
       out_F = zeros(5, 1);
@@ -151,43 +160,64 @@ classdef Transistor5 < Indigo.DAE.Implicit
       U__f = this.m_U__f;
       alpha = this.m_alpha;
       beta = this.m_beta;
+      R__0 = this.m_R__0;
       R__1 = this.m_R__1;
       R__2 = this.m_R__2;
       R__3 = this.m_R__3;
       R__4 = this.m_R__4;
+      R__5 = this.m_R__5;
       C__1 = this.m_C__1;
+      C__2 = this.m_C__2;
       C__3 = this.m_C__3;
 
       % Extract inputs
       y__2 = in_1(2);
       y__3 = in_1(3);
       y__2_dot = in_2(2);
-      y__3_dot = in_2(3);
 
       % Evaluate function
       t1 = 0.1e1 / U__f;
-      t5 = exp(t1 * (y__2 - y__3));
+      t3 = y__2 - y__3;
+      t5 = exp(t1 * t3);
       out_1_2 = t5 * t1 * beta;
       t8 = alpha - 1;
-      t16 = 0.1e1 / C__1;
-      out_2_2 = t16 / R__2 / R__1 * (-t5 * t1 * t8 * beta * R__1 * R__2 + R__1 + R__2);
-      t18 = t5 * t1;
-      t19 = alpha * beta;
-      t20 = 0.1e1 / C__3;
-      out_3_2 = t20 * t19 * t18;
-      t22 = t8 * beta;
-      t23 = y__2_dot - y__3_dot;
-      t25 = U__f ^ 2;
-      t27 = t5 / t25;
-      out_4_2 = t16 * t27 * t23 * t22;
-      t31 = t20 * t27 * t23 * t19;
-      out_5_2 = -t31;
-      out_1_3 = 0.1e1 / R__3 * (-t18 * beta * R__3 - 1);
-      out_2_3 = t16 * t18 * t22;
-      out_3_3 = -out_3_2;
-      out_4_3 = -out_4_2;
-      out_5_3 = t31;
-      out_3_4 = t20 / R__4;
+      t13 = 0.1e1 / R__1;
+      t15 = 0.1e1 / R__2;
+      out_2_2 = t15 * t13 * (t5 * t1 * t8 * beta * R__1 * R__2 - R__1 - R__2);
+      t16 = t5 * t1;
+      t18 = alpha * beta * t16;
+      out_3_2 = -t18;
+      t22 = exp(2 * t1 * t3);
+      t26 = beta ^ 2;
+      t30 = 2 * t26 * alpha * R__4 * R__5 * R__3 * t22 * t1 * C__3;
+      t38 = C__3 * R__5 * beta;
+      t47 = t5 * t1 * alpha * R__4 * beta * (C__2 * C__3 * R__3 * R__5 * y__2_dot + y__3 * C__3 * R__5 + (C__2 * U__f + t38) * R__3);
+      t49 = 0.1e1 / C__2;
+      t52 = 0.1e1 / R__3;
+      t53 = 0.1e1 / C__3;
+      t55 = 0.1e1 / R__5;
+      t56 = 0.1e1 / R__4;
+      t58 = t56 * t55 * t53 * t52;
+      out_4_2 = t58 * t1 * t49 * (-t30 + t47);
+      t61 = t26 * C__1;
+      t68 = 2 * t22 * t1 * R__1 * R__2 * R__3 * t61 * (alpha - 0.1e1) * R__0;
+      t70 = -0.1e1 * alpha + 0.1e1;
+      t71 = R__0 * t70;
+      t75 = R__3 * R__1;
+      t79 = beta * t71;
+      t80 = C__1 * R__2;
+      t93 = t5 * t1 * (y__2_dot * t75 * C__2 * R__2 * beta * C__1 * t71 + R__1 * y__3 * t80 * t79 + t75 * R__2 * (C__2 * beta * U__f * t70 + t61 * t71));
+      t99 = 0.1e1 / R__0;
+      t101 = t1 * t49;
+      t106 = t15 * t13 / C__1 * t52;
+      out_5_2 = t106 * t101 * t99 * (t68 + t93 + C__2 * R__3 * U__f * (R__2 + R__1));
+      out_1_3 = t52 * (-t16 * beta * R__3 - 1);
+      out_2_3 = -t16 * t8 * beta;
+      out_3_3 = t18;
+      out_4_3 = t58 * t1 * t49 * (t5 * alpha * R__4 * t38 + t30 - t47);
+      out_5_3 = t106 * t101 * t99 * (t5 * R__1 * t80 * t79 - t68 - t93);
+      out_3_4 = -t56;
+      out_4_4 = t56 * t55 * t53;
 
       % Store outputs
       out_JF_x = zeros(5, 5);
@@ -202,12 +232,189 @@ classdef Transistor5 < Indigo.DAE.Implicit
       out_JF_x(4, 3) = out_4_3;
       out_JF_x(5, 3) = out_5_3;
       out_JF_x(3, 4) = out_3_4;
+      out_JF_x(4, 4) = out_4_4;
     end % JF_x
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     function out_JF_x_dot = JF_x_dot( this, in_1, ~, ~, ~ )
       % Evaluate the Jacobian of F with respect to x_dot.
+
+      % Extract properties
+      U__f = this.m_U__f;
+      alpha = this.m_alpha;
+      beta = this.m_beta;
+      R__0 = this.m_R__0;
+      R__1 = this.m_R__1;
+      R__2 = this.m_R__2;
+      R__3 = this.m_R__3;
+      R__4 = this.m_R__4;
+      R__5 = this.m_R__5;
+      C__1 = this.m_C__1;
+      C__2 = this.m_C__2;
+      C__3 = this.m_C__3;
+
+      % Extract inputs
+      y__2 = in_1(2);
+      y__3 = in_1(3);
+
+      % Evaluate function
+      out_2_1 = C__1;
+      out_2_2 = -C__1;
+      t1 = 0.1e1 / U__f;
+      t4 = exp(t1 * (y__2 - y__3));
+      out_4_2 = alpha * beta * t4 * t1;
+      out_5_2 = 0.1e1 / R__3 / C__1 / R__1 / R__2 * t1 / C__2 / R__0 * (t4 * R__1 * R__3 * C__2 * R__2 * (-0.1e1 * alpha + 0.1e1) * R__0 * beta * C__1 + C__1 * ((R__0 + R__2) * R__1 + R__0 * R__2) * R__3 * C__2 * U__f);
+      out_1_3 = -C__2;
+      out_3_4 = -C__3;
+      out_4_4 = (R__5 + R__4) / R__5 / R__4;
+      out_3_5 = C__3;
+
+      % Store outputs
+      out_JF_x_dot = zeros(5, 5);
+      out_JF_x_dot(2, 1) = out_2_1;
+      out_JF_x_dot(2, 2) = out_2_2;
+      out_JF_x_dot(4, 2) = out_4_2;
+      out_JF_x_dot(5, 2) = out_5_2;
+      out_JF_x_dot(1, 3) = out_1_3;
+      out_JF_x_dot(3, 4) = out_3_4;
+      out_JF_x_dot(4, 4) = out_4_4;
+      out_JF_x_dot(3, 5) = out_3_5;
+    end % JF_x_dot
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_JF_v = JF_v( ~, ~, ~, ~, ~ )
+      % Evaluate the Jacobian of F with respect to v.
+
+      % Extract properties
+      % No properties
+
+      % Extract inputs
+
+      % Evaluate function
+      % No body
+
+      % Store outputs
+      out_JF_v = zeros(5, 0);
+    end % JF_v
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_v = v( ~, ~, ~ )
+      % Evaluate the the veils v.
+
+      % Extract properties
+      % No properties
+
+      % Extract inputs
+
+      % Evaluate function
+      % No body
+
+      % Store outputs
+      out_v = zeros(0, 1);
+    end % v
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_Jv_x = Jv_x( ~, ~, ~, ~ )
+      % Evaluate the Jacobian of v with respect to x.
+
+      % Extract properties
+      % No properties
+
+      % Extract inputs
+
+      % Evaluate function
+      % No body
+
+      % Store outputs
+      out_Jv_x = zeros(0, 5);
+    end % Jv_x
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_h = h( this, in_1, ~, t )
+      % Calculate the residual of the invariants h.
+
+      % Extract properties
+      U__b = this.m_U__b;
+      U__f = this.m_U__f;
+      alpha = this.m_alpha;
+      beta = this.m_beta;
+      R__0 = this.m_R__0;
+      R__1 = this.m_R__1;
+      R__2 = this.m_R__2;
+      R__4 = this.m_R__4;
+      R__5 = this.m_R__5;
+
+      % Extract inputs
+      y__1 = in_1(1);
+      y__2 = in_1(2);
+      y__3 = in_1(3);
+      y__4 = in_1(4);
+      y__5 = in_1(5);
+
+      % Evaluate function
+      t9 = exp((y__2 - y__3) / U__f);
+      t14 = sin(200 * pi * t);
+      out_1 = 0.1e1 / R__1 / R__2 / R__0 * (t9 * R__1 * R__0 * (-0.1e1 * alpha + 0.1e1) * beta * R__2 + 0.4e0 * R__2 * R__1 * t14 + R__0 * (R__2 + R__1) * y__2 + y__1 * R__1 * R__2 + ((alpha - 0.1e1) * beta * R__2 - 0.1e1 * U__b) * R__0 * R__1);
+      out_2 = 0.1e1 / R__5 / R__4 * (R__5 * alpha * beta * R__4 * t9 + y__4 * R__5 + y__5 * R__4 - R__5 * (alpha * beta * R__4 + U__b));
+
+      % Store outputs
+      out_h = zeros(2, 1);
+      out_h(1) = out_1;
+      out_h(2) = out_2;
+    end % h
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_Jh_x = Jh_x( this, in_1, ~, ~ )
+      % Calculate the Jacobian of h with respect to x.
+
+      % Extract properties
+      U__f = this.m_U__f;
+      alpha = this.m_alpha;
+      beta = this.m_beta;
+      R__0 = this.m_R__0;
+      R__1 = this.m_R__1;
+      R__2 = this.m_R__2;
+      R__4 = this.m_R__4;
+      R__5 = this.m_R__5;
+
+      % Extract inputs
+      y__2 = in_1(2);
+      y__3 = in_1(3);
+
+      % Evaluate function
+      out_1_1 = 0.1e1 / R__0;
+      t3 = (-0.1e1 * alpha + 0.1e1) * beta;
+      t6 = 0.1e1 / U__f;
+      t9 = exp(t6 * (y__2 - y__3));
+      t10 = t9 * t6;
+      out_1_2 = 0.1e1 / R__1 / R__2 * out_1_1 * (t10 * R__0 * R__1 * R__2 * t3 + R__0 * (R__2 + R__1));
+      out_2_2 = alpha * beta * t10;
+      out_1_3 = -t10 * t3;
+      out_2_3 = -out_2_2;
+      out_2_4 = 0.1e1 / R__4;
+      out_2_5 = 0.1e1 / R__5;
+
+      % Store outputs
+      out_Jh_x = zeros(2, 5);
+      out_Jh_x(1, 1) = out_1_1;
+      out_Jh_x(1, 2) = out_1_2;
+      out_Jh_x(2, 2) = out_2_2;
+      out_Jh_x(1, 3) = out_1_3;
+      out_Jh_x(2, 3) = out_2_3;
+      out_Jh_x(2, 4) = out_2_4;
+      out_Jh_x(2, 5) = out_2_5;
+    end % Jh_x
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    function out_pivots = pivots( this, in_1, ~, ~ )
+      % Calculate the pivoting values
 
       % Extract properties
       U__f = this.m_U__f;
@@ -227,205 +434,33 @@ classdef Transistor5 < Indigo.DAE.Implicit
       y__3 = in_1(3);
 
       % Evaluate function
-      out_2_1 = -1;
-      t1 = 0.1e1 / C__1;
-      t2 = 0.1e1 / R__0;
-      out_4_1 = -t2 * t1;
-      out_2_2 = 1;
-      t7 = beta * (alpha - 1);
-      t9 = 0.1e1 / U__f;
-      t11 = exp(t9 * (y__2 - y__3));
-      out_4_2 = t2 * t1 / R__2 / R__1 * t9 * (t11 * t7 * R__0 * R__1 * R__2 - R__0 * (R__2 + R__1) * U__f);
-      t24 = t11 * t9;
-      t26 = 0.1e1 / C__3;
-      t28 = t26 * beta * alpha * t24;
-      out_5_2 = -t28;
-      out_1_3 = -C__2;
-      out_4_3 = -t1 * t24 * t7;
-      out_5_3 = t28;
-      out_3_4 = 1;
-      out_5_4 = -t26 / R__4;
-      out_3_5 = -1;
-      out_5_5 = -t26 / R__5;
+      out_1_1 = -C__2;
+      out_2_1 = C__1;
+      out_3_1 = C__3;
+      out_4_1 = -1;
+      out_5_1 = -1;
+      out_1_2 = out_1_1;
+      out_2_2 = C__1;
+      out_3_2 = C__3;
+      out_4_2 = (R__5 + R__4) / R__5 / R__4;
+      t11 = 0.1e1 / U__f;
+      t13 = exp(t11 * (y__2 - y__3));
+      t16 = U__f * R__1;
+      out_5_2 = 0.1e1 / R__0 / R__1 / R__2 * t11 * (t13 * R__1 * R__0 * (-0.1e1 * alpha + 0.1e1) * beta * R__2 + R__0 * (0.1e1 * t16 + 0.1e1 * U__f * R__2) + 0.1e1 * R__2 * t16);
 
       % Store outputs
-      out_JF_x_dot = zeros(5, 5);
-      out_JF_x_dot(2, 1) = out_2_1;
-      out_JF_x_dot(4, 1) = out_4_1;
-      out_JF_x_dot(2, 2) = out_2_2;
-      out_JF_x_dot(4, 2) = out_4_2;
-      out_JF_x_dot(5, 2) = out_5_2;
-      out_JF_x_dot(1, 3) = out_1_3;
-      out_JF_x_dot(4, 3) = out_4_3;
-      out_JF_x_dot(5, 3) = out_5_3;
-      out_JF_x_dot(3, 4) = out_3_4;
-      out_JF_x_dot(5, 4) = out_5_4;
-      out_JF_x_dot(3, 5) = out_3_5;
-      out_JF_x_dot(5, 5) = out_5_5;
-    end % JF_x_dot
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_JF_v = JF_v( ~, ~, ~, ~, ~ )
-      % Evaluate the Jacobian of F with respect to v.
-
-      % Extract properties
-      % No properties
-
-      % Extract inputs
-
-      % Evaluate function
-      % No body
-
-      % Store outputs
-      out_JF_v = zeros(5, 1);
-    end % JF_v
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_v = v( this, in_1, t )
-      % Evaluate the the veils v.
-
-      % Extract properties
-      U__b = this.m_U__b;
-      U__f = this.m_U__f;
-      alpha = this.m_alpha;
-      beta = this.m_beta;
-      R__0 = this.m_R__0;
-      R__1 = this.m_R__1;
-      R__2 = this.m_R__2;
-      C__1 = this.m_C__1;
-
-      % Extract inputs
-      y__1 = in_1(1);
-      y__2 = in_1(2);
-      y__3 = in_1(3);
-
-      % Evaluate function
-      t4 = exp((y__2 - y__3) / U__f);
-      t5 = R__0 * t4;
-      t8 = R__2 * alpha * beta;
-      t10 = R__1 * R__2;
-      t13 = R__0 * R__1;
-      t17 = R__0 * y__2;
-      t23 = sin(200 * pi * t);
-      V_y58KN_1 = -0.1e1 / R__2 / C__1 / R__0 / R__1 * (-t8 * R__1 * t5 + beta * t10 * t5 + t8 * t13 - R__2 * beta * t13 + R__1 * t17 + R__2 * t17 - U__b * t13 + 0.4e0 * t23 * t10 + y__1 * t10);
-
-      % Store outputs
-      out_v = zeros(1, 1);
-      out_v(1) = V_y58KN_1;
-    end % v
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_Jv_x = Jv_x( this, in_1, ~, ~ )
-      % Evaluate the Jacobian of v with respect to x.
-
-      % Extract properties
-      U__f = this.m_U__f;
-      alpha = this.m_alpha;
-      beta = this.m_beta;
-      R__0 = this.m_R__0;
-      R__1 = this.m_R__1;
-      R__2 = this.m_R__2;
-      C__1 = this.m_C__1;
-
-      % Extract inputs
-      y__2 = in_1(2);
-      y__3 = in_1(3);
-
-      % Evaluate function
-      t1 = 0.1e1 / C__1;
-      t2 = 0.1e1 / R__0;
-      D_V_y58KN_1_1 = -t2 * t1;
-      t4 = 0.1e1 / U__f;
-      t7 = exp(t4 * (y__2 - y__3));
-      t9 = R__0 * t7 * t4;
-      t10 = R__1 * R__2;
-      t13 = alpha * beta * t10 * t9;
-      t15 = beta * t10 * t9;
-      t19 = 0.1e1 / R__1;
-      t23 = t2 * t1 / R__2;
-      D_V_y58KN_1_2 = -t23 * t19 * (R__0 * R__1 + R__0 * R__2 - t13 + t15);
-      D_V_y58KN_1_3 = -t23 * t19 * (t13 - t15);
-      D_V_y58KN_1_4 = 0;
-      D_V_y58KN_1_5 = 0;
-
-      % Store outputs
-      out_Jv_x = zeros(1, 5);
-      out_Jv_x(1, 1) = D_V_y58KN_1_1;
-      out_Jv_x(1, 2) = D_V_y58KN_1_2;
-      out_Jv_x(1, 3) = D_V_y58KN_1_3;
-      out_Jv_x(1, 4) = D_V_y58KN_1_4;
-      out_Jv_x(1, 5) = D_V_y58KN_1_5;
-    end % Jv_x
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_h = h( this, in_1, in_2, ~ )
-      % Calculate the residual of the invariants h.
-
-      % Extract properties
-      U__b = this.m_U__b;
-      U__f = this.m_U__f;
-      alpha = this.m_alpha;
-      beta = this.m_beta;
-      R__4 = this.m_R__4;
-      R__5 = this.m_R__5;
-      C__3 = this.m_C__3;
-
-      % Extract inputs
-      y__2 = in_1(2);
-      y__3 = in_1(3);
-      y__4 = in_1(4);
-      y__5 = in_1(5);
-      V_y58KN_1 = in_2(1);
-
-      % Evaluate function
-      out_1 = V_y58KN_1;
-      t4 = exp((y__2 - y__3) / U__f);
-      out_2 = 0.1e1 / R__5 / C__3 / R__4 * (-R__5 * alpha * beta * R__4 * t4 - y__4 * R__5 - y__5 * R__4 + R__5 * (alpha * beta * R__4 + U__b));
-
-      % Store outputs
-      out_h = zeros(2, 1);
-      out_h(1) = out_1;
-      out_h(2) = out_2;
-    end % h
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_Jh_x = Jh_x( this, in_1, ~, ~ )
-      % Calculate the Jacobian of h with respect to x.
-
-      % Extract properties
-      U__f = this.m_U__f;
-      alpha = this.m_alpha;
-      beta = this.m_beta;
-      R__4 = this.m_R__4;
-      R__5 = this.m_R__5;
-      C__3 = this.m_C__3;
-
-      % Extract inputs
-      y__2 = in_1(2);
-      y__3 = in_1(3);
-
-      % Evaluate function
-      t1 = 0.1e1 / U__f;
-      t4 = exp(t1 * (y__2 - y__3));
-      t7 = 0.1e1 / C__3;
-      t9 = t7 * beta * alpha * t4 * t1;
-      out_2_2 = -t9;
-      out_2_3 = t9;
-      out_2_4 = -t7 / R__4;
-      out_2_5 = -t7 / R__5;
-
-      % Store outputs
-      out_Jh_x = zeros(2, 5);
-      out_Jh_x(2, 2) = out_2_2;
-      out_Jh_x(2, 3) = out_2_3;
-      out_Jh_x(2, 4) = out_2_4;
-      out_Jh_x(2, 5) = out_2_5;
-    end % Jh_x
+      out_pivots = zeros(5, 2);
+      out_pivots(1, 1) = out_1_1;
+      out_pivots(2, 1) = out_2_1;
+      out_pivots(3, 1) = out_3_1;
+      out_pivots(4, 1) = out_4_1;
+      out_pivots(5, 1) = out_5_1;
+      out_pivots(1, 2) = out_1_2;
+      out_pivots(2, 2) = out_2_2;
+      out_pivots(3, 2) = out_3_2;
+      out_pivots(4, 2) = out_4_2;
+      out_pivots(5, 2) = out_5_2;
+    end % pivots
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -438,11 +473,10 @@ classdef Transistor5 < Indigo.DAE.Implicit
       % Extract inputs
 
       % Evaluate function
-      out_1_1 = 1;
+      % No body
 
       % Store outputs
-      out_Jh_v = zeros(2, 1);
-      out_Jh_v(1, 1) = out_1_1;
+      out_Jh_v = zeros(2, 0);
     end % Jh_v
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
