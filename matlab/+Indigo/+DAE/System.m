@@ -6,25 +6,20 @@
 %> by the following equations:
 %>
 %> \f[
-%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t ) = \mathbf{0}
 %> \f]
 %>
-%> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
+%> with *optional* linear states \f$ \mathbf{y}( \mathbf{x}, t ) \f$ of the form:
 %>
 %> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{v}, t ) = \left{\begin{array}{c}
-%>   v_1( \mathbf{x}, t ) \\
-%>   v_2( \mathbf{x}, v_1, t ) \\
-%>   v_3( \mathbf{x}, v_1, v_2, t ) \\
-%>   \vdots \\
-%>   v_n( \mathbf{x}, v_1, \dots, v_{n-1}, t )
+%> \mathbf{A}( \mathbf{x}, t ) \mathbf{y}( \mathbf{x}, t ) = \mathbf{b}( \mathbf{x}, t )
 %> \end{array}\right.
 %> \f]
 %>
 %> And *optional* invariants of the form:
 %>
 %> \f[
-%> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{h}( \mathbf{x}, \mathbf{y}, t ) = \mathbf{0}
 %> \f]
 %>
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
@@ -42,9 +37,9 @@ classdef System < handle
     %
     m_num_eqns;
     %
-    %> Number of veils of the system.
+    %> Number of linear equations of the system.
     %
-    m_num_veil;
+    m_num_sysy;
     %
     %> Number of invariants of the system.
     %
@@ -59,13 +54,13 @@ classdef System < handle
     %>
     %> \param t_name     The name of the system.
     %> \param t_num_eqns The number of equations of the system.
-    %> \param t_num_veil The number of (user-defined) veils of the system.
+    %> \param t_num_sysy The number of linear equations of the system.
     %> \param t_num_invs The number of invariants of the system.
     %
-    function this = System( t_name, t_num_eqns, t_num_veil, t_num_invs )
+    function this = System( t_name, t_num_eqns, t_num_sysy, t_num_invs )
       this.m_name     = t_name;
       this.m_num_eqns = t_num_eqns;
-      this.m_num_veil = t_num_veil;
+      this.m_num_sysy = t_num_sysy;
       this.m_num_invs = t_num_invs;
     end
     %
@@ -101,22 +96,22 @@ classdef System < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Get the number of veils of the system.
+    %> Get the number of linear states of the system.
     %>
-    %> \return The number of veils of the system.
+    %> \return The number of linear states of the system.
     %
-    function t_num_veil = get_num_veil( this )
-      t_num_veil = this.m_num_veil;
+    function t_num_sysy = get_num_sysy( this )
+      t_num_sysy = this.m_num_sysy;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Set the number of veils of the system.
+    %> Set the number of linear states of the system.
     %>
-    %> \param t_num_veil The number of veils of the system.
+    %> \param t_num_sysy The number of linear states of the system.
     %
-    function set_num_veil( this, t_num_veil )
-      this.m_num_veil = t_num_veil;
+    function set_num_sysy( this, t_num_sysy )
+      this.m_num_sysy = t_num_sysy;
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -142,6 +137,52 @@ classdef System < handle
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
+    %> Calculate the linear states \f$ \mathbf{y} \f$.
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The linear states \f$ \mathbf{y} \f$.
+    %
+    function out = y( this, x, t )
+      out = this.A(x, t)\this.b(x, t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Calculate the derivative of the linear states \f$ \mathbf{y} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \dfrac{\partial}{\partial\mathbf{x}} \left[ \mathbf{A}( \mathbf{x}, \mathbf{v}, t )
+    %> \mathbf{y} - \mathbf{b}( \mathbf{x}, \mathbf{v}, t ) \right] = \mathbf{0}
+    %> \f]
+    %>
+    %> which, if expanded applying the chain rule, can be written as:
+    %>
+    %> \f[
+    %> (\mathbf{TA}_{\mathbf{x}} + \mathbf{TA}_{\mathbf{v}}\mathbf{Jv}_{\mathbf{x}})\mathbf{y} + \mathbf{A}\mathbf{Jy}_\mathbf{x}
+    %> = \mathbf{Jb}_{\mathbf{x}} + \mathbf{Jb}_{\mathbf{v}}\mathbf{Jv}_{\mathbf{x}}
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear states \f$ \mathbf{y} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The linear states derivative \f$ \mathbf{y}' \f$.
+    %
+    function out = Jy_x( this, x, y, t )
+      TA_x = this.TA_x(x, t);
+      Jb_x = this.Jb_x(x, t);
+      out  = zeros(this.m_num_sysy, this.m_num_eqns);
+      for i = 1:size(TA_x, 3)
+        out(:,i) = TA_x(:,:,i) * y;
+      end
+      out = this.A(x, t) \ (Jb_x - out);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
   end
   %
   methods (Abstract)
@@ -152,12 +193,12 @@ classdef System < handle
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The system function \f$ \mathbf{F} \f$.
     %
-    F( this, x, x_dot, v, t )
+    F( this, x, x_dot, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -165,9 +206,9 @@ classdef System < handle
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
@@ -175,13 +216,35 @@ classdef System < handle
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
     %
-    JF_x( this, x, x_dot, v, t )
+    JF_x( this, x, x_dot, y, t )
     %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the linear states \f$ \mathbf{y} \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{y}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t )
+    %> }{
+    %>   \partial \mathbf{y}
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{y}} \f$.
+    %
+    JF_y( this, x, x_dot, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -189,9 +252,9 @@ classdef System < handle
     %> respect to the states derivative \f$ \mathbf{x}' \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t )
     %> }{
     %>   \partial \mathbf{x}'
     %> }.
@@ -199,88 +262,94 @@ classdef System < handle
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}'} \f$.
     %
-    JF_x_dot( this, x, x_dot, v, t )
+    JF_x_dot( this, x, x_dot, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
-    %> respect to the veils \f$ \mathbf{v} \f$:
-    %>
-    %> \f[
-    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
-    %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
-    %> }{
-    %>   \partial \mathbf{v}
-    %> }.
-    %> \f]
-    %>
-    %> \param x     States \f$ \mathbf{x} \f$.
-    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
-    %> \param v     Veils \f$ \mathbf{v} \f$.
-    %> \param t     Independent variable \f$ t \f$.
-    %>
-    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.
-    %
-    JF_v( this, x, x_dot, v, t )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Evaluate the system veils \f$ \mathbf{v} \f$:
-    %>
-    %> \f[
-    %> \mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.
-    %> \f]
+    %> Evaluate the system matrix \f$ \mathbf{A} \f$ of the linear states
+    %> \f$ \mathbf{y} \f$.
     %>
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The system veils \f$ \mathbf{v} \f$..
+    %> \return The system matrix \f$ \mathbf{A} \f$.
     %
-    v( this, x, t )
+    A( this, x, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the system veils \f$ \mathbf{v} \f$
-    %> with respect to the states \f$ \mathbf{x} \f$:
+    %> Evaluate the tensor of the linear system matrix \f$ \mathbf{A} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =
+    %> \mathbf{TA}_{\mathbf{x}}( \mathbf{x}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{v}( \mathbf{x}, t )
+    %>   \partial \mathbf{\A}( \mathbf{x}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
-    %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jv}_{\mathbf{x}} \f$.
+    %> \return The tensor \f$ \mathbf{TA}_{\mathbf{x}} \f$.
     %
-    Jv_x( this, x, v, t )
+    TA_x( this, x, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the system vector \f$ \mathbf{b} \f$ of the linear states
+    %> \f$ \mathbf{y} \f$.
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The system vector \f$ \mathbf{b} \f$.
+    %
+    b( this, x, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system vector \f$ \mathbf{b} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jb}_{\mathbf{x}}( \mathbf{x}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{b}( \mathbf{x}, t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jb}_{\mathbf{x}} \f$.
+    %
+    Jb_x( this, x, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Evaluate the system invariants \f$ \mathbf{h} \f$:
     %>
     %> \f[
-    %> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
+    %> \mathbf{h}( \mathbf{x}, \mathbf{y}, t ) = \mathbf{0}.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
-    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param y Linear states \f$ \mathbf{y} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The invariants \f$ \mathbf{h} \f$..
+    %> \return The invariants \f$ \mathbf{h} \f$.
     %
-    h( this, x, v, t )
+    h( this, x, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -288,43 +357,43 @@ classdef System < handle
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{h}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{h}( \mathbf{x}, \mathbf{y}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
-    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param y Linear states \f$ \mathbf{y} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{x}} \f$.
     %
-    Jh_x( this, x, v, t )
+    Jh_x( this, x, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
     %> Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with
-    %> respect to the veils \f$ \mathbf{v} \f$:
+    %> respect to the linear states \f$ \mathbf{y} \f$:
     %>
     %> \f[
-    %> \mathbf{Jh}_{\mathbf{v}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{Jh}_{\mathbf{y}}( \mathbf{x}, \mathbf{y}, t ) =
     %> \dfrac{
     %>   \partial \mathbf{h}
     %> }{
-    %>   \partial \mathbf{v}
+    %>   \partial \mathbf{y}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
-    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param y Linear states \f$ \mathbf{y} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{v}} \f$.
+    %> \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{y}} \f$.
     %
-    Jh_v( this, x, v, t )
+    Jh_y( this, x, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

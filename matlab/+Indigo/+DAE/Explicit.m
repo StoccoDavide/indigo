@@ -3,8 +3,8 @@
 %>
 %> \f[
 %> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
-%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t )^{-1}
-%> \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+%> \mathbf{M}( \mathbf{x}, \mathbf{v}, t )^{-1}
+%> \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
 %> \f]
 %>
 %> or equivalently:

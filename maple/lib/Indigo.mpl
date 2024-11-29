@@ -429,14 +429,14 @@ module Indigo()
     local out;
 
     # Store the differential equations
-    out := convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_ReductionSteps[-1]["vars_d"], t)> -
+    out := convert(_self:-m_ReductionSteps[-1]["E"].<diff(_self:-m_ReductionSteps[-1]["vars_x"], t)> -
       _self:-m_ReductionSteps[-1]["g"], list);
 
     # Try to simplify
     try
       out := timelimit(_self:-m_TimeLimit, simplify(out));
     catch "time expired":
-      WARNING("time expired, simplify interrupted.");
+      WARNING("time expired, simplify(output) interrupted.");
     end try;
 
     # Return the results
@@ -461,7 +461,7 @@ module Indigo()
     try
       out := timelimit(_self:-m_TimeLimit, simplify(out));
     catch "time expired":
-      WARNING("time expired, simplify interrupted.");
+      WARNING("time expired, simplify(output) interrupted.");
     end try;
 
     # Return the results
@@ -485,6 +485,64 @@ module Indigo()
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  export GetLinearEquations::static := proc(
+    _self::Indigo,
+    $)
+
+    description "Get the linear equations for the index-1 variables of the "
+    "current DAE system.";
+
+    local v, y, f, x, out, A, b;
+
+    if _self:-m_VerboseMode then
+      printf("Indigo:-GetLinearEquations(...): : collecting linear system equations... ");
+    end if;
+
+    # Get the veiling variables
+    v := _self:-GetVeils(_self);
+
+    # Store the linear equations and index-1 variables
+    y := map(x -> op(convert(x["vars_y"], list)), _self:-m_ReductionSteps);
+    f := map(x -> `if`(
+      nops(x["vars_y"]) > 0, op(convert(x["A"].<op(x["vars_y"])> =~ x["b"], list)), NULL
+      ), _self:-m_ReductionSteps);
+
+    # Union of the two lists
+    x   := [op(y), op(lhs~(v))];
+    out := [op(f), op(v)];
+
+    if _self:-m_VerboseMode then
+      printf("DONE\n");
+    end if;
+
+    # Try to simplify
+    try
+      out := timelimit(_self:-m_TimeLimit, simplify(out));
+    catch "time expired":
+      WARNING("time expired, simplify(output) interrupted.");
+    end try;
+
+    # Return the results
+    if _nresults = 1 or _nresults = 3 then
+      if _self:-m_VerboseMode then
+        printf("Indigo:-GetLinearEquations(...): : generating linear system matrix/vector... ");
+      end if;
+      A, b := LinearAlgebra:-GenerateMatrix(out, x);
+      if _self:-m_VerboseMode then
+        printf("DONE\n");
+      end if;
+      if _nresults = 1 then
+        return [x, A, b];
+      else
+        return x, A, b;
+      end if;
+    else
+      return x, out;
+    end if;
+  end proc: # GetLinearEquations
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   export GetInvariants::static := proc(
     _self::Indigo,
     $)::list;
@@ -500,7 +558,7 @@ module Indigo()
     try
       out := timelimit(_self:-m_TimeLimit, simplify(out));
     catch "time expired":
-      WARNING("time expired, simplify interrupted.");
+      WARNING("time expired, simplify(output) interrupted.");
     end try;
 
     # Return the results
@@ -524,7 +582,7 @@ module Indigo()
     try
       out := timelimit(_self:-m_TimeLimit, simplify(out));
     catch "time expired":
-      WARNING("time expired, simplify interrupted.");
+      WARNING("time expired, simplify(output) interrupted.");
     end try;
 
     # Return the results
@@ -612,13 +670,13 @@ module Indigo()
       "indigo class <type>, output file './<fname>.m', optional internal class "
       "data <data>, and class information string <info>.";
 
-    local vars, eqns, veil, invs, pvts, label;
+    local vars, eqns, sysy, invs, pvts, label;
 
     # Get system data
     if _self:-m_SystemLoaded then
-      vars := _self:-m_SystemVars;
+      vars := _self:-m_ReductionSteps[-1]["vars_x"];
       eqns := _self:-GetDAEquations(_self);
-      veil := _self:-GetVeils(_self);
+      sysy := _self:-GetLinearEquations(_self);
       pvts := _self:-GetPivots(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
@@ -634,20 +692,20 @@ module Indigo()
     if (type = "Implicit") then
       return IndigoCodegen:-ImplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil")  = veil, parse("invs")  = invs,  parse("pvts") = pvts,
-        parse("data")  = data, parse("label") = label, parse("info") = info
+        parse("sysy") = sysy, parse("invs")  = invs,  parse("pvts") = pvts,
+        parse("data") = data, parse("label") = label, parse("info") = info
       );
     elif (type = "Explicit") then
       return IndigoCodegen:-ExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil")  = veil, parse("invs")  = invs,  parse("pvts") = pvts,
-        parse("data")  = data, parse("label") = label, parse("info") = info
+        parse("sysy") = sysy, parse("invs")  = invs,  parse("pvts") = pvts,
+        parse("data") = data, parse("label") = label, parse("info") = info
       );
     elif (type = "SemiExplicit") then
       return IndigoCodegen:-SemiExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("veil")  = veil, parse("invs")  = invs,  parse("pvts") = pvts,
-        parse("data")  = data, parse("label") = label, parse("info") = info
+        parse("sysy") = sysy, parse("invs")  = invs,  parse("pvts") = pvts,
+        parse("data") = data, parse("label") = label, parse("info") = info
       );
     else
       error("unknown indigo class type '%1'.", type);

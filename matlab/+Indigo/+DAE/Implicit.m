@@ -2,37 +2,20 @@
 %> Class container for an implicit system of ODEs/DAEs of the form:
 %>
 %> \f[
-%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, t ) = \mathbf{0}
 %> \f]
 %>
-%> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
+%> with *optional* linear states \f$ \mathbf{y}( \mathbf{x}, t ) \f$ of the form:
 %>
 %> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{v}, t ) = \left{\begin{array}{c}
-%>   v_1( \mathbf{x}, t ) \\
-%>   v_2( \mathbf{x}, v_1, t ) \\
-%>   v_3( \mathbf{x}, v_1, v_2, t ) \\
-%>   \vdots \\
-%>   v_n( \mathbf{x}, v_1, \dots, v_{n-1}, t )
-%> \end{array}\right.
-%> \f]
-%>
-%> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
-%>
-%> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{v}, t ) = \left{\begin{array}{c}
-%>   v_1( \mathbf{x}, t ) \\
-%>   v_2( \mathbf{x}, v_1, t ) \\
-%>   v_3( \mathbf{x}, v_1, v_2, t ) \\
-%>   \vdots \\
-%>   v_n( \mathbf{x}, v_1, \dots, v_{n-1}, t )
+%> \mathbf{A}( \mathbf{x}, t ) \mathbf{y}( \mathbf{x}, t ) = \mathbf{b}( \mathbf{x}, t )
 %> \end{array}\right.
 %> \f]
 %>
 %> And *optional* invariants of the form:
 %>
 %> \f[
-%> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{h}( \mathbf{x}, \mathbf{y}, t ) = \mathbf{0}
 %> \f]
 %>
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
@@ -48,11 +31,11 @@ classdef Implicit < Indigo.DAE.System
     %>
     %> \param t_name     The name of the system.
     %> \param t_num_eqns The number of equations of the system.
-    %> \param t_num_veil The number of (user-defined) veils of the system.
+    %> \param t_num_sysy The number of linear equations of the system.
     %> \param t_num_invs The number of invariants of the system.
     %
-    function this = Implicit( t_name, t_num_eqns, t_num_veil, t_num_invs )
-      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
+    function this = Implicit( t_name, t_num_eqns, t_num_sysy, t_num_invs )
+      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_sysy, t_num_invs);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

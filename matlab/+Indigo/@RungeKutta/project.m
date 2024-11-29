@@ -106,12 +106,12 @@ function x = project( this, x_t, t, varargin )
       % \ Jh   0  / \ lambda /   \    -h     /
 
       % Evaluate the veils, invariants vector and their Jacobian
-      v    = this.m_sys.v(x, t);
-      h    = this.m_sys.h(x, v, t);
-      Jh_x = this.m_sys.Jh_x(x, v, t);
-      Jh_v = this.m_sys.Jh_v(x, v, t);
-      Jv_x = this.m_sys.Jv_x(x, v, t);
-      Jh   = Jh_x + Jh_v * Jv_x;
+      y    = this.m_sys.y(x, t);
+      h    = this.m_sys.h(x, y, t);
+      Jh_x = this.m_sys.Jh_x(x, y, t);
+      Jh_y = this.m_sys.Jh_y(x, y, t);
+      Jy_x = this.m_sys.Jy_x(x, y, t);
+      Jh   = Jh_x + Jh_y * Jy_x;
 
       % Select only the projected invariants
       h   = h(this.m_projected_invs);

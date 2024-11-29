@@ -27,12 +27,14 @@ function [x_out, t, v_out, h_out] = solve( this, t, x_0 )
   % Instantiate output
   x_out = zeros(num_eqns, length(t));
   v_out = zeros(num_veil, length(t));
+  y_out = zeros(num_veil, length(t));
   h_out = zeros(num_invs, length(t));
 
   % Store first step
   x_out(:,1) = x_0(:);
   v_out(:,1) = this.m_sys.v(x_out(:,1), t(1));
-  h_out(:,1) = this.m_sys.h(x_out(:,1), v_out(:,1), t(1));
+  y_out(:,1) = this.m_sys.A(x_out(:,1), v_out(:,1), t(1))/this.m_sys.b(x_out(:,1), v_out(:,1), t(1));
+  h_out(:,1) = this.m_sys.h(x_out(:,1), y_out(:,1), v_out(:,1), t(1));
 
   % Instantiate temporary variables
   s   = 1;         % Current step
