@@ -477,10 +477,14 @@ module Indigo()
     description "Get the latest differential-algebraic equations of the "
       "current system as F(x,x',t) = 0.";
 
-    return [
-      op(_self:-GetDifferentialEquations(_self)),
-      op(_self:-GetAlgebraicEquations(_self))
-    ];
+    if _self:-m_ReductionSteps[-1]["index-0"] or _self:-m_ReductionSteps[-1]["index-1"] then
+      return _self:-GetDifferentialEquations(_self);
+    else
+      return [
+        op(_self:-GetDifferentialEquations(_self)),
+        op(_self:-GetAlgebraicEquations(_self))
+      ];
+    end if;
   end proc: # GetAlgebraicEquations
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -492,28 +496,11 @@ module Indigo()
     description "Get the linear equations for the index-1 variables of the "
     "current DAE system.";
 
-    local v, y, f, x, out, A, b;
-
-    if _self:-m_VerboseMode then
-      printf("Indigo:-GetLinearEquations(...): : collecting linear system equations... ");
-    end if;
-
-    # Get the veiling variables
-    v := _self:-GetVeils(_self);
+    local y, out, A, b;
 
     # Store the linear equations and index-1 variables
-    y := map(x -> op(convert(x["vars_y"], list)), _self:-m_ReductionSteps);
-    f := map(x -> `if`(
-      nops(x["vars_y"]) > 0, op(convert(x["A"].<op(x["vars_y"])> =~ x["b"], list)), NULL
-      ), _self:-m_ReductionSteps);
-
-    # Union of the two lists
-    x   := [op(y), op(lhs~(v))];
-    out := [op(f), op(v)];
-
-    if _self:-m_VerboseMode then
-      printf("DONE\n");
-    end if;
+    y   := _self:-m_ReductionSteps[-1]["vars_y"];
+    out := convert(_self:-m_ReductionSteps[-1]["a"], list);
 
     # Try to simplify
     try
@@ -524,20 +511,14 @@ module Indigo()
 
     # Return the results
     if _nresults = 1 or _nresults = 3 then
-      if _self:-m_VerboseMode then
-        printf("Indigo:-GetLinearEquations(...): : generating linear system matrix/vector... ");
-      end if;
-      A, b := LinearAlgebra:-GenerateMatrix(out, x);
-      if _self:-m_VerboseMode then
-        printf("DONE\n");
-      end if;
+      A, b := LinearAlgebra:-GenerateMatrix(out, y);
       if _nresults = 1 then
-        return [x, A, b];
+        return [y, A, b];
       else
-        return x, A, b;
+        return y, A, b;
       end if;
     else
-      return x, out;
+      return y, out;
     end if;
   end proc: # GetLinearEquations
 
@@ -670,13 +651,14 @@ module Indigo()
       "indigo class <type>, output file './<fname>.m', optional internal class "
       "data <data>, and class information string <info>.";
 
-    local vars, eqns, sysy, invs, pvts, label;
+    local vars, eqns, sysy, veil, invs, pvts, label;
 
     # Get system data
     if _self:-m_SystemLoaded then
       vars := _self:-m_ReductionSteps[-1]["vars_x"];
       eqns := _self:-GetDAEquations(_self);
       sysy := _self:-GetLinearEquations(_self);
+      veil := _self:-GetVeils(_self);
       pvts := _self:-GetPivots(_self);
       invs := [
         op(_self:-GetUserInvariants(_self)), op(_self:-GetInvariants(_self))
@@ -692,20 +674,23 @@ module Indigo()
     if (type = "Implicit") then
       return IndigoCodegen:-ImplicitSystemToMatlab(
         name, vars, eqns,
-        parse("sysy") = sysy, parse("invs")  = invs,  parse("pvts") = pvts,
-        parse("data") = data, parse("label") = label, parse("info") = info
+        parse("sysy") = sysy, parse("veil") = veil, parse("invs") = invs,
+        parse("pvts") = pvts, parse("data") = data, parse("info") = info,
+        parse("label") = label
       );
     elif (type = "Explicit") then
       return IndigoCodegen:-ExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("sysy") = sysy, parse("invs")  = invs,  parse("pvts") = pvts,
-        parse("data") = data, parse("label") = label, parse("info") = info
+        parse("sysy") = sysy, parse("veil") = veil, parse("invs") = invs,
+        parse("pvts") = pvts, parse("data") = data, parse("info") = info,
+        parse("label") = label
       );
     elif (type = "SemiExplicit") then
       return IndigoCodegen:-SemiExplicitSystemToMatlab(
         name, vars, eqns,
-        parse("sysy") = sysy, parse("invs")  = invs,  parse("pvts") = pvts,
-        parse("data") = data, parse("label") = label, parse("info") = info
+        parse("sysy") = sysy, parse("veil") = veil, parse("invs") = invs,
+        parse("pvts") = pvts, parse("data") = data, parse("info") = info,
+        parse("label") = label
       );
     else
       error("unknown indigo class type '%1'.", type);

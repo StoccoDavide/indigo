@@ -23,16 +23,17 @@ function K = explicit_K( this, x_k, t_k, d_t )
   nc = length(this.m_c);
 
   % Initialize the K vector
-  K  = zeros(length(x_k), nc);
+  K  = zeros(length(x_k),nc);
 
   for i = 1:nc
     % Compute the time and state values for the i-th stage
     t_i = t_k + this.m_c(i) * d_t;
-    x_i = x_k + K(:,1:i-1) * this.m_A(i,1:i-1).';
-    y_i = this.m_sys.y(x_i, t_i);
+    x_i = x_k + K(:, 1:i-1) * this.m_A(i, 1:i-1).';
+    v_i = this.m_sys.v(x_i, t_i);
+    y_i = this.m_sys.y(x_i, v_i, t_i);
 
     % If the Runge-Kutta method and the system are both explicit then calculate
     % the K values directly
-    K(:,i) = d_t * this.m_sys.f(x_i, y_i, t_i);
+    K(:,i) = d_t * this.m_sys.f(x_i, y_i, v_i, t_i);
   end
 end

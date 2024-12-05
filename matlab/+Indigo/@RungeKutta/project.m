@@ -101,21 +101,24 @@ function x = project( this, x_t, t, varargin )
 
       % Standard projection method
       %     [A]         {x}    =        {b}
-      % / I  Jh^T \ /   dx   \   / x_t - x_k \
-      % |         | |        | = |           |
-      % \ Jh   0  / \ lambda /   \    -h     /
+      % / I  Jh_x^T \ /   dx   \   / x_t - x_k \
+      % |           | |        | = |           |
+      % \ Jh_x    0 / \ lambda /   \    -h     /
 
       % Evaluate the veils, invariants vector and their Jacobian
-      y    = this.m_sys.y(x, t);
-      h    = this.m_sys.h(x, y, t);
-      Jh_x = this.m_sys.Jh_x(x, y, t);
-      Jh_y = this.m_sys.Jh_y(x, y, t);
-      Jy_x = this.m_sys.Jy_x(x, y, t);
-      Jh   = Jh_x + Jh_y * Jy_x;
+      v    = this.m_sys.v(x, t);
+      y    = this.m_sys.y(x, v, t);
+      h    = this.m_sys.h(x, y, v, t);
+      Jv_x = this.m_sys.Jv_x(x, v, t);
+      Jh_x = this.m_sys.Jh_x(x, y, v, t);
+      Jh_y = this.m_sys.Jh_y(x, y, v, t);
+      Jh_v = this.m_sys.Jh_v(x, y, v, t);
+      Jy_x = this.m_sys.Jy_x(x, y, v, t);
+      Jh_x = Jh_x + Jh_y * Jy_x + Jh_v * Jv_x;
 
       % Select only the projected invariants
-      h   = h(this.m_projected_invs);
-      Jh  = Jh(this.m_projected_invs, projected_x);
+      h    = h(this.m_projected_invs);
+      Jh_x = Jh_x(this.m_projected_invs, projected_x);
 
       % Check if the solution is found
       if (norm(h, inf) < this.m_projection_low_tolerance)
@@ -123,8 +126,8 @@ function x = project( this, x_t, t, varargin )
       end
 
       % Compute the solution of the linear system
-      A = [eye(num_projected_x), Jh.'; ...
-           Jh, zeros(sum(this.m_projected_invs))];
+      A = [eye(num_projected_x), Jh_x.'; ...
+           Jh_x, zeros(sum(this.m_projected_invs))];
       b = [x_t(projected_x) - x(projected_x); -h];
       if (rcond(A) > this.m_projection_rcond_tolerance)
         sol = A\b;

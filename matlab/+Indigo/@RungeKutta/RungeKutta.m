@@ -88,15 +88,15 @@ classdef RungeKutta < handle
     %
     %> Tolerance for projection step
     %
-    m_projection_tolerance = 1e-12;
+    m_projection_tolerance = 1e-10;
     %
     %> Low tolerance for projection step
     %
-    m_projection_low_tolerance = 1e-10;
+    m_projection_low_tolerance = 1e-5;
     %
     %> Matrix conditioning tolerance for projection step
     %
-    m_projection_rcond_tolerance = 1e-12;
+    m_projection_rcond_tolerance = 1e-10;
     %
     %> Boolean vector to project the corresponding invariants.
     %
@@ -128,11 +128,11 @@ classdef RungeKutta < handle
     %
     %> Absolute tolerance for adaptive step.
     %
-    m_A_tol = 1e-10;
+    m_A_tol = 1e-7;
     %
     %> Relative tolerance for adaptive step.
     %
-    m_R_tol = 1e-8;
+    m_R_tol = 1e-6;
     %
     %> Safety factor for adaptive step.
     %

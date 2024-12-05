@@ -54,7 +54,7 @@ function [x_out, t_out, v_out, h_out] = adaptive_solve( this, t, x_0, varargin )
   t_out(1)   = t(1);
   x_out(:,1) = x_0(:);
   v_out(:,1) = this.m_sys.v(x_0, t(1));
-  y_out(:,1) = this.m_sys.A(x_0, v_out(:,1), t(1))\this.m_sys.b(x_0, v_out(:,1), t(1));
+  y_out(:,1) = this.m_sys.y(x_0, v_out(:,1), t(1));
   h_out(:,1) = this.m_sys.h(x_0, y_out(:,1), v_out(:,1), t(1));
 
   % Instantiate temporary variables
@@ -72,13 +72,14 @@ function [x_out, t_out, v_out, h_out] = adaptive_solve( this, t, x_0, varargin )
     end
 
     % Integrate system
-    [x_new, d_t_star, ierr] = this.advance(x_out(:,s), t_out(s), d_t);
+    [x_new, d_t_star, ~] = this.advance(x_out(:,s), t_out(s), d_t);
 
     % Store solution
     t_out(s+1)   = t_out(s) + d_t;
     x_out(:,s+1) = x_new;
-    v_out(:,s+1) = this.m_sys.v(x_new, t_out(s+1));
-    h_out(:,s+1) = this.m_sys.h(x_new, v_out(:,s+1), t_out(s+1));
+    v_out(:,s+1) = this.m_sys.v(x_new,  t_out(s+1));
+    y_out(:,s+1) = this.m_sys.y(x_new, v_out(:,s+1), t_out(s+1));
+    h_out(:,s+1) = this.m_sys.h(x_new, y_out(:,s+1), v_out(:,s+1), t_out(s+1));
 
     % Saturate the suggested timestep
     d_t = max(min(d_t_star, t_max), t_min);

@@ -25,8 +25,9 @@ function out = implicit_residual( this, x_k, K_in, t_k, d_t )
   for i = 1:nc
     t_i = t_k + this.m_c(i) * d_t;
     x_i = x_k + K * this.m_A(i,:).';
-    y_i = this.m_sys.y(x_i, t_i);
-    res(:,i) = this.m_sys.F(x_i, K(:,i)./d_t, y_i, t_i);
+    v_i = this.m_sys.v(x_i, t_i);
+    y_i = this.m_sys.y(x_i, v_i, t_i);
+    res(:,i) = this.m_sys.F(x_i, K(:,i)./d_t, y_i, v_i, t_i);
   end
-  out = reshape( res, nc*nx, 1);
+  out = reshape(res, nc*nx, 1);
 end

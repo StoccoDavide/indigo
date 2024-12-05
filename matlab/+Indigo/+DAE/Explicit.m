@@ -3,8 +3,8 @@
 %>
 %> \f[
 %> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
-%> \mathbf{M}( \mathbf{x}, \mathbf{v}, t )^{-1}
-%> \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
+%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t )^{-1}
+%> \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
 %> \f]
 %>
 %> or equivalently:
@@ -57,11 +57,12 @@ classdef Explicit < Indigo.DAE.System
     %>
     %> \param t_name     The name of the system.
     %> \param t_num_eqns The number of equations of the system.
+    %> \param t_num_sysy The number of linear index-1 variables of the system.
     %> \param t_num_veil The number of (user-defined) veils of the system.
     %> \param t_num_invs The number of invariants of the system.
     %
-    function this = Explicit( t_name, t_num_eqns, t_num_veil, t_num_invs )
-      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
+    function this = Explicit( t_name, t_num_eqns, t_num_sysy, t_num_veil, t_num_invs )
+      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_sysy, t_num_veil, t_num_invs);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -70,13 +71,14 @@ classdef Explicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The system function \f$ \mathbf{F} \f$.
     %
-    function out = F( this, x, x_dot, v, t )
-      out = x_dot - this.f(x, v, t);
+    function out = F( this, x, x_dot, y, v, t )
+      out = x_dot - this.f(x, y, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -95,13 +97,14 @@ classdef Explicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
     %
-    function out = JF_x( this, x, ~, v, t )
-      out = -(this.Jf_x(x, v, t) + this.Jf_v(x, v, t)*this.Jv_x(x, v, t));
+    function out = JF_x( this, x, ~, y, v, t )
+      out = -(this.Jf_x(x, y, v, t) + this.Jf_y(x, y, v, t)*this.Jy_x(x, y, v, t) + this.Jf_v(x, v, t)*this.Jv_x(x, v, t));
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -120,6 +123,7 @@ classdef Explicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
@@ -145,13 +149,40 @@ classdef Explicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.
     %
-    function out = JF_v( this, x, ~, v, t )
-      out = -this.Jf_v(x, v, t);
+    function out = JF_y( this, x, ~, y, v, t )
+      out = -this.Jf_y(x, v, y, t);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the veils \f$ \mathbf{v} \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{v}
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.
+    %
+    function out = JF_v( this, x, ~, y, v, t )
+      out = -this.Jf_v(x, y, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -169,12 +200,13 @@ classdef Explicit < Indigo.DAE.System
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
     %> \return The function \f$ \mathbf{f} \f$.
     %
-    f( this, x, v, t )
+    f( this, x, v, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -191,12 +223,13 @@ classdef Explicit < Indigo.DAE.System
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear states \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$.
     %
-    Jf_x( this, x, v, t )
+    Jf_x( this, x, y, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
@@ -214,12 +247,13 @@ classdef Explicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{v}} \f$.
     %
-    Jf_v( this, x, x_dot, v, t )
+    Jf_v( this, x, x_dot, y, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
