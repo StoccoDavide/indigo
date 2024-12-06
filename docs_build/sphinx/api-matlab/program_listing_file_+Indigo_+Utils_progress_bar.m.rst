@@ -136,7 +136,7 @@ Program Listing for File progress_bar.m
    %
    function out = default_option( opts, field, default )
    
-     if (isfield(opts, field))
+     if isfield(opts, field)
        out = opts.(field);
      else
        out = default;

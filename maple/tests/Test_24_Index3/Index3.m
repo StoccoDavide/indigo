@@ -48,10 +48,10 @@ classdef Index3 < Indigo.DAE.Implicit
 
       % Evaluate function
       t1 = sin(t);
-      out_1 = x__3_dot + x__2 - t1;
-      out_2 = x__2_dot + x__1 - t1;
+      out_1 = -t1 + x__3_dot + x__2;
+      out_2 = -t1 + x__2_dot + x__1;
       t3 = cos(t);
-      out_3 = 2 * t1 - x__1_dot + t3;
+      out_3 = 2 * t1 + t3 - x__1_dot;
 
       % Store outputs
       out_F = zeros(3, 1);
@@ -168,10 +168,10 @@ classdef Index3 < Indigo.DAE.Implicit
 
       % Evaluate function
       t1 = cos(t);
-      out_1 = -x__3 + t1;
+      out_1 = t1 - x__3;
       t2 = sin(t);
       out_2 = 2 * t2 - x__2;
-      out_3 = -2 * t1 - x__1 + t2;
+      out_3 = -2 * t1 + t2 - x__1;
 
       % Store outputs
       out_h = zeros(3, 1);
@@ -201,46 +201,6 @@ classdef Index3 < Indigo.DAE.Implicit
       out_Jh_x(2, 2) = out_2_2;
       out_Jh_x(1, 3) = out_1_3;
     end % Jh_x
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    function out_pivots = pivots( ~, ~, ~, ~ )
-      % Calculate the pivoting values
-
-      % Extract properties
-      % No properties
-
-      % Extract inputs
-
-      % Evaluate function
-      out_1_1 = 1;
-      out_2_1 = 1;
-      out_3_1 = -1;
-      out_1_2 = 1;
-      out_2_2 = 1;
-      out_3_2 = -1;
-      out_1_3 = 1;
-      out_2_3 = 1;
-      out_3_3 = -1;
-      out_1_4 = 1;
-      out_2_4 = 1;
-      out_3_4 = -1;
-
-      % Store outputs
-      out_pivots = zeros(3, 4);
-      out_pivots(1, 1) = out_1_1;
-      out_pivots(2, 1) = out_2_1;
-      out_pivots(3, 1) = out_3_1;
-      out_pivots(1, 2) = out_1_2;
-      out_pivots(2, 2) = out_2_2;
-      out_pivots(3, 2) = out_3_2;
-      out_pivots(1, 3) = out_1_3;
-      out_pivots(2, 3) = out_2_3;
-      out_pivots(3, 3) = out_3_3;
-      out_pivots(1, 4) = out_1_4;
-      out_pivots(2, 4) = out_2_4;
-      out_pivots(3, 4) = out_3_4;
-    end % pivots
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %

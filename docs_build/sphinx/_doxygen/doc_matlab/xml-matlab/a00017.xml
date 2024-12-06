@@ -1,126 +1,117 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00017" kind="file" language="C++">
-    <compoundname>generate_rgb.m</compoundname>
-      <sectiondef kind="func">
-      <memberdef kind="function" id="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function generate_rgb</definition>
-        <argsstring>(in str)</argsstring>
-        <name>generate_rgb</name>
-        <param>
-          <type>in</type>
-          <declname>str</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Compute Rgb triple for given CSS color name. The function returns the RGB (Red-Green-Blue) triple corresponding to the color name by the CSS3 proposed standard [1], which contains 139 different colors (an RGB triple is a 1x3 vector of numbers between 0 and 1). The input color name is case insensitive, and for gray colors both spellings (gray and grey) are allowed.</para>
-<para><bold>Usage:</bold><itemizedlist>
-<listitem><para>c = Indigo.Utils.generate_rgb(&apos;DarkRed&apos;): returns c = [0.5430 0 0].</para>
-</listitem><listitem><para>c = Indigo.Utils.generate_rgb(&apos;Green&apos;): returns c = [0 0.5 0].</para>
-</listitem><listitem><para>plot(x, y, &apos;color&apos;, generate_rgb(&apos;Orange&apos;)): plots an orange line through x and y.</para>
-</listitem><listitem><para>Indigo.Utils.show_colors(): shows all the available colors.</para>
-</listitem></itemizedlist>
-</para>
-<para><bold>Background:</bold> The color names of [1] have already been ratified in [2], and according to [3] they are accepted by almost all web browsers and are used in Microsoft&apos;s .net framework. All but four colors agree with the X11 colornames, as detailed in [4]. Of these the most important clash is green, defined as [0 0.5 0] by CSS and [0 1 0] by X11. The definition of green in Matlab matches the X11 definition and gives a very light green, called lime by CSS (many users of Matlab have discovered this when trying to color graphs with &apos;g-&apos;). Note that cyan and aqua are synonyms as well as magenta and fuchsia.</para>
-<para><bold>About:</bold> This program is public domain and may be distributed freely. Author: Kristjan Jonasson, Dept. of Computer Science, University of Iceland (<ulink url="mailto:jonasson@hi.is">jonasson@hi.is</ulink>). June 2009.</para>
-<para><bold>References:</bold> [1] &quot;CSS Color module level 3&quot;, W3C (World Wide Web Consortium) working draft 21 July 2008, <ulink url="http://www.w3.org/TR/css3-color">http://www.w3.org/TR/css3-color</ulink> [2] &quot;Scalable Vector Graphics (SVG) 1.1 specification&quot;, W3C recommendation 14 January 2003, edited in place 30 April 2009, <ulink url="http://www.w3.org/TR/SVG">http://www.w3.org/TR/SVG</ulink> [3] &quot;Web colors&quot;, <ulink url="http://en.wikipedia.org/wiki/Web_colors">http://en.wikipedia.org/wiki/Web_colors</ulink> [4] &quot;X11 color names&quot; <ulink url="http://en.wikipedia.org/wiki/X11_color_names">http://en.wikipedia.org/wiki/X11_color_names</ulink></para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>str</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Color string name.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Red-Green-Blue triple. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="+Indigo/+Utils/generate_rgb.m" line="44" column="11" declfile="+Indigo/+Utils/generate_rgb.m" declline="44" declcolumn="11"/>
-      </memberdef>
-      </sectiondef>
+    <compoundname>implicit_step.m</compoundname>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Compute<sp/>Rgb<sp/>triple<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>given<sp/>CSS<sp/>color<sp/>name.<sp/>The<sp/>function<sp/>returns<sp/>the<sp/>RGB</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%&gt;<sp/>(Red-Green-Blue)<sp/>triple<sp/>corresponding<sp/>to<sp/>the<sp/>color<sp/>name<sp/>by<sp/>the<sp/>CSS3</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">%&gt;<sp/>proposed<sp/>standard<sp/>[1],<sp/>which<sp/>contains<sp/>139<sp/>different<sp/>colors<sp/>(an<sp/>RGB<sp/>triple</highlight></codeline>
-<codeline lineno="5"><highlight class="normal">%&gt;<sp/>is<sp/>a<sp/>1x3<sp/>vector<sp/>of<sp/>numbers<sp/>between<sp/>0<sp/>and<sp/>1).<sp/>The<sp/>input<sp/>color<sp/>name<sp/>is<sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal">%&gt;<sp/>insensitive,<sp/>and<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>gray<sp/>colors<sp/>both<sp/>spellings<sp/>(gray<sp/>and<sp/>grey)<sp/>are<sp/>allowed.</highlight></codeline>
-<codeline lineno="7"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="8"><highlight class="normal">%&gt;<sp/><sp/><sp/>**Usage:**</highlight></codeline>
-<codeline lineno="9"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>c<sp/>=<sp/>Indigo.Utils.generate_rgb(</highlight><highlight class="stringliteral">&apos;DarkRed&apos;</highlight><highlight class="normal">):<sp/>returns<sp/>c<sp/>=<sp/>[0.5430<sp/>0<sp/>0].</highlight></codeline>
-<codeline lineno="10"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>c<sp/>=<sp/>Indigo.Utils.generate_rgb(</highlight><highlight class="stringliteral">&apos;Green&apos;</highlight><highlight class="normal">):<sp/>returns<sp/>c<sp/>=<sp/>[0<sp/>0.5<sp/>0].</highlight></codeline>
-<codeline lineno="11"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>plot(x,<sp/>y,<sp/></highlight><highlight class="stringliteral">&apos;color&apos;</highlight><highlight class="normal">,<sp/><ref refid="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" kindref="member">generate_rgb</ref>(</highlight><highlight class="stringliteral">&apos;Orange&apos;</highlight><highlight class="normal">)):<sp/>plots<sp/>an<sp/>orange<sp/>line<sp/>through</highlight></codeline>
-<codeline lineno="12"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>x<sp/>and<sp/>y.</highlight></codeline>
-<codeline lineno="13"><highlight class="normal">%&gt;<sp/><sp/><sp/>-<sp/>Indigo.Utils.<ref refid="a00023_1a0f96702c9a77aeb61fe8039ecafc43b1" kindref="member">show_colors</ref>():<sp/>shows<sp/>all<sp/>the<sp/>available<sp/>colors.</highlight></codeline>
-<codeline lineno="14"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal">%&gt;<sp/><sp/><sp/>**Background:**</highlight></codeline>
-<codeline lineno="16"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>The<sp/>color<sp/>names<sp/>of<sp/>[1]<sp/>have<sp/>already<sp/>been<sp/>ratified<sp/>in<sp/>[2],<sp/>and</highlight></codeline>
-<codeline lineno="17"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>according<sp/>to<sp/>[3]<sp/>they<sp/>are<sp/>accepted<sp/>by<sp/>almost<sp/>all<sp/>web<sp/>browsers<sp/>and<sp/>are</highlight></codeline>
-<codeline lineno="18"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/>used<sp/>in<sp/>Microsoft</highlight><highlight class="stringliteral">&apos;s<sp/>.net<sp/>framework.<sp/>All<sp/>but<sp/>four<sp/>colors<sp/>agree<sp/>with</highlight></codeline>
-<codeline lineno="19"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>the<sp/>X11<sp/>colornames,<sp/>as<sp/>detailed<sp/>in<sp/>[4].<sp/>Of<sp/>these<sp/>the<sp/>most<sp/>important</highlight></codeline>
-<codeline lineno="20"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>clash<sp/>is<sp/>green,<sp/>defined<sp/>as<sp/>[0<sp/>0.5<sp/>0]<sp/>by<sp/>CSS<sp/>and<sp/>[0<sp/>1<sp/>0]<sp/>by<sp/>X11.<sp/>The</highlight></codeline>
-<codeline lineno="21"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>definition<sp/>of<sp/>green<sp/>in<sp/>Matlab<sp/>matches<sp/>the<sp/>X11<sp/>definition<sp/>and<sp/>gives<sp/>a</highlight></codeline>
-<codeline lineno="22"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>very<sp/>light<sp/>green,<sp/>called<sp/>lime<sp/>by<sp/>CSS<sp/>(many<sp/>users<sp/>of<sp/>Matlab<sp/>have</highlight></codeline>
-<codeline lineno="23"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>discovered<sp/>this<sp/>when<sp/>trying<sp/>to<sp/>color<sp/>graphs<sp/>with<sp/>&apos;</highlight><highlight class="normal">g-</highlight><highlight class="stringliteral">&apos;).<sp/>Note<sp/>that</highlight></codeline>
-<codeline lineno="24"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>cyan<sp/>and<sp/>aqua<sp/>are<sp/>synonyms<sp/>as<sp/>well<sp/>as<sp/>magenta<sp/>and<sp/>fuchsia.</highlight></codeline>
+<codeline lineno="1"><highlight class="normal">%&gt;<sp/>Compute<sp/>an<sp/>integration<sp/>step<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">the<sp/>implicit<sp/>Runge-Kutta<sp/>method<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>system<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t)<sp/>=</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral">%&gt;<sp/>\mathbf{0}<sp/>\f$.</highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral">%&gt;<sp/>**Solution<sp/>Algorithm**</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">%&gt;<sp/>Consider<sp/>a<sp/>Runge-Kutta<sp/>method,<sp/>written<sp/>for<sp/>a<sp/>system<sp/>of<sp/>the<sp/>form</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>=<sp/>\mathbf{f}(\mathbf{x},<sp/>\mathbf{v},<sp/>t)<sp/>\f$:</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">%&gt;<sp/>\begin{array}{l}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">%&gt;<sp/>\mathbf{K}_i<sp/>=<sp/>\mathbf{f}<sp/>\left(</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^{s}<sp/>a_{ij}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">%&gt;<sp/><sp/><sp/>\mathbf{K}_j,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">%&gt;<sp/><sp/><sp/>\,<sp/>t_k<sp/>+<sp/>c_i<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">%&gt;<sp/><sp/><sp/>\right),<sp/>\qquad<sp/>i<sp/>=<sp/>1,<sp/>2,<sp/>\ldots,<sp/>s<sp/>\\</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">%&gt;<sp/>\mathbf{x}_{k+1}<sp/>=<sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^s<sp/>b_j</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">%&gt;<sp/>\mathbf{K}_j<sp/>\,<sp/>,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">%&gt;<sp/>\end{array}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">%&gt;<sp/>Then<sp/>the<sp/>implicit<sp/>Runge-Kutta<sp/>method<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>an<sp/>implicit<sp/>system<sp/>of<sp/>the<sp/>form</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">%&gt;<sp/>\f$\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t)<sp/>=<sp/>\mathbf{0}<sp/>\f$<sp/>can<sp/>be<sp/>written</highlight></codeline>
+<codeline lineno="24"><highlight class="stringliteral">%&gt;<sp/>as:</highlight></codeline>
 <codeline lineno="25"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="26"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>**About:**</highlight></codeline>
-<codeline lineno="27"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>This<sp/>program<sp/>is<sp/>public<sp/>domain<sp/>and<sp/>may<sp/>be<sp/>distributed<sp/>freely.</highlight></codeline>
-<codeline lineno="28"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>Author:<sp/>Kristjan<sp/>Jonasson,<sp/>Dept.<sp/>of<sp/>Computer<sp/>Science,<sp/>University<sp/>of</highlight></codeline>
-<codeline lineno="29"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>Iceland<sp/>(jonasson@hi.is).<sp/>June<sp/>2009.</highlight></codeline>
-<codeline lineno="30"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="31"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>**References:**</highlight></codeline>
-<codeline lineno="32"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[1]<sp/>&quot;CSS<sp/>Color<sp/>module<sp/>level<sp/>3&quot;,<sp/>W3C<sp/>(World<sp/>Wide<sp/>Web<sp/>Consortium)</highlight></codeline>
-<codeline lineno="33"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>working<sp/>draft<sp/>21<sp/>July<sp/>2008,<sp/>http://www.w3.org/TR/css3-color</highlight></codeline>
-<codeline lineno="34"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[2]<sp/>&quot;Scalable<sp/>Vector<sp/>Graphics<sp/>(SVG)<sp/>1.1<sp/>specification&quot;,<sp/>W3C</highlight></codeline>
-<codeline lineno="35"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>recommendation<sp/>14<sp/>January<sp/>2003,<sp/>edited<sp/>in<sp/>place<sp/>30<sp/>April<sp/>2009,</highlight></codeline>
-<codeline lineno="36"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>http://www.w3.org/TR/SVG</highlight></codeline>
-<codeline lineno="37"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[3]<sp/>&quot;Web<sp/>colors&quot;,<sp/>http://en.wikipedia.org/wiki/Web_colors</highlight></codeline>
-<codeline lineno="38"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>[4]<sp/>&quot;X11<sp/>color<sp/>names&quot;<sp/>http://en.wikipedia.org/wiki/X11_color_names</highlight></codeline>
-<codeline lineno="39"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="40"><highlight class="stringliteral">%&gt;<sp/>\param<sp/>str<sp/>Color<sp/>string<sp/>name.</highlight></codeline>
-<codeline lineno="41"><highlight class="stringliteral">%&gt;</highlight></codeline>
-<codeline lineno="42"><highlight class="stringliteral">%&gt;<sp/>\return<sp/>Red-Green-Blue<sp/>triple.</highlight></codeline>
-<codeline lineno="43"><highlight class="stringliteral">%</highlight></codeline>
-<codeline lineno="44" refid="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" refkind="member"><highlight class="stringliteral">function<sp/>out<sp/>=<sp/>generate_rgb(<sp/>str<sp/>)</highlight></codeline>
-<codeline lineno="45"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.Utils.<ref refid="a00017_1aeccba89cc850e3b22b4bcf20506e7e5a" kindref="member">generate_rgb</ref>(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
-<codeline lineno="47"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/>%<sp/>First<sp/>time<sp/>rgb<sp/>is<sp/>called</highlight></codeline>
-<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/>[num,<sp/>name]<sp/>=<sp/>Indigo.Utils.get_colors();</highlight></codeline>
-<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/>name<sp/>=<sp/>lower(name);</highlight></codeline>
-<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/>num<sp/><sp/>=<sp/>reshape(hex2dec(num),<sp/>[],<sp/>3);</highlight></codeline>
-<codeline lineno="52"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/>%<sp/>Divide<sp/>most<sp/>numbers<sp/>by<sp/>256<sp/>for<sp/>&quot;aesthetic&quot;<sp/>reasons<sp/>(green<sp/>=<sp/>[0<sp/>0.5<sp/>0])</highlight></codeline>
-<codeline lineno="54"><highlight class="stringliteral"><sp/><sp/>I<sp/>=<sp/>num<sp/>&lt;<sp/>240;</highlight></codeline>
-<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/></highlight></codeline>
-<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/>%<sp/>Interpolate<sp/>F0-FF<sp/>linearly<sp/>from<sp/>240/256<sp/>to<sp/>1.0</highlight></codeline>
-<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/>num(I)<sp/><sp/>=<sp/>num(I)/256;</highlight></codeline>
-<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/>num(~I)<sp/>=<sp/>((num(~I)<sp/>-<sp/>240)/15<sp/>+<sp/>15)/16;<sp/>%<sp/>+<sp/>240;</highlight></codeline>
-<codeline lineno="59"><highlight class="stringliteral"></highlight></codeline>
-<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/>%<sp/>Show<sp/>colors<sp/>chart</highlight></codeline>
-<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/>if<sp/>strcmpi(str,<sp/>&apos;</highlight><highlight class="normal">chart</highlight><highlight class="stringliteral">&apos;)</highlight></codeline>
-<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Indigo.Utils.show_colors()</highlight></codeline>
-<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/>else</highlight></codeline>
-<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>k<sp/>=<sp/>find(strcmpi(str,<sp/>name));<sp/>%#ok&lt;STLOW&gt;</highlight></codeline>
-<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>if<sp/>isempty(k)</highlight></codeline>
-<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>error([CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>color<sp/></highlight><highlight class="stringliteral">&apos;&apos;</highlight><highlight class="stringliteral">&apos;,<sp/>str,<sp/>&apos;</highlight><highlight class="stringliteral">&apos;&apos;</highlight><highlight class="normal">.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
-<codeline lineno="67"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>else</highlight></codeline>
-<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>num(k(1),<sp/>:);</highlight></codeline>
-<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="71"><highlight class="stringliteral">end</highlight></codeline>
+<codeline lineno="26"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="27"><highlight class="stringliteral">%&gt;<sp/>\begin{array}{l}</highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_i<sp/>\left(</highlight></codeline>
+<codeline lineno="29"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^s<sp/>a_{ij}</highlight></codeline>
+<codeline lineno="30"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>\mathbf{K}_i,<sp/>\,<sp/>t_k<sp/>+<sp/>c_i<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="31"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0},<sp/>\qquad<sp/>i<sp/>=<sp/>1,<sp/>2,<sp/>\ldots,<sp/>s<sp/>\\</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral">%&gt;<sp/>\mathbf{x}_{k+1}<sp/>=<sp/>\mathbf{x}_k<sp/>+<sp/>\displaystyle\sum_{j=1}^s<sp/>b_j<sp/>\mathbf{K}_j.</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral">%&gt;<sp/>\end{array}</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral">%&gt;<sp/>Thus,<sp/>the<sp/>final<sp/>system<sp/>to<sp/>be<sp/>solved<sp/>is<sp/>the<sp/>following:</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral">%&gt;<sp/>\left\{\begin{array}{l}</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_1<sp/>\left(</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^s<sp/>a_{1j}</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>\mathbf{K}_1,<sp/>\,<sp/>t_k<sp/>+<sp/>c_1<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0}<sp/>\\</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_2<sp/>\left(</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^s<sp/>a_{2j}</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>\mathbf{K}_2,<sp/>\,<sp/>t_k<sp/>+<sp/>c_2<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0}<sp/>\\</highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral">%&gt;<sp/>~~<sp/>\vdots<sp/>\\</highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_s<sp/>\left(</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^s<sp/>a_{sj}</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>\mathbf{K}_s,<sp/>\,<sp/>t_k<sp/>+<sp/>c_s<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral">%&gt;<sp/>\end{array}\right.</highlight></codeline>
+<codeline lineno="54"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral">%&gt;<sp/>The<sp/>\f$<sp/>\mathbf{K}<sp/>\f$<sp/>variables<sp/>are<sp/>computed<sp/>using<sp/>the<sp/>Newton&apos;</highlight><highlight class="normal">s<sp/>method.</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">%&gt;<sp/>The<sp/>suggested<sp/>time<sp/>step<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>next<sp/>advancing<sp/>step</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">%&gt;<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,<sp/>is<sp/>the<sp/>same<sp/>as<sp/>the<sp/>input<sp/>time<sp/>step</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">%&gt;<sp/>\f$<sp/>\Delta<sp/>t<sp/>\f$<sp/>since<sp/>in<sp/>the<sp/>implicit<sp/>Runge-Kutta<sp/>method<sp/>the<sp/>time<sp/>step</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">%&gt;<sp/>is<sp/>not<sp/>modified<sp/>through<sp/>any<sp/>error<sp/>control<sp/>method.</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">%&gt;<sp/>\param<sp/>x_k<sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">%&gt;<sp/>\param<sp/>t_k<sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">%&gt;<sp/>\param<sp/>d_t<sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$,<sp/>the<sp/>suggested<sp/>time<sp/>step<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,<sp/>and<sp/>the<sp/>error<sp/>control<sp/>flag.</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">%</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">function<sp/>[x_out,<sp/>d_t_star,<sp/>ierr]<sp/>=<sp/>implicit_step(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>%<sp/>Extract<sp/>lengths</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>nc<sp/>=<sp/>length(this.m_c);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>nx<sp/>=<sp/>length(x_k);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>%<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal"><sp/>suggested<sp/>time<sp/>step<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>next<sp/>advancing<sp/>step</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>d_t_star<sp/>=<sp/>d_t;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>x_out<sp/><sp/><sp/><sp/>=<sp/>x_k;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>%<sp/>Create<sp/>the<sp/>intial<sp/>guess<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>K</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>K0<sp/>=<sp/>zeros(<sp/>nc<sp/>*<sp/>nx,<sp/>1);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>%<sp/>Define<sp/>the<sp/>function<sp/>handles</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>fun<sp/>=<sp/>@(K)<sp/>this.implicit_residual(x_k,<sp/>K,<sp/>t_k,<sp/>d_t);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>jac<sp/>=<sp/>@(K)<sp/>this.implicit_jacobian(x_k,<sp/>K,<sp/>t_k,<sp/>d_t);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>%<sp/>Solve<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Newton</highlight><highlight class="stringliteral">&apos;s<sp/>method</highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/>[K,<sp/>ierr]<sp/>=<sp/>this.m_newton_solver.solve_handle(fun,<sp/>jac,<sp/>K0);</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/>%<sp/>Error<sp/>code<sp/>check</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral"><sp/><sp/>if<sp/>(ierr<sp/>~=<sp/>0)</highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/>%<sp/>Perform<sp/>the<sp/>step<sp/>and<sp/>obtain<sp/>x_k+1</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/>x_out<sp/>=<sp/>x_k<sp/>+<sp/>reshape(K,<sp/>nx,<sp/>nc)<sp/>*<sp/>this.m_b&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>%<sp/>Adapt<sp/>next<sp/>time<sp/>step</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>this.m_adaptive_step<sp/>&amp;&amp;<sp/>this.m_is_embedded</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>x_e<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>x_k<sp/>+<sp/>reshape(K,<sp/>nx,<sp/>nc)<sp/>*<sp/>this.m_b_e</highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="102"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>d_t_star<sp/>=<sp/>this.estimate_step(<sp/>x_out,<sp/>x_e,<sp/>d_t<sp/>);</highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+Utils/generate_rgb.m"/>
+    <location file="+Indigo/@RungeKutta/implicit_step.m"/>
   </compounddef>
 </doxygen>

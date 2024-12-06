@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Listing for File implicit_jacobian.m &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="program-listing-for-file-implicit-jacobian-m">
+<span id="program-listing-file-indigo-rungekutta-implicit-jacobian-m"></span><h1>Program Listing for File implicit_jacobian.m<a class="headerlink" href="#program-listing-for-file-implicit-jacobian-m" title="Permalink to this headline">¶</a>
+</h1>
+<p>↰ <a class="reference internal" href="file_%2BIndigo_%40RungeKutta_implicit_jacobian.m.html#file-indigo-rungekutta-implicit-jacobian-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">+Indigo/@RungeKutta/implicit_jacobian.m</span></code>)</p>
+<div class="highlight-MATLAB notranslate">
+<div class="highlight"><pre><span></span><span class="c">%&gt; Compute the Jacobian of the system of equations:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}_i\left(\mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s</span><span class="w"></span>
+<span class="c">%&gt;   a_{ij} \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="c">%&gt; \right) = \mathbf{0}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; to be solved in the \f$ \mathbf{K} \f$ variable:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \dfrac{\partial \mathbf{F}_i}{\partial \mathbf{K}_i} \left(</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{ij} \mathbf{K}_j,</span><span class="w"></span>
+<span class="c">%&gt;   \, \mathbf{K}_i, \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="c">%&gt; \right)</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \param i   Index of the step to be computed.</span><span class="w"></span>
+<span class="c">%&gt; \param x_i States value at \f$ i \f$-th node.</span><span class="w"></span>
+<span class="c">%&gt; \param K   Variable \f$ \mathbf{K} \f$ of the system to be solved.</span><span class="w"></span>
+<span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
+<span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \return The Jacobian of the system of equations to be solved.</span><span class="w"></span>
+<span class="c">%</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">implicit_jacobian</span><span class="p">(</span> this, x_k, K_in, t_k, d_t <span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Extract lengths</span><span class="w"></span>
+<span class="w">  </span><span class="n">nc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">nx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x_k</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">K</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">K_in</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="n">nc</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Get the number of veils and linear index-1 variables</span><span class="w"></span>
+<span class="w">  </span><span class="n">num_veil</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">get_num_veil</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">num_sysy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">get_num_sysy</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% The Jacobian is a square nc*nx (i.e., length(K)) matrix</span><span class="w"></span>
+<span class="w">  </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="n">nc</span><span class="o">*</span><span class="n">nx</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Loop through each equation of the system</span><span class="w"></span>
+<span class="w">  </span><span class="n">idx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">nx</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">nc</span><span class="w"></span>
+<span class="w">    </span><span class="n">t_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">x_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">(</span><span class="nb">i</span><span class="p">,:).</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">v_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">v</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">y_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">y</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c">% Compute the Jacobians with respect to x and x_dot</span><span class="w"></span>
+<span class="w">    </span><span class="n">x_dot_i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">K</span><span class="p">(:,</span><span class="nb">i</span><span class="p">)</span><span class="o">./</span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF_x</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">JF_x</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_i</span><span class="p">,</span><span class="w"> </span><span class="n">y_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF_x_dot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">JF_x_dot</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_i</span><span class="p">,</span><span class="w"> </span><span class="n">y_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c">% Add the contribution of linear index-1 variables to the Jacobian</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num_sysy</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">JF_x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">JF_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">JF_y</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_i</span><span class="p">,</span><span class="w"> </span><span class="n">y_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">                    </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">Jy_x</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">    </span><span class="c">% Add the contribution of veils to the Jacobian</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num_veil</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">JF_x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">JF_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">JF_v</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot_i</span><span class="p">,</span><span class="w"> </span><span class="n">y_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">                    </span><span class="n">this</span><span class="p">.</span><span class="n">m_sys</span><span class="p">.</span><span class="n">Jv_x</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">v_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">    </span><span class="c">% Derivative of F(x_i, K(:,i)/d_t, t_i)</span><span class="w"></span>
+<span class="w">    </span><span class="n">jdx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">nx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">nc</span><span class="w"></span>
+<span class="w">      </span><span class="c">% Combine the Jacobians with respect to x and x_dot to obtain the</span><span class="w"></span>
+<span class="w">      </span><span class="c">% Jacobian with respect to K</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">j</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="n">jdx</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">JF_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">JF_x_dot</span><span class="o">./</span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="n">jdx</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">JF_x</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">jdx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">jdx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="n">idx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nx</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Explicit &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ExplicitEuler" href="class_a00284.html" />
+    <link rel="prev" title="Class DormandPrince54" href="class_a00280.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="class-explicit">
+<span id="exhale-class-a00248"></span><h1>Class Explicit<a class="headerlink" href="#class-explicit" title="Permalink to this headline">¶</a>
+</h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_%2BIndigo_%2BDAE_Explicit.m.html#file-indigo-dae-explicit-m"><span class="std std-ref">File Explicit.m</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a>
+</h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">Indigo::DAE::System</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a>
+</h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv48Explicit">
+<span id="_CPPv38Explicit"></span><span id="_CPPv28Explicit"></span><span id="Explicit"></span><span class="target" id="a00248"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Explicit</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">Indigo</span></span><span class="p">.</span><span class="n"><span class="pre">DAE</span></span><span class="p">.</span><span class="n"><span class="pre">System</span></span><a class="headerlink" href="#_CPPv48Explicit" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class container for an explicit system of ODEs/DAEs of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+\mathbf{A}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )^{-1}
+\mathbf{b}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
+\]</div>
+
+<p>or equivalently:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+\mathbf{x}' - \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}
+\]</div>
+
+<p>with <em>optional</em> veils <span class="math notranslate nohighlight">\( \mathbf{v}( \mathbf{x}, t ) \)</span> of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}
+  v_1( \mathbf{x}, t ) \\
+  v_2( \mathbf{x}, v_1, t ) \\
+  v_3( \mathbf{x}, v_1, v_2, t ) \\
+  \vdots \\
+  v_n( \mathbf{x}, v_1, \dots, v_{n-1}, t )
+\end{array}\right.
+\end{split}\]</div>
+
+<p>with <em>optional</em> veils <span class="math notranslate nohighlight">\( \mathbf{v}( \mathbf{x}, t ) \)</span> of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}
+  v_1( \mathbf{x}, t ) \\
+  v_2( \mathbf{x}, v_1, t ) \\
+  v_3( \mathbf{x}, v_1, v_2, t ) \\
+  \vdots \\
+  v_n( \mathbf{x}, v_1, \dots, v_{n-1}, t )
+\end{array}\right.
+\end{split}\]</div>
+
+<p><em>optional</em> linear system for index-1 variables \mathbf{y} of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{A}( \mathbf{x}, \mathbf{v}, t ) \mathbf{y} = \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+\]</div>
+
+<p>and <em>optional</em> invariants of the form:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}
+\]</div>
+
+<p>where <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> are the unknown functions (states) of the independent variable <span class="math notranslate nohighlight">\( t \)</span>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit8ExplicitE2in2in2in2in2in">
+<span id="_CPPv3N8Explicit8ExplicitE2in2in2in2in2in"></span><span id="_CPPv2N8Explicit8ExplicitE2in2in2in2in2in"></span><span id="Explicit::Explicit__in.in.in.in.in"></span><span class="target" id="a00248_1a6615189a88238532f73bc0e121d3bab8"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Explicit</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">t_name</span></span>, </span><span class="n sig-param"><span class="pre">t_num_eqns</span></span>, </span><span class="n sig-param"><span class="pre">t_num_sysy</span></span>, </span><span class="n sig-param"><span class="pre">t_num_veil</span></span>, </span><span class="n sig-param"><span class="pre">t_num_invs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit8ExplicitE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Class constructor for a explicit system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>t_name</strong> – The name of the system. </p></li>
+<li><p><strong>t_num_eqns</strong> – The number of equations of the system. </p></li>
+<li><p><strong>t_num_sysy</strong> – The number of linear index-1 variables of the system. </p></li>
+<li><p><strong>t_num_veil</strong> – The number of (user-defined) veils of the system. </p></li>
+<li><p><strong>t_num_invs</strong> – The number of invariants of the system. </p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit1FE2in2in2in2in2in2in">
+<span id="_CPPv3N8Explicit1FE2in2in2in2in2in2in"></span><span id="_CPPv2N8Explicit1FE2in2in2in2in2in2in"></span><span id="Explicit::F__in.in.in.in.in.in"></span><span class="target" id="a00248_1ad9d7293130f476bb426885fdadc54e51"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit1FE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit4JF_xE2in2in2in2in2in2in">
+<span id="_CPPv3N8Explicit4JF_xE2in2in2in2in2in2in"></span><span id="_CPPv2N8Explicit4JF_xE2in2in2in2in2in2in"></span><span id="Explicit::JF_x__in.in.in.in.in.in"></span><span class="target" id="a00248_1a1bc0e00b030469488ea21285769c5e97"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"></span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit4JF_xE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit8JF_x_dotE2in2in2in2in2in">
+<span id="_CPPv3N8Explicit8JF_x_dotE2in2in2in2in2in"></span><span id="_CPPv2N8Explicit8JF_x_dotE2in2in2in2in2in"></span><span id="Explicit::JF_x_dot__in.in.in.in.in"></span><span class="target" id="a00248_1a0c2184eea8778da7cd8f13cad64e1d31"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_x_dot</span></span></span><span class="sig-paren">(</span><span class="n"><span class="n"><span class="n"><span class="n"><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit8JF_x_dotE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the states derivative <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}'
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{x}'} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit4JF_yE2in2in2in2in2in2in">
+<span id="_CPPv3N8Explicit4JF_yE2in2in2in2in2in2in"></span><span id="_CPPv2N8Explicit4JF_yE2in2in2in2in2in2in"></span><span id="Explicit::JF_y__in.in.in.in.in.in"></span><span class="target" id="a00248_1a65cfe15912eb23bd351dc12ea17da21f"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_y</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"></span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit4JF_yE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
+}{
+  \partial \mathbf{v}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{y}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit4JF_vE2in2in2in2in2in2in">
+<span id="_CPPv3N8Explicit4JF_vE2in2in2in2in2in2in"></span><span id="_CPPv2N8Explicit4JF_vE2in2in2in2in2in2in"></span><span id="Explicit::JF_v__in.in.in.in.in.in"></span><span class="target" id="a00248_1a6fbcfc7dfb034a9ce8fcf897238dabcb"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JF_v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"></span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit4JF_vE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{F} \)</span> with respect to the veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
+}{
+  \partial \mathbf{v}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{JF}_{\mathbf{v}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit1fE2in2in2in2in2in">
+<span id="_CPPv3N8Explicit1fE2in2in2in2in2in"></span><span id="_CPPv2N8Explicit1fE2in2in2in2in2in"></span><span id="Explicit::f__in.in.in.in.in"></span><span class="target" id="a00248_1a7cff92f199462cd057035f9040ce7557"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">f</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit1fE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the system function <span class="math notranslate nohighlight">\( \mathbf{f} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The function <span class="math notranslate nohighlight">\( \mathbf{f} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit4Jf_xE2in2in2in2in2in">
+<span id="_CPPv3N8Explicit4Jf_xE2in2in2in2in2in"></span><span id="_CPPv2N8Explicit4Jf_xE2in2in2in2in2in"></span><span id="Explicit::Jf_x__in.in.in.in.in"></span><span class="target" id="a00248_1abe4429e3bf1e7cdfdf4f9f733e938a21"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jf_x</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit4Jf_xE2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{f} \)</span> with respect to the states <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
+}{
+  \partial \mathbf{x}
+}.
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jf}_{\mathbf{x}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit4Jf_vE2in2in2in2in2in2in">
+<span id="_CPPv3N8Explicit4Jf_vE2in2in2in2in2in2in"></span><span id="_CPPv2N8Explicit4Jf_vE2in2in2in2in2in2in"></span><span id="Explicit::Jf_v__in.in.in.in.in.in"></span><span class="target" id="a00248_1a5570bfa9a0f9fd2ea7f0e089344ec1b5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Jf_v</span></span></span><span class="sig-paren">(</span><span class="n"></span><span class="n sig-param"><span class="pre">x</span></span>, </span><span class="n sig-param"><span class="pre">x_dot</span></span>, </span><span class="n sig-param"><span class="pre">y</span></span>, </span><span class="n sig-param"><span class="pre">v</span></span>, </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit4Jf_vE2in2in2in2in2in2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Evaluate the Jacobian of the system function <span class="math notranslate nohighlight">\( \mathbf{f} \)</span> with respect to the veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>:</p>
+<p></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+\dfrac{
+  \partial \mathbf{f}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
+}{
+  \partial \mathbf{v}
+}
+\]</div>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<ul class="simple">
+<li><p><strong>x</strong> – States <span class="math notranslate nohighlight">\( \mathbf{x} \)</span>. </p></li>
+<li><p><strong>x_dot</strong> – States derivatives <span class="math notranslate nohighlight">\( \mathbf{x}' \)</span>. </p></li>
+<li><p><strong>y</strong> – Linear states <span class="math notranslate nohighlight">\( \mathbf{y} \)</span>. </p></li>
+<li><p><strong>v</strong> – Veils <span class="math notranslate nohighlight">\( \mathbf{v} \)</span>. </p></li>
+<li><p><strong>t</strong> – Independent variable <span class="math notranslate nohighlight">\( t \)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>The Jacobian <span class="math notranslate nohighlight">\( \mathbf{Jf}_{\mathbf{v}} \)</span>. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit8whattypeEv">
+<span id="_CPPv3N8Explicit8whattypeEv"></span><span id="_CPPv2N8Explicit8whattypeEv"></span><span id="Explicit::whattype"></span><span class="target" id="a00248_1aad348e7d04cd08adb7848fb79d258611"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">whattype</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit8whattypeEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Get the system type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>The system type. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit11is_explicitEv">
+<span id="_CPPv3N8Explicit11is_explicitEv"></span><span id="_CPPv2N8Explicit11is_explicitEv"></span><span id="Explicit::is_explicit"></span><span class="target" id="a00248_1ae94b237e0a7f4dcf2c8ddeeb61e146dc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_explicit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit11is_explicitEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check if the system is explicit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>True if the system is explicit, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit15is_semiexplicitEv">
+<span id="_CPPv3N8Explicit15is_semiexplicitEv"></span><span id="_CPPv2N8Explicit15is_semiexplicitEv"></span><span id="Explicit::is_semiexplicit"></span><span class="target" id="a00248_1a380cf5c9f5dc0d676149e11511d28cfd"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_semiexplicit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit15is_semiexplicitEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check if the system is semiexplicit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>True if the system is semiexplicit, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Explicit11is_implicitEv">
+<span id="_CPPv3N8Explicit11is_implicitEv"></span><span id="_CPPv2N8Explicit11is_implicitEv"></span><span id="Explicit::is_implicit"></span><span class="target" id="a00248_1ac5815e0d6a38b1227f790936b1f7061a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_implicit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Explicit11is_implicitEv" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Check if the system is implicit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd">
+<p>True if the system is implicit, false otherwise. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</dd>
+</dl>
+
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

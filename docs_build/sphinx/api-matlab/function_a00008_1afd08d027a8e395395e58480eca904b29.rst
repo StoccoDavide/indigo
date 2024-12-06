@@ -1,0 +1,14 @@
+.. _exhale_function_a00008_1afd08d027a8e395395e58480eca904b29:
+
+Function generate_string
+========================
+
+- Defined in :ref:`file_+Indigo_+Utils_progress_bar.m`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: generate_string(in, in)
+   :project: doc_matlab

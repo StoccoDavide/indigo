@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function generate_rgb &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function generate_string" href="function_a00008_1afd08d027a8e395395e58480eca904b29.html" />
+    <link rel="prev" title="Function default_option" href="function_a00008_1a9dd481946d2e553022a27801ff530d81.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="function-generate-rgb">
+<span id="exhale-function-a00005-1aeccba89cc850e3b22b4bcf20506e7e5a"></span><h1>Function generate_rgb<a class="headerlink" href="#function-generate-rgb" title="Permalink to this headline">¶</a>
+</h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_%2BIndigo_%2BUtils_generate_rgb.m.html#file-indigo-utils-generate-rgb-m"><span class="std std-ref">File generate_rgb.m</span></a></p></li>
+</ul>
+<div class="section" id="function-documentation">
+<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a>
+</h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412generate_rgb2in">
+<span id="_CPPv312generate_rgb2in"></span><span id="_CPPv212generate_rgb2in"></span><span id="generate_rgb__in"></span><span class="target" id="a00005_1aeccba89cc850e3b22b4bcf20506e7e5a"></span><span class="n"><span class="pre">function</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">generate_rgb</span></span></span><span class="sig-paren">(</span></span><span class="n sig-param"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412generate_rgb2in" title="Permalink to this definition">¶</a><br>
+</dt>
+<dd>
+<p>Compute Rgb triple for given CSS color name. The function returns the RGB (Red-Green-Blue) triple corresponding to the color name by the CSS3 proposed standard [1], which contains 139 different colors (an RGB triple is a 1x3 vector of numbers between 0 and 1). The input color name is case insensitive, and for gray colors both spellings (gray and grey) are allowed.</p>
+<p><strong>Usage:</strong></p>
+<ul class="simple">
+<li><p>c = Indigo.Utils.generate_rgb(‘DarkRed’): returns c = [0.5430 0 0].</p></li>
+<li><p>c = Indigo.Utils.generate_rgb(‘Green’): returns c = [0 0.5 0].</p></li>
+<li><p>plot(x, y, ‘color’, generate_rgb(‘Orange’)): plots an orange line through x and y.</p></li>
+<li><p>Indigo.Utils.show_colors(): shows all the available colors.</p></li>
+</ul>
+
+<p><strong>Background:</strong> The color names of [1] have already been ratified in [2], and according to [3] they are accepted by almost all web browsers and are used in Microsoft’s .net framework. All but four colors agree with the X11 colornames, as detailed in [4]. Of these the most important clash is green, defined as [0 0.5 0] by CSS and [0 1 0] by X11. The definition of green in Matlab matches the X11 definition and gives a very light green, called lime by CSS (many users of Matlab have discovered this when trying to color graphs with ‘g-‘). Note that cyan and aqua are synonyms as well as magenta and fuchsia.</p>
+<p><strong>About:</strong> This program is public domain and may be distributed freely. Author: Kristjan Jonasson, Dept. of Computer Science, University of Iceland (<script type="text/javascript">document.write(
+    "<n pynff=\"ersrerapr rkgreany\" uers=\"znvygb:wbanffba%40uv\056vf\">wbanffba<fcna>\100<\057fcna>uv<fcna>\056<\057fcna>vf<\057n>".replace(/[a-zA-Z]/g,
+        function(c){
+            return String.fromCharCode(
+                (c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26
+            );
+        }
+    )
+);</script>). June 2009.</p>
+<p><strong>References:</strong> [1] “CSS Color module level 3”, W3C (World Wide Web Consortium) working draft 21 July 2008, <a class="reference external" href="http://www.w3.org/TR/css3-color">http://www.w3.org/TR/css3-color</a> [2] “Scalable Vector Graphics (SVG) 1.1 specification”, W3C recommendation 14 January 2003, edited in place 30 April 2009, <a class="reference external" href="http://www.w3.org/TR/SVG">http://www.w3.org/TR/SVG</a> [3] “Web colors”, <a class="reference external" href="http://en.wikipedia.org/wiki/Web_colors">http://en.wikipedia.org/wiki/Web_colors</a> [4] “X11 color names” <a class="reference external" href="http://en.wikipedia.org/wiki/X11_color_names">http://en.wikipedia.org/wiki/X11_color_names</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd">
+<p><strong>str</strong> – Color string name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even">
+<p>Red-Green-Blue triple. </p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

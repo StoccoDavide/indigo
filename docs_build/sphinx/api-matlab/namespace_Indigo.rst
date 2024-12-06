@@ -17,6 +17,4 @@ Namespaces
 ----------
 
 
-- :ref:`namespace_Indigo__RungeKutta`
-
-- :ref:`namespace_Indigo__Systems`
+- :ref:`namespace_Indigo__DAE`

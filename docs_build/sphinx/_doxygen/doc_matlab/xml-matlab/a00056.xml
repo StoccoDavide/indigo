@@ -1,51 +1,83 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00056" kind="file" language="C++">
-    <compoundname>RK4.m</compoundname>
+    <compoundname>estimate_step.m</compoundname>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Runge-Kutta<sp/>4<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">classdef<sp/>RK4<sp/>&lt;<sp/>Indigo.RungeKutta.Explicit</highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Runge-Kutta<sp/>4<sp/>method.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|ccccc}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>1/2<sp/>&amp;<sp/>1/2<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>1/2<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/>1/2<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/6<sp/>&amp;<sp/>1/3<sp/>&amp;<sp/>1/3<sp/>&amp;<sp/>1/6</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>RK4()</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[0,<sp/><sp/><sp/>0,<sp/><sp/><sp/>0,<sp/>0;<sp/>...</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/2,<sp/>0,<sp/><sp/><sp/>0,<sp/>0;<sp/>...</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,<sp/><sp/><sp/>1/2,<sp/>0,<sp/>0;<sp/>...</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,<sp/><sp/><sp/>0,<sp/><sp/><sp/>1,<sp/>0];</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[1/6,<sp/>1/3,<sp/>1/3,<sp/>1/6];</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[0,<sp/>1/2,<sp/>1/2,<sp/>1]&apos;;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.RungeKutta.<ref refid="a00207" kindref="compound">Explicit</ref>(&apos;RK4&apos;,<sp/>4,<sp/>tbl);</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="38"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="1"><highlight class="normal">%&gt;<sp/>Compute<sp/>adaptive<sp/>time<sp/>step<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>according<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>error<sp/>control<sp/>method.<sp/>The<sp/>error<sp/>control<sp/>method<sp/>used<sp/>is<sp/>the<sp/>local<sp/>truncation</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;<sp/>error<sp/>method,<sp/>which<sp/>is<sp/>based<sp/>on<sp/>the<sp/>following<sp/>formula:</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">%&gt;<sp/>e<sp/>=<sp/>\sqrt{\dfrac{1}{n}<sp/>\displaystyle\sum_{i=1}{n}\left(\dfrac</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">%&gt;<sp/><sp/><sp/>{\mathbf{x}<sp/>-<sp/>\hat{\mathbf{x}}}</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">%&gt;<sp/><sp/><sp/>{s<sp/>c_i}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">%&gt;<sp/>\right)^2}</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>is<sp/>the<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>computed</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">%&gt;<sp/>with<sp/>higher<sp/>order<sp/>method<sp/>of<sp/>\f$<sp/>p<sp/>\f$,<sp/>and<sp/>\f$<sp/>\hat{\mathbf{x}}<sp/>\f$<sp/>is<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">%&gt;<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>computed<sp/>with<sp/>lower<sp/>order<sp/>method<sp/>of<sp/>\f$</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">%&gt;<sp/>\hat{p}<sp/>\f$.<sp/>To<sp/>compute<sp/>the<sp/>suggested<sp/>time<sp/>step<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>next<sp/>advancing<sp/>step</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">%&gt;<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,<sp/>The<sp/>error<sp/>is<sp/>compared<sp/>to<sp/>\f$<sp/>1<sp/>\f$<sp/>in<sp/>order<sp/>to<sp/>find</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">%&gt;<sp/>an<sp/>optimal<sp/>step<sp/>size.<sp/>From<sp/>the<sp/>error<sp/>behaviour<sp/>\f$<sp/>e<sp/>\approx<sp/>Ch^{q+1}<sp/>\f$</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">%&gt;<sp/>and<sp/>from<sp/>\f$<sp/>1<sp/>\approx<sp/>Ch_{opt}^{q+1}<sp/>\f$<sp/>(where<sp/>\f$<sp/>q<sp/>=<sp/>\min(p,\hat{p})<sp/>\f$)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">%&gt;<sp/>the<sp/>optimal<sp/>step<sp/>size<sp/>is<sp/>obtained<sp/>as:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">%&gt;<sp/>h_{opt}<sp/>=<sp/>h<sp/>\left(<sp/>\dfrac{1}{e}<sp/>\right)^{\frac{1}{q+1}}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">%&gt;<sp/>We<sp/>multiply<sp/>the<sp/>previous<sp/>quation<sp/>by<sp/>a<sp/>safety<sp/>factor<sp/>\f$<sp/>f<sp/>\f$,<sp/>usually</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">%&gt;<sp/>\f$<sp/>f<sp/>=<sp/>0.8<sp/>\f$,<sp/>\f$<sp/>0.9<sp/>\f$,<sp/>\f$<sp/>(0.25)^{1/(q+1)}<sp/>\f$,<sp/>or<sp/>\f$<sp/>(0.38)^{1/(q+1)}<sp/>\f$,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">%&gt;<sp/>so<sp/>that<sp/>the<sp/>error<sp/>will<sp/>be<sp/>acceptable<sp/>the<sp/>next<sp/>time<sp/>with<sp/>high<sp/>probability.</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">%&gt;<sp/>Further,<sp/>\f$<sp/>h<sp/>\f$<sp/>is<sp/>not<sp/>allowed<sp/>to<sp/>increase<sp/>nor<sp/>to<sp/>decrease<sp/>too<sp/>fast.</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">%&gt;<sp/>So<sp/>we<sp/>put:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">%&gt;<sp/>h_{</highlight><highlight class="keyword">new</highlight><highlight class="normal">}<sp/>=<sp/>h<sp/>\min<sp/>\left(<sp/>f_{max},<sp/>\max<sp/>\left(<sp/>f_{max},<sp/>f<sp/>\left(</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">%&gt;<sp/><sp/><sp/>\dfrac{1}{e}<sp/>\right)^{\frac{1}{q+1}}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">%&gt;<sp/>\right)<sp/>\right)</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">%&gt;<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>step<sp/>size.<sp/>Then,<sp/>if<sp/>\f$<sp/>e<sp/>\leq<sp/>1<sp/>\f$,<sp/>the<sp/>computed<sp/>step<sp/>is</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">%&gt;<sp/>accepted<sp/>and<sp/>the<sp/>solution<sp/>is<sp/>advanced<sp/>to<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>a<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>step</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">%&gt;<sp/>is<sp/>tried<sp/>with<sp/>\f$<sp/>h_{</highlight><highlight class="keyword">new</highlight><highlight class="normal">}<sp/>\f$<sp/>as<sp/>step<sp/>size.<sp/>Else,<sp/>the<sp/>step<sp/>is<sp/>rejected</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">%&gt;<sp/>and<sp/>the<sp/>computations<sp/>are<sp/>repeated<sp/>with<sp/>the<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>step<sp/>size<sp/>\f$<sp/>h_{</highlight><highlight class="keyword">new</highlight><highlight class="normal">}<sp/>\f$.</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">%&gt;<sp/>Typially,<sp/>\f$<sp/>f<sp/>\f$<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[0.8,<sp/>0.9]<sp/>\f$,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">%&gt;<sp/>\f$<sp/>f_{max}<sp/>\f$<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[1.5,<sp/>5]<sp/>\f$,<sp/>and<sp/>\f$<sp/>f_{min}<sp/>\f$</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">%&gt;<sp/>is<sp/>set<sp/>in<sp/>the<sp/>interval<sp/>\f$<sp/>[0.1,<sp/>0.2]<sp/>\f$.</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">%&gt;<sp/>\param<sp/>x_h<sp/>Approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>with<sp/>higher<sp/>order<sp/>method.</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">%&gt;<sp/>\param<sp/>x_l<sp/>Approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$<sp/>with<sp/>lower<sp/>order<sp/>method.</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">%&gt;<sp/>\param<sp/>d_t<sp/>Actual<sp/>advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>suggested<sp/>time<sp/>step<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_{k+1}<sp/>\f$.</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">%</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">function<sp/>out<sp/>=<sp/>estimate_step(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>x_h,<sp/>x_l,<sp/>d_t<sp/>)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>CMD<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Indigo.RungeKutta.estimate_step(...):<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>assert(length(x_h)<sp/>==<sp/>length(x_l),<sp/>...</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>[CMD,<sp/></highlight><highlight class="stringliteral">&quot;x_h<sp/>and<sp/>x_l<sp/>must<sp/>have<sp/>the<sp/>same<sp/>length&quot;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>%<sp/>Compute<sp/>the<sp/>error<sp/>with<sp/>2-norm</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>r<sp/>=<sp/>(x_h<sp/>-<sp/>x_l)<sp/>./<sp/>(this.m_A_tol<sp/>+<sp/>this.m_R_tol*max(abs(x_h),<sp/>abs(x_l)));</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>e<sp/>=<sp/>max(abs(r));</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>%<sp/>Compute<sp/>the<sp/>suggested<sp/>time<sp/>step</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>q<sp/><sp/><sp/>=<sp/>this.m_order<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>out<sp/>=<sp/>d_t<sp/>*<sp/>min(this.m_factor_max,<sp/>max(<sp/>...</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>this.m_factor_min,<sp/>this.m_safety_factor*(1/e)^(1/q)<sp/>...</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>));</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+RungeKutta/+Methods/+Explicit/RK4.m"/>
+    <location file="+Indigo/@RungeKutta/estimate_step.m"/>
   </compounddef>
 </doxygen>

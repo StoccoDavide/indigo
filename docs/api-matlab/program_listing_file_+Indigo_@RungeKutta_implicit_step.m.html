@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Listing for File implicit_step.m &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="program-listing-for-file-implicit-step-m">
+<span id="program-listing-file-indigo-rungekutta-implicit-step-m"></span><h1>Program Listing for File implicit_step.m<a class="headerlink" href="#program-listing-for-file-implicit-step-m" title="Permalink to this headline">¶</a>
+</h1>
+<p>↰ <a class="reference internal" href="file_%2BIndigo_%40RungeKutta_implicit_step.m.html#file-indigo-rungekutta-implicit-step-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">+Indigo/@RungeKutta/implicit_step.m</span></code>)</p>
+<div class="highlight-MATLAB notranslate">
+<div class="highlight"><pre><span></span><span class="c">%&gt; Compute an integration step using the implicit Runge-Kutta method for a</span><span class="w"></span>
+<span class="c">%&gt; system of the form \f$ \mathbf{F}(\mathbf{x}, \mathbf{x}', t) =</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{0} \f$.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; **Solution Algorithm**</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; Consider a Runge-Kutta method, written for a system of the form</span><span class="w"></span>
+<span class="c">%&gt; \f$ \mathbf{x}' = \mathbf{f}(\mathbf{x}, \mathbf{v}, t) \f$:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \begin{array}{l}</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{K}_i = \mathbf{f} \left(</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^{s} a_{ij}</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{K}_j,</span><span class="w"></span>
+<span class="c">%&gt;   \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="c">%&gt;   \right), \qquad i = 1, 2, \ldots, s \\</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{x}_{k+1} = \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s b_j</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{K}_j \, ,</span><span class="w"></span>
+<span class="c">%&gt; \end{array}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; Then the implicit Runge-Kutta method for an implicit system of the form</span><span class="w"></span>
+<span class="c">%&gt; \f$\mathbf{F}(\mathbf{x}, \mathbf{x}', t) = \mathbf{0} \f$ can be written</span><span class="w"></span>
+<span class="c">%&gt; as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \begin{array}{l}</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}_i \left(</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{ij}</span><span class="w"></span>
+<span class="c">%&gt;     \mathbf{K}_j, \, \mathbf{K}_i, \, t_k + c_i \Delta t</span><span class="w"></span>
+<span class="c">%&gt; \right) = \mathbf{0}, \qquad i = 1, 2, \ldots, s \\</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{x}_{k+1} = \mathbf{x}_k + \displaystyle\sum_{j=1}^s b_j \mathbf{K}_j.</span><span class="w"></span>
+<span class="c">%&gt; \end{array}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; Thus, the final system to be solved is the following:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \left\{\begin{array}{l}</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}_1 \left(</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{1j}</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{K}_j, \, \mathbf{K}_1, \, t_k + c_1 \Delta t</span><span class="w"></span>
+<span class="c">%&gt; \right) = \mathbf{0} \\</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}_2 \left(</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{2j}</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{K}_j, \, \mathbf{K}_2, \, t_k + c_2 \Delta t</span><span class="w"></span>
+<span class="c">%&gt; \right) = \mathbf{0} \\</span><span class="w"></span>
+<span class="c">%&gt; ~~ \vdots \\</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}_s \left(</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{x}_k + \Delta t \displaystyle\sum_{j=1}^s a_{sj}</span><span class="w"></span>
+<span class="c">%&gt;   \mathbf{K}_j, \, \mathbf{K}_s, \, t_k + c_s \Delta t</span><span class="w"></span>
+<span class="c">%&gt; \right) = \mathbf{0}</span><span class="w"></span>
+<span class="c">%&gt; \end{array}\right.</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; The \f$ \mathbf{K} \f$ variables are computed using the Newton's method.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; The suggested time step for the next advancing step</span><span class="w"></span>
+<span class="c">%&gt; \f$ \Delta t_{k+1} \f$, is the same as the input time step</span><span class="w"></span>
+<span class="c">%&gt; \f$ \Delta t \f$ since in the implicit Runge-Kutta method the time step</span><span class="w"></span>
+<span class="c">%&gt; is not modified through any error control method.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \param x_k States value at \f$ k \f$-th time step \f$ \mathbf{x}(t_k) \f$.</span><span class="w"></span>
+<span class="c">%&gt; \param t_k Time step \f$ t_k \f$.</span><span class="w"></span>
+<span class="c">%&gt; \param d_t Advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \return The approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="c">%&gt;         \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$, the suggested time step for the</span><span class="w"></span>
+<span class="c">%&gt;         next advancing step \f$ \Delta t_{k+1} \f$, and the error control flag.</span><span class="w"></span>
+<span class="c">%</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span><span class="nf">[x_out, d_t_star, ierr] = implicit_step</span><span class="p">(</span> this, x_k, t_k, d_t <span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Extract lengths</span><span class="w"></span>
+<span class="w">  </span><span class="n">nc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_c</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">nx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x_k</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% default suggested time step for the next advancing step</span><span class="w"></span>
+<span class="w">  </span><span class="n">d_t_star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">x_out</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Create the intial guess for K</span><span class="w"></span>
+<span class="w">  </span><span class="n">K0</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="w"> </span><span class="n">nc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Define the function handles</span><span class="w"></span>
+<span class="w">  </span><span class="n">fun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">implicit_residual</span><span class="p">(</span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">jac</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">implicit_jacobian</span><span class="p">(</span><span class="n">x_k</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">t_k</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Solve using Newton's method</span><span class="w"></span>
+<span class="w">  </span><span class="p">[</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_newton_solver</span><span class="p">.</span><span class="n">solve_handle</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">K0</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Error code check</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Perform the step and obtain x_k+1</span><span class="w"></span>
+<span class="w">  </span><span class="n">x_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="n">nc</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Adapt next time step</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_adaptive_step</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_is_embedded</span><span class="w"></span>
+<span class="w">    </span><span class="n">x_e</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="n">x_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">nx</span><span class="p">,</span><span class="w"> </span><span class="n">nc</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_b_e</span><span class="o">'</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">d_t_star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">estimate_step</span><span class="p">(</span><span class="w"> </span><span class="n">x_out</span><span class="p">,</span><span class="w"> </span><span class="n">x_e</span><span class="p">,</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

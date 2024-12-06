@@ -1,0 +1,14 @@
+.. _exhale_function_a00011_1a0f96702c9a77aeb61fe8039ecafc43b1:
+
+Function show_colors
+====================
+
+- Defined in :ref:`file_+Indigo_+Utils_show_colors.m`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: show_colors()
+   :project: doc_matlab

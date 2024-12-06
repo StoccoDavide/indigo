@@ -34,9 +34,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_a00020_1a9dd481946d2e553022a27801ff530d81`
+- :ref:`exhale_function_a00008_1a9dd481946d2e553022a27801ff530d81`
 
-- :ref:`exhale_function_a00020_1afd08d027a8e395395e58480eca904b29`
+- :ref:`exhale_function_a00008_1afd08d027a8e395395e58480eca904b29`
 
-- :ref:`exhale_function_a00020_1ae97c4520a33fe6864edc163bc4169171`
+- :ref:`exhale_function_a00008_1ae97c4520a33fe6864edc163bc4169171`
 

@@ -34,8 +34,8 @@ IC = [ ...
 ]';
 IC_l = IC;
 
-ODE = SliderCrankFlexible_i1_p();
-ODE_l = SliderCrankFlexible_Linear_p();
+ODE = SliderCrankFlexible_i1();
+ODE_l = SliderCrankFlexible_Linear();
 
 %% Initialize the solver and set the system
 
@@ -57,12 +57,12 @@ for k = 1:length(solver_name)
   solver_l{k} = IndigoSolver(solver_name{k});
   solver_l{k}.set_system(ODE_l);
 end
-color = colormap(lines(100));
+color = colormap(lines(length(solver_name)));
 
 %% Integrate the system
 
 % Set integration interval
-d_t   = 0.00005;
+d_t   = 0.0001;
 t_ini = 0.0;
 t_end = 0.1*0.525;
 T_vec = t_ini:d_t:t_end;
@@ -79,7 +79,7 @@ V = cell(1, length(T_vec));
 % Solve the system for each solver
 for i = 1:length(solver_name)
   solver{i}.enable_projection();
-  [X{i}, T{i}, V{i}, H{i}] = solver{i}.adaptive_solve(T_vec, IC);
+  [X{i}, T{i}, V{i}, H{i}] = solver{i}.solve(T_vec, IC);
 end
 
 %% Integrate the linear system
@@ -153,40 +153,6 @@ figure();
     h2 = H{i}(2,:);
     h3 = H{i}(3,:);
     plot(t, h1, t, h2, t, h3, 'LineWidth', linewidth, 'Color', color(i,:));
-  end
-  legend(solver_name, 'Location', 'northwest');
-  hold off;
-
-%%
-
-figure();
-  hold on;
-  grid on;
-  grid minor;
-  xlabel('$t$ (s)');
-  ylabel('$\mathbf{p}$ (-)');
-  for i = 1:length(solver_name)
-    t   = T{i};
-    for j = 1:length(t)
-      p1(:,:,j) = ODE.pivots(X{i}(:,j), V{i}(:,j), t(i));
-    end
-    for i_1 = 1:size(p1, 1)
-      for i_2 = 1:size(p1, 2)
-        tmp = p1(i_1, i_2, :);
-        plot(t, reshape(tmp, [], size(tmp,1), size(tmp,2)), '--', 'LineWidth', linewidth, 'Color', color(i_1+i_2,:));
-      end
-    end
-    t_l = T_l{i};
-    for j = 1:length(t_l)
-      p2(:,:,j) = ODE_l.pivots(X_l{i}(:,j), V_l{i}(:,j), t_l(i));
-    end
-    for i_1 = 1:size(p2, 1)
-      for i_2 = 1:size(p2, 2)
-        tmp = p2(i_1, i_2, :);
-        plot(t_l, reshape(tmp, [], size(tmp,1), size(tmp,2)), 'LineWidth', linewidth, 'Color', color(i_1+i_2,:));
-      end
-    end
-    xlim([t_ini, t_end])
   end
   legend(solver_name, 'Location', 'northwest');
   hold off;

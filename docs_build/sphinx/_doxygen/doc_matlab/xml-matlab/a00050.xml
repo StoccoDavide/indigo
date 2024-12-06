@@ -1,46 +1,130 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00050" kind="file" language="C++">
-    <compoundname>Ralston2.m</compoundname>
+    <compoundname>explicit_step.m</compoundname>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Ralston</highlight><highlight class="stringliteral">&apos;s<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="stringliteral">%</highlight></codeline>
-<codeline lineno="4"><highlight class="stringliteral">classdef<sp/>Ralston2<sp/>&lt;<sp/>Indigo.RungeKutta.Explicit</highlight></codeline>
-<codeline lineno="5"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Ralston&apos;</highlight><highlight class="normal">s<sp/>method.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|cc}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>2/3<sp/>&amp;<sp/>2/3<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/4<sp/>&amp;<sp/>3/4</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>Ralston2()</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[0,<sp/>0;<sp/>2/3,<sp/>0];</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[1/4,<sp/>3/4];</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[0,<sp/>2/3]&apos;;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.RungeKutta.<ref refid="a00207" kindref="compound">Explicit</ref>(&apos;Ralston2&apos;,<sp/>2,<sp/>tbl);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="33"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="1"><highlight class="normal">%&gt;<sp/>Compute<sp/>an<sp/>integration<sp/>step<sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">the<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>Runge-Kutta<sp/>method<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>system<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t)</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral">%&gt;<sp/>=<sp/>\mathbf{0}<sp/>\f$.</highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral">%&gt;<sp/>**Solution<sp/>Algorithm**</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">%&gt;<sp/>Consider<sp/>a<sp/>Runge-Kutta<sp/>method,<sp/>written<sp/>for<sp/>a<sp/>system<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>form<sp/>\f$<sp/>\mathbf{x}&apos;</highlight><highlight class="normal"><sp/>=<sp/>\mathbf{f}(\mathbf{x},<sp/>\mathbf{v},<sp/>t)<sp/>\f$:</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">%&gt;<sp/>\begin{array}{l}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">%&gt;<sp/>\mathbf{K}_i<sp/>=<sp/>\mathbf{f}<sp/>\left(</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^{s}<sp/>a_{ij}<sp/>\mathbf{K}_j,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">%&gt;<sp/><sp/><sp/>\,<sp/>t_k<sp/>+<sp/>c_i<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">%&gt;<sp/><sp/><sp/>\right),<sp/>\qquad<sp/>i<sp/>=<sp/>1,<sp/>2,<sp/>\ldots,<sp/>s<sp/>\\</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">%&gt;<sp/>\mathbf{x}_{k+1}<sp/>=<sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^s<sp/>b_j</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">%&gt;<sp/>\mathbf{K}_j<sp/>\,<sp/>,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">%&gt;<sp/>\end{array}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">%&gt;<sp/>Beacuse<sp/>of<sp/>the<sp/>nature<sp/>of<sp/>the<sp/>matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$<sp/>(lower<sp/>triangular)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">%&gt;<sp/>the<sp/>\f$<sp/>s\f$<sp/>stages<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a<sp/></highlight><highlight class="keyword">generic</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>Runge-Kutta<sp/>method<sp/>take<sp/>the</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">%&gt;<sp/>form:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">%&gt;<sp/>\mathbf{K}_i<sp/>=<sp/>\mathbf{f}<sp/>\left(</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^{i-1}<sp/>a_{ij}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">%&gt;<sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>t_k<sp/>+<sp/>c_i<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">%&gt;<sp/><sp/><sp/>\right),<sp/>\qquad<sp/>i<sp/>=<sp/>1,<sp/>2,<sp/>\ldots,<sp/>s.</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">%&gt;<sp/>Then<sp/>the<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>Runge-Kutta<sp/>method<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>an<sp/>implicit<sp/>system<sp/>of<sp/>the<sp/>form</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">%&gt;<sp/>\f$\mathbf{F}(\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>t)<sp/>=<sp/>\mathbf{0}<sp/>\f$<sp/>can<sp/>be</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral">%&gt;<sp/>written<sp/>as:</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral">%&gt;<sp/>\begin{array}{l}</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_i<sp/>\left(</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^{i-1}<sp/>a_{ij}</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>\mathbf{K}_i,<sp/>\,<sp/>t_k<sp/>+<sp/>c_i<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0},<sp/>\qquad<sp/>i<sp/>=<sp/>1,<sp/>2,<sp/>\ldots,<sp/>s<sp/>\\</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral">%&gt;<sp/>\mathbf{x}_{k+1}<sp/>=<sp/>\mathbf{x}_k<sp/>+<sp/>\displaystyle\sum_{j=1}^s<sp/>b_j<sp/>\mathbf{K}_j.</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral">%&gt;<sp/>\end{array}</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral">%&gt;<sp/>It<sp/>is<sp/>important<sp/>to<sp/>notice<sp/>that<sp/>the<sp/>system<sp/>of<sp/>\f$<sp/>s<sp/>\f$<sp/>equations</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral">%&gt;<sp/>\f$<sp/>\mathbf{F}_i<sp/>\f$<sp/>is<sp/>a<sp/>triangular<sp/>system<sp/>(which<sp/>may<sp/>be<sp/>non-linear<sp/>in</highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral">%&gt;<sp/>the<sp/>\f$<sp/>\mathbf{K}_i<sp/>\f$<sp/>variables),<sp/>so<sp/>it<sp/>can<sp/>be<sp/>solved<sp/>using<sp/>forward</highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral">%&gt;<sp/>substitution<sp/>and<sp/>the<sp/>solution<sp/>of<sp/>the<sp/>system<sp/>is<sp/>the<sp/>vector<sp/>\f$<sp/>\mathbf{K}</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral">%&gt;<sp/>\f$.<sp/>Thus,<sp/>the<sp/>final<sp/>system<sp/>to<sp/>be<sp/>solved<sp/>is<sp/>the<sp/>following:</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral">%&gt;<sp/>\left\{\begin{array}{l}</highlight></codeline>
+<codeline lineno="54"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_1<sp/>\left(</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k,<sp/>\,<sp/>\mathbf{K}_1,<sp/>\,<sp/>t_k<sp/>+<sp/>c_1<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0}<sp/>\\</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_2<sp/>\left(</highlight></codeline>
+<codeline lineno="58"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\,<sp/>a_{21}<sp/>\mathbf{K}_1,<sp/>\,</highlight></codeline>
+<codeline lineno="59"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{K}_2,<sp/>\,<sp/>t_k<sp/>+<sp/>c_2<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0}<sp/>\\</highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral">%&gt;<sp/>~~<sp/>\vdots<sp/>\\</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral">%&gt;<sp/>\mathbf{F}_s<sp/>\left(</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{x}_k<sp/>+<sp/>\Delta<sp/>t<sp/>\displaystyle\sum_{j=1}^{s-1}<sp/>a_{sj}</highlight></codeline>
+<codeline lineno="64"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\mathbf{K}_j,<sp/>\,<sp/>\mathbf{K}_s,<sp/>\,<sp/>t_k<sp/>+<sp/>c_s<sp/>\Delta<sp/>t</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral">%&gt;<sp/>\right)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral">%&gt;<sp/>\end{array}\right.</highlight></codeline>
+<codeline lineno="67"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral">%&gt;<sp/>The<sp/>\f$<sp/>\mathbf{K}_i<sp/>\f$<sp/>variable<sp/>are<sp/>computed<sp/>using<sp/>the<sp/>Newton&apos;</highlight><highlight class="normal">s<sp/>method.</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">%&gt;<sp/>**Note**</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">%&gt;<sp/>Another<sp/>approach<sp/>is<sp/>to<sp/>directly<sp/>solve<sp/>the<sp/>whole<sp/>system<sp/>of<sp/>equations<sp/>by</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">%&gt;<sp/>Newton</highlight><highlight class="stringliteral">&apos;smethod.<sp/>In<sp/>other<sp/>words,<sp/>the<sp/>system<sp/>of<sp/>equations<sp/>is<sp/>solved</highlight></codeline>
+<codeline lineno="75"><highlight class="stringliteral">%&gt;<sp/>iteratively<sp/>by<sp/>computing<sp/>the<sp/>Jacobian<sp/>matrixes<sp/>of<sp/>the<sp/>system<sp/>and<sp/>using</highlight></codeline>
+<codeline lineno="76"><highlight class="stringliteral">%&gt;<sp/>them<sp/>to<sp/>compute<sp/>the<sp/>solution.<sp/>This<sp/>approach<sp/>is<sp/>used<sp/>in<sp/>the<sp/>implicit</highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral">%&gt;<sp/>Runge-Kutta<sp/>method.<sp/>For<sp/>this<sp/>reason,<sp/>a<sp/>Butcher<sp/>tableau<sp/>relative<sp/>to<sp/>an</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral">%&gt;<sp/>explicit<sp/>Runge-Kutta<sp/>method<sp/>can<sp/>also<sp/>be<sp/>used<sp/>in<sp/>the<sp/>`ImplicitRungeKutta`<sp/>class.</highlight></codeline>
+<codeline lineno="79"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral">%&gt;<sp/>The<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral">%&gt;<sp/>is<sp/>the<sp/>same<sp/>as<sp/>the<sp/>input<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t<sp/>\f$<sp/>since<sp/>in<sp/>the<sp/>explicit</highlight></codeline>
+<codeline lineno="82"><highlight class="stringliteral">%&gt;<sp/>Runge-Kutta<sp/>method<sp/>the<sp/>time<sp/>step<sp/>is<sp/>not<sp/>modified<sp/>through<sp/>any<sp/>error<sp/>control</highlight></codeline>
+<codeline lineno="83"><highlight class="stringliteral">%&gt;<sp/>method.</highlight></codeline>
+<codeline lineno="84"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="85"><highlight class="stringliteral">%&gt;<sp/>\param<sp/>x_k<sp/>States<sp/>value<sp/>at<sp/>\f$<sp/>k<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$<sp/>\mathbf{x}(t_k)<sp/>\f$.</highlight></codeline>
+<codeline lineno="86"><highlight class="stringliteral">%&gt;<sp/>\param<sp/>t_k<sp/>Time<sp/>step<sp/>\f$<sp/>t_k<sp/>\f$.</highlight></codeline>
+<codeline lineno="87"><highlight class="stringliteral">%&gt;<sp/>\param<sp/>d_t<sp/>Advancing<sp/>time<sp/>step<sp/>\f$<sp/>\Delta<sp/>t\f$.</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral">%&gt;<sp/>\return<sp/>The<sp/>approximation<sp/>of<sp/>the<sp/>states<sp/>at<sp/>\f$<sp/>k+1<sp/>\f$-th<sp/>time<sp/>step<sp/>\f$</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\mathbf{x_{k+1}}(t_{k}+\Delta<sp/>t)<sp/>\f$,<sp/>the<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the</highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>next<sp/>advancing<sp/>step<sp/>\f$<sp/>\Delta<sp/>t_{k+1}<sp/>\f$,<sp/>and<sp/>the<sp/>error<sp/>control<sp/>flag.</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral">function<sp/>[x_out,<sp/>d_t_star,<sp/>ierr]<sp/>=<sp/>explicit_step(<sp/>this,<sp/>x_k,<sp/>t_k,<sp/>d_t<sp/>)</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/>%<sp/>No<sp/>error<sp/>and<sp/>default<sp/>x_out<sp/>and<sp/>suggested<sp/>time<sp/>step<sp/>for<sp/>the<sp/>next<sp/>advancing<sp/>step</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/>ierr<sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/>d_t_star<sp/>=<sp/>d_t;</highlight></codeline>
+<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/>x_out<sp/><sp/><sp/><sp/>=<sp/>x_k;</highlight></codeline>
+<codeline lineno="99"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="100"><highlight class="stringliteral"><sp/><sp/>%<sp/>Solve<sp/>the<sp/>system<sp/>to<sp/>obtain<sp/>K</highlight></codeline>
+<codeline lineno="101"><highlight class="stringliteral"><sp/><sp/>K<sp/>=<sp/>this.explicit_K(<sp/>x_k,<sp/>t_k,<sp/>d_t<sp/>);</highlight></codeline>
+<codeline lineno="102"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>for<sp/>errors</highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/>if<sp/>~all(isfinite(K))</highlight></codeline>
+<codeline lineno="105"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>ierr<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="107"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="108"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="109"><highlight class="stringliteral"><sp/><sp/>%<sp/>Perform<sp/>the<sp/>step<sp/>and<sp/>obtain<sp/>x_k+1</highlight></codeline>
+<codeline lineno="110"><highlight class="stringliteral"><sp/><sp/>x_out<sp/>=<sp/>x_k<sp/>+<sp/>K<sp/>*<sp/>this.m_b&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>%<sp/>Adapt<sp/>next<sp/>time<sp/>step</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>this.m_adaptive_step<sp/>&amp;&amp;<sp/>this.m_is_embedded</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>x_e<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>x_k<sp/>+<sp/>K<sp/>*<sp/>this.m_b_e</highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="115"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>d_t_star<sp/>=<sp/>this.estimate_step(<sp/>x_out,<sp/>x_e,<sp/>d_t<sp/>);</highlight></codeline>
+<codeline lineno="116"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="117"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+RungeKutta/+Methods/+Explicit/Ralston2.m"/>
+    <location file="+Indigo/@RungeKutta/explicit_step.m"/>
   </compounddef>
 </doxygen>

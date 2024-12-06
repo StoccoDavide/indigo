@@ -1,43 +1,107 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00152" kind="file" language="C++">
-    <compoundname>LobattoIIID2.m</compoundname>
+    <compoundname>Verner65.m</compoundname>
+    <innerclass refid="a00472" prot="public">Verner65</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Lobatto<sp/>IIID<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">classdef<sp/>LobattoIIID2<sp/>&lt;<sp/>Indigo.RungeKutta.Implicit</highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Lobatto<sp/>IIID<sp/>method.</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Verner</highlight><highlight class="stringliteral">&apos;s<sp/>6(5)<sp/>method.</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="4" refid="a00472" refkind="compound"><highlight class="stringliteral">classdef<sp/>Verner65<sp/>&lt;<sp/>Indigo.RungeKutta</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Verner&apos;</highlight><highlight class="normal">s<sp/>6(5)<sp/>method.</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|cc}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/>1/2<sp/>&amp;<sp/>1/2<sp/>\\</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>1<sp/>&amp;<sp/>-1/2<sp/>&amp;<sp/>1/2<sp/>\\</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>&amp;<sp/><sp/>1/2<sp/>&amp;<sp/>1/2</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>LobattoIIID2()</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[1/2,<sp/>1/2;<sp/>-1/2,<sp/>1/2];</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[1/2,<sp/>1/2];</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[0,<sp/>1]&apos;;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.RungeKutta.<ref refid="a00211" kindref="compound">Implicit</ref>(&apos;LobattoIIID2&apos;,<sp/>2,<sp/>tbl);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="30"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>https:</highlight><highlight class="comment">//www.sfu.ca/~jverner/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|ccccccc}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>1/6<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1/6<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>4/5<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4/75<sp/>&amp;<sp/><sp/><sp/>16/75<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>2/3<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>5/6<sp/>&amp;<sp/><sp/><sp/><sp/>-8/3<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>5/2<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/>5/6<sp/>&amp;<sp/><sp/><sp/><sp/><sp/>-165/64<sp/>&amp;<sp/><sp/><sp/><sp/>55/6<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/>-425/64<sp/>&amp;<sp/><sp/><sp/><sp/><sp/>85/96<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>12/5<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/>-8<sp/>&amp;<sp/><sp/><sp/><sp/><sp/>4015/612<sp/>&amp;<sp/><sp/><sp/><sp/>-11/36<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/>88/255<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>1/15<sp/>&amp;<sp/>-8263/15000<sp/>&amp;<sp/><sp/>124/75<sp/>&amp;<sp/><sp/><sp/><sp/><sp/>-643/680<sp/>&amp;<sp/><sp/><sp/>-81/250<sp/>&amp;<sp/><sp/>2484/10625<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>3501/1720<sp/>&amp;<sp/>-300/43<sp/>&amp;<sp/>297275/52632<sp/>&amp;<sp/>-319/2322<sp/>&amp;<sp/>24068/84065<sp/>&amp;<sp/>0<sp/>&amp;<sp/>3850/26703<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>\hline</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/><sp/><sp/>3/40<sp/>&amp;<sp/>0<sp/>&amp;<sp/><sp/>875/2244<sp/>&amp;<sp/>23/72<sp/>&amp;<sp/>264/1955<sp/>&amp;<sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/>125/11592<sp/>&amp;<sp/>43/616<sp/>\\</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>13/160<sp/>&amp;<sp/>0<sp/>&amp;<sp/>2375/5984<sp/>&amp;<sp/><sp/>5/16<sp/>&amp;<sp/><sp/><sp/><sp/>12/85<sp/>&amp;<sp/>3/44<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/><ref refid="a00472" kindref="compound">Verner65</ref>()</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>zeros(9,9);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>zeros(1,9);</highlight></codeline>
+<codeline lineno="33" refid="a00472_1ab297dda57326223538386736a41ff7c9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>zeros(1,9);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>zeros(9,1);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(2,1)<sp/>=<sp/><sp/>9/50;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(3,1)<sp/>=<sp/><sp/>29/324;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(3,2)<sp/>=<sp/><sp/>25/324;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(4,1)<sp/>=<sp/><sp/>1/16;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(4,3)<sp/>=<sp/><sp/>3/16;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(5,1)<sp/>=<sp/><sp/>79129/250000;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(5,3)<sp/>=<sp/>-261237/250000;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(5,4)<sp/>=<sp/><sp/>19663/15625;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(6,1)<sp/>=<sp/><sp/>1336883/4909125;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(6,3)<sp/>=<sp/>-25476/30875;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(6,4)<sp/>=<sp/><sp/>194159/185250;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(6,5)<sp/>=<sp/><sp/>8225/78546;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(7,1)<sp/>=<sp/>-2459386/14727375;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(7,3)<sp/>=<sp/><sp/>19504/30875;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(7,4)<sp/>=<sp/><sp/>2377474/13615875;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(7,5)<sp/>=<sp/>-6157250/5773131;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(7,6)<sp/>=<sp/><sp/>902/735;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(8,1)<sp/>=<sp/><sp/>2699/7410;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(8,3)<sp/>=<sp/>-252/1235;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(8,4)<sp/>=<sp/>-1393253/3993990;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(8,5)<sp/>=<sp/><sp/>236875/72618;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(8,6)<sp/>=<sp/>-135/49;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(8,7)<sp/>=<sp/><sp/>15/22;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(9,1)<sp/>=<sp/><sp/>11/144;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(9,4)<sp/>=<sp/><sp/>256/693;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(9,6)<sp/>=<sp/><sp/>125/504;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(9,7)<sp/>=<sp/><sp/>125/528;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A(9,8)<sp/>=<sp/><sp/>5/72;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b(1)<sp/>=<sp/><sp/>11/144;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b(4)<sp/>=<sp/><sp/>256/693;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b(6)<sp/>=<sp/><sp/>125/504;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b(7)<sp/>=<sp/><sp/>125/528;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b(8)<sp/>=<sp/><sp/>5/72;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e(1)<sp/>=<sp/>28/477;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e(4)<sp/>=<sp/>212/441;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e(5)<sp/>=<sp/>-312500/366177;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e(6)<sp/>=<sp/>2125/1764;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e(8)<sp/>=<sp/>-2105/35532;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e(9)<sp/>=<sp/><sp/>2995/17766;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(2)<sp/>=<sp/><sp/>9/50;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(3)<sp/>=<sp/><sp/>1/6;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(4)<sp/>=<sp/><sp/>1/4;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(5)<sp/>=<sp/><sp/>53/100;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(6)<sp/>=<sp/><sp/>3/5;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(7)<sp/>=<sp/><sp/>4/5;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(8)<sp/>=<sp/><sp/>1;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c(9)<sp/>=<sp/><sp/>1;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.<ref refid="a00484" kindref="compound">RungeKutta</ref>(&apos;<ref refid="a00472" kindref="compound">Verner65</ref>&apos;,<sp/>6,<sp/>tbl);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+RungeKutta/+Methods/+Implicit/LobattoIIID2.m"/>
+    <location file="+Indigo/+Tableau/Verner65.m"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Listing for File estimate_step.m &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="program-listing-for-file-estimate-step-m">
+<span id="program-listing-file-indigo-rungekutta-estimate-step-m"></span><h1>Program Listing for File estimate_step.m<a class="headerlink" href="#program-listing-for-file-estimate-step-m" title="Permalink to this headline">¶</a>
+</h1>
+<p>↰ <a class="reference internal" href="file_%2BIndigo_%40RungeKutta_estimate_step.m.html#file-indigo-rungekutta-estimate-step-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">+Indigo/@RungeKutta/estimate_step.m</span></code>)</p>
+<div class="highlight-MATLAB notranslate">
+<div class="highlight"><pre><span></span><span class="c">%&gt; Compute adaptive time step for the next advancing step according to the</span><span class="w"></span>
+<span class="c">%&gt; error control method. The error control method used is the local truncation</span><span class="w"></span>
+<span class="c">%&gt; error method, which is based on the following formula:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; e = \sqrt{\dfrac{1}{n} \displaystyle\sum_{i=1}{n}\left(\dfrac</span><span class="w"></span>
+<span class="c">%&gt;   {\mathbf{x} - \hat{\mathbf{x}}}</span><span class="w"></span>
+<span class="c">%&gt;   {s c_i}</span><span class="w"></span>
+<span class="c">%&gt; \right)^2}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; where \f$ \mathbf{x} \f$ is the approximation of the states at computed</span><span class="w"></span>
+<span class="c">%&gt; with higher order method of \f$ p \f$, and \f$ \hat{\mathbf{x}} \f$ is the</span><span class="w"></span>
+<span class="c">%&gt; approximation of the states at computed with lower order method of \f$</span><span class="w"></span>
+<span class="c">%&gt; \hat{p} \f$. To compute the suggested time step for the next advancing step</span><span class="w"></span>
+<span class="c">%&gt; \f$ \Delta t_{k+1} \f$, The error is compared to \f$ 1 \f$ in order to find</span><span class="w"></span>
+<span class="c">%&gt; an optimal step size. From the error behaviour \f$ e \approx Ch^{q+1} \f$</span><span class="w"></span>
+<span class="c">%&gt; and from \f$ 1 \approx Ch_{opt}^{q+1} \f$ (where \f$ q = \min(p,\hat{p}) \f$)</span><span class="w"></span>
+<span class="c">%&gt; the optimal step size is obtained as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; h_{opt} = h \left( \dfrac{1}{e} \right)^{\frac{1}{q+1}}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; We multiply the previous quation by a safety factor \f$ f \f$, usually</span><span class="w"></span>
+<span class="c">%&gt; \f$ f = 0.8 \f$, \f$ 0.9 \f$, \f$ (0.25)^{1/(q+1)} \f$, or \f$ (0.38)^{1/(q+1)} \f$,</span><span class="w"></span>
+<span class="c">%&gt; so that the error will be acceptable the next time with high probability.</span><span class="w"></span>
+<span class="c">%&gt; Further, \f$ h \f$ is not allowed to increase nor to decrease too fast.</span><span class="w"></span>
+<span class="c">%&gt; So we put:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; h_{new} = h \min \left( f_{max}, \max \left( f_{max}, f \left(</span><span class="w"></span>
+<span class="c">%&gt;   \dfrac{1}{e} \right)^{\frac{1}{q+1}}</span><span class="w"></span>
+<span class="c">%&gt; \right) \right)</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; for the new step size. Then, if \f$ e \leq 1 \f$, the computed step is</span><span class="w"></span>
+<span class="c">%&gt; accepted and the solution is advanced to \f$ \mathbf{x} \f$ and a new step</span><span class="w"></span>
+<span class="c">%&gt; is tried with \f$ h_{new} \f$ as step size. Else, the step is rejected</span><span class="w"></span>
+<span class="c">%&gt; and the computations are repeated with the new step size \f$ h_{new} \f$.</span><span class="w"></span>
+<span class="c">%&gt; Typially, \f$ f \f$ is set in the interval \f$ [0.8, 0.9] \f$,</span><span class="w"></span>
+<span class="c">%&gt; \f$ f_{max} \f$ is set in the interval \f$ [1.5, 5] \f$, and \f$ f_{min} \f$</span><span class="w"></span>
+<span class="c">%&gt; is set in the interval \f$ [0.1, 0.2] \f$.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \param x_h Approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="c">%&gt;            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with higher order method.</span><span class="w"></span>
+<span class="c">%&gt; \param x_l Approximation of the states at \f$ k+1 \f$-th time step \f$</span><span class="w"></span>
+<span class="c">%&gt;            \mathbf{x_{k+1}}(t_{k}+\Delta t) \f$ with lower order method.</span><span class="w"></span>
+<span class="c">%&gt; \param d_t Actual advancing time step \f$ \Delta t\f$.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \return The suggested time step for the next advancing step \f$ \Delta</span><span class="w"></span>
+<span class="c">%&gt;         t_{k+1} \f$.</span><span class="w"></span>
+<span class="c">%</span><span class="w"></span>
+<span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">estimate_step</span><span class="p">(</span> this, x_h, x_l, d_t <span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Indigo.RungeKutta.estimate_step(...): "</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="nb">assert</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x_h</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x_l</span><span class="p">),</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">    </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">"x_h and x_l must have the same length"</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Compute the error with 2-norm</span><span class="w"></span>
+<span class="w">  </span><span class="n">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">x_h</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x_l</span><span class="p">)</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_A_tol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_R_tol</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_h</span><span class="p">),</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">x_l</span><span class="p">)));</span><span class="w"></span>
+<span class="w">  </span><span class="n">e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">  </span><span class="c">% Compute the suggested time step</span><span class="w"></span>
+<span class="w">  </span><span class="n">q</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_order</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">d_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_factor_max</span><span class="p">,</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">    </span><span class="n">this</span><span class="p">.</span><span class="n">m_factor_min</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_safety_factor</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">e</span><span class="p">)</span>^<span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">  </span><span class="p">));</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,47 +1,127 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00068" kind="file" language="C++">
-    <compoundname>Generic2.m</compoundname>
+    <compoundname>Implicit.m</compoundname>
+    <innerclass refid="a00252" prot="public">Implicit</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Generic<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">classdef<sp/>Generic2<sp/>&lt;<sp/>Indigo.RungeKutta.Explicit</highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>Generic<sp/>method.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|cc}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\alpha<sp/>&amp;<sp/>\alpha<sp/>&amp;<sp/><sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1-\frac{1}{2\alpha}</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/>\frac{1}{2\alpha}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>Generic2(<sp/>alpha<sp/>)</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[0,<sp/>0;<sp/>alpha,<sp/>0];</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[0,<sp/>alpha];</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[1-alpha/2,<sp/>alpha/2]</highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
-<codeline lineno="27"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.RungeKutta.Explicit(&apos;</highlight><highlight class="normal">Generic2</highlight><highlight class="stringliteral">&apos;,<sp/>2,<sp/>tbl);</highlight></codeline>
-<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="29"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="30"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="31"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="34"><highlight class="stringliteral">end</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>an<sp/>implicit<sp/>system<sp/>of<sp/>ODEs/DAEs<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">%&gt;<sp/>\mathbf{F}(<sp/>\mathbf{x},<sp/>\mathbf{x}</highlight><highlight class="stringliteral">&apos;,<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>with<sp/>*optional*<sp/>veils<sp/>\f$<sp/>\mathbf{v}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>\f$<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="10"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="11"><highlight class="stringliteral">%&gt;<sp/>\mathbf{v}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\left{\begin{array}{c}</highlight></codeline>
+<codeline lineno="12"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_1(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>\\</highlight></codeline>
+<codeline lineno="13"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_2(<sp/>\mathbf{x},<sp/>v_1,<sp/>t<sp/>)<sp/>\\</highlight></codeline>
+<codeline lineno="14"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_3(<sp/>\mathbf{x},<sp/>v_1,<sp/>v_2,<sp/>t<sp/>)<sp/>\\</highlight></codeline>
+<codeline lineno="15"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\vdots<sp/>\\</highlight></codeline>
+<codeline lineno="16"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_n(<sp/>\mathbf{x},<sp/>v_1,<sp/>\dots,<sp/>v_{n-1},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="17"><highlight class="stringliteral">%&gt;<sp/>\end{array}\right.</highlight></codeline>
+<codeline lineno="18"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="19"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="20"><highlight class="stringliteral">%&gt;<sp/>with<sp/>*optional*<sp/>veils<sp/>\f$<sp/>\mathbf{v}(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>\f$<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="21"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="22"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="23"><highlight class="stringliteral">%&gt;<sp/>\mathbf{v}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\left{\begin{array}{c}</highlight></codeline>
+<codeline lineno="24"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_1(<sp/>\mathbf{x},<sp/>t<sp/>)<sp/>\\</highlight></codeline>
+<codeline lineno="25"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_2(<sp/>\mathbf{x},<sp/>v_1,<sp/>t<sp/>)<sp/>\\</highlight></codeline>
+<codeline lineno="26"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_3(<sp/>\mathbf{x},<sp/>v_1,<sp/>v_2,<sp/>t<sp/>)<sp/>\\</highlight></codeline>
+<codeline lineno="27"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>\vdots<sp/>\\</highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral">%&gt;<sp/><sp/><sp/>v_n(<sp/>\mathbf{x},<sp/>v_1,<sp/>\dots,<sp/>v_{n-1},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="29"><highlight class="stringliteral">%&gt;<sp/>\end{array}\right.</highlight></codeline>
+<codeline lineno="30"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="31"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral">%&gt;<sp/>*optional*<sp/>linear<sp/>system<sp/>for<sp/>index-1<sp/>variables<sp/>\mathbf{y}<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral">%&gt;<sp/>\mathbf{A}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>\mathbf{y}<sp/>=<sp/>\mathbf{b}(<sp/>\mathbf{x},<sp/>\mathbf{v},<sp/>t<sp/>)</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral">%&gt;<sp/>and<sp/>*optional*<sp/>invariants<sp/>of<sp/>the<sp/>form:</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral">%&gt;<sp/>\mathbf{h}(<sp/>\mathbf{x},<sp/>\mathbf{y},<sp/>\mathbf{v},<sp/>t<sp/>)<sp/>=<sp/>\mathbf{0}</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral">%&gt;<sp/>where<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>are<sp/>the<sp/>unknown<sp/>functions<sp/>(states)<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral">%&gt;<sp/>independent<sp/>variable<sp/>\f$<sp/>t<sp/>\f$.</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="47" refid="a00252" refkind="compound"><highlight class="stringliteral">classdef<sp/>Implicit<sp/>&lt;<sp/>Indigo.DAE.System</highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Class<sp/>constructor<sp/>for<sp/>a<sp/>implicit<sp/>system.</highlight></codeline>
+<codeline lineno="54"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_name<sp/><sp/><sp/><sp/><sp/>The<sp/>name<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_eqns<sp/>The<sp/>number<sp/>of<sp/>equations<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_sysy<sp/>The<sp/>number<sp/>of<sp/>linear<sp/>index-1<sp/>variables<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_veil<sp/>The<sp/>number<sp/>of<sp/>(user-defined)<sp/>veils<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_num_invs<sp/>The<sp/>number<sp/>of<sp/>invariants<sp/>of<sp/>the<sp/>system.</highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>this<sp/>=<sp/>Implicit(<sp/>t_name,<sp/>t_num_eqns,<sp/>t_num_sysy,<sp/>t_num_veil,<sp/>t_num_invs<sp/>)</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.DAE.System(t_name,<sp/>t_num_eqns,<sp/>t_num_sysy,<sp/>t_num_veil,<sp/>t_num_invs);</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="64" refid="a00252_1afc96485e649503194e4b500577b5feb3" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="67"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral"><sp/><sp/>methods<sp/>(Static)</highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>the<sp/>system<sp/>type.</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>system<sp/>type.</highlight></codeline>
+<codeline lineno="74"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="75"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>whattype()</highlight></codeline>
+<codeline lineno="76"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>&apos;</highlight><highlight class="normal">implicit</highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="79" refid="a00252_1a6ecff513ea8bb32ffe3dd69f3a06baf7" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>explicit.</highlight></codeline>
+<codeline lineno="82"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="83"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>explicit,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="84"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_explicit()</highlight></codeline>
+<codeline lineno="86"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="90" refid="a00252_1ada55f5d28eababa6728c3629cbd46688" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>semiexplicit.</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>semiexplicit,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_semiexplicit()</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="99"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="100"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="101" refid="a00252_1af0878dddff00078abe7016c5b7383dd5" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Check<sp/>if<sp/>the<sp/>system<sp/>is<sp/>implicit.</highlight></codeline>
+<codeline lineno="102"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>True<sp/>if<sp/>the<sp/>system<sp/>is<sp/>implicit,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="105"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>is_implicit()</highlight></codeline>
+<codeline lineno="106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>true;</highlight></codeline>
+<codeline lineno="107"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="108"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="109"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="110"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="111"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="112" refid="a00252_1a8a87e9435f511374ef53c9e3fa7cb421" refkind="member"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="113"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+RungeKutta/+Methods/+Explicit/Generic2.m"/>
+    <location file="+Indigo/+DAE/Implicit.m"/>
   </compounddef>
 </doxygen>

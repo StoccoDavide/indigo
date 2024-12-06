@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Listing for File NewtonFixed.m &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="program-listing-for-file-newtonfixed-m">
+<span id="program-listing-file-indigo-newtonfixed-m"></span><h1>Program Listing for File NewtonFixed.m<a class="headerlink" href="#program-listing-for-file-newtonfixed-m" title="Permalink to this headline">¶</a>
+</h1>
+<p>↰ <a class="reference internal" href="file_%2BIndigo_NewtonFixed.m.html#file-indigo-newtonfixed-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">+Indigo/NewtonFixed.m</span></code>)</p>
+<div class="highlight-MATLAB notranslate">
+<div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
+<span class="c">%&gt; Class container for a dumped Newton's method with affine invariant step.</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; **Solution Algorithm:**</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; Given a zeros of a vectorial function problem of the form \f$ \mathbf{F}</span><span class="w"></span>
+<span class="c">%&gt; (\mathbf{x}) = \mathbf{0} \f$, where \f$ \mathbf{F}: \mathbb{R}^n \rightarrow</span><span class="w"></span>
+<span class="c">%&gt; \mathbb{R}^n \f$, then the Newton's method is defined as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{JF}(\mathbf{x}_k)\mathbf{h} = -\mathbf{F}(\mathbf{x}_k).</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; The dumped step is defined as:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{x}_{k+1} = \mathbf{x}_k + \alpha_k \mathbf{h}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; where \f$ \alpha_k \f$ is a dumping coefficient that satisfies:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \left\| \mathbf{JF}(\mathbf{x}_k)^{-1} \mathbf{F}(\mathbf{x}_{k+1}) \right\|</span><span class="w"></span>
+<span class="c">%&gt; \leq \left(1 - \dfrac{\alpha_k}{2}\right) \left\| \mathbf{JF}(\mathbf{x}_k)^{-1}</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}(\mathbf{x}_k) \right\| = \left(1 - \dfrac{\alpha_k}{2} \right)</span><span class="w"></span>
+<span class="c">%&gt; \left\| \mathbf{h}  \right\|.</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; **Note:**</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; For more details on the Newton's method with affine invariant step refer to:</span><span class="w"></span>
+<span class="c">%&gt; https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.</span><span class="w"></span>
+<span class="c">%</span><span class="w"></span>
+<span class="k">classdef</span><span class="w"> </span><span class="n">NewtonFixed</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">handle</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">properties</span><span class="w"> </span><span class="p">(</span><span class="nb">Access</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">private</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Function handle.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_function_handle</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Jacobian handle.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_jacobian_handle</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Algorithm tolerance.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_tolerance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1e-10</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Maximum allowed algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_max_iterations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Verbose mode boolean.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_verbose</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_iterations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Function evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_function_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Function residuals.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_residuals</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Convergence boolean.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_converged</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">methods</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Newton's solver class constructor.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Newton's solver object.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">NewtonFixed</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set algorithm tolerance.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_tolerance The algorithm tolerance.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_tolerance</span><span class="p">(</span> this, t_tolerance <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Indigo.NewtonFixed.set_tolerance(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="o">~</span><span class="nb">isnan</span><span class="p">(</span><span class="n">t_tolerance</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="nb">isfinite</span><span class="p">(</span><span class="n">t_tolerance</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="n">t_tolerance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid input detected.'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_tolerance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_tolerance</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get algorithm tolerance.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The algorithm tolerance.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_tolerance</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_tolerance</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set maximum allowed algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_max_iterations The maximum allowed algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_max_iterations</span><span class="p">(</span> this, t_max_iterations <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Indigo.NewtonFixed.set_max_iterations(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="nb">assert</span><span class="p">(</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="o">~</span><span class="nb">isnan</span><span class="p">(</span><span class="n">t_max_iterations</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="nb">isfinite</span><span class="p">(</span><span class="n">t_max_iterations</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="n">t_max_iterations</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="p">[</span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="s">'invalid input detected.'</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iterations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_max_iterations</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set maximum allowed algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The maximum allowed algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_max_iterations</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iterations</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Enable verbose mode.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_alpha The relaxation factor.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">enable_verbose</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_verbose</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Disable verbose mode.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_alpha The relaxation factor.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">disable_verbose</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_verbose</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The algorithm iterations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">out_iterations</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_iterations</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set function evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The function evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">out_function_evaluations</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_function_evaluations</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set Jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">out_jacobian_evaluations</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get function evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The function evaluations.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">out_residuals</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_residuals</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get convergence boolean value.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The convergence boolean value.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">out_converged</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_converged</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Solve non-linear system of equations \f$ \mathbf{F}(\mathbf{x}) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{0} \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_function_handle The function handle.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_jacobian_handle The Jacobian handle.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_ini             The initial guess vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The solution vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[out, ierr] = solve_handle</span><span class="p">(</span> this, t_function_handle, t_jacobian_handle, x_ini <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_function_handle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_function_handle</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_handle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_jacobian_handle</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">[</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">x_ini</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Reset solver internal counter and variables.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_function_handle The function handle.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_iterations</span><span class="w">           </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_function_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_residuals</span><span class="w">            </span><span class="p">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_converged</span><span class="w">            </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Perform function \f$ \mathbf{F}(\mathbf{x}) \f$ evaluation.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x The input vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The function value \f$ \mathbf{F}(\mathbf{x}) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">eval_function</span><span class="p">(</span> this, x <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_function_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_function_evaluations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_function_handle</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Perform function \f$ \mathbf{JF}(\mathbf{x}) \f$ evaluation.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x The input vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian value \f$ \mathbf{JF}(\mathbf{x}) \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">eval_jacobian</span><span class="p">(</span> this, x <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_evaluations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_jacobian_handle</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Solve non-linear system of equations \f$ \mathbf{F} (\mathbf{x}) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{0} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_ini The initial guess for the vector \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The solution \f$ \mathbf{x} \f$ and the output flag:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ 0 \f$ = success,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ 1 \f$ = failed because of bad initial point,</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;         \f$ 2 \f$ = failed because of bad dumping (step got too short).</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">[x, ierr] = solve</span><span class="p">(</span> this, x_ini <span class="p">)</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CMD</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Indigo.NewtonFixed.solve(...): '</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Setup internal variables</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">      </span><span class="c">% Algorithm iterations</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_converged</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">ierr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">x</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="n">x_ini</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">this</span><span class="p">.</span><span class="n">m_max_iterations</span><span class="w"></span>
+<span class="w">        </span><span class="n">this</span><span class="p">.</span><span class="n">m_iterations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">x</span><span class="p">));</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Evaluate F</span><span class="w"></span>
+<span class="w">        </span><span class="n">F</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">eval_function</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">F</span><span class="p">));</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Check convergence</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_tolerance</span><span class="w"></span>
+<span class="w">          </span><span class="n">ierr</span><span class="w">             </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">this</span><span class="p">.</span><span class="n">m_converged</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Evaluate JF</span><span class="w"></span>
+<span class="w">        </span><span class="n">J</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">eval_jacobian</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">J</span><span class="p">));</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Evaluate advancing direction</span><span class="w"></span>
+<span class="w">        </span><span class="c">%D = -J\F;</span><span class="w"></span>
+<span class="w">        </span><span class="c">%[D, ~] = lsqr(J, -F, 1e-8, 50);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">rcond</span><span class="p">(</span><span class="n">J</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1e-14</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="n">D</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="n">J</span><span class="o">\</span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">          </span><span class="p">[</span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="o">~</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lsqr</span><span class="p">(</span><span class="n">J</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">~</span><span class="nb">all</span><span class="p">(</span><span class="nb">isfinite</span><span class="p">(</span><span class="n">D</span><span class="p">));</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Update solution</span><span class="w"></span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="n">D</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_verbose</span><span class="w"></span>
+<span class="w">          </span><span class="nb">fprintf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">'%s iter %d: ||F||_inf = %f, tau = %1.4f.\n'</span><span class="p">,</span><span class="w"> </span><span class="n">CMD</span><span class="p">,</span><span class="w"> </span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">inf</span><span class="p">),</span><span class="w"> </span><span class="n">tau</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+
+<span class="w">        </span><span class="c">% Check convergence</span><span class="w"></span>
+<span class="w">        </span><span class="c">%if norm(D,inf) &lt; this.m_tolerance</span><span class="w"></span>
+<span class="w">        </span><span class="c">%  this.m_converged = true;</span><span class="w"></span>
+<span class="w">        </span><span class="c">%  break;</span><span class="w"></span>
+<span class="w">        </span><span class="c">%end</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,45 +1,361 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00059" kind="file" language="C++">
-    <compoundname>ExplicitEuler.m</compoundname>
+    <compoundname>NewtonFixed.m</compoundname>
+    <innerclass refid="a00488" prot="public">NewtonFixed</innerclass>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/><ref refid="a00207" kindref="compound">Explicit</ref><sp/>Euler<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">classdef<sp/>ExplicitEuler<sp/>&lt;<sp/>Indigo.RungeKutta.<ref refid="a00207_1a8689bdc390f929b3c94bc5f22ba8db1a" kindref="member">Explicit</ref></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><ref refid="a00207" kindref="compound">Explicit</ref><sp/>Euler<sp/>method.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|c}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>0<sp/>&amp;<sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>ExplicitEuler()</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.RungeKutta.<ref refid="a00207" kindref="compound">Explicit</ref>(&apos;ExplicitEuler&apos;,<sp/>1,<sp/>tbl);</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="32"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>a<sp/>dumped<sp/>Newton</highlight><highlight class="stringliteral">&apos;s<sp/>method<sp/>with<sp/>affine<sp/>invariant<sp/>step.</highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral">%&gt;<sp/>**Solution<sp/>Algorithm:**</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">%&gt;</highlight></codeline>
+<codeline lineno="7"><highlight class="stringliteral">%&gt;<sp/>Given<sp/>a<sp/>zeros<sp/>of<sp/>a<sp/>vectorial<sp/>function<sp/>problem<sp/>of<sp/>the<sp/>form<sp/>\f$<sp/>\mathbf{F}</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral">%&gt;<sp/>(\mathbf{x})<sp/>=<sp/>\mathbf{0}<sp/>\f$,<sp/>where<sp/>\f$<sp/>\mathbf{F}:<sp/>\mathbb{R}^n<sp/>\rightarrow</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral">%&gt;<sp/>\mathbb{R}^n<sp/>\f$,<sp/>then<sp/>the<sp/>Newton&apos;</highlight><highlight class="normal">s<sp/>method<sp/>is<sp/>defined<sp/>as:</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">%&gt;<sp/>\mathbf{JF}(\mathbf{x}_k)\mathbf{h}<sp/>=<sp/>-\mathbf{F}(\mathbf{x}_k).</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">%&gt;<sp/>The<sp/>dumped<sp/>step<sp/>is<sp/>defined<sp/>as:</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">%&gt;<sp/>\mathbf{x}_{k+1}<sp/>=<sp/>\mathbf{x}_k<sp/>+<sp/>\alpha_k<sp/>\mathbf{h}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">%&gt;<sp/>where<sp/>\f$<sp/>\alpha_k<sp/>\f$<sp/>is<sp/>a<sp/>dumping<sp/>coefficient<sp/>that<sp/>satisfies:</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">%&gt;<sp/>\f[</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">%&gt;<sp/>\left\|<sp/>\mathbf{JF}(\mathbf{x}_k)^{-1}<sp/>\mathbf{F}(\mathbf{x}_{k+1})<sp/>\right\|</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">%&gt;<sp/>\leq<sp/>\left(1<sp/>-<sp/>\dfrac{\alpha_k}{2}\right)<sp/>\left\|<sp/>\mathbf{JF}(\mathbf{x}_k)^{-1}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">%&gt;<sp/>\mathbf{F}(\mathbf{x}_k)<sp/>\right\|<sp/>=<sp/>\left(1<sp/>-<sp/>\dfrac{\alpha_k}{2}<sp/>\right)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">%&gt;<sp/>\left\|<sp/>\mathbf{h}<sp/><sp/>\right\|.</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">%&gt;<sp/>\f]</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">%&gt;<sp/>**Note:**</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">%&gt;<sp/>For<sp/>more<sp/>details<sp/>on<sp/>the<sp/>Newton</highlight><highlight class="stringliteral">&apos;s<sp/>method<sp/>with<sp/>affine<sp/>invariant<sp/>step<sp/>refer<sp/>to:</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral">%&gt;<sp/>https://www.zib.de/deuflhard/research/algorithm/ainewton.en.html.</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral">%</highlight></codeline>
+<codeline lineno="35" refid="a00488" refkind="compound"><highlight class="stringliteral">classdef<sp/>NewtonFixed<sp/>&lt;<sp/>handle</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/>properties<sp/>(Access<sp/>=<sp/>private)</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Function<sp/>handle.</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_function_handle;</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Jacobian<sp/>handle.</highlight></codeline>
+<codeline lineno="44" refid="a00488_1a3d9f7171780e7c5ffc554d12d53470f3" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_jacobian_handle;</highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Algorithm<sp/>tolerance.</highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="49" refid="a00488_1a49266c28e8189f54e8c5af27472e5253" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_tolerance<sp/>=<sp/>1e-10;</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Maximum<sp/>allowed<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_max_iterations<sp/>=<sp/>50;</highlight></codeline>
+<codeline lineno="54" refid="a00488_1ae3e294f6c3ca8736efd77ff3b92e9319" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Verbose<sp/>mode<sp/>boolean.</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_verbose<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="59" refid="a00488_1afad0b727535c9cb0d4af2f5cf8a0ab8b" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_iterations<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Function<sp/>evaluations.</highlight></codeline>
+<codeline lineno="64" refid="a00488_1a19002482222e036c7b383efb0bdcf778" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_function_evaluations<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="67"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Jacobian<sp/>evaluations.</highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="69" refid="a00488_1a7654f6ab535ee5b791959db2d1404913" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_jacobian_evaluations<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Function<sp/>residuals.</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_residuals<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="74" refid="a00488_1af52fc3b993caa531399adb1b23333a79" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="75"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Convergence<sp/>boolean.</highlight></codeline>
+<codeline lineno="76"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>m_converged<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="79" refid="a00488_1a56b4b940901b137af8e697a0d07fcab3" refkind="member"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
+<codeline lineno="82"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="83"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="84" refid="a00488_1a632edb2b85f19032d52e7212fcde62b1" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Newton&apos;</highlight><highlight class="normal">s<sp/>solver<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">constructor.</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>Newton</highlight><highlight class="stringliteral">&apos;s<sp/>solver<sp/>object.</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="89" refid="a00488_1af740de7c4a3cbd9d4f20c1934ce9ea26" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>this<sp/>=<sp/>NewtonFixed()</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>algorithm<sp/>tolerance.</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_tolerance<sp/>The<sp/>algorithm<sp/>tolerance.</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>set_tolerance(<sp/>this,<sp/>t_tolerance<sp/>)</highlight></codeline>
+<codeline lineno="99"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="100"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.NewtonFixed.set_tolerance(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="101"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="102" refid="a00488_1a52e0e620af45f27e9de1e17029a9ee7c" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(<sp/>...</highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~isnan(t_tolerance)<sp/>&amp;&amp;<sp/>...</highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>isfinite(t_tolerance)<sp/>&amp;&amp;<sp/>...</highlight></codeline>
+<codeline lineno="105"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_tolerance<sp/>&gt;<sp/>0.0,<sp/>...</highlight></codeline>
+<codeline lineno="106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>input<sp/>detected.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
+<codeline lineno="107"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="108"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_tolerance<sp/>=<sp/>t_tolerance;</highlight></codeline>
+<codeline lineno="109"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="110"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="111"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="112" refid="a00488_1a6a0f1c91b5b57751c1d2c69c61e33b04" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="113"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>algorithm<sp/>tolerance.</highlight></codeline>
+<codeline lineno="114"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="115"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>algorithm<sp/>tolerance.</highlight></codeline>
+<codeline lineno="116"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="117"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>get_tolerance(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="118"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_tolerance;</highlight></codeline>
+<codeline lineno="119"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="120"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="121"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="122"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="123"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>maximum<sp/>allowed<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="124"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="125"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_max_iterations<sp/>The<sp/>maximum<sp/>allowed<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="126"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="127"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>set_max_iterations(<sp/>this,<sp/>t_max_iterations<sp/>)</highlight></codeline>
+<codeline lineno="128"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="129"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.NewtonFixed.set_max_iterations(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="130"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="131"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>assert(<sp/>...</highlight></codeline>
+<codeline lineno="132" refid="a00488_1a817efdaa4cd8e95dbcc57b76dd3957d7" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~isnan(t_max_iterations)<sp/>&amp;&amp;<sp/>...</highlight></codeline>
+<codeline lineno="133"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>isfinite(t_max_iterations)<sp/>&amp;&amp;<sp/>...</highlight></codeline>
+<codeline lineno="134"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t_max_iterations<sp/>&gt;<sp/>0,<sp/>...</highlight></codeline>
+<codeline lineno="135"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">invalid<sp/>input<sp/>detected.</highlight><highlight class="stringliteral">&apos;]);</highlight></codeline>
+<codeline lineno="136"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="137"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_max_iterations<sp/>=<sp/>t_max_iterations;</highlight></codeline>
+<codeline lineno="138"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="140"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="141"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="142"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>maximum<sp/>allowed<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="143" refid="a00488_1a85c2d3c3bcb1614a4850d1fdcc1b9aeb" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="144"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>maximum<sp/>allowed<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="145"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="146"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>get_max_iterations(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="147"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_max_iterations;</highlight></codeline>
+<codeline lineno="148"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="149"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="150"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="151"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="152"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Enable<sp/>verbose<sp/>mode.</highlight></codeline>
+<codeline lineno="153"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="154"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_alpha<sp/>The<sp/>relaxation<sp/>factor.</highlight></codeline>
+<codeline lineno="155"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="156"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>enable_verbose(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="157"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_verbose<sp/>=<sp/>true;</highlight></codeline>
+<codeline lineno="158"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="159"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="160"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="161"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="162"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Disable<sp/>verbose<sp/>mode.</highlight></codeline>
+<codeline lineno="163" refid="a00488_1a9213bc2ce7e9d5f1d345e3bfc69a8cce" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="164"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_alpha<sp/>The<sp/>relaxation<sp/>factor.</highlight></codeline>
+<codeline lineno="165"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="166"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>disable_verbose(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="167"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_verbose<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="168"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="169"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="170"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="171"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="172"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="173"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="174" refid="a00488_1abfa35318862be5a3d0e20d448ff0b049" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>algorithm<sp/>iterations.</highlight></codeline>
+<codeline lineno="175"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="176"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>out_iterations(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="177"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_iterations;</highlight></codeline>
+<codeline lineno="178"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="179"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="180"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="181"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="182"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>function<sp/>evaluations.</highlight></codeline>
+<codeline lineno="183"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="184"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>function<sp/>evaluations.</highlight></codeline>
+<codeline lineno="185" refid="a00488_1a625aef0f4781ab560b3ac11345a04e07" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="186"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>out_function_evaluations(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="187"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_function_evaluations;</highlight></codeline>
+<codeline lineno="188"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="189"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="190"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="191"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="192"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Set<sp/>Jacobian<sp/>evaluations.</highlight></codeline>
+<codeline lineno="193"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="194"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>Jacobian<sp/>evaluations.</highlight></codeline>
+<codeline lineno="195"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="196" refid="a00488_1a64b959f9fbc75caf34f65a156786ea1f" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>out_jacobian_evaluations(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="197"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_jacobian_evaluations;</highlight></codeline>
+<codeline lineno="198"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="199"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="200"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="201"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="202"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>function<sp/>evaluations.</highlight></codeline>
+<codeline lineno="203"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="204"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>function<sp/>evaluations.</highlight></codeline>
+<codeline lineno="205"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="206"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>out_residuals(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="207" refid="a00488_1ac978d4785b9fefadf22299b5f7f04178" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_residuals;</highlight></codeline>
+<codeline lineno="208"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="209"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="210"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="211"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="212"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Get<sp/>convergence<sp/>boolean<sp/>value.</highlight></codeline>
+<codeline lineno="213"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="214"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>convergence<sp/>boolean<sp/>value.</highlight></codeline>
+<codeline lineno="215"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="216"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>out_converged(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="217"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_converged;</highlight></codeline>
+<codeline lineno="218" refid="a00488_1af89d65c8ade7f0160d7729051a471c5a" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="219"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="220"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="221"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="222"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>non-linear<sp/>system<sp/>of<sp/>equations<sp/>\f$<sp/>\mathbf{F}(\mathbf{x})<sp/>=</highlight></codeline>
+<codeline lineno="223"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{0}<sp/>\f$</highlight></codeline>
+<codeline lineno="224"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="225"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_function_handle<sp/>The<sp/>function<sp/>handle.</highlight></codeline>
+<codeline lineno="226"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_jacobian_handle<sp/>The<sp/>Jacobian<sp/>handle.</highlight></codeline>
+<codeline lineno="227"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_ini<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>initial<sp/>guess<sp/>vector<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="228"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="229" refid="a00488_1a0edfe6a2b31c9d7cfbeb97094b727dd0" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>solution<sp/>vector<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="230"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="231"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[out,<sp/>ierr]<sp/>=<sp/>solve_handle(<sp/>this,<sp/>t_function_handle,<sp/>t_jacobian_handle,<sp/>x_ini<sp/>)</highlight></codeline>
+<codeline lineno="232"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_function_handle<sp/>=<sp/>t_function_handle;</highlight></codeline>
+<codeline lineno="233"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_jacobian_handle<sp/>=<sp/>t_jacobian_handle;</highlight></codeline>
+<codeline lineno="234"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>[out,<sp/>ierr]<sp/>=<sp/>this.solve(x_ini);</highlight></codeline>
+<codeline lineno="235"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="236"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="237"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="238"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="239"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Reset<sp/>solver<sp/>internal<sp/>counter<sp/>and<sp/>variables.</highlight></codeline>
+<codeline lineno="240" refid="a00488_1a0713bb642ad58ce1c356355ff6fdc6ac" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="241"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>t_function_handle<sp/>The<sp/>function<sp/>handle.</highlight></codeline>
+<codeline lineno="242"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="243"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>reset(<sp/>this<sp/>)</highlight></codeline>
+<codeline lineno="244"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_iterations<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="245"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_function_evaluations<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="246"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_jacobian_evaluations<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="247"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_residuals<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="248"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_converged<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="249"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="250"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="251"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="252"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="253"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Perform<sp/>function<sp/>\f$<sp/>\mathbf{F}(\mathbf{x})<sp/>\f$<sp/>evaluation.</highlight></codeline>
+<codeline lineno="254"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="255"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/>The<sp/>input<sp/>vector<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="256" refid="a00488_1a4a06d274b9ec6c52152e8d0b8953636e" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="257"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>function<sp/>value<sp/>\f$<sp/>\mathbf{F}(\mathbf{x})<sp/>\f$.</highlight></codeline>
+<codeline lineno="258"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="259"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>eval_function(<sp/>this,<sp/>x<sp/>)</highlight></codeline>
+<codeline lineno="260"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_function_evaluations<sp/>=<sp/>this.m_function_evaluations<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="261"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_function_handle(x);</highlight></codeline>
+<codeline lineno="262"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="263"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="264"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="265"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="266"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Perform<sp/>function<sp/>\f$<sp/>\mathbf{JF}(\mathbf{x})<sp/>\f$<sp/>evaluation.</highlight></codeline>
+<codeline lineno="267"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="268"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x<sp/>The<sp/>input<sp/>vector<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="269" refid="a00488_1adb09bf3c2e06689c6da9a68094d1077e" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="270"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>Jacobian<sp/>value<sp/>\f$<sp/>\mathbf{JF}(\mathbf{x})<sp/>\f$.</highlight></codeline>
+<codeline lineno="271"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="272"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>out<sp/>=<sp/>eval_jacobian(<sp/>this,<sp/>x<sp/>)</highlight></codeline>
+<codeline lineno="273"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_jacobian_evaluations<sp/>=<sp/>this.m_jacobian_evaluations<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="274"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/>this.m_jacobian_handle(x);</highlight></codeline>
+<codeline lineno="275"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="276"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="277"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="278"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="279"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Solve<sp/>non-linear<sp/>system<sp/>of<sp/>equations<sp/>\f$<sp/>\mathbf{F}<sp/>(\mathbf{x})<sp/>=</highlight></codeline>
+<codeline lineno="280"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\mathbf{0}<sp/>\f$.</highlight></codeline>
+<codeline lineno="281"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="282"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\param<sp/>x_ini<sp/>The<sp/>initial<sp/>guess<sp/>for<sp/>the<sp/>vector<sp/>\f$<sp/>\mathbf{x}<sp/>\f$.</highlight></codeline>
+<codeline lineno="283"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
+<codeline lineno="284"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>\return<sp/>The<sp/>solution<sp/>\f$<sp/>\mathbf{x}<sp/>\f$<sp/>and<sp/>the<sp/>output<sp/>flag:</highlight></codeline>
+<codeline lineno="285"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>0<sp/>\f$<sp/>=<sp/>success,</highlight></codeline>
+<codeline lineno="286" refid="a00488_1af20c872050e1035b6e0eafb0d7196886" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>1<sp/>\f$<sp/>=<sp/>failed<sp/>because<sp/>of<sp/>bad<sp/>initial<sp/>point,</highlight></codeline>
+<codeline lineno="287"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>2<sp/>\f$<sp/>=<sp/>failed<sp/>because<sp/>of<sp/>bad<sp/>dumping<sp/>(step<sp/>got<sp/>too<sp/>short).</highlight></codeline>
+<codeline lineno="288"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="289"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>function<sp/>[x,<sp/>ierr]<sp/>=<sp/>solve(<sp/>this,<sp/>x_ini<sp/>)</highlight></codeline>
+<codeline lineno="290"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="291"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>CMD<sp/>=<sp/>&apos;</highlight><highlight class="normal">Indigo.NewtonFixed.solve(...):<sp/></highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="292"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="293"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Setup<sp/>internal<sp/>variables</highlight></codeline>
+<codeline lineno="294"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.reset();</highlight></codeline>
+<codeline lineno="295"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="296"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Algorithm<sp/>iterations</highlight></codeline>
+<codeline lineno="297"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>this.m_converged<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="298"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>ierr<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="299"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/><sp/><sp/><sp/>=<sp/>x_ini;</highlight></codeline>
+<codeline lineno="300" refid="a00488_1ada71c6681fee9bfc4272fe6b0aee2f91" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>i=1:this.m_max_iterations</highlight></codeline>
+<codeline lineno="301"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_iterations<sp/>=<sp/>i;</highlight></codeline>
+<codeline lineno="302"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="303"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>~all(isfinite(x));<sp/>break;<sp/>end</highlight></codeline>
+<codeline lineno="304"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="305"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>F</highlight></codeline>
+<codeline lineno="306"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>F<sp/>=<sp/>this.eval_function(x);</highlight></codeline>
+<codeline lineno="307"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>~all(isfinite(F));<sp/>break;<sp/>end</highlight></codeline>
+<codeline lineno="308"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="309"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>convergence</highlight></codeline>
+<codeline lineno="310"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>norm(F,<sp/>inf)<sp/>&lt;<sp/>this.m_tolerance</highlight></codeline>
+<codeline lineno="311"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ierr<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="312"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.m_converged<sp/>=<sp/>true;</highlight></codeline>
+<codeline lineno="313"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>break;</highlight></codeline>
+<codeline lineno="314"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="315"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="316"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>JF</highlight></codeline>
+<codeline lineno="317"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>J<sp/>=<sp/>this.eval_jacobian(x);</highlight></codeline>
+<codeline lineno="318" refid="a00488_1aebcfbf1ada69758c73e507164a670116" refkind="member"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>~all(isfinite(J));<sp/>break;<sp/>end</highlight></codeline>
+<codeline lineno="319"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="320"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Evaluate<sp/>advancing<sp/>direction</highlight></codeline>
+<codeline lineno="321"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%D<sp/>=<sp/>-J\F;</highlight></codeline>
+<codeline lineno="322"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%[D,<sp/>~]<sp/>=<sp/>lsqr(J,<sp/>-F,<sp/>1e-8,<sp/>50);</highlight></codeline>
+<codeline lineno="323"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(rcond(J)<sp/>&gt;<sp/>1e-14)</highlight></codeline>
+<codeline lineno="324"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>D<sp/>=<sp/>-J\F;</highlight></codeline>
+<codeline lineno="325"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>else</highlight></codeline>
+<codeline lineno="326"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[D,<sp/>~]<sp/>=<sp/>lsqr(J,<sp/>-F,<sp/>1e-6,<sp/>50);</highlight></codeline>
+<codeline lineno="327"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="328"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>~all(isfinite(D));<sp/>break;<sp/>end</highlight></codeline>
+<codeline lineno="329"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="330"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Update<sp/>solution</highlight></codeline>
+<codeline lineno="331"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/>=<sp/>x+D;</highlight></codeline>
+<codeline lineno="332"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>this.m_verbose</highlight></codeline>
+<codeline lineno="333"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(1,<sp/>&apos;</highlight><highlight class="normal">%s<sp/>iter<sp/>%d:<sp/>||F||_inf<sp/>=<sp/>%f,<sp/>tau<sp/>=<sp/>%1.4f.\n</highlight><highlight class="stringliteral">&apos;,<sp/>CMD,<sp/>i,<sp/>norm(F,<sp/>inf),<sp/>tau);</highlight></codeline>
+<codeline lineno="334"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="335"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="336"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Check<sp/>convergence</highlight></codeline>
+<codeline lineno="337"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%if<sp/>norm(D,inf)<sp/>&lt;<sp/>this.m_tolerance</highlight></codeline>
+<codeline lineno="338"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/><sp/>this.m_converged<sp/>=<sp/>true;</highlight></codeline>
+<codeline lineno="339"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/><sp/>break;</highlight></codeline>
+<codeline lineno="340"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%end</highlight></codeline>
+<codeline lineno="341"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="342"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="343"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="344"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
+<codeline lineno="345"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
+<codeline lineno="346"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="347"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+RungeKutta/+Methods/+Explicit/ExplicitEuler.m"/>
+    <location file="+Indigo/NewtonFixed.m"/>
   </compounddef>
 </doxygen>

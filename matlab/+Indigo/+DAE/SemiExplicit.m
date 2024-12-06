@@ -228,9 +228,9 @@ classdef SemiExplicit < Indigo.DAE.System
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$..
     %
     function out = Jf_x( this, x, x_dot, y, v, t )
-      TMs_x = this.TMs_x(x, v, t);
-      TMs_y = this.TMs_y(x, v, t);
-      TMs_v = this.TMs_v(x, v, t);
+      TMs_x = this.TMs_x(x, v, y, t);
+      TMs_y = this.TMs_y(x, v, y, t);
+      TMs_v = this.TMs_v(x, v, y, t);
       Jfs_x = this.Jfs_x(x, y, v, t);
       Jfs_y = this.Jfs_y(x, y, v, t);
       Jfs_v = this.Jfs_v(x, y, v, t);

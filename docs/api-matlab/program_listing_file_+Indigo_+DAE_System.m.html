@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Listing for File System.m &#8212; indigo v0.3-35-g0e162b1
+</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/collapsible-lists/css/tree_view.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+    <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="program-listing-for-file-system-m">
+<span id="program-listing-file-indigo-dae-system-m"></span><h1>Program Listing for File System.m<a class="headerlink" href="#program-listing-for-file-system-m" title="Permalink to this headline">¶</a>
+</h1>
+<p>↰ <a class="reference internal" href="file_%2BIndigo_%2BDAE_System.m.html#file-indigo-dae-system-m"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">+Indigo/+DAE/System.m</span></code>)</p>
+<div class="highlight-MATLAB notranslate">
+<div class="highlight"><pre><span></span><span class="c">%</span><span class="w"></span>
+<span class="c">%&gt; Class container for the system of Ordinary Differential Equations (ODEs)</span><span class="w"></span>
+<span class="c">%&gt; or Differential Algebraic Equations (DAEs). This class is the base class</span><span class="w"></span>
+<span class="c">%&gt; for more specific systems, such as the explicit, semi-explicit and implicit</span><span class="w"></span>
+<span class="c">%&gt; systems. The system *must* define the abstract methods. The system is defined</span><span class="w"></span>
+<span class="c">%&gt; by the following equations:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}</span><span class="w"></span>
+<span class="c">%&gt;   v_1( \mathbf{x}, t ) \\</span><span class="w"></span>
+<span class="c">%&gt;   v_2( \mathbf{x}, v_1, t ) \\</span><span class="w"></span>
+<span class="c">%&gt;   v_3( \mathbf{x}, v_1, v_2, t ) \\</span><span class="w"></span>
+<span class="c">%&gt;   \vdots \\</span><span class="w"></span>
+<span class="c">%&gt;   v_n( \mathbf{x}, v_1, \dots, v_{n-1}, t )</span><span class="w"></span>
+<span class="c">%&gt; \end{array}\right.</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; *optional* linear system for index-1 variables \mathbf{y} of the form:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{A}( \mathbf{x}, \mathbf{v}, t ) \mathbf{y} = \mathbf{b}( \mathbf{x}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; and *optional* invariants of the form:</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="c">%&gt; \mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}</span><span class="w"></span>
+<span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="c">%&gt;</span><span class="w"></span>
+<span class="c">%&gt; where \f$ \mathbf{x} \f$ are the unknown functions (states) of the</span><span class="w"></span>
+<span class="c">%&gt; independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="c">%</span><span class="w"></span>
+<span class="k">classdef</span><span class="w"> </span><span class="n">System</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">handle</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">properties</span><span class="w"> </span><span class="p">(</span><span class="nb">SetAccess</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">protected</span><span class="p">,</span><span class="w"> </span><span class="nb">Hidden</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Name of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Number of equations of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_num_eqns</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Number of linear index-1 variables of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_num_sysy</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Number of veils of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_num_veil</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Number of invariants of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">m_num_invs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">methods</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Class constructor for a system that requires the following inputs:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_name     The name of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_eqns The number of equations of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_sysy The number of linear index-1 variables of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_veil The number of (user-defined) veils of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_invs The number of invariants of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>this<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">System</span><span class="p">(</span> t_name, t_num_eqns, t_num_sysy, t_num_veil, t_num_invs <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="n">t_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_eqns</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_sysy</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_veil</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_veil</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_invs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the system name.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The system name.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the number of equations of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The number of equations of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_num_eqns<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_eqns</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_num_eqns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the number of equations of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_eqns The number of equations of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_num_eqns</span><span class="p">(</span> this, t_num_eqns <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_eqns</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the number of linear index-1 variables of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The number of linear index-1 variables of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_num_sysy<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_sysy</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_num_sysy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the number of linear index-1 variables of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_sysy The number of linear index-1 variables of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_num_sysy</span><span class="p">(</span> this, t_num_sysy <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_sysy</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the number of veils of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The number of veils of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_num_veil<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_veil</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_num_veil</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_veil</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the number of veils of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_veil The number of veils of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_num_veil</span><span class="p">(</span> this, t_num_veil <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_veil</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_veil</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the number of invariants of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The number of invariants of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>t_num_invs<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">get_num_invs</span><span class="p">(</span> this <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">t_num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_invs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Set the number of invariants of the system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t_num_invs The number of invariants of the</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;                   system.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">set_num_invs</span><span class="p">(</span> this, t_num_invs <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_invs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">t_num_invs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Calculate the linear states \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The linear states \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">y</span><span class="p">(</span> this, x, v, t <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="o">\</span><span class="n">this</span><span class="p">.</span><span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Calculate the Jacobial of the linear states \f$ \mathbf{y} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the states \f$ \mathbf{x} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{\partial}{\partial\mathbf{x}} \left[ \mathbf{A}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{y} - \mathbf{b}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) \right] = \mathbf{0}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; which, if expanded applying the chain rule, can be written as:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; (\mathbf{TA}_{\mathbf{x}} + \mathbf{TA}_{\mathbf{v}}\mathbf{Jv}_{\mathbf{x}})\mathbf{y} + \mathbf{A}\mathbf{Jy}_\mathbf{x}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; = \mathbf{Jb}_{\mathbf{x}} + \mathbf{Jb}_{\mathbf{v}}\mathbf{Jv}_{\mathbf{x}}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y Linear states \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian of the linear states with respect to the states</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{Jy}_\mathbf{x}.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span>out<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">Jy_x</span><span class="p">(</span> this, x, y, v, t <span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">TA_x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">TA_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">TA_v</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">TA_v</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Jb_x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">Jb_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Jb_v</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">Jb_v</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Jv_x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">Jv_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">TA_v_Jv_x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">TA_v</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">TA_v_Jv_x</span><span class="p">(:,</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TA_v</span><span class="p">(:,:,</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">Jv_x</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">m_num_sysy</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">m_num_eqns</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">TA_x</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="n">out</span><span class="p">(:,</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">TA_x</span><span class="p">(:,:,</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TA_v_Jv_x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">end</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="p">(</span><span class="n">Jb_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Jb_v</span><span class="o">*</span><span class="n">Jv_x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">out</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">methods</span><span class="w"> </span><span class="p">(</span><span class="n">Abstract</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the system function \f$ \mathbf{F} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x     States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y     Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v     Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The system function \f$ \mathbf{F} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the states \f$ \mathbf{x} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{x}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x     States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y     Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v     Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF_x</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the states \f$ \mathbf{x} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{x}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x     States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y     Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v     Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF_y</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the states derivative \f$ \mathbf{x}' \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{x}'</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x     States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y     Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v     Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}'} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF_x_dot</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the veils \f$ \mathbf{v} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{v}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x     States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x_dot States derivatives \f$ \mathbf{x}' \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y     Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v     Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t     Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">JF_v</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_dot</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the system veils \f$ \mathbf{v} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{v}( \mathbf{x}, t ) = \mathbf{0}.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The system veils \f$ \mathbf{v} \f$..</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">v</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system veils \f$ \mathbf{v} \f$</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; with respect to the states \f$ \mathbf{x} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{Jv}_{\mathbf{x}}( \mathbf{x}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{v}( \mathbf{x}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{x}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{Jv}_{\mathbf{x}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">Jv_x</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the system invariants \f$ \mathbf{h} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The invariants \f$ \mathbf{h} \f$..</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">h</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the states \f$ \mathbf{x} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{Jh}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{x}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{x}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">Jh_x</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the veils \f$ \mathbf{v} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{Jh}_{\mathbf{v}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{h}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{v}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{v}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">Jh_y</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Evaluate the Jacobian of the system invariants \f$ \mathbf{h} \f$ with</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; respect to the veils \f$ \mathbf{v} \f$:</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f[</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \mathbf{Jh}_{\mathbf{v}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \dfrac{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{h}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }{</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;   \partial \mathbf{v}</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; }.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \f]</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param x States \f$ \mathbf{x} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param y Linear index-1 variables \f$ \mathbf{y} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param v Veils \f$ \mathbf{v} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \param t Independent variable \f$ t \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The Jacobian \f$ \mathbf{Jh}_{\mathbf{v}} \f$.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">Jh_v</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Get the system type.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return The system type.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">whattype</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Check if the system is explicit.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return True if the system is explicit, false otherwise.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">is_explicit</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Check if the system is explicit.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return True if the system is explicit, false otherwise.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">is_semiexplicit</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Check if the system is implicit.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; \return True if the system is implicit, false otherwise.</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">is_implicit</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">%&gt; Return true if (x,t) is in the domain of the DAE system</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="n">in_domain</span><span class="p">(</span><span class="w"> </span><span class="n">this</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">    </span><span class="c">% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><span class="w"></span>
+<span class="w">    </span><span class="c">%</span><span class="w"></span>
+<span class="w">  </span><span class="k">end</span><span class="w"></span>
+<span class="w">  </span><span class="c">%</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MATLAB_Toolbox.html">MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="root.html">MATLAB API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_Package.html">MAPLE Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_MAPLE_API.html">MAPLE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_Examples_Index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Manual_References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, D. Stocco, S. Taddei and E. Bertolazzi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

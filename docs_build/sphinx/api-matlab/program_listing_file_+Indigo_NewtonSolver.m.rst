@@ -58,23 +58,15 @@ Program Listing for File NewtonSolver.m
        %
        %> Algorithm tolerance.
        %
-       m_tolerance = 1.0e-8;
+       m_tolerance = 1.0e-10;
        %
        %> Maximum allowed algorithm iterations.
        %
-       m_max_iterations = 25;
-       %
-       %> Maximum allowed function evaluations.
-       %
-       m_max_function_evaluations = 50;
-       %
-       %> Maximum allowed Jacobian evaluations.
-       %
-       m_max_jacobian_evaluations = 25;
+       m_max_iterations = 100;
        %
        %> Maximum allowed algorithm relaxations.
        %
-       m_max_relaxations = 10;
+       m_max_relaxations = 50;
        %
        %> Verbose mode boolean.
        %
@@ -106,7 +98,8 @@ Program Listing for File NewtonSolver.m
        %
        %> Relaxation factor.
        %
-       m_alpha = 0.9;
+       m_alpha = 0.8;
+       %
      end
      %
      methods
@@ -176,64 +169,6 @@ Program Listing for File NewtonSolver.m
        %
        function out = get_max_iterations( this )
          out = this.m_max_iterations;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Set maximum allowed function evaluations.
-       %>
-       %> \param t_max_evaluations The maximum allowed function evaluations.
-       %
-       function set_max_function_evaluations( this, t_max_function_evaluations )
-   
-         CMD = 'Indigo.NewtonSolver.set_max_function_evaluations(...): ';
-   
-         assert( ...
-           ~isnan(t_max_function_evaluations) && ...
-           isfinite(t_max_function_evaluations) && ...
-           t_max_function_evaluations > 0, ...
-           [CMD, 'invalid input detected.']);
-   
-         this.m_max_function_evaluations = t_max_function_evaluations;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Get maximum allowed function evaluations.
-       %>
-       %> \return The maximum allowed function evaluations.
-       %
-       function out = get_max_function_evaluations( this )
-         out = this.m_max_function_evaluations;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Set maximum allowed Jacobian evaluations.
-       %>
-       %> \param t_max_evaluations The maximum allowed Jacobian evaluations.
-       %
-       function set_max_jacobian_evaluations( this, t_max_jacobian_evaluations )
-   
-         CMD = 'Indigo.NewtonSolver.set_max_jacobian_evaluations(...): ';
-   
-         assert( ...
-           ~isnan(t_max_jacobian_evaluations) && ...
-           isfinite(t_max_jacobian_evaluations) && ...
-           t_max_jacobian_evaluations > 0, ...
-           [CMD, 'invalid input detected.']);
-   
-         this.m_max_jacobian_evaluations = t_max_jacobian_evaluations;
-       end
-       %
-       % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-       %
-       %> Get maximum allowed Jacobian evaluations.
-       %>
-       %> \return The maximum allowed Jacobian evaluations.
-       %
-       function out = get_max_jacobian_evaluations( this )
-         out = this.m_max_jacobian_evaluations;
        end
        %
        % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -412,14 +347,7 @@ Program Listing for File NewtonSolver.m
        %> \return The function value \f$ \mathbf{F}(\mathbf{x}) \f$.
        %
        function out = eval_function( this, x )
-   
-         CMD = 'Indigo.NewtonSolver.eval_function(...): ';
-   
          this.m_function_evaluations = this.m_function_evaluations + 1;
-   
-         assert( this.m_function_evaluations <= this.m_max_function_evaluations, ...
-           [CMD, 'maximum number of function evaluations reached.']);
-   
          out = this.m_function_handle(x);
        end
        %
@@ -432,14 +360,7 @@ Program Listing for File NewtonSolver.m
        %> \return The Jacobian value \f$ \mathbf{JF}(\mathbf{x}) \f$.
        %
        function out = eval_jacobian( this, x )
-   
-         CMD = 'Indigo.NewtonSolver.eval_jacobian(...): ';
-   
          this.m_jacobian_evaluations = this.m_jacobian_evaluations + 1;
-   
-         assert( this.m_jacobian_evaluations <= this.m_max_jacobian_evaluations, ...
-           [CMD, 'maximum number of Jacobian evaluations reached.']);
-   
          out = this.m_jacobian_handle(x);
        end
        %
@@ -455,7 +376,7 @@ Program Listing for File NewtonSolver.m
        %>         \f$ 1 \f$ = failed because of bad initial point,
        %>         \f$ 2 \f$ = failed because of bad dumping (step got too short).
        %
-       function [out, ierr] = solve( this, x_ini )
+       function [x, ierr] = solve( this, x_ini )
    
          CMD = 'Indigo.NewtonSolver.solve(...): ';
    
@@ -463,72 +384,86 @@ Program Listing for File NewtonSolver.m
          this.reset();
    
          % Set initial iteration
-         ierr = 0;
-         out  = x_ini;
-         if (any(isnan(x_ini)))
-           fprintf(1, [CMD, 'bad initial point.\n']) ;
-           ierr = 1;
-           return;
-         end
+         ierr = 1;
+         x    = x_ini;
    
          % Algorithm iterations
          this.m_converged = false;
-         x = x_ini;
-         for i = 1:this.m_max_iterations
+         for i=1:this.m_max_iterations
            this.m_iterations = i;
    
-           % Evaluate advancing direction
+           if ~all(isfinite(x)); break; end
+   
+           % Evaluate F
            F = this.eval_function(x);
-           J = this.eval_jacobian(x);
-           D = -J\F;
+           if ~all(isfinite(F)); break; end
    
            % Check convergence
-           if (norm(F, inf) < this.m_tolerance)
+           if norm(F, inf) < this.m_tolerance
+             ierr             = 0;
              this.m_converged = true;
              break;
            end
    
+           % Evaluate JF
+           J = this.eval_jacobian(x);
+           if ~all(isfinite(J)); break; end
+   
+           % Evaluate advancing direction
+           if (rcond(J) > 1e-8)
+             D = -J\F;
+           else
+             [D, ~] = lsqr(J, -F, 1e-8, 50);
+           end
+           if ~all(isfinite(D)); break; end
+   
            % Relax the iteration process
-           tau    = 1.0;
+           tau    = 1/this.m_alpha;
            dumped = false;
            for j = 1:this.m_max_relaxations
              this.m_relaxations = j;
    
+             tau = tau * this.m_alpha;
+   
              % Update point
              x_dump = x + tau * D;
              F_dump = this.eval_function(x_dump);
-             D_dump = -J\F_dump;
+   
+             if ~all(isfinite(F_dump)); continue; end
+   
+             if (rcond(J) > 1e-8)
+               D_dump = -J\F_dump;
+             else
+               [D_dump, ~] = lsqr(J, -F_dump, 1e-8, 50);
+             end
+             if ~all(isfinite(D_dump)); continue; end
    
              % Check relaxation convergence
-             if (norm(D_dump, 2) < (1.0-tau/2.0) * norm(D, 2))
+             if (norm(D_dump, 2) <= eps + (1-tau/2) * norm(D, 2))
                dumped = true;
                break;
-             else
-               tau = tau * this.m_alpha;
              end
            end
    
            % Check if dumping failed
-           if (~dumped)
-             if (this.m_verbose)
+           if ~dumped
+             if this.m_verbose
                fprintf(1, [CMD, 'tau = %d, failed dumping iteration.\n'], tau);
              end
-             ierr = 2;
              break;
            end
    
            % Update solution
-           x   = x_dump;
-           out = x;
-           if (this.m_verbose)
-             fprintf(1, [CMD, 'iter %d: ||F||_inf = %f, tau = %1.4f.\n'], ...
-               i, norm(F, inf), tau);
+           x = x_dump;
+           if this.m_verbose
+             fprintf(1, '%s iter %d: ||F||_inf = %f, tau = %1.4f.\n', CMD, i, norm(F, inf), tau);
            end
    
-           % Check if converged
-           if (norm(D, inf) < this.m_tolerance)
-             return;
-           end
+           % Check convergence
+           %if i > 2 && norm(D, inf) < this.m_tolerance
+           %  this.m_converged = true;
+           %  break;
+           %end
          end
        end
        %

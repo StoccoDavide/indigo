@@ -1,316 +1,283 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00020" kind="file" language="C++">
-    <compoundname>progress_bar.m</compoundname>
-      <sectiondef kind="func">
-      <memberdef kind="function" id="a00020_1ae97c4520a33fe6864edc163bc4169171" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function progress_bar</definition>
-        <argsstring>(in input, in varargin)</argsstring>
-        <name>progress_bar</name>
-        <param>
-          <type>in</type>
-          <declname>input</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>varargin</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Display a progress bar inside the command window of the type:</para>
-<para><computeroutput>100% [====================] Completed!</computeroutput></para>
-<para><bold>Usage:</bold></para>
-<para><itemizedlist>
-<listitem><para>progress(&apos;_start&apos;): initializes a new progress bar. Must always be called first.</para>
-</listitem><listitem><para>progress(i): updates the progress bar. i is a percentage.</para>
-</listitem><listitem><para>progress(i, m): is similar, but a percentage is automagically calculated, where i is the current step and m the maximum number of steps.</para>
-</listitem><listitem><para>progress(&apos;_end&apos;): ends the progress bar.</para>
-</listitem><listitem><para>progress(&apos;_erase&apos;): ends the progress bar and removes if from the command window, restoring it to the way it was before the progress bar was initiated.</para>
-</listitem><listitem><para>progress(message): ends the progress bar and adds message after the bar.</para>
-</listitem><listitem><para>progress(..., opts): uses options from the opts struct.</para>
-</listitem></itemizedlist>
-</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>[optional]</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>opts.percentage_length: sets the number of characters reserved for the percentage display (default: 5) </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>[optional]</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>opts.bar_length: sets the number of characters reserved for the progress bar (default: 20) </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>[optional]</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>opts.char_empty: sets the &quot;empty&quot; character (default: &apos; &apos;) </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>[optional]</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>opts.char_filled: sets the &quot;filled&quot; character (default: &apos;=&apos;)</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>out The output progress bar string. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="+Indigo/+Utils/progress_bar.m" line="29" column="11" declfile="+Indigo/+Utils/progress_bar.m" declline="29" declcolumn="11"/>
-      </memberdef>
-      <memberdef kind="function" id="a00020_1afd08d027a8e395395e58480eca904b29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function generate_string</definition>
-        <argsstring>(in perc, in opts)</argsstring>
-        <name>generate_string</name>
-        <param>
-          <type>in</type>
-          <declname>perc</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>opts</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Generate the progress bar string.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>perc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Percentage of the progress bar to be filled. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>opts</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Struct containing the options.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>out The output string. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="+Indigo/+Utils/progress_bar.m" line="102" column="11" declfile="+Indigo/+Utils/progress_bar.m" declline="102" declcolumn="11"/>
-      </memberdef>
-      <memberdef kind="function" id="a00020_1a9dd481946d2e553022a27801ff530d81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>function</type>
-        <definition>function default_option</definition>
-        <argsstring>(in opts, in field, in default)</argsstring>
-        <name>default_option</name>
-        <param>
-          <type>in</type>
-          <declname>opts</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>field</declname>
-        </param>
-        <param>
-          <type>in</type>
-          <declname>default</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-<para>Check whether a setting was found in the options struct.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>opts</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The options struct. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>field</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The field to be checked. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>default</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The default value to be returned if the field is not found.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>out The field, or the default value if the field is not found. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="+Indigo/+Utils/progress_bar.m" line="125" column="11" declfile="+Indigo/+Utils/progress_bar.m" declline="125" declcolumn="11"/>
-      </memberdef>
-      </sectiondef>
+    <compoundname>tableau_order.m</compoundname>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Display<sp/>a<sp/>progress<sp/>bar<sp/>inside<sp/>the<sp/>command<sp/>window<sp/>of<sp/>the<sp/>type:</highlight></codeline>
-<codeline lineno="3"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="4"><highlight class="normal">%&gt;<sp/>`100%<sp/>[====================]<sp/>Completed!`</highlight></codeline>
-<codeline lineno="5"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="6"><highlight class="normal">%&gt;<sp/>**Usage:**</highlight></codeline>
-<codeline lineno="7"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="8"><highlight class="normal">%&gt;<sp/>-<sp/>progress(</highlight><highlight class="stringliteral">&apos;_start&apos;</highlight><highlight class="normal">):<sp/>initializes<sp/>a<sp/>new<sp/>progress<sp/>bar.<sp/>Must<sp/>always<sp/>be<sp/>called</highlight></codeline>
-<codeline lineno="9"><highlight class="normal">%&gt;<sp/><sp/><sp/>first.</highlight></codeline>
-<codeline lineno="10"><highlight class="normal">%&gt;<sp/>-<sp/>progress(i):<sp/>updates<sp/>the<sp/>progress<sp/>bar.<sp/>i<sp/>is<sp/>a<sp/>percentage.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal">%&gt;<sp/>-<sp/>progress(i,<sp/>m):<sp/>is<sp/>similar,<sp/>but<sp/>a<sp/>percentage<sp/>is<sp/>automagically<sp/>calculated,</highlight></codeline>
-<codeline lineno="12"><highlight class="normal">%&gt;<sp/><sp/><sp/>where<sp/>i<sp/>is<sp/>the<sp/>current<sp/>step<sp/>and<sp/>m<sp/>the<sp/>maximum<sp/>number<sp/>of<sp/>steps.</highlight></codeline>
-<codeline lineno="13"><highlight class="normal">%&gt;<sp/>-<sp/>progress(</highlight><highlight class="stringliteral">&apos;_end&apos;</highlight><highlight class="normal">):<sp/>ends<sp/>the<sp/>progress<sp/>bar.</highlight></codeline>
-<codeline lineno="14"><highlight class="normal">%&gt;<sp/>-<sp/>progress(</highlight><highlight class="stringliteral">&apos;_erase&apos;</highlight><highlight class="normal">):<sp/>ends<sp/>the<sp/>progress<sp/>bar<sp/>and<sp/>removes<sp/>if<sp/>from<sp/>the<sp/>command</highlight></codeline>
-<codeline lineno="15"><highlight class="normal">%&gt;<sp/><sp/><sp/>window,<sp/>restoring<sp/>it<sp/>to<sp/>the<sp/>way<sp/>it<sp/>was<sp/>before<sp/>the<sp/>progress<sp/>bar<sp/>was</highlight></codeline>
-<codeline lineno="16"><highlight class="normal">%&gt;<sp/><sp/><sp/>initiated.</highlight></codeline>
-<codeline lineno="17"><highlight class="normal">%&gt;<sp/>-<sp/>progress(message):<sp/>ends<sp/>the<sp/>progress<sp/>bar<sp/>and<sp/>adds<sp/>message<sp/>after<sp/>the<sp/>bar.</highlight></codeline>
-<codeline lineno="18"><highlight class="normal">%&gt;<sp/>-<sp/>progress(...,<sp/>opts):<sp/>uses<sp/>options<sp/>from<sp/>the<sp/>opts<sp/>struct.</highlight></codeline>
-<codeline lineno="19"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="20"><highlight class="normal">%&gt;<sp/>\param<sp/>[optional]<sp/>opts.percentage_length:<sp/>sets<sp/>the<sp/>number<sp/>of<sp/>characters</highlight></codeline>
-<codeline lineno="21"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reserved<sp/>for<sp/>the<sp/>percentage<sp/>display<sp/>(default:<sp/>5)</highlight></codeline>
-<codeline lineno="22"><highlight class="normal">%&gt;<sp/>\param<sp/>[optional]<sp/>opts.bar_length:<sp/>sets<sp/>the<sp/>number<sp/>of<sp/>characters<sp/>reserved</highlight></codeline>
-<codeline lineno="23"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>the<sp/>progress<sp/>bar<sp/>(default:<sp/>20)</highlight></codeline>
-<codeline lineno="24"><highlight class="normal">%&gt;<sp/>\param<sp/>[optional]<sp/>opts.char_empty:<sp/>sets<sp/>the<sp/></highlight><highlight class="stringliteral">&quot;empty&quot;</highlight><highlight class="normal"><sp/>character<sp/>(default:<sp/></highlight><highlight class="stringliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="25"><highlight class="normal">%&gt;<sp/>\param<sp/>[optional]<sp/>opts.char_filled:<sp/>sets<sp/>the<sp/></highlight><highlight class="stringliteral">&quot;filled&quot;</highlight><highlight class="normal"><sp/>character<sp/>(default:<sp/></highlight><highlight class="stringliteral">&apos;=&apos;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="26"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="27"><highlight class="normal">%&gt;<sp/>\return<sp/>out<sp/>The<sp/>output<sp/>progress<sp/>bar<sp/>string.</highlight></codeline>
-<codeline lineno="28"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="29" refid="a00020_1ae97c4520a33fe6864edc163bc4169171" refkind="member"><highlight class="normal">function<sp/><ref refid="a00020_1ae97c4520a33fe6864edc163bc4169171" kindref="member">progress_bar</ref>(<sp/>input,<sp/>varargin<sp/>)</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/>%<sp/>Handle<sp/>input</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>inputParser;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/>p.addRequired(</highlight><highlight class="stringliteral">&apos;input&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/>p.addOptional(</highlight><highlight class="stringliteral">&apos;max&apos;</highlight><highlight class="normal">,<sp/>[]);</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/>p.addOptional(</highlight><highlight class="stringliteral">&apos;opts&apos;</highlight><highlight class="normal">,<sp/>[]);</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/>p.parse(input,<sp/>varargin{:});</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>p.Results;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/>%<sp/>Handle<sp/>options</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/>opts<sp/>=<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/>opts.perc_length<sp/>=<sp/><ref refid="a00020_1a9dd481946d2e553022a27801ff530d81" kindref="member">default_option</ref>(p.opts,<sp/></highlight><highlight class="stringliteral">&apos;perc_length&apos;</highlight><highlight class="normal">,<sp/>5);</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/>opts.bar_length<sp/><sp/>=<sp/><ref refid="a00020_1a9dd481946d2e553022a27801ff530d81" kindref="member">default_option</ref>(p.opts,<sp/></highlight><highlight class="stringliteral">&apos;bar_length&apos;</highlight><highlight class="normal">,<sp/><sp/>20);</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/>opts.char_empty<sp/><sp/>=<sp/><ref refid="a00020_1a9dd481946d2e553022a27801ff530d81" kindref="member">default_option</ref>(p.opts,<sp/></highlight><highlight class="stringliteral">&apos;char_empty&apos;</highlight><highlight class="normal">,<sp/><sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/>opts.char_filled<sp/>=<sp/><ref refid="a00020_1a9dd481946d2e553022a27801ff530d81" kindref="member">default_option</ref>(p.opts,<sp/></highlight><highlight class="stringliteral">&apos;char_filled&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;=&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/>%<sp/>If<sp/>input<sp/>is<sp/>a<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>ischar(p.input)</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>switch<sp/>p.input</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>case<sp/>(&apos;_start&apos;)</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>Start<sp/>a<sp/>new<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str_out<sp/>=<sp/><ref refid="a00020_1afd08d027a8e395395e58480eca904b29" kindref="member">generate_string</ref>(0,<sp/>opts);</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(str_out);</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>case<sp/>(&apos;_end&apos;)</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>a<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>case<sp/>(&apos;_erase&apos;)</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>and<sp/>erase<sp/>a<sp/>progress<sp/>bar</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str_out<sp/>=<sp/><ref refid="a00020_1afd08d027a8e395395e58480eca904b29" kindref="member">generate_string</ref>(0,<sp/>opts);</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str_cr<sp/><sp/>=<sp/>repmat(&apos;\b&apos;,<sp/>1,<sp/>length(str_out)-2);</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(str_cr);</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>otherwise</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%<sp/>End<sp/>a<sp/>progress<sp/>bar<sp/>with<sp/>a<sp/>message<sp/>after<sp/>the<sp/>bar</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str_out<sp/>=<sp/>sprintf(&apos;<sp/>%s\n&apos;,<sp/>p.input);</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str_cr<sp/>=<sp/>repmat(&apos;\b&apos;,<sp/>1,<sp/>1);</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>fprintf([str_cr,<sp/>str_out]);</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/>%<sp/>If<sp/>input<sp/>is<sp/>a<sp/>number</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/>elseif<sp/>isnumeric(p.input)</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>If<sp/>a<sp/>max<sp/>value<sp/>is<sp/>also<sp/>provided,<sp/>compute<sp/>the<sp/>percentage</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>If<sp/>no,<sp/>p.input<sp/>is<sp/>assumed<sp/>to<sp/>be<sp/>a<sp/>percentage</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>if<sp/>(~isempty(p.max)<sp/>&amp;&amp;<sp/>isnumeric(p.max))</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>p.input<sp/>=<sp/>round(100*input/p.max);</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>else</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(p.input<sp/>&lt;<sp/>0)</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.input<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>elseif<sp/>(p.input<sp/>&gt;<sp/>100)</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.input<sp/>=<sp/>100;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>Generate<sp/>the<sp/>output<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>str_out<sp/>=<sp/><ref refid="a00020_1afd08d027a8e395395e58480eca904b29" kindref="member">generate_string</ref>(p.input,<sp/>opts);</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>str_cr<sp/><sp/>=<sp/>repmat(&apos;\b&apos;,<sp/>1,<sp/>length(str_out)-2);</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf([str_cr,<sp/>str_out]);</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/>%<sp/>Unsupported<sp/>argument<sp/>type</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/>else</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>error(&apos;Indigo.Utils.<ref refid="a00020_1ae97c4520a33fe6864edc163bc4169171" kindref="member">progress_bar</ref>(...):<sp/>invalid<sp/>input<sp/>detected.&apos;);</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="91"><highlight class="normal">end</highlight></codeline>
-<codeline lineno="92"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="93"><highlight class="normal">%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="94"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="95"><highlight class="normal">%&gt;<sp/>Generate<sp/>the<sp/>progress<sp/>bar<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.</highlight></codeline>
-<codeline lineno="96"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal">%&gt;<sp/>\param<sp/>perc<sp/>Percentage<sp/>of<sp/>the<sp/>progress<sp/>bar<sp/>to<sp/>be<sp/>filled.</highlight></codeline>
-<codeline lineno="98"><highlight class="normal">%&gt;<sp/>\param<sp/>opts<sp/>Struct<sp/>containing<sp/>the<sp/>options.</highlight></codeline>
-<codeline lineno="99"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal">%&gt;<sp/>\return<sp/>out<sp/>The<sp/>output<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">.</highlight></codeline>
-<codeline lineno="101"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="102" refid="a00020_1afd08d027a8e395395e58480eca904b29" refkind="member"><highlight class="normal">function<sp/>out<sp/>=<sp/><ref refid="a00020_1afd08d027a8e395395e58480eca904b29" kindref="member">generate_string</ref>(<sp/>perc,<sp/>opts<sp/>)</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/>perc<sp/><sp/><sp/><sp/><sp/>=<sp/>floor(perc);</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/>perc_out<sp/>=<sp/>[num2str(perc),<sp/>&apos;%%&apos;];</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/>perc_out<sp/>=<sp/>[perc_out,<sp/>repmat(&apos;<sp/>&apos;,<sp/>1,<sp/>opts.perc_length-length(perc_out)+1)];</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/>n_empty<sp/><sp/>=<sp/>floor(perc/100*opts.bar_length);</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/>bar_out<sp/><sp/>=<sp/>[&apos;[&apos;,<sp/>repmat(&apos;=&apos;,<sp/>1,<sp/>n_empty),<sp/>...</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>repmat(&apos;<sp/>&apos;,<sp/>1,<sp/>opts.bar_length-n_empty),<sp/>&apos;]&apos;];</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/>out<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>[perc_out,<sp/>bar_out,<sp/>&apos;\n&apos;];</highlight></codeline>
-<codeline lineno="111"><highlight class="normal">end</highlight></codeline>
-<codeline lineno="112"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="113"><highlight class="normal">%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="114"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="115"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="116"><highlight class="normal">%&gt;<sp/>Check<sp/>whether<sp/>a<sp/>setting<sp/>was<sp/>found<sp/>in<sp/>the<sp/>options<sp/>struct.</highlight></codeline>
-<codeline lineno="117"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal">%&gt;<sp/>\param<sp/>opts<sp/><sp/><sp/><sp/>The<sp/>options<sp/>struct.</highlight></codeline>
-<codeline lineno="119"><highlight class="normal">%&gt;<sp/>\param<sp/>field<sp/><sp/><sp/>The<sp/>field<sp/>to<sp/>be<sp/>checked.</highlight></codeline>
-<codeline lineno="120"><highlight class="normal">%&gt;<sp/>\param<sp/>default<sp/>The<sp/>default<sp/>value<sp/>to<sp/>be<sp/>returned<sp/>if<sp/>the<sp/>field<sp/>is<sp/>not<sp/>found.</highlight></codeline>
-<codeline lineno="121"><highlight class="normal">%&gt;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal">%&gt;<sp/>\return<sp/>out<sp/>The<sp/>field,<sp/>or<sp/>the<sp/>default<sp/>value<sp/>if<sp/>the<sp/>field<sp/>is<sp/>not</highlight></codeline>
-<codeline lineno="123"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>found.</highlight></codeline>
-<codeline lineno="124"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="125" refid="a00020_1a9dd481946d2e553022a27801ff530d81" refkind="member"><highlight class="normal">function<sp/>out<sp/>=<sp/><ref refid="a00020_1a9dd481946d2e553022a27801ff530d81" kindref="member">default_option</ref>(<sp/>opts,<sp/>field,<sp/>default<sp/>)</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/>if<sp/>(isfield(opts,<sp/>field))</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/>opts.(field);</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/>else</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/>default;</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="132"><highlight class="normal">end</highlight></codeline>
-<codeline lineno="133"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="134"><highlight class="normal">%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="135"><highlight class="normal">%</highlight></codeline>
+<codeline lineno="1"><highlight class="normal">%&gt;<sp/>Check<sp/>the<sp/>order<sp/>of<sp/>a<sp/>Runge-Kutta<sp/>tableau<sp/>according<sp/>to<sp/>the<sp/>routine<sp/>taken<sp/>from</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;<sp/>thereference:<sp/>*A<sp/>family<sp/>of<sp/>embedded<sp/>Runge-Kutta<sp/>formulae*,<sp/>J.<sp/>R.<sp/>Dormand<sp/>and</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;<sp/>Journal<sp/>of<sp/>Computational<sp/>and<sp/>Applied<sp/>Mathematics,<sp/>volume<sp/>6(1),<sp/>1980.</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">%&gt;<sp/>\param<sp/>A<sp/>Matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$.</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">%&gt;<sp/>\param<sp/>b<sp/>Weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">%&gt;<sp/>\param<sp/>c<sp/>Nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$<sp/>(column<sp/>vector).</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>The<sp/>order<sp/>of<sp/>the<sp/>Runge-Kutta<sp/>tableau<sp/>and<sp/>an<sp/>error<sp/>message<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>the</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>order<sp/>is<sp/>not<sp/>correct.</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">%</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">function<sp/>[order,<sp/>msg]<sp/>=<sp/>tableau_order(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>A,<sp/>b,<sp/>c<sp/>)</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>CMD<sp/>=<sp/></highlight><highlight class="stringliteral">&apos;Indigo.RungeKutta.tableau_order(...):<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>%<sp/>Temporary<sp/>variables<sp/>initialization</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>tol<sp/><sp/><sp/>=<sp/>eps^(2/3);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>one<sp/><sp/><sp/>=<sp/>ones(length(c),<sp/>1);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>Ac<sp/><sp/><sp/><sp/>=<sp/>A*c;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>bA<sp/><sp/><sp/><sp/>=<sp/>(b*A).</highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="21"><highlight class="stringliteral"><sp/><sp/>err<sp/><sp/><sp/>=<sp/>A*one<sp/>-<sp/>c;</highlight></codeline>
+<codeline lineno="22"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="23"><highlight class="stringliteral"><sp/><sp/>msg<sp/><sp/><sp/>=<sp/>&apos;</highlight><highlight class="stringliteral">&apos;;</highlight></codeline>
+<codeline lineno="24"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="25"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>consistency</highlight></codeline>
+<codeline lineno="26"><highlight class="stringliteral"><sp/><sp/>if<sp/>(max(abs(err))<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="27"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>[CMD,<sp/>&apos;</highlight><highlight class="normal">consistency<sp/>A*1-c<sp/>==<sp/>0<sp/>failed.\n</highlight><highlight class="stringliteral">&apos;];</highlight></codeline>
+<codeline lineno="28"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="29"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="30"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="31"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>order<sp/>1</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(b)<sp/>-<sp/>1)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="34"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>1<sp/>sum(b)<sp/>==<sp/>1<sp/>failed,<sp/>found<sp/>sum(b)<sp/>==<sp/>%g</highlight><highlight class="stringliteral">&apos;],<sp/>sum(b));</highlight></codeline>
+<codeline lineno="35"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="36"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="37"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="38"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="39"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>order<sp/>2</highlight></codeline>
+<codeline lineno="40"><highlight class="stringliteral"><sp/><sp/>bc<sp/>=<sp/>b(:).*c;</highlight></codeline>
+<codeline lineno="41"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc)<sp/>-<sp/>1/2)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="42"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>2<sp/>failed<sp/>sum(b*c)=%g<sp/>!=<sp/>1/2.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc));</highlight></codeline>
+<codeline lineno="43"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="44"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="45"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="46"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="47"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="48"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>order<sp/>3</highlight></codeline>
+<codeline lineno="49"><highlight class="stringliteral"><sp/><sp/>bc2<sp/>=<sp/>b(:).*c.^2;</highlight></codeline>
+<codeline lineno="50"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc2)<sp/>-<sp/>1/3)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="51"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>3<sp/>failed<sp/>sum(b*c^2)=%g<sp/>!=<sp/>1/3.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc2));</highlight></codeline>
+<codeline lineno="52"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="53"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="54"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="55"><highlight class="stringliteral"><sp/><sp/>bAc<sp/>=<sp/>b(:).*Ac;</highlight></codeline>
+<codeline lineno="56"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAc)<sp/>-<sp/>1/6)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="57"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>3<sp/>failed<sp/>sum(b*d)=%g<sp/>!=<sp/>1/6.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAc));</highlight></codeline>
+<codeline lineno="58"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="59"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="60"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="61"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="62"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="63"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>order<sp/>4</highlight></codeline>
+<codeline lineno="64"><highlight class="stringliteral"><sp/><sp/>bc3<sp/>=<sp/>b(:).*c.^3;</highlight></codeline>
+<codeline lineno="65"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc3)<sp/>-<sp/>1/4)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="66"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>4<sp/>failed<sp/>sum(b*c^3)=%g<sp/>!=<sp/>1/4.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc3));</highlight></codeline>
+<codeline lineno="67"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="68"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="69"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="70"><highlight class="stringliteral"><sp/><sp/>cAc<sp/><sp/>=<sp/>c.*Ac;</highlight></codeline>
+<codeline lineno="71"><highlight class="stringliteral"><sp/><sp/>bcAc<sp/>=<sp/>b(:).*cAc;</highlight></codeline>
+<codeline lineno="72"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAc)<sp/>-<sp/>1/8)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="73"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>4<sp/>failed<sp/>sum(b*c*A*c)=%g<sp/>!=<sp/>1/8.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bcAc));</highlight></codeline>
+<codeline lineno="74"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="75"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="76"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="77"><highlight class="stringliteral"><sp/><sp/>bAc2<sp/>=<sp/>bA.*c.^2;</highlight></codeline>
+<codeline lineno="78"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAc2)<sp/>-<sp/>1/12)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="79"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>4<sp/>failed<sp/>sum(b*A*c^2)=%g<sp/>!=<sp/>1/12.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAc2));</highlight></codeline>
+<codeline lineno="80"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="81"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="82"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="83"><highlight class="stringliteral"><sp/><sp/>bAAc<sp/>=<sp/>bA.*Ac;</highlight></codeline>
+<codeline lineno="84"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAc)<sp/>-<sp/>1/24)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>4<sp/>failed<sp/>sum(b*A*A*c)=%g<sp/>!=<sp/>1/24.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAc));</highlight></codeline>
+<codeline lineno="86"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>order<sp/>5</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral"><sp/><sp/>bc4<sp/>=<sp/>b(:).*c.^4;</highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc4)<sp/>-<sp/>1/5)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*c^4)=%g<sp/>!=<sp/>1/5.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc4));</highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="97"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="98"><highlight class="stringliteral"><sp/><sp/>bc2Ac<sp/>=<sp/>bc2.*Ac;</highlight></codeline>
+<codeline lineno="99"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc2Ac)<sp/>-<sp/>1/10)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="100"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*c^2*A*c)=%g<sp/>!=<sp/>1/10.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc2Ac));</highlight></codeline>
+<codeline lineno="101"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="102"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="103"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="104"><highlight class="stringliteral"><sp/><sp/>bAcAc<sp/>=<sp/>(b(:).*Ac).*Ac;</highlight></codeline>
+<codeline lineno="105"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAcAc)<sp/>-<sp/>1/20)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="106"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*A*c*A*c)=%g<sp/>!=<sp/>1/20.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAcAc));</highlight></codeline>
+<codeline lineno="107"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="108"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="109"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="110"><highlight class="stringliteral"><sp/><sp/>Ac2<sp/><sp/><sp/>=<sp/>A*(c.^2);</highlight></codeline>
+<codeline lineno="111"><highlight class="stringliteral"><sp/><sp/>bcAc2<sp/>=<sp/>bc.*Ac2;</highlight></codeline>
+<codeline lineno="112"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAc2)<sp/>-<sp/>1/15)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="113"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*c*A*c^2)=%g<sp/>!=<sp/>1/15.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bcAc2));</highlight></codeline>
+<codeline lineno="114"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="115"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="116"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="117"><highlight class="stringliteral"><sp/><sp/>Ac3<sp/><sp/>=<sp/>A*(c.^3);</highlight></codeline>
+<codeline lineno="118"><highlight class="stringliteral"><sp/><sp/>bAc3<sp/>=<sp/>b(:).*Ac3;</highlight></codeline>
+<codeline lineno="119"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAc3)<sp/>-<sp/>1/20)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="120"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*A*c^3)=%g<sp/>!=<sp/>1/20.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAc3));</highlight></codeline>
+<codeline lineno="121"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="122"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="123"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="124"><highlight class="stringliteral"><sp/><sp/>bAcAc<sp/>=<sp/>bA.*(c.*Ac);</highlight></codeline>
+<codeline lineno="125"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAcAc)<sp/>-<sp/>1/40)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="126"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*A*c*A*c)=%g<sp/>!=<sp/>1/40.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAcAc));</highlight></codeline>
+<codeline lineno="127"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="128"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="129"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="130"><highlight class="stringliteral"><sp/><sp/>bAAc2<sp/>=<sp/>bA.*Ac2;</highlight></codeline>
+<codeline lineno="131"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAc2)<sp/>-<sp/>1/60)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="132"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*A*c*A*c)=%g<sp/>!=<sp/>1/60.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAc2));</highlight></codeline>
+<codeline lineno="133"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="134"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="135"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="136"><highlight class="stringliteral"><sp/><sp/>AAc<sp/><sp/><sp/>=<sp/>A*Ac;</highlight></codeline>
+<codeline lineno="137"><highlight class="stringliteral"><sp/><sp/>bAAAc<sp/>=<sp/>bA.*AAc;</highlight></codeline>
+<codeline lineno="138"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAAc)<sp/>-<sp/>1/120)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="139"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>5<sp/>failed<sp/>sum(b*A*c*A*c)=%g<sp/>!=<sp/>1/120.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAAc));</highlight></codeline>
+<codeline lineno="140"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="141"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="142"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="143"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="144"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="145"><highlight class="stringliteral"><sp/><sp/>%<sp/>Check<sp/>order<sp/>6</highlight></codeline>
+<codeline lineno="146"><highlight class="stringliteral"><sp/><sp/>bc5<sp/>=<sp/>b(:).*c.^5;</highlight></codeline>
+<codeline lineno="147"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc5)<sp/>-<sp/>1/6)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="148"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(b*c^5)=%g<sp/>!=<sp/>1/6.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc5));</highlight></codeline>
+<codeline lineno="149"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="150"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="151"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="152"><highlight class="stringliteral"><sp/><sp/>bc3Ac<sp/>=<sp/>bc3.*Ac;</highlight></codeline>
+<codeline lineno="153"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc3Ac)<sp/>-<sp/>1/12)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="154"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bc3Ac)=%g<sp/>!=<sp/>1/12.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc3Ac));</highlight></codeline>
+<codeline lineno="155"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="156"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="157"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="158"><highlight class="stringliteral"><sp/><sp/>bcAcAc<sp/>=<sp/>bc.*Ac.^2;</highlight></codeline>
+<codeline lineno="159"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAcAc)<sp/>-<sp/>1/24)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="160"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bcAcAc)=%g<sp/>!=<sp/>1/24.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc3Ac));</highlight></codeline>
+<codeline lineno="161"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="162"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="163"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="164"><highlight class="stringliteral"><sp/><sp/>bc2Ac2<sp/>=<sp/>bc2.*Ac2;</highlight></codeline>
+<codeline lineno="165"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bc2Ac2)<sp/>-<sp/>1/18)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="166"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bc2Ac2)=%g<sp/>!=<sp/>1/18.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bc2Ac2));</highlight></codeline>
+<codeline lineno="167"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="168"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="169"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="170"><highlight class="stringliteral"><sp/><sp/>bAc2Ac<sp/>=<sp/>b(:).*Ac2.*Ac;</highlight></codeline>
+<codeline lineno="171"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAc2Ac)<sp/>-<sp/>1/36)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="172"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAc2Ac)=%g<sp/>!=<sp/>1/36.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAc2Ac));</highlight></codeline>
+<codeline lineno="173"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="174"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="175"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="176"><highlight class="stringliteral"><sp/><sp/>bcAc3<sp/>=<sp/>bc.*Ac3;</highlight></codeline>
+<codeline lineno="177"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAc3)<sp/>-<sp/>1/24)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="178"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bcAc3)=%g<sp/>!=<sp/>1/24.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bcAc3));</highlight></codeline>
+<codeline lineno="179"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="180"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="181"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="182"><highlight class="stringliteral"><sp/><sp/>Ac4<sp/><sp/>=<sp/>A*c.^4;</highlight></codeline>
+<codeline lineno="183"><highlight class="stringliteral"><sp/><sp/>bAc4<sp/>=<sp/>b(:).*Ac4;</highlight></codeline>
+<codeline lineno="184"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAc4)<sp/>-<sp/>1/30)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="185"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAc4)=%g<sp/>!=<sp/>1/30.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAc4));</highlight></codeline>
+<codeline lineno="186"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="187"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="188"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="189"><highlight class="stringliteral"><sp/><sp/>bc2A<sp/><sp/><sp/>=<sp/>A.&apos;</highlight><highlight class="normal">*bc2;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>bc2AAc<sp/>=<sp/>bc2A.*Ac;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(abs(sum(bc2AAc)<sp/>-<sp/>1/36)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/></highlight><highlight class="stringliteral">&apos;order<sp/>6<sp/>failed<sp/>sum(bc2AAc)=%g<sp/>!=<sp/>1/36.\n&apos;</highlight><highlight class="normal">],<sp/>sum(bc2AAc));</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>bAcAAc<sp/>=<sp/>bAc.*A*Ac;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(abs(sum(bAcAAc)<sp/>-<sp/>1/72)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/></highlight><highlight class="stringliteral">&apos;order<sp/>6<sp/>failed<sp/>sum(bAcAAc)=%g<sp/>!=<sp/>1/72.\n&apos;</highlight><highlight class="normal">],<sp/>sum(bAcAAc));</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>bcA<sp/><sp/><sp/><sp/>=<sp/>A</highlight><highlight class="stringliteral">&apos;*bc;</highlight></codeline>
+<codeline lineno="203"><highlight class="stringliteral"><sp/><sp/>bcAcAc<sp/>=<sp/>bcA.*cAc;</highlight></codeline>
+<codeline lineno="204"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAcAc)<sp/>-<sp/>1/48)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="205"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bcAcAc)=%g<sp/>!=<sp/>1/48.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bcAcAc));</highlight></codeline>
+<codeline lineno="206"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="207"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="208"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="209"><highlight class="stringliteral"><sp/><sp/>bAc2Ac<sp/>=<sp/>bA.*c.^2.*Ac;</highlight></codeline>
+<codeline lineno="210"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAc2Ac)<sp/>-<sp/>1/60)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="211"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAc2Ac)=%g<sp/>!=<sp/>1/60.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAc2Ac));</highlight></codeline>
+<codeline lineno="212"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="213"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="214"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="215"><highlight class="stringliteral"><sp/><sp/>bAAcAc<sp/>=<sp/>bA.*Ac.^2;</highlight></codeline>
+<codeline lineno="216"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAcAc)<sp/>-<sp/>1/120)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="217"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAAcAc)=%g<sp/>!=<sp/>1/120.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAcAc));</highlight></codeline>
+<codeline lineno="218"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="219"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="220"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="221"><highlight class="stringliteral"><sp/><sp/>bcAAc2<sp/>=<sp/>bcA.*Ac2;</highlight></codeline>
+<codeline lineno="222"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAAc2)<sp/>-<sp/>1/72)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="223"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bcAAc2)=%g<sp/>!=<sp/>1/72.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bcAAc2));</highlight></codeline>
+<codeline lineno="224"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="225"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="226"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="227"><highlight class="stringliteral"><sp/><sp/>bAcAc2<sp/>=<sp/>bA.*c.*Ac2;</highlight></codeline>
+<codeline lineno="228"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAcAc2)<sp/>-<sp/>1/90)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="229"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAcAc2)=%g<sp/>!=<sp/>1/90.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAcAc2));</highlight></codeline>
+<codeline lineno="230"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="231"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="232"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="233"><highlight class="stringliteral"><sp/><sp/>bAAc3<sp/>=<sp/>bA.*Ac3;</highlight></codeline>
+<codeline lineno="234"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAc3)<sp/>-<sp/>1/120)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="235"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAAc3)=%g<sp/>!=<sp/>1/120.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAc3));</highlight></codeline>
+<codeline lineno="236"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="237"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="238"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="239"><highlight class="stringliteral"><sp/><sp/>bcAAAc<sp/>=<sp/>bcA.*A*Ac;</highlight></codeline>
+<codeline lineno="240"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bcAAAc)<sp/>-<sp/>1/144)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="241"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bcAAAc)=%g<sp/>!=<sp/>1/144.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bcAAAc));</highlight></codeline>
+<codeline lineno="242"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="243"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="244"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="245"><highlight class="stringliteral"><sp/><sp/>bAcAAc<sp/>=<sp/>(bA.*c).*A*Ac;</highlight></codeline>
+<codeline lineno="246"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAcAAc)<sp/>-<sp/>1/180)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="247"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAcAAc)=%g<sp/>!=<sp/>1/180.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAcAAc));</highlight></codeline>
+<codeline lineno="248"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="249"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="250"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="251"><highlight class="stringliteral"><sp/><sp/>bAAcAc<sp/>=<sp/>bA.*A*(cAc);</highlight></codeline>
+<codeline lineno="252"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAcAc)<sp/>-<sp/>1/240)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="253"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAAcAc)=%g<sp/>!=<sp/>1/240.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAcAc));</highlight></codeline>
+<codeline lineno="254"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="255"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="256"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="257"><highlight class="stringliteral"><sp/><sp/>bAAAc2<sp/>=<sp/>bA.*A*Ac2;</highlight></codeline>
+<codeline lineno="258"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAAc2)<sp/>-<sp/>1/360)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="259"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAAcAc)=%g<sp/>!=<sp/>1/360.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAAc2));</highlight></codeline>
+<codeline lineno="260"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="261"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="262"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="263"><highlight class="stringliteral"><sp/><sp/>bAAAAc<sp/>=<sp/>bA.*A*(A*Ac);</highlight></codeline>
+<codeline lineno="264"><highlight class="stringliteral"><sp/><sp/>if<sp/>(abs(sum(bAAAAc)<sp/>-<sp/>1/720)<sp/>&gt;<sp/>tol)</highlight></codeline>
+<codeline lineno="265"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>msg<sp/>=<sp/>sprintf([CMD,<sp/>&apos;</highlight><highlight class="normal">order<sp/>6<sp/>failed<sp/>sum(bAAcAc)=%g<sp/>!=<sp/>1/720.\n</highlight><highlight class="stringliteral">&apos;],<sp/>sum(bAAAAc));</highlight></codeline>
+<codeline lineno="266"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline lineno="267"><highlight class="stringliteral"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="268"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="269"><highlight class="stringliteral"><sp/><sp/>order<sp/>=<sp/>6;</highlight></codeline>
+<codeline lineno="270"><highlight class="stringliteral">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+Utils/progress_bar.m"/>
+    <location file="+Indigo/@RungeKutta/tableau_order.m"/>
   </compounddef>
 </doxygen>

@@ -1,46 +1,123 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.6" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.12.0" xml:lang="en-US">
   <compounddef id="a00053" kind="file" language="C++">
-    <compoundname>Heun2.m</compoundname>
+    <compoundname>check_tableau.m</compoundname>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal">%</highlight></codeline>
-<codeline lineno="2"><highlight class="normal">%&gt;<sp/>Class<sp/>container<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>Heun</highlight><highlight class="stringliteral">&apos;s<sp/>method.</highlight></codeline>
-<codeline lineno="3"><highlight class="stringliteral">%</highlight></codeline>
-<codeline lineno="4"><highlight class="stringliteral">classdef<sp/>Heun2<sp/>&lt;<sp/>Indigo.RungeKutta.Explicit</highlight></codeline>
-<codeline lineno="5"><highlight class="stringliteral"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="6"><highlight class="stringliteral"><sp/><sp/>methods</highlight></codeline>
-<codeline lineno="7"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="8"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="9"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="10"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>%&gt;<sp/>Heun&apos;</highlight><highlight class="normal">s<sp/>method.</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\begin{array}{c|cc}</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>1<sp/>&amp;<sp/><sp/><sp/>0<sp/>\\</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/>\hline</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/><sp/><sp/><sp/><sp/>&amp;<sp/>1/2<sp/>&amp;<sp/>1/2</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\end{array}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>%&gt;<sp/>\f[</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>function<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>=<sp/>Heun2()</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.A<sp/><sp/><sp/>=<sp/>[0,<sp/>0;<sp/>1,<sp/>0];</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b<sp/><sp/><sp/>=<sp/>[1/2,<sp/>1/2];</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.b_e<sp/>=<sp/>[];</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tbl.c<sp/><sp/><sp/>=<sp/>[0,<sp/>1]&apos;;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>this@Indigo.RungeKutta.<ref refid="a00207" kindref="compound">Explicit</ref>(&apos;Heun2&apos;,<sp/>2,<sp/>tbl);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>%<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-<sp/>-</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>%</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/>%</highlight></codeline>
-<codeline lineno="33"><highlight class="normal">end</highlight></codeline>
+<codeline lineno="1"><highlight class="normal">%&gt;<sp/>Check<sp/>Butcher<sp/>tableau<sp/>consistency<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>an<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>Runge-Kutta<sp/>method.</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal">%&gt;<sp/>\param<sp/>tbl.A<sp/><sp/><sp/>Matrix<sp/>\f$<sp/>\mathbf{A}<sp/>\f$.</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">%&gt;<sp/>\param<sp/>tbl.b<sp/><sp/><sp/>Weights<sp/>vector<sp/>\f$<sp/>\mathbf{b}<sp/>\f$.</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">%&gt;<sp/>\param<sp/>tbl.b_e<sp/>[optional]<sp/>Embedded<sp/>weights<sp/>vector<sp/>\f$<sp/>\hat{\mathbf{b}}</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">%&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\f$<sp/>(row<sp/>vector).</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">%&gt;<sp/>\param<sp/>tbl.c<sp/><sp/><sp/>Nodes<sp/>vector<sp/>\f$<sp/>\mathbf{c}<sp/>\f$.</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">%&gt;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">%&gt;<sp/>\</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>True<sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>the<sp/>Butcher<sp/>tableau<sp/>is<sp/>consistent,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>otherwise.</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">%</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">function<sp/>[out,<sp/>order,<sp/>e_order]<sp/>=<sp/>check_tableau(<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>tbl<sp/>)</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>CMD<sp/>=<sp/></highlight><highlight class="stringliteral">&apos;Indigo.RungeKutta.check_tableau(...):<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>%<sp/>Collect<sp/>input<sp/>data</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>A<sp/><sp/><sp/>=<sp/>tbl.A;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>b<sp/><sp/><sp/>=<sp/>tbl.b;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>b_e<sp/>=<sp/>tbl.b_e;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>c<sp/><sp/><sp/>=<sp/>tbl.c;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>%<sp/>Prepare<sp/>output</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>%<sp/>Check<sp/>matrix<sp/>A</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isnumeric(A))</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;A<sp/>must<sp/>be<sp/>a<sp/>numeric<sp/>matrix.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(size(A,<sp/>1)<sp/>~=<sp/>size(A,<sp/>2))</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;matrix<sp/>A<sp/>is<sp/>not<sp/>a<sp/>square<sp/>matrix.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isfinite(A))</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;matrix<sp/>A<sp/>found<sp/>with<sp/>NaN<sp/>or<sp/>Inf<sp/>values.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>%<sp/>Check<sp/>vector<sp/>b</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isnumeric(b))</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;b<sp/>must<sp/>be<sp/>a<sp/>numeric<sp/>vector.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isfinite(b))</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;matrix<sp/>b<sp/>found<sp/>with<sp/>NaN<sp/>or<sp/>Inf<sp/>values.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~isrow(b)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>b<sp/>is<sp/>not<sp/>a<sp/>row<sp/>vector.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(size(A,<sp/>2)<sp/>~=<sp/>size(b,<sp/>2))</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>b<sp/>is<sp/>not<sp/>consistent<sp/>with<sp/>the<sp/>size<sp/>of<sp/>matrix<sp/>A.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>%<sp/>Check<sp/>vector<sp/>b_e</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~isempty(b_e)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~isnumeric(b_e)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;b_e<sp/>must<sp/>be<sp/>a<sp/>numeric<sp/>vector.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isfinite(b_e))</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>b_e<sp/>found<sp/>with<sp/>NaN<sp/>or<sp/>Inf<sp/>values.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~isrow(b_e)</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>b_e<sp/>is<sp/>not<sp/>a<sp/>row<sp/>vector.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(size(A,<sp/>2)<sp/>~=<sp/>size(b_e,<sp/>2))</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>b_e<sp/>is<sp/>not<sp/>consistent<sp/>with<sp/>the<sp/>size<sp/>of<sp/>matrix<sp/>A.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>end</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>%<sp/>Check<sp/>vector<sp/>c</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isnumeric(c))</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;c<sp/>must<sp/>be<sp/>a<sp/>numeric<sp/>vector.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~all(isfinite(c))</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>c<sp/>found<sp/>with<sp/>NaN<sp/>or<sp/>Inf<sp/>values.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~iscolumn(c)</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>c<sp/>is<sp/>not<sp/>a<sp/>column<sp/>vector.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(size(A,<sp/>1)<sp/>~=<sp/>size(c,<sp/>1))</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>warning([CMD,<sp/></highlight><highlight class="stringliteral">&apos;vector<sp/>c<sp/>is<sp/>not<sp/>consistent<sp/>with<sp/>the<sp/>size<sp/>of<sp/>matrix<sp/>A.&apos;</highlight><highlight class="normal">]);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>%<sp/>Check<sp/>consistency</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>[order,<sp/>msg]<sp/>=<sp/>this.tableau_order(A,<sp/>b,<sp/>c);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(order<sp/>~=<sp/>this.m_order)</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>%warning(sprintf([CMD,<sp/></highlight><highlight class="stringliteral">&apos;order<sp/>%d,<sp/>expected<sp/>%d.\n&apos;</highlight><highlight class="normal">,<sp/>msg],<sp/>order,<sp/>this.m_order));</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>out<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>~isempty(b_e)</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>[e_order,<sp/>msg]<sp/>=<sp/>this.tableau_order(A,<sp/>b_e,<sp/>c);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>%fprintf([CMD,<sp/></highlight><highlight class="stringliteral">&apos;\norder<sp/>=<sp/>%d,<sp/>embedded<sp/>order<sp/>=<sp/>%d.\n&apos;</highlight><highlight class="normal">],<sp/>order,<sp/>e_order);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>e_order<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>%fprintf([CMD,<sp/></highlight><highlight class="stringliteral">&apos;\norder<sp/>=<sp/>%d.\n&apos;</highlight><highlight class="normal">],<sp/>order);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>end</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">end</highlight></codeline>
     </programlisting>
-    <location file="+Indigo/+RungeKutta/+Methods/+Explicit/Heun2.m"/>
+    <location file="+Indigo/@RungeKutta/check_tableau.m"/>
   </compounddef>
 </doxygen>
