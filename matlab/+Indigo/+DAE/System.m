@@ -12,7 +12,7 @@
 %> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
 %>
 %> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \left{\begin{array}{c}
+%> \mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}
 %>   v_1( \mathbf{x}, t ) \\
 %>   v_2( \mathbf{x}, v_1, t ) \\
 %>   v_3( \mathbf{x}, v_1, v_2, t ) \\

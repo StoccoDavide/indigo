@@ -29,10 +29,16 @@
 %> \end{array}\right.
 %> \f]
 %>
-%> And *optional* invariants of the form:
+%> *optional* linear system for index-1 variables \mathbf{y} of the form:
 %>
 %> \f[
-%> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t ) \mathbf{y} = \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+%> \f]
+%>
+%> and *optional* invariants of the form:
+%>
+%> \f[
+%> \mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}
 %> \f]
 %>
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the

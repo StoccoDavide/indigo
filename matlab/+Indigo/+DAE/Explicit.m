@@ -2,22 +2,22 @@
 %> Class container for an explicit system of ODEs/DAEs of the form:
 %>
 %> \f[
-%> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
-%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t )^{-1}
-%> \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+%> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+%> \mathbf{A}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )^{-1}
+%> \mathbf{b}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
 %> \f]
 %>
 %> or equivalently:
 %>
 %> \f[
-%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
-%> \mathbf{x}' - \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
+%> \mathbf{x}' - \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}
 %> \f]
 %>
 %> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
 %>
 %> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{v}, t ) = \left{\begin{array}{c}
+%> \mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}
 %>   v_1( \mathbf{x}, t ) \\
 %>   v_2( \mathbf{x}, v_1, t ) \\
 %>   v_3( \mathbf{x}, v_1, v_2, t ) \\
@@ -29,7 +29,7 @@
 %> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
 %>
 %> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{v}, t ) = \left{\begin{array}{c}
+%> \mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}
 %>   v_1( \mathbf{x}, t ) \\
 %>   v_2( \mathbf{x}, v_1, t ) \\
 %>   v_3( \mathbf{x}, v_1, v_2, t ) \\
@@ -38,10 +38,16 @@
 %> \end{array}\right.
 %> \f]
 %>
-%> And *optional* invariants of the form:
+%> *optional* linear system for index-1 variables \mathbf{y} of the form:
 %>
 %> \f[
-%> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t ) \mathbf{y} = \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+%> \f]
+%>
+%> and *optional* invariants of the form:
+%>
+%> \f[
+%> \mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}
 %> \f]
 %>
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
@@ -87,9 +93,9 @@ classdef Explicit < Indigo.DAE.System
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{JF}_{\mathbf{x}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
@@ -113,9 +119,9 @@ classdef Explicit < Indigo.DAE.System
     %> respect to the states derivative \f$ \mathbf{x}' \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{JF}_{\mathbf{x}'}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}'
     %> }.
@@ -139,9 +145,9 @@ classdef Explicit < Indigo.DAE.System
     %> respect to the veils \f$ \mathbf{v} \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{v}
     %> }.
@@ -153,7 +159,7 @@ classdef Explicit < Indigo.DAE.System
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{v}} \f$.
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{y}} \f$.
     %
     function out = JF_y( this, x, ~, y, v, t )
       out = -this.Jf_y(x, v, y, t);
@@ -165,9 +171,9 @@ classdef Explicit < Indigo.DAE.System
     %> respect to the veils \f$ \mathbf{v} \f$:
     %>
     %> \f[
-    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{JF}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{v}
     %> }.
@@ -196,11 +202,11 @@ classdef Explicit < Indigo.DAE.System
     %> Evaluate the system function \f$ \mathbf{f} \f$:
     %>
     %> \f[
-    %> \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}.
+    %> \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
-    %> \param y     Linear states \f$ \mathbf{y} \f$.
+    %> \param y Linear states \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
@@ -214,9 +220,9 @@ classdef Explicit < Indigo.DAE.System
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
@@ -237,9 +243,9 @@ classdef Explicit < Indigo.DAE.System
     %> respect to the veils \f$ \mathbf{v} \f$:
     %>
     %> \f[
-    %> \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{x}', \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{v}
     %> }

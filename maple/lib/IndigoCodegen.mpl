@@ -1171,10 +1171,10 @@ IndigoCodegen := module()
 
     description "Generate an explicit system for the firt-order differential "
       "equations <eqns>, pivots <pvts>, invariants <invs> with states variables "
-      "<vars> and states variables, system data <data>, veilig label <label> "
-      "and description <info>. A linear systems <sysy> can be provided to "
-      "compute some of the system states in terms of the others during "
-      "integration (linear index-1) variables.";
+      "<vars> and states variables, system data <data>, veiling variables <veil> "
+      "and label <label>, and description <info>. A linear systems <sysy> can be "
+      "provided to compute some of the system states in terms of the others "
+      "during integration (linear index-1) variables.";
 
     local x, x_dot, F, M, f, A, y, b, v, v_fncs, Jv_x, pvts_tmp, Jf_x, Jf_y,
       Jf_v, TA_x, TA_v, Jb_x, Jb_y, Jb_v, h, Jh_x, Jh_y, Jh_v, rm_deps,
@@ -1554,16 +1554,17 @@ IndigoCodegen := module()
     indent::string                      := "  "
     }, $)::string;
 
-    description "Generate a semi explicit system for the firt-order differential "
+    description "Generate an semiexplicit system for the firt-order differential "
       "equations <eqns>, pivots <pvts>, invariants <invs> with states variables "
-      "<vars> and states variables, system data <data>, veilig label <label> and "
-      "description <info>. A linear systems <sysy> can be provided to compute "
-      "some of the system states in terms of the others during integration "
-      "(linear index-1) variables.";
+      "<vars> and states variables, system data <data>, veiling variables <veil> "
+      "and label <label>, and description <info>. A linear systems <sysy> can be "
+      "provided to compute some of the system states in terms of the others "
+      "during integration (linear index-1) variables.";
 
-    local x, x_dot, F, M, f, pvts_tmp, TM_x, TM_v, Jf_x, Jf_v, v, v_fncs, Jv_x,
-      h, Jh_x, Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps,
-      mk_x_dot, i, bar, data_str, properties;
+    local x, x_dot, F, Ms, fs, A, y, b, pvts_tmp, TMs_x, TMs_y, TMs_v, Jfs_x,
+      Jfs_y, Jfs_v, v, v_fncs, Jv_x, TA_x, TA_v, Jb_x, Jb_y, Jb_v, h, Jh_x, Jh_y,
+      Jh_v, rm_deps, rm_v_dot_deps, rm_v_deps, rm_x_deps, rm_x_dot_deps, mk_x_dot,
+      rm_y_deps, i, bar, data_str, properties;
 
     # Store system states and derivatives
     if not type(vars, Vector) then
@@ -1572,14 +1573,6 @@ IndigoCodegen := module()
       x := vars;
     end if;
     x_dot := map(x -> convert(cat(op(0, x), "_dot"), symbol)(op(1..-1, x)), x);
-
-    # Prepare veriables for substitution
-    # diff(x, t) -> x_dot(t)
-    mk_x_dot := convert(diff(x, t) =~ x_dot, list);
-    # x(t) -> x
-    rm_x_deps := convert(x =~ op~(0, x), list);
-    # x_dot(t) -> x_dot
-    rm_x_dot_deps := convert(x_dot =~ op~(0, x_dot), list);
 
     # Store system veils and calculate Jacobians
     if not type(veil, Vector) then
@@ -1591,7 +1584,30 @@ IndigoCodegen := module()
     Jv_x := IndigoUtils:-DoJacobian(v_fncs, x);
 
     # Get substitutions for veils to remove dependencies
-    rm_v_deps, rm_v_dot_deps := IndigoCodegen:-GetVeilSubs(lhs~(veil), x);
+    rm_v_deps, rm_v_dot_deps := IndigoCodegen:-GetVeilSubs(v, x);
+    v := subs(op(rm_v_deps), v);
+
+    # Store linear system of equations and calculate Jacobians
+    y, A, b := op(sysy);
+    if not type(y, Vector) then
+      y := convert(y, Vector);
+    end if;
+    A    := subs(op(rm_v_deps), A);
+    b    := subs(op(rm_v_deps), b);
+    TA_x := IndigoUtils:-DoTensor(A, x);
+    TA_v := IndigoUtils:-DoTensor(A, v);
+    Jb_x := IndigoUtils:-DoJacobian(b, x);
+    Jb_v := IndigoUtils:-DoJacobian(b, v);
+
+    # Prepare veriables for substitution
+    # diff(x, t) -> x_dot(t)
+    mk_x_dot := convert(diff(x, t) =~ x_dot, list);
+    # x(t) -> x
+    rm_x_deps := convert(x =~ op~(0, x), list);
+    # y(t) -> y
+    rm_y_deps := convert(y =~ op~(0, y), list);
+    # x_dot(t) -> x_dot
+    rm_x_dot_deps := convert(x_dot =~ op~(0, x_dot), list);
 
     # Store system function and calculate Jacobians
     if not type(eqns, Vector) then
@@ -1601,20 +1617,24 @@ IndigoCodegen := module()
     end if;
     F := subs(op(mk_x_dot), op(rm_v_deps), F);
 
-    # Extract M and f from: F(x,x',v,t) = M(x,v,t).x' - f(x,v,t)
-    M, f := LinearAlgebra:-GenerateMatrix(convert(F, list), convert(x_dot, list));
+    # Extract M and f from: F(x,x',y,v,t) = M(x,v,y,t).x' - f(x,y,v,t)
+    Ms, fs := LinearAlgebra:-GenerateMatrix(convert(F, list), convert(x_dot, list));
 
-    if (LinearAlgebra:-RowDimension(M) <> LinearAlgebra:-ColumnDimension(M)) or
-       (LinearAlgebra:-Rank(M) <> LinearAlgebra:-ColumnDimension(M)) then
+    if (LinearAlgebra:-RowDimension(Ms) <> LinearAlgebra:-ColumnDimension(Ms)) or
+       (LinearAlgebra:-Rank(Ms) <> LinearAlgebra:-ColumnDimension(Ms)) then
       error("the system cannot be transformed into an explicit form, the "
         "matrix M is not square or full rank.");
       return NULL;
     end if;
 
-    TM_x := IndigoUtils:-DoTensor(M, x);
-    TM_v := IndigoUtils:-DoTensor(M, v);
-    Jf_x := IndigoUtils:-DoJacobian(f, x);
-    Jf_v := IndigoUtils:-DoJacobian(f, v);
+    Ms    := subs(op(rm_v_deps), Ms);
+    TMs_x := IndigoUtils:-DoTensor(Ms, x);
+    TMs_y := IndigoUtils:-DoTensor(Ms, y);
+    TMs_v := IndigoUtils:-DoTensor(Ms, v);
+    fs    := subs(op(rm_v_deps), fs);
+    Jfs_x := IndigoUtils:-DoJacobian(fs, x);
+    Jfs_y := IndigoUtils:-DoJacobian(fs, y);
+    Jfs_v := IndigoUtils:-DoJacobian(fs, v);
 
     # Store system invariants and calculate Jacobian
     if not type(invs, Vector) then
@@ -1622,33 +1642,45 @@ IndigoCodegen := module()
     else
       h := invs;
     end if;
-    Jh_v := IndigoUtils:-DoJacobian(h, v);
     h    := subs(op(rm_v_deps), h);
     Jh_x := IndigoUtils:-DoJacobian(h, x);
+    Jh_y := IndigoUtils:-DoJacobian(h, y);
+    Jh_v := IndigoUtils:-DoJacobian(h, v);
 
     # Compose substitutions
     rm_deps := [
       op(rm_v_dot_deps), # D[i](v[j])(f) -> D_v_j_i
       op(rm_v_deps),     # (v[j])(f) -> v_j
       op(rm_x_deps),     # x(t) -> x
+      op(rm_y_deps),     # y(t) -> y
       op(rm_x_dot_deps)  # x_dot(t) -> x_dot
     ];
 
     # Generate expressions with proper variables dependencices
     x        := convert(subs(op(rm_deps), x), list);
     x_dot    := convert(subs(op(rm_deps), x_dot), list);
-    M        := subs(op(rm_deps), M);
-    TM_x     := subs(op(rm_deps), TM_x);
-    TM_v     := subs(op(rm_deps), TM_v);
-    f        := subs(op(rm_deps), f);
-    Jf_x     := subs(op(rm_deps), Jf_x);
-    Jf_v     := subs(op(rm_deps), Jf_v);
+    y        := convert(subs(op(rm_deps), y), list);
     v        := convert(subs(op(rm_deps), v), list);
-    v_fncs   := subs(op(rm_deps), v_fncs);
-    Jv_x     := subs(op(rm_deps), Jv_x);
+    Ms       := subs(op(rm_deps), Ms);
+    TMs_x    := subs(op(rm_deps), TMs_x);
+    TMs_y    := subs(op(rm_deps), TMs_y);
+    TMs_v    := subs(op(rm_deps), TMs_v);
+    fs       := subs(op(rm_deps), fs);
+    Jfs_x    := subs(op(rm_deps), Jfs_x);
+    Jfs_y    := subs(op(rm_deps), Jfs_y);
+    Jfs_v    := subs(op(rm_deps), Jfs_v);
+    A        := subs(op(rm_deps), A);
+    TA_x     := subs(op(rm_deps), TA_x);
+    TA_v     := subs(op(rm_deps), TA_v);
+    b        := subs(op(rm_deps), b);
+    Jb_x     := subs(op(rm_deps), Jb_x);
+    Jb_y     := subs(op(rm_deps), Jb_y);
     h        := subs(op(rm_deps), h);
     Jh_x     := subs(op(rm_deps), Jh_x);
+    Jh_y     := subs(op(rm_deps), Jh_y);
     Jh_v     := subs(op(rm_deps), Jh_v);
+    Jv_x     := subs(op(rm_deps), Jv_x);
+    v_fncs   := subs(op(rm_deps), v_fncs);
     pvts_tmp := subs(op(rm_deps), pvts);
 
     # Function utilities strings
@@ -1707,9 +1739,9 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
-          "M_t", [x, v], M,
+          "Ms", [x, y, v], Ms,
           parse("data") = properties,
-          parse("info") = "Evaluate the matrix M_t."
+          parse("info") = "Evaluate the matrix Ms."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1717,9 +1749,9 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-TensorToMatlab(
-          "TM_t_x", [x, v], TM_x,
+          "TMs_x", [x, y, v], TMs_x,
           parse("data") = properties,
-          parse("info") = "Evaluate the tensor of M_t with respect to x."
+          parse("info") = "Evaluate the tensor of Ms with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1727,9 +1759,19 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-TensorToMatlab(
-          "TM_t_v", [x, v], TM_v,
+          "TMs_y", [x, y, v], TMs_y,
           parse("data") = properties,
-          parse("info") = "Evaluate the tensor of M_t with respect to v."
+          parse("info") = "Evaluate the tensor of Ms with respect to y."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-TensorToMatlab(
+          "TMs_v", [x, y, v], TMs_v,
+          parse("data") = properties,
+          parse("info") = "Evaluate the tensor of Ms with respect to v."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1737,9 +1779,9 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-VectorToMatlab(
-          "f_t", [x, v], f,
+          "fs", [x, y, v], fs,
           parse("data") = properties,
-          parse("info") = "Evaluate the vector f_t of the explicit system."
+          parse("info") = "Evaluate the vector fs of the explicit system."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1747,9 +1789,9 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
-          "Jf_t_x", [x, v], Jf_x,
+          "Jfs_x", [x, y, v], Jfs_x,
           parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of f with respect to x."
+          parse("info") = "Evaluate the Jacobian of fs with respect to x."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1757,9 +1799,119 @@ IndigoCodegen := module()
       IndigoCodegen:-ApplyIndent(
         cat(i, i),
         IndigoCodegen:-MatrixToMatlab(
-          "Jf_t_v", [x, v], Jf_v,
+          "Jfs_y", [x, y, v], Jfs_y,
           parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of f with respect to v."
+          parse("info") = "Evaluate the Jacobian of fs with respect to y."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "Jfs_v", [x, y, v], Jfs_v,
+          parse("data") = properties,
+          parse("info") = "Evaluate the Jacobian of fs with respect to v."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "A", [x, v], A,
+          parse("data") = properties,
+          parse("info") = "Evaluate the matrix A."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-TensorToMatlab(
+          "TA_x", [x, v], TA_x,
+          parse("data") = properties,
+          parse("info") = "Evaluate tensor of A with respect to x."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-TensorToMatlab(
+          "TA_v", [x, v], TA_v,
+          parse("data") = properties,
+          parse("info") = "Evaluate tensor of A with respect to v."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-VectorToMatlab(
+          "b", [x, v], b,
+          parse("data") = properties,
+          parse("info") = "Evaluate the vector b."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "Jb_x", [x, v], Jb_x,
+          parse("data")     = properties,
+          parse("info")     = "Evaluate the Jacobian of b with respect to x."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "Jb_v", [x, v], Jb_v,
+          parse("data")     = properties,
+          parse("info")     = "Evaluate the Jacobian of b with respect to v."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-VectorToMatlab(
+          "h", [x, y, v], h,
+          parse("data") = properties,
+          parse("info") = "Evaluate the residual of the invariants h."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "Jh_x", [x, y, v], Jh_x,
+          parse("data") = properties,
+          parse("info") = "Evaluate the Jacobian of h with respect to x."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "Jh_y", [x, y, v], Jh_y,
+          parse("data") = properties,
+          parse("info") = "Evaluate the Jacobian of h with respect to y."
+      )),
+      i, i, "%\n",
+      i, i, bar,
+      i, i, "%\n",
+      IndigoCodegen:-ApplyIndent(
+        cat(i, i),
+        IndigoCodegen:-MatrixToMatlab(
+          "Jh_v", [x, y, v], Jh_v,
+          parse("data") = properties,
+          parse("info") = "Evaluate the Jacobian of h with respect to v."
       )),
       i, i, "%\n",
       i, i, bar,
@@ -1783,36 +1935,6 @@ IndigoCodegen := module()
           parse("data")     = properties,
           parse("label")    = cat("D_", label),
           parse("info")     = "Evaluate the Jacobian of v with respect to x."
-      )),
-      i, i, "%\n",
-      i, i, bar,
-      i, i, "%\n",
-      IndigoCodegen:-ApplyIndent(
-        cat(i, i),
-        IndigoCodegen:-VectorToMatlab(
-          "h", [x, v], h,
-          parse("data") = properties,
-          parse("info") = "Evaluate the residual of the invariants h."
-      )),
-      i, i, "%\n",
-      i, i, bar,
-      i, i, "%\n",
-      IndigoCodegen:-ApplyIndent(
-        cat(i, i),
-        IndigoCodegen:-MatrixToMatlab(
-          "Jh_x", [x, v], Jh_x,
-          parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of h with respect to x."
-      )),
-      i, i, "%\n",
-      i, i, bar,
-      i, i, "%\n",
-      IndigoCodegen:-ApplyIndent(
-        cat(i, i),
-        IndigoCodegen:-MatrixToMatlab(
-          "Jh_v", [x, v], Jh_v,
-          parse("data") = properties,
-          parse("info") = "Evaluate the Jacobian of h with respect to v."
       )),
       i, i, "%\n",
       i, i, bar,

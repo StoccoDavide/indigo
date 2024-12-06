@@ -2,23 +2,23 @@
 %> Class container for a semi explicit system of ODEs/DAEs of the form:
 %>
 %> \f[
-%> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
-%> \mathbf{A}( \mathbf{x}, \mathbf{v}, t )^{-1}
-%> \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+%> \mathbf{x}' = \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+%> \mathbf{M}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )^{-1}
+%> \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
 %> \f]
 %>
 %> or equivalently:
 %>
 %> \f[
 %> \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
-%> \mathbf{x}' - \mathbf{f}( \mathbf{x}, \mathbf{x}, \mathbf{v}, t ) =
+%> \mathbf{x}' - \mathbf{f}( \mathbf{x}, \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
 %> \mathbf{0}
 %> \f]
 %>
 %> with *optional* veils \f$ \mathbf{v}( \mathbf{x}, t ) \f$ of the form:
 %>
 %> \f[
-%> \mathbf{v}( \mathbf{x}, \mathbf{v}, t ) = \left{\begin{array}{c}
+%> \mathbf{v}( \mathbf{x}, t ) = \left{\begin{array}{c}
 %>   v_1( \mathbf{x}, t ) \\
 %>   v_2( \mathbf{x}, v_1, t ) \\
 %>   v_3( \mathbf{x}, v_1, v_2, t ) \\
@@ -27,10 +27,16 @@
 %> \end{array}\right.
 %> \f]
 %>
-%> And *optional* invariants of the form:
+%> *optional* linear system for index-1 variables \mathbf{y} of the form:
 %>
 %> \f[
-%> \mathbf{h}( \mathbf{x}, \mathbf{v}, t ) = \mathbf{0}
+%> \mathbf{M}( \mathbf{x}, \mathbf{v}, t ) \mathbf{y} = \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
+%> \f]
+%>
+%> and *optional* invariants of the form:
+%>
+%> \f[
+%> \mathbf{h}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) = \mathbf{0}
 %> \f]
 %>
 %> where \f$ \mathbf{x} \f$ are the unknown functions (states) of the
@@ -46,11 +52,12 @@ classdef SemiExplicit < Indigo.DAE.System
     %>
     %> \param t_name     The name of the system.
     %> \param t_num_eqns The number of equations of the system.
+    %> \param t_num_sysy The number of linear index-1 variables of the system.
     %> \param t_num_veil The number of (user-defined) veils of the system.
     %> \param t_num_invs The number of invariants of the system.
     %
-    function this = SemiExplicit( t_name, t_num_eqns, t_num_veil, t_num_invs )
-      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_veil, t_num_invs);
+    function this = SemiExplicit( t_name, t_num_eqns, t_num_sysy, t_num_veil, t_num_invs )
+      this@Indigo.DAE.System(t_name, t_num_eqns, t_num_sysy, t_num_veil, t_num_invs);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -59,13 +66,14 @@ classdef SemiExplicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The system function \f$ \mathbf{F} \f$.
     %
-    function out = F( this, x, x_dot, v, t )
-      out = x_dot - this.f(x, v, t);
+    function out = F( this, x, x_dot, y, v, t )
+      out = x_dot - this.f(x, y, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -84,14 +92,16 @@ classdef SemiExplicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}} \f$.
     %
-    function out = JF_x( this, x, x_dot, v, t )
-      out = -this.Jf_x(x, x_dot, v, t) - ...
-            this.Jf_v(x, x_dot, v, t) * this.Jv_x(x, v, t);
+    function out = JF_x( this, x, x_dot, y, v, t )
+      out = -this.Jf_x(x, x_dot, y, v, t) - ...
+            this.Jf_y(x, x_dot, y, v, t) * this.Jy_x(x, v, t) - ...
+            this.Jf_v(x, x_dot, y, v, t) * this.Jv_x(x, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -110,13 +120,39 @@ classdef SemiExplicit < Indigo.DAE.System
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{x}'} \f$.
     %
-    function out = JF_x_dot( this, ~, ~, ~, ~ )
+    function out = JF_x_dot( this, ~, ~, ~, ~, ~ )
       out = eye(this.m_num_eqns);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{F} \f$ with
+    %> respect to the veils \f$ \mathbf{y} \f$:
+    %>
+    %> \f[
+    %> \mathbf{JF}_{\mathbf{y}}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{F}( \mathbf{x}, \mathbf{x}', \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{y}
+    %> }.
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{JF}_{\mathbf{y}} \f$.
+    %
+    function out = JF_y( this, x, x_dot, v, t )
+      out = -this.Jf_y(x, x_dot, v, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -149,19 +185,20 @@ classdef SemiExplicit < Indigo.DAE.System
     %> Evaluate the system function \f$ \mathbf{f} \f$ as:
     %>
     %> \f[
-    %> \mathbf{f}( \mathbf{x}, \mathbf{v}, t ) =
-    %> \mathbf{A}( \mathbf{x}, \mathbf{v}, t )^{-1}
-    %> \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+    %> \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+    %> \mathbf{M}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )^{-1}
+    %> \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
     %> \return The system function \f$ \mathbf{f} \f$.
     %
-    function out = f( this, x, v, t )
-      out = this.A(x, v, t) \ this.b(x, v, t);
+    function out = f( this, x, v, y, t )
+      out = this.Ms(x, v, y, t) \ this.fs(x, v, y, t);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -170,14 +207,14 @@ classdef SemiExplicit < Indigo.DAE.System
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> } =
     %> \dfrac{
-    %>   \partial \mathbf{A}^{-1} \mathbf{b}
+    %>   \partial \mathbf{M}^{-1} \mathbf{f}
     %> }{
     %>   \partial \mathbf{x}
     %> \f]
@@ -185,22 +222,61 @@ classdef SemiExplicit < Indigo.DAE.System
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param y     Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
     %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$..
     %
-    function out = Jf_x( this, x, x_dot, v, t )
-      TA_x = this.TA_x(x, v, t);
-      TA_v = this.TA_v(x, v, t);
-      Jb_x = this.Jb_x(x, v, t);
-      Jb_v = this.Jb_v(x, v, t);
+    function out = Jf_x( this, x, x_dot, y, v, t )
+      TMs_x = this.TMs_x(x, v, t);
+      TMs_y = this.TMs_y(x, v, t);
+      TMs_v = this.TMs_v(x, v, t);
+      Jfs_x = this.Jfs_x(x, y, v, t);
+      Jfs_y = this.Jfs_y(x, y, v, t);
+      Jfs_v = this.Jfs_v(x, y, v, t);
       Jv_x = this.Jv_x(x, v, t);
       out  = zeros(this.m_num_eqns);
-      rsh  = [size(TA_v, 1), size(TA_v, 3)];
-      for i = 1:size(TA_x, 3)
-        out(:,i) = (TA_x(:,:,i) + reshape(TA_v(:,i,:), rsh) * Jv_x) * x_dot;
+      rsh  = [size(TMs_v, 1), size(TMs_v, 3)];
+      for i = 1:size(TMs_x, 3)
+        out(:,i) = (TMs_x(:,:,i) + reshape(TMs_v(:,i,:), rsh) * Jv_x) * x_dot;
       end
-      out = this.A(x, v, t) \ (Jb_x + Jb_v * Jv_x - out);
+      out = this.Ms(x, y, v, t) \ (Jfs_x + Jfs_v * Jv_x - out);
+    end
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system function \f$ \mathbf{f} \f$ with
+    %> respect to the states \f$ \mathbf{y} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jf}_{\mathbf{y}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{y}
+    %> } =
+    %> \dfrac{
+    %>   \partial \mathbf{M}^{-1} \mathbf{f}
+    %> }{
+    %>   \partial \mathbf{v}
+    %> \f]
+    %>
+    %> \param x     States \f$ \mathbf{x} \f$.
+    %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
+    %> \param v     Veils \f$ \mathbf{v} \f$.
+    %> \param t     Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{y}} \f$..
+    %
+    function out = Jf_y( this, x, x_dot, y, v, t )
+      TMs_y = this.TMs_y(x, y, v, t);
+      Jfs_y = this.Jfs_y(x, y, v, t);
+      out  = zeros(this.m_num_eqns, this.m_num_veil);
+      for i = 1:size(TMs_y, 3)
+        out(:,i) = TMs_y(:,:,i) * x_dot;
+      end
+      out = this.Ms(x, v, t) \ (Jfs_y - out);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -209,33 +285,34 @@ classdef SemiExplicit < Indigo.DAE.System
     %> respect to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{v}
     %> } =
     %> \dfrac{
-    %>   \partial \mathbf{A}^{-1} \mathbf{b}
+    %>   \partial \mathbf{M}^{-1} \mathbf{f}
     %> }{
     %>   \partial \mathbf{v}
     %> \f]
     %>
     %> \param x     States \f$ \mathbf{x} \f$.
     %> \param x_dot States derivatives \f$ \mathbf{x}' \f$.
+    %> \param y     Linear states \f$ \mathbf{y} \f$.
     %> \param v     Veils \f$ \mathbf{v} \f$.
     %> \param t     Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$..
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{v}} \f$..
     %
-    function out = Jf_v( this, x, x_dot, v, t )
-      TA_v = this.TA_v(x, v, t);
-      Jb_v = this.Jb_v(x, v, t);
+    function out = Jf_v( this, x, x_dot, y, v, t )
+      TMs_v = this.TMs_v(x, y, v, t);
+      Jfs_v = this.Jfs_v(x, y, v, t);
       out  = zeros(this.m_num_eqns, this.m_num_veil);
-      for i = 1:size(TA_v, 3)
-        out(:,i) = TA_v(:,:,i) * x_dot;
+      for i = 1:size(TMs_v, 3)
+        out(:,i) = TMs_v(:,:,i) * x_dot;
       end
-      out = this.A(x, v, t) \ (Jb_v - out);
+      out = this.M(x, y, v, t) \ (Jfs_v - out);
     end
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -246,93 +323,167 @@ classdef SemiExplicit < Indigo.DAE.System
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the sytem matrix \f$ \mathbf{A} \f$.
+    %> Evaluate the sytem matrix \f$ \mathbf{M} \f$.
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The system matrix \f$ \mathbf{A} \f$.
+    %> \return The system matrix \f$ \mathbf{M} \f$.
     %
-    A( this, x, v, t )
+    Ms( this, x, y, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the tensor of the system matrix \f$ \mathbf{A} \f$ with respect
+    %> Evaluate the tensor of the system matrix \f$ \mathbf{M} \f$ with respect
     %> to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{TA}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{TM}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{A}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{M}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{x}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The tensor \f$ \mathbf{TA}_{\mathbf{x}} \f$.
+    %> \return The tensor \f$ \mathbf{TM}_{\mathbf{x}} \f$.
     %
-    TA_x( this, x, v, t )
-    %
-    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    %
-    %> Evaluate the sytem vector \f$ \mathbf{b} \f$.
-    %>
-    %> \param x States \f$ \mathbf{x} \f$.
-    %> \param v Veils \f$ \mathbf{v} \f$.
-    %> \param t Independent variable \f$ t \f$.
-    %>
-    %> \return The system vector \f$ \mathbf{b} \f$.
-    %
-    b( this, x, v, t )
+    TMs_x( this, x, y, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the system vector \f$ \mathbf{b} \f$ with
-    %> respect to the states \f$ \mathbf{x} \f$:
+    %> Evaluate the tensor of the system matrix \f$ \mathbf{M} \f$ with respect
+    %> to the states \f$ \mathbf{x} \f$:
     %>
     %> \f[
-    %> \mathbf{Jb}_{\mathbf{x}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{TM}_{\mathbf{y}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{M}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> }{
-    %>   \partial \mathbf{x}
+    %>   \partial \mathbf{y}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jb}_{\mathbf{x}} \f$..
+    %> \return The tensor \f$ \mathbf{TM}_{\mathbf{y}} \f$.
     %
-    Jb_x( this, x, v, t )
+    TMs_y( this, x, y, v, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Evaluate the Jacobian of the system vector \f$ \mathbf{b} \f$ with
-    %> respect to the veils \f$ \mathbf{v} \f$:
+    %> Evaluate the tensor of the system matrix \f$ \mathbf{M} \f$ with respect
+    %> to the states \f$ \mathbf{v} \f$:
     %>
     %> \f[
-    %> \mathbf{Jb}_{\mathbf{v}}( \mathbf{x}, \mathbf{v}, t ) =
+    %> \mathbf{TM}_{\mathbf{y}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
     %> \dfrac{
-    %>   \partial \mathbf{b}( \mathbf{x}, \mathbf{v}, t )
+    %>   \partial \mathbf{M}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
     %> }{
     %>   \partial \mathbf{v}
     %> }.
     %> \f]
     %>
     %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
     %> \param v Veils \f$ \mathbf{v} \f$.
     %> \param t Independent variable \f$ t \f$.
     %>
-    %> \return The Jacobian \f$ \mathbf{Jb}_{\mathbf{v}} \f$..
+    %> \return The tensor \f$ \mathbf{TM}_{\mathbf{v}} \f$.
     %
-    Jb_v( this, x, v, t )
+    TMs_v( this, x, y, v, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the sytem vector \f$ \mathbf{f} \f$.
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
+    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The system vector \f$ \mathbf{f} \f$.
+    %
+    fs( this, x, v, y, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system vector \f$ \mathbf{f} \f$ with
+    %> respect to the states \f$ \mathbf{x} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jf}_{\mathbf{x}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{x}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
+    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{x}} \f$..
+    %
+    Jfs_x( this, x, v, y, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system vector \f$ \mathbf{f} \f$ with
+    %> respect to the veils \f$ \mathbf{y} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jf}_{\mathbf{y}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{y}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
+    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{y}} \f$..
+    %
+    Jfs_y( this, x, v, y, t )
+    %
+    % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    %
+    %> Evaluate the Jacobian of the system vector \f$ \mathbf{f} \f$ with
+    %> respect to the veils \f$ \mathbf{v} \f$:
+    %>
+    %> \f[
+    %> \mathbf{Jf}_{\mathbf{v}}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t ) =
+    %> \dfrac{
+    %>   \partial \mathbf{f}( \mathbf{x}, \mathbf{y}, \mathbf{v}, t )
+    %> }{
+    %>   \partial \mathbf{v}
+    %> }.
+    %> \f]
+    %>
+    %> \param x States \f$ \mathbf{x} \f$.
+    %> \param y Linear index-1 variables \f$ \mathbf{y} \f$.
+    %> \param v Veils \f$ \mathbf{v} \f$.
+    %> \param t Independent variable \f$ t \f$.
+    %>
+    %> \return The Jacobian \f$ \mathbf{Jf}_{\mathbf{v}} \f$..
+    %
+    Jfs_v( this, x, v, y, t )
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
