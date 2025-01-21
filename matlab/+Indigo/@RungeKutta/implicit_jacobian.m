@@ -46,7 +46,7 @@ function out = implicit_jacobian( this, x_k, K_in, t_k, d_t )
     y_i = this.m_sys.y(x_i, v_i, t_i);
 
     % Compute the Jacobians with respect to x and x_dot
-    x_dot_i = K(:,i)./d_t;
+    x_dot_i  = K(:,i)./d_t;
     JF_x     = this.m_sys.JF_x(x_i, x_dot_i, y_i, v_i, t_i);
     JF_x_dot = this.m_sys.JF_x_dot(x_i, x_dot_i, y_i, v_i, t_i);
 

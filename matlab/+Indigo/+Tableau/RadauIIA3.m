@@ -7,7 +7,7 @@ classdef RadauIIA3 < Indigo.RungeKutta
     %
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     %
-    %> Radau IIA method.
+    %> Radau IIA3 method.
     %>
     %> \f[
     %> \begin{array}{c|cc}

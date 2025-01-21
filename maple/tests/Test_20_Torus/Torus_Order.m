@@ -18,7 +18,7 @@ ICS = [ ...
 
 ODES = Torus();
 
-rho = 5.0; 
+rho = 5.0;
 r   = 10.0;
 
 %% Initialize the solver and set the system
